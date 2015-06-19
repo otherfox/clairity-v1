@@ -1,9 +1,9 @@
 import React from 'react'
-import Settings from '../settings'
+import Settings from '../shared/components/settings'
 
 let data = [];
 
-let WorkOrderDetails = React.createClass ({
+let Installation = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
@@ -15,7 +15,6 @@ let WorkOrderDetails = React.createClass ({
       data: data
     };
   },
-
   style() {
     let style = {};
 
@@ -32,10 +31,10 @@ let WorkOrderDetails = React.createClass ({
   render() {
     return (
       <div style={this.style()}>
-        <h3>Work Order Details</h3>
+        <h3>Installation</h3>
       </div>
     );
   }
 });
 
-export default WorkOrderDetails;
+export default Installation;

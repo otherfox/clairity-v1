@@ -1,9 +1,9 @@
 import React from 'react'
-import Settings from '../settings'
+import Settings from '../shared/components/settings'
 
 let data = [];
 
-let POP = React.createClass ({
+let EngineeringNetwroking = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
@@ -32,10 +32,10 @@ let POP = React.createClass ({
   render() {
     return (
       <div style={this.style()}>
-        <h3>POP</h3>
+        <h3>Engineering Netwroking</h3>
       </div>
     );
   }
 });
 
-export default POP;
+export default EngineeringNetwroking;

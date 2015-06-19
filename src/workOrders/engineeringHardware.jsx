@@ -1,9 +1,9 @@
 import React from 'react'
-import Settings from '../settings'
+import Settings from '../shared/components/settings'
 
 let data = [];
 
-let Provisioning = React.createClass ({
+let EngineeringHardware = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
@@ -32,10 +32,10 @@ let Provisioning = React.createClass ({
   render() {
     return (
       <div style={this.style()}>
-        <h3>Provisioning</h3>
+        <h3>Engineering Hardware</h3>
       </div>
     );
   }
 });
 
-export default Provisioning;
+export default EngineeringHardware;

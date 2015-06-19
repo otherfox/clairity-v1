@@ -1,18 +1,13 @@
 import React from 'react'
-import Settings from '../settings'
+import Settings from '../shared/components/settings'
+import Layout from '../shared/components/layout'
 import {
   Paper
 } from 'material-ui'
-import Layout from '../layout'
 
-let data = [
-  { label: 'Customer (Billing) Address', value: '8445 Freeport Parkway, Suite 175, Irving, TX 75063'},
-  { label: 'Location (Service) Address', value: '8445 Freeport Parkway, Suite 175, Irving, TX 75063'},
-  { label: 'Account #', value: '100-3067-6384'},
-  { label: 'Status', value: 'Active - Installed 04/28/2014'},
-];
+let data = [];
 
-let CustomerOverview = React.createClass ({
+let ContactLogs = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
@@ -44,14 +39,13 @@ let CustomerOverview = React.createClass ({
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12,12], md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12]}} cPadding={'0 20px 20px 20px'}>
             <div>
-              <h4>Customer Overview</h4>
+              <h4>Contact Logs</h4>
             </div>
             <Layout widths={{ lg: [3,8], md: [3,8], sm: [12,12], xs: [12,12], xxs: [12,12]}}>
-              <div>left</div>
-              <div>right</div>
+              <div></div>
+              <div></div>
             </Layout>
           </Layout>
-
         </Paper>
 
       </div>
@@ -59,4 +53,4 @@ let CustomerOverview = React.createClass ({
   }
 });
 
-export default CustomerOverview;
+export default ContactLogs;

@@ -8,17 +8,17 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
-import ContactLogs from '../shared/components/workOrders/contactLogs'
-import WorkOrderDetails from '../shared/components/workOrders/workOrderDetails'
-// import ContractOverview from '../shared/components/workOrders/contractOverview'
+import ContactLogs from './contactLogs'
+import WorkOrderDetails from './workOrderDetails'
+// import ContractOverview from './contractOverview'
 import Details from '../shared/components/details'
-import Engineering from '../shared/components/workOrders/engineering'
-import EngineeringHardware from '../shared/components/workOrders/engineeringHardware'
-import EngineeringNetworking from '../shared/components/workOrders/engineeringNetworking'
-import Installation from '../shared/components/workOrders/installation'
-import Messaging from '../shared/components/workOrders/messaging'
-import Pop from '../shared/components/workOrders/pop'
-import Provisioning from '../shared/components/workOrders/provisioning'
+import Engineering from './engineering'
+import EngineeringHardware from './engineeringHardware'
+import EngineeringNetworking from './engineeringNetworking'
+import Installation from './installation'
+import Messaging from './messaging'
+import Pop from './pop'
+import Provisioning from './provisioning'
 
 import {
   RadioButtonGroup,
@@ -37,57 +37,14 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-
-import {fetchWorkOrder, updateWorkOrder} from './actions.js'
-import {queryWorkOrder} from './queries.js'
-import {Navigation} from 'react-router'
+import {State} from 'react-router'
 
 
 let WorkOrders = React.createClass({
-  mixins: [Navigation],
-
-  getInitialState() {
-    return {};
-  },
-
-  updateState(msg) {
-    console.log('msg:',msg);
-    this.setState(this.getStateFromStore());
-  },
+  mixins: [State],
 
   getOrderId() {
-    let {router} = this.context;
-    let id = (router.getCurrentParams().Id) ? router.getCurrentParams().Id : 1538;
-    return Number(id);
-  },
-
-  componentWillMount() {
-    let id = this.getOrderId();
-    fetchWorkOrder(id);
-  },
-
-  componentDidMount() {
-    this.updateState();
-    Store.on('update', () => this.updateState('store updated'));
-  },
-
-  getStateFromStore() {
-    return { order: queryWorkOrder(this.getOrderId()) };
-  },
-
-  tryLogin(username, password) {
-    tryLogin(username, password);
-  },
-
-  updateAddressField(fieldName) {
-    return value => {
-      this.setState({order: this.state.order.setIn(['address', fieldName], value)});
-    }
-  },
-
-  updateOrder() {
-    let id = this.getParams().id;
-    updateWorkOrder(id, this.state.order);
+    return Number(this.getParams().id || 1538);
   },
 
   render() {
@@ -99,13 +56,13 @@ let WorkOrders = React.createClass({
           <Content>
             <div>
               <div className="section-header">
-                <h1>Edit Work Order {this.state.order} </h1>
+                <h1>Edit Work Order</h1>
               </div>
 
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
                 <div><Details title={'Customer Overview'} /></div>
                 <div></div>
-                <div><WorkOrderDetails></WorkOrderDetails></div>
+                <div><WorkOrderDetails id={this.getOrderId()}></WorkOrderDetails></div>
               </Layout>
               <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
                 <div><Pop></Pop></div>
@@ -126,7 +83,6 @@ let WorkOrders = React.createClass({
         </Layout>
         <Footer />
       </div>
-      //value={this.state.order.getIn(['address', 'street'])} onChange={this.updateAddressField('street')}
     )
   }
 });
