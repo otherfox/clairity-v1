@@ -46,6 +46,9 @@ let WorkOrders = React.createClass({
     return Number(this.getParams().id || 1538);
   },
 
+  
+
+
   render() {
     return (
       <div>
@@ -63,21 +66,24 @@ let WorkOrders = React.createClass({
                     <Link to="work-order-upload" params={this.getParams()}>Attach / View Files</Link>
                   </div>
                   <div>
-                  <a href="#">View Customer Details</a>
+                    <Link to="view-customer" params={this.getParams()}>View Customer Details</Link>
                   </div>
                 </Layout>
               </div>
+              <div>
+                <h2></h2>
+              </div>
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-                <div><LocationInfo></LocationInfo></div>
+                <div><LocationInfo id={this.getOrderId()}></LocationInfo></div>
                 <div></div>
                 <div><WorkOrderDetails id={this.getOrderId()}></WorkOrderDetails></div>
               </Layout>
-              <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
+              <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
                 <div><Pop></Pop></div>
                 <div><ContactLogs></ContactLogs></div>
                 <div><Provisioning></Provisioning></div>
               </Layout>
-              <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
+              <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
                 <div><EngineeringNetworking></EngineeringNetworking></div>
                 <div><EngineeringHardware></EngineeringHardware></div>
                 <div><Installation></Installation></div>
