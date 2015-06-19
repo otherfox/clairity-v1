@@ -19,7 +19,7 @@ export default (
     <Route name="create-contract" handler={CreateContract} />
     <Route name="open-installs" handler={OpenInstalls} />
     <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
-      <Route name="work-orders-upload" path="upload" handler={WorkOrdersUpload} />
+      <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
     </Route>
   </Route>
 );

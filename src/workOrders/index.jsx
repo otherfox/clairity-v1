@@ -60,7 +60,7 @@ let WorkOrders = React.createClass({
               <div>
                 <Layout cPadding={'0 20px 0 0'}>
                   <div>
-                  <a href="#">Attach / View Files</a>
+                    <Link to="work-order-upload" params={this.getParams()}>Attach / View Files</Link>
                   </div>
                   <div>
                   <a href="#">View Customer Details</a>
