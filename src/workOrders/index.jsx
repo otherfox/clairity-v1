@@ -37,14 +37,13 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {Navigation} from 'react-router'
+import {State} from 'react-router'
 
 
 let WorkOrders = React.createClass({
-  mixins: [Navigation],
+  mixins: [State],
 
   getOrderId() {
-    debugger;
     return Number(this.getParams().id || 1538);
   },
 

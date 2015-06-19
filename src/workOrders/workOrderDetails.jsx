@@ -76,14 +76,14 @@ let WorkOrderDetails = React.createClass ({
   },
 
   updateOrder() {
-    let id = this.getParams().id;
+    let id = this.props.id;
     updateWorkOrder(id, this.state.order);
   },
 
   render() {
     return (
       <div style={this.style()}>
-        <h3>Work Order Details</h3>
+        <h3>{}</h3>
       </div>
     );
   }
