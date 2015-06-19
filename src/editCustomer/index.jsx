@@ -23,7 +23,7 @@ import {
 import {List, fromJS} from 'immutable'
 
 import {fetchLocation, updateLocation, fetchAllCustomerTypes} from './actions'
-import {queryLocation, queryAllCustomerTypes} from './queries'
+import {queryAllCustomerTypes, queryLocation} from './queries'
 
 // React Renders
 export default class CreateLocation extends React.Component {

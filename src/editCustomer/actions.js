@@ -1,6 +1,7 @@
 import Fynx from 'fynx'
 import {getAllCustomerTypes} from './services'
 import {getLocation, putLocation} from '../shared/services/location'
+import {fetchLocation, updateLocation} from '../shared/actions/location'
 import Store from '../shared/store'
 
 /* Customer Actions */
@@ -25,31 +26,5 @@ customerTypesFetched.listen(customerTypes =>
   })
 );
 
-/* Location actions */
-
-export const fetchLocation = Fynx.createAsyncAction();
-
-const locationFetched = Fynx.createAsyncAction();
-
-// Fetch the data
-fetchLocation.listen(id => {
-  requestLocation(id)
-    .then(location => locationFetched(location));
-});
-
-// Store the data
-locationFetched.listen(location =>
-  Store.handleMessage({
-    type: Store.MessageTypes.Write,
-    payload: {
-      table: 'locations',
-      row: location
-    }
-  })
-);
-
-export const updateLocation = Fynx.createAction();
-
-updateLocation.listen((state) => {
-  return updateLocation(state.location, state.sameAddress);
-});
+export fetchLocation;
+export updateLocation;
