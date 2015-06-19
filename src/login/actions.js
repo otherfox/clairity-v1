@@ -8,8 +8,8 @@ export const loginSuccess = Fynx.createAsyncAction();
 export const loginFailure = Fynx.createAsyncAction();
 
 // contact server
-tryLogin.listen((username, password) => { // when someone tries to login
-  tryUserLogin(username, password).then(  // send to server, then...
+tryLogin.listen(creds => { // when someone tries to login
+  tryUserLogin(creds).then(  // send to server, then...
     user => loginSuccess(user), // if it succeeded, record the user
     reason => loginFailure(reason)  // if it failed, report the reason
   );
@@ -24,7 +24,6 @@ loginSuccess.listen(user => {
       row: user
     }
   });
-  alert('You logged in!');
 });
 
 // failure

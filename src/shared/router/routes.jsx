@@ -17,6 +17,6 @@ export default (
     <Route name="edit-customer" handler={EditCustomer} />
     <Route name="create-contract" handler={CreateContract} />
     <Route name="open-installs" handler={OpenInstalls} />
-    <Route name="work-orders" handler={WorkOrders} />
+    <Route name="work-orders" path="work-orders/:id" handler={WorkOrders} />
   </Route>
 );
