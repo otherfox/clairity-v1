@@ -1,5 +1,5 @@
 import React from 'react'
-import Settings from '../shared/components/settings'
+import Settings from '../../shared/components/settings'
 import {
   Paper,
   DropDownMenu
@@ -68,7 +68,7 @@ let ContractOverview = React.createClass ({
               <h4>Contract Overview</h4>
             </div>
             <div>
-              <DropDownMenu menuItems={this.state.contracts} selectedIndex={this.state.selectedContract} onChange={this.handleContractChange.bind(this)}/>
+              //<DropDownMenu menuItems={this.state.contracts} selectedIndex={this.state.selectedContract} onChange={this.handleContractChange.bind(this)}/>
             </div>
             <div>
               <Table></Table>

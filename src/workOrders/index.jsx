@@ -36,7 +36,7 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {State} from 'react-router'
+import {State, Link} from 'react-router'
 
 
 let WorkOrders = React.createClass({
@@ -55,10 +55,19 @@ let WorkOrders = React.createClass({
           <Content>
             <div>
               <div className="section-header">
-                <h1>Edit Work Order</h1>
+                <h1>Update Work Order #{this.getOrderId()}</h1>
               </div>
-
-              <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
+              <div>
+                <Layout cPadding={'0 20px 0 0'}>
+                  <div>
+                    <Link to="work-order-upload" params={this.getParams()}>Attach / View Files</Link>
+                  </div>
+                  <div>
+                  <a href="#">View Customer Details</a>
+                  </div>
+                </Layout>
+              </div>
+              <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
                 <div><LocationInfo></LocationInfo></div>
                 <div></div>
                 <div><WorkOrderDetails id={this.getOrderId()}></WorkOrderDetails></div>
