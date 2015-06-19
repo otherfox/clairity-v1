@@ -16,11 +16,10 @@ export default (
     <DefaultRoute handler={Login} />
     <Route name="login" handler={Login} />
     <Route name="aging-reports" handler={AgingReports} />
-    <Route name="customer/:id" handler={RouteHandler}>
+    <Route name="customer" path="customer/:id" handler={RouteHandler}>
       <DefaultRoute name="view-customer" handler={ViewCustomer} />
       <Route name="edit-customer" path="edit" handler={EditCustomer} />
     </Route>
-    <Route name="edit-customer" handler={EditCustomer} />
     <Route name="create-contract" handler={CreateContract} />
     <Route name="open-installs" handler={OpenInstalls} />
     <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>

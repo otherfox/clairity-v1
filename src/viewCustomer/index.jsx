@@ -8,17 +8,6 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
-import ContactLogs from './components/contactLogs'
-import WorkOrderDetails from './components/workOrderDetails'
-import LocationInfo from './components/locationInfo'
-import Engineering from './components/engineering'
-import EngineeringHardware from './components/engineeringHardware'
-import EngineeringNetworking from './components/engineeringNetworking'
-import Installation from './components/installation'
-import Messaging from './components/messaging'
-import Pop from './components/pop'
-import Provisioning from './components/provisioning'
-
 import {
   RadioButtonGroup,
   RadioButton,
