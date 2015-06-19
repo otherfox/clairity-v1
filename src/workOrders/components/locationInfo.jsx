@@ -1,9 +1,9 @@
 import React from 'react'
-import Settings from '../shared/components/settings'
+import Settings from '../../shared/components/settings'
 import {
   Paper
 } from 'material-ui'
-import Layout from '../shared/components/layout'
+import Layout from '../../shared/components/layout'
 
 let data = [
   { label: 'Customer (Billing) Address', value: '8445 Freeport Parkway, Suite 175, Irving, TX 75063'},

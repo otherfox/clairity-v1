@@ -55,7 +55,7 @@ let WorkOrders = React.createClass({
           <Content>
             <div>
               <div className="section-header">
-                <h1>Edit Work Order</h1>
+                <h1>Update Work Order #{this.getOrderId()}</h1>
               </div>
 
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>

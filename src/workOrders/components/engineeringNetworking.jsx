@@ -1,5 +1,5 @@
 import React from 'react'
-import Settings from '../shared/components/settings'
+import Settings from '../../shared/components/settings'
 
 let data = [];
 

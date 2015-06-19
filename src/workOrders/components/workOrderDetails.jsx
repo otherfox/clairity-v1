@@ -1,5 +1,5 @@
 import React from 'react'
-import Settings from '../shared/components/settings'
+import Settings from '../../shared/components/settings'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -16,12 +16,12 @@ import {
   Paper
 } from 'material-ui'
 
-import Layout from '../shared/components/layout'
+import Layout from '../../shared/components/layout'
 
 import controllable from 'react-controllables'
 
-import {fetchWorkOrder, updateWorkOrder} from './actions.js'
-import {queryWorkOrder} from './queries.js'
+import {fetchWorkOrder, updateWorkOrder} from '../actions.js'
+import {queryWorkOrder} from '../queries.js'
 import {Navigation} from 'react-router'
 
 let WorkOrderDetails = React.createClass ({
