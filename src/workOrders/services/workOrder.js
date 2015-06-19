@@ -32,6 +32,34 @@ export function getWorkOrderMessages(id) {
   });
 }
 
+export function getWorkOrderTypes() {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderTypeDAO&_m=getAllWorkOrderTypes`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      });
+  });
+}
+
+export function getWorkOrderStatuses() {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderStatusDAO&_m=getAllWorkOrderStatuses`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      });
+  });
+}
+
 export function putWorkOrder(id, data) {
     return new Promise((s, f) => {
 
