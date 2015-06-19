@@ -8,7 +8,6 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
-
 import ContactLogs from '../shared/components/workOrders/contactLogs'
 import WorkOrderDetails from '../shared/components/workOrders/workOrderDetails'
 // import ContractOverview from '../shared/components/workOrders/contractOverview'
@@ -20,8 +19,6 @@ import Installation from '../shared/components/workOrders/installation'
 import Messaging from '../shared/components/workOrders/messaging'
 import Pop from '../shared/components/workOrders/pop'
 import Provisioning from '../shared/components/workOrders/provisioning'
-
-
 
 import {
   RadioButtonGroup,
@@ -42,17 +39,20 @@ import {
 import controllable from 'react-controllables'
 
 import {fetchWorkOrder, updateWorkOrder} from './actions.js'
-import {queryOrder} from './queries.js'
+import {queryWorkOrder} from './queries.js'
 import {Navigation} from 'react-router'
 
 
 let WorkOrders = React.createClass({
   mixins: [Navigation],
 
-  updateState() {
-    let id = this.getOrderId();
-    let order = queryOrder(id);
-    this.setState( order );
+  getInitialState() {
+    return {};
+  },
+
+  updateState(msg) {
+    console.log('msg:',msg);
+    this.setState(this.getStateFromStore());
   },
 
   getOrderId() {
@@ -61,18 +61,18 @@ let WorkOrders = React.createClass({
     return Number(id);
   },
 
-  conmponentWillMount() {
+  componentWillMount() {
     let id = this.getOrderId();
-    queryOrder(id);
+    fetchWorkOrder(id);
   },
 
   componentDidMount() {
     this.updateState();
-    Store.on('update', () => this.setState( this.getStateFromStore() ));
+    Store.on('update', () => this.updateState('store updated'));
   },
 
   getStateFromStore() {
-    return { order: queryWorkOrder(this.getParams()) };
+    return { order: queryWorkOrder(this.getOrderId()) };
   },
 
   tryLogin(username, password) {
@@ -99,7 +99,7 @@ let WorkOrders = React.createClass({
           <Content>
             <div>
               <div className="section-header">
-                <h1>Edit Work Order</h1>
+                <h1>Edit Work Order {this.state.order} </h1>
               </div>
 
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
