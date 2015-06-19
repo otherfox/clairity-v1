@@ -23,7 +23,7 @@ workOrderRecieved.listen(order =>
   })
 );
 
-// Update
+// Update Work Order
 updateWorkOrder.listen((id, data) => {
   let promise = putWorkOrder(id, data);
   Store.handleMessage({

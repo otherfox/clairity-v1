@@ -8,3 +8,8 @@ export function queryOrdersForCustomer(customerId) {
 export function queryWorkOrder(id) {
   return Store.data.getIn(['workOrders', id]);
 }
+
+export function queryWorkOrderOwners() {
+  //return Store.data.getIn(['workOrders', id]);
+  return {};
+}
