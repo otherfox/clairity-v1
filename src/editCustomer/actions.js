@@ -26,5 +26,5 @@ customerTypesFetched.listen(customerTypes =>
   })
 );
 
-export fetchLocation;
-export updateLocation;
+export {fetchLocation};
+export {updateLocation};

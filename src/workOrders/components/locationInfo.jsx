@@ -21,7 +21,7 @@ import Layout from '../../shared/components/layout'
 import controllable from 'react-controllables'
 
 import {fetchLocation} from '../../shared/actions/location'
-import {queryLocation, fetchLocation} from '../../shared/queries/location'
+import {queryLocation} from '../../shared/queries/location'
 import {Navigation} from 'react-router'
 
 import {Map} from 'immutable'
@@ -35,7 +35,7 @@ let LocationInfo = React.createClass ({
 
   getInitialState() {
     return {
-      location: new Map()
+      location: undefined
     };
   },
 
@@ -86,12 +86,13 @@ let LocationInfo = React.createClass ({
   },
 
   render() {
+    let loc = this.state.location || new Map();
     return (
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
             <div>
-              {this.state.location.get('id')}
+              {loc.get('id')}
             </div>
           </Layout>
         </Paper>

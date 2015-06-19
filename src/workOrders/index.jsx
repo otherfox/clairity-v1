@@ -46,9 +46,6 @@ let WorkOrders = React.createClass({
     return Number(this.getParams().id || 1538);
   },
 
-  
-
-
   render() {
     return (
       <div>

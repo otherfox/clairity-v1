@@ -8,7 +8,7 @@ const locationFetched = Fynx.createAsyncAction();
 
 // Fetch the data
 fetchLocation.listen(id => {
-  requestLocation(id)
+  getLocation(id)
     .then(location => locationFetched(location));
 });
 
@@ -23,6 +23,7 @@ locationFetched.listen(location =>
   })
 );
 
+// TODO: Fix this
 export const updateLocation = Fynx.createAction();
 
 updateLocation.listen((state) => {

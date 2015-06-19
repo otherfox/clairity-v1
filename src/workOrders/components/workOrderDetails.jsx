@@ -41,7 +41,7 @@ let WorkOrderDetails = React.createClass ({
     return {};
   },
 
-  updateState(msg) {
+  updateState() {
     this.setState(this.getStateFromStore());
   },
 
@@ -58,6 +58,7 @@ let WorkOrderDetails = React.createClass ({
   getStateFromStore() {
     return { order: queryWorkOrder(this.props.id) };
   },
+
   style() {
     let style = {};
 
@@ -94,7 +95,7 @@ let WorkOrderDetails = React.createClass ({
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
             <div>
-            
+
             </div>
           </Layout>
         </Paper>
