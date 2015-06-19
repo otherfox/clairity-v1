@@ -13,15 +13,15 @@ fetchWorkOrder.listen(id => {
 });
 
 // Store the data
-workOrderRecieved.listen(order =>
+workOrderRecieved.listen(order => {
   Store.handleMessage({
     type: Store.MessageTypes.Write,
     payload: {
       table: 'workOrders',
       row: order
     }
-  })
-);
+  });
+});
 
 // Update Work Order
 updateWorkOrder.listen((id, data) => {

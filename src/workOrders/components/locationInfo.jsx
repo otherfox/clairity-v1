@@ -20,9 +20,11 @@ import Layout from '../../shared/components/layout'
 
 import controllable from 'react-controllables'
 
-import {fetchWorkOrder, updateWorkOrder} from '../actions.js'
-import {queryWorkOrder} from '../queries.js'
+import {fetchLocation} from '../../shared/actions/location'
+import {queryLocation, fetchLocation} from '../../shared/queries/location'
 import {Navigation} from 'react-router'
+
+import {Map} from 'immutable'
 
 let LocationInfo = React.createClass ({
 
@@ -31,14 +33,10 @@ let LocationInfo = React.createClass ({
     id: React.PropTypes.number
   },
 
-  getDefaultProps() {
-    return {
-      id: 1538
-    };
-  },
-
   getInitialState() {
-    return {};
+    return {
+      location: new Map()
+    };
   },
 
   updateState() {
@@ -47,16 +45,16 @@ let LocationInfo = React.createClass ({
 
   componentWillMount() {
     let id = this.props.id;
-    fetchWorkOrder(id);
+    fetchLocation(id);
   },
 
   componentDidMount() {
     this.updateState();
-    Store.on('update', () => this.updateState('store updated'));
+    Store.on('update', () => this.updateState());
   },
 
   getStateFromStore() {
-    return { order: queryWorkOrder(this.props.id) };
+    return { location: queryLocation(this.props.id) };
   },
 
   style() {
@@ -93,7 +91,7 @@ let LocationInfo = React.createClass ({
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
             <div>
-              {this.state.order.get('location_id')}
+              {this.state.location.get('id')}
             </div>
           </Layout>
         </Paper>
