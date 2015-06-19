@@ -38,7 +38,7 @@ class LoginForm extends React.Component {
   }
   fireLogin() {
     if (this.props.onLogin) {
-      this.props.onLogin(this.props.username, this.props.password);
+      this.props.onLogin({username: this.props.username, password: this.props.password});
     }
   }
   render() {
