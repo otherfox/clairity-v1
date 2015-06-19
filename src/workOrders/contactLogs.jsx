@@ -1,6 +1,6 @@
 import React from 'react'
-import Settings from '../settings'
-import Layout from '../layout'
+import Settings from '../shared/components/settings'
+import Layout from '../shared/components/layout'
 import {
   Paper
 } from 'material-ui'
