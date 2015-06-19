@@ -5,6 +5,6 @@ export function queryOrdersForCustomer(customerId) {
   //...
 }
 
-export function queryOrder(id) {
-  return Store.data.getIn(['workOrders', id])
+export function queryWorkOrder(id) {
+  return Store.data.getIn(['workOrders', id]);
 }
