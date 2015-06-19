@@ -1,5 +1,6 @@
 import Fynx from 'fynx'
-import {getAllCustomerTypes, getLocation, putLocation} from './services'
+import {getAllCustomerTypes} from './services'
+import {getLocation, putLocation} from '../shared/services/location'
 import Store from '../shared/store'
 
 /* Customer Actions */
