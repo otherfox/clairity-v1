@@ -8,6 +8,7 @@ import CreateContract from '../../createContract'
 import Login from '../../login'
 import OpenInstalls from '../../openInstalls'
 import WorkOrders from '../../workOrders'
+import WorkOrderUpload from '../../workOrderUpload'
 
 export default (
   <Route handler={App}>
@@ -17,6 +18,8 @@ export default (
     <Route name="edit-customer" handler={EditCustomer} />
     <Route name="create-contract" handler={CreateContract} />
     <Route name="open-installs" handler={OpenInstalls} />
-    <Route name="work-orders" path="work-orders/:id" handler={WorkOrders} />
+    <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
+      <Route name="work-orders-upload" path="upload" handler={WorkOrdersUpload} />
+    </Route>
   </Route>
 );
