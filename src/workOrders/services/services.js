@@ -18,11 +18,4 @@ export function getServiceTypes() {
         }
       });
   });
-  //return new Promise((res, rej) => _.defer(() => res(data)));
-}
-
-export function putWorkOrder(id, data) {
-    return new Promise((s, f) => {
-
-    });
 }
