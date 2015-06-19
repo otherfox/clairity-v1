@@ -37,57 +37,15 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-
-import {fetchWorkOrder, updateWorkOrder} from './actions.js'
-import {queryWorkOrder} from './queries.js'
 import {Navigation} from 'react-router'
 
 
 let WorkOrders = React.createClass({
   mixins: [Navigation],
 
-  getInitialState() {
-    return {};
-  },
-
-  updateState(msg) {
-    console.log('msg:',msg);
-    this.setState(this.getStateFromStore());
-  },
-
   getOrderId() {
-    let {router} = this.context;
-    let id = (router.getCurrentParams().Id) ? router.getCurrentParams().Id : 1538;
-    return Number(id);
-  },
-
-  componentWillMount() {
-    let id = this.getOrderId();
-    fetchWorkOrder(id);
-  },
-
-  componentDidMount() {
-    this.updateState();
-    Store.on('update', () => this.updateState('store updated'));
-  },
-
-  getStateFromStore() {
-    return { order: queryWorkOrder(this.getOrderId()) };
-  },
-
-  tryLogin(username, password) {
-    tryLogin(username, password);
-  },
-
-  updateAddressField(fieldName) {
-    return value => {
-      this.setState({order: this.state.order.setIn(['address', fieldName], value)});
-    }
-  },
-
-  updateOrder() {
-    let id = this.getParams().id;
-    updateWorkOrder(id, this.state.order);
+    debugger;
+    return Number(this.getParams().id || 1538);
   },
 
   render() {
@@ -99,13 +57,13 @@ let WorkOrders = React.createClass({
           <Content>
             <div>
               <div className="section-header">
-                <h1>Edit Work Order {this.state.order} </h1>
+                <h1>Edit Work Order</h1>
               </div>
 
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
                 <div><Details title={'Customer Overview'} /></div>
                 <div></div>
-                <div><WorkOrderDetails></WorkOrderDetails></div>
+                <div><WorkOrderDetails id={this.getOrderId()}></WorkOrderDetails></div>
               </Layout>
               <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
                 <div><Pop></Pop></div>
@@ -126,7 +84,6 @@ let WorkOrders = React.createClass({
         </Layout>
         <Footer />
       </div>
-      //value={this.state.order.getIn(['address', 'street'])} onChange={this.updateAddressField('street')}
     )
   }
 });
