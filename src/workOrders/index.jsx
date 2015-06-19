@@ -8,17 +8,16 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
-import ContactLogs from './contactLogs'
-import WorkOrderDetails from './workOrderDetails'
-// import ContractOverview from './contractOverview'
-import Details from '../shared/components/details'
-import Engineering from './engineering'
-import EngineeringHardware from './engineeringHardware'
-import EngineeringNetworking from './engineeringNetworking'
-import Installation from './installation'
-import Messaging from './messaging'
-import Pop from './pop'
-import Provisioning from './provisioning'
+import ContactLogs from './components/contactLogs'
+import WorkOrderDetails from './components/workOrderDetails'
+import LocationInfo from './components/locationInfo'
+import Engineering from './components/engineering'
+import EngineeringHardware from './components/engineeringHardware'
+import EngineeringNetworking from './components/engineeringNetworking'
+import Installation from './components/installation'
+import Messaging from './components/messaging'
+import Pop from './components/pop'
+import Provisioning from './components/provisioning'
 
 import {
   RadioButtonGroup,
@@ -60,7 +59,7 @@ let WorkOrders = React.createClass({
               </div>
 
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 20px 20px 20px'}>
-                <div><Details title={'Customer Overview'} /></div>
+                <div><LocationInfo></LocationInfo></div>
                 <div></div>
                 <div><WorkOrderDetails id={this.getOrderId()}></WorkOrderDetails></div>
               </Layout>
