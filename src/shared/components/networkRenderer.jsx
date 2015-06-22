@@ -56,7 +56,6 @@ export default function(Component, tableName) {
 
     render() {
       if (this.state.ready) {
-        debugger;
         return <Component {...this.props} {...{[tableName]: this.state.data}} />
       } else {
         return false;
