@@ -8,6 +8,8 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
+import networkRenderer from '../shared/components/networkRenderer'
+
 import ContactLogs from './components/contactLogs'
 import ContractOverview from './components/contractOverview'
 import WorkOrderDetails from './components/workOrderDetails'
@@ -39,15 +41,10 @@ import {
 import controllable from 'react-controllables'
 import {State, Link} from 'react-router'
 
-
-let WorkOrders = React.createClass({
-  mixins: [State],
-
-  getOrderId() {
-    return Number(this.getParams().id || 1538);
-  },
+class WorkOrders extends React.Component {
 
   render() {
+    let wo = this.props.workOrder.toJS()
     return (
       <div>
         <TopNav />
@@ -56,15 +53,15 @@ let WorkOrders = React.createClass({
           <Content>
             <div>
               <div className="section-header">
-                <h1>Update Work Order #{this.getOrderId()}</h1>
+                <h1>Update Work Order #{wo.id}</h1>
               </div>
               <div>
                 <Layout cPadding={'0 20px 0 0'}>
                   <div>
-                    <Link to="work-order-upload" params={this.getParams()}>Attach / View Files</Link>
+                    <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
                   </div>
                   <div>
-                    <Link to="view-customer" params={this.getParams()}>View Customer Details</Link>
+                    <Link to="view-customer" params={{id: wo.location_id}}>View Customer Details</Link>
                   </div>
                 </Layout>
               </div>
@@ -72,9 +69,9 @@ let WorkOrders = React.createClass({
                 <h2></h2>
               </div>
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-                <div><LocationInfo id={this.getOrderId()} /></div>
-                <div><ContractOverview id={this.getOrderId()} /></div>
-                <div><WorkOrderDetails id={this.getOrderId()} /></div>
+                <div><LocationInfo id={wo.location_id} /></div>
+                <div><ContractOverview id={wo.contract_id} /></div>
+                <div><WorkOrderDetails id={wo.id} /></div>
               </Layout>
               <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
                 <div><Pop></Pop></div>
@@ -97,6 +94,16 @@ let WorkOrders = React.createClass({
       </div>
     )
   }
+
+}
+
+let WorkOrdersWrapped = networkRenderer(WorkOrders, 'workOrder');
+
+let WorkOrderPage = React.createClass({
+  mixins: [State],
+  render() {
+    return (<WorkOrdersWrapped id={this.getParams().id} />);
+  }
 });
 
-export default WorkOrders;
+export default WorkOrderPage;
