@@ -9,6 +9,7 @@ import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
 import ContactLogs from './components/contactLogs'
+import ContractOverview from './components/contractOverview'
 import WorkOrderDetails from './components/workOrderDetails'
 import LocationInfo from './components/locationInfo'
 import Engineering from './components/engineering'
@@ -71,9 +72,9 @@ let WorkOrders = React.createClass({
                 <h2></h2>
               </div>
               <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-                <div><LocationInfo id={this.getOrderId()}></LocationInfo></div>
-                <div></div>
-                <div><WorkOrderDetails id={this.getOrderId()}></WorkOrderDetails></div>
+                <div><LocationInfo id={this.getOrderId()} /></div>
+                <div><ContractOverview id={this.getOrderId()} /></div>
+                <div><WorkOrderDetails id={this.getOrderId()} /></div>
               </Layout>
               <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
                 <div><Pop></Pop></div>

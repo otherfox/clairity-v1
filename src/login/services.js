@@ -12,7 +12,6 @@ export function tryUserLogin(creds) {
       .end((err, res) => {
         console.log(err);
         console.log(res);
-        debugger;
       });
   });
   // return new Promise((res, rej) =>
