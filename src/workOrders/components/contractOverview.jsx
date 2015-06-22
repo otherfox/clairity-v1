@@ -49,9 +49,12 @@ let ContractOverview = React.createClass ({
   getContracts() {
     let contracts = this.props.location.get('contracts').map((contract, idx) => {
       if(contract.get('signed')) {
+
+        let signed = new Date(contract.get('signed'));
+
         return new Map({
           value: contract.get('id'),
-          label: contract.get('signed')
+          label: (contract.get('services')) ? 'Signed '+signed.toDateString()+' - '+contract.getIn(['services', 1,'actual_name']) :  'Signed '+signed.toDateString()
         });
       }
     });
