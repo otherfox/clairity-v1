@@ -1,7 +1,8 @@
 {
-    "agingReports": {},
-    "user": {},
-    "locations": {},
-    "customerTypes": {},
-    "workOrders": {}
+  "agingReport": {},
+  "user": {},
+  "location": {},
+  "customerType": {},
+  "workOrder": {},
+  "contact": {}
 }
