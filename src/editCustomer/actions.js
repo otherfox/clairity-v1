@@ -19,7 +19,7 @@ customerTypesFetched.listen(customerTypes =>
   Store.handleMessage({
     type: Store.MessageTypes.ReplaceAll,
     payload: {
-      table: 'customerTypes',
+      table: 'customerType',
       rows: customerTypes
     }
   })
@@ -42,7 +42,7 @@ locationFetched.listen(location =>
   Store.handleMessage({
     type: Store.MessageTypes.Write,
     payload: {
-      table: 'locations',
+      table: 'location',
       row: location
     }
   })
