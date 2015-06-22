@@ -20,11 +20,12 @@ customerTypesFetched.listen(customerTypes =>
   Store.handleMessage({
     type: Store.MessageTypes.ReplaceAll,
     payload: {
-      table: 'customerTypes',
+      table: 'customerType',
       rows: customerTypes
     }
   })
 );
+
 
 export {fetchLocation};
 export {updateLocation};

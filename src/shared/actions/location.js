@@ -17,7 +17,7 @@ locationFetched.listen(location =>
   Store.handleMessage({
     type: Store.MessageTypes.Write,
     payload: {
-      table: 'locations',
+      table: 'location',
       row: location
     }
   })

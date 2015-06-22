@@ -15,7 +15,7 @@ function all(v) {
 
 export function queryActive(includeZeros) {
   return Store.data
-    .get('agingReports')
+    .get('agingReport')
     .filter(v => v.get('active') == 'Active')
     .filter(includeZeros ? all : nonzero)
     .toMap()
@@ -23,7 +23,7 @@ export function queryActive(includeZeros) {
 
 export function queryInactive(includeZeros) {
   return Store.data
-    .get('agingReports')
+    .get('agingReport')
     .filter(v => v.get('active') == 'Inactive')
     .filter(includeZeros ? all : nonzero)
     .toMap()
@@ -31,7 +31,7 @@ export function queryInactive(includeZeros) {
 
 export function queryAll(includeZeros) {
   return Store.data
-    .get('agingReports')
+    .get('agingReport')
     .filter(includeZeros ? all : nonzero)
     .toMap()
 }

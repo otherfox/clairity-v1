@@ -1,5 +1,5 @@
 import Fynx from 'fynx'
-import {getWorkOrder, putWorkOrder} from './services/workOrder.js'
+import {getWorkOrder, putWorkOrder} from '../shared/services/workOrder'
 import Store from '../shared/store'
 
 export const fetchWorkOrder = Fynx.createAsyncAction();
@@ -17,7 +17,7 @@ workOrderRecieved.listen(order => {
   Store.handleMessage({
     type: Store.MessageTypes.Write,
     payload: {
-      table: 'workOrders',
+      table: 'workOrder',
       row: order
     }
   });
@@ -29,7 +29,7 @@ updateWorkOrder.listen((id, data) => {
   Store.handleMessage({
     type: Store.MessageTypes.Update,
     payload: {
-      table: 'workOrders',
+      table: 'workOrder',
       row: order
     },
     promise
