@@ -71,7 +71,7 @@ let WorkOrders = React.createClass({
               <div>
                 <h2></h2>
               </div>
-              <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
+              <Layout widths={{lg: [8,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
                 <div><LocationInfo id={this.getOrderId()} /></div>
                 <div><ContractOverview id={this.getOrderId()} /></div>
                 <div><WorkOrderDetails id={this.getOrderId()} /></div>

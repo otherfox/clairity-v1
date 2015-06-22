@@ -138,7 +138,9 @@ let LocationInfo = React.createClass ({
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
           <Layout pPadding={'0 20px 20px 20px'}>
-            <Details title={title} data={data} />
+            <div>
+              <Details title={title} data={data} />
+            </div>
           </Layout>
         </Paper>
       </div>
