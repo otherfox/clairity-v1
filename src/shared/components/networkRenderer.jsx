@@ -1,5 +1,6 @@
 import React from 'react'
 import Store from '../store'
+import {getResource} from '../services/getResource'
 
 function queryStore(tableName, id) {
   return Store.data.getIn([tableName, id]) || null;
@@ -11,18 +12,28 @@ export default function(Component, tableName) {
 
     constructor() {
       super();
-      let data = queryStore(tableName, this.props.id);
       this.state = {
-        data: data,
+        data: null,
         pending: true,
-        ready: data ? true : false,
+        ready: false,
       };
     }
 
     componentWillMount() {
-      // let promise = Component.queryForData(this.props.id);
-      promise.then(() => {
-        let data = queryStore(tableName, this.props.id);
+      let currentData = queryStore(tableName, this.props.id);
+      this.setState({
+        data: currentData,
+        pending: true,
+        ready: currentData ? true : false
+      });
+      getResource(this.props.id, tableName).then(data => {
+        Store.handleMessage({
+          type: Store.MessageTypes.Write,
+          payload: {
+            table: tableName,
+            row: data
+          }
+        });
         this.setState({
           pending: false,
           ready: true,
