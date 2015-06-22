@@ -11,7 +11,7 @@ let DropDown = React.createClass ({
   propTypes: {
     style: React.PropTypes.object,
     menuItems: React.PropTypes.object,
-    selectedIndex: React.PropTypes.number
+    selectedValue: React.PropTypes.number
   },
 
   style() {
@@ -27,13 +27,13 @@ let DropDown = React.createClass ({
     return style;
   },
 
-  handleChange() {
-    this.props.onChange()
+  handleChange(ev, index, menuItem) {
+    this.props.onChange(menuItem.value, index, ev);
   },
 
   render() {
     let data = false;
-    let selectedIndex = false;
+    let selectedValue = this.props.selectedValue;
 
     if (this.props.menuItems) {
 
@@ -41,8 +41,8 @@ let DropDown = React.createClass ({
 
         let menuObj;
 
-        if(selectedIndex === dataObj.get('value')) {
-          selectedIndex = idx;
+        if(selectedValue === dataObj.get('value')) {
+          selectedValue = idx;
         }
 
         return menuObj = new Map({
@@ -58,7 +58,7 @@ let DropDown = React.createClass ({
 
     return (
       <div style={this.style()}>
-        <DropDownMenu menuItems={data} selectedIndex={selectedIndex} onChange={this.handleChange} />
+        <DropDownMenu menuItems={data} selectedIndex={selectedValue} onChange={this.handleChange} />
       </div>
     );
   }
