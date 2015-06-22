@@ -18,6 +18,7 @@ import {
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
+import networkRenderer from '../../shared/components/networkRenderer'
 
 import controllable from 'react-controllables'
 
@@ -25,7 +26,7 @@ import {fetchLocation} from '../../shared/actions/location'
 import {queryLocation} from '../../shared/queries/location'
 import {Navigation} from 'react-router'
 
-import Location from '../services/stubs/location6384.json'
+//import Location from '../services/stubs/location6384.json'
 
 import {Map, fromJS } from 'immutable'
 
@@ -45,34 +46,9 @@ let LocationInfo = React.createClass ({
     location: React.PropTypes.object
   },
 
-  getDefaultProps() {
-    return {
-      location: fromJS(Location)
-    }
-  },
-
-  getInitialState() {
-    return {
-      location: undefined
-    };
-  },
-
-  updateState() {
-    this.setState(this.getStateFromStore());
-  },
-
   componentWillMount() {
     let id = this.props.id;
     fetchLocation(id);
-  },
-
-  componentDidMount() {
-    this.updateState();
-    Store.on('update', () => this.updateState());
-  },
-
-  getStateFromStore() {
-    return { location: queryLocation(this.props.id) };
   },
 
   style() {
@@ -86,21 +62,6 @@ let LocationInfo = React.createClass ({
     }
 
     return style;
-  },
-
-  updateAddressField(fieldName) {
-    return value => {
-      this.setState({order: this.state.order.setIn(['address', fieldName], value)});
-    }
-  },
-
-  updateOrder() {
-    let id = this.props.id;
-    updateWorkOrder(id, this.state.order);
-  },
-
-  handleWorkOrderOwnerChange() {
-    return {};
   },
 
   render() {
@@ -146,4 +107,4 @@ let LocationInfo = React.createClass ({
   }
 });
 
-export default LocationInfo;
+export default networkRenderer(LocationInfo, 'location');

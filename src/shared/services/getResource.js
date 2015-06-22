@@ -1,6 +1,6 @@
-import {getContact} from 'contacts'
-import {getLocation} from 'locations'
-import {getWorkOrder} from 'workOrder'
+import {getContact} from './contacts'
+import {getLocation} from './location'
+import {getWorkOrder} from './workOrder'
 
 const fns = {
   contact: getContact,

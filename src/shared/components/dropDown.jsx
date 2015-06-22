@@ -37,7 +37,6 @@ let DropDown = React.createClass ({
 
     if (this.props.menuItems) {
 
-      debugger;
       data = this.props.menuItems.map((dataObj,idx) => {
 
         let menuObj;
