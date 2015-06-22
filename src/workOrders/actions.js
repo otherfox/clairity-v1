@@ -1,5 +1,5 @@
 import Fynx from 'fynx'
-import {getWorkOrder, putWorkOrder} from './services/workOrder.js'
+import {getWorkOrder, putWorkOrder} from '../shared/services/workOrder'
 import Store from '../shared/store'
 
 export const fetchWorkOrder = Fynx.createAsyncAction();
