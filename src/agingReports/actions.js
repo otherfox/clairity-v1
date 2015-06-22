@@ -17,7 +17,7 @@ agingReportsFetched.listen(reports =>
   Store.handleMessage({
     type: Store.MessageTypes.ReplaceAll,
     payload: {
-      table: 'agingReports',
+      table: 'agingReport',
       rows: reports.rows
     }
   })
