@@ -10,7 +10,9 @@ export function getWorkOrder(id) {
       .withCredentials()
       .end((err, res) => {
         if (!err) {
-          s(JSON.parse(res.text));
+          let wo = JSON.parse(res.text);
+          wo.services = wo.services.map(s => s.id = +s.id)
+          s(wo);
         } else {
           f(err);
         }
