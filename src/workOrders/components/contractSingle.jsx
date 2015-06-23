@@ -34,55 +34,19 @@ const ContractSingle = React.createClass({
   },
 
   getContractData(contract) {
-    return [
-      {
-        label: 'Agent',
-        value: contract.get('agent_name')
-      },
-      {
-        label: 'Type',
-        value: contract.getIn(['type','name'])
-      },
-      {
-        label: 'Term',
-        value: (contract.get('term')) ? contract.get('term')+' Months' : Date(contract.get('start_date')).toDateString()+' to '+Date(contract.get('end_date')).toDateString()
-      },
-      {
-        label: 'Days Until Install',
-        value: contract.get('est_days_till_install')
-      },
-      {
-        label: 'Total NRC',
-        value: contract.get('total_nrc')
-      },
-      {
-        label: 'Total MRC',
-        value: contract.get('total_mrc')
-      },
-      {
-        label: 'Signed',
-        value: new Date(contract.get('signed')).toDateString()
-      },
-      {
-        label: 'Installed',
-        value: (contract.get('install_date')) ? new Date(contract.get('install_date')).toDateString() : ''
-      },
-      {
-        label: 'Disconnected',
-        value: (contract.get('disconnect_date')) ? new Date(contract.get('disconnect_date')).toDateString() : ''
-      },
-      {
-        label: 'Status',
-        value: contract.getIn(['status','name'])
-      },
-      {
-        label: 'Billable',
-        value: contract.get('billable') ? 'Yes' : 'No'
-      },
-      {
-        label: 'Telecomm Tax Estimate (17%)',
-        value: '// TODO'
-      }
+    return [  // Had to condense this into something manageable. 80 lines of inline POJOs was too much for me.
+      { label: 'Agent', value: contract.get('agent_name') },
+      { label: 'Type', value: contract.getIn(['type','name']) },
+      { label: 'Term', value: (contract.get('term')) ? contract.get('term')+' Months' : Date(contract.get('start_date')).toDateString()+' to '+Date(contract.get('end_date')).toDateString() },
+      { label: 'Days Until Install', value: contract.get('est_days_till_install') },
+      { label: 'Total NRC', value: contract.get('total_nrc') },
+      { label: 'Total MRC', value: contract.get('total_mrc') },
+      { label: 'Signed', value: new Date(contract.get('signed')).toDateString() },
+      { label: 'Installed', value: (contract.get('install_date')) ? new Date(contract.get('install_date')).toDateString() : '' },
+      { label: 'Disconnected', value: (contract.get('disconnect_date')) ? new Date(contract.get('disconnect_date')).toDateString() : '' },
+      { label: 'Status', value: contract.getIn(['status','name']) },
+      { label: 'Billable', value: contract.get('billable') ? 'Yes' : 'No' },
+      { label: 'Telecomm Tax Estimate (17%)', value: '// TODO' }
     ];
   },
 
