@@ -10,8 +10,9 @@ import Table from '../shared/components/table'
 
 import networkRenderer from '../shared/components/networkRenderer'
 
-import ContactLogs from './components/contactLogs'
 import ContractOverview from './components/contractOverview'
+
+import ContactLogs from './components/contactLogs'
 import WorkOrderDetails from './components/workOrderDetails'
 import LocationInfo from './components/locationInfo'
 import Engineering from './components/engineering'
