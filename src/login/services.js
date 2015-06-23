@@ -4,14 +4,17 @@ import _ from 'lodash'
 import req from 'superagent'
 
 export function tryUserLogin(creds) {
-  return new Promise((resolve, reject) => {
+  return new Promise((s, f) => {
     req.post("http://lab.rairity.com/login.cfm")
       .withCredentials()
       .type('form')
       .send(creds)
       .end((err, res) => {
-        console.log(err);
-        console.log(res);
+        if (res.ok && res.xhr.responseURL.match(/controller\.cfm/i)) {
+          s(res);
+        } else {
+          f({res, err});
+        }
       });
   });
   // return new Promise((res, rej) =>

@@ -12,18 +12,20 @@ import WorkOrderUpload from '../../workOrderUpload'
 import ViewCustomer from '../../viewCustomer'
 
 export default (
-  <Route handler={App}>
+  <Route>
     <DefaultRoute handler={Login} />
-    <Route name="login" handler={Login} />
-    <Route name="aging-reports" handler={AgingReports} />
-    <Route name="customer" path="customer/:id" handler={RouteHandler}>
-      <DefaultRoute name="view-customer" handler={ViewCustomer} />
-      <Route name="edit-customer" path="edit" handler={EditCustomer} />
+    <Route path="/" handler={App}>
+      <Route name="aging-reports" handler={AgingReports} />
+      <Route name="customer" path="customer/:id" handler={RouteHandler}>
+        <DefaultRoute name="view-customer" handler={ViewCustomer} />
+        <Route name="edit-customer" path="edit" handler={EditCustomer} />
+      </Route>
+      <Route name="create-contract" handler={CreateContract} />
+      <Route name="open-installs" handler={OpenInstalls} />
+      <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
+        <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
+      </Route>
     </Route>
-    <Route name="create-contract" handler={CreateContract} />
-    <Route name="open-installs" handler={OpenInstalls} />
-    <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
-      <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
-    </Route>
+    <Route name="login" path="/login" handler={Login} />
   </Route>
 );
