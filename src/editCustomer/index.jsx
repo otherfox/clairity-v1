@@ -152,180 +152,171 @@ export default class CreateLocation extends React.Component {
       dropDown = <DropDownMenu menuItems={this.state.customerTypes} selectedIndex={this.state.selectedIndex} onChange={this.handleCustomerTypeChange.bind(this)}/>;
     }
     return (
-      <div>
-        <TopNav />
-        <Layout type="main">
-          <LeftNav />
-          <Content>
-            <Layout>
-              <div className="section-header">
-                <h1>Edit Customer Location</h1>
-              </div>
-              <Paper zDepth={1} rounded={true}>
-                <Layout widths={{ lg: [6, 6], md: [12, 12], sm: [12, 12], xs: [12, 12]}} cPadding={'0 20px 20px 20px'}>
-                  <div>
-                    <h4>Customer(Billing) Details</h4>
-                    {dropDown}
-                    <Layout widths={{ lg: [12,6,6,12,6,6,4,4,4], md: [12,6,6,12,6,6,4,4,4], sm: [12,6,6,12,6,6,4,4,4], xs: [12,6,6,12,6,6,4,4,4]}}>
-                      <TextField
-                        name="name"
-                        value={customer.name}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Name" />
-                      <TextField
-                        name="street1"
-                        value={customer.street1}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Street 1" />
-                      <TextField
-                        name="street2"
-                        value={customer.street2}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Street 2" />
-                      <TextField
-                        name="city"
-                        value={customer.city}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="City" />
-                      <TextField
-                        name="state"
-                        value={customer.state}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="State" />
-                      <TextField
-                        name="zip_code"
-                        value={customer.zip_code}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Zip Code" />
-                      <TextField
-                        name="reference_number"
-                        value={customer.reference_number}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Reference #" />
-                      <TextField
-                        name="attn"
-                        value={customer.attn}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Attn" />
-                      <TextField
-                        name="legacy_account_number"
-                        value={customer.legacy_account_number}
-                        onChange={this.handleCustomerChange.bind(this)}
-                        floatingLabelText="Legacy Account #" />
-                    </Layout>
-                    <Layout widths={{ lg: [6,6,6,6,6,6,6,6], md: [6,6,6,6,6,6,6,6], sm: [6,6,6,6,6,6,6,6], xs: [6,6,6,6,6,6,6,6]}} pPadding={"20px 0"}>
-                      <Checkbox
-                        name="tax_exempt"
-                        checked={customer.tax_exempt}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Tax Exempt" />
-                      <Checkbox
-                        name="summary_billing"
-                        checked={customer.summary_billing}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Summary Billing" />
-                      <Checkbox
-                        name="show_international"
-                        checked={customer.show_international}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Show International Calls" />
-                      <Checkbox
-                        name="show_long_distance"
-                        checked={customer.show_long_distance}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Show long Distance Calls" />
-                      <Checkbox
-                        name="email_invoice"
-                        checked={customer.email_invoice}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Email Invoice" />
-                      <Checkbox
-                        name="invoice_weekly"
-                        checked={customer.invoice_weekly}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Invoice Weekly" />
-                      <Checkbox
-                        name="vip"
-                        value="vip"
-                        checked={customer.vip}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="VIP" />
-                      <Checkbox
-                        name="auto_pay"
-                        checked={customer.auto_pay}
-                        onCheck={this.handleCustomerCheck.bind(this)}
-                        label="Auto Pay" />
-                    </Layout>
-                  </div>
-                  <div>
-                    <h4>Service Location</h4>
-                    <Layout widths={{ lg: [12,12,12,6,6,12,6,6,4,4,4], md: [12,12,12,12,12,12,12], sm: [12,12,12,12,12,12,12], xs: [12,12,12,12,12,12,12]}}>
-                      <TextField
-                        name="name"
-                        value={location.name}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Name" />
-                      <Checkbox
-                        name="tax_exempt"
-                        checked={location.tax_exempt}
-                        onCheck={this.handleLocationCheck.bind(this)}
-                        label="Tax Exempt" />
-                      <Checkbox
-                        checked={this.state.sameAddress}
-                        onCheck={this.handleSameAddressCheck.bind(this)}
-                        label="Same as Customer Address" />
-                      <TextField
-                        name="street1"
-                        value={location.street1}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Street 1" />
-                      <TextField
-                        name="street2"
-                        value={location.street2}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Street 2" />
-                      <TextField
-                        name="city"
-                        value={location.city}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="City" />
-                      <TextField
-                        name="state"
-                        value={location.state}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="State" />
-                      <TextField
-                        name="zip_code"
-                        value={location.zip_code}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Zip Code" />
-                      <TextField
-                        name="reference_number"
-                        value={location.reference_number}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Reference #" />
-                      <TextField
-                        name="legacy_account_number"
-                        value={location.legacy_account_number}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Legacy Account #" />
-                      <TextField
-                        name="order_index"
-                        value={location.order_index}
-                        onChange={this.handleLocationChange.bind(this)}
-                        floatingLabelText="Order Index" />
-                    </Layout>
-                  </div>
-                </Layout>
-              </Paper>
-              <Layout pPadding={"10px 0"}>
-                <RaisedButton label="Submit" disabled={this.state.submitDisabled} onClick={this.onSubmit.bind(this)} primary={true} />
+      <Layout>
+        <div className="section-header">
+          <h1>Edit Customer Location</h1>
+        </div>
+        <Paper zDepth={1} rounded={true}>
+          <Layout widths={{ lg: [6, 6], md: [12, 12], sm: [12, 12], xs: [12, 12]}} cPadding={'0 20px 20px 20px'}>
+            <div>
+              <h4>Customer(Billing) Details</h4>
+              {dropDown}
+              <Layout widths={{ lg: [12,6,6,12,6,6,4,4,4], md: [12,6,6,12,6,6,4,4,4], sm: [12,6,6,12,6,6,4,4,4], xs: [12,6,6,12,6,6,4,4,4]}}>
+                <TextField
+                  name="name"
+                  value={customer.name}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Name" />
+                <TextField
+                  name="street1"
+                  value={customer.street1}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Street 1" />
+                <TextField
+                  name="street2"
+                  value={customer.street2}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Street 2" />
+                <TextField
+                  name="city"
+                  value={customer.city}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="City" />
+                <TextField
+                  name="state"
+                  value={customer.state}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="State" />
+                <TextField
+                  name="zip_code"
+                  value={customer.zip_code}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Zip Code" />
+                <TextField
+                  name="reference_number"
+                  value={customer.reference_number}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Reference #" />
+                <TextField
+                  name="attn"
+                  value={customer.attn}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Attn" />
+                <TextField
+                  name="legacy_account_number"
+                  value={customer.legacy_account_number}
+                  onChange={this.handleCustomerChange.bind(this)}
+                  floatingLabelText="Legacy Account #" />
               </Layout>
-            </Layout>
-          </Content>
+              <Layout widths={{ lg: [6,6,6,6,6,6,6,6], md: [6,6,6,6,6,6,6,6], sm: [6,6,6,6,6,6,6,6], xs: [6,6,6,6,6,6,6,6]}} pPadding={"20px 0"}>
+                <Checkbox
+                  name="tax_exempt"
+                  checked={customer.tax_exempt}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Tax Exempt" />
+                <Checkbox
+                  name="summary_billing"
+                  checked={customer.summary_billing}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Summary Billing" />
+                <Checkbox
+                  name="show_international"
+                  checked={customer.show_international}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Show International Calls" />
+                <Checkbox
+                  name="show_long_distance"
+                  checked={customer.show_long_distance}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Show long Distance Calls" />
+                <Checkbox
+                  name="email_invoice"
+                  checked={customer.email_invoice}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Email Invoice" />
+                <Checkbox
+                  name="invoice_weekly"
+                  checked={customer.invoice_weekly}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Invoice Weekly" />
+                <Checkbox
+                  name="vip"
+                  value="vip"
+                  checked={customer.vip}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="VIP" />
+                <Checkbox
+                  name="auto_pay"
+                  checked={customer.auto_pay}
+                  onCheck={this.handleCustomerCheck.bind(this)}
+                  label="Auto Pay" />
+              </Layout>
+            </div>
+            <div>
+              <h4>Service Location</h4>
+              <Layout widths={{ lg: [12,12,12,6,6,12,6,6,4,4,4], md: [12,12,12,12,12,12,12], sm: [12,12,12,12,12,12,12], xs: [12,12,12,12,12,12,12]}}>
+                <TextField
+                  name="name"
+                  value={location.name}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Name" />
+                <Checkbox
+                  name="tax_exempt"
+                  checked={location.tax_exempt}
+                  onCheck={this.handleLocationCheck.bind(this)}
+                  label="Tax Exempt" />
+                <Checkbox
+                  checked={this.state.sameAddress}
+                  onCheck={this.handleSameAddressCheck.bind(this)}
+                  label="Same as Customer Address" />
+                <TextField
+                  name="street1"
+                  value={location.street1}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Street 1" />
+                <TextField
+                  name="street2"
+                  value={location.street2}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Street 2" />
+                <TextField
+                  name="city"
+                  value={location.city}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="City" />
+                <TextField
+                  name="state"
+                  value={location.state}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="State" />
+                <TextField
+                  name="zip_code"
+                  value={location.zip_code}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Zip Code" />
+                <TextField
+                  name="reference_number"
+                  value={location.reference_number}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Reference #" />
+                <TextField
+                  name="legacy_account_number"
+                  value={location.legacy_account_number}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Legacy Account #" />
+                <TextField
+                  name="order_index"
+                  value={location.order_index}
+                  onChange={this.handleLocationChange.bind(this)}
+                  floatingLabelText="Order Index" />
+              </Layout>
+            </div>
+          </Layout>
+        </Paper>
+        <Layout pPadding={"10px 0"}>
+          <RaisedButton label="Submit" disabled={this.state.submitDisabled} onClick={this.onSubmit.bind(this)} primary={true} />
         </Layout>
-        <Footer />
-      </div>
+      </Layout>
     );
   }
 }
