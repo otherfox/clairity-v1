@@ -61,20 +61,22 @@ const ContractSingle = React.createClass({
       { label: 'Billable', name: 'billable',value: contract.get('billable') ? 'Yes' : 'No', cellType: 'string' },
       { label: 'Telecomm Tax Estimate (17%)', name: 'tax_estimate',value: '// TODO', cellType: 'string' }
     ];
-    // let c = {};
-    // colNames.forEach((col, idx) => { c[col.name] = col.value;});
-    // let data = [c];
-    //
-    // return {
-    //   colNames: colNames,
-    //   data: data,
-    //   colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-    //   maxWidth: 36,
-    //   widthAdj: -60,
-    //   margin: '20px 0 5px 0'
-    // };
+    let c = {};
+    colNames.forEach((col, idx) => { c[col.name] = col.value;});
+    let data = [c];
 
-    return {data: colNames}
+    let table = {
+      colNames: colNames,
+      data: data,
+      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+      maxWidth: 36,
+      widthAdj: -60,
+      margin: '20px 0 5px 0'
+    };
+
+    let details = {data: colNames};
+
+    return details;
   },
 
   getTableConfig(contract) {
@@ -105,7 +107,7 @@ const ContractSingle = React.createClass({
   render() {
     return (
       <div style={this.props.style}>
-        <Layout widths={{lg: [2, 10]}} pPadding={'20px 0 0 0'}>
+        <Layout widths = {{lg: [2, 10], md: [2, 10], sm: [2, 10], xs: [2, 10]}} pPadding = {'20px 0 0 0'}>
           <div>
             <Details {...this.getContractData(this.props.contract)} />
           </div>

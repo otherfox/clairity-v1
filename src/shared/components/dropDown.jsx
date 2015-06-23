@@ -46,6 +46,7 @@ let DropDown = React.createClass ({
         }
 
         return menuObj = new Map({
+          key: idx,
           text: dataObj.get('label'),
           value: dataObj.get('value')
         });

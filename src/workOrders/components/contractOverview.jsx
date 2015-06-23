@@ -59,6 +59,7 @@ const ContractOverview = React.createClass({
         let signed = new Date(contract.get('signed'));
 
         return new Map({
+          key: contract.get('id'),
           value: contract.get('id'),
           label: (contract.get('services')) ? 'Signed '+signed.toDateString()+' - '+contract.getIn(['services', 1,'actual_name']) :  'Signed '+signed.toDateString()
         });
@@ -77,7 +78,10 @@ const ContractOverview = React.createClass({
     return (
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{lg: [12,12]}} pPadding={'0 20px 20px 20px'}>
+          <Layout widths={{lg: [12, 12,12], md: [12, 12,12], sm: [12, 12,12], xs: [12, 12,12]}} pPadding={'0 20px 20px 20px'}>
+            <div>
+              <h3>Contracts</h3>
+            </div>
             <div>
               <DropDown menuItems={this.getContracts()} selectedValue={this.state.selectedContract} onChange={this.handleContractChange}/>
             </div>
