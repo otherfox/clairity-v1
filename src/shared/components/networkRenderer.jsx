@@ -30,15 +30,14 @@ export default function(Component, tableName) {
       });
     }
 
-    componentWillMount() {
-      //Store.on('update', this.update);
-      let currentData = queryStore(tableName, this.props.id);
+    fetchData(id) {
+      let currentData = queryStore(tableName, id);
       this.setState({
         data: currentData,
         pending: true,
         ready: currentData ? true : false
       });
-      getResource(this.props.id, tableName).then(data => {
+      getResource(id, tableName).then(data => {
         this.setState({
           pending: false,
           ready: true,
@@ -52,6 +51,17 @@ export default function(Component, tableName) {
           }
         });
       });
+    }
+
+    componentWillMount() {
+      //Store.on('update', this.update);
+      this.fetchData(this.props.id);
+    }
+
+    componentWillReceiveProps(props) {
+      if (this.state.data && this.state.data.get('id') != props.id) {
+        this.fetchData(props.id);
+      }
     }
 
     render() {
