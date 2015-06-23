@@ -79,7 +79,7 @@ export default class POP extends React.Component {
             <div>
               <DropDown selectedValue={this.state.popType} menuItems={fromJS([{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}])} onChange={this.updatePopType.bind(this)}/>
             </div>
-            <div><PopDisplay /></div>
+            <div><PopDisplay workOrder={this.props.workOrder} /></div>
             <div style={{float: 'right'}}>
               <RaisedButton primary label="Update" />
             </div>
