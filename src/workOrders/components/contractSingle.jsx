@@ -37,7 +37,7 @@ const ContractSingle = React.createClass({
     return [
       {
         label: 'Agent',
-        value: contract.get['agent_name']
+        value: contract.get('agent_name')
       },
       {
         label: 'Type',
