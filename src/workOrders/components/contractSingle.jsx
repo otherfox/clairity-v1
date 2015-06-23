@@ -1,5 +1,6 @@
 import React from 'react'
 import Settings from '../../shared/components/settings'
+import Table from '../../shared/components/table'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -53,9 +54,12 @@ const ContractSingle = React.createClass({
   render() {
     return (
       <div style={this.props.style}>
-        <Layout widths={{lg: [12,12]}} pPadding={'0 20px 20px 20px'}>
+        <Layout widths={{lg: [6, 6]}} pPadding={'0 20px 20px 20px'}>
           <div>
             <Details data={this.getContractData(this.props.contract)} />
+          </div>
+          <div>
+            <Table />
           </div>
         </Layout>
       </div>
