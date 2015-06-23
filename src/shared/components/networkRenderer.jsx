@@ -30,14 +30,22 @@ export default function(Component, tableName) {
       });
     }
 
-    fetchData(id) {
+    queryService(tableName, id, options) {
+      if (this.props.queryMethod) {
+        return this.props.queryMethod(options, id, tableName);
+      } else {
+        return getResource(id, tableName);
+      }
+    }
+
+    fetchData(id, opts) {
       let currentData = queryStore(tableName, id);
       this.setState({
         data: currentData,
         pending: true,
         ready: currentData ? true : false
       });
-      getResource(id, tableName).then(data => {
+      this.queryService(id, tableName, opts).then(data => {
         this.setState({
           pending: false,
           ready: true,
@@ -60,7 +68,7 @@ export default function(Component, tableName) {
 
     componentWillReceiveProps(props) {
       if (this.state.data && this.state.data.get('id') != props.id) {
-        this.fetchData(props.id);
+        this.fetchData(props.id, props.options);
       }
     }
 
