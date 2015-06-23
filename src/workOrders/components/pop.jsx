@@ -19,21 +19,27 @@ import {
 } from 'material-ui'
 
 import {fromJS} from 'immutable'
+import {networkCollectionRenderer} from '../shared/components/networkRenderer'
 
 // Make available for use in all components
 let widths = { lg: [6,6], md: [6,6], sm: [12,12], xs: [12,12], xxs: [12,12] };
 let cPadding = '0 20px 20px 20px';
 
-class ExistingPops extends React.Component {
+class ExistingPopsView extends React.Component {
   render() {
     return (
       <Layout {...{widths, cPadding}}>
         <div />
-        <DropDown menuItems={fromJS([{label: 'Test POP', value: 0}])} />
+        <DropDown menuItems={fromJS(this.props.popType)} />
       </Layout>
     );
   }
 }
+
+let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
+  tableName: 'popType',
+  cacheMethod: () => {}
+});
 
 class NewPopForm extends React.Component {
   render() {
