@@ -27,6 +27,17 @@ import Contract from '../services/stubs/contract7416.json'
 
 import {Map, fromJS} from 'immutable'
 
+class YesNoCell extends React.Component {
+  render() {
+    if(this.props.children) {
+      var status = <div className="c-green"><span className="md md-check"></span> Yes</div>;
+    } else {
+      var status = <div className="c-a-1"><span className="md md-close"></span> No</div>;
+    }
+    return status;
+  }
+}
+
 const ContractSingle = React.createClass({
 
   propTypes: {
@@ -51,6 +62,28 @@ const ContractSingle = React.createClass({
     ];
   },
 
+  getTableConfig(contract) {
+    let services = contract.get('services').toJS();
+    return {
+      colNames: [
+        { label: 'Service', name: 'full_name', cellType: 'string'},
+        { label: 'Name', name: 'actual_name', cellType: 'string' },
+        { label: 'Description', name: 'actual_description', cellType: 'string' },
+        { label: 'Quantity', name: '__quantity', cellType: 'string' },
+        { label: 'NRC', name: 'nrc', cellType: 'currency' },
+        { label: 'MRC', name: 'mrc', cellType: 'currency' },
+        { label: 'Installed', name: 'install_date', cellType: 'date' },
+        { label: 'Billable', name: 'billable', cellType: YesNoCell }
+      ],
+      data: services.map(s => {
+        s.__quantity = `${s.quantity} ${s.unit_description || ''}`;
+        return s;
+      }),
+      colWidths: [5, 3, 8, 2, 1, 1, 2, 1],
+      maxWidth: 23
+    };
+  },
+
   render() {
     return (
       <div style={this.props.style}>
@@ -59,7 +92,7 @@ const ContractSingle = React.createClass({
             <Details data={this.getContractData(this.props.contract)} />
           </div>
           <div>
-            <Table />
+            <Table {...this.getTableConfig(this.props.contract)} />
           </div>
         </Layout>
       </div>
