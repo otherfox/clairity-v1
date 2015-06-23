@@ -146,8 +146,8 @@ let DataTable = React.createClass({
         {
           this.props.colNames.map((col, i) =>
             <Column
-              label={col.name}
-              dataKey={i}
+              label={col.label}
+              dataKey={col.name || i}
               width={this.getColWidth(i)}
               cellRenderer={
                 function(cellData) {

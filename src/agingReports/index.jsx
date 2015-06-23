@@ -38,18 +38,18 @@ import {ToggleCell, SendCell, UserCell} from './tableCells'
 
 // Table Data
 let colNames = [
-  { name: 'Customer', cellType: 'uri', props: {href: '#'}},
-	{ name: 'Status', cellType: ToggleCell },
-  { name: 'Balance', cellType: 'currency'},
-  { name: '0 - 30', cellType: 'currency'},
-  { name: '31 - 60', cellType: 'currency'},
-  { name: '61 - 90', cellType: 'currency'},
-  { name: '91+', cellType: 'currency'},
-  { name: 'Send Late Notice', cellType: SendCell},
-  { name: 'Last Weekly Notice', cellType: 'date'},
-  { name: 'Last Monthly Notice', cellType: 'date'},
-  { name: 'Agent', cellType: UserCell},
-  { name: 'State', cellType: 'string'},
+  { label: 'Customer', cellType: 'uri', props: {href: '#'}},
+	{ label: 'Status', cellType: ToggleCell },
+  { label: 'Balance', cellType: 'currency'},
+  { label: '0 - 30', cellType: 'currency'},
+  { label: '31 - 60', cellType: 'currency'},
+  { label: '61 - 90', cellType: 'currency'},
+  { label: '91+', cellType: 'currency'},
+  { label: 'Send Late Notice', cellType: SendCell},
+  { label: 'Last Weekly Notice', cellType: 'date'},
+  { label: 'Last Monthly Notice', cellType: 'date'},
+  { label: 'Agent', cellType: UserCell},
+  { label: 'State', cellType: 'string'},
 ];
 
 export default class Aging extends React.Component {
