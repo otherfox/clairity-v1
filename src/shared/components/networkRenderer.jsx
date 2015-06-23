@@ -1,11 +1,34 @@
 import React from 'react'
-import Store from '../store'
+import Store, {MessageTypes} from '../store'
 import {getResource} from '../services/getResource'
 
 import {fromJS} from 'immutable'
 
 function queryStore(tableName, id) {
   return Store.data.getIn([tableName, id]) || null;
+}
+
+export function networkCollectionRenderer(Component, options) {
+
+  let Wrapped = networkRenderer(Component, options.tableName);
+
+  let opts = {
+    cacheMethod: options.cacheMethod,
+    serviceMethod: options.serviceMethod,
+    writeMethod: data => Store.handleMessage({
+      type: options.replace ? MessageTypes.ReplaceAll : MessageTypes.Write,
+      payload: {
+        rows: data,
+        table: options.tableName
+      }
+    })
+  };
+
+  return class networkCollectionRenderer extends React.Component {
+    render() {
+      return <Wrapped id={this.props.id} options={opts} />
+    }
+  }
 }
 
 export default function networkRenderer(Component, tableName) {
