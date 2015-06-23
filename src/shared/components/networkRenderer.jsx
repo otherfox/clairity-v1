@@ -8,9 +8,9 @@ function queryStore(tableName, id) {
   return Store.data.getIn([tableName, id]) || null;
 }
 
-export default function(Component, tableName) {
+export default function networkRenderer(Component, tableName) {
 
-  return class NetworkWrappedComponent extends React.Component {
+  return class NetworkWrapperComponent extends React.Component {
 
     constructor() {
       super();
@@ -23,7 +23,7 @@ export default function(Component, tableName) {
     }
 
     update() {
-      let currentData = queryStore(tableName, this.props.id);
+      let currentData = this.queryCache(tableName, this.props.id, this.props.options);
       this.setState({
         data: currentData,
         ready: currentData ? true : false
@@ -68,7 +68,7 @@ export default function(Component, tableName) {
     }
 
     fetchData(id, opts) {
-      let currentData = queryStore(tableName, id);
+      let currentData = this.queryCache(tableName, id, opts);
       this.setState({
         data: currentData,
         pending: true,
