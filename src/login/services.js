@@ -17,11 +17,4 @@ export function tryUserLogin(creds) {
         }
       });
   });
-  // return new Promise((res, rej) =>
-  //   _.defer(() =>
-  //     Math.random() > 0.5 ?
-  //       res(data.user) :
-  //       rej(data.reason)
-  //   )
-  // );
 }
