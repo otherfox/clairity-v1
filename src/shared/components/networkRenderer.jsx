@@ -39,7 +39,7 @@ export default function(Component, tableName) {
     }
 
     queryService(id, tableName, options) {
-      if (options && options.queryMethod) {
+      if (options && options.serviceMethod) {
         return options.serviceMethod(options, id, tableName);
       } else {
         return getResource(id, tableName);
