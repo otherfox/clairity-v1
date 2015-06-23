@@ -38,7 +38,7 @@ export default function(Component, tableName) {
       }
     }
 
-    queryService(tableName, id, options) {
+    queryService(id, tableName, options) {
       if (options && options.queryMethod) {
         return options.serviceMethod(options, id, tableName);
       } else {
