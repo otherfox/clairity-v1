@@ -22,6 +22,8 @@ import DropDown from '../../shared/components/dropDown'
 
 import WorkOrder from '../services/stubs/order1583.json'
 import Contract from '../services/stubs/contract7416.json'
+import ServiceTypes from '../services/stubs/serviceTypes.json'
+import OrderTypes from '../services/stubs/workOrderTypes.json'
 
 import {List, Map, fromJS} from 'immutable'
 
@@ -29,12 +31,16 @@ let WorkOrderDetails = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
-    order: React.PropTypes.object
+    order: React.PropTypes.object,
+    serviceTypes: React.PropTypes.object,
+    orderTypes: React.PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      order: fromJS(WorkOrder)
+      order: fromJS(WorkOrder),
+      serviceTypes: fromJS(ServiceTypes),
+      orderTypes: fromJS(OrderTypes)
     };
   },
 
@@ -50,21 +56,88 @@ let WorkOrderDetails = React.createClass ({
     return style;
   },
 
+  getServiceTypes() {
+
+    let order = this.props.order;
+    let os = [];
+    let orderServices = order.get('services').forEach((service, idx) => {
+      os.push(service.get('id'));
+    });
+
+    let services = this.props.serviceTypes.map( (serviceType, idx) =>
+      <div>
+        <Checkbox key={idx} name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
+      </div>
+    );
+
+    return services
+  },
+
+  getUsers() {
+
+    let users = [
+      new Map({
+        key: 0,
+        label: 'test',
+        value: 0
+      })
+    ];
+
+    users = new List(users);
+
+    return users;
+  },
+
+  getStatus() {
+    let status = [
+      new Map({
+        key: 0,
+        label: 'Open',
+        value: 'Open'
+      }),
+      new Map({
+        key: 1,
+        label: 'Closed',
+        value: 'Closed'
+      })
+    ];
+
+    status = new List(status);
+
+    return status;
+
+  },
+
+  getWorkOrderTypes() {
+
+    let orderTypes = this.props.orderTypes.map((orderType, idx) => {
+      let data = new Map({
+          key: idx,
+          value: orderType.get('id'),
+          label: orderType.get('name')
+        });
+      return data;
+    });
+
+    orderTypes= new List(orderTypes);
+    return orderTypes;
+  },
+
   getDetails(order) {
 
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [
-      { label: 'Owners', name: 'owners', value: order.get['owner'], cellType: 'string' },
-      { label: 'Work Order Status', name: 'status', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'Work Order Type', name: 'owners', value: 'Type', cellType: 'string' },
-      { label: 'Description', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'Services', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'Expected Install Date (Earliest)', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'Expected Install Data (Latest)', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'Install Date', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'Close Date', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
-      { label: 'notes', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'])} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
+      { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [4,4,4,4,4,4,4,4,4,4,4,4], sm: [4,4,4,4,4,4,4,4,4,4,4,4], xs: [4,4,4,4,4,4,4,4,4,4,4,4], xx: [4,4,4,4,4,4,4,4,4,4,4,4] }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
+      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : new Date()} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: (order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date')).toDateString() : '', cellType: 'string', detailType: 'mui' },
+      { label: 'Install Date', name: 'work_order_date', value: (order.get('work_order_date')) ? new Date(order.get('work_order_date')).toDateString() : '', cellType: 'string', detailType: 'mui' },
+      { label: 'Close Date', name: 'close_date', value: (order.get('close_date')) ? new Date(order.get('close_date')).toDateString() : '', cellType: 'string', detailType: 'mui' },
+      { label: 'notes', name: 'general_notes', value: (order.get('general_notes')) ? order.get('general_notes'): '', cellType: 'string', detailType: 'mui' },
     ];
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});

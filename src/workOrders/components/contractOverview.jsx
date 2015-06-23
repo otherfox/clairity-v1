@@ -26,7 +26,7 @@ import Location from '../services/stubs/location6384.json'
 import WorkOrder from '../services/stubs/order1583.json'
 import Contract from '../services/stubs/contract7416.json'
 
-import {Map, fromJS} from 'immutable'
+import {List, Map, fromJS} from 'immutable'
 
 const ContractOverview = React.createClass({
 
@@ -66,7 +66,7 @@ const ContractOverview = React.createClass({
       }
     });
 
-    return contracts.toList();
+    return new List(contracts);
   },
 
   handleContractChange(value) {
