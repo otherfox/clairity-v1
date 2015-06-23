@@ -38,19 +38,15 @@ export default function(Component, tableName) {
       }
     }
 
-    fetchData(id, opts) {
-      let currentData = queryStore(tableName, id);
+    handleQueryResults(data, options) {
       this.setState({
-        data: currentData,
-        pending: true,
-        ready: currentData ? true : false
+        pending: false,
+        ready: true,
+        data: fromJS(data)
       });
-      this.queryService(id, tableName, opts).then(data => {
-        this.setState({
-          pending: false,
-          ready: true,
-          data: fromJS(data)
-        });
+      if (options.writeMethod) {
+        options.writeMethod(data, tableName);
+      } else {
         Store.handleMessage({
           type: Store.MessageTypes.Write,
           payload: {
@@ -58,7 +54,18 @@ export default function(Component, tableName) {
             row: data
           }
         });
+      }
+    }
+
+    fetchData(id, opts) {
+      let currentData = queryStore(tableName, id);
+      this.setState({
+        data: currentData,
+        pending: true,
+        ready: currentData ? true : false
       });
+      this.queryService(id, tableName, opts)
+        .then(this.handleQueryResults.bind(this));
     }
 
     componentWillMount() {
