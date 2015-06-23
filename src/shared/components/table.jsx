@@ -79,7 +79,10 @@ let DataTable = React.createClass({
     colNames: React.PropTypes.array,
     data: React.PropTypes.array,
     colWidths : React.PropTypes.array,
-    maxWidth: React.PropTypes.number
+    maxWidth: React.PropTypes.number,
+    widthAdj: React.PropTypes.number,
+    widthPerc: React.PropTypes.number,
+    margin: React.PropTypes.string
   },
 
   rowGetter: function(rowIndex) {
@@ -87,7 +90,8 @@ let DataTable = React.createClass({
   },
 
   getWidth: function() {
-    let width = window.innerWidth - Settings.leftNavWidth - (2 * Settings.contentPadding) - Settings.widthBuffer;
+    let widthPerc = (this.props.widthPerc) ? this.props.widthPerc / 100 : 1;
+    let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - (2 * Settings.contentPadding) - Settings.widthBuffer + this.props.widthAdj);
     return width;
   },
 
@@ -114,7 +118,7 @@ let DataTable = React.createClass({
   style: function() {
     return {
       width: this.state.width + "px",
-      margin: "20px 0"
+      margin: this.props.margin || "20px 0"
     };
   },
 
@@ -146,8 +150,9 @@ let DataTable = React.createClass({
         {
           this.props.colNames.map((col, i) =>
             <Column
-              label={col.name}
-              dataKey={i}
+              label={col.label}
+              key={i}
+              dataKey={col.name || i}
               width={this.getColWidth(i)}
               cellRenderer={
                 function(cellData) {
@@ -158,6 +163,8 @@ let DataTable = React.createClass({
         }
       </Group>;
 
+    let height = (((this.props.data.length * 50) + 50) < window.innerHeight - 300) ? (this.props.data.length * 50) + 50 : window.innerHeight - 300;
+
     return (
       <div style={this.style()} className="table">
         <Table
@@ -167,7 +174,7 @@ let DataTable = React.createClass({
           rowsCount={this.props.data.length}
           rowClassNameGetter = {this.getRowClass}
           width={this.state.width}
-          height={window.innerHeight - 300}
+          height={height}
           headerHeight={50}>
             {columns}
         </Table>

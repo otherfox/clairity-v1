@@ -38,18 +38,18 @@ import {ToggleCell, SendCell, UserCell} from './tableCells'
 
 // Table Data
 let colNames = [
-  { name: 'Customer', cellType: 'uri', props: {href: '#'}},
-	{ name: 'Status', cellType: ToggleCell },
-  { name: 'Balance', cellType: 'currency'},
-  { name: '0 - 30', cellType: 'currency'},
-  { name: '31 - 60', cellType: 'currency'},
-  { name: '61 - 90', cellType: 'currency'},
-  { name: '91+', cellType: 'currency'},
-  { name: 'Send Late Notice', cellType: SendCell},
-  { name: 'Last Weekly Notice', cellType: 'date'},
-  { name: 'Last Monthly Notice', cellType: 'date'},
-  { name: 'Agent', cellType: UserCell},
-  { name: 'State', cellType: 'string'},
+  { label: 'Customer', cellType: 'uri', props: {href: '#'}},
+	{ label: 'Status', cellType: ToggleCell },
+  { label: 'Balance', cellType: 'currency'},
+  { label: '0 - 30', cellType: 'currency'},
+  { label: '31 - 60', cellType: 'currency'},
+  { label: '61 - 90', cellType: 'currency'},
+  { label: '91+', cellType: 'currency'},
+  { label: 'Send Late Notice', cellType: SendCell},
+  { label: 'Last Weekly Notice', cellType: 'date'},
+  { label: 'Last Monthly Notice', cellType: 'date'},
+  { label: 'Agent', cellType: UserCell},
+  { label: 'State', cellType: 'string'},
 ];
 
 export default class Aging extends React.Component {
@@ -132,38 +132,27 @@ export default class Aging extends React.Component {
   render() {
     let rowsData = this.computeRows();
     return (
-      <div>
-        <TopNav />
-        <div className="main">
-          <Layout>
-            <LeftNav />
-            <Content>
-              <Layout widths={{lg: [12], md: [12], sm: [12], xs: [12]}}>
-                <div>
-                  <div className="section-header">
-                    <h1>Aging Reports</h1>
-                  </div>
-                  <Filters data={this.state.rows}>
-                    <RadioButtonGroup name="status" valueSelected={this.state.filter} onChange={this.handleFilterChange.bind(this)}>
-                      <RadioButton value="active" label="Acitve" />
-                      <RadioButton value="inactive" label="Inactive"  defaultChecked={true} />
-                      <RadioButton value="both" label="Both" />
-                    </RadioButtonGroup>
-                    <Checkbox  name="checkboxName1" value={this.state.showZeros} onCheck={this.handleshowZerosChange.bind(this)} label="Hide $0 Credit Balances" />
-                    <DatePicker hintText="As of" mode="landscape" />
-                  </Filters>
-                  <Table
-                    data={rowsData}
-                    colNames={this.state.colNames}
-                    colWidths={[4,1,1,1,1,1,1,2,2,2,2]}
-                    maxWidth={18} />
-                </div>
-              </Layout>
-            </Content>
-          </Layout>
+      <Layout widths={{lg: [12], md: [12], sm: [12], xs: [12]}}>
+        <div>
+          <div className="section-header">
+            <h1>Aging Reports</h1>
+          </div>
+          <Filters data={this.state.rows}>
+            <RadioButtonGroup name="status" valueSelected={this.state.filter} onChange={this.handleFilterChange.bind(this)}>
+              <RadioButton value="active" label="Acitve" />
+              <RadioButton value="inactive" label="Inactive"  defaultChecked={true} />
+              <RadioButton value="both" label="Both" />
+            </RadioButtonGroup>
+            <Checkbox  name="checkboxName1" value={this.state.showZeros} onCheck={this.handleshowZerosChange.bind(this)} label="Hide $0 Credit Balances" />
+            <DatePicker hintText="As of" mode="landscape" />
+          </Filters>
+          <Table
+            data={rowsData}
+            colNames={this.state.colNames}
+            colWidths={[4,1,1,1,1,1,1,2,2,2,2]}
+            maxWidth={18} />
         </div>
-        <Footer />
-      </div>
+      </Layout>
     );
   }
 };

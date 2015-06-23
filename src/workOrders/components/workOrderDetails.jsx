@@ -17,46 +17,25 @@ import {
 } from 'material-ui'
 
 import Layout from '../../shared/components/layout'
+import Details from '../../shared/components/details'
+import DropDown from '../../shared/components/dropDown'
 
-import controllable from 'react-controllables'
+import WorkOrder from '../services/stubs/order1583.json'
+import Contract from '../services/stubs/contract7416.json'
 
-import {fetchWorkOrder, updateWorkOrder} from '../actions.js'
-import {queryWorkOrder} from '../queries.js'
-import {Navigation} from 'react-router'
+import {List, Map, fromJS} from 'immutable'
 
 let WorkOrderDetails = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
-    id: React.PropTypes.number
+    order: React.PropTypes.object
   },
 
   getDefaultProps() {
     return {
-      id: 1538
+      order: fromJS(WorkOrder)
     };
-  },
-
-  getInitialState() {
-    return {};
-  },
-
-  updateState() {
-    this.setState(this.getStateFromStore());
-  },
-
-  componentWillMount() {
-    let id = this.props.id;
-    fetchWorkOrder(id);
-  },
-
-  componentDidMount() {
-    this.updateState();
-    Store.on('update', () => this.updateState('store updated'));
-  },
-
-  getStateFromStore() {
-    return { order: queryWorkOrder(this.props.id) };
   },
 
   style() {
@@ -64,7 +43,6 @@ let WorkOrderDetails = React.createClass ({
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
         style[key] = this.props.style[key];
       }, this);
     }
@@ -72,30 +50,54 @@ let WorkOrderDetails = React.createClass ({
     return style;
   },
 
-  updateAddressField(fieldName) {
-    return value => {
-      this.setState({order: this.state.order.setIn(['address', fieldName], value)});
-    }
-  },
+  getDetails(order) {
 
-  updateOrder() {
-    let id = this.props.id;
-    updateWorkOrder(id, this.state.order);
-  },
+    let owners = [{value: 'Owner',label:'Label'}];
 
-  handleWorkOrderOwnerChange() {
-    return {};
+    let colNames = [
+      { label: 'Owners', name: 'owners', value: order.get['owner'], cellType: 'string' },
+      { label: 'Work Order Status', name: 'status', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Work Order Type', name: 'owners', value: 'Type', cellType: 'string' },
+      { label: 'Description', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Services', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Expected Install Date (Earliest)', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Expected Install Data (Latest)', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Install Date', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'Close Date', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
+      { label: 'notes', name: 'owners', value: order.getIn(['status', 'name']), cellType: 'string' },
+    ];
+    let c = {};
+    colNames.forEach((col, idx) => { c[col.name] = col.value;});
+    let data = [c];
+
+    let table = {
+      colNames: colNames,
+      data: data,
+      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+      maxWidth: 36,
+      widthAdj: -60,
+      margin: '20px 0 5px 0'
+    };
+
+    let details = {data: colNames};
+
+    return details;
+
   },
 
   render() {
-    let ownerId = this.state.order || '';
-    let owners = this.state.owners || [{payload: 1, text: 'text'}];
+
+
+
     return (
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
             <div>
-
+              <h3>Details</h3>
+            </div>
+            <div>
+              <Details {...this.getDetails(this.props.order)} />
             </div>
           </Layout>
         </Paper>
