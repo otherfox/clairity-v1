@@ -1,0 +1,64 @@
+{
+  "ips_requested_2": "infrastructure",
+  "pop_id": 121,
+  "rssi": "60.0 dBm",
+  "pop_router_configured": false,
+  "status": {
+    "name": "Closed",
+    "id": 3
+  },
+  "customer_ip_block": "216.59.217.8/30",
+  "slave_radio_ip": "10.210.40.71/24",
+  "customer_contact_id": 12552,
+  "voice_provisioning_complete": false,
+  "id": 1538,
+  "ips_requested": "/30",
+  "master_radio_ip": "10.210.40.10/24",
+  "type": {
+    "name": "New Install",
+    "id": 1
+  },
+  "notes": "24ghz -48  5/27/2014",
+  "customer_ip_block_2": "216.59.210.240/30",
+  "contract_id": 7416,
+  "provisioning_notified": false,
+  "circuit_installed": false,
+  "voice_installed": false,
+  "vlan_id": "39 mgt 240 data",
+  "radios_configured": false,
+  "swip_completed": true,
+  "orion_monitored": true,
+  "gateway": "216.59.217.9",
+  "first_usable_ip_2": "216.59.210.242",
+  "expected_install_date_end": "April, 28 2014 18:00:00 +0000",
+  "subnet_mask_2": "255.255.255.252",
+  "router_ports": "fa0/14",
+  "location_id": 6384,
+  "other_configured": false,
+  "subnet_mask": "255.255.255.252",
+  "circuit_accepted": false,
+  "gateway_2": "216.59.210.241",
+  "services": [
+    {
+      "name": "Wireless",
+      "id": "10"
+    },
+    {
+      "name": "Voice",
+      "id": "13"
+    },
+    {
+      "name": "Data",
+      "id": "14"
+    }
+  ],
+  "customer_notified": false,
+  "loop_ip": "216.59.223.6",
+  "voice_services_accepted": false,
+  "expected_install_date": "April, 28 2014 15:00:00 +0000",
+  "first_usable_ip": "216.59.217.10",
+  "voice_cpe_configured": false,
+  "pop_router_ports_assigned": false,
+  "ethernet_errors_checked": false,
+  "networking_notes": "DanSchreimannandAssociates_100-3067-6384\r\ndfw.rtr01.DanSchreimannandAssociates\r\n8445 Freeport Parkway, Suite 175, Irving, TX 75063\r\nvlan 240\r\nname RF_DanSchreiman\r\nint vl 240\r\ndesc RF-DanSchreimannandAssociates\r\nno shut\r\nip addr 216.59.210.241 255.255.255.252\r\nno ip redirects\r\nno ip unreachables\r\nno ip proxy-arp\r\nip route 216.59.217.8  255.255.255.252 216.59.210.242 name RF-DanSchreimannandAssociates_100-3067-6384\r\nrouter ospf 1059\r\nnet 216.59.210.240 0.0.0.3 a 4\r\n"
+}
