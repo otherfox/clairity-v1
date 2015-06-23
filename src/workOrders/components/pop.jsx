@@ -20,13 +20,17 @@ import {
 
 import {fromJS} from 'immutable'
 
+// Make available for use in all components
+let widths = { lg: [6,6], md: [6,6], sm: [12,12], xs: [12,12], xxs: [12,12] };
+let cPadding = '0 20px 20px 20px';
+
 class ExistingPops extends React.Component {
   render() {
     return (
-      <div>
-        <div>Existing POP</div>
+      <Layout {...{widths, cPadding}}>
+        <div />
         <DropDown menuItems={fromJS([{label: 'Test POP', value: 0}])} />
-      </div>
+      </Layout>
     );
   }
 }
@@ -35,11 +39,11 @@ class NewPopForm extends React.Component {
   render() {
     return (
       <div>
-        <Layout widths={{ lg: [5,7], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]}} cPadding={'0 20px 10px 0'}>
+        <Layout widths={{ lg: [6,6], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]}} cPadding={'0 20px 10px 0'}>
           <div style={{textAlign: 'right'}}><strong>POP Name</strong></div>
           <div><TextField /></div>
         </Layout>
-        <Layout widths={{ lg: [5,7], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]}} cPadding={'0 20px 10px 0'}>
+        <Layout widths={{ lg: [6,6], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]}} cPadding={'0 20px 10px 0'}>
           <div style={{textAlign: 'right'}}><strong>POP Address</strong></div>
           <div><TextField /></div>
         </Layout>
@@ -50,7 +54,7 @@ class NewPopForm extends React.Component {
 
 class UnknownPop extends React.Component {
   render() {
-    return <div>Unknown POP</div>;
+    return <div />;
   }
 }
 
@@ -64,26 +68,30 @@ export default class POP extends React.Component {
     this.setState({popType});
   }
 
-  render() {
-    let PopDisplay = UnknownPop;
-    if (this.state.popType === 0) {
-      PopDisplay = ExistingPops;
-    } else if (this.state.popType === 1) {
-      PopDisplay = NewPopForm;
+  getPopDisplay(type) {
+    if (type === 0) {
+      return ExistingPops;
+    } else if (type === 1) {
+      return NewPopForm;
     }
+    return UnknownPop;
+  }
+
+  render() {
+    let PopDisplay = this.getPopDisplay(this.state.popType);
+
     return (
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [6,6,12,12], md: [6,6,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12]}} cPadding={'0 20px 20px 20px'}>
+          <Layout {...{widths, cPadding}}>
             <h3>POP Types</h3>
-            <div>
-              <DropDown selectedValue={this.state.popType} menuItems={fromJS([{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}])} onChange={this.updatePopType.bind(this)}/>
-            </div>
-            <div><PopDisplay workOrder={this.props.workOrder} /></div>
-            <div style={{float: 'right'}}>
-              <RaisedButton primary label="Update" />
-            </div>
+            <DropDown style={{paddingTop: 20}}
+                      selectedValue={this.state.popType}
+                      menuItems={fromJS([{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}])}
+                      onChange={this.updatePopType.bind(this)} />
           </Layout>
+          <PopDisplay workOrder={this.props.workOrder}/>
+          <Layout {...{widths, cPadding}}><div /><RaisedButton primary label="Update" /></Layout>
         </Paper>
       </div>
     );
