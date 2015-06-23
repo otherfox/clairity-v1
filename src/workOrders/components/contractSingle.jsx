@@ -61,18 +61,20 @@ const ContractSingle = React.createClass({
       { label: 'Billable', name: 'billable',value: contract.get('billable') ? 'Yes' : 'No', cellType: 'string' },
       { label: 'Telecomm Tax Estimate (17%)', name: 'tax_estimate',value: '// TODO', cellType: 'string' }
     ];
-    let c = {};
-    colNames.forEach((col, idx) => { c[col.name] = col.value;});
-    let data = [c];
+    // let c = {};
+    // colNames.forEach((col, idx) => { c[col.name] = col.value;});
+    // let data = [c];
+    //
+    // return {
+    //   colNames: colNames,
+    //   data: data,
+    //   colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+    //   maxWidth: 36,
+    //   widthAdj: -60,
+    //   margin: '20px 0 5px 0'
+    // };
 
-    return {
-      colNames: colNames,
-      data: data,
-      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-      maxWidth: 36,
-      widthAdj: -60,
-      margin: '20px 0 5px 0'
-    };
+    return {data: colNames}
   },
 
   getTableConfig(contract) {
@@ -95,6 +97,7 @@ const ContractSingle = React.createClass({
       colWidths: [5, 3, 8, 2, 1, 1, 2, 1],
       maxWidth: 23,
       widthAdj: -60,
+      widthPerc: (1000/12),
       margin: '0'
     };
   },
@@ -102,9 +105,9 @@ const ContractSingle = React.createClass({
   render() {
     return (
       <div style={this.props.style}>
-        <Layout widths={{lg: [12, 12]}} pPadding={'0 0 0 0'}>
+        <Layout widths={{lg: [2, 10]}} pPadding={'20px 0 0 0'}>
           <div>
-            <Table {...this.getContractData(this.props.contract)} />
+            <Details {...this.getContractData(this.props.contract)} />
           </div>
           <div>
             <Table {...this.getTableConfig(this.props.contract)} />
