@@ -81,7 +81,7 @@ const ContractSingle = React.createClass({
       },
       {
         label: 'Telecomm Tax Estimate (17%)',
-        value: ''
+        value: '// TODO'
       }
     ];
   },
@@ -89,13 +89,11 @@ const ContractSingle = React.createClass({
   render() {
     return (
       <div style={this.props.style}>
-        <Paper zDepth={1} rounded={true}>
-          <Layout widths={{lg: [12,12]}} pPadding={'0 20px 20px 20px'}>
-            <div>
-              <Details data={this.getContractData(this.props.contract)} />
-            </div>
-          </Layout>
-        </Paper>
+        <Layout widths={{lg: [12,12]}} pPadding={'0 20px 20px 20px'}>
+          <div>
+            <Details data={this.getContractData(this.props.contract)} />
+          </div>
+        </Layout>
       </div>
     );
   }
