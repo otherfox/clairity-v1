@@ -30,30 +30,40 @@ export default function(Component, tableName) {
       });
     }
 
+    queryCache(id, tableName, options) {
+      if (options && options.cacheMethod) {
+        return options.cacheMethod(options);
+      } else {
+        return queryStore(tableName, id);
+      }
+    }
+
     queryService(tableName, id, options) {
-      if (this.props.queryMethod) {
-        return this.props.queryMethod(options, id, tableName);
+      if (options && options.queryMethod) {
+        return options.serviceMethod(options, id, tableName);
       } else {
         return getResource(id, tableName);
       }
     }
 
-    handleQueryResults(data, options) {
-      this.setState({
-        pending: false,
-        ready: true,
-        data: fromJS(data)
-      });
-      if (options.writeMethod) {
-        options.writeMethod(data, tableName);
-      } else {
-        Store.handleMessage({
-          type: Store.MessageTypes.Write,
-          payload: {
-            table: tableName,
-            row: data
-          }
+    handleQueryResults(options) {
+      return data => {
+        this.setState({
+          pending: false,
+          ready: true,
+          data: fromJS(data)
         });
+        if (options && options.writeMethod) {
+          options.writeMethod(data, tableName);
+        } else {
+          Store.handleMessage({
+            type: Store.MessageTypes.Write,
+            payload: {
+              table: tableName,
+              row: data
+            }
+          });
+        }
       }
     }
 
@@ -65,7 +75,7 @@ export default function(Component, tableName) {
         ready: currentData ? true : false
       });
       this.queryService(id, tableName, opts)
-        .then(this.handleQueryResults.bind(this));
+        .then(this.handleQueryResults(opts));
     }
 
     componentWillMount() {
