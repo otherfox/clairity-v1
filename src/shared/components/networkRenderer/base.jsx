@@ -28,12 +28,12 @@ export default function delayRender(Component, options) {
 
     handleQueryResults(opts) {
       return data => {
+        options.writeMethod(data, opts);
         this.setState({
           pending: false,
           ready: true,
           data: fromJS(data)
         });
-        options.writeMethod(data, opts)
       }
     }
 

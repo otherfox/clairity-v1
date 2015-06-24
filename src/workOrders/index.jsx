@@ -94,7 +94,7 @@ let WorkOrdersWrapped = networkModelRenderer(WorkOrders, 'workOrder');
 let WorkOrderPage = React.createClass({
   mixins: [State],
   render() {
-    return (<WorkOrdersWrapped id={this.getParams().id} />);
+    return (<WorkOrdersWrapped id={+this.getParams().id} />);
   }
 });
 
