@@ -1,6 +1,6 @@
 import React from 'react'
-import Store, {MessageTypes} from '../store'
-import {getResource} from '../services/getResource'
+import Store, {MessageTypes} from '../../store'
+import {getResource} from '../../services/getResource'
 
 import {fromJS} from 'immutable'
 

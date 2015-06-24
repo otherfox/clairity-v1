@@ -1,6 +1,6 @@
 import React from 'react'
 import delayRender from './base'
-import Store, {MessageTypes} from '../store'
+import Store, {MessageTypes} from '../../store'
 import {fromJS} from 'immutable'
 
 export function networkCollectionRenderer(Component, options) {
