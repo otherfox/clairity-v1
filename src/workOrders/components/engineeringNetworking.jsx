@@ -86,15 +86,15 @@ let EngineeringNetworking = React.createClass ({
 
                       { label: 'First Usable IP', name: 'first_usable_ip', value:  <TextField multiLine={true} defaultValue={'216.59.217.10'} />, detailType: 'muiTextField'},
 
-                      { label: 'Last Usable IP', name: 'last_usable_ip', value: <TextField multiLine={true} /> },
+                      { label: 'Last Usable IP', name: 'last_usable_ip', value: <TextField multiLine={true} /> , detailType: 'muiTextField'},
 
                       { label: 'Loop IP', name: 'loop_ip', value:  <TextField multiLine={true} defaultValue={'216.59.223.6'} />, detailType: 'muiTextField'},
 
                       { label: 'ARIN Org ID', name: 'slave_radio_ip', value:  <TextField multiLine={true} defaultValue={'10.210.40.71/24'} />, detailType: 'muiTextField'},
 
-                      { label: 'DNS 1', name: 'dns_1', value: <TextField multiLine={true} />},
+                      { label: 'DNS 1', name: 'dns_1', value: <TextField multiLine={true} />, detailType: 'muiTextField'},
 
-                      { label: 'DNS 2', name: 'dns_2', value: <TextField multiLine={true} />},
+                      { label: 'DNS 2', name: 'dns_2', value: <TextField multiLine={true} />, detailType: 'muiTextField'},
 
                     ]}
                   />
@@ -115,7 +115,7 @@ let EngineeringNetworking = React.createClass ({
 
                     { label: 'First Usable IP', name: 'first_usable_ip_2', value:  <TextField multiLine={true} defaultValue={'216.59.210.242'} />, detailType: 'muiTextField'},
 
-                    { label: 'Last Usable IP', name: 'last_usable_ip_2', value: <TextField multiLine={true} />},
+                    { label: 'Last Usable IP', name: 'last_usable_ip_2', value: <TextField multiLine={true} />, detailType: 'muiTextField'},
 
                     { label: 'Advertised Prefixes', name: 'master_radio_ip', value:  <TextField multiLine={true} defaultValue={'10.210.40.10/24'} />, detailType: 'muiTextField'},
 
