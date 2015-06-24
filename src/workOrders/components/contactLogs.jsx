@@ -54,7 +54,10 @@ let ContactLogs = React.createClass ({
             <div>
               <Details title={'Contact Logs'}
                 data = {[
-                  { label: 'Notes', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
+                  { label: 'Customer', value: <div className={'full'}><TextField multiLine={true} /></div>, detailType: 'muiTextField' },
+                  { label: 'Technical', value: <div className={'full'}><TextField multiLine={true} /></div>, detailType: 'muiTextField' },
+                  { label: 'Voice', value: <div className={'full'}><TextField multiLine={true} /></div>, detailType: 'muiTextField' },
+                  { label: 'Site', value: <div className={'full'}><TextField multiLine={true} /></div>, detailType: 'muiTextField' },
                   { label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton' }
                 ]}
               />
