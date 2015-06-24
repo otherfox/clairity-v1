@@ -56,6 +56,7 @@ let Messaging = React.createClass ({
               <Details title={'Messaging'}
                 data = {[
                   { label: 'Add Message', value: <div className={'full'}><TextField style={{width: '100%'}} mulitLine={true} /></div>, detailType: 'muiTextField'},
+                  { label: '', value: <div style={{marginBottom: '30px', textAlign: 'right'}}><RaisedButton label="Add Message" /></div>},
                   { label: 'Nancy Morefield 07/16/2014 9:58 AM', value: '1-877-408-8967 added to account.  Physical location Stephen Exley, LLC in Spring, TX.'},
                   { label: 'D. Garcia 07/15/2014 3:43 PM', value: ' LNP Order 147928 for TN 2812470011 has been rejected for no account found. Thank You!'},
                   { label: 'D. Garcia 07/14/2014 5:04 PM', value: ' LNP Order Submitted:147928 for TN2812470011. Thank you!'},
