@@ -54,7 +54,9 @@ let Engineering = React.createClass ({
             <div>
               <Details title={'Engineering'}
                 data = {[
-                  { label: 'Notes', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
+                  { label: '', value: <Layout widths={{lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12]}}><Checkbox label={'Circuit Built in AMPLE'} /><Checkbox label={'Provisioning Notified'} /><Checkbox label={'SWIP Completed'} /><Checkbox label={'Monitored in Orion'} /></Layout>, detailType: 'muiTextField' },
+
+            
                   { label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton' }
                 ]}
               />
