@@ -66,6 +66,7 @@ class WorkOrders extends React.Component {
             <Layout widths={{lg: [12,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 0 20px 0'}>
               <LocationInfo id={wo.location_id} />
               <Pop workOrder={wo} />
+              <Provisioning />
             </Layout>
           </div>
           <div><WorkOrderDetails workOrder={wo} /></div>
@@ -74,7 +75,7 @@ class WorkOrders extends React.Component {
         <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
           <div></div>
           <div><ContactLogs /></div>
-          <div><Provisioning /></div>
+          <div></div>
         </Layout>
         <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
           <div><EngineeringNetworking></EngineeringNetworking></div>

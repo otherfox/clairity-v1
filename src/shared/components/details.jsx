@@ -54,7 +54,7 @@ let Details = React.createClass ({
         </div>);
     }
 
-    let title = (this.props.title) ? <div><h4>{this.props.title}</h4></div> : null ;
+    let title = (this.props.title) ? <div><h3>{this.props.title}</h3></div> : null ;
 
     return (
       <div style={this.style()}>
