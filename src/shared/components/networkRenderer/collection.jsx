@@ -19,9 +19,9 @@ export function networkCollectionRenderer(Component, options) {
     propName: options.propName || options.tableName + 's'
   });
 
-  return class networkCollectionRenderer extends React.Component {
+  return class NetworkCollectionRenderer extends React.Component {
     render() {
-      return <Wrapped id={this.props.id} options={opts} />
+      return <Delayed id={this.props.id} />
     }
   }
 }

@@ -26,14 +26,14 @@ export default function delayRender(Component, options) {
       });
     }
 
-    handleQueryResults(options) {
+    handleQueryResults(opts) {
       return data => {
         this.setState({
           pending: false,
           ready: true,
           data: fromJS(data)
         });
-        options.writeMethod(data, options)
+        options.writeMethod(data, opts)
       }
     }
 
@@ -50,7 +50,7 @@ export default function delayRender(Component, options) {
 
     componentWillMount() {
       Store.on('update', this.update);
-      this.fetchData(this.props.id);
+      this.fetchData(this.props);
     }
 
     componentWillReceiveProps(props) {

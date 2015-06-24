@@ -39,10 +39,9 @@ class ExistingPopsView extends React.Component {
 }
 
 let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
-  tableName: 'popType',
-  cacheMethod: queryAllPops,
+  tableName: 'pop',
   serviceMethod: getPops,
-  replace: true
+  propName: 'pops'
 });
 
 class NewPopForm extends React.Component {
