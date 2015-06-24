@@ -24,7 +24,7 @@ export function networkCollectionRenderer(Component, options) {
 
   return class NetworkCollectionRenderer extends React.Component {
     render() {
-      return <Delayed id={this.props.id} />
+      return <Delayed {...this.props} />
     }
   }
 }

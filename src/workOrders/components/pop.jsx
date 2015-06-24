@@ -18,7 +18,7 @@ import {
   Paper
 } from 'material-ui'
 
-import {fromJS} from 'immutable'
+import {fromJS, Map} from 'immutable'
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {queryAllPops} from '../../shared/queries/pop'
 import {getPops} from '../../shared/services/pop'
@@ -30,10 +30,16 @@ let cPadding = '0 20px 20px 20px';
 class ExistingPopsView extends React.Component {
   render() {
     return (
-      <Layout {...{widths, cPadding}}>
-        <div />
-        <DropDown menuItems={fromJS([{value: 'a', label: 'A'}])} />
-      </Layout>
+      <DropDown style={{paddingLeft: 20, maxHeight: 400}}
+                onChange={this.props.onChange}
+                selectedValue={this.props.workOrder.pop_id}
+                menuItems={
+                  this.props.pops.map(pop =>
+                    new Map({
+                      value: pop.get('id'),
+                      label: pop.get('name')
+                    })
+                  )} />
     );
   }
 }
@@ -86,9 +92,12 @@ export default class POP extends React.Component {
     return UnknownPop;
   }
 
+  handleSelect(id) {
+
+  }
+
   render() {
     let PopDisplay = this.getPopDisplay(this.state.popType);
-
     return (
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
@@ -99,7 +108,7 @@ export default class POP extends React.Component {
                       menuItems={fromJS([{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}])}
                       onChange={this.updatePopType.bind(this)} />
           </Layout>
-          <PopDisplay workOrder={this.props.workOrder}/>
+          <PopDisplay workOrder={this.props.workOrder} onChange={this.handleSelect} />
           <Layout {...{widths, cPadding}}><div /><RaisedButton primary label="Update" /></Layout>
         </Paper>
       </div>
