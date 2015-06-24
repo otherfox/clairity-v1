@@ -30,7 +30,3 @@ export function networkModelRenderer(Component, tableName) {
   }
 
 }
-
-if (this.state.data && this.state.data.get('id') != props.id) {
-  this.fetchData(props, options);
-}
