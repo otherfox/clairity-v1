@@ -138,6 +138,7 @@ let WorkOrderDetails = React.createClass ({
       { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'Close Date', name: 'close_date', value: <DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={(order.get('general_notes')) ? order.get('general_notes'): ''} />, cellType: 'string', detailType: 'muiTextField' },
+      { label: '', name: 'submit', value: <RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, cellType: 'button', detailType: 'muiButton'}
     ];
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
@@ -146,7 +147,7 @@ let WorkOrderDetails = React.createClass ({
     let table = {
       colNames: colNames,
       data: data,
-      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
       maxWidth: 36,
       widthAdj: -60,
       margin: '20px 0 5px 0'

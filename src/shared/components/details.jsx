@@ -26,14 +26,20 @@ let Details = React.createClass ({
     return style;
   },
 
-  titleStyle(type) {
-    let titleStyle = {
+  labelStyle(type) {
+    let labelStyle = {
       textAlign: 'right',
     }
-    if(type === 'muiTextField' || type === 'muiDatePicker') titleStyle.lineHeight = 3.5;
-    if(type === 'muiDropDown') titleStyle.lineHeight = 4.5;
+    if(type === 'muiTextField' || type === 'muiDatePicker') labelStyle.lineHeight = 3.5;
+    if(type === 'muiDropDown') labelStyle.lineHeight = 4.5;
 
-    return titleStyle;
+    return labelStyle;
+  },
+
+  valueStyle(type) {
+    let valueStyle = {}
+    if(type === 'muiButton') valueStyle.marginTop = '20px';
+    return valueStyle;
   },
 
   render() {
@@ -42,8 +48,8 @@ let Details = React.createClass ({
       fData = this.props.data.map((dataObj,idx) =>
         <div key={idx}>
           <Layout widths={{ lg: [5,7], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]}} cPadding={'0 20px 5px 0'}>
-            <div style={this.titleStyle(dataObj.detailType)}><strong>{dataObj.label}</strong></div>
-            <div>{dataObj.value}</div>
+            <div style={this.labelStyle(dataObj.detailType)}><strong>{dataObj.label}</strong></div>
+            <div style={this.valueStyle(dataObj.detailType)}>{dataObj.value}</div>
           </Layout>
         </div>);
     }
