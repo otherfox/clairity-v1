@@ -3,9 +3,6 @@ import React, {PropTypes} from 'react'
 import Store from '../shared/store'
 import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
-import TopNav from '../shared/components/topnav'
-import LeftNav from '../shared/components/leftnav'
-import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
 import {networkModelRenderer} from '../shared/components/networkRenderer'
@@ -64,24 +61,32 @@ class WorkOrders extends React.Component {
         <div>
           <h2></h2>
         </div>
-        <Layout widths={{lg: [6,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-          <div><LocationInfo id={wo.location_id} /></div>
-          <div><ContractOverview id={wo.contract_id} /></div>
+        <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
+          <div>
+            <Layout widths={{lg: [12,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 0 20px 0'}>
+              <LocationInfo id={wo.location_id} />
+              <Pop workOrder={wo} />
+              <Provisioning />
+            </Layout>
+          </div>
           <div><WorkOrderDetails workOrder={wo} /></div>
+          <div><ContractOverview id={wo.contract_id} /></div>
         </Layout>
-        <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-          <div><Pop workOrder={wo} /></div>
-          <div><ContactLogs /></div>
-          <div><Provisioning /></div>
-        </Layout>
-        <Layout widths={{lg: [4,4,4],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-          <div><EngineeringNetworking></EngineeringNetworking></div>
-          <div><EngineeringHardware></EngineeringHardware></div>
-          <div><Installation></Installation></div>
-        </Layout>
-        <Layout widths={{lg: [4,8],md: [], sm: [], xs: [], xxs: [], }}>
-          <div><Engineering></Engineering></div>
-          <div><Messaging></Messaging></div>
+        <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12], }} cPadding={'20px 20px 0 0'}>
+          <div>
+            <Layout widths={{lg: [12,12],md: [12,12], sm: [12,12], xs: [12,12], xxs: [2,12], }} cPadding={'0 0 20px 0'}>
+              <EngineeringNetworking></EngineeringNetworking>
+              <Messaging></Messaging>
+            </Layout>
+          </div>
+          <div>
+            <Layout widths={{lg: [12,12, 12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
+              <EngineeringHardware></EngineeringHardware>
+              <Installation></Installation>
+              <Engineering></Engineering>
+              <ContactLogs />
+            </Layout>
+          </div>
         </Layout>
       </div>
     )

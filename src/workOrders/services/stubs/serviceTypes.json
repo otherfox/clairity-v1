@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Data",
+    "id": 14
+  },
+  {
+    "name": "Fiber",
+    "id": 12
+  },
+  {
+    "name": "Hosted",
+    "id": 7
+  },
+  {
+    "name": "Off-Net",
+    "id": 9
+  },
+  {
+    "name": "On-Net",
+    "id": 8
+  },
+  {
+    "name": "Retail",
+    "id": 2
+  },
+  {
+    "name": "Sales",
+    "id": 1
+  },
+  {
+    "name": "Support",
+    "id": 6
+  },
+  {
+    "name": "Voice",
+    "id": 13
+  },
+  {
+    "name": "Wholesale",
+    "id": 3
+  },
+  {
+    "name": "Wired",
+    "id": 11
+  },
+  {
+    "name": "Wireless",
+    "id": 10
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Disconnect",
+    "id": 11
+  },
+  {
+    "name": "Downgrade",
+    "id": 13
+  },
+  {
+    "name": "Equipment Maintenance",
+    "id": 15
+  },
+  {
+    "name": "Equipment Replacement",
+    "id": 14
+  },
+  {
+    "name": "Equipment Retrieval",
+    "id": 9
+  },
+  {
+    "name": "Maintenance",
+    "id": 2
+  },
+  {
+    "name": "Network Deprovision",
+    "id": 10
+  },
+  {
+    "name": "New Install",
+    "id": 1
+  },
+  {
+    "name": "Radio Maintenance",
+    "id": 17
+  },
+  {
+    "name": "Radio Replacement",
+    "id": 16
+  },
+  {
+    "name": "Upgrade",
+    "id": 12
+  },
+  {
+    "name": "Voice Deprovision",
+    "id": 19
+  },
+  {
+    "name": "Voice Maintenance",
+    "id": 18
+  }
+]
