@@ -54,7 +54,7 @@ export default function delayRender(Component, options) {
     }
 
     componentWillReceiveProps(props) {
-      if (options.shouldFetch(this)) {
+      if (options.shouldFetch(this, props)) {
         this.fetchData(props, options);
       }
     }
