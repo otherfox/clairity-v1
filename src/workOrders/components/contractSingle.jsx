@@ -120,6 +120,6 @@ const ContractSingle = React.createClass({
   }
 });
 
-import networkRenderer from '../../shared/components/networkRenderer'
+import {networkModelRenderer} from '../../shared/components/networkRenderer'
 
-export default networkRenderer(ContractSingle, 'contract');
+export default networkModelRenderer(ContractSingle, 'contract');

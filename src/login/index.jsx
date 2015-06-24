@@ -59,6 +59,7 @@ class LoginForm extends React.Component {
                   value={this.props.password}
                   floatingLabelText="Password"
                   onChange={this.changePassword.bind(this)}
+                  onEnterKeyDown={this.fireLogin.bind(this)}
                   type="password" />
               </div>
               <div style={{marginTop: '1em'}}>
