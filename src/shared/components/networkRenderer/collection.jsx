@@ -14,7 +14,10 @@ export function networkCollectionRenderer(Component, options) {
       }
     }),
     shouldFetch: e => e.state.data,
-    cacheMethod: () => Store.data.get(options.tableName).toList(),
+    cacheMethod: () => {
+      let results = Store.data.get(options.tableName).toList();
+      return results.size > 0 ? results : null;
+    },
     serviceMethod: options.serviceMethod,
     propName: options.propName || options.tableName + 's'
   });
