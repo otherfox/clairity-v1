@@ -8,7 +8,7 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
-import networkRenderer from '../shared/components/networkRenderer'
+import {networkModelRenderer} from '../shared/components/networkRenderer'
 
 import ContractOverview from './components/contractOverview'
 
@@ -89,12 +89,12 @@ class WorkOrders extends React.Component {
 
 }
 
-let WorkOrdersWrapped = networkRenderer(WorkOrders, 'workOrder');
+let WorkOrdersWrapped = networkModelRenderer(WorkOrders, 'workOrder');
 
 let WorkOrderPage = React.createClass({
   mixins: [State],
   render() {
-    return (<WorkOrdersWrapped id={this.getParams().id} />);
+    return (<WorkOrdersWrapped id={+this.getParams().id} />);
   }
 });
 

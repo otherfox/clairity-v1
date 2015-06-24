@@ -18,7 +18,7 @@ import {
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
-import networkRenderer from '../../shared/components/networkRenderer'
+import {networkModelRenderer} from '../../shared/components/networkRenderer'
 
 import controllable from 'react-controllables'
 
@@ -32,36 +32,10 @@ import {Map, fromJS } from 'immutable'
 
 let LocationInfo = React.createClass ({
 
-  // statics: {
-  //   queryForData(id) {
-  //     return Promise((s, f) => {
-  //
-  //     });
-  //   }
-  // }
-
   propTypes: {
     style: React.PropTypes.object,
     id: React.PropTypes.number,
     location: React.PropTypes.object
-  },
-
-  componentWillMount() {
-    let id = this.props.id;
-    fetchLocation(id);
-  },
-
-  style() {
-    let style = {};
-
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
   },
 
   render() {
@@ -96,7 +70,7 @@ let LocationInfo = React.createClass ({
     ];
 
     return (
-      <div style={this.style()}>
+      <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
           <Layout pPadding={'0 20px 20px 20px'}>
             <div>
@@ -109,4 +83,4 @@ let LocationInfo = React.createClass ({
   }
 });
 
-export default networkRenderer(LocationInfo, 'location');
+export default networkModelRenderer(LocationInfo, 'location');

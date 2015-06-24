@@ -19,7 +19,6 @@ let DropDown = React.createClass ({
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
         style[key] = this.props.style[key];
       }, this);
     }
@@ -56,10 +55,11 @@ let DropDown = React.createClass ({
       data = data.toJS();
     }
 
+    let link = this.props.valueLink;
 
     return (
       <div style={this.style()}>
-        <DropDownMenu menuItems={data} selectedIndex={selectedValue} onChange={this.handleChange} />
+        <DropDownMenu menuItems={data} valueLink={link} selectedIndex={selectedValue} onChange={link ? (() => {}) : this.handleChange} />
       </div>
     );
   }
