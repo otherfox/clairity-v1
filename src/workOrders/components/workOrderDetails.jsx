@@ -133,11 +133,11 @@ let WorkOrderDetails = React.createClass ({
       { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
       { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [4,4,4,4,4,4,4,4,4,4,4,4], sm: [4,4,4,4,4,4,4,4,4,4,4,4], xs: [4,4,4,4,4,4,4,4,4,4,4,4], xx: [4,4,4,4,4,4,4,4,4,4,4,4] }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
-      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : new Date()} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: (order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date')).toDateString() : '', cellType: 'string', detailType: 'mui' },
-      { label: 'Install Date', name: 'work_order_date', value: (order.get('work_order_date')) ? new Date(order.get('work_order_date')).toDateString() : '', cellType: 'string', detailType: 'mui' },
-      { label: 'Close Date', name: 'close_date', value: (order.get('close_date')) ? new Date(order.get('close_date')).toDateString() : '', cellType: 'string', detailType: 'mui' },
-      { label: 'notes', name: 'general_notes', value: (order.get('general_notes')) ? order.get('general_notes'): '', cellType: 'string', detailType: 'mui' },
+      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : ''} /> , cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Close Date', name: 'close_date', value: <DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={(order.get('general_notes')) ? order.get('general_notes'): ''} />, cellType: 'string', detailType: 'muiTextField' },
     ];
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});

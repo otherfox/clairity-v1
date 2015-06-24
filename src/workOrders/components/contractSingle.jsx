@@ -96,7 +96,7 @@ const ContractSingle = React.createClass({
         s.__quantity = `${s.quantity} ${s.unit_description || ''}`;
         return s;
       }),
-      colWidths: [5, 3, 8, 2, 1, 1, 2, 1],
+      colWidths: [5, 3, 5, 2, 2, 2, 2, 2],
       maxWidth: 23,
       widthAdj: -60,
       widthPerc: (1000/12),
