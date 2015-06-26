@@ -25,11 +25,9 @@ export function networkModelRenderer(Component, tableName, options) {
 
   @exposeMethods(options ? options.methods || [] : [])
   class NetworkModelWrapper extends React.Component {
-
     render() {
       return <Delayed {...this.props} />
     }
-
   }
 
   return NetworkModelWrapper;
