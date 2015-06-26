@@ -23,7 +23,7 @@ export function networkModelRenderer(Component, tableName, options) {
     })
   })
 
-  @exposeMethods(options.methods || [])
+  @exposeMethods(options ? options.methods || [] : [])
   class NetworkModelWrapper extends React.Component {
 
     render() {
