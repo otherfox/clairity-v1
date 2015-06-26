@@ -1,12 +1,15 @@
 import React from 'react'
 import Store, {MessageTypes} from '../../store'
 import {getResource} from '../../services/getResource'
-
+import {exposeMethods} from './methods'
 import {fromJS} from 'immutable'
 
 export default function delayRender(Component, options) {
 
-  return class DelayedRenderer extends React.Component {
+  return DelayedRenderer;
+
+  @exposeMethods(options.methods || [])
+  class DelayedRenderer extends React.Component {
 
     constructor() {
       super();
@@ -16,11 +19,6 @@ export default function delayRender(Component, options) {
         ready: false,
       };
       this.update = this.update.bind(this);
-      if (options.methods) {
-        for (let method in options.methods) {
-          this[method] = () => this.refs.inner[method](this.refs.inner, arguments);
-        }
-      }
     }
 
     update() {
