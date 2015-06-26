@@ -30,7 +30,6 @@ let DropDown = React.createClass({
   },
 
   handleLink(ev, index, menuItem) {
-    debugger;
     this.props.valueLink.requestChange(menuItem.value);
   },
 
