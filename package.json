@@ -47,7 +47,7 @@
     "webpack-dev-server": "^1.8.2"
   },
   "dependencies": {
-    "@brainbytes/immutable-store": "^0.2.0",
+    "@brainbytes/immutable-store": "^0.2.1",
     "event-emitter": "^0.3.3",
     "fixed-data-table": "^0.3.0",
     "fynx": "^1.6.0",
