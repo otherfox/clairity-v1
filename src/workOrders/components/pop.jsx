@@ -53,7 +53,8 @@ let ExistingPopsView = React.createClass({
 let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
   tableName: 'pop',
   serviceMethod: getPops,
-  propName: 'pops'
+  propName: 'pops',
+  methods: ['submit']
 });
 
 let NewPopForm = React.createClass({

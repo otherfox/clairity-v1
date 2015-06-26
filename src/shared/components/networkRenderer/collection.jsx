@@ -18,6 +18,7 @@ export function networkCollectionRenderer(Component, options) {
       let results = Store.data.get(options.tableName).toList();
       return results.size > 0 ? results : null;
     },
+    methods: options.methods,
     serviceMethod: options.serviceMethod,
     propName: options.propName || options.tableName + 's'
   });
