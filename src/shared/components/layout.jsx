@@ -2,7 +2,7 @@ import React from 'react'
 import Settings from './settings'
 
 
-var Layout = React.createClass ({
+var Layout = React.createClass({
   propTypes: {
 
     // colNum, ex 12
