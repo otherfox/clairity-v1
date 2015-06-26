@@ -19,7 +19,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /src.*\.jsx?$/, loaders: ['react-hot', 'babel-loader?optional=runtime']},
+      {test: /src.*\.jsx?$/, loaders: ['react-hot', 'babel-loader?optional=runtime&stage=1']},
       {test: /src.*\.json$/, loaders: ['json-loader']},
       {test: /src.*\.less$/,  loader: 'style-loader!css-loader!less-loader'},
       {test: /src.*\.(ttf|woff)$/, loader: 'url-loader?limit=100000' },
