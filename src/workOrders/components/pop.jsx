@@ -19,12 +19,11 @@ import {
   TextField,
   Paper
 } from 'material-ui'
-//
 import {fromJS, Map} from 'immutable'
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {queryAllPops} from '../../shared/queries/pop'
 import {getPops} from '../../shared/services/pop'
-//
+
 // // Make available for use in all components
 let widths = { lg: [12,12,12,12], md: [12,12,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12] };
 let cPadding = '0 20px 20px 20px';
@@ -45,6 +44,9 @@ let ExistingPopsView = React.createClass({
     return (
       <DropDown valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
     );
+  },
+  submit() {
+    console.log('Update Work Order `pop_id`:', this.state.popId);
   }
 })
 //
@@ -78,6 +80,9 @@ let NewPopForm = React.createClass({
 class UnknownPop extends React.Component {
   render() {
     return <div />;
+  }
+  submit() {
+    console.log('Update Work Order `pop_id`:', this.state.popId);
   }
 }
 
