@@ -65,8 +65,8 @@ let WorkOrderDetails = React.createClass ({
     });
 
     let services = this.props.serviceTypes.map( (serviceType, idx) =>
-      <div>
-        <Checkbox key={idx} name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
+      <div key={idx}>
+        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
       </div>
     );
 
@@ -160,8 +160,6 @@ let WorkOrderDetails = React.createClass ({
   },
 
   render() {
-
-
 
     return (
       <div style={this.style()}>
