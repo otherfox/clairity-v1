@@ -37,7 +37,7 @@ let DropDown = React.createClass({
     let link = this.props.valueLink;
     let searchValue = link ? link.value : this.props.selectedValue;
     let items = (this.props.menuItems || new List()).toJS();
-    let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
+    let data = items.forEach((item, i) => item.key = i);
     let index = data.findIndex(item => item.value === searchValue);
 
     return (
