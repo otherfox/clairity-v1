@@ -117,52 +117,43 @@ export default class CreateContract extends React.Component {
   render() {
     return (
       <div>
-        <TopNav />
-        <Layout type="main">
-          <LeftNav />
-          <Content>
+        <div className="section-header">
+          <h1>Create Contract</h1>
+        </div>
+        <Paper zDepth={1} rounded={true}>
+          <Layout widths={{ lg: [3, 9], md: [12, 12], sm: [12, 12], xs: [12, 12]}} cPadding={'0 20px 20px 20px'}>
             <div>
-              <div className="section-header">
-                <h1>Create Contract</h1>
-              </div>
-              <Paper zDepth={1} rounded={true}>
-                <Layout widths={{ lg: [3, 9], md: [12, 12], sm: [12, 12], xs: [12, 12]}} cPadding={'0 20px 20px 20px'}>
-                  <div>
-                    <h4>Details</h4>
-                    <Layout widths={{ lg: [12,12,12,12,12,12,12], md: [12,12,12,12,12,12,12], sm: [12,12,12,12,12,12,12], xs: [12,12,12,12,12,12,12]}}>
-                      <DropDownMenu menuItems={customerItems} />
-                      <DropDownMenu menuItems={locationItems}/>
-                      <DropDownMenu menuItems={typeItems} />
-                      <TextField
-                        defaultValue="30 Days"
-                        floatingLabelText="Days Until Install" />
-                      <DropDownMenu menuItems={salesItems} />
-                      <TextField
-                        floatingLabelText="Contract Notes" />
-                      <TextField
-                        floatingLabelText="Work Order Notes" />
-                    </Layout>
-                  </div>
-                  <div>
-                    <h4>Services</h4>
-                    <div>
-                    {
-                      this.state.services.map((s, n) => {
-                        return (<ServiceForm key={n} onDelete={() => this.removeService(n)} />);
-                      })
-                    }
-                    </div>
-                    <Layout cPadding={"10px 10px 0 0"}>
-                      <RaisedButton label="+" onClick={this.addService.bind(this)} />
-                      <RaisedButton label="Create Contract" primary={true} />
-                    </Layout>
-                  </div>
-                </Layout>
-              </Paper>
+              <h4>Details</h4>
+              <Layout widths={{ lg: [12,12,12,12,12,12,12], md: [12,12,12,12,12,12,12], sm: [12,12,12,12,12,12,12], xs: [12,12,12,12,12,12,12]}}>
+                <DropDownMenu menuItems={customerItems} />
+                <DropDownMenu menuItems={locationItems}/>
+                <DropDownMenu menuItems={typeItems} />
+                <TextField
+                  defaultValue="30 Days"
+                  floatingLabelText="Days Until Install" />
+                <DropDownMenu menuItems={salesItems} />
+                <TextField
+                  floatingLabelText="Contract Notes" />
+                <TextField
+                  floatingLabelText="Work Order Notes" />
+              </Layout>
             </div>
-          </Content>
-        </Layout>
-        <Footer />
+            <div>
+              <h4>Services</h4>
+              <div>
+              {
+                this.state.services.map((s, n) => {
+                  return (<ServiceForm key={n} onDelete={() => this.removeService(n)} />);
+                })
+              }
+              </div>
+              <Layout cPadding={"10px 10px 0 0"}>
+                <RaisedButton label="+" onClick={this.addService.bind(this)} />
+                <RaisedButton label="Create Contract" primary={true} />
+              </Layout>
+            </div>
+          </Layout>
+        </Paper>
       </div>
     );
   }

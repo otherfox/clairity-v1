@@ -37,20 +37,11 @@ let WorkOrders = React.createClass({
 
   render() {
     return (
-      <div>
-        <TopNav />
-        <Layout type="main">
-          <LeftNav />
-          <Content>
             <div>
               <div className="section-header">
                 <h1>Work Order: View/Upload Files</h1>
               </div>
             </div>
-          </Content>
-        </Layout>
-        <Footer />
-      </div>
     )
   }
 });

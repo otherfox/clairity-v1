@@ -17,13 +17,13 @@ tryLogin.listen(creds => { // when someone tries to login
 
 // success
 loginSuccess.listen(user => {
-  Store.handleMessage({
+  /*Store.handleMessage({
     type: MessageTypes.Write,
     payload: {
       table: 'user',
       row: user
     }
-  });
+  });*/
 });
 
 // failure
