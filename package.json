@@ -49,7 +49,7 @@
   "dependencies": {
     "@brainbytes/immutable-store": "^0.2.0",
     "event-emitter": "^0.3.3",
-    "fixed-data-table": "^0.1.2",
+    "fixed-data-table": "^0.3.0",
     "fynx": "^1.6.0",
     "immutable": "^3.7.0",
     "material-design-iconfont": "^0.1.7",
