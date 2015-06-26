@@ -39,11 +39,12 @@ let DropDown = React.createClass({
     let items = (this.props.menuItems || new List()).toJS();
     let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
     let index = data.findIndex(item => item.value === searchValue) || searchValue;
+    console.log('Index:', index)
 
     return (
       <div style={this.style()}>
         <DropDownMenu menuItems={data}
-                      selectedIndex={index > 0 ? 0 : +index}
+                      selectedIndex={index < 0 ? 0 : +index}
                       onChange={link ? this.handleLink : this.handleChange} />
       </div>
     );
