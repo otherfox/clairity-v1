@@ -168,15 +168,17 @@ let DataTable = React.createClass({
 
     return (
       <div style={this.style()} className="table">
-        <ResponsiveTable
+        <Table
           rowHeight={50}
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
           rowsCount={this.props.data.length}
           rowClassNameGetter={this.getRowClass}
+          width={this.getWidth()}
+          height={500}
           headerHeight={50}>
             {columns}
-        </ResponsiveTable>
+        </Table>
       </div>
     );
   }
