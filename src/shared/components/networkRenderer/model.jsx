@@ -3,6 +3,7 @@ import delayRender from './base'
 import Store, {MessageTypes} from '../../store'
 import {getResource} from '../../services/getResource'
 import {fromJS} from 'immutable'
+import {exposeMethods} from './methods'
 
 export function networkModelRenderer(Component, tableName, options) {
 
@@ -22,12 +23,15 @@ export function networkModelRenderer(Component, tableName, options) {
     })
   })
 
-  return class NetworkModelWrapper extends React.Component {
+  @exposeMethods(options.methods || [])
+  class NetworkModelWrapper extends React.Component {
 
     render() {
       return <Delayed {...this.props} />
     }
 
   }
+
+  return NetworkModelWrapper;
 
 }
