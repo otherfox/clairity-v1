@@ -6,8 +6,6 @@ import {fromJS} from 'immutable'
 
 export default function delayRender(Component, options) {
 
-  return DelayedRenderer;
-
   @exposeMethods(options.methods || [])
   class DelayedRenderer extends React.Component {
 
@@ -70,5 +68,7 @@ export default function delayRender(Component, options) {
       }
     }
   }
+
+  return DelayedRenderer;
 
 }
