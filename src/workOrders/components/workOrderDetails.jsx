@@ -79,7 +79,7 @@ let WorkOrderDetails = React.createClass ({
       new Map({
         key: 0,
         label: 'test',
-        value: 0
+        value: 7416
       })
     ];
 
@@ -128,7 +128,7 @@ let WorkOrderDetails = React.createClass ({
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [
-      { label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'])} />, cellType: 'string', detailType: 'muiDropDown' },
+      //{ label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'] ? +order.get['owner'] : 0)} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
@@ -143,15 +143,6 @@ let WorkOrderDetails = React.createClass ({
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
     let data = [c];
-
-    let table = {
-      colNames: colNames,
-      data: data,
-      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-      maxWidth: 36,
-      widthAdj: -60,
-      margin: '20px 0 5px 0'
-    };
 
     let details = {data: colNames};
 
