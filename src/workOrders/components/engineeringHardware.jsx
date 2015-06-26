@@ -1,7 +1,7 @@
 import React from 'react'
 import Settings from '../../shared/components/settings'
 import Layout from '../../shared/components/layout'
-import DropDown from '../../shared/components/dropdown'
+import DropDown from '../../shared/components/dropDown'
 import Details from '../../shared/components/details'
 import {
   RadioButtonGroup,

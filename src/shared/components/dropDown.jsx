@@ -59,7 +59,7 @@ let DropDown = React.createClass ({
 
     return (
       <div style={this.style()}>
-        <DropDownMenu menuItems={data} valueLink={link} selectedIndex={selectedValue} onChange={link ? (() => {}) : this.handleChange} />
+        <DropDownMenu menuItems={data} valueLink={link} selectedIndex={+selectedValue} onChange={link ? (() => {}) : this.handleChange} />
       </div>
     );
   }
