@@ -16,6 +16,11 @@ export default function delayRender(Component, options) {
         ready: false,
       };
       this.update = this.update.bind(this);
+      if (options.methods) {
+        for (let method in options.methods) {
+          this[method] = () => this.refs.inner[method](this.refs.inner, arguments);
+        }
+      }
     }
 
     update() {
@@ -61,7 +66,7 @@ export default function delayRender(Component, options) {
 
     render() {
       if (this.state.ready) {
-        return <Component {...this.props} {...{[options.propName]: this.state.data}} />
+        return <Component ref="inner" {...this.props} {...{[options.propName]: this.state.data}} />
       } else {
         return false;
       }
