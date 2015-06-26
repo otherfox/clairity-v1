@@ -34,11 +34,16 @@ let ExistingPopsView = React.createClass({
   getInitialState() {
     return { popId: this.props.workOrder.pop_id }
   },
+  getMenuItems() {
+    return this.props.pops
+      .map(p => new Map({
+        value: p.get('id'),
+        label: p.get('name')
+      }));
+  },
   render() {
     return (
-      <DropDown style={{ maxHeight: 400}}
-                valueLink={this.linkState('popId')}
-                menuItems={ this.props.pops.map(p => new Map({ value: p.get('id'), label: p.get('name') })) } />
+      <DropDown valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
     );
   }
 })
