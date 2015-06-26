@@ -11,7 +11,7 @@ let DropDown = React.createClass({
   propTypes: {
     style: PropTypes.object,
     menuItems: PropTypes.object,
-    selectedValue: PropTypes.oneOf([PropTypes.string, PropTypes.number])
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   },
 
   style() {
@@ -39,7 +39,7 @@ let DropDown = React.createClass({
     let searchValue = link ? link.value : this.props.selectedValue;
     let items = (this.props.menuItems || new List()).toJS();
     let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
-    let index = data.findIndex(item => item.value === searchValue).key || this.props.selectedValue;
+    let index = data.find(item => item.value === searchValue).key || this.props.selectedValue;
 
     return (
       <div style={this.style()}>
