@@ -10,8 +10,7 @@ let DropDown = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
-    menuItems: React.PropTypes.object,
-    selectedValue: React.PropTypes.number
+    menuItems: React.PropTypes.object
   },
 
   style() {
