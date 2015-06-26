@@ -2,6 +2,7 @@ import React from 'react'
 import delayRender from './base'
 import Store, {MessageTypes} from '../../store'
 import {fromJS} from 'immutable'
+import {exposeMethods} from './methods'
 
 export function networkCollectionRenderer(Component, options) {
 
@@ -23,9 +24,12 @@ export function networkCollectionRenderer(Component, options) {
     propName: options.propName || options.tableName + 's'
   });
 
-  return class NetworkCollectionRenderer extends React.Component {
+  @exposeMethods(options.methods || [])
+  class NetworkCollectionRenderer extends React.Component {
     render() {
-      return <Delayed {...this.props} />
+      return <Delayed ref="inner" {...this.props} />
     }
   }
+
+  return NetworkCollectionRenderer;
 }
