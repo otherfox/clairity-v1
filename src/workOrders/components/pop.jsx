@@ -31,7 +31,7 @@ let cPadding = '0 20px 20px 20px';
 let ExistingPopsView = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
-    return { popId: this.props.workOrder.pop_id }
+    return { popId: this.props.workOrder.pop_id || this.props.pops.first().get('id') }
   },
   getMenuItems() {
     return this.props.pops
@@ -83,7 +83,7 @@ class UnknownPop extends React.Component {
     return <div />;
   }
   submit() {
-    console.log('Update Work Order `pop_id`:', this.state.popId);
+    console.log('Update Work Order `pop_id`:', undefined);
   }
 }
 
