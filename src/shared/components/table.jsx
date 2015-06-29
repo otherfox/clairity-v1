@@ -2,6 +2,7 @@ import React from 'react'
 import Settings from './settings'
 import mui, {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
 import FixedDataTable, {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
+import ResponsiveTable from 'responsive-fixed-data-table'
 import _ from 'lodash'
 
 import numeral from 'numeral'
@@ -172,9 +173,9 @@ let DataTable = React.createClass({
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
           rowsCount={this.props.data.length}
-          rowClassNameGetter = {this.getRowClass}
-          width={this.state.width}
-          height={height}
+          rowClassNameGetter={this.getRowClass}
+          width={this.getWidth()}
+          height={500}
           headerHeight={50}>
             {columns}
         </Table>

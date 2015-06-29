@@ -65,8 +65,8 @@ let WorkOrderDetails = React.createClass ({
     });
 
     let services = this.props.serviceTypes.map( (serviceType, idx) =>
-      <div>
-        <Checkbox key={idx} name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
+      <div key={idx}>
+        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
       </div>
     );
 
@@ -79,7 +79,7 @@ let WorkOrderDetails = React.createClass ({
       new Map({
         key: 0,
         label: 'test',
-        value: 0
+        value: 7416
       })
     ];
 
@@ -128,30 +128,21 @@ let WorkOrderDetails = React.createClass ({
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [
-      { label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'])} />, cellType: 'string', detailType: 'muiDropDown' },
+      //{ label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'] ? +order.get['owner'] : 0)} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
       { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [4,4,4,4,4,4,4,4,4,4,4,4], sm: [4,4,4,4,4,4,4,4,4,4,4,4], xs: [4,4,4,4,4,4,4,4,4,4,4,4], xx: [4,4,4,4,4,4,4,4,4,4,4,4] }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
-      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : ''} /> , cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Close Date', name: 'close_date', value: <DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : ''} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : undefined} /> , cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Close Date', name: 'close_date', value: <DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={(order.get('general_notes')) ? order.get('general_notes'): ''} />, cellType: 'string', detailType: 'muiTextField' },
       { label: '', name: 'submit', value: <RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, cellType: 'button', detailType: 'muiButton'}
     ];
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
     let data = [c];
-
-    let table = {
-      colNames: colNames,
-      data: data,
-      colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
-      maxWidth: 36,
-      widthAdj: -60,
-      margin: '20px 0 5px 0'
-    };
 
     let details = {data: colNames};
 
@@ -160,8 +151,6 @@ let WorkOrderDetails = React.createClass ({
   },
 
   render() {
-
-
 
     return (
       <div style={this.style()}>

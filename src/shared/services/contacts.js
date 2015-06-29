@@ -1,3 +1,6 @@
+// TODO: Memoize network traffic.
+// TODO: Integrate network traffic w/ actions implicitly.
+
 import _ from 'lodash'
 import moment from 'moment'
 

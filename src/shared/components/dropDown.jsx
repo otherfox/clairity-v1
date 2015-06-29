@@ -1,26 +1,25 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Settings from './settings'
 import {
   DropDownMenu
 } from 'material-ui'
 
-import {Map} from 'immutable'
+import {Map, List} from 'immutable'
 
-let DropDown = React.createClass ({
+let DropDown = React.createClass({
 
   propTypes: {
-    style: React.PropTypes.object,
-    menuItems: React.PropTypes.object,
-    selectedValue: React.PropTypes.number
+    style: PropTypes.object,
+    menuItems: PropTypes.object,
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   },
 
   style() {
     let style = {};
 
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        style[key] = this.props.style[key];
-      }, this);
+    if (this.props.style) {
+      Object.keys(this.props.style)
+        .forEach((key, i) => style[key] = this.props.style[key]);
     }
 
     return style;
@@ -30,36 +29,22 @@ let DropDown = React.createClass ({
     this.props.onChange(menuItem.value, index, ev);
   },
 
+  handleLink(ev, index, menuItem) {
+    this.props.valueLink.requestChange(menuItem.value);
+  },
+
   render() {
-    let data = false;
-    let selectedValue = this.props.selectedValue;
-
-    if (this.props.menuItems) {
-
-      data = this.props.menuItems.map((dataObj,idx) => {
-
-        let menuObj;
-
-        if(selectedValue === dataObj.get('value')) {
-          selectedValue = idx;
-        }
-
-        return menuObj = new Map({
-          key: idx,
-          text: dataObj.get('label'),
-          value: dataObj.get('value')
-        });
-
-      });
-
-      data = data.toJS();
-    }
-
     let link = this.props.valueLink;
+    let searchValue = link ? link.value : this.props.selectedValue;
+    let items = (this.props.menuItems || new List()).toJS();
+    let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
+    let index = data.findIndex(item => item.value === searchValue);
 
     return (
       <div style={this.style()}>
-        <DropDownMenu menuItems={data} valueLink={link} selectedIndex={selectedValue} onChange={link ? (() => {}) : this.handleChange} />
+        <DropDownMenu menuItems={data}
+                      selectedIndex={index < 0 ? 0 : +index}
+                      onChange={link ? this.handleLink : this.handleChange} />
       </div>
     );
   }
