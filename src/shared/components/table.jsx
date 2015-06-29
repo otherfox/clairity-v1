@@ -1,8 +1,7 @@
 import React from 'react'
 import Settings from './settings'
-import mui, {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
-import FixedDataTable, {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
-import ResponsiveTable from 'responsive-fixed-data-table'
+import {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
+import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import _ from 'lodash'
 
 import numeral from 'numeral'
@@ -164,7 +163,7 @@ let DataTable = React.createClass({
         }
       </Group>;
 
-    let height = (((this.props.data.length * 50) + 50) < window.innerHeight - 300) ? (this.props.data.length * 50) + 50 : window.innerHeight - 300;
+    let height = ((this.props.data.length * 50) < window.innerHeight - 300) ? this.props.data.length * 50 : window.innerHeight - 300;
 
     return (
       <div style={this.style()} className="table">
