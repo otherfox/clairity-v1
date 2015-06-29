@@ -70,7 +70,7 @@ const ContractSingle = React.createClass({
       data: data,
       colWidths: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
       maxWidth: 36,
-      widthAdj: -60,
+      widthAdj: 160,
       margin: '20px 0 5px 0'
     };
 

@@ -6,7 +6,7 @@ let Content = React.createClass ({
   style: function() {
     return {
       width: '100%',
-      paddingLeft: '290px'
+      paddingLeft: Settings.leftNavWidth+Settings.contentPadding+'px'
     };
   },
 

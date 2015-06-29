@@ -1,6 +1,6 @@
 import React from 'react'
 import Settings from './settings'
-
+import {ClearFix} from 'material-ui'
 import {List} from 'immutable'
 
 var Layout = React.createClass({
@@ -56,7 +56,7 @@ var Layout = React.createClass({
 
     if (this.props.children) {
 
-      let count = 0;
+      let count = 0
       React.Children.forEach(this.props.children, (value, index) => count += 1 );
 
       for (let i = 0; i < count; i++) {
@@ -164,13 +164,13 @@ var Layout = React.createClass({
   render: function() {
 
 		let children = React.Children.map(this.props.children, (child, i) =>
-			 <div style={this.childStyle(i)} className={'clearfix'}>{React.cloneElement(child)}</div>
+			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
     );
 
     return (
-      <div style={this.style()} className={'clearfix'}>
+      <ClearFix style={this.style()}>
         {children}
-      </div>
+      </ClearFix>
     );
   }
 });

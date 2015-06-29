@@ -36,7 +36,7 @@ var LeftNav = React.createClass ({
   style: function() {
     return {
       position: 'absolute',
-      width: 'initial'
+      width: Settings.leftNavWidth
     }
   },
 

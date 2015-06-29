@@ -9,9 +9,10 @@ import Content from './shared/components/content'
 import Layout from './shared/components/layout'
 import Footer from './shared/components/footer'
 
-let ThemeManager = new Styles.ThemeManager()
+import ClairityLightTheme from './shared/themes/clairityLight.js'
 
-
+let ThemeManager = new Styles.ThemeManager();
+ThemeManager.setTheme(ClairityLightTheme);
 
 export default class App extends React.Component {
 

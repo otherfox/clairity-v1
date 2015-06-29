@@ -91,7 +91,7 @@ let DataTable = React.createClass({
 
   getWidth: function() {
     let widthPerc = (this.props.widthPerc) ? this.props.widthPerc / 100 : 1;
-    let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - (2 * Settings.contentPadding) - Settings.widthBuffer + this.props.widthAdj);
+    let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj);
     return width;
   },
 
