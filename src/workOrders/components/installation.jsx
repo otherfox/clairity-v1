@@ -55,7 +55,7 @@ let Installation = React.createClass ({
               <Details title={'Installation'}
                 data = {[
                   { label: '', value: <Layout widths={{lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12]}}><Checkbox label={'Circuit Installed and Tested'} defaultSwitched={true} switched /><Checkbox label={'Ethernet Errors Checked'} /><Checkbox label={'Circuit Accepted'} /><Checkbox label={'Voice Installed and Tested'} /><Checkbox label={'Voice Services Accepted'} /></Layout>, detailType: 'muiTextField' },
-                  { label: 'RSSI', name: '60.0 dBm', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
+                  { label: 'RSS', name: '60.0 dBm', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
                   { label: 'Notes', name: 'hardware_notes', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
                   { label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton' }
                 ]}
