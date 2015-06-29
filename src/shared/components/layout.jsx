@@ -2,7 +2,7 @@ import React from 'react'
 import Settings from './settings'
 
 
-var Layout = React.createClass ({
+var Layout = React.createClass({
   propTypes: {
 
     // colNum, ex 12
@@ -33,7 +33,7 @@ var Layout = React.createClass ({
 
   },
 
-  getChildWidth: function(i, breakpoint) {
+  getChildWidth(i, breakpoint) {
 
     if (this.props.widths && this.props.widths[breakpoint][i]) {
       if (typeof this.props.widths[breakpoint][i] === 'number') {
@@ -48,22 +48,16 @@ var Layout = React.createClass ({
     return width;
   },
 
-  getChildWidths: function() {
+  getChildWidths() {
 
-    var percWidths = [];
-    var breakpoint = this.getBreakpoint();
+    let percWidths = [];
+    let breakpoint = this.getBreakpoint();
 
-    if(this.props.children) {
-      var count = (typeof this.props.children.length === 'undefined') ? 1 : this.props.children.length ;
+    if (this.props.children) {
+      let count = (typeof this.props.children.size === 'undefined') ? 1 : this.props.children.size ;
 
-      for(var i=0;i<count;i++) {
-  		 		var width = this.getChildWidth(i, breakpoint);
-          percWidths.push(width);
-      }
-
-      if (percWidths.indexOf("rest") > -1) {
-        percWidths.forEach(function(w, i){
-        },this);
+      for (let i = 0; i < count; i++) {
+        percWidths.push(this.getChildWidth(i, breakpoint));
       }
     } else {
       percWidths = ['100%'];
@@ -71,7 +65,7 @@ var Layout = React.createClass ({
     return percWidths;
   },
 
-	getBreakpoint: function() {
+	getBreakpoint() {
 		var vwidth = window.innerWidth,
 				bKeys = Object.keys(this.props.breakpoints),
 				breakpoint;
@@ -88,29 +82,32 @@ var Layout = React.createClass ({
 		return breakpoint;
 	},
 
-  componentDidMount: function() {
+  componentDidMount() {
     window.addEventListener('resize', this.handleResize);
   },
 
-  getDefaultProps: function() {
+  componentWillDismount() {
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  getDefaultProps() {
     return {
       breakpoints: Settings.breakpoints,
       cols: Settings.cols
     }
   },
 
-  getInitialState: function() {
-      return { cWidths: this.getChildWidths() };
+  getInitialState() {
+    return { cWidths: this.getChildWidths() };
   },
 
-	handleResize: function() {
-
+	handleResize() {
     if(this.props.widths) {
       this.setState({cWidths: this.getChildWidths() });
     }
   },
 
-  class: function() {
+  class() {
     if(!this.props.type) return 'layout';
     return 'layout ' + this.props.type;
   },
@@ -163,8 +160,8 @@ var Layout = React.createClass ({
 
   render: function() {
 
-		var children = React.Children.map(this.props.children, (child, i) =>
-				<div style={this.childStyle(i)}>{React.cloneElement(child)}</div>
+		let children = React.Children.map(this.props.children, (child, i) =>
+			<div style={this.childStyle(i)}>{React.cloneElement(child)}</div>
     );
 
     return (

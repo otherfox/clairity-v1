@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {addons} from 'react/addons'
 import Settings from '../../shared/components/settings'
 import {
   RadioButtonGroup,
@@ -29,6 +29,7 @@ import Contract from '../services/stubs/contract7416.json'
 import {List, Map, fromJS} from 'immutable'
 
 const ContractOverview = React.createClass({
+  mixins:[addons.LinkedStateMixin],
 
   propTypes: {
     style: React.PropTypes.object,
@@ -59,7 +60,7 @@ const ContractOverview = React.createClass({
         let signed = new Date(contract.get('signed'));
 
         return new Map({
-          key: contract.get('id'),
+          key: idx,
           value: contract.get('id'),
           label: (contract.get('services')) ? 'Signed '+signed.toDateString()+' - '+contract.getIn(['services', 1,'actual_name']) :  'Signed '+signed.toDateString()
         });
@@ -74,7 +75,6 @@ const ContractOverview = React.createClass({
   },
 
   render() {
-
     return (
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
@@ -83,7 +83,7 @@ const ContractOverview = React.createClass({
               <h3>Contracts</h3>
             </div>
             <div>
-              <DropDown style={{paddingTop: '10px'}}menuItems={this.getContracts()} selectedValue={this.state.selectedContract} onChange={this.handleContractChange}/>
+              <DropDown style={{paddingTop: '10px'}} menuItems={this.getContracts()} valueLink={this.linkState('selectedContract')}/>
             </div>
             <div>
               <ContractSingle id={this.state.selectedContract} />
