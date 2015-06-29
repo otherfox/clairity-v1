@@ -26,5 +26,5 @@ workOrderFetched.listen(workOrder =>
 export const updateWorkOrder = Fynx.createAction();
 
 updateWorkOrder.listen((state) => {
-  return putWorkOrder(state.workOrder, state.sameAddress);
+  return putWorkOrder(state.id, state.workOrder);
 });
