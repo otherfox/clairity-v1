@@ -53,7 +53,7 @@ let ExistingPopsView = React.createClass({
     console.log('Update Work Order `pop_id`:', this.state.popId);
     updateWorkOrder({
       id: this.props.workOrder.id,
-      workOrder: _.extend({}, this.props.workOrder, {pop_id: this.state.popId})
+      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'existing', pop_id: this.state.popId})
     });
   }
 })
