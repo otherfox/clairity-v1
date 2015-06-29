@@ -63,7 +63,7 @@ export function getWorkOrderStatuses() {
 }
 
 export function putWorkOrder(id, data) {
+    console.log(id, data);
     return new Promise((s, f) => {
-
     });
 }
