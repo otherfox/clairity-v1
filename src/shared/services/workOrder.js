@@ -71,8 +71,8 @@ export function putWorkOrder(id, data) {
         .type('form')
         .send(eventUpdateWorkOrder(data))
         .end((err, res) => {
-          if (!err) {
-            s(JSON.parse(res.text));
+          if (res.ok && res.xhr.responseURL.match(/controller\.cfm/i)) {
+            return getWorkOrder(id);
           } else {
             f(err);
           }
