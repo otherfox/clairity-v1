@@ -163,7 +163,7 @@ let DataTable = React.createClass({
         }
       </Group>;
 
-    let height = ((this.props.data.length * 50) < window.innerHeight - 300) ? this.props.data.length * 50 : window.innerHeight - 300;
+    let height = (((this.props.data.length * 50) + 52) < window.innerHeight - 300) ? (this.props.data.length * 50) + 52 : window.innerHeight - 300;
 
     return (
       <div style={this.style()} className="table">
@@ -174,7 +174,7 @@ let DataTable = React.createClass({
           rowsCount={this.props.data.length}
           rowClassNameGetter={this.getRowClass}
           width={this.getWidth()}
-          height={500}
+          height={height}
           headerHeight={50}>
             {columns}
         </Table>

@@ -25,12 +25,12 @@ export default class App extends React.Component {
     return (
       <div>
         <TopNav />
-        <Layout type="main">
+        <div>
           <LeftNav />
           <Content>
             <RouteHandler />
           </Content>
-        </Layout>
+        </div>
       <Footer />
       </div>
     )

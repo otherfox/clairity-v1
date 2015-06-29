@@ -1,17 +1,15 @@
 import React from 'react'
 import Settings from './settings'
-import mui from 'material-ui'
-
-var AppLeftNav = mui.Menu;
+import {Menu, MenuItem} from 'material-ui'
 
 var nestedMenuItems = [
-  { type: mui.MenuItem.Types.NESTED, text: 'Apply', items: [
+  { type: MenuItem.Types.NESTED, text: 'Apply', items: [
     { payload: '1', text: 'Nested Item 1' }
   ] },
-  { type: mui.MenuItem.Types.NESTED, text: 'Expenses', items: [
+  { type: MenuItem.Types.NESTED, text: 'Expenses', items: [
     { payload: '1', text: 'Nested Item 1' }
   ] },
-  { type: mui.MenuItem.Types.NESTED, text: 'Quickbooks', items: [
+  { type: MenuItem.Types.NESTED, text: 'Quickbooks', items: [
     { payload: '1', text: 'Nested Item 1' }
   ] },
   { payload: '1', text: 'Invoice Customer'},
@@ -37,17 +35,15 @@ var LeftNav = React.createClass ({
 
   style: function() {
     return {
-      width: Settings.leftNavWidth,
-      float: 'left',
-      top: 64,
-			height: window.innerHeight
+      position: 'absolute',
+      width: 'initial'
     }
   },
 
   render: function() {
       return (
-        <div style={this.style()} className="leftnav">
-          <mui.Menu menuItems={nestedMenuItems} zDepth={0}/>
+        <div style={this.style()}>
+          <Menu menuItems={nestedMenuItems} zDepth={0} />
         </div>
       )
   }

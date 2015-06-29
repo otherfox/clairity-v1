@@ -98,7 +98,7 @@ const ContractSingle = React.createClass({
       }),
       colWidths: [5, 3, 5, 2, 2, 2, 2, 2],
       maxWidth: 23,
-      widthAdj: -60,
+      widthAdj: -100,
       widthPerc: (900/12),
       margin: '0'
     };

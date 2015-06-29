@@ -1,6 +1,7 @@
 import React from 'react'
 import Settings from './settings'
 
+import {List} from 'immutable'
 
 var Layout = React.createClass({
   propTypes: {
@@ -42,7 +43,7 @@ var Layout = React.createClass({
         var width = this.props.widths[breakpoint][i];
       }
     } else {
-      var width = 'auto';
+      var width = 'initial';
     }
 
     return width;
@@ -54,7 +55,9 @@ var Layout = React.createClass({
     let breakpoint = this.getBreakpoint();
 
     if (this.props.children) {
-      let count = (typeof this.props.children.size === 'undefined') ? 1 : this.props.children.size ;
+
+      let count = 0;
+      React.Children.forEach(this.props.children, (value, index) => count += 1 );
 
       for (let i = 0; i < count; i++) {
         percWidths.push(this.getChildWidth(i, breakpoint));
@@ -107,16 +110,15 @@ var Layout = React.createClass({
     }
   },
 
-  class() {
-    if(!this.props.type) return 'layout';
-    return 'layout ' + this.props.type;
-  },
-
   style: function() {
 
-    let style = {
-      width: '100%',
-      padding: this.props.pPadding
+    let style = {};
+
+    if(this.props.type !== 'main') {
+      style = {
+        width: '100%',
+        padding: this.props.pPadding
+      }
     }
 
     if(this.props.type === 'center-b'){
@@ -134,20 +136,21 @@ var Layout = React.createClass({
 
   childStyle: function(i) {
 
-    let style = {
-      width: this.state.cWidths[i],
-      float: 'left',
-      padding: this.props.cPadding,
-      margin: this.props.cMargin
-    }
 
-    if(this.props.type === 'center-h') {
+    let style = {
+        width: this.state.cWidths[i],
+        float: 'left',
+        padding: this.props.cPadding,
+        margin: this.props.cMargin
+      }
+
+    if (this.props.type === 'center-h') {
       style.position = 'relative';
       style.margin = '0 auto';
       style.float = 'none';
     }
 
-    if(this.props.type === 'center-b') {
+    if (this.props.type === 'center-b') {
       style.position = 'relative';
       style.margin = '0 auto';
       style.top = '50%';
@@ -161,11 +164,11 @@ var Layout = React.createClass({
   render: function() {
 
 		let children = React.Children.map(this.props.children, (child, i) =>
-			<div style={this.childStyle(i)}>{React.cloneElement(child)}</div>
+			 <div style={this.childStyle(i)} className={'clearfix'}>{React.cloneElement(child)}</div>
     );
 
     return (
-      <div style={this.style()} className={this.class()}>
+      <div style={this.style()} className={'clearfix'}>
         {children}
       </div>
     );

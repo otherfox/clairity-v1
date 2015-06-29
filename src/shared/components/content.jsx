@@ -3,34 +3,16 @@ import Settings from './settings'
 
 let Content = React.createClass ({
 
-  getWidth: function() {
-    let width = (window.innerWidth - Settings.leftNavWidth - Settings.widthBuffer )+'px';
-    return width;
-  },
-
-  handleResize: function() {
-    this.setState({width: this.getWidth()});
-  },
-
-  componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-  getInitialState: function() {
-    return { width: this.getWidth() };
-  },
-
   style: function() {
     return {
-      padding: `${Settings.contentPadding / 2}px ${Settings.contentPadding}px`,
-      float: 'left',
-      width: this.state.width,
+      width: '100%',
+      paddingLeft: '290px'
     };
   },
 
   render: function() {
     return (
-      <div style={this.style()} className="content">
+      <div style={this.style()} >
         {this.props.children}
       </div>
     );
