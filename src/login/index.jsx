@@ -86,7 +86,7 @@ import {Navigation} from 'react-router'
 const Login = React.createClass({
   mixins: [Navigation],
   componentDidMount() {
-    loginSuccess.listen(() => this.transitionTo('aging-reports'));
+    loginSuccess.listen(() => this.transitionTo('work-orders', {id: 1538}));
   },
   tryLogin(username, password) {
     tryLogin(username, password);
