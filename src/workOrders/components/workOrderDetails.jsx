@@ -144,7 +144,7 @@ let WorkOrderDetails = React.createClass ({
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
     let data = [c];
 
-    let details = {data: colNames};
+    let details = {title: 'Details', data: colNames};
 
     return details;
 
@@ -156,9 +156,6 @@ let WorkOrderDetails = React.createClass ({
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
-            <div>
-              <h3>Details</h3>
-            </div>
             <div>
               <Details {...this.getDetails(this.props.order)} />
             </div>

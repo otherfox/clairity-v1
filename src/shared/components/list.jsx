@@ -2,14 +2,16 @@ import React from 'react'
 import Settings from './settings'
 import {
   Utils,
-  Paper
+  List,
+  ListItem,
+  ListDivider,
+  ListItem
+
 } from 'material-ui'
-
 import Layout from './layout'
-
 let ColorManipulator = Utils.ColorManipulator;
 
-let Details = React.createClass ({
+let CustomList = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
@@ -43,7 +45,7 @@ let Details = React.createClass ({
 
     let labelStyle = {
       color: textColor,
-      textAlign: 'right'
+      textAlign: 'right',
     }
 
     if(this.props.labelTop === true) labelStyle.textAlign = 'left'
@@ -88,8 +90,8 @@ let Details = React.createClass ({
     let fData = false;
     if (this.props.data && Array.isArray(this.props.data)) {
       fData = this.props.data.map((dataObj,idx) =>
-        <div style={this.rowStyle(dataObj.detailType)} key={idx}>
-          <Layout ref={`layout_${idx}`} widths={this.layout()} cPadding={'0 20px 5px 0'}>
+        <div style ={this.rowStyle(dataObj.detailType)} key={idx}>
+          <Layout widths={this.layout()} cPadding={'0 20px 5px 0'}>
             <div style={this.labelStyle(dataObj.detailType)}>{dataObj.label}</div>
             <div style={this.valueStyle(dataObj.detailType)}>{dataObj.value}</div>
           </Layout>
@@ -100,15 +102,13 @@ let Details = React.createClass ({
 
     return (
       <div style={this.style()}>
-        {title}
-        {fData}
       </div>
     );
   }
 });
 
-Details.contextTypes = {
+CustomList.contextTypes = {
   muiTheme: React.PropTypes.object
 };
 
-export default Details;
+export default CustomList;

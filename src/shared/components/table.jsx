@@ -47,7 +47,7 @@ class CurrencyCell extends React.Component {
 class UriCell extends React.Component {
   render() {
     return (
-      <a href='#' className="c-p-1">{this.props.children}</a>
+      <a href='#'>{this.props.children}</a>
     );
   }
 }
@@ -97,9 +97,9 @@ let DataTable = React.createClass({
 
   getColWidth: function(i) {
     if(this.props.colWidths) {
-      return (this.state.width * (this.props.colWidths[i] / this.props.maxWidth));
+      return (Math.round(this.state.width * (this.props.colWidths[i] / this.props.maxWidth)));
     } else {
-      return (this.state.width / this.props.colNames.length);
+      return (Math.round(this.state.width / this.props.colNames.length));
     }
   },
 

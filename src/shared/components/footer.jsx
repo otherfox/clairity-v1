@@ -2,8 +2,6 @@ import React from 'react'
 import Settings from './settings'
 import {Styles} from 'material-ui'
 
-let {Colors} = Styles;
-
 class Footer extends React.Component {
 
   style() {

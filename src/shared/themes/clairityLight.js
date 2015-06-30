@@ -1,6 +1,8 @@
-let Colors = require('../../../node_modules/material-ui/src/styles/colors');
-let Spacing = require('../../../node_modules/material-ui/src/styles/spacing');
-let ColorManipulator = require('../../../node_modules/material-ui/src/utils/color-manipulator');
+import {Styles, Utils} from 'material-ui'
+
+let Colors = Styles.Colors;
+let Spacing = Styles.Spacing;
+let ColorManipulator = Utils.ColorManipulator;
 
 
 /**
