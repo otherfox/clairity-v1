@@ -4,6 +4,7 @@ import Store from '../shared/store'
 import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
 import Table from '../shared/components/table'
+// import Link from '../shared/components/link'
 
 import {networkModelRenderer} from '../shared/components/networkRenderer'
 
@@ -19,6 +20,7 @@ import Installation from './components/installation'
 import Messaging from './components/messaging'
 import Pop from './components/pop'
 import Provisioning from './components/provisioning'
+
 
 import {
   RadioButtonGroup,
@@ -58,9 +60,6 @@ class WorkOrders extends React.Component {
             </div>
           </Layout>
         </div>
-        <div>
-          <h2></h2>
-        </div>
         <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
           <div>
             <Layout widths={{lg: [12,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 0 20px 0'}>
@@ -80,7 +79,7 @@ class WorkOrders extends React.Component {
             </Layout>
           </div>
           <div>
-            <Layout widths={{lg: [12,12, 12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
+            <Layout widths={{lg: [12,12,  12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
               <EngineeringHardware></EngineeringHardware>
               <Installation></Installation>
               <Engineering></Engineering>

@@ -1,8 +1,9 @@
 import React from 'react'
 import Settings from './settings'
+import {ClearFix} from 'material-ui'
+import {List} from 'immutable'
 
-
-var Layout = React.createClass ({
+var Layout = React.createClass({
   propTypes: {
 
     // colNum, ex 12
@@ -33,7 +34,7 @@ var Layout = React.createClass ({
 
   },
 
-  getChildWidth: function(i, breakpoint) {
+  getChildWidth(i, breakpoint) {
 
     if (this.props.widths && this.props.widths[breakpoint][i]) {
       if (typeof this.props.widths[breakpoint][i] === 'number') {
@@ -42,28 +43,24 @@ var Layout = React.createClass ({
         var width = this.props.widths[breakpoint][i];
       }
     } else {
-      var width = 'auto';
+      var width = 'initial';
     }
 
     return width;
   },
 
-  getChildWidths: function() {
+  getChildWidths() {
 
-    var percWidths = [];
-    var breakpoint = this.getBreakpoint();
+    let percWidths = [];
+    let breakpoint = this.getBreakpoint();
 
-    if(this.props.children) {
-      var count = (typeof this.props.children.length === 'undefined') ? 1 : this.props.children.length ;
+    if (this.props.children) {
 
-      for(var i=0;i<count;i++) {
-  		 		var width = this.getChildWidth(i, breakpoint);
-          percWidths.push(width);
-      }
+      let count = 0
+      React.Children.forEach(this.props.children, (value, index) => count += 1 );
 
-      if (percWidths.indexOf("rest") > -1) {
-        percWidths.forEach(function(w, i){
-        },this);
+      for (let i = 0; i < count; i++) {
+        percWidths.push(this.getChildWidth(i, breakpoint));
       }
     } else {
       percWidths = ['100%'];
@@ -71,7 +68,7 @@ var Layout = React.createClass ({
     return percWidths;
   },
 
-	getBreakpoint: function() {
+	getBreakpoint() {
 		var vwidth = window.innerWidth,
 				bKeys = Object.keys(this.props.breakpoints),
 				breakpoint;
@@ -88,38 +85,40 @@ var Layout = React.createClass ({
 		return breakpoint;
 	},
 
-  componentDidMount: function() {
+  componentDidMount() {
     window.addEventListener('resize', this.handleResize);
   },
 
-  getDefaultProps: function() {
+  componentWillDismount() {
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  getDefaultProps() {
     return {
       breakpoints: Settings.breakpoints,
       cols: Settings.cols
     }
   },
 
-  getInitialState: function() {
-      return { cWidths: this.getChildWidths() };
+  getInitialState() {
+    return { cWidths: this.getChildWidths() };
   },
 
-	handleResize: function() {
-
+	handleResize() {
     if(this.props.widths) {
       this.setState({cWidths: this.getChildWidths() });
     }
   },
 
-  class: function() {
-    if(!this.props.type) return 'layout';
-    return 'layout ' + this.props.type;
-  },
-
   style: function() {
 
-    let style = {
-      width: '100%',
-      padding: this.props.pPadding
+    let style = {};
+
+    if(this.props.type !== 'main') {
+      style = {
+        width: '100%',
+        padding: this.props.pPadding
+      }
     }
 
     if(this.props.type === 'center-b'){
@@ -137,20 +136,21 @@ var Layout = React.createClass ({
 
   childStyle: function(i) {
 
-    let style = {
-      width: this.state.cWidths[i],
-      float: 'left',
-      padding: this.props.cPadding,
-      margin: this.props.cMargin
-    }
 
-    if(this.props.type === 'center-h') {
+    let style = {
+        width: this.state.cWidths[i],
+        float: 'left',
+        padding: this.props.cPadding,
+        margin: this.props.cMargin
+      }
+
+    if (this.props.type === 'center-h') {
       style.position = 'relative';
       style.margin = '0 auto';
       style.float = 'none';
     }
 
-    if(this.props.type === 'center-b') {
+    if (this.props.type === 'center-b') {
       style.position = 'relative';
       style.margin = '0 auto';
       style.top = '50%';
@@ -163,14 +163,14 @@ var Layout = React.createClass ({
 
   render: function() {
 
-		var children = React.Children.map(this.props.children, (child, i) =>
-				<div style={this.childStyle(i)}>{React.cloneElement(child)}</div>
+		let children = React.Children.map(this.props.children, (child, i) =>
+			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
     );
 
     return (
-      <div style={this.style()} className={this.class()}>
+      <ClearFix style={this.style()}>
         {children}
-      </div>
+      </ClearFix>
     );
   }
 });

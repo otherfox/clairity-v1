@@ -19,12 +19,12 @@ import {
   TextField,
   Paper
 } from 'material-ui'
-//
 import {fromJS, Map} from 'immutable'
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {queryAllPops} from '../../shared/queries/pop'
 import {getPops} from '../../shared/services/pop'
-//
+import {updateWorkOrder} from '../../shared/actions/workOrder'
+
 // // Make available for use in all components
 let widths = { lg: [12,12,12,12], md: [12,12,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12] };
 let cPadding = '0 20px 20px 20px';
@@ -32,21 +32,37 @@ let cPadding = '0 20px 20px 20px';
 let ExistingPopsView = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
-    return { popId: this.props.workOrder.pop_id }
+    return {
+      popId: this.props.workOrder.pop_id ||
+             this.props.pops.first().get('id')
+    };
+  },
+  getMenuItems() {
+    return this.props.pops
+      .map(p => new Map({
+        value: p.get('id'),
+        label: p.get('name')
+      }));
   },
   render() {
     return (
-      <DropDown style={{ maxHeight: 400}}
-                valueLink={this.linkState('popId')}
-                menuItems={ this.props.pops.map(p => new Map({ value: p.get('id'), label: p.get('name') })) } />
+      <DropDown valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
     );
+  },
+  submit() {
+    console.log('Update Work Order `pop_id`:', this.state.popId);
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'existing', pop_id: this.state.popId})
+    });
   }
 })
 //
 let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
   tableName: 'pop',
   serviceMethod: getPops,
-  propName: 'pops'
+  propName: 'pops',
+  methods: ['submit']
 });
 
 let NewPopForm = React.createClass({
@@ -73,6 +89,9 @@ let NewPopForm = React.createClass({
 class UnknownPop extends React.Component {
   render() {
     return <div />;
+  }
+  submit() {
+    console.log('Update Work Order `pop_id`:', undefined);
   }
 }
 
