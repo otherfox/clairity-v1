@@ -23,6 +23,7 @@ import {fromJS, Map} from 'immutable'
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {queryAllPops} from '../../shared/queries/pop'
 import {getPops} from '../../shared/services/pop'
+import {updateWorkOrder} from '../../shared/actions/workOrder'
 
 // // Make available for use in all components
 let widths = { lg: [12,12,12,12], md: [12,12,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12] };
@@ -31,7 +32,10 @@ let cPadding = '0 20px 20px 20px';
 let ExistingPopsView = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
-    return { popId: this.props.workOrder.pop_id }
+    return {
+      popId: this.props.workOrder.pop_id ||
+             this.props.pops.first().get('id')
+    };
   },
   getMenuItems() {
     return this.props.pops
@@ -47,6 +51,10 @@ let ExistingPopsView = React.createClass({
   },
   submit() {
     console.log('Update Work Order `pop_id`:', this.state.popId);
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'existing', pop_id: this.state.popId})
+    });
   }
 })
 //
@@ -83,7 +91,7 @@ class UnknownPop extends React.Component {
     return <div />;
   }
   submit() {
-    console.log('Update Work Order `pop_id`:', this.state.popId);
+    console.log('Update Work Order `pop_id`:', undefined);
   }
 }
 
