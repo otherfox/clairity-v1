@@ -14,8 +14,9 @@ class Footer extends React.Component {
     return {
       padding: '20px',
       textAlign: 'center',
-			position: 'relative',
+			position: 'absolute',
     	width: '100%',
+      height: Settings.footerHeight+'px',
       color: textColor,
       backgroundColor: backgroundColor,
     	bottom: '0'
