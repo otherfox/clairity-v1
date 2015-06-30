@@ -8,6 +8,7 @@ import LeftNav from './shared/components/leftnav'
 import Content from './shared/components/content'
 import Layout from './shared/components/layout'
 import Footer from './shared/components/footer'
+import Wrapper from './shared/components/wrapper'
 
 import ClairityLightTheme from './shared/themes/clairityLight.js'
 
@@ -26,13 +27,13 @@ export default class App extends React.Component {
     return (
       <div>
         <TopNav />
-        <div>
+        <Wrapper>
           <LeftNav />
           <Content>
             <RouteHandler />
           </Content>
-        </div>
-      <Footer />
+          <Footer />
+        </Wrapper>
       </div>
     )
   }
