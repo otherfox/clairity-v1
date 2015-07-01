@@ -46,6 +46,6 @@ export function getUsersByRole(role, active = true) {
 }
 
 export function getWorkOrderOwners() {
-  return Promise.all(getUsersByRole('provisioning'), getUsersByRole('field_ops'))
+  return Promise.all([getUsersByRole('provisioning'), getUsersByRole('field_ops')])
     .then(results => _.uniq(results[0].concat[results[1]], 'id'));
 }
