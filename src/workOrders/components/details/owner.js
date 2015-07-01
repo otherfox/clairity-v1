@@ -2,7 +2,7 @@ import React, {addons} from 'react/addons'
 import DropDown from '../../../shared/components/dropDown'
 import delayRender from '../../../shared/components/base'
 import {ownersFetched} from '../../actions'
-import {queryOwners} from '../../queries'
+import {queryWorkOrderOwners} from '../../queries'
 import {getOwners} from '../../services/users'
 
 let WorkOrderDetailsOwner = React.createClass({
@@ -22,7 +22,7 @@ let WorkOrderDetailsOwner = React.createClass({
 export default delayRender(WorkOrderDetailsOwner, {
   writeMethod: ownersFetched,
   shouldFetch: e => e.state.data,
-  cacheMethod: queryOwners,
+  cacheMethod: queryWorkOrderOwners,
   serviceMethod: getOwners,
   propName: 'owners'
 });
