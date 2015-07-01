@@ -14,7 +14,8 @@ let WorkOrderDetailsOwner = React.createClass({
   },
   render() {
     return (
-      <DropDown menuItems={this.props.owners} valueLink={this.linkState('owner')} />
+      <DropDown menuItems={this.props.owners.unshift(new Map({value:'',label:''}))}
+                valueLink={this.linkState('owner')} />
     );
   }
 });
