@@ -4,6 +4,7 @@ import delayRender from '../../../shared/components/networkRenderer/base'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
 import {getWorkOrderOwners} from '../../services/users'
+import {Map} from 'immutable'
 
 let WorkOrderDetailsOwner = React.createClass({
   mixins: [addons.LinkedStateMixin],
