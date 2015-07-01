@@ -27,7 +27,7 @@ ownersFetched.listen(owners => {
   Store.handleMessage({
     type: Store.MessageTypes.Write,
     payload: {
-      table: 'workOrderOwner',
+      table: 'user',
       rows: owners
     }
   });
