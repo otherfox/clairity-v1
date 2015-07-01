@@ -25,16 +25,11 @@ import Contract from '../services/stubs/contract7416.json'
 import ServiceTypes from '../services/stubs/serviceTypes.json'
 import OrderTypes from '../services/stubs/workOrderTypes.json'
 
+import OwnerView from './details/owner'
+
 import {List, Map, fromJS} from 'immutable'
 
 let WorkOrderDetails = React.createClass ({
-
-  propTypes: {
-    style: React.PropTypes.object,
-    order: React.PropTypes.object,
-    serviceTypes: React.PropTypes.object,
-    orderTypes: React.PropTypes.object,
-  },
 
   getDefaultProps() {
     return {
@@ -128,7 +123,7 @@ let WorkOrderDetails = React.createClass ({
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [
-      //{ label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'] ? +order.get['owner'] : 0)} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Owners', name: 'owners', value: <OwnerView workOrder={this.props.workOrder} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },

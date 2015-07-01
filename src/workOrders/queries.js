@@ -6,10 +6,16 @@ export function queryOrdersForCustomer(customerId) {
 }
 
 export function queryWorkOrder(id) {
-  return Store.data.getIn(['workOrders', id]);
+  return Store.data.getIn(['workOrder', id]);
 }
 
 export function queryWorkOrderOwners() {
-  //return Store.data.getIn(['workOrders', id]);
-  return {};
+  return Store.data.get('user') // get all users
+    .toList() // as a list/collection
+    .filter(u => // find the users
+      u.get('roles') // inspect each users roles
+       .filter(r => // find roles which have
+         r.get('name') == 'provisioning' || // the name provisioning
+         r.get('name') == 'field_ops')  // or field_ops
+       .size > 0); // return users whose role query returned one or more entry
 }

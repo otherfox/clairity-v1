@@ -28,6 +28,7 @@ import {updateWorkOrder} from '../../shared/actions/workOrder'
 // // Make available for use in all components
 let widths = { lg: [12,12,12,12], md: [12,12,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12] };
 let cPadding = '0 20px 20px 20px';
+
 //
 let ExistingPopsView = React.createClass({
   mixins: [LinkedStateMixin],
@@ -68,7 +69,10 @@ let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
 let NewPopForm = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
-    return {name: '', address: ''};
+    return {
+      name: this.props.workOrder.pop_name || '',
+      address: this.props.workOrder.pop_address || ''
+    };
   },
   render() {
     return (
@@ -83,6 +87,16 @@ let NewPopForm = React.createClass({
         </Layout>
       </div>
     );
+  },
+  submit() {
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {
+        pop_entry: 'new',
+        pop_name: this.state.name,
+        pop_address: this.state.address
+      })
+    });
   }
 });
 
@@ -92,6 +106,10 @@ class UnknownPop extends React.Component {
   }
   submit() {
     console.log('Update Work Order `pop_id`:', undefined);
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'unknown'})
+    });
   }
 }
 
@@ -99,12 +117,14 @@ export default React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
     return {
-      popType: this.props.workOrder.pop_id ? 0 : 2,
+      popType: this.props.workOrder.pop_id ? 0 : (this.props.workOrder.pop_name ? 1 : 2),
     }
   },
 
   getPopDisplay(type) {
-    return type === 0 ? ExistingPops : (type === 1 ? NewPopForm : UnknownPop)
+    if (type === 0) return ExistingPops;
+    if (type === 1) return NewPopForm;
+    if (type === 2) return UnknownPop;
   },
 
   render() {

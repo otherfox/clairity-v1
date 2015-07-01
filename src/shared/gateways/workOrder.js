@@ -8,6 +8,14 @@ function setDefaultStrings(object, defs, fields) {
   }
 }
 
+function deleteFalseFields(w, o, fields) {
+  for (let n in fields) {
+    if (!w[fields[n]]) {
+      delete o[fields[n]];
+    }
+  }
+}
+
 export function eventUpdateWorkOrder(workOrder) {
   let o = _.cloneDeep(workOrder);
   let l = queryLocation(workOrder.location_id).toJS();
@@ -18,12 +26,17 @@ export function eventUpdateWorkOrder(workOrder) {
   delete o.status;
   delete o.owner;
   delete o.services;
+  o.service_types = workOrder.services;
   if (workOrder.owner) {
     o.owner_id = workOrder.owner.id;
   } else {
     o.owner_id = '';
   }
-  o.service_types = workOrder.services;
+  deleteFalseFields(workOrder, o, ['circuit_installed', 'circuit_accepted',
+  'ethernet_errors_checked', 'other_configured', 'pop_router_configured',
+  'pop_router_ports_assigned', 'provisioning_notified', 'radios_configured',
+  'voice_cpe_configured', 'voice_installed', 'voice_provisioning_complete',
+  'voice_services_accepted']);
   setDefaultStrings(o, workOrder, [ 'technicalContactName', 'voiceContactName', 'siteContactName',
   'owner_id', 'description', 'ips_requested', 'customer_ip_block', 'subnet_mask',
   'first_usable_ip', 'last_usable_ip', 'gateway', 'ips_requested_2', 'customer_ip_block_2',
@@ -38,6 +51,6 @@ export function eventUpdateWorkOrder(workOrder) {
   o.customer_id = l.customer.id;
   o.work_order_type_id = workOrder.type.id;
   o.work_order_status_id = workOrder.status.id;
-  o.pop_entry = workOrder.pop_entry || workOrder.pop_id ? 'existing' : 'unknown';
+  o.pop_entry = workOrder.pop_entry || 'existing';
   return o;
 }
