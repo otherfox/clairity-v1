@@ -23,16 +23,6 @@ workOrderRecieved.listen(order => {
   });
 });
 
-ownersFetched.listen(owners => {
-  Store.handleMessage({
-    type: Store.MessageTypes.Write,
-    payload: {
-      table: 'user',
-      rows: owners
-    }
-  });
-})
-
 // Update Work Order
 updateWorkOrder.listen((id, data) => {
   let promise = putWorkOrder(id, data);
@@ -45,3 +35,13 @@ updateWorkOrder.listen((id, data) => {
     promise
   })
 });
+
+ownersFetched.listen(owners => {
+  Store.handleMessage({
+    type: Store.MessageTypes.Write,
+    payload: {
+      table: 'user',
+      rows: owners
+    }
+  });
+})
