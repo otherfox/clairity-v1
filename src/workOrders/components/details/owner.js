@@ -3,7 +3,7 @@ import DropDown from '../../../shared/components/dropDown'
 import delayRender from '../../../shared/components/base'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
-import {getOwners} from '../../services/users'
+import {getWorkOrderOwners} from '../../services/users'
 
 let WorkOrderDetailsOwner = React.createClass({
   mixins: [addons.LinkedStateMixin],
@@ -23,6 +23,6 @@ export default delayRender(WorkOrderDetailsOwner, {
   writeMethod: ownersFetched,
   shouldFetch: e => e.state.data,
   cacheMethod: queryWorkOrderOwners,
-  serviceMethod: getOwners,
+  serviceMethod: getWorkOrderOwners,
   propName: 'owners'
 });
