@@ -6,7 +6,7 @@ export function queryOrdersForCustomer(customerId) {
 }
 
 export function queryWorkOrder(id) {
-  return Store.data.getIn(['workOrders', id]);
+  return Store.data.getIn(['workOrder', id]);
 }
 
 export function queryWorkOrderOwners() {
