@@ -4,6 +4,7 @@ import Store from '../shared/store'
 
 export const fetchWorkOrder = Fynx.createAsyncAction();
 export const updateWorkOrder = Fynx.createAsyncAction();
+export const ownersFetched = Fynx.createAsyncAction();
 const workOrderRecieved = Fynx.createAsyncAction();
 
 // Fetch the data
