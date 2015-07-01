@@ -56,8 +56,7 @@ var Layout = React.createClass({
 
     if (this.props.children) {
 
-      let count = 0
-      React.Children.forEach(this.props.children, (value, index) => count += 1 );
+      let count = React.Children.count(this.props.children);
 
       for (let i = 0; i < count; i++) {
         percWidths.push(this.getChildWidth(i, breakpoint));
