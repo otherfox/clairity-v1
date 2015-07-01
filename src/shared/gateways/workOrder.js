@@ -51,6 +51,6 @@ export function eventUpdateWorkOrder(workOrder) {
   o.customer_id = l.customer.id;
   o.work_order_type_id = workOrder.type.id;
   o.work_order_status_id = workOrder.status.id;
-  o.pop_entry = workOrder.pop_entry || workOrder.pop_id ? 'existing' : 'unknown';
+  o.pop_entry = workOrder.pop_entry || 'existing';
   return o;
 }
