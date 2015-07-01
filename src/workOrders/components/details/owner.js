@@ -9,7 +9,7 @@ let WorkOrderDetailsOwner = React.createClass({
   mixins: [addons.LinkedStateMixin],
   getInitialState() {
     return {
-      owner: this.props.workOrder.owner_id || this.props.owners.first().get('id')
+      owner: this.props.workOrder.owner_id || ''
     };
   },
   render() {
