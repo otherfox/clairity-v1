@@ -15,16 +15,17 @@ let WorkOrderDetailsOwner = React.createClass({
   },
   getMenuItems() {
     let result = this.props.owners
-      .map(o => new Map({
-        label: o.get('name'),
-        value: o.get('id')
-      }))
+      .map(o =>
+          new Map({
+            label: o.get('name'),
+            value: o.get('id')
+          })
+      )
       .unshift(new Map({value: '', label: ''}));
-    debugger;
     return result;
   },
   render() {
-    debugger;
+
     return (
       <DropDown menuItems={this.getMenuItems()}
                 valueLink={this.linkState('owner')} />
