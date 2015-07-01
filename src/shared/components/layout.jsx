@@ -72,14 +72,14 @@ var Layout = React.createClass({
 				bKeys = Object.keys(this.props.breakpoints),
 				breakpoint;
 
-		bKeys.forEach( function(key, i) {
+		bKeys.forEach( (key, i) => {
 			if(this.props.breakpoints[key] > vwidth) {
 				var prevKey = i;
 				breakpoint = bKeys[prevKey];
 			} else if(vwidth > this.props.breakpoints.lg) {
 				breakpoint = 'lg';
 			}
-		}, this);
+		});
 
 		return breakpoint;
 	},
@@ -163,7 +163,7 @@ var Layout = React.createClass({
   render: function() {
 
 		let children = React.Children.map(this.props.children, (child, i) =>
-			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
+			 <ClearFix style={this.childStyle(i)} sizeClass={this.state.br}>{React.cloneElement(child)}</ClearFix>
     );
 
     return (

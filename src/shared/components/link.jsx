@@ -1,8 +1,5 @@
 import React from 'react'
-import {Styles} from 'material-ui'
 import {State, Link} from 'react-router'
-
-let {Colors} = Styles;
 
 class CustomLink extends React.Component {
 
@@ -14,9 +11,8 @@ class CustomLink extends React.Component {
   }
 
   render() {
-
     return (
-      <Link to={this.props.to} style={this.style()}>
+      <Link to={this.props.to} params={this.props.params} style={this.style()}>
         {this.props.children}
       </Link>
     );

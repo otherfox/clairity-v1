@@ -54,9 +54,8 @@ let EngineeringHardware = React.createClass ({
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg:[12],md:[12],sm:[12],xs:[12]}} pPadding={'0 20px 20px 20px'}>
-            <div>
-              <h3>Engineering Hardware</h3>
               <Details
+                title = {'Engineering Hardware'}
                 data = {[
                   { label: 'POP Router', name: 'pop_router_inventory_type_id', value: <div><DropDown menuItems={ new List([
                   new Map({ label: '', value: 1000, key: 51}),
@@ -304,7 +303,7 @@ let EngineeringHardware = React.createClass ({
                   new Map({ label: 'Canopy 900Mhz', value: 10, key: 10}),
                   new Map({ label: 'Dell Switch', value: 25, key: 25}),
                   ])} selectedValue= {1000} /><Checkbox label={'Configured and Tested'} name={'other_configured'} /></div>, detailType: "muiDropDown"},
-                  { label: 'Voice Handoff Type', name: 'voice_handoff_type', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
+                  { label: 'Voice Handoff Type', name: 'voice_handoff_type', value: <TextField fullWidth={false} multiLine={true} />, detailType: 'muiTextField' },
                   { label: 'Master Radio MAC', name: 'master_radio_mac', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
                   { label: 'Slave Radio MAC', name: 'slave_radio_mac', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
                   { label: 'Frequency', name: 'frequency', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
@@ -317,7 +316,6 @@ let EngineeringHardware = React.createClass ({
 
                 ]}
               />
-              </div>
           </Layout>
         </Paper>
       </div>

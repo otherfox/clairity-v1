@@ -79,9 +79,7 @@ const ContractOverview = React.createClass({
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg: [3, 9,12], md: [12, 12,12], sm: [12, 12,12], xs: [12, 12,12]}} pPadding={'0 20px 20px 20px'}>
-            <div>
-              <h3>Contracts</h3>
-            </div>
+            <Details title={'Contracts'} />
             <div>
               <DropDown style={{paddingTop: '10px'}} menuItems={this.getContracts()} valueLink={this.linkState('selectedContract')}/>
             </div>
