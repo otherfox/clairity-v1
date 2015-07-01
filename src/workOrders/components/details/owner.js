@@ -1,6 +1,6 @@
 import React, {addons} from 'react/addons'
 import DropDown from '../../../shared/components/dropDown'
-import delayRender from '../../../shared/components/base'
+import delayRender from '../../../shared/components/networkRenderer/base'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
 import {getWorkOrderOwners} from '../../services/users'
