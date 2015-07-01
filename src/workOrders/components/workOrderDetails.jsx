@@ -29,13 +29,6 @@ import {List, Map, fromJS} from 'immutable'
 
 let WorkOrderDetails = React.createClass ({
 
-  propTypes: {
-    style: React.PropTypes.object,
-    order: React.PropTypes.object,
-    serviceTypes: React.PropTypes.object,
-    orderTypes: React.PropTypes.object,
-  },
-
   getDefaultProps() {
     return {
       order: fromJS(WorkOrder),
