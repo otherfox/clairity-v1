@@ -23,6 +23,16 @@ workOrderRecieved.listen(order => {
   });
 });
 
+ownersFetched.listen(owners => {
+  Store.handleMessage({
+    type: Store.MessageTypes.Write,
+    payload: {
+      table: 'workOrderOwner',
+      rows: owners
+    }
+  });
+})
+
 // Update Work Order
 updateWorkOrder.listen((id, data) => {
   let promise = putWorkOrder(id, data);
