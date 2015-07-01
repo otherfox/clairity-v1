@@ -116,7 +116,7 @@ export default React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
     return {
-      popType: this.props.workOrder.pop_id ? 0 : 2,
+      popType: this.props.workOrder.pop_id ? 0 : (this.props.workOrder.pop_name ? 1 : 2),
     }
   },
 
