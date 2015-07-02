@@ -5,6 +5,7 @@ import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
 import Table from '../shared/components/table'
 import Link from '../shared/components/link'
+import {Tabs, Tab} from '../shared/components/tabs'
 
 import {networkModelRenderer} from '../shared/components/networkRenderer'
 
@@ -49,47 +50,67 @@ class WorkOrders extends React.Component {
         <div className="section-header">
           <h1>Update Work Order #{wo.id}</h1>
         </div>
-        <div>
-          <Layout cPadding={'0 20px 0 0'}>
-            <div>
-              <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
-            </div>
-            <div>
-              <Link to="view-customer" params={{id: wo.location_id}}>View Customer Details</Link>
-            </div>
-          </Layout>
-        </div>
-        <Layout widths={{lg: [6,6,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'20px 20px 0 0'}>
-          <div>
-            <Layout widths={{lg: [12,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 0 20px 0'}>
-              <LocationInfo id={wo.location_id} />
-              <Pop workOrder={wo} />
-              <Provisioning />
-            </Layout>
-          </div>
-          <div><WorkOrderDetails workOrder={wo} /></div>
-          <div><ContractOverview id={wo.contract_id} /></div>
+
+        <Layout cPadding={'0 20px 0 0'}>
+          <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
+          <Link to="view-customer" params={{id: wo.location_id}}>View Customer Details</Link>
         </Layout>
-        <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12], }} cPadding={'20px 20px 0 0'}>
-          <div>
-            <Layout widths={{lg: [12,12],md: [12,12], sm: [12,12], xs: [12,12], xxs: [2,12], }} cPadding={'0 0 20px 0'}>
-              <EngineeringNetworking></EngineeringNetworking>
-              <Messaging></Messaging>
+
+        <Tabs compact={true}>
+          <Tab label="Details">
+            <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12] }} cPadding={'20px 20px 0 0'}>
+              <div>
+                <Layout widths={{lg: [12,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 0 20px 0'}>
+                  <LocationInfo id={wo.location_id} />
+                  <Pop workOrder={wo} />
+                  <Provisioning />
+                </Layout>
+              </div>
+              <WorkOrderDetails workOrder={wo} />
             </Layout>
-          </div>
-          <div>
-            <Layout widths={{lg: [12,12,  12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
-              <EngineeringHardware></EngineeringHardware>
-              <Installation></Installation>
-              <Engineering></Engineering>
-              <ContactLogs />
+          </Tab>
+
+          <Tab label="Contracts">
+            <Layout widths={{lg: [12], md: [12], sm: [12], xs: [12], xxs: [12] }} cPadding={'20px 20px 0 0'}>
+              <ContractOverview id={wo.contract_id} />
             </Layout>
-          </div>
-        </Layout>
+          </Tab>
+
+          <Tab label="Engineering">
+            <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12], }} cPadding={'20px 20px 0 0'}>
+              <div>
+                <Layout widths={{lg: [12,12],md: [12,12], sm: [12,12], xs: [12,12], xxs: [2,12], }} cPadding={'0 0 20px 0'}>
+                  <EngineeringNetworking></EngineeringNetworking>
+                </Layout>
+              </div>
+              <div>
+                <Layout widths={{lg: [12,12,  12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
+                  <EngineeringHardware></EngineeringHardware>
+                  <Installation></Installation>
+                  <Engineering></Engineering>
+                </Layout>
+              </div>
+            </Layout>
+          </Tab>
+
+          <Tab label="Messages">
+            <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12], }} cPadding={'20px 20px 0 0'}>
+              <div>
+                <Layout widths={{lg: [12],md: [12], sm: [12], xs: [12], xxs: [12], }} cPadding={'0 0 20px 0'}>
+                  <Messaging />
+                </Layout>
+              </div>
+              <div>
+                <Layout widths={{lg: [12,12,  12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
+                  <ContactLogs />
+                </Layout>
+              </div>
+            </Layout>
+          </Tab>
+        </Tabs>
       </div>
     )
   }
-
 }
 
 let WorkOrdersWrapped = networkModelRenderer(WorkOrders, 'workOrder');

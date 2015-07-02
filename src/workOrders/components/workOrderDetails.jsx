@@ -40,7 +40,9 @@ let WorkOrderDetails = React.createClass ({
   },
 
   style() {
-    let style = {};
+    let style = {
+      width: '100%'
+    };
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
@@ -150,10 +152,8 @@ let WorkOrderDetails = React.createClass ({
     return (
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
-            <div>
-              <Details {...this.getDetails(this.props.order)} />
-            </div>
+          <Layout widths={{ lg: [12], md: [12], sm: [12], xs: [12], xxs: [12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
+            <Details {...this.getDetails(this.props.order)} />
           </Layout>
         </Paper>
       </div>
