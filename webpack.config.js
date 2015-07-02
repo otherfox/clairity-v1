@@ -11,7 +11,7 @@ module.exports = {
     './src/index'
   ],
   output: {
-    filename: 'index.[hash].js',
+    filename: 'index.js',
     path: __dirname + '/bin'
   },
   resolve: {
