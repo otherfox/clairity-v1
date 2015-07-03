@@ -13,6 +13,7 @@ let Layout = React.createClass({
     cPadding: React.PropTypes.string,
     cMargin: React.PropTypes.string,
     cStyle: React.PropTypes.object,
+    cStyles: React.PropTypes.object,
     type: React.PropTypes.string,
     style: React.PropTypes.object
   },
@@ -59,6 +60,45 @@ let Layout = React.createClass({
     return percWidths;
   },
 
+  getChildStyle(i, breakpoint) {
+
+    let breakpoints = ['lg', 'md', 'sm', 'xs', 'xxs'];
+
+    if (this.props.cStyles) {
+      if(this.props.cStyles[breakpoint]) {
+        let style = this.props.cStyles[breakpoint][i];
+        return style;
+      } else {
+        let bidx = breakpoints.indexOf(breakpoint);
+        if(bidx > -1) {
+          for(let j = bidx - 1; j > -1; j--) {
+            if(this.props.cStyles[breakpoints[j]]) {
+              return this.props.cStyles[breakpoints[j]][i] || {};
+            }
+          }
+        }
+        return {};
+      }
+    }
+    return {};
+  },
+
+  getChildStyles() {
+
+    let breakpoint = this.getBreakpoint();
+    let styles = [];
+
+    if (this.props.children) {
+      let count = React.Children.count(this.props.children);
+      for (let i = 0; i < count; i++) {
+        styles.push(this.getChildStyle(i, breakpoint));
+      }
+    } else {
+      styles = [{}];
+    }
+    return styles;
+  },
+
 	getBreakpoint() {
 		let vwidth = window.innerWidth,
 				bKeys = Object.keys(this.props.breakpoints),
@@ -92,12 +132,15 @@ let Layout = React.createClass({
   },
 
   getInitialState() {
-    return { cWidths: this.getChildWidths() };
+    return { cWidths: this.getChildWidths(), cStyles: this.getChildStyles() };
   },
 
 	handleResize() {
     if(this.props.widths) {
       this.setState({cWidths: this.getChildWidths() });
+    }
+    if(this.props.cStyles) {
+      this.setState({cStyles: this.getChildStyles() });
     }
   },
 
@@ -130,8 +173,8 @@ let Layout = React.createClass({
     let style = {
         width: this.state.cWidths[i],
         float: 'left',
-        padding: this.props.cPadding,
-        margin: this.props.cMargin
+        padding: this.props.cPadding || 'initial',
+        margin: this.props.cMargin || 'initial'
     }
 
     if (this.props.type === 'center-h') {
@@ -154,13 +197,19 @@ let Layout = React.createClass({
       }, this);
     }
 
+    if(this.state.cStyles[i]) {
+      Object.keys(this.state.cStyles[i]).forEach(function(key, i){
+        style[key] = this.state.cStyles[i][key];
+      }, this);
+    }
+
     return style;
   },
 
   render: function() {
 
 		let children = React.Children.map(this.props.children, (child, i) =>
-			 <ClearFix style={this.childStyle(i)} sizeClass={this.state.br}>{React.cloneElement(child)}</ClearFix>
+			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
     );
 
     return (

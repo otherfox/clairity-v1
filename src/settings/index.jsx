@@ -30,17 +30,9 @@ let OpenInstalls = React.createClass({
 
   render() {
     return (
-      <Layout widths={{ lg: [6,6], sm: [12]}}>
-        <Paper>
-          one
-        </Paper>
-        <Paper>
-          two
-        </Paper>
-        <Paper>
-          three
-        </Paper>
-      </Layout>
+      <div>
+        Settings Page
+      </div>
     );
   }
 });
