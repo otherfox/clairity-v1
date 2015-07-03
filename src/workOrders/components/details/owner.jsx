@@ -4,7 +4,7 @@ import delayRender from '../../../shared/components/networkRenderer/base'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
 import {getWorkOrderOwners} from '../../services/users'
-import {Map} from 'immutable'
+import {Map, List} from 'immutable'
 
 let WorkOrderDetailsOwner = React.createClass({
   mixins: [addons.LinkedStateMixin],
@@ -22,13 +22,16 @@ let WorkOrderDetailsOwner = React.createClass({
           })
       )
       .unshift(new Map({value: '', label: ''}));
-    return result;
+    return new List(result);
   },
   render() {
 
+    let result = (this.props.owners.size > 0) ? <DropDown menuItems={this.getMenuItems()} valueLink={this.linkState('owner')} /> : '';
+
     return (
-      <DropDown menuItems={this.getMenuItems()}
-                valueLink={this.linkState('owner')} />
+      <div>
+        {result}
+      </div>
     );
   }
 });

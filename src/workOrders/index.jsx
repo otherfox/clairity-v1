@@ -56,7 +56,7 @@ class WorkOrders extends React.Component {
           <Link to="view-customer" params={{id: wo.location_id}}>View Customer Details</Link>
         </Layout>
 
-        <Tabs compact={true}>
+        <Tabs compact={false}>
           <Tab label="Details">
             <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12] }} cPadding={'20px 20px 0 0'}>
               <div>
