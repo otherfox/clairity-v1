@@ -3,14 +3,16 @@ import {Route, RouteHandler, DefaultRoute, NotFoundRoute} from 'react-router'
 
 import App from '../../app'
 import AgingReports from '../../agingReports'
-import EditCustomer  from '../../editCustomer'
 import CreateContract from '../../createContract'
+import CreateLead from '../../createLead'
+import EditCustomer  from '../../editCustomer'
 import Login from '../../login'
 import OpenInstalls from '../../openInstalls'
+import Settings from '../../settings'
 import WorkOrders from '../../workOrders'
 import WorkOrderUpload from '../../workOrderUpload'
 import ViewCustomer from '../../viewCustomer'
-import Settings from '../../settings'
+
 
 export default (
   <Route>
@@ -22,6 +24,7 @@ export default (
         <Route name="edit-customer" path="edit" handler={EditCustomer} />
       </Route>
       <Route name="create-contract" handler={CreateContract} />
+      <Route name="create-lead" handler={CreateLead} />
       <Route name="open-installs" handler={OpenInstalls} />
       <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
         <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
