@@ -6,21 +6,39 @@ import {List} from 'immutable'
 let Layout = React.createClass({
   propTypes: {
     cols: React.PropTypes.number,
-    widths: React.PropTypes.object,
-    breakpoints: React.PropTypes.object,
+    widths: React.PropTypes.shape({
+      lg: React.PropTypes.arrayOf(React.PropTypes.number),
+      md: React.PropTypes.arrayOf(React.PropTypes.number),
+      sm: React.PropTypes.arrayOf(React.PropTypes.number),
+      xs: React.PropTypes.arrayOf(React.PropTypes.number),
+      xxs: React.PropTypes.arrayOf(React.PropTypes.number)
+    }),
+    breakpoints: React.PropTypes.shape({
+      lg: React.PropTypes.number,
+      md: React.PropTypes.number,
+      sm: React.PropTypes.number,
+      xs: React.PropTypes.number,
+      xxs: React.PropTypes.number
+    }),
     order: React.PropTypes.object,
     pPadding: React.PropTypes.string,
     cPadding: React.PropTypes.string,
     cMargin: React.PropTypes.string,
     cStyle: React.PropTypes.object,
-    cStyles: React.PropTypes.object,
+    cStyles: React.PropTypes.shape({
+      lg: React.PropTypes.arrayOf(React.PropTypes.object),
+      md: React.PropTypes.arrayOf(React.PropTypes.object),
+      sm: React.PropTypes.arrayOf(React.PropTypes.object),
+      xs: React.PropTypes.arrayOf(React.PropTypes.object),
+      xxs: React.PropTypes.arrayOf(React.PropTypes.object)
+    }),
     type: React.PropTypes.string,
     style: React.PropTypes.object
   },
 
   getChildWidth(i, breakpoint) {
 
-    let breakpoints = ['lg', 'md', 'sm', 'xs', 'xxs'];
+    let breakpoints = Object.keys(Settings.breakpoints);
 
     if (this.props.widths) {
       if(this.props.widths[breakpoint]) {
@@ -101,14 +119,21 @@ let Layout = React.createClass({
 
 	getBreakpoint() {
 		let vwidth = window.innerWidth,
-				bKeys = Object.keys(this.props.breakpoints),
+				bKeys = Object.keys(Settings.breakpoints),
+        breakpoints = Settings.breakpoints,
 				breakpoint;
 
+    if(this.props.breakpoints) {
+      Object.keys(this.props.breakpoints).forEach( (key, i) => {
+        breakpoints[key] = this.props.breakpoints[key];
+      });
+    }
+
 		bKeys.forEach( (key, i) => {
-			if(this.props.breakpoints[key] > vwidth) {
+			if(breakpoints[key] > vwidth) {
 				let prevKey = i;
 				breakpoint = bKeys[prevKey];
-			} else if(vwidth > this.props.breakpoints.lg) {
+			} else if(vwidth > breakpoints.lg) {
 				breakpoint = 'lg';
 			}
 		});
@@ -126,7 +151,13 @@ let Layout = React.createClass({
 
   getDefaultProps() {
     return {
-      breakpoints: Settings.breakpoints,
+      breakpoints: {
+        lg: Settings.breakpoints.lg,
+        md: Settings.breakpoints.md,
+        sm: Settings.breakpoints.sm,
+        xs: Settings.breakpoints.xs,
+        xxs: Settings.breakpoints.xxs,
+      },
       cols: Settings.cols
     }
   },
