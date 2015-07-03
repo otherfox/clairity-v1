@@ -28,17 +28,19 @@ import {Navigation} from 'react-router'
 let OpenInstalls = React.createClass({
   mixins: [Navigation],
 
-  componentDidMount() {
-    loginSuccess.listen(() => this.transitionTo('aging-reports'));
-  },
-
-  tryLogin(username, password) {
-    tryLogin(username, password);
-  },
-
   render() {
     return (
-      <div>Settings page</div>
+      <Layout widths={{ lg: [6,6], sm: [12]}}>
+        <Paper>
+          one
+        </Paper>
+        <Paper>
+          two
+        </Paper>
+        <Paper>
+          three
+        </Paper>
+      </Layout>
     );
   }
 });

@@ -28,7 +28,6 @@ let Details = React.createClass ({
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
         style[key] = this.props.style[key];
       }, this);
     }
