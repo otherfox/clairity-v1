@@ -41,10 +41,17 @@ import {
 import controllable from 'react-controllables'
 import {State} from 'react-router'
 
-class WorkOrders extends React.Component {
-
+let WorkOrders = React.createClass({
+  getInitialState() {
+    return {
+      compact: false
+    }
+  },
+  setCompact(e, toggled) {
+    this.setState({compact: toggled});
+  },
   render() {
-    let wo = this.props.workOrder.toJS()
+    let wo = this.props.workOrder.toJS();
     return (
       <div>
         <div className="section-header">
@@ -54,9 +61,18 @@ class WorkOrders extends React.Component {
         <Layout cPadding={'0 20px 0 0'}>
           <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
           <Link to="view-customer" params={{id: wo.location_id}}>View Customer Details</Link>
+          <div style={{position: 'absolute', right: '20px'}} >
+            <Toggle
+              labelStyle={{ minWidth: '100px'}}
+              name="compactView"
+              value="false"
+              label="Compact View"
+              onToggle={this.setCompact}
+            />
+          </div>
         </Layout>
 
-        <Tabs compact={false}>
+        <Tabs compact={this.state.compact}>
           <Tab label="Details">
             <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12] }} cPadding={'20px 20px 0 0'}>
               <div>
@@ -111,7 +127,7 @@ class WorkOrders extends React.Component {
       </div>
     )
   }
-}
+});
 
 let WorkOrdersWrapped = networkModelRenderer(WorkOrders, 'workOrder');
 
