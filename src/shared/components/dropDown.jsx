@@ -15,7 +15,9 @@ let DropDown = React.createClass({
   },
 
   style() {
-    let style = {};
+    let style = {
+
+    };
 
     if (this.props.style) {
       Object.keys(this.props.style)
@@ -35,7 +37,8 @@ let DropDown = React.createClass({
 
   dropDownLabelStyle() {
     let labelStyle = {
-      paddingLeft: 0
+      paddingLeft: 0,
+      zIndex: 0
     }
 
     return labelStyle;
@@ -63,6 +66,7 @@ let DropDown = React.createClass({
                       onChange={link ? this.handleLink : this.handleChange}
                       labelStyle={this.dropDownLabelStyle()}
                       underlineStyle={this.dropDownUnderlineStyle()}
+                      menuItemStyle={{zIndex: 3}}
                       />
       </div>
     );

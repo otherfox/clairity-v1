@@ -44,9 +44,7 @@ let createLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-      <div>
         <h1>Convert Lead - {contact.name}</h1>
-      </div>
       <Paper>
         <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
           <Details
