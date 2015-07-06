@@ -17,7 +17,8 @@ class Footer extends React.Component {
       height: Settings.footerHeight+'px',
       color: textColor,
       backgroundColor: backgroundColor,
-    	bottom: '0'
+    	bottom: '0',
+      zIndex: 2
     }
   }
 
