@@ -12,6 +12,7 @@ import Settings from '../../settings'
 import WorkOrders from '../../workOrders'
 import WorkOrderUpload from '../../workOrderUpload'
 import ViewCustomer from '../../viewCustomer'
+import ViewLeads from '../../viewLeads'
 
 
 export default (
@@ -30,6 +31,7 @@ export default (
         <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
       </Route>
       <Route name="settings" handler={Settings} />
+      <Route name="view-leads" handler={ViewLeads} />
     </Route>
     <Route name="login" path="/login" handler={Login} />
   </Route>
