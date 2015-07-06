@@ -85,12 +85,19 @@ let DataTable = React.createClass({
     margin: React.PropTypes.string
   },
 
+  getDefaultProps() {
+    return {
+      widthPerc: 100,
+      widthAdj: 0
+    }
+  },
+
   rowGetter: function(rowIndex) {
       return this.props.data[rowIndex];
   },
 
   getWidth: function() {
-    let widthPerc = (this.props.widthPerc) ? this.props.widthPerc / 100 : 1;
+    let widthPerc = this.props.widthPerc / 100;
     let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj);
     let adjWidth = 0;
 
