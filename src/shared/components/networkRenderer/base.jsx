@@ -9,8 +9,8 @@ export default function delayRender(Component, options) {
   @exposeMethods(options.methods || [])
   class DelayedRenderer extends React.Component {
 
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       this.state = {
         data: null,
         pending: true,
@@ -52,6 +52,10 @@ export default function delayRender(Component, options) {
     componentWillMount() {
       Store.on('update', this.update);
       this.fetchData(this.props);
+    }
+
+    componentWillDismount() {
+      Store.off('update', this.update);
     }
 
     componentWillReceiveProps(props) {
