@@ -25,7 +25,7 @@ export default (
         <Route name="edit-customer" path="edit" handler={EditCustomer} />
       </Route>
       <Route name="create-contract" handler={CreateContract} />
-      <Route name="create-lead" handler={CreateLead} />
+      <Route name="create-lead/:id/:agentid" handler={CreateLead} />
       <Route name="open-installs" handler={OpenInstalls} />
       <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
         <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />

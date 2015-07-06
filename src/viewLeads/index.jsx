@@ -33,8 +33,8 @@ let viewLeads = React.createClass({
   getDefaultProps() {
     return {
       leads: [
-        { contact_id : 13146, agent_id: 130, lead_name: '"Tom Smith ', account: 'Kenco', account_owner: 'Kit Carker' },
-        { contact_id : 7223, agent_id: 130, lead_name: '•Central Regional Wastewater System', account: 'HTM Construction Company', account_owner: 'Kit Carker' },
+        { contact_id : 13146, agent_id: 130, lead_name: 'Tom Smith ', account: 'Kenco', account_owner: 'Kit Carker' },
+        { contact_id : 7223, agent_id: 130, lead_name: 'Central Regional Wastewater System', account: 'HTM Construction Company', account_owner: 'Kit Carker' },
         { contact_id : 7364, agent_id: 85, lead_name: '13657 Jupiter Rd', account: '1', account_owner: 'Donna Viviano' },
         { contact_id : 4825, agent_id: 85, lead_name: 'Aaron  Fogul', account: 'HB Meats', account_owner: 'Donna Viviano' },
         { contact_id : 10265, agent_id: 130, lead_name: 'Aaron Davenport', account: 'Edge Communications', account_owner: 'Kit Carker' },
@@ -1592,7 +1592,7 @@ let viewLeads = React.createClass({
         { label: 'Account Owner', name: 'account_owner', cellType: 'string'}
       ],
       data: leads.map(s => {
-        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/create-lead/${s.contact_id}/${s.agent_id}`} /></div>;
+        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/create-lead/${s.contact_id}/${s.agent_id}`} /></div>;
         return s;
       }),
       colWidths: [2,6,4,4],
