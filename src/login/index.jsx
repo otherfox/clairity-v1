@@ -6,6 +6,7 @@ import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Settings from '../shared/components/settings'
+import ThemeManager from '../shared/themes/themeManager'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -85,6 +86,14 @@ import {Navigation} from 'react-router'
 
 const Login = React.createClass({
   mixins: [Navigation],
+  childContextTypes: {
+    muiTheme: PropTypes.object
+  },
+  getChildContext() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  },
   componentDidMount() {
     loginSuccess.listen(() => this.transitionTo('work-orders', {id: 1538}));
   },
