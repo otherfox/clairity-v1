@@ -1,7 +1,6 @@
 
 import React from 'react'
 import {RouteHandler} from 'react-router'
-import {Styles} from 'material-ui'
 
 import TopNav from './shared/components/topnav'
 import LeftNav from './shared/components/leftnav'
@@ -10,10 +9,7 @@ import Layout from './shared/components/layout'
 import Footer from './shared/components/footer'
 import Wrapper from './shared/components/wrapper'
 
-import ClairityLightTheme from './shared/themes/clairityLight.js'
-
-let ThemeManager = new Styles.ThemeManager();
-ThemeManager.setTheme(ClairityLightTheme);
+import ThemeManager from './shared/themes/themeManager'
 
 export default class App extends React.Component {
 

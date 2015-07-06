@@ -18,6 +18,7 @@ import ViewLeads from '../../viewLeads'
 export default (
   <Route>
     <DefaultRoute handler={Login} />
+    <Route name="login" path="/login" handler={Login} />
     <Route path="/" handler={App}>
       <Route name="aging-reports" handler={AgingReports} />
       <Route name="customer" path="customer/:id" handler={RouteHandler}>
@@ -33,6 +34,5 @@ export default (
       <Route name="settings" handler={Settings} />
       <Route name="view-leads" handler={ViewLeads} />
     </Route>
-    <Route name="login" path="/login" handler={Login} />
   </Route>
 );
