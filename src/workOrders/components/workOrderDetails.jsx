@@ -40,7 +40,9 @@ let WorkOrderDetails = React.createClass ({
   },
 
   style() {
-    let style = {};
+    let style = {
+      width: '100%'
+    };
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
@@ -127,7 +129,7 @@ let WorkOrderDetails = React.createClass ({
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
-      { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [4,4,4,4,4,4,4,4,4,4,4,4], sm: [4,4,4,4,4,4,4,4,4,4,4,4], xs: [4,4,4,4,4,4,4,4,4,4,4,4], xx: [4,4,4,4,4,4,4,4,4,4,4,4] }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
+      { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [6,6,6,6,6,6,6,6,6,6,6,6], sm: [12]}} breakpoints={{ md: 1550 }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
       { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : undefined} /> , cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
@@ -150,10 +152,8 @@ let WorkOrderDetails = React.createClass ({
     return (
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
-            <div>
-              <Details {...this.getDetails(this.props.order)} />
-            </div>
+          <Layout widths={{ lg: [12], md: [12], sm: [12], xs: [12], xxs: [12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
+            <Details {...this.getDetails(this.props.order)} />
           </Layout>
         </Paper>
       </div>

@@ -10,6 +10,7 @@ import OpenInstalls from '../../openInstalls'
 import WorkOrders from '../../workOrders'
 import WorkOrderUpload from '../../workOrderUpload'
 import ViewCustomer from '../../viewCustomer'
+import Settings from '../../settings'
 
 export default (
   <Route>
@@ -25,6 +26,7 @@ export default (
       <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
         <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
       </Route>
+      <Route name="settings" handler={Settings} />
     </Route>
     <Route name="login" path="/login" handler={Login} />
   </Route>

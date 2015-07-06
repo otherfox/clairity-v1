@@ -92,14 +92,23 @@ let DataTable = React.createClass({
   getWidth: function() {
     let widthPerc = (this.props.widthPerc) ? this.props.widthPerc / 100 : 1;
     let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj);
-    return width;
+    let adjWidth = 0;
+
+    this.props.colNames.forEach((col, i) => {
+      adjWidth += this.getColWidth(i, width);
+    });
+
+    return adjWidth;
   },
 
-  getColWidth: function(i) {
+  getColWidth: function(i, width) {
+
+    width = width || this.state.width;
+
     if(this.props.colWidths) {
-      return (Math.round(this.state.width * (this.props.colWidths[i] / this.props.maxWidth)));
+      return (Math.floor(width * (this.props.colWidths[i] / this.props.maxWidth)));
     } else {
-      return (Math.round(this.state.width / this.props.colNames.length));
+      return (Math.floor(width / this.props.colNames.length));
     }
   },
 
@@ -117,7 +126,7 @@ let DataTable = React.createClass({
 
   style: function() {
     return {
-      width: this.state.width + "px",
+      width: '100%',
       margin: this.props.margin || "20px 0"
     };
   },
