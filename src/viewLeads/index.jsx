@@ -1595,9 +1595,9 @@ let viewLeads = React.createClass({
         s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/create-lead/${s.contact_id}/${s.agent_id}`} /></div>;
         return s;
       }),
-      colWidths: [2,6,4,4],
+      colWidths: [3,5,4,4],
       maxWidth: 16,
-      widthPerc: 96.5
+      widthPerc: 93
     };
   },
 
