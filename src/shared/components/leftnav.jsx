@@ -43,7 +43,7 @@ var LeftNav = React.createClass ({
   render: function() {
       return (
         <div style={this.style()}>
-          <Menu menuItems={nestedMenuItems} zDepth={0} />
+          <Menu menuItems={nestedMenuItems} zDepth={0} style={{zIndex: 3}}/>
         </div>
       )
   }
