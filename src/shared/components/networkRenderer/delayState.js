@@ -1,3 +1,4 @@
+import Store, {MessageTypes} from '../../store'
 
 export default class DelayState {
 
@@ -7,6 +8,7 @@ export default class DelayState {
     this.ready = false;
     this.cb = cb;
     this.data = options.cacheMethod(props, options);
+    this.update = this.update.bind(this);
   }
 
   get state() {
@@ -29,6 +31,14 @@ export default class DelayState {
   fetch() {
     this.options.serviceMethod(this.props, this.options)
       .then(this.write);
+  }
+
+  listen() {
+    Store.on('update', this.update);
+  }
+
+  stop() {
+    Store.off('update', this.update);
   }
 
   write(results) {
