@@ -15,7 +15,21 @@ export default function multiQueryRenderer(Component, options) {
       super(props);
       this.queries = options.queries.map(q =>
         new DelayState(props, q, this.update));
-      this.state = {ready: false};
+      this.state = {
+        ready: this.ready
+      };
+    }
+
+    get ready() {
+      return this.queries.reduce((val, q) => val && q.ready, false);
+    }
+
+    componentDidMount() {
+      this.queries.forEach(q => q.listen());
+    }
+
+    componentWillDismount() {
+      this.queries.forEach(q => q.stop());
     }
 
     update() {
