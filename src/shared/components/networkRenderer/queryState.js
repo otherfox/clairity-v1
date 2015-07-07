@@ -5,7 +5,6 @@ export default class QueryState {
   constructor(props, options, cb) {
     this._props = props;
     this.options = options;
-    this.ready = false;
     this.cb = cb;
     this.data = options.cacheMethod(props, options);
     this.update = this.update.bind(this);
@@ -16,7 +15,7 @@ export default class QueryState {
   }
 
   get ready() {
-    return this.ready || this.options.optional;
+    return this.data != null;
   }
 
   set props(val) {
