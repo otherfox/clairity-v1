@@ -22,10 +22,10 @@ import {
 
 import controllable from 'react-controllables'
 import {List} from 'immutable'
-import {Navigation} from 'react-router'
+import {State} from 'react-router'
 
 let createLead = React.createClass({
-  mixins: [Navigation],
+  mixins: [State],
 
   render() {
     let event = 'controller.cfm?event=convertLead';
@@ -44,9 +44,7 @@ let createLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-      <div>
         <h1>Convert Lead - {contact.name}</h1>
-      </div>
       <Paper>
         <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
           <Details
@@ -132,7 +130,7 @@ let createLead = React.createClass({
                 { label: 'Oz', value: 1 },
                 { label: 'Spring Webinar - 2015', value: 3 },
               ])} />, detailType: 'muiDropDown' },
-              {label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
+              {label: '', value: <RaisedButton primary={true} linkButton={true} label="Update" href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().agentId+'/edit'}/>, detaildetailType: 'muiButton'}
             ]}
           />
         </Layout>

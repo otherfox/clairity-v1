@@ -182,7 +182,7 @@ let DataTable = React.createClass({
     let height = (((this.props.data.length * 50) + 52) < window.innerHeight - 300) ? (this.props.data.length * 50) + 52 : window.innerHeight - 300;
 
     return (
-      <div style={this.style()} className="table">
+      <div style={this.style()}>
         <Table
           rowHeight={50}
           onRowClick={this.onRowClick}
