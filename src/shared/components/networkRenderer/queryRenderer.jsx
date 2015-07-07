@@ -21,10 +21,15 @@ export default function multiQueryRenderer(Component, options) {
       this.state = {
         ready: this.ready
       };
+      this._dirty = false;
     }
 
     get ready() {
       return this.queries.reduce((val, q) => val && q.ready, false);
+    }
+
+    shouldComponentUpdate(props, state) {
+      return this._dirty || (this.state.ready != state.ready);
     }
 
     componentDidMount() {
@@ -37,6 +42,7 @@ export default function multiQueryRenderer(Component, options) {
 
     componentWillReceiveProps(props) {
       this.queries.forEach(q => q.props = props);
+      this._dirty = true;
     }
 
     update() {
