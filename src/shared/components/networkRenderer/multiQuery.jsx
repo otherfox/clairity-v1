@@ -42,14 +42,6 @@ export default function multiQueryRenderer(Component, options) {
       });
     }
 
-    render() {
-      if (this.state.ready) {
-        return <Component {...this.props} {...this.state.queryState} />;
-      } else {
-        return false;
-      }
-    }
-
   }
 
   return MultiQueryRenderer;
