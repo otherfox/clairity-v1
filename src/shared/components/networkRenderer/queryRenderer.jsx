@@ -25,7 +25,7 @@ export default function multiQueryRenderer(Component, options) {
     }
 
     get ready() {
-      return this.queries.reduce((val, q) => val && q.ready, false);
+      return this.queries.reduce((val, q) => val && q.ready, true);
     }
 
     shouldComponentUpdate(props, state) {
