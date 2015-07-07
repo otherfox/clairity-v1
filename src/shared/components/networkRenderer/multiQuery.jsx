@@ -12,7 +12,9 @@ export default function multiQueryRenderer(Component, options) {
   class MultiQueryRenderer extends React.Component {
 
     constructor(props) {
+      // TOOD: Autobind decorator
       super(props);
+      this.update = this.update.bind(this);
       this.queries = options.queries.map(q =>
         new DelayState(props, q, this.update));
       this.state = {
