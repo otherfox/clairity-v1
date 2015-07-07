@@ -10,7 +10,7 @@ import DelayState from './delayState'
 export default function multiQueryRenderer(Component, options) {
 
   @exposeMethods(options.methods || [])
-  class MultiQueryRenderer extends React.Component {
+  class QueryRenderer extends React.Component {
 
     constructor(props) {
       // TOOD: Autobind decorator
@@ -52,5 +52,5 @@ export default function multiQueryRenderer(Component, options) {
 
   }
 
-  return MultiQueryRenderer;
+  return QueryRenderer;
 }
