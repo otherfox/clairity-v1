@@ -10,7 +10,7 @@ export default class DelayState {
   }
 
   get state() {
-    return {[this.options.propName]: this.data}
+    return {[this.options.propName]: this.data};
   }
 
   get ready() {
