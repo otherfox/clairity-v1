@@ -31,11 +31,11 @@ let IpBlocks = React.createClass({
   proptypes: {
     blocks: React.PropTypes.object
   },
-  getDefaultProps() {
-    return {
-      blocks:    [
+  getBlocks() {
+    return [
       { blockId: 12005, block: '66.187.176.0/30', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <DropDown  menuItems={ new List([
-        { label: 'internal: Internal', value: 1 } ]) } /> },
+        { label: 'internal: Internal', value: 1 },
+        { label: 'internal: Internal', value: 1 }]) } /> },
       { blockId: 12006, block: '66.187.176.4/30', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <DropDown  menuItems={ new List([
         { label: 'pop: Winder', value: 1} ]) } />},
       { blockId: 12007, block: '66.187.176.8/32', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <DropDown  menuItems={ new List([
@@ -404,10 +404,9 @@ let IpBlocks = React.createClass({
         { label: 'pop: Kennesaw', value: 1 }, ]) } />},
       { blockId: 10752, block: '216.59.223.66/32', status: 'Inactive', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: '' }
       ]
-    }
   },
 
-  getBlocks(getBlocks) {
+  getBlockTable(getBlocks) {
     let blocks = getBlocks;
     return {
       colNames: [
@@ -420,7 +419,7 @@ let IpBlocks = React.createClass({
         { label: 'Reverse DNS 2', name: 'reverse_dns_2', cellType: 'string'},
         { label: 'Associations', name: 'associations', cellType: 'string' } ],
       data: blocks.map(s => {
-        s.edit = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/ip-block/${s.blockId}/edit`} /></div>;
+        s.edit = <div style={{textAlign: 'center'}}><RaisedButton label={'EDIT'} linkButton={true} href={`/#/ip-block/${s.blockId}/edit`} /></div>;
         return s;
       }),
       colWidths: [2,2,2,2,2,2,2,2],
@@ -441,6 +440,9 @@ let IpBlocks = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Details
           title={'IP Blocks'}
+          layout={ {lg: ['auto', '300px']}}
+          rowStyle={{ float: 'left' }}
+          cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[
               { label: 'Subnet', name: 'subnet', value: <TextField value={''}/>, detailType: 'muiTextField'},
               { label: 'Keyword', name: 'keyword', value: <TextField value={66}/>, detailType: 'muiTextField'},
@@ -448,11 +450,11 @@ let IpBlocks = React.createClass({
           ]}
         />
         <RadioButtonGroup name="status">
-          <RadioButton value="active" label="Acitve" />
-          <RadioButton value="inactive" label="Inactive"  defaultChecked={true} />
-          <RadioButton value="both" label="Both" />
+            <RadioButton value="active" label="Acitve" />
+            <RadioButton value="inactive" label="Inactive" defaultChecked={true} />
+            <RadioButton value="both" label="Both" />
         </RadioButtonGroup>
-        <Table {...this.getBlocks(this.props.blocks)} />
+        <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>
     );
   }

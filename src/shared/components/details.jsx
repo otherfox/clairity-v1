@@ -16,7 +16,13 @@ let Details = React.createClass ({
     style: React.PropTypes.object,
     data: React.PropTypes.array,
     title: React.PropTypes.string,
-    labelTop: React.PropTypes.bool
+    labelTop: React.PropTypes.bool,
+    headerStyle: React.PropTypes.object,
+    rowStyle: React.PropTypes.object,
+    labelStyle: React.PropTypes.object,
+    valueStyle: React.PropTypes.object,
+    cStyles: React.PropTypes.object,
+    layout: React.PropTypes.object
   },
 
   style() {
@@ -49,6 +55,12 @@ let Details = React.createClass ({
     if(type === 'muiTextField' || type === 'muiDatePicker') labelStyle.lineHeight = 3.5;
     if(type === 'muiDropDown') labelStyle.lineHeight = 4;
 
+    if(this.props.labelStyle) {
+      Object.keys(this.props.labelStyle).forEach(function(key, i){
+        labelStyle[key] = this.props.labelStyle[key];
+      }, this);
+    }
+
     return labelStyle;
   },
 
@@ -64,6 +76,12 @@ let Details = React.createClass ({
 
     headerStyle.height = (this.props.title === null) ? '1.8em' : 'auto';
 
+    if(this.props.headerStyle) {
+      Object.keys(this.props.headerStyle).forEach(function(key, i){
+        headerStyle[key] = this.props.headerStyle[key];
+      }, this);
+    }
+
     return headerStyle;
   },
 
@@ -72,8 +90,14 @@ let Details = React.createClass ({
     let rowStyle = {};
 
     if (type === 'muiTextField' || type === 'muiDatePicker' || type === 'muiDropDown') {}
-    else if( type == 'muiCheckbox') { rowStyle.margin = '20px 0'; } 
+    else if( type == 'muiCheckbox') { rowStyle.margin = '20px 0'; }
     else {}
+
+    if(this.props.rowStyle) {
+      Object.keys(this.props.rowStyle).forEach(function(key, i){
+        rowStyle[key] = this.props.rowStyle[key];
+      }, this);
+    }
 
     return rowStyle;
   },
@@ -81,11 +105,34 @@ let Details = React.createClass ({
   valueStyle(type) {
     let valueStyle = {}
     if(type === 'muiButton') valueStyle.marginTop = '20px';
+
+    if(this.props.valueStyle) {
+      Object.keys(this.props.valueStyle).forEach(function(key, i){
+        valueStyle[key] = this.props.valueStyle[key];
+      }, this);
+    }
+
     return valueStyle;
   },
 
   layout() {
-    return (this.props.labelTop) ? {} : {lg: [5,7], md: [4,8], sm: [12]};
+
+    let layout = (this.props.layout) ? this.props.layout : {lg: [5,7], md: [4,8], sm: [12]};
+
+    return (this.props.labelTop) ? {} : layout;
+  },
+
+  cStyles() {
+
+    let cStyles = {lg: [{ textAlign: 'right' }], sm: [{ textAlign: 'left'}]};
+
+    if(this.props.cStyles) {
+      Object.keys(this.props.cStyles).forEach(function(key, i){
+        cStyles[key] = this.props.cStyles[key];
+      }, this);
+    }
+
+    return cStyles;
   },
 
   render() {
@@ -93,7 +140,7 @@ let Details = React.createClass ({
     if (this.props.data && Array.isArray(this.props.data)) {
       fData = this.props.data.map((dataObj,idx) =>
         <div style={this.rowStyle(dataObj.detailType)} key={idx}>
-          <Layout widths={this.layout()} cPadding={'0 20px 5px 0'} cStyles = {{lg: [{ textAlign: 'right' }], sm: [{ textAlign: 'left'}]}}>
+          <Layout widths={this.layout()} cPadding={'0 20px 5px 0'} cStyles = {this.cStyles()}>
             <div style={this.labelStyle(dataObj.detailType)}>{dataObj.label}</div>
             <div style={this.valueStyle(dataObj.detailType)}>{dataObj.value}</div>
           </Layout>
