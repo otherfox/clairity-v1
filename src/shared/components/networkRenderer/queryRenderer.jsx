@@ -35,6 +35,10 @@ export default function multiQueryRenderer(Component, options) {
       this.queries.forEach(q => q.stop());
     }
 
+    componentWillReceiveProps(props) {
+      this.queries.forEach(q => q.props = props);
+    }
+
     update() {
       this.setState({
         ready: this.ready,
