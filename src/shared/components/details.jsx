@@ -72,6 +72,7 @@ let Details = React.createClass ({
     let rowStyle = {};
 
     if (type === 'muiTextField' || type === 'muiDatePicker' || type === 'muiDropDown') {}
+    else if( type == 'muiCheckbox') { rowStyle.margin = '20px 0'; } 
     else {}
 
     return rowStyle;
@@ -84,7 +85,7 @@ let Details = React.createClass ({
   },
 
   layout() {
-    return (this.props.labelTop) ? {lg: [12,12], md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12]} : {lg: [5,7], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]};
+    return (this.props.labelTop) ? {} : {lg: [5,7], md: [4,8], sm: [12]};
   },
 
   render() {

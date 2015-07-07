@@ -1586,18 +1586,18 @@ let viewLeads = React.createClass({
     let leads = getLeads;
     return {
       colNames: [
-        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string'},
         { label: 'Lead Name', name: 'lead_name', cellType: 'string'},
         { label: 'Account', name: 'account', cellType: 'string'},
-        { label: 'Account Owner', name: 'account_owner', cellType: 'string'}
+        { label: 'Account Owner', name: 'account_owner', cellType: 'string'},
+        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string'}
       ],
       data: leads.map(s => {
-        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/create-lead/${s.contact_id}/${s.agent_id}`} /></div>;
+        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/lead/${s.contact_id}/${s.agent_id}/create`} /></div>;
         return s;
       }),
-      colWidths: [3,5,4,4],
+      colWidths: [5,4,4,3],
       maxWidth: 16,
-      widthPerc: 93
+      widthAdj: -30
     };
   },
 
@@ -1606,12 +1606,8 @@ let viewLeads = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
       <div>
         <h1>View Leads</h1>
+        <Table {...this.getLeads(this.props.leads)} />
       </div>
-      <Paper>
-        <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
-          <Table {...this.getLeads(this.props.leads)} />
-        </Layout>
-      </Paper>
     </Layout>
     );
   }
