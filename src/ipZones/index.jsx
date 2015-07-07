@@ -32,7 +32,7 @@ let IpZones = React.createClass({
       <Paper>
         <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
           <Details
-            title={'IpZones'}
+            title={'IP Zones'}
             data={[
                 {label: '', value: <Layout><Toggle labelStyle={{ minWidth: '100px'}} name="compactView"  value="false"  label="Compact View" /></Layout>},
                 {},

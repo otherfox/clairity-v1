@@ -149,7 +149,7 @@ let editLead = React.createClass({
                 { label: 'Web', value: 9 },
                 { label: 'Word of Mouth', value: 11 },
               ])} />, detailType: 'muiDropDown' },
-              { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <DropDown selectedValue={0} menuItems={ new List([
+              { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <DropDownMenu selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Conference - 2015', value: 2 },
                 { label: 'Oz', value: 1 },
@@ -163,7 +163,7 @@ let editLead = React.createClass({
               { label: 'Sales Amount', name: 'sales', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Probability Pct.', name: 'probability', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: '', name: 'project_result', value: <Checkbox name={'project_result'} value={1} label={'Project Successful'} defaultSwitched={false} switched/>, detailType: 'muiCheckbox' },
-              {label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
+              { label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
             ]}
           />
         </Layout>
