@@ -32,16 +32,17 @@ export default (
       <Route name="create-contract" handler={CreateContract} />
       <Route name="ip-blocks" handler={IpBlocks} />
       <Route name="ip-zones" handler={IpZones} />
-      <Route name="lead/:id/:agentid" handler={RouteHandler} />
+      <Route name="lead" path="lead/:contactId/:agentId" handler={RouteHandler}>
         <DefaultRoute name="view-lead" handler={ViewLead} />
         <Route name="edit-lead" path="edit" handler={EditLead} />
         <Route name="create-lead" path="create" handler={CreateLead} />
+      </Route>
       <Route name="open-installs" handler={OpenInstalls} />
       <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
         <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
       </Route>
       <Route name="settings" handler={Settings} />
-      <Route name="view-leads" handler={ViewLeads} />
+      <Route name="leads" handler={ViewLeads} />
     </Route>
   </Route>
 );

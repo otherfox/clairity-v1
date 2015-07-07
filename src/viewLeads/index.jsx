@@ -1592,7 +1592,7 @@ let viewLeads = React.createClass({
         { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string'}
       ],
       data: leads.map(s => {
-        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/create-lead/${s.contact_id}/${s.agent_id}`} /></div>;
+        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/lead/${s.contact_id}/${s.agent_id}/create`} /></div>;
         return s;
       }),
       colWidths: [5,4,4,3],
