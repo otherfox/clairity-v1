@@ -3,6 +3,7 @@ import Store, {MessageTypes} from '../../store'
 import {getResource} from '../../services/getResource'
 import {exposeMethods} from './methods'
 import {fromJS} from 'immutable'
+import _ from 'lodash'
 
 import DelayState from './delayState'
 
@@ -35,7 +36,18 @@ export default function multiQueryRenderer(Component, options) {
     }
 
     update() {
+      this.setState({
+        ready: this.ready,
+        queryState: this.queries.map((s, q) => _.extend({}, s, q.state), {})
+      });
+    }
 
+    render() {
+      if (this.state.ready) {
+        return <Component {...this.props} {...this.state.queryState} />;
+      } else {
+        return false;
+      }
     }
 
   }
