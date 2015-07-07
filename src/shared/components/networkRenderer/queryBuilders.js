@@ -5,7 +5,7 @@ import {getResource} from '../../services/getResource'
 import {fromJS} from 'immutable'
 
 export function modelQuery(tableName, options) {
-  let id = `tableName${Id}`;
+  let id = options ? options.id || `${tableName}Id` : `${tableName}Id`;
   return {
     tableName,
     propName: tableName,
