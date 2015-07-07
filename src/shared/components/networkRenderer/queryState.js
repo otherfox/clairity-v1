@@ -1,6 +1,6 @@
 import Store, {MessageTypes} from '../../store'
 
-export default class DelayState {
+export default class QueryState {
 
   constructor(props, options, cb) {
     this._props = props;
