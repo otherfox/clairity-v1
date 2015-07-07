@@ -3,7 +3,7 @@ import {getLocation} from './location'
 import {getWorkOrder} from './workOrder'
 import {getContract} from './contracts'
 
-const fns = {
+const resource = {
   contact: getContact,
   location: getLocation,
   workorder: getWorkOrder,
@@ -12,6 +12,22 @@ const fns = {
 
 export function getResource(id, tableName) {
 
-  return fns[tableName.toLowerCase()](id);
+  return resource[tableName.toLowerCase()](id);
+
+}
+
+
+import {getPops} from './pop'
+import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
+
+const collection = {
+  pop: getPops,
+  workOrderType: getWorkOrderTypes,
+  workOrderStatus: getWorkOrderStatuses,
+};
+
+export function getCollection(tableName) {
+
+  return collection[tableName]();
 
 }
