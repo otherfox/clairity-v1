@@ -21,3 +21,23 @@ export function modelQuery(tableName, options) {
     })
   }
 }
+
+export function collectionQuery(options) {
+  return {
+    tableName: options.tableName,
+    methods: options ? options.methods || [] : [],
+    propName: options.propName || options.tableName + 's',
+    serviceMethod: options.serviceMethod,
+    cacheMethod: () => {
+      let results = Store.data.get(options.tableName).toList();
+      return results.size > 0 ? results : null;
+    },
+    writeMethod: data => Store.handleMessage({
+      type: options.replace ? MessageTypes.ReplaceAll : MessageTypes.Write,
+      payload: {
+        rows: data,
+        table: options.tableName
+      }
+    })
+  }
+}
