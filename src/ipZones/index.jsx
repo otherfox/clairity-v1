@@ -31,9 +31,7 @@ let IpZones = React.createClass({
 
   getZones() {
     return [
-      { zoneId: 1, name: 'zone asdf', blocks: <DropDown  menuItems={ new List([
-        { label: '66.187.176.0 - 66.187.176.127', value: 1 },
-        { label: '216.59.211.0 - 216.59.211.25', value: 1 }]) } /> }
+      { zoneId: 1, name: 'zone asdf', blocks: <div>66.187.176.0 - 66.187.176.127<br />216.59.211.0 - 216.59.211.25</div> }
       ]
   },
 
@@ -50,7 +48,8 @@ let IpZones = React.createClass({
       }),
       colWidths: [2,6,6],
       maxWidth: 14,
-      widthAdj: -30
+      widthAdj: -30,
+      rowHeight: 80
     };
   },
 
