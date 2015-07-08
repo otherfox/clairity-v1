@@ -49,8 +49,11 @@ let viewLead = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <h1>View Lead - {opportunity.name}</h1>
       <Paper>
-        <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
+        <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            rowStyle={{marginLeft: '15%'}}
+            layout={{ lg: [4,8]}}
             title={'Customer Details'}
             data={[
               { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled= {true}/>, detailType: 'muiTextField' },
@@ -99,6 +102,13 @@ let viewLead = React.createClass({
                 { label: 'Telenational - Business', value: 3 },
                 { label: 'Telenational - Residential', value: 4 }
               ])} />, detailType: 'muiDropDown' },
+            ]}
+          />
+          <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            layout={{ lg: [2,10]}}
+            title={null}
+            data={[
               { label: 'Street 1', name: 'customerStreet1', value: <TextField value={'15400 Knoll Trail'}/>, detailType: 'muiTextField' },
               { label: 'Street 2', name: 'customerStreet2', value: <TextField value={'Suite 400'}/>, detailType: 'muiTextField' },
               { label: 'City', name: 'customerCity', value: <TextField value={'Dallas'} />, detailType: 'muiTextField' },
@@ -109,8 +119,11 @@ let viewLead = React.createClass({
         </Layout>
       </Paper>
       <Paper>
-        <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
+        <Layout widths={{ lg: [6,6] }} cPadding={'0 20px 20px 20px'}>
           <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            rowStyle={{marginLeft: '15%'}}
+            layout={{ lg: [4,8]}}
             title={'Opportunity Details'}
             data={[
               { label: 'Name', name: 'oppName', value: <TextField value={'Fill the Bill'}/>, detailType: 'muiTextField' },
@@ -155,7 +168,14 @@ let viewLead = React.createClass({
                 { label: 'Oz', value: 1 },
                 { label: 'Spring Webinar - 2015', value: 3 },
               ])} />, detailType: 'muiDropDown' },
-              { label: '', names: ['offer_made', 'project_started'], value: <Layout widths={{lg: [6,6], sm: [12]}}><Checkbox name={'offer_made'} value={1} label={'Offer Made'} defaultSwitched={true} switched/><Checkbox name={'project_started'} value={1} label={'Project Started'} defaultSwitched={true} switched/></Layout>, detailType: 'muiCheckbox'},
+              { label: '', names: ['offer_made', 'project_started'], value: <Layout widths={{lg: [6,6], sm: [12]}}><Checkbox name={'offer_made'} value={1} label={'Offer Made'} defaultSwitched={true} switched/><Checkbox name={'project_started'} value={1} label={'Project Started'} defaultSwitched={true} switched/></Layout>, detailType: 'muiCheckbox'}
+            ]}
+          />
+          <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            layout={{ lg: [4,8]}}
+            title={null}
+            data={[
               { label: 'Date Offer Made', name: 'dt_offer_made', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Date Project Started', name: 'dt_project_start', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Closing Date', name: 'dt_closing', value: <TextField value={''}/>, detailType: 'muiTextField' },
@@ -163,7 +183,7 @@ let viewLead = React.createClass({
               { label: 'Sales Amount', name: 'sales', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Probability Pct.', name: 'probability', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: '', name: 'project_result', value: <Checkbox name={'project_result'} value={1} label={'Project Successful'} defaultSwitched={false} switched/>, detailType: 'muiCheckbox' },
-              {label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
+              { label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
             ]}
           />
         </Layout>

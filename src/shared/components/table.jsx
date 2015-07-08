@@ -82,13 +82,15 @@ let DataTable = React.createClass({
     maxWidth: React.PropTypes.number,
     widthAdj: React.PropTypes.number,
     widthPerc: React.PropTypes.number,
+    rowHeight: React.PropTypes.number,
     margin: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       widthPerc: 100,
-      widthAdj: 0
+      widthAdj: 0,
+      rowHeight: 50
     }
   },
 
@@ -178,13 +180,12 @@ let DataTable = React.createClass({
           , this)
         }
       </Group>;
-
-    let height = (((this.props.data.length * 50) + 52) < window.innerHeight - 300) ? (this.props.data.length * 50) + 52 : window.innerHeight - 300;
+    let height = (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
 
     return (
       <div style={this.style()}>
         <Table
-          rowHeight={50}
+          rowHeight={this.props.rowHeight}
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
           rowsCount={this.props.data.length}
