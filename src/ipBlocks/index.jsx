@@ -440,20 +440,23 @@ let IpBlocks = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Details
           title={'IP Blocks'}
-          layout={ {lg: ['auto', '300px']}}
+          layout={ {lg: ['auto', '320px']}}
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[
               { label: 'Subnet', name: 'subnet', value: <TextField value={''}/>, detailType: 'muiTextField'},
               { label: 'Keyword', name: 'keyword', value: <TextField value={66}/>, detailType: 'muiTextField'},
-              { label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
+              { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px'}}/><RaisedButton label="Assign New Block" /></div>, detaildetailType: 'muiButton'}
           ]}
         />
-        <RadioButtonGroup name="status">
-            <RadioButton value="active" label="Acitve" />
-            <RadioButton value="inactive" label="Inactive" defaultChecked={true} />
-            <RadioButton value="both" label="Both" />
-        </RadioButtonGroup>
+        <div>
+          <div style={{ fontWeight: 'bold', float: 'left', width: 'initial', lineHeight: '1.75em', marginRight: '20px' }}>Show:</div>
+          <RadioButtonGroup name={"status"} style={{float: 'left', width: 'initial'}}>
+            <RadioButton value={"active"} label={"Acitve"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
+            <RadioButton value={"inactive"} label={"Inactive"} defaultChecked={true} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
+            <RadioButton value={"both"} label={"Both"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
+            </RadioButtonGroup>
+        </div>
         <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>
     );
