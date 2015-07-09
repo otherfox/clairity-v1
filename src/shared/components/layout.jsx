@@ -1,5 +1,6 @@
 import React from 'react'
 import Settings from './settings'
+import lodash from 'lodash'
 import {ClearFix} from 'material-ui'
 import {List} from 'immutable'
 
@@ -176,27 +177,11 @@ let Layout = React.createClass({
   },
 
   style: function() {
-
-    let style = {};
-
-    if(this.props.type !== 'main') {
-      style = {
-        width: '100%',
-        padding: this.props.pPadding
-      }
+    return {
+      width : (this.props.type === 'main') ? 'initial' : '100%',
+      padding: (this.props.type === 'main') ? 'initial' : this.props.pPadding,
+      height: (this.props.type === 'center-v') ? '100%' : 'initial'
     }
-
-    if(this.props.type === 'center-b'){
-      style.height = '100%';
-    }
-
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
   },
 
   childStyle: function(i) {
@@ -206,32 +191,24 @@ let Layout = React.createClass({
         float: 'left',
         padding: this.props.cPadding || 'initial',
         margin: this.props.cMargin || 'initial'
-    }
+    };
 
     if (this.props.type === 'center-h') {
-      style.position = 'relative';
-      style.margin = '0 auto';
-      style.float = 'none';
+      style = _.assign(style, {
+        position: 'relative',
+        margin: '0 auto',
+        float: 'none'
+      });
     }
 
     if (this.props.type === 'center-v') {
-      style.position = 'relative';
-      style.margin = '0 auto';
-      style.top = '50%';
-      style.transform = 'translateY(-50%)';
-      style.float = 'none';
-    }
-
-    if(this.props.cStyle) {
-      Object.keys(this.props.cStyle).forEach(function(key, i){
-        style[key] = this.props.cStyle[key];
-      }, this);
-    }
-
-    if(this.state.cStyles[i]) {
-      Object.keys(this.state.cStyles[i]).forEach(function(key, i){
-        style[key] = this.state.cStyles[i][key];
-      }, this);
+      style = _.assign( style, {
+        position: 'relative',
+        margin: '0 auto',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        float: 'none'
+      });
     }
 
     return style;
@@ -240,11 +217,11 @@ let Layout = React.createClass({
   render: function() {
 
 		let children = React.Children.map(this.props.children, (child, i) =>
-			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
+			 <ClearFix style={_.assign(this.childStyle(i), this.state.cStyles[i])}>{React.cloneElement(child)}</ClearFix>
     );
 
     return (
-      <ClearFix style={this.style()}>
+      <ClearFix style={_.assign(this.style(), this.props.style)}>
         {children}
       </ClearFix>
     );
