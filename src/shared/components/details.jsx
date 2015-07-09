@@ -77,6 +77,7 @@ let Details = React.createClass ({
 
   render() {
 
+    let fData = false;
     if (this.props.data && Array.isArray(this.props.data)) {
       fData = this.props.data.map((dataObj,idx) =>
         <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
