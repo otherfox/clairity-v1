@@ -1,5 +1,6 @@
 import React from 'react'
 import Settings from './settings'
+import _ from 'lodash'
 
 let Content = React.createClass ({
 
@@ -14,7 +15,7 @@ let Content = React.createClass ({
 
   render: function() {
     return (
-      <div style={this.style()} >
+      <div style={ _.assign(this.style(), this.props.style)} >
         {this.props.children}
       </div>
     );

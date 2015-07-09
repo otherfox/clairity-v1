@@ -32,7 +32,7 @@ let IpZones = React.createClass({
   getZones() {
     return [
       { zoneId: 1, name: 'zone asdf', blocks: <div>66.187.176.0 - 66.187.176.127<br />216.59.211.0 - 216.59.211.25</div> }
-      ]
+    ]
   },
 
   getZoneTable(getZones) {
@@ -53,10 +53,6 @@ let IpZones = React.createClass({
     };
   },
 
-  contextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
   render() {
 
     let action = "controller.cfm?event=manageIpZones";
@@ -65,7 +61,7 @@ let IpZones = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Details
           title={'IP Zones'}
-          layout={ {lg: ['auto', '320px']}}
+          widths={ {lg: ['auto', '320px']}}
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[

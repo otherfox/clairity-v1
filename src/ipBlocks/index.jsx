@@ -288,7 +288,7 @@ let IpBlocks = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Details
           title={'IP Blocks'}
-          layout={ {lg: ['auto', '320px']}}
+          widths={ {lg: ['auto', '320px']}}
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[

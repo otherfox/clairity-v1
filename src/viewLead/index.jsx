@@ -53,7 +53,7 @@ let viewLead = React.createClass({
           <Details
             cStyles={{ lg: [{textAlign: 'left'}]}}
             rowStyle={{marginLeft: '15%'}}
-            layout={{ lg: [4,8]}}
+            widths={{ lg: [4,8]}}
             title={'Customer Details'}
             data={[
               { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled= {true}/>, detailType: 'muiTextField' },
@@ -106,7 +106,7 @@ let viewLead = React.createClass({
           />
           <Details
             cStyles={{ lg: [{textAlign: 'left'}]}}
-            layout={{ lg: [2,10]}}
+            widths={{ lg: [2,10]}}
             title={null}
             data={[
               { label: 'Street 1', name: 'customerStreet1', value: <TextField value={'15400 Knoll Trail'}/>, detailType: 'muiTextField' },
@@ -123,7 +123,7 @@ let viewLead = React.createClass({
           <Details
             cStyles={{ lg: [{textAlign: 'left'}]}}
             rowStyle={{marginLeft: '15%'}}
-            layout={{ lg: [4,8]}}
+            widths={{ lg: [4,8]}}
             title={'Opportunity Details'}
             data={[
               { label: 'Name', name: 'oppName', value: <TextField value={'Fill the Bill'}/>, detailType: 'muiTextField' },
@@ -173,7 +173,7 @@ let viewLead = React.createClass({
           />
           <Details
             cStyles={{ lg: [{textAlign: 'left'}]}}
-            layout={{ lg: [4,8]}}
+            widths={{ lg: [4,8]}}
             title={null}
             data={[
               { label: 'Date Offer Made', name: 'dt_offer_made', value: <TextField value={''}/>, detailType: 'muiTextField' },
