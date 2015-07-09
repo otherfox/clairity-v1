@@ -40,7 +40,6 @@
     "lodash": "^3.8.0",
     "mocha": "^2.2.4",
     "node-libs-browser": "^0.5.2",
-    "react-jss": "^0.1.0",
     "react-hot-loader": "^1.2.7",
     "style-loader": "^0.11.0",
     "url-loader": "^0.5.5",
