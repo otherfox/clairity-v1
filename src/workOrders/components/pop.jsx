@@ -23,15 +23,20 @@ import {fromJS, Map} from 'immutable'
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {queryAllPops} from '../../shared/queries/pop'
 import {getPops} from '../../shared/services/pop'
+import {updateWorkOrder} from '../../shared/actions/workOrder'
 
 // // Make available for use in all components
 let widths = { lg: [12,12,12,12], md: [12,12,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12] };
 let cPadding = '0 20px 20px 20px';
+
 //
 let ExistingPopsView = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
-    return { popId: this.props.workOrder.pop_id }
+    return {
+      popId: this.props.workOrder.pop_id ||
+             this.props.pops.first().get('id')
+    };
   },
   getMenuItems() {
     return this.props.pops
@@ -47,6 +52,10 @@ let ExistingPopsView = React.createClass({
   },
   submit() {
     console.log('Update Work Order `pop_id`:', this.state.popId);
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'existing', pop_id: this.state.popId})
+    });
   }
 })
 //
@@ -60,7 +69,10 @@ let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
 let NewPopForm = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
-    return {name: '', address: ''};
+    return {
+      name: this.props.workOrder.pop_name || '',
+      address: this.props.workOrder.pop_address || ''
+    };
   },
   render() {
     return (
@@ -75,6 +87,16 @@ let NewPopForm = React.createClass({
         </Layout>
       </div>
     );
+  },
+  submit() {
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {
+        pop_entry: 'new',
+        pop_name: this.state.name,
+        pop_address: this.state.address
+      })
+    });
   }
 });
 
@@ -83,7 +105,11 @@ class UnknownPop extends React.Component {
     return <div />;
   }
   submit() {
-    console.log('Update Work Order `pop_id`:', this.state.popId);
+    console.log('Update Work Order `pop_id`:', undefined);
+    updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'unknown'})
+    });
   }
 }
 
@@ -91,12 +117,14 @@ export default React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
     return {
-      popType: this.props.workOrder.pop_id ? 0 : 2,
+      popType: this.props.workOrder.pop_id ? 0 : (this.props.workOrder.pop_name ? 1 : 2),
     }
   },
 
   getPopDisplay(type) {
-    return type === 0 ? ExistingPops : (type === 1 ? NewPopForm : UnknownPop)
+    if (type === 0) return ExistingPops;
+    if (type === 1) return NewPopForm;
+    if (type === 2) return UnknownPop;
   },
 
   render() {
@@ -105,8 +133,7 @@ export default React.createClass({
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg:[12,12], md:[12,12], sm:[12,12], xs:[12,12]}} pPadding={'0 20px 20px 20px'}>
-            <h3>POP Types</h3>
-            <Details data={[
+            <Details title={'POP Types'} data={[
               {label: 'POP Type', value:<DropDown style={{}} menuItems={fromJS([{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}])} valueLink={this.linkState('popType')} />, detailType: 'muiDropDown'},
               {label: '', value:<PopDisplay {...this.props} ref="pop" />},
               {label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton'}

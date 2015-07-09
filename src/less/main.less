@@ -1,284 +1,52 @@
 /* normalize */
 @import "../../node_modules/normalize.css/normalize.css";
 
-/* material-ui */
-@import "../../node_modules/material-ui/src/less/scaffolding.less";
-
 /*icons*/
-//@import "font-icons-old/style.css";
 @import "font-icons/style.css";
 
-
 /* FixedDataTable */
-@import "fixed-data-table/dist/fixed-data-table.css";
+@import "../../node_modules/fixed-data-table/dist/fixed-data-table.css";
 
-/* Fix for dynamic cell constructors. */
-.public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
-    padding: 8px;
-}
+// General Settings
 
-//Define a custom less file to override any variables defined in scaffolding.less
-@import "custom-overrides.less";
-
-@import "../../node_modules/material-ui/src/less/components.less";
-
-
-
-
-// Background Colors
-
-    body {
-      //background-color: @grey-900;
-    }
-
-    .main {
-      background-color: @white;
-      padding-bottom: 100px;
-    }
-
-		.bg-p-1 { background-color: @primary-1-color; }
-		.bg-p-2 { background-color: @primary-2-color; }
-		.bg-p-3 { background-color: @primary-3-color; }
-		.bg-a-1 { background-color: @accent-1-color; }
-		.bg-a-2 { background-color: @accent-2-color; }
-		.bg-a-3 { background-color: @accent-3-color; }
-
-// Colors
-
-		.c-p-1 { color: @primary-1-color; }
-		.c-p-2 { color: @primary-2-color; }
-		.c-p-3 { color: @primary-3-color; }
-		.c-a-1 { color: @accent-1-color; }
-		.c-a-2 { color: @accent-2-color; }
-		.c-a-3 { color: @accent-3-color; }
-
-		.c-green {color: @light-green-600; }
-
-
-// Global Elements
-
-    a {
-      color: @primary-1-color;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-// Main Nav
-
-    .main-nav {
-        width: (64px * 3);
-        position: fixed;
-        top: 64px;
-    }
-
-// App Bar
-
-    .mui-app-bar .mui-app-bar-title {
-      margin-bottom: 0;
-    }
-
-// App Left Nav
-
-    .logo {
-        color: @primary-3-color;
-        font-size: 1.3em;
-        font-weight: bold;
-        padding: 20px 24px;
-        border-bottom: 1px solid @border-color;
-    }
-
-    .leftnav .mui-menu {
-        border-right: 1px solid @border-color;
-    }
-
-// Content
-
-    .content {
-
-    }
-
-// Footer
-
-  .footer {
-    color: @grey-500;
-    background-color: @grey-900;
+  html {
+    font-size: 14px;
   }
 
-// General
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    margin: 0;
+    line-height: 300%;
+  }
 
-    h5 { font-weight: 500 !important; }
+// Table Customizations
 
-// Elements
+  /* Fix for dynamic cell constructors. */
+  .public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
+      padding: 8px;
+  }
 
-    // Headers
+  /* Fix gradient header */
+  .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
+    background-image: none;
+  }
 
-    .section-header {
-        border-bottom: 3px solid @header-border-color;
-        margin-bottom: 18px;
+// Helper classes
 
-        h2 {
-            color: @header-color;
-            font-size:2em;
-        }
+  /* Box Sizing */
+  * {
+      box-sizing: border-box;
+  }
 
-        h1 {
-            color: @header-color;
-            font-size:2em;
-        }
-    }
+  /* Clearfix */
 
-    .section-hr {
-        border-bottom: 1px solid @border-color-light;
-        padding: 2%;
-    }
+  .clearfix:before {
+    content: '';
+    display: table;
+  }
 
-    .section-hr.p-t-0 {
-            padding-top: 0;
-        }
-
-
-    // Forms
-
-    .mui-drop-down-menu .mui-menu-control .mui-menu-label, .mui-drop-down-menu     .mui-menu-control .mui-menu-control-underline { margin: 0; padding-left: 0; }
-
-
-    // Buttons
-
-    .floating-action-button-primary {
-        .mui-floating-action-button-container {
-          background-color: @floating-action-button-primary-color;
-
-          &:hover,
-          &.mui-is-keyboard-focused {
-            background-color: @floating-action-button-primary-hover-color;
-          }
-        }
-
-        .mui-floating-action-button-icon {
-          color: @floating-action-button-primary-icon-color;
-        }
-
-        .mui-touch-ripple {
-          .mui-ripple-circle-inner {
-            background-color: @floating-action-button-primary-ripple-color;
-          }
-        }
-
-        .mui-focus-ripple {
-          .mui-focus-ripple-inner {
-            background-color: @floating-action-button-primary-focus-ripple-color;
-          }
-        }
-    }
-
-		.button-icon, .button-label {
-			color: @grey-400;
-			font-size: 1.5em;
-			line-height: 36px;
-			vertical-align: middle;
-		}
-
-		.button-label {
-			color: @grey-600;
-			font-size: 1em;
-			padding-left: 5px;
-			text-transform: uppercase;
-		}
-
-    // Tabs
-
-    .mui-tabs-container {
-      .mui-tab-item-container { background-color: @grey-300;
-        .mui-tab-item { color: @black;
-          &.mui-tab-is-active { color: @accent-1-color; }
-        }
-      }
-    .mui-ink-bar { background-color: @accent-1-color; }
-    }
-
-    // Paper
-
-    .primary {
-        background-color: @accent-1-color;
-        h1, h2, h3, h4, h5, p { color: white }
-    }
-
-    .secondary {
-        background-color: @primary-1-color;
-        h1, h2, h3, h4, h5, p { color: white }
-    }
-
-    // Tables
-
-    .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
-      font-size: 12px;
-    }
-
-    .public_fixedDataTableRow_main, .public_fixedDataTableRow_main .public_fixedDataTableCell_main {
-      transition: background-color 0.5s ease;
-    }
-
-    .public_fixedDataTableRow_main.active, .public_fixedDataTableRow_main.active .public_fixedDataTableCell_main {
-      background-color: @yellow-100;
-    }
-
-		.public_fixedDataTableRow_highlighted, .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
-			background-color: @grey-50;
-		}
-
-    // Inputs
-
-    .primary-txtfld .mui-text-field.mui-is-disabled .mui-text-field-input { color: @black; }
-    .primary-txtfld .mui-text-field.mui-has-floating-labels.mui-has-value .mui-text-field-floating-label { color: @primary-1-color; }
-
-		// CheckBoxes and Radios
-
-		.inline > div > div { float: left; width: inherit;}
-		.mui-enhanced-switch .mui-switch-label { width: inherit; padding-right: 20px;}
-
-    // Dropdown
-
-    .mui-drop-down-menu { height: 43px; }
-
-// Filter
-
-		.filters > label { color: @grey-500; }
-
-    .filters .mui-text-field { font-size: 14px; line-height: 20px; width: 80px; height: 22px; margin-right: 20px; }
-    .filters .mui-text-field .mui-text-field-underline, .filters .mui-text-field .mui-text-field-focus-underline { bottom: 0; }
-    .filters .mui-text-field .mui-text-field-hint, .filters .mui-text-field .mui-text-field-floating-label { line-height: 24px; }
-    .filters .mui-radio-button .mui-radio-button-icon, .filters .mui-checkbox .mui-checkbox-icon { margin-right: 6px; }
-    .filters .mui-raised-button { height: 30px; margin-top: -3px; }
-    .filters .mui-raised-button .mui-raised-button-label { line-height: 30px; }
-
-// Layout
-
-    .layout:before, .clearfix:before,
-    .layout:after, .clearfix:after {
-      content: "";
-      display: table;
-    }
-
-    .layout:after, .clearfix:after {
-      clear: both;
-    }
-
-    .layout > div > .mui-text-field, .layout > div > .mui-drop-down-menu { width: 100% !important; }
-
-    .row > div > .mui-drop-down-menu { margin-top: 20px; }
-    .row > div > .mui-enhanced-switch { margin-top: 35px; }
-
-
-// Table
-
-    .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
-      background-image: none;
-    }
-
-    .mui-text-field {
-      width: auto;
-    }
-
-    .full .mui-text-field {
-      width: 100%;
-    }
+  .clearfix:after {
+    clear: both;
+    content: '';
+    display: table;
+  }

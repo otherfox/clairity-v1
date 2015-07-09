@@ -2,15 +2,16 @@ import React from 'react'
 import Settings from './settings'
 import {
   Utils,
-  Paper,
-  ClearFix
+  List,
+  ListItem,
+  ListDivider,
+  ListItem
+
 } from 'material-ui'
-
 import Layout from './layout'
-
 let ColorManipulator = Utils.ColorManipulator;
 
-let Details = React.createClass ({
+let CustomList = React.createClass ({
 
   propTypes: {
     style: React.PropTypes.object,
@@ -29,6 +30,7 @@ let Details = React.createClass ({
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
+        console.log(key);
         style[key] = this.props.style[key];
       }, this);
     }
@@ -43,6 +45,7 @@ let Details = React.createClass ({
 
     let labelStyle = {
       color: textColor,
+      textAlign: 'right',
     }
 
     if(this.props.labelTop === true) labelStyle.textAlign = 'left'
@@ -56,15 +59,11 @@ let Details = React.createClass ({
 
     let textColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .3 );
 
-    let headerStyle =  {
+    return {
       color: textColor,
-      margin: '1em 0',
-      lineHeight: '1.8em'
-    };
-
-    headerStyle.height = (this.props.title === null) ? '1.8em' : 'auto';
-
-    return headerStyle;
+      height: '1.7em',
+      marginBottom: '1em'
+    }
   },
 
   rowStyle(type) {
@@ -91,8 +90,8 @@ let Details = React.createClass ({
     let fData = false;
     if (this.props.data && Array.isArray(this.props.data)) {
       fData = this.props.data.map((dataObj,idx) =>
-        <div style={this.rowStyle(dataObj.detailType)} key={idx}>
-          <Layout widths={this.layout()} cPadding={'0 20px 5px 0'} cStyles = {{lg: [{ textAlign: 'right' }], sm: [{ textAlign: 'left'}]}}>
+        <div style ={this.rowStyle(dataObj.detailType)} key={idx}>
+          <Layout widths={this.layout()} cPadding={'0 20px 5px 0'}>
             <div style={this.labelStyle(dataObj.detailType)}>{dataObj.label}</div>
             <div style={this.valueStyle(dataObj.detailType)}>{dataObj.value}</div>
           </Layout>
@@ -103,15 +102,13 @@ let Details = React.createClass ({
 
     return (
       <div style={this.style()}>
-        <ClearFix>{title}</ClearFix>
-        <ClearFix>{fData}</ClearFix>
       </div>
     );
   }
 });
 
-Details.contextTypes = {
+CustomList.contextTypes = {
   muiTheme: React.PropTypes.object
 };
 
-export default Details;
+export default CustomList;

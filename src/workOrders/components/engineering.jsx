@@ -18,8 +18,6 @@ import {
   Paper
 } from 'material-ui'
 
-let data = [];
-
 let Engineering = React.createClass ({
 
   propTypes: {
@@ -29,7 +27,7 @@ let Engineering = React.createClass ({
 
   getDefaultProps() {
     return {
-      data: data
+      data: []
     };
   },
 
@@ -54,9 +52,7 @@ let Engineering = React.createClass ({
             <div>
               <Details title={'Engineering'}
                 data = {[
-                  { label: '', value: <Layout widths={{lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12]}}><Checkbox label={'Circuit Built in AMPLE'} /><Checkbox label={'Provisioning Notified'} /><Checkbox label={'SWIP Completed'} /><Checkbox label={'Monitored in Orion'} /></Layout>, detailType: 'muiTextField' },
-
-            
+                  { label: '', value:<Layout widths={{lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12]}}><Checkbox name={'circuit_provisioned_in_ample'} label={'Circuit Built in AMPLE'} /><Checkbox name={'provisioning_notified'} label={'Provisioning Notified'} /><Checkbox name={'swip_completed'} label={'SWIP Completed'} /><Checkbox name={'orion_monitored'} label={'Monitored in Orion'} /></Layout>, detailType: 'muiTextField' },
                   { label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton' }
                 ]}
               />

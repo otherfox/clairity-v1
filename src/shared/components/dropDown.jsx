@@ -25,6 +25,22 @@ let DropDown = React.createClass({
     return style;
   },
 
+  dropDownUnderlineStyle() {
+    let underlineStyle = {
+      marginLeft: 0
+    }
+
+    return underlineStyle;
+  },
+
+  dropDownLabelStyle() {
+    let labelStyle = {
+      paddingLeft: 0
+    }
+
+    return labelStyle;
+  },
+
   handleChange(ev, index, menuItem) {
     this.props.onChange(menuItem.value, index, ev);
   },
@@ -44,7 +60,10 @@ let DropDown = React.createClass({
       <div style={this.style()}>
         <DropDownMenu menuItems={data}
                       selectedIndex={index < 0 ? 0 : +index}
-                      onChange={link ? this.handleLink : this.handleChange} />
+                      onChange={link ? this.handleLink : this.handleChange}
+                      labelStyle={this.dropDownLabelStyle()}
+                      underlineStyle={this.dropDownUnderlineStyle()}
+                      />
       </div>
     );
   }

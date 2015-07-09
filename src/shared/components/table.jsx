@@ -1,8 +1,7 @@
 import React from 'react'
 import Settings from './settings'
-import mui, {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
-import FixedDataTable, {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
-import ResponsiveTable from 'responsive-fixed-data-table'
+import {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
+import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import _ from 'lodash'
 
 import numeral from 'numeral'
@@ -48,7 +47,7 @@ class CurrencyCell extends React.Component {
 class UriCell extends React.Component {
   render() {
     return (
-      <a href='#' className="c-p-1">{this.props.children}</a>
+      <a href='#'>{this.props.children}</a>
     );
   }
 }
@@ -86,21 +85,37 @@ let DataTable = React.createClass({
     margin: React.PropTypes.string
   },
 
+  getDefaultProps() {
+    return {
+      widthPerc: 100,
+      widthAdj: 0
+    }
+  },
+
   rowGetter: function(rowIndex) {
       return this.props.data[rowIndex];
   },
 
   getWidth: function() {
-    let widthPerc = (this.props.widthPerc) ? this.props.widthPerc / 100 : 1;
-    let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - (2 * Settings.contentPadding) - Settings.widthBuffer + this.props.widthAdj);
-    return width;
+    let widthPerc = this.props.widthPerc / 100;
+    let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj);
+    let adjWidth = 0;
+
+    this.props.colNames.forEach((col, i) => {
+      adjWidth += this.getColWidth(i, width);
+    });
+
+    return adjWidth;
   },
 
-  getColWidth: function(i) {
+  getColWidth: function(i, width) {
+
+    width = width || this.state.width;
+
     if(this.props.colWidths) {
-      return (this.state.width * (this.props.colWidths[i] / this.props.maxWidth));
+      return (Math.floor(width * (this.props.colWidths[i] / this.props.maxWidth)));
     } else {
-      return (this.state.width / this.props.colNames.length);
+      return (Math.floor(width / this.props.colNames.length));
     }
   },
 
@@ -118,7 +133,7 @@ let DataTable = React.createClass({
 
   style: function() {
     return {
-      width: this.state.width + "px",
+      width: '100%',
       margin: this.props.margin || "20px 0"
     };
   },
@@ -164,7 +179,7 @@ let DataTable = React.createClass({
         }
       </Group>;
 
-    let height = (((this.props.data.length * 50) + 50) < window.innerHeight - 300) ? (this.props.data.length * 50) + 50 : window.innerHeight - 300;
+    let height = (((this.props.data.length * 50) + 52) < window.innerHeight - 300) ? (this.props.data.length * 50) + 52 : window.innerHeight - 300;
 
     return (
       <div style={this.style()} className="table">
@@ -175,7 +190,7 @@ let DataTable = React.createClass({
           rowsCount={this.props.data.length}
           rowClassNameGetter={this.getRowClass}
           width={this.getWidth()}
-          height={500}
+          height={height}
           headerHeight={50}>
             {columns}
         </Table>

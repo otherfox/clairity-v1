@@ -67,7 +67,7 @@ var TopNav = React.createClass ({
         return (
           <div style={this.style()}>
             <AppTopBar
-              onMenuIconButtonTouchTap={this._onMenuIconButtonTouchTap}
+              onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
               title= "Clairity"
               zDepth={0}>
             </AppTopBar>

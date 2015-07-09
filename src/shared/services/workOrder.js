@@ -62,8 +62,20 @@ export function getWorkOrderStatuses() {
   });
 }
 
+import {eventUpdateWorkOrder} from '../gateways/workOrder'
+
 export function putWorkOrder(id, data) {
     return new Promise((s, f) => {
-
+      req.post(`http://lab.rairity.com/controller.cfm?event=updateWorkOrders`)
+        .withCredentials()
+        .type('form')
+        .send(eventUpdateWorkOrder(data))
+        .end((err, res) => {
+          if (res.ok && res.xhr.responseURL.match(/controller\.cfm/i)) {
+            return getWorkOrder(id);
+          } else {
+            f(err);
+          }
+        });
     });
 }

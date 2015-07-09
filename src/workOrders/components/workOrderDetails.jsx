@@ -25,16 +25,11 @@ import Contract from '../services/stubs/contract7416.json'
 import ServiceTypes from '../services/stubs/serviceTypes.json'
 import OrderTypes from '../services/stubs/workOrderTypes.json'
 
+import OwnerView from './details/owner'
+
 import {List, Map, fromJS} from 'immutable'
 
 let WorkOrderDetails = React.createClass ({
-
-  propTypes: {
-    style: React.PropTypes.object,
-    order: React.PropTypes.object,
-    serviceTypes: React.PropTypes.object,
-    orderTypes: React.PropTypes.object,
-  },
 
   getDefaultProps() {
     return {
@@ -45,7 +40,9 @@ let WorkOrderDetails = React.createClass ({
   },
 
   style() {
-    let style = {};
+    let style = {
+      width: '100%'
+    };
 
     if(this.props.style) {
       Object.keys(this.props.style).forEach(function(key, i){
@@ -128,11 +125,11 @@ let WorkOrderDetails = React.createClass ({
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [
-      //{ label: 'Owners', name: 'owners', value: <DropDown menuItems={this.getUsers()} selectedValue={(order.get['owner'] ? +order.get['owner'] : 0)} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Owners', name: 'owners', value: <OwnerView workOrder={this.props.workOrder} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
-      { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [4,4,4,4,4,4,4,4,4,4,4,4], sm: [4,4,4,4,4,4,4,4,4,4,4,4], xs: [4,4,4,4,4,4,4,4,4,4,4,4], xx: [4,4,4,4,4,4,4,4,4,4,4,4] }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
+      { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [6,6,6,6,6,6,6,6,6,6,6,6], sm: [12]}} breakpoints={{ md: 1550 }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
       { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : undefined} /> , cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
@@ -144,7 +141,7 @@ let WorkOrderDetails = React.createClass ({
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
     let data = [c];
 
-    let details = {data: colNames};
+    let details = {title: 'Details', data: colNames};
 
     return details;
 
@@ -155,13 +152,8 @@ let WorkOrderDetails = React.createClass ({
     return (
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
-            <div>
-              <h3>Details</h3>
-            </div>
-            <div>
-              <Details {...this.getDetails(this.props.order)} />
-            </div>
+          <Layout widths={{ lg: [12], md: [12], sm: [12], xs: [12], xxs: [12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
+            <Details {...this.getDetails(this.props.order)} />
           </Layout>
         </Paper>
       </div>

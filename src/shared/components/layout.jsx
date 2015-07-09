@@ -1,51 +1,65 @@
 import React from 'react'
 import Settings from './settings'
+import {ClearFix} from 'material-ui'
+import {List} from 'immutable'
 
-
-var Layout = React.createClass({
+let Layout = React.createClass({
   propTypes: {
-
-    // colNum, ex 12
     cols: React.PropTypes.number,
-
-    // {name: [colWidth, colWidth, colWidth], name: [colWidth, colWidth, colWidth]}, ex {lg: [7, 3, 2], md: [4, 4, 4], xs: [12, 12, 12]}
-    widths: React.PropTypes.object,
-
-    // {name: pxValue, name: pxValue}, ex {lg: 1200, md: 990, sm: 750, xs: 480, xxs: 380}
-    breakpoints: React.PropTypes.object,
-
-    // {name: [colN, colN, colN], name: [colN, colN, colN]}, ex {md: [2, 1, 3], sm: [1, 2, 3]}
+    widths: React.PropTypes.shape({
+      lg: React.PropTypes.arrayOf(React.PropTypes.number),
+      md: React.PropTypes.arrayOf(React.PropTypes.number),
+      sm: React.PropTypes.arrayOf(React.PropTypes.number),
+      xs: React.PropTypes.arrayOf(React.PropTypes.number),
+      xxs: React.PropTypes.arrayOf(React.PropTypes.number)
+    }),
+    breakpoints: React.PropTypes.shape({
+      lg: React.PropTypes.number,
+      md: React.PropTypes.number,
+      sm: React.PropTypes.number,
+      xs: React.PropTypes.number,
+      xxs: React.PropTypes.number
+    }),
     order: React.PropTypes.object,
-
-    // '10px'
     pPadding: React.PropTypes.string,
-
-    // '10px'
     cPadding: React.PropTypes.string,
-
-    // '10px'
     cMargin: React.PropTypes.string,
-
-    // 'row'
+    cStyle: React.PropTypes.object,
+    cStyles: React.PropTypes.shape({
+      lg: React.PropTypes.arrayOf(React.PropTypes.object),
+      md: React.PropTypes.arrayOf(React.PropTypes.object),
+      sm: React.PropTypes.arrayOf(React.PropTypes.object),
+      xs: React.PropTypes.arrayOf(React.PropTypes.object),
+      xxs: React.PropTypes.arrayOf(React.PropTypes.object)
+    }),
     type: React.PropTypes.string,
-
     style: React.PropTypes.object
-
   },
 
   getChildWidth(i, breakpoint) {
 
-    if (this.props.widths && this.props.widths[breakpoint][i]) {
-      if (typeof this.props.widths[breakpoint][i] === 'number') {
-        var width = ((this.props.widths[breakpoint][i] * 100 )/ this.props.cols)+'%';
-      } else if (this.props.widths[breakpoint][i]) {
-        var width = this.props.widths[breakpoint][i];
-      }
-    } else {
-      var width = 'auto';
-    }
+    let breakpoints = Object.keys(Settings.breakpoints);
 
-    return width;
+    if (this.props.widths) {
+      if(this.props.widths[breakpoint]) {
+        if (typeof this.props.widths[breakpoint][i] === 'number') {
+          return ((this.props.widths[breakpoint][i] * 100 )/ this.props.cols)+'%';
+        } else {
+          return this.props.widths[breakpoint][i] || '100%';
+        }
+      } else {
+        let bidx = breakpoints.indexOf(breakpoint);
+        if(bidx > -1) {
+          for(let j = bidx - 1; j > -1; j--) {
+            if(this.props.widths[breakpoints[j]]) {
+              return (this.props.widths[breakpoints[j]][i]) ? ((this.props.widths[breakpoints[j]][i] * 100 )/ this.props.cols)+'%' : '100%';
+            }
+          }
+        }
+        return '100%'
+      }
+    }
+    return 'initial';
   },
 
   getChildWidths() {
@@ -54,8 +68,7 @@ var Layout = React.createClass({
     let breakpoint = this.getBreakpoint();
 
     if (this.props.children) {
-      let count = (typeof this.props.children.size === 'undefined') ? 1 : this.props.children.size ;
-
+      let count = React.Children.count(this.props.children);
       for (let i = 0; i < count; i++) {
         percWidths.push(this.getChildWidth(i, breakpoint));
       }
@@ -65,19 +78,65 @@ var Layout = React.createClass({
     return percWidths;
   },
 
+  getChildStyle(i, breakpoint) {
+
+    let breakpoints = ['lg', 'md', 'sm', 'xs', 'xxs'];
+
+    if (this.props.cStyles) {
+      if(this.props.cStyles[breakpoint]) {
+        let style = this.props.cStyles[breakpoint][i];
+        return style;
+      } else {
+        let bidx = breakpoints.indexOf(breakpoint);
+        if(bidx > -1) {
+          for(let j = bidx - 1; j > -1; j--) {
+            if(this.props.cStyles[breakpoints[j]]) {
+              return this.props.cStyles[breakpoints[j]][i] || {};
+            }
+          }
+        }
+        return {};
+      }
+    }
+    return {};
+  },
+
+  getChildStyles() {
+
+    let breakpoint = this.getBreakpoint();
+    let styles = [];
+
+    if (this.props.children) {
+      let count = React.Children.count(this.props.children);
+      for (let i = 0; i < count; i++) {
+        styles.push(this.getChildStyle(i, breakpoint));
+      }
+    } else {
+      styles = [{}];
+    }
+    return styles;
+  },
+
 	getBreakpoint() {
-		var vwidth = window.innerWidth,
-				bKeys = Object.keys(this.props.breakpoints),
+		let vwidth = window.innerWidth,
+				bKeys = Object.keys(Settings.breakpoints),
+        breakpoints = Settings.breakpoints,
 				breakpoint;
 
-		bKeys.forEach( function(key, i) {
-			if(this.props.breakpoints[key] > vwidth) {
-				var prevKey = i;
+    if(this.props.breakpoints) {
+      Object.keys(this.props.breakpoints).forEach( (key, i) => {
+        breakpoints[key] = this.props.breakpoints[key];
+      });
+    }
+
+		bKeys.forEach( (key, i) => {
+			if(breakpoints[key] > vwidth) {
+				let prevKey = i;
 				breakpoint = bKeys[prevKey];
-			} else if(vwidth > this.props.breakpoints.lg) {
+			} else if(vwidth > breakpoints.lg) {
 				breakpoint = 'lg';
 			}
-		}, this);
+		});
 
 		return breakpoint;
 	},
@@ -92,31 +151,39 @@ var Layout = React.createClass({
 
   getDefaultProps() {
     return {
-      breakpoints: Settings.breakpoints,
+      breakpoints: {
+        lg: Settings.breakpoints.lg,
+        md: Settings.breakpoints.md,
+        sm: Settings.breakpoints.sm,
+        xs: Settings.breakpoints.xs,
+        xxs: Settings.breakpoints.xxs,
+      },
       cols: Settings.cols
     }
   },
 
   getInitialState() {
-    return { cWidths: this.getChildWidths() };
+    return { cWidths: this.getChildWidths(), cStyles: this.getChildStyles() };
   },
 
 	handleResize() {
     if(this.props.widths) {
       this.setState({cWidths: this.getChildWidths() });
     }
-  },
-
-  class() {
-    if(!this.props.type) return 'layout';
-    return 'layout ' + this.props.type;
+    if(this.props.cStyles) {
+      this.setState({cStyles: this.getChildStyles() });
+    }
   },
 
   style: function() {
 
-    let style = {
-      width: '100%',
-      padding: this.props.pPadding
+    let style = {};
+
+    if(this.props.type !== 'main') {
+      style = {
+        width: '100%',
+        padding: this.props.pPadding
+      }
     }
 
     if(this.props.type === 'center-b'){
@@ -135,24 +202,36 @@ var Layout = React.createClass({
   childStyle: function(i) {
 
     let style = {
-      width: this.state.cWidths[i],
-      float: 'left',
-      padding: this.props.cPadding,
-      margin: this.props.cMargin
+        width: this.state.cWidths[i],
+        float: 'left',
+        padding: this.props.cPadding || 'initial',
+        margin: this.props.cMargin || 'initial'
     }
 
-    if(this.props.type === 'center-h') {
+    if (this.props.type === 'center-h') {
       style.position = 'relative';
       style.margin = '0 auto';
       style.float = 'none';
     }
 
-    if(this.props.type === 'center-b') {
+    if (this.props.type === 'center-v') {
       style.position = 'relative';
       style.margin = '0 auto';
       style.top = '50%';
       style.transform = 'translateY(-50%)';
       style.float = 'none';
+    }
+
+    if(this.props.cStyle) {
+      Object.keys(this.props.cStyle).forEach(function(key, i){
+        style[key] = this.props.cStyle[key];
+      }, this);
+    }
+
+    if(this.state.cStyles[i]) {
+      Object.keys(this.state.cStyles[i]).forEach(function(key, i){
+        style[key] = this.state.cStyles[i][key];
+      }, this);
     }
 
     return style;
@@ -161,13 +240,13 @@ var Layout = React.createClass({
   render: function() {
 
 		let children = React.Children.map(this.props.children, (child, i) =>
-			<div style={this.childStyle(i)}>{React.cloneElement(child)}</div>
+			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
     );
 
     return (
-      <div style={this.style()} className={this.class()}>
+      <ClearFix style={this.style()}>
         {children}
-      </div>
+      </ClearFix>
     );
   }
 });

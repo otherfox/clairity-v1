@@ -1,46 +1,39 @@
 import React from 'react'
 import Settings from './settings'
+import {Styles} from 'material-ui'
 
-var Footer = React.createClass ({
+class Footer extends React.Component {
 
-  propTypes: {
-  },
+  style() {
 
-  style: function() {
+    let backgroundColor = this.context.muiTheme.palette.textColor;
+    let textColor = this.context.muiTheme.palette.canvasColor;
+
     return {
       padding: '20px',
       textAlign: 'center',
-			position: this.state.position,
+			position: 'absolute',
     	width: '100%',
+      height: Settings.footerHeight+'px',
+      color: textColor,
+      backgroundColor: backgroundColor,
     	bottom: '0',
-    };
-  },
+      zIndex: 2
+    }
+  }
 
-	componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-	handleResize: function() {
-      this.setState({position: this.getPosition()});
-  },
-
-	getPosition: function() {
-		var pos = (window.innerHeight > 850) ? 'fixed': 'relative';
-		return pos;
-	},
-
-	getInitialState: function() {
-		return { position: this.getPosition() };
-	},
-
-  render: function() {
+  render() {
 
     return (
-      <div style={this.style()} className="footer">
+      <div style={this.style()}>
         Copywrite 2015 One Ring Networks
       </div>
     );
   }
-});
+}
+
+Footer.contextTypes = {
+  muiTheme: React.PropTypes.object
+};
 
 export default Footer;
