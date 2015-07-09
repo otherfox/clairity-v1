@@ -35,7 +35,6 @@ let createIpZone = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <h1></h1>
       <Paper>
         <Layout widths={{ lg: [12, 6,6] }} cPadding={'0 20px 20px 20px'}>
           <Details

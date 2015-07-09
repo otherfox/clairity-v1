@@ -1,5 +1,5 @@
-
 import React, {PropTypes} from 'react'
+import Header from '../shared/components/header'
 import Store from '../shared/store'
 import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
@@ -39,7 +39,7 @@ let WorkOrders = React.createClass({
     return (
       <div>
         <div className="section-header">
-          <h1>Customer Details</h1>
+          <Header><h1>Customer Details</h1></Header>
         </div>
       </div>
     )

@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react'
 import Store from '../shared/store'
 import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
+import Header from '../shared/components/header'
 import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
@@ -39,7 +40,7 @@ let WorkOrders = React.createClass({
     return (
             <div>
               <div className="section-header">
-                <h1>Work Order: View/Upload Files</h1>
+                <Header><h1>Work Order: View/Upload Files</h1></Header>
               </div>
             </div>
     )
