@@ -2,6 +2,7 @@
 import React from 'react'
 import Settings from './settings'
 import mui from 'material-ui'
+import _ from 'lodash'
 
 var AppTopNav = mui.LeftNav;
 var AppTopBar = mui.AppBar;
@@ -62,7 +63,7 @@ var TopNav = React.createClass ({
     },
 
     render: function() {
-        var header = <div className="logo" onClick={this._onHeaderClick}>Clarity</div>;
+        var header = <div  onClick={this._onHeaderClick}>Clarity</div>;
 
         return (
           <div style={this.style()}>
