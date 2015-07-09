@@ -6,14 +6,10 @@ let Content = React.createClass ({
 
   style: function() {
 
-    let canvasColor = this.context.muiTheme.palette.canvasColor;
+    let textColor = this.context.muiTheme.palette.textColor;
 
     return {
-      width: '100%',
-      backgroundColor: canvasColor,
-      paddingLeft: Settings.leftNavWidth+Settings.contentPadding+'px',
-      paddingBottom: Settings.footerHeight+'px',
-      minHeight: Settings.contentMinHeight+'px'
+      color: textColor,
     };
   },
 

@@ -1,5 +1,5 @@
-
 import React, {PropTypes} from 'react'
+import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
@@ -47,7 +47,7 @@ let viewLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <h1>View Lead - {opportunity.name}</h1>
+        <Header><h1>View Lead - {opportunity.name}</h1></Header>
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details

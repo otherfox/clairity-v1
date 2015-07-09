@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from  '../shared/components/layout'
+import Header from '../shared/components/header'
 import Footer from  '../shared/components/footer'
 import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
@@ -117,9 +118,9 @@ export default class CreateContract extends React.Component {
   render() {
     return (
       <div>
-        <div className="section-header">
-          <h1>Create Contract</h1>
-        </div>
+
+        <Header><h1>Create Contract</h1></Header>
+
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [3, 9], md: [12, 12], sm: [12, 12], xs: [12, 12]}} cPadding={'0 20px 20px 20px'}>
             <div>

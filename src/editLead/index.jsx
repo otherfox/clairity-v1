@@ -1,9 +1,8 @@
-
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
-
+import Header from '../shared/components/header'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -47,7 +46,7 @@ let editLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <h1>Edit Lead - {opportunity.name}</h1>
+        <Header><h1>Edit Lead - {opportunity.name}</h1></Header>
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details

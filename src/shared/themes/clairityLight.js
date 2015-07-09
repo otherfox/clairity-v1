@@ -32,8 +32,8 @@ let ClairityLightTheme = {
     spacing = spacing || Spacing;
     let obj = {
       appBar: {
-        color: Colors.blueGrey700,
-        textColor: Colors.darkWhite,
+        color: Colors.blue400,
+        textColor: Colors.white,
         height: spacing.desktopKeylineIncrement
       },
       button: {
