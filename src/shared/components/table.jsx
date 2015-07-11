@@ -1,6 +1,11 @@
 import React from 'react'
 import Settings from './settings'
-import {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
+import {RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils} from 'material-ui'
+
+// This is for adding styles to fixed data table
+import ThemeManager from '../themes/themeManager'
+import useSheet from 'react-jss';
+
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import _ from 'lodash'
 
@@ -82,13 +87,15 @@ let DataTable = React.createClass({
     maxWidth: React.PropTypes.number,
     widthAdj: React.PropTypes.number,
     widthPerc: React.PropTypes.number,
+    rowHeight: React.PropTypes.number,
     margin: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       widthPerc: 100,
-      widthAdj: 0
+      widthAdj: 0,
+      rowHeight: 50
     }
   },
 
@@ -133,8 +140,10 @@ let DataTable = React.createClass({
 
   style: function() {
     return {
-      width: '100%',
-      margin: this.props.margin || "20px 0"
+      root: {
+        width: '100%',
+        margin: this.props.margin || "20px 0"
+      }
     };
   },
 
@@ -143,14 +152,19 @@ let DataTable = React.createClass({
   },
 
   getRowClass: function(index) {
+    const { classes } = this.props.sheet;
+    var active = this.state.active;
 
-      var active = this.state.active;
+    let selector = (index % 2 !== 0) ? 'even' : 'default';
+    selector = (active === index ) ? 'active' : selector;
 
-      if( index === active ) {
-        return 'active';
-      }
+    let classNames = {
+      active: classes.rowStyle,
+      even: classes.rowStyleEven,
+      default: classes.rowStyle
+    }
 
-      return;
+    return classNames[selector];
   },
 
   formatCell: function(cell, col) {
@@ -161,6 +175,9 @@ let DataTable = React.createClass({
   },
 
   render: function() {
+
+
+
     let columns =
       <Group fixed={true}>
         {
@@ -178,13 +195,13 @@ let DataTable = React.createClass({
           , this)
         }
       </Group>;
-
-    let height = (((this.props.data.length * 50) + 52) < window.innerHeight - 300) ? (this.props.data.length * 50) + 52 : window.innerHeight - 300;
+    let height = (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
 
     return (
-      <div style={this.style()}>
+
+      <div style={_.assign(this.style(), this.props.style)}>
         <Table
-          rowHeight={50}
+          rowHeight={this.props.rowHeight}
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
           rowsCount={this.props.data.length}
@@ -199,4 +216,15 @@ let DataTable = React.createClass({
   }
 });
 
-export default DataTable;
+const styles = {
+  rowStyle: {
+    'background-color': Utils.ColorManipulator.lighten(ThemeManager.getCurrentTheme().palette.canvasColor, .5),
+    'color': ThemeManager.getCurrentTheme().palette.textColor,
+  },
+  rowStyleEven: {
+    'background-color': Utils.ColorManipulator.darken(ThemeManager.getCurrentTheme().palette.canvasColor, .04),
+    'color': ThemeManager.getCurrentTheme().palette.textColor,
+  },
+};
+
+export default useSheet(DataTable, styles);;

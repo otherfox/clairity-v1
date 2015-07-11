@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from  '../shared/components/layout'
+import Header from  '../shared/components/header'
 import Footer from  '../shared/components/footer'
 import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
@@ -134,9 +135,9 @@ export default class Aging extends React.Component {
     return (
       <Layout widths={{lg: [12], md: [12], sm: [12], xs: [12]}}>
         <div>
-          <div className="section-header">
-            <h1>Aging Reports</h1>
-          </div>
+
+          <Header><h1>Aging Reports</h1></Header>
+
           <Filters data={this.state.rows}>
             <RadioButtonGroup name="status" valueSelected={this.state.filter} onChange={this.handleFilterChange.bind(this)}>
               <RadioButton value="active" label="Acitve" />

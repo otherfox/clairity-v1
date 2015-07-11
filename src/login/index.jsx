@@ -1,7 +1,7 @@
-
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import Footer from  '../shared/components/footer'
+import Header from '../shared/components/header'
 import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
@@ -48,7 +48,7 @@ class LoginForm extends React.Component {
         <div>
           <Paper>
             <div style={{position: 'relative', margin: '0 auto', padding: '3em 0 5em', display: 'table'}}>
-              <h1>Clairity</h1>
+              <Header><h1>Clairity</h1></Header>
               <div>
                 <TextField
                   value={this.props.username}

@@ -1,9 +1,8 @@
-
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
-
+import Header from '../shared/components/header'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -47,10 +46,13 @@ let editLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <h1>Edit Lead - {opportunity.name}</h1>
+        <Header><h1>Edit Lead - {opportunity.name}</h1></Header>
       <Paper>
-        <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
+        <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            rowStyle={{marginLeft: '15%'}}
+            widths={{ lg: [4,8]}}
             title={'Customer Details'}
             data={[
               { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled= {true}/>, detailType: 'muiTextField' },
@@ -99,6 +101,13 @@ let editLead = React.createClass({
                 { label: 'Telenational - Business', value: 3 },
                 { label: 'Telenational - Residential', value: 4 }
               ])} />, detailType: 'muiDropDown' },
+            ]}
+          />
+          <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            widths={{ lg: [2,10]}}
+            title={null}
+            data={[
               { label: 'Street 1', name: 'customerStreet1', value: <TextField value={'15400 Knoll Trail'}/>, detailType: 'muiTextField' },
               { label: 'Street 2', name: 'customerStreet2', value: <TextField value={'Suite 400'}/>, detailType: 'muiTextField' },
               { label: 'City', name: 'customerCity', value: <TextField value={'Dallas'} />, detailType: 'muiTextField' },
@@ -109,8 +118,11 @@ let editLead = React.createClass({
         </Layout>
       </Paper>
       <Paper>
-        <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
+        <Layout widths={{ lg: [6,6] }} cPadding={'0 20px 20px 20px'}>
           <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            rowStyle={{marginLeft: '15%'}}
+            widths={{ lg: [4,8]}}
             title={'Opportunity Details'}
             data={[
               { label: 'Name', name: 'oppName', value: <TextField value={'Fill the Bill'}/>, detailType: 'muiTextField' },
@@ -149,13 +161,20 @@ let editLead = React.createClass({
                 { label: 'Web', value: 9 },
                 { label: 'Word of Mouth', value: 11 },
               ])} />, detailType: 'muiDropDown' },
-              { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <DropDownMenu selectedValue={0} menuItems={ new List([
+              { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Conference - 2015', value: 2 },
                 { label: 'Oz', value: 1 },
                 { label: 'Spring Webinar - 2015', value: 3 },
               ])} />, detailType: 'muiDropDown' },
-              { label: '', names: ['offer_made', 'project_started'], value: <Layout widths={{lg: [6,6], sm: [12]}}><Checkbox name={'offer_made'} value={1} label={'Offer Made'} defaultSwitched={true} switched/><Checkbox name={'project_started'} value={1} label={'Project Started'} defaultSwitched={true} switched/></Layout>, detailType: 'muiCheckbox'},
+              { label: '', names: ['offer_made', 'project_started'], value: <Layout widths={{lg: [6,6], sm: [12]}}><Checkbox name={'offer_made'} value={1} label={'Offer Made'} defaultSwitched={true} switched/><Checkbox name={'project_started'} value={1} label={'Project Started'} defaultSwitched={true} switched/></Layout>, detailType: 'muiCheckbox'}
+            ]}
+          />
+          <Details
+            cStyles={{ lg: [{textAlign: 'left'}]}}
+            widths={{ lg: [4,8]}}
+            title={null}
+            data={[
               { label: 'Date Offer Made', name: 'dt_offer_made', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Date Project Started', name: 'dt_project_start', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Closing Date', name: 'dt_closing', value: <TextField value={''}/>, detailType: 'muiTextField' },

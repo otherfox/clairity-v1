@@ -1,8 +1,8 @@
-
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
+import Header from '../shared/components/header'
 
 import {
   RadioButtonGroup,
@@ -44,7 +44,7 @@ let createLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <h1>Convert Lead - {contact.name}</h1>
+        <Header><h1>Convert Lead - {contact.name}</h1></Header>
       <Paper>
         <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
           <Details

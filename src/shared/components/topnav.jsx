@@ -1,10 +1,10 @@
 
 import React from 'react'
 import Settings from './settings'
-import mui from 'material-ui'
+import { AppBar, LeftNav, Utils } from 'material-ui'
+import _ from 'lodash'
 
-var AppTopNav = mui.LeftNav;
-var AppTopBar = mui.AppBar;
+let ColorManipulator = Utils.ColorManipulator;
 
 var menuItems = [
   { route: 'administration', text: 'Administration' },
@@ -43,8 +43,18 @@ var TopNav = React.createClass ({
         };
     },
 */
-    style: function() {
+    style() {
+      let headerColor = this.context.muiTheme.palette.primary1Color;
+
       return {
+        root: {},
+        header: {
+          color: headerColor,
+          padding: '10px 20px',
+          fontWeight: 'bold',
+          fontSize: '2em',
+          borderBottom: '2px solid '+headerColor
+        }
       }
     },
 
@@ -62,17 +72,17 @@ var TopNav = React.createClass ({
     },
 
     render: function() {
-        var header = <div className="logo" onClick={this._onHeaderClick}>Clarity</div>;
+        var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
 
         return (
-          <div style={this.style()}>
-            <AppTopBar
+          <div style={this.style().root}>
+            <AppBar
               onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
               title= "Clairity"
-              zDepth={0}>
-            </AppTopBar>
+              zDepth={0}
+            />
 
-            <AppTopNav
+            <LeftNav
               ref="topNav"
               docked={false}
               isInitiallyOpen={false}
@@ -87,5 +97,9 @@ var TopNav = React.createClass ({
     },
 
 });
+
+TopNav.contextTypes = {
+  muiTheme: React.PropTypes.object
+};
 
 export default TopNav
