@@ -51,7 +51,6 @@ var TopNav = React.createClass ({
         header: {
           color: headerColor,
           padding: '10px 20px',
-          fontWeight: 'bold',
           fontSize: '2em',
           borderBottom: '2px solid '+headerColor
         }
