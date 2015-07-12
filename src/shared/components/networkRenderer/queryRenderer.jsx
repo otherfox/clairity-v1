@@ -19,8 +19,7 @@ export default function multiQueryRenderer(Component, options) {
       this.queries = options.queries.map(q =>
         new QueryState(props, q, this.update));
       this.state = {
-        ready: this.ready(),
-        queryState: {}
+        ready: this.ready()
       };
       this._dirty = false;
     }
@@ -43,19 +42,23 @@ export default function multiQueryRenderer(Component, options) {
 
     componentWillReceiveProps(props) {
       this.queries.forEach(q => q.props = props);
+      this.update();
       this._dirty = true;
     }
 
     update() {
       this.setState({
-        ready: this.ready(),
-        queryState: this.queries.reduce((s, q) => _.extend({}, s, q.state), {})
+        ready: this.ready()
       });
+    }
+
+    getQueryState() {
+      return this.queries.reduce((s, q) => _.extend({}, s, q.state), {});
     }
 
     render() {
       if (this.state.ready) {
-        return <Component {...this.props} {...this.state.queryState} />;
+        return <Component {...this.props} {...this.getQueryState()} />;
       } else {
         return false;
       }
