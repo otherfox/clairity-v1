@@ -1,6 +1,6 @@
 import React, {addons} from 'react/addons'
 import DropDown from '../../../shared/components/dropDown'
-import delayRender from '../../../shared/components/networkRenderer/base'
+import query from '../../../shared/components/networkRenderer/queryRenderer'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
 import {getWorkOrderOwners} from '../../services/users'
@@ -36,10 +36,12 @@ let WorkOrderDetailsOwner = React.createClass({
   }
 });
 
-export default delayRender(WorkOrderDetailsOwner, {
-  writeMethod: ownersFetched,
-  shouldFetch: e => e.state.data,
-  cacheMethod: queryWorkOrderOwners,
-  serviceMethod: getWorkOrderOwners,
-  propName: 'owners'
+export default query(WorkOrderDetailsOwner, {
+  queries: [{
+    writeMethod: ownersFetched,
+    shouldFetch: e => e.state.data,
+    cacheMethod: queryWorkOrderOwners,
+    serviceMethod: getWorkOrderOwners,
+    propName: 'owners'
+  }]
 });
