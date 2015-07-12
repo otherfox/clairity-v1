@@ -22,17 +22,16 @@ import {
 
 import controllable from 'react-controllables'
 import {List} from 'immutable'
-import {Navigation} from 'react-router'
+import {State} from 'react-router'
 
 let viewLead = React.createClass({
-  mixins: [Navigation],
 
   render() {
     let event = 'controller.cfm?event=updateSalesOpp';
 
     let hiddenValues = {
       customer_id: "1480",
-      oportunity_id: "7223",
+      contact_id: "7223",
       tax_exempt: false,
       summary_billing: false,
       show_international: true,
@@ -43,7 +42,7 @@ let viewLead = React.createClass({
       auto_pay: false,
     };
 
-    let opportunity = { name: 'Central Regional Wastewater System'};
+    let opportunity = this.props.contact;
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
@@ -193,4 +192,17 @@ let viewLead = React.createClass({
   }
 });
 
-export default viewLead;
+import {networkModelRenderer} from '../shared/components/networkRenderer'
+
+let ViewLead = networkModelRenderer(viewLead, 'contact')
+
+let ViewLeadPage = React.createClass({
+  mixins: [State],
+  render() {
+    return (
+      <ViewLead id={this.getParams().contactId} />
+    );
+  }
+});
+
+export default ViewLeadPage;
