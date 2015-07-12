@@ -40,19 +40,20 @@ let createLead = React.createClass({
       dt_lastmodified: "{ts '2015-07-03 19:16:41'}",
     };
 
-    let contact = { name: 'Central Regional Wastewater System'};
+    let opp = this.props.lead.toJS();
+    let owner = this.props.agent.toJS();
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Header><h1>Convert Lead - {contact.name}</h1></Header>
+        <Header><h1>Convert Lead - {opp.name}</h1></Header>
       <Paper>
         <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
           <Details
             title={'Opportunity Details'}
             data={[
               { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: 'Current Account Owner:', value: <TextField value={'Kit Carker'} disabled= {true}/>, detailType: 'muiTextField' },
-              { label: 'Change Account Owner?', name: 'user_id', value: <DropDown selectedValue={0} menuItems={ new List([
+              { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
+              { label: 'Change Account Owner?', name: 'user_id', value: <DropDown selectedValue={owner.id} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Brad Hackett', value: 20 },
                 { label: 'Casey Pinedo', value: 199 },
@@ -140,4 +141,22 @@ let createLead = React.createClass({
   }
 });
 
-export default createLead;
+import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
+
+let CreateLead = queryRenderer(createLead, {
+  queries: [
+    modelQuery('contact', 'lead', 'contactId'),
+    modelQuery('user', 'agent', 'agentId')
+  ]
+});
+
+let CreateLeadPage = React.createClass({
+  mixins: [State],
+  render() {
+    return (
+      <CreateLead contactId={+this.getParams().contactId} agentId={+this.getParams().agentId} />
+    );
+  }
+});
+
+export default CreateLeadPage;
