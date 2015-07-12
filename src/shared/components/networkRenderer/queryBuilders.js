@@ -20,17 +20,18 @@ export function modelQuery(tableName, propName, idName) {
   }
 }
 
-export function collectionQuery(tableName, propName) {
+export function collectionQuery(tableName, propName, replace = true) {
   return {
     tableName,
     propName: propName || tableName + 's',
     serviceMethod: props => getCollection(tableName),
     cacheMethod: () => {
       let results = Store.data.get(tableName).toList();
+      if (tableName == "user") debugger;
       return results.size > 0 ? results : null;
     },
     writeMethod: data => Store.handleMessage({
-      type: options.replace ? MessageTypes.ReplaceAll : MessageTypes.Write,
+      type: replace ? MessageTypes.ReplaceAll : MessageTypes.Write,
       payload: {
         rows: data,
         table: tableName
