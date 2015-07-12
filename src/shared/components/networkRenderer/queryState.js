@@ -20,8 +20,8 @@ export default class QueryState {
   }
 
   set props(val) {
-    this._props = props;
-    this.data = options.cacheMethod(val, this.options);
+    this._props = val;
+    this.data = this.options.cacheMethod(val, this.options);
   }
 
   get props() {
