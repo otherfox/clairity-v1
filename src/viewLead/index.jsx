@@ -56,7 +56,7 @@ let viewLead = React.createClass({
             widths={{ lg: [4,8]}}
             title={'Customer Details'}
             data={[
-              { label: 'Current Account Owner', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
+              { label: 'Current Account Owner', value: <TextField value={owner.name} disabled />, detailType: 'muiTextField' },
               { label: 'Change Account Owner?', name: 'user_id', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Brad Hackett', value: 20 },
@@ -94,7 +94,7 @@ let viewLead = React.createClass({
                 { label: 'Thomas Dudley', value: 115 },
                 { label: 'William Dobbins', value: 283 }
               ])} />, detailType: 'muiDropDown' },
-              { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
+              { label: 'Name', name: 'name', value: <TextField value={''} />, detailType: 'muiTextField' },
               { label: 'Type', name: 'customerTypeId', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Business', value: 1 },
