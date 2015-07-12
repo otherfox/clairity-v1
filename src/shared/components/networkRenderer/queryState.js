@@ -15,7 +15,7 @@ export default class QueryState {
   }
 
   get ready() {
-    return this.options.cacheMethod(val, this.options) != null;
+    return this.options.cacheMethod(this.props, this.options) != null;
   }
 
   set props(val) {
