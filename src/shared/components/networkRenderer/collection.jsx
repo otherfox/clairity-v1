@@ -8,7 +8,7 @@ export function networkCollectionRenderer(Component, options) {
   return multiQueryRenderer(Component, {
     methods: options.methods || [],
     queries: [
-      collectionQuery(options.tableName, options.propName, !!options.replace)
+      collectionQuery(options.tableName, options.propName, options.replace)
     ]
   });
 
