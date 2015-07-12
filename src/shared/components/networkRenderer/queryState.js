@@ -12,7 +12,7 @@ export default class QueryState {
   }
 
   get state() {
-    return {[this.options.propName]: this.data};
+    return {[this.options.propName]: this.options.cacheMethod(this.props, this.options)};
   }
 
   get ready() {
