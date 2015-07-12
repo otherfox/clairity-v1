@@ -5,7 +5,7 @@ import {exposeMethods} from './methods'
 import {fromJS} from 'immutable'
 import _ from 'lodash'
 
-import DelayState from './delayState'
+import QueryState from './queryState'
 
 export default function multiQueryRenderer(Component, options) {
 
@@ -17,14 +17,14 @@ export default function multiQueryRenderer(Component, options) {
       super(props);
       this.update = this.update.bind(this);
       this.queries = options.queries.map(q =>
-        new DelayState(props, q, this.update));
+        new QueryState(props, q, this.update));
       this.state = {
-        ready: this.ready
+        ready: this.ready()
       };
       this._dirty = false;
     }
 
-    get ready() {
+    ready() {
       return this.queries.reduce((val, q) => val && q.ready, true);
     }
 
@@ -33,7 +33,7 @@ export default function multiQueryRenderer(Component, options) {
     }
 
     componentDidMount() {
-      this.queries.forEach(q => q.listen());
+      this.queries.forEach(q => q.listen().fetch());
     }
 
     componentWillDismount() {
@@ -47,7 +47,7 @@ export default function multiQueryRenderer(Component, options) {
 
     update() {
       this.setState({
-        ready: this.ready,
+        ready: this.ready(),
         queryState: this.queries.map((s, q) => _.extend({}, s, q.state), {})
       });
     }
