@@ -36,9 +36,7 @@ export function getContactsForCustomer(id) {
   });
 }
 
-debug('getContactsForCustomer')(getContactsForCustomer)
-
-export function getContactsWithoutOpportunities() {
+export function getLeads() {
   return new Promise(function(s, f) {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsWithoutOpportunities`)
       .withCredentials()
@@ -51,5 +49,3 @@ export function getContactsWithoutOpportunities() {
       });
   });
 }
-
-debug('getLeads')(getContactsWithoutOpportunities);
