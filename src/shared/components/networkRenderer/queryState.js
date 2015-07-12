@@ -8,6 +8,7 @@ export default class QueryState {
     this.cb = cb;
     this.data = options.cacheMethod(props, options);
     this.update = this.update.bind(this);
+    this.write = this.write.bind(this);
   }
 
   get state() {
@@ -28,7 +29,7 @@ export default class QueryState {
   }
 
   update() {
-    this.data = options.cacheMethod(this.props, this.options);
+    this.data = this.options.cacheMethod(this.props, this.options);
     return this;
   }
 
@@ -49,7 +50,8 @@ export default class QueryState {
   }
 
   write(results) {
-    this.options.writeMethod(data, this.options);
+    debugger;
+    this.options.writeMethod(results, this.options);
     this.update();
     this.cb();
     return this;
