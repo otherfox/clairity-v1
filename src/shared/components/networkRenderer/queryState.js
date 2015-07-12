@@ -23,27 +23,36 @@ export default class QueryState {
     this.data = options.cacheMethod(val, this.options);
   }
 
+  get props() {
+    return this._props;
+  }
+
   update() {
     this.data = options.cacheMethod(this.props, this.options);
+    return this;
   }
 
   fetch() {
     this.options.serviceMethod(this.props, this.options)
       .then(this.write);
+    return this;
   }
 
   listen() {
     Store.on('update', this.update);
+    return this;
   }
 
   stop() {
     Store.off('update', this.update);
+    return this;
   }
 
   write(results) {
     this.options.writeMethod(data, this.options);
     this.update();
     this.cb();
+    return this;
   }
 
 }
