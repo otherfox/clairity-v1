@@ -19,11 +19,13 @@ export function getResource(id, tableName) {
 
 import {getPops} from './pop'
 import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
+import {getLeads} from './contacts'
 
 const collection = {
   pop: getPops,
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
+  lead: getLeads
 };
 
 export function getCollection(tableName) {
