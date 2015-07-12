@@ -3,7 +3,7 @@ import Store, {MessageTypes} from '../../store'
 export default class QueryState {
 
   constructor(props, options, cb) {
-    this._props = props;
+    this.props = props;
     this.options = options;
     this.cb = cb;
     this.update = this.update.bind(this);
@@ -11,19 +11,15 @@ export default class QueryState {
   }
 
   get state() {
-    return {[this.options.propName]: this.options.cacheMethod(this.props, this.options)};
+    return {[this.options.propName]: this.data};
+  }
+
+  get data() {
+    return this.options.cacheMethod(this.props, this.options)
   }
 
   get ready() {
-    return this.options.cacheMethod(this.props, this.options) != null;
-  }
-
-  set props(val) {
-    this._props = val;
-  }
-
-  get props() {
-    return this._props;
+    return this.data != null;
   }
 
   update() {
