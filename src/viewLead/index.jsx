@@ -42,7 +42,8 @@ let viewLead = React.createClass({
       auto_pay: false,
     };
 
-    let opp = this.props.contact.toJS();
+    let opp = this.props.lead.toJS();
+    let owner = this.props.agent.toJS();
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
@@ -55,7 +56,7 @@ let viewLead = React.createClass({
             widths={{ lg: [4,8]}}
             title={'Customer Details'}
             data={[
-              { label: 'Current Account Owner', value: <TextField value={opp.agent_name} disabled= {true}/>, detailType: 'muiTextField' },
+              { label: 'Current Account Owner', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
               { label: 'Change Account Owner?', name: 'user_id', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Brad Hackett', value: 20 },
