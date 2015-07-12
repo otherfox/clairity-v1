@@ -7,7 +7,8 @@ const resource = {
   contact: getContact,
   location: getLocation,
   workorder: getWorkOrder,
-  contract: getContract
+  contract: getContract,
+  lead: getContact
 };
 
 export function getResource(id, tableName) {
