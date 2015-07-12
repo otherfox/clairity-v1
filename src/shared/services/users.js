@@ -53,5 +53,3 @@ export function getWorkOrderOwners() {
 export function getAccountOwners() {
   return getUsersByType('Employee');
 }
-
-window.getWorkOrderOwners = getWorkOrderOwners;
