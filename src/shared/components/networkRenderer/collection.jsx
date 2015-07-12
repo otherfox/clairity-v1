@@ -4,32 +4,16 @@ import Store, {MessageTypes} from '../../store'
 import {fromJS} from 'immutable'
 import {exposeMethods} from './methods'
 
+import {collectionQuery} from './queryBuilders'
+import multiQueryRenderer from './queryRenderer'
+
 export function networkCollectionRenderer(Component, options) {
 
-  let Delayed = delayRender(Component, {
-    writeMethod: data => Store.handleMessage({
-      type: options.replace ? MessageTypes.ReplaceAll : MessageTypes.Write,
-      payload: {
-        rows: data,
-        table: options.tableName
-      }
-    }),
-    shouldFetch: e => e.state.data,
-    cacheMethod: () => {
-      let results = Store.data.get(options.tableName).toList();
-      return results.size > 0 ? results : null;
-    },
-    methods: options.methods,
-    serviceMethod: options.serviceMethod,
-    propName: options.propName || options.tableName + 's'
+  return multiQueryRenderer(Component, {
+    methods: options.methods || [],
+    queries: [
+      collectionQuery(options.tableName, options.propName)
+    ]
   });
-
-  @exposeMethods(options.methods || [])
-  class NetworkCollectionRenderer extends React.Component {
-    render() {
-      return <Delayed ref="inner" {...this.props} />
-    }
-  }
-
-  return NetworkCollectionRenderer;
+  
 }
