@@ -147,6 +147,7 @@ let Layout = React.createClass({
   },
 
   render: function() {
+    console.log('layout', 'rendered')
     let pclass = 'p'+uid();
 		let children = React.Children.map(this.props.children, (child, i) => {
       let cclass = 'c'+uid();
