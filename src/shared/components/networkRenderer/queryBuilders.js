@@ -1,7 +1,7 @@
 import React from 'react'
 import delayRender from './base'
 import Store, {MessageTypes} from '../../store'
-import {getResource} from '../../services/getResource'
+import {getResource, getCollection} from '../../services/getResource'
 import {fromJS} from 'immutable'
 
 export function modelQuery(tableName, propName, idName) {
@@ -24,7 +24,7 @@ export function modelQuery(tableName, propName, idName) {
 export function collectionQuery(tableName, propName) {
   return {
     tableName,
-    propName: options.propName || options.tableName + 's',
+    propName: propName || tableName + 's',
     serviceMethod: props => getCollection(tableName),
     cacheMethod: () => {
       let results = Store.data.get(tableName).toList();
