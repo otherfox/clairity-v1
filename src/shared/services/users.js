@@ -50,4 +50,8 @@ export function getWorkOrderOwners() {
     .then(results => _.uniq(results[0].concat(results[1]), 'id'));
 }
 
+export function getAccountOwners() {
+  return getUsersByType('Employee');
+}
+
 window.getWorkOrderOwners = getWorkOrderOwners;
