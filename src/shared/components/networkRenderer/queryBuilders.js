@@ -4,11 +4,10 @@ import Store, {MessageTypes} from '../../store'
 import {getResource} from '../../services/getResource'
 import {fromJS} from 'immutable'
 
-export function modelQuery(tableName, propName, methods = []) {
-  let id = `${tableName}Id`;
+export function modelQuery(tableName, propName, idName) {
+  let id = idName || `${tableName}Id`;
   return {
     tableName,
-    methods,
     propName: propName || tableName,
     cacheMethod: props => Store.data.getIn([tableName, props[id]]),
     serviceMethod: props => getResource(props[id], tableName),
@@ -22,10 +21,9 @@ export function modelQuery(tableName, propName, methods = []) {
   }
 }
 
-export function collectionQuery(tableName, propName, methods = []) {
+export function collectionQuery(tableName, propName) {
   return {
     tableName,
-    methods,
     propName: options.propName || options.tableName + 's',
     serviceMethod: props => getCollection(tableName),
     cacheMethod: () => {
