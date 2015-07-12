@@ -50,7 +50,6 @@ export default class QueryState {
   }
 
   write(results) {
-    debugger;
     this.options.writeMethod(results, this.options);
     this.update();
     this.cb();
