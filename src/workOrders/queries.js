@@ -10,7 +10,7 @@ export function queryWorkOrder(id) {
 }
 
 export function queryWorkOrderOwners() {
-  return Store.data.get('user') // get all users
+  let result = Store.data.get('user') // get all users
     .toList() // as a list/collection
     .filter(u => // find the users
       u.get('roles') // inspect each users roles
@@ -18,4 +18,5 @@ export function queryWorkOrderOwners() {
          r.get('name') == 'provisioning' || // the name provisioning
          r.get('name') == 'field_ops')  // or field_ops
        .size > 0); // return users whose role query returned one or more entry
+  return result.size > 0 ? result : null;
 }
