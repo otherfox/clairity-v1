@@ -1,5 +1,4 @@
 import React from 'react'
-import delayRender from './base'
 import Store, {MessageTypes} from '../../store'
 import {getResource, getCollection} from '../../services/getResource'
 import {fromJS} from 'immutable'
