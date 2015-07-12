@@ -30,6 +30,7 @@ export default class QueryState {
 
   update() {
     this.data = this.options.cacheMethod(this.props, this.options);
+    this.cb();
     return this;
   }
 
@@ -51,8 +52,6 @@ export default class QueryState {
 
   write(results) {
     this.options.writeMethod(results, this.options);
-    this.update();
-    this.cb();
     return this;
   }
 
