@@ -6,7 +6,6 @@ export default class QueryState {
     this._props = props;
     this.options = options;
     this.cb = cb;
-    this.data = options.cacheMethod(props, options);
     this.update = this.update.bind(this);
     this.write = this.write.bind(this);
   }
@@ -16,12 +15,11 @@ export default class QueryState {
   }
 
   get ready() {
-    return this.data != null;
+    return this.options.cacheMethod(val, this.options) != null;
   }
 
   set props(val) {
     this._props = val;
-    this.data = this.options.cacheMethod(val, this.options);
   }
 
   get props() {
@@ -29,7 +27,6 @@ export default class QueryState {
   }
 
   update() {
-    this.data = this.options.cacheMethod(this.props, this.options);
     this.cb();
     return this;
   }
