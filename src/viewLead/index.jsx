@@ -46,7 +46,7 @@ let viewLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Header><h1>View Lead - {opp.name}</h1></Header>
+        <Header><h1>View Lead - {opp.company}</h1></Header>
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details
@@ -55,7 +55,7 @@ let viewLead = React.createClass({
             widths={{ lg: [4,8]}}
             title={'Customer Details'}
             data={[
-              { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled= {true}/>, detailType: 'muiTextField' },
+              { label: 'Current Account Owner', value: <TextField value={opp.agent_name} disabled= {true}/>, detailType: 'muiTextField' },
               { label: 'Change Account Owner?', name: 'user_id', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Brad Hackett', value: 20 },
@@ -192,15 +192,20 @@ let viewLead = React.createClass({
   }
 });
 
-import {networkModelRenderer} from '../shared/components/networkRenderer'
+import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
 
-let ViewLead = networkModelRenderer(viewLead, 'contact')
+let ViewLead = queryRenderer(viewLead, {
+  queries: [
+    modelQuery('contact', 'lead', 'contactId'),
+    modelQuery('user', 'agent', 'agentId')
+  ]
+});
 
 let ViewLeadPage = React.createClass({
   mixins: [State],
   render() {
     return (
-      <ViewLead id={+this.getParams().contactId} />
+      <ViewLead contactId={+this.getParams().contactId} agentId={+this.getParams().agentId} />
     );
   }
 });
