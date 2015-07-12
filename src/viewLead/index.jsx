@@ -42,11 +42,11 @@ let viewLead = React.createClass({
       auto_pay: false,
     };
 
-    let opportunity = this.props.contact;
+    let opp = this.props.contact.toJS();
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Header><h1>View Lead - {opportunity.name}</h1></Header>
+        <Header><h1>View Lead - {opp.name}</h1></Header>
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details
@@ -200,7 +200,7 @@ let ViewLeadPage = React.createClass({
   mixins: [State],
   render() {
     return (
-      <ViewLead id={this.getParams().contactId} />
+      <ViewLead id={+this.getParams().contactId} />
     );
   }
 });
