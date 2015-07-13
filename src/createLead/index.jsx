@@ -13,6 +13,7 @@ import {
 import AccountOwners from './owners'
 import ProjectTypes from './projectTypes'
 import SalesStages from './salesStage'
+import LeadSources from './leadSource'
 
 import {
   RaisedButton,
@@ -46,21 +47,7 @@ let createLead = React.createClass({
               { label: 'Change Account Owner?', name: 'user_id', value: <AccountOwners owner={owner} />, detailType: 'muiDropDown' },
               { label: 'Project Type', name: 'project_type', value: <ProjectTypes />, detailType: 'muiDropDown' },
               { label: 'Stage', name: 'stage', value: <SalesStages />, detailType: 'muiDropDown' },
-              { label: 'Lead Source', name: 'lead_source_id', value: <DropDown selectedValue={0} menuItems={ new List([
-                { label: '', value: 0},
-                { label: 'Advertisement', value: 1 },
-                { label: 'Email', value: 10 },
-                { label: 'Employee Referal', value: 2 },
-                { label: 'External Referal', value: 3 },
-                { label: 'Other', value: 12 },
-                { label: 'Partner', value: 4 },
-                { label: 'Public Relations', value: 5 },
-                { label: 'Seminar - External', value: 7 },
-                { label: 'Seminar - Internal', value: 6 },
-                { label: 'Trade Show', value: 8 },
-                { label: 'Web', value: 9 },
-                { label: 'Word of Mouth', value: 11 },
-              ])} />, detailType: 'muiDropDown' },
+              { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources />, detailType: 'muiDropDown' },
               { label: 'Lead Campaign Source', name: 'lead_source', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Conference - 2015', value: 2 },
