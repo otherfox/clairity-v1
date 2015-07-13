@@ -10,21 +10,20 @@ import {
 
 class ProjectTypesView extends React.Component {
   getMenuItems() {
-    return this.props.owners.map(o => new Map({
+    return this.props.projectTypes.map(o => new Map({
       label: o.get('name'),
       value: o.get('id')
     })).unshift(new Map({label: "", value: ""}));
   }
   render() {
     return <DropDown {...this.props}
-                     selectedValue={this.props.owner.id}
                      menuItems={this.getMenuItems()} />
   }
 }
 ProjectTypesView.displayName = 'ProjectTypesInternal';
 
 let ProjectTypes = networkCollectionRenderer(ProjectTypesView, {
-  tableName: 'projectType'
+  tableName: 'projectType',
 });
 
 ProjectTypes.displayName = 'ProjectTypes';
