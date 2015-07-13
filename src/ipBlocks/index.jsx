@@ -33,9 +33,7 @@ let IpBlocks = React.createClass({
   },
   getBlocks() {
     return [
-      { blockId: 12005, block: '66.187.176.0/30', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <DropDown  menuItems={ new List([
-        { label: 'internal: Internal', value: 1 },
-        { label: 'internal: Internal', value: 1 }]) } /> },
+      { blockId: 12005, block: '66.187.176.0/30', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <select><option>1</option><option>1</option><option>1</option></select> },
       { blockId: 12006, block: '66.187.176.4/30', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <DropDown  menuItems={ new List([
         { label: 'pop: Winder', value: 1} ]) } />},
       { blockId: 12007, block: '66.187.176.8/32', status: 'Active', notes: '', downstream_org_id: '', reverse_dns_1: '', reverse_dns_2: '', associations: <DropDown  menuItems={ new List([
