@@ -14,9 +14,7 @@ const resource = {
 };
 
 export function getResource(id, tableName) {
-
   return resource[tableName.toLowerCase()](id);
-
 }
 
 
@@ -34,7 +32,5 @@ const collection = {
 };
 
 export function getCollection(tableName) {
-
   return collection[tableName]();
-
 }
