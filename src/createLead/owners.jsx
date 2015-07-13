@@ -3,11 +3,19 @@ import {usersFetched} from '../shared/actions/user'
 import {queryAccountOwners} from '../shared/queries/users'
 import {getAccountOwners} from '../shared/services/users'
 
-let AccountOwners = queryRenderer(class AccountOwnersView extends React.Component {
+import {
+  networkModelRenderer,
+  queryRenderer,
+  modelQuery
+} from '../shared/components/networkRenderer'
+
+class AccountOwnersView extends React.Component {
   render() {
-    return <DropDown selectedValue={owner.id} menuItems={this.props.owners} />
+    return <DropDown {...this.props} selectedValue={owner.id} menuItems={this.props.owners} />
   }
-}, {
+}
+
+let AccountOwners = queryRenderer(AccountOwnersView, {
   queries: [
     {
       writeMethod: usersFetched,
@@ -17,6 +25,6 @@ let AccountOwners = queryRenderer(class AccountOwnersView extends React.Componen
       propName: 'owners'
     }
   ]
-})
+});
 
 export default AccountOwners;
