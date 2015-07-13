@@ -24,6 +24,7 @@ import {getLeads} from './contacts'
 import {getProjectTypes} from './projectType'
 import {getSalesStages} from './salesStage'
 import {getLeadSources} from './leadSource'
+import {getCampaignSources} from './campaignSource'
 
 const collection = {
   pop: getPops,
@@ -32,7 +33,8 @@ const collection = {
   lead: getLeads,
   projectType: getProjectTypes,
   salesStage: getSalesStages,
-  leadSource: getLeadSources
+  leadSource: getLeadSources,
+  campaignSource: getCampaignSources
 };
 
 export function getCollection(tableName) {
