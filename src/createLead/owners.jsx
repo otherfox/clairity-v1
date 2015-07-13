@@ -18,3 +18,5 @@ let AccountOwners = queryRenderer(class AccountOwnersView extends React.Componen
     }
   ]
 })
+
+export default AccountOwners;
