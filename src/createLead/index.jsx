@@ -10,8 +10,15 @@ import {
   modelQuery
 } from '../shared/components/networkRenderer'
 
+import {
+  collectionDropdown
+} from '../shared/components/collectionDropdown'
+
 import AccountOwners from './owners'
-import ProjectTypes from './projectTypes'
+
+let ProjectTypes = collectionDropdown('projectType')
+
+//import ProjectTypes from './projectTypes'
 import SalesStages from './salesStage'
 import LeadSources from './leadSource'
 import CampaignSources from './campaignSource'
