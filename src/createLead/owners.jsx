@@ -19,7 +19,6 @@ class AccountOwnersView extends React.Component {
   }
   render() {
     return <DropDown {...this.props}
-                     selectedValue={this.props.owner.id}
                      menuItems={this.getMenuItems()} />
   }
 }
