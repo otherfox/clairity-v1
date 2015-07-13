@@ -45,7 +45,7 @@ let createLead = React.createClass({
             data={[
               { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
-              { label: 'Change Account Owner?', name: 'user_id', value: <AccountOwners owner={owner} />, detailType: 'muiDropDown' },
+              { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners owner={owner} />, detailType: 'muiDropDown' },
               { label: 'Project Type', name: 'project_type', value: <ProjectTypes />, detailType: 'muiDropDown' },
               { label: 'Stage', name: 'stage', value: <SalesStages />, detailType: 'muiDropDown' },
               { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources />, detailType: 'muiDropDown' },
