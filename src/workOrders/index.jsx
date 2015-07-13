@@ -5,6 +5,7 @@ import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
 import Table from '../shared/components/table'
 import Link from '../shared/components/link'
+import Header from '../shared/components/header'
 import {Tabs, Tab} from '../shared/components/tabs'
 
 import {networkModelRenderer} from '../shared/components/networkRenderer'
@@ -54,9 +55,7 @@ let WorkOrders = React.createClass({
     let wo = this.props.workOrder.toJS();
     return (
       <div>
-        <div className="section-header">
-          <h1>Update Work Order #{wo.id}</h1>
-        </div>
+        <Header><h1>Update Work Order #{wo.id}</h1></Header>
 
         <Layout cPadding={'0 20px 0 0'}>
           <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>

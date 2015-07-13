@@ -1,5 +1,7 @@
 import React from 'react'
 import Settings from './settings'
+import lodash from 'lodash'
+import uid from 'uid'
 import {ClearFix} from 'material-ui'
 import {List} from 'immutable'
 
@@ -36,6 +38,19 @@ let Layout = React.createClass({
     style: React.PropTypes.object
   },
 
+  getDefaultProps() {
+    return {
+      breakpoints: {
+        lg: Settings.breakpoints.lg,
+        md: Settings.breakpoints.md,
+        sm: Settings.breakpoints.sm,
+        xs: Settings.breakpoints.xs,
+        xxs: Settings.breakpoints.xxs,
+      },
+      cols: Settings.cols
+    }
+  },
+
   getChildWidth(i, breakpoint) {
 
     let breakpoints = Object.keys(Settings.breakpoints);
@@ -62,30 +77,13 @@ let Layout = React.createClass({
     return 'initial';
   },
 
-  getChildWidths() {
-
-    let percWidths = [];
-    let breakpoint = this.getBreakpoint();
-
-    if (this.props.children) {
-      let count = React.Children.count(this.props.children);
-      for (let i = 0; i < count; i++) {
-        percWidths.push(this.getChildWidth(i, breakpoint));
-      }
-    } else {
-      percWidths = ['100%'];
-    }
-    return percWidths;
-  },
-
   getChildStyle(i, breakpoint) {
 
-    let breakpoints = ['lg', 'md', 'sm', 'xs', 'xxs'];
+    let breakpoints = Object.keys(Settings.breakpoints);
 
     if (this.props.cStyles) {
       if(this.props.cStyles[breakpoint]) {
-        let style = this.props.cStyles[breakpoint][i];
-        return style;
+        return this.props.cStyles[breakpoint][i];
       } else {
         let bidx = breakpoints.indexOf(breakpoint);
         if(bidx > -1) {
@@ -101,152 +99,105 @@ let Layout = React.createClass({
     return {};
   },
 
-  getChildStyles() {
-
-    let breakpoint = this.getBreakpoint();
-    let styles = [];
-
-    if (this.props.children) {
-      let count = React.Children.count(this.props.children);
-      for (let i = 0; i < count; i++) {
-        styles.push(this.getChildStyle(i, breakpoint));
-      }
-    } else {
-      styles = [{}];
-    }
-    return styles;
+  getChildStyleCSS(i, breakpoint) {
+    return this.getStyleCSS(this.getChildStyle(i, breakpoint));
   },
 
-	getBreakpoint() {
-		let vwidth = window.innerWidth,
-				bKeys = Object.keys(Settings.breakpoints),
-        breakpoints = Settings.breakpoints,
-				breakpoint;
-
-    if(this.props.breakpoints) {
-      Object.keys(this.props.breakpoints).forEach( (key, i) => {
-        breakpoints[key] = this.props.breakpoints[key];
-      });
+  getStyleCSS(cStyle) {
+    let cStyleCSS='';
+    if(typeof cStyle === 'object' && cStyle !== {}){
+      let cStyleKeys= Object.keys(cStyle);
+      cStyleKeys.forEach((key,i) =>{ cStyleCSS += key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()+': '+cStyle[key]+';' });
     }
-
-		bKeys.forEach( (key, i) => {
-			if(breakpoints[key] > vwidth) {
-				let prevKey = i;
-				breakpoint = bKeys[prevKey];
-			} else if(vwidth > breakpoints.lg) {
-				breakpoint = 'lg';
-			}
-		});
-
-		return breakpoint;
-	},
-
-  componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
+    return cStyleCSS;
   },
 
-  componentWillDismount() {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-  getDefaultProps() {
-    return {
-      breakpoints: {
-        lg: Settings.breakpoints.lg,
-        md: Settings.breakpoints.md,
-        sm: Settings.breakpoints.sm,
-        xs: Settings.breakpoints.xs,
-        xxs: Settings.breakpoints.xxs,
-      },
-      cols: Settings.cols
-    }
-  },
-
-  getInitialState() {
-    return { cWidths: this.getChildWidths(), cStyles: this.getChildStyles() };
-  },
-
-	handleResize() {
-    if(this.props.widths) {
-      this.setState({cWidths: this.getChildWidths() });
-    }
-    if(this.props.cStyles) {
-      this.setState({cStyles: this.getChildStyles() });
-    }
-  },
-
-  style: function() {
-
-    let style = {};
-
-    if(this.props.type !== 'main') {
-      style = {
-        width: '100%',
-        padding: this.props.pPadding
-      }
-    }
-
-    if(this.props.type === 'center-b'){
-      style.height = '100%';
-    }
-
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
-  },
-
-  childStyle: function(i) {
-
+  style() {
     let style = {
-        width: this.state.cWidths[i],
+      root: {
+        width : (this.props.type === 'main') ? 'initial' : '100%',
+        padding: (this.props.type === 'main') ? 'initial' : this.props.pPadding,
+        height: (this.props.type === 'center-v') ? '100%' : 'initial'
+      },
+      child: {
         float: 'left',
         padding: this.props.cPadding || 'initial',
         margin: this.props.cMargin || 'initial'
+      }
     }
 
     if (this.props.type === 'center-h') {
-      style.position = 'relative';
-      style.margin = '0 auto';
-      style.float = 'none';
+      style.child = _.assign(style.child, {
+        position: 'relative',
+        margin: '0 auto',
+        float: 'none'
+      });
     }
 
     if (this.props.type === 'center-v') {
-      style.position = 'relative';
-      style.margin = '0 auto';
-      style.top = '50%';
-      style.transform = 'translateY(-50%)';
-      style.float = 'none';
+      style.child = _.assign( style.child, {
+        position: 'relative',
+        margin: '0 auto',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        float: 'none'
+      });
     }
-
-    if(this.props.cStyle) {
-      Object.keys(this.props.cStyle).forEach(function(key, i){
-        style[key] = this.props.cStyle[key];
-      }, this);
-    }
-
-    if(this.state.cStyles[i]) {
-      Object.keys(this.state.cStyles[i]).forEach(function(key, i){
-        style[key] = this.state.cStyles[i][key];
-      }, this);
-    }
-
     return style;
   },
 
   render: function() {
+    let pclass = 'p'+uid();
+		let children = React.Children.map(this.props.children, (child, i) => {
+      let cclass = 'c'+uid();
+      return <ClearFix className={cclass} >
+        <style>
+          {`
+            /* general style */
+            .${pclass} .${cclass} {
+              ${this.getStyleCSS(_.assign(this.style().child, this.props.cStyle))}
+            }
 
-		let children = React.Children.map(this.props.children, (child, i) =>
-			 <ClearFix style={this.childStyle(i)}>{React.cloneElement(child)}</ClearFix>
-    );
+            /* lg */
+            .${pclass} .${cclass} {
+              width: ${this.getChildWidth(i, 'lg')};
+              ${this.getChildStyleCSS(i, 'lg')}
+            }
+
+            /* md */
+            @media (max-width: ${this.props.breakpoints.md}px) {
+              .${pclass} .${cclass} {
+                  width: ${this.getChildWidth(i, 'md')};
+                  ${this.getChildStyleCSS(i, 'lg')}
+              }
+            }
+            /* sm */
+            @media (max-width: ${this.props.breakpoints.sm}px) {
+              .${pclass} .${cclass} {
+                  width: ${this.getChildWidth(i, 'sm')};
+              }
+            }
+            /* xs */
+            @media (max-width: ${this.props.breakpoints.xs}px) {
+              .${pclass} .${cclass} {
+                  width: ${this.getChildWidth(i, 'xs')};
+              }
+            }
+            /* xxs */
+            @media (max-width: ${this.props.breakpoints.xxs}px) {
+              .${pclass} .${cclass} {
+                  width: ${this.getChildWidth(i, 'xxs')};
+              }
+            }
+          `}
+        </style>
+        {React.cloneElement(child)}</ClearFix>
+    });
 
     return (
-      <ClearFix style={this.style()}>
-        {children}
-      </ClearFix>
+        <ClearFix className={pclass} style={_.assign(this.style().root, this.props.style)}>
+          {children}
+        </ClearFix>
     );
   }
 });

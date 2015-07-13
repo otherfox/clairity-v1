@@ -1,5 +1,6 @@
 
 import React, {PropTypes} from 'react'
+import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import Table from  '../shared/components/table'
 
@@ -1605,7 +1606,7 @@ let viewLeads = React.createClass({
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
       <div>
-        <h1>View Leads</h1>
+        <Header><h1>View Leads</h1></Header>
         <Table {...this.getLeads(this.props.leads)} />
       </div>
     </Layout>

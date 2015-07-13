@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from  '../shared/components/layout'
+import Header from '../shared/components/header'
 import Footer from  '../shared/components/footer'
 import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
@@ -153,11 +154,11 @@ export default class CreateLocation extends React.Component {
     }
     return (
       <Layout>
-        <div className="section-header">
-          <h1>Edit Customer Location</h1>
-        </div>
-        <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [6, 6], md: [12, 12], sm: [12, 12], xs: [12, 12]}} cPadding={'0 20px 20px 20px'}>
+
+        <Header><h1>Edit Customer Location</h1></Header>
+
+        <Paper>
+          <Layout widths={{ lg: [6, 6], md: [12, 12]}} cPadding={'0 20px 20px 20px'}>
             <div>
               <h4>Customer(Billing) Details</h4>
               {dropDown}

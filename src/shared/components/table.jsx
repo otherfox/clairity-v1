@@ -1,6 +1,6 @@
 import React from 'react'
 import Settings from './settings'
-import {RaisedButton, Toggle, FloatingActionButton, FontIcon} from 'material-ui'
+import {RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import _ from 'lodash'
 
@@ -86,6 +86,10 @@ let DataTable = React.createClass({
     margin: React.PropTypes.string
   },
 
+  contextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+
   getDefaultProps() {
     return {
       widthPerc: 100,
@@ -135,8 +139,10 @@ let DataTable = React.createClass({
 
   style: function() {
     return {
-      width: '100%',
-      margin: this.props.margin || "20px 0"
+      root: {
+        width: '100%',
+        margin: this.props.margin || "20px 0"
+      }
     };
   },
 
@@ -145,14 +151,7 @@ let DataTable = React.createClass({
   },
 
   getRowClass: function(index) {
-
-      var active = this.state.active;
-
-      if( index === active ) {
-        return 'active';
-      }
-
-      return;
+    return (this.state.active === index ) ? 'active' : '';
   },
 
   formatCell: function(cell, col) {
@@ -163,6 +162,7 @@ let DataTable = React.createClass({
   },
 
   render: function() {
+
     let columns =
       <Group fixed={true}>
         {
@@ -183,7 +183,47 @@ let DataTable = React.createClass({
     let height = (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
 
     return (
-      <div style={this.style()}>
+      <div style={_.assign(this.style().root, this.props.style)}>
+        <style>
+          {`
+            /* Fix for dynamic cell constructors. */
+            .public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
+                padding: 8px;
+            }
+
+            /* Fix gradient header */
+            .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
+              background-image: none;
+              background-color: ${this.context.muiTheme.palette.primary1Color};
+              color: ${Styles.Colors.white};
+            }
+
+            /* Fix z-index and border */
+            .public_fixedDataTable_main {
+              z-index: 0;
+            }
+
+            /* changes border color */
+            .public_fixedDataTable_header,
+            .fixedDataTable_hasBottomBorder,
+            .public_fixedDataTableCell_main,
+            .fixedDataTableColumnResizerLine_main,
+            .fixedDataTableRow_fixedColumnsDivider,
+            .public_fixedDataTable_main {
+              border-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, 0.15)};
+            }
+
+            /* removes background colors */
+            .public_fixedDataTableCell_main {
+              background-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.canvasColor, 0.9)};
+              color: ${this.context.muiTheme.palette.textColor};
+            }
+            .public_fixedDataTableRow_highlighted, .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+              background-color: ${Utils.ColorManipulator.darken(this.context.muiTheme.palette.canvasColor, 0.04)};
+              color: ${this.context.muiTheme.palette.textColor};
+            }
+          `}
+        </style>
         <Table
           rowHeight={this.props.rowHeight}
           onRowClick={this.onRowClick}

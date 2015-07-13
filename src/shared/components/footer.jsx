@@ -1,13 +1,15 @@
 import React from 'react'
 import Settings from './settings'
-import {Styles} from 'material-ui'
+import {Utils, Styles} from 'material-ui'
+
+let ColorManipulator = Utils.ColorManipulator;
 
 class Footer extends React.Component {
 
   style() {
 
-    let backgroundColor = this.context.muiTheme.palette.textColor;
-    let textColor = this.context.muiTheme.palette.canvasColor;
+    let textColor = Styles.Colors.white;
+    let backgroundColor = Styles.Colors.black;
 
     return {
       padding: '20px',

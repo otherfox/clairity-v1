@@ -43,7 +43,7 @@ let IpBlocks = React.createClass({
         { label: 'Notes', name: 'notes', value: <TextField />,cellType: 'string'},
       ],
       title: 'Create IP Blocks',
-      layout: { lg: ['auto', '320px'] },
+      widths: { lg: ['auto', '320px'] },
       rowStyle: { float: 'left' },
       cStyles: { lg: [{textAlign: 'left'}] },
     }

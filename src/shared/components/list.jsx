@@ -1,107 +1,99 @@
 import React from 'react'
 import Settings from './settings'
+import _ from 'lodash'
 import {
   Utils,
-  List,
-  ListItem,
-  ListDivider,
-  ListItem
-
+  Paper,
+  ClearFix
 } from 'material-ui'
+
 import Layout from './layout'
+
 let ColorManipulator = Utils.ColorManipulator;
 
 let CustomList = React.createClass ({
 
   propTypes: {
-    style: React.PropTypes.object,
     data: React.PropTypes.array,
     title: React.PropTypes.string,
-    labelTop: React.PropTypes.bool
+    labelTop: React.PropTypes.bool,
+    headerStyle: React.PropTypes.object,
+    rowStyle: React.PropTypes.object,
+    labelStyle: React.PropTypes.object,
+    valueStyle: React.PropTypes.object,
+    cStyles: React.PropTypes.object,
+    cPadding: React.PropTypes.string,
+    widths: React.PropTypes.object
   },
 
-  style() {
+  getDefaultProps() {
+    return {
+      widths: {lg: [5,7], md: [4,8], sm: [12]},
+      cPadding: '0 20px 5px 0'
+    }
+  },
+
+  style(detailType) {
 
     let textColor = this.context.muiTheme.palette.textColor;
-    let style = {
-      color: textColor,
-      lineHeight: '180%'
-    };
-
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
-        style[key] = this.props.style[key];
-      }, this);
+    let labelColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .6 );
+    let headerColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .3 );
+    let labelLineHeight = {
+      muiDropDown: '4em',
+      muiTextField: '3.2em',
     }
-
-    return style;
-  },
-
-  labelStyle(type) {
-
-    let textColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .6 );
-
-
-    let labelStyle = {
-      color: textColor,
-      textAlign: 'right',
-    }
-
-    if(this.props.labelTop === true) labelStyle.textAlign = 'left'
-    if(type === 'muiTextField' || type === 'muiDatePicker') labelStyle.lineHeight = 3.5;
-    if(type === 'muiDropDown') labelStyle.lineHeight = 4;
-
-    return labelStyle;
-  },
-
-  headerStyle() {
-
-    let textColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .3 );
 
     return {
-      color: textColor,
-      height: '1.7em',
-      marginBottom: '1em'
-    }
-  },
-
-  rowStyle(type) {
-
-    let rowStyle = {};
-
-    if (type === 'muiTextField' || type === 'muiDatePicker' || type === 'muiDropDown') {}
-    else {}
-
-    return rowStyle;
-  },
-
-  valueStyle(type) {
-    let valueStyle = {}
-    if(type === 'muiButton') valueStyle.marginTop = '20px';
-    return valueStyle;
+      cStyles: {
+        lg: (this.props.labelTop === true) ? [{ textAlign: 'left' }] : [{ textAlign: 'right' }],
+        sm: [{ textAlign: 'left'}]
+      },
+      header: {
+        color: textColor,
+        margin: '1em 0',
+        lineHeight: '1.8em',
+        height: (this.props.title === null) ? '1.8em' : 'auto'
+      },
+      label: {
+        color: labelColor,
+        lineHeight: (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
+      },
+      root: {
+        color: textColor,
+        lineHeight: '180%'
+      },
+      row: {
+        margin: (detailType === 'muiCheckbox') ? '20px 0' : 'initial'
+      },
+      value: {
+        marginTop: (detailType === 'muiButton') ? '20px' : 'initial'
+      }
+    };
   },
 
   layout() {
-    return (this.props.labelTop) ? {lg: [12,12], md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12]} : {lg: [5,7], md: [4,8], sm: [12,12], xs: [12,12], xxs: [12,12]};
+    return (this.props.labelTop === true) ? {} : this.props.widths;
   },
 
   render() {
+
     let fData = false;
     if (this.props.data && Array.isArray(this.props.data)) {
       fData = this.props.data.map((dataObj,idx) =>
-        <div style ={this.rowStyle(dataObj.detailType)} key={idx}>
-          <Layout widths={this.layout()} cPadding={'0 20px 5px 0'}>
-            <div style={this.labelStyle(dataObj.detailType)}>{dataObj.label}</div>
-            <div style={this.valueStyle(dataObj.detailType)}>{dataObj.value}</div>
+        <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
+          <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles) }>
+            <div style={_.assign(this.style(dataObj.detailType).label, this.props.label)}>{dataObj.label}</div>
+            <div style={_.assign(this.style(dataObj.detailType).value, this.props.value)}>{dataObj.value}</div>
           </Layout>
         </div>);
     }
 
-    let title = (this.props.title || this.props.title === null) ? <div><h3 style={this.headerStyle()}>{this.props.title}</h3></div> : null ;
+    let title = (this.props.title || this.props.title === null) ? <div><h3 style={_.assign(this.style().header, this.props.headerStyle)}>{this.props.title}</h3></div> : null ;
 
     return (
-      <div style={this.style()}>
+      <div style={this.style().root}>
+        <ClearFix>{title}</ClearFix>
+        <ClearFix>{fData}</ClearFix>
       </div>
     );
   }

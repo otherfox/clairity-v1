@@ -1,5 +1,6 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import Settings from './settings'
+import _ from 'lodash'
 import {
   DropDownMenu
 } from 'material-ui'
@@ -9,39 +10,27 @@ import {Map, List} from 'immutable'
 let DropDown = React.createClass({
 
   propTypes: {
-    style: PropTypes.object,
-    menuItems: PropTypes.object,
-    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    menuItems: React.PropTypes.object,
+    menuItemStyle: React.PropTypes.object,
+    labelStyle: React.PropTypes.object,
+    underlineStyle: React.PropTypes.object,
+    selectedValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
   },
 
   style() {
-    let style = {
-
-    };
-
-    if (this.props.style) {
-      Object.keys(this.props.style)
-        .forEach((key, i) => style[key] = this.props.style[key]);
+    return {
+      root: {},
+      underlineStyle: {
+        marginLeft: 0
+      },
+      labelStyle: {
+        paddingLeft: 0,
+        zIndex: 0,
+      },
+      menuItemStyle: {
+        zIndex: 3
+      }
     }
-
-    return style;
-  },
-
-  dropDownUnderlineStyle() {
-    let underlineStyle = {
-      marginLeft: 0
-    }
-
-    return underlineStyle;
-  },
-
-  dropDownLabelStyle() {
-    let labelStyle = {
-      paddingLeft: 0,
-      zIndex: 0
-    }
-
-    return labelStyle;
   },
 
   handleChange(ev, index, menuItem) {
@@ -60,13 +49,13 @@ let DropDown = React.createClass({
     let index = data.findIndex(item => item.value === searchValue);
 
     return (
-      <div style={this.style()}>
+      <div style={_.assign(this.style().root, this.props.style)}>
         <DropDownMenu menuItems={data}
                       selectedIndex={index < 0 ? 0 : +index}
                       onChange={link ? this.handleLink : this.handleChange}
-                      labelStyle={this.dropDownLabelStyle()}
-                      underlineStyle={this.dropDownUnderlineStyle()}
-                      menuItemStyle={{zIndex: 3}}
+                      labelStyle={_.assign(this.style().labelStyle, this.props.labelStyle)}
+                      underlineStyle={_.assign(this.style().underlineStyle, this.props.underlineStyle)}
+                      menuItemStyle={_.assign(this.style().menuItemStyle, this.props.menuItemStyle)}
                       />
       </div>
     );
