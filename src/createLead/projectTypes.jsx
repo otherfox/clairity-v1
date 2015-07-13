@@ -1,0 +1,32 @@
+import React, {PropTypes} from 'react'
+import {projectTypesFetched} from '../shared/actions/projectType'
+import {queryProjectTypes} from '../shared/queries/projectType'
+import {getProjectTypes} from '../shared/services/projectType'
+import DropDown from '../shared/components/dropDown'
+import {Map} from 'immutable'
+import {
+  networkCollectionRenderer
+} from '../shared/components/networkRenderer'
+
+class ProjectTypesView extends React.Component {
+  getMenuItems() {
+    return this.props.owners.map(o => new Map({
+      label: o.get('name'),
+      value: o.get('id')
+    })).unshift(new Map({label: "", value: ""}));
+  }
+  render() {
+    return <DropDown {...this.props}
+                     selectedValue={this.props.owner.id}
+                     menuItems={this.getMenuItems()} />
+  }
+}
+ProjectTypesView.displayName = 'ProjectTypesInternal';
+
+let ProjectTypes = networkCollectionRenderer(ProjectTypesView, {
+  tableName: 'projectType'
+});
+
+ProjectTypes.displayName = 'ProjectTypes';
+
+export default ProjectTypes;
