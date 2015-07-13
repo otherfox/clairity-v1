@@ -21,7 +21,6 @@ import {
 } from 'material-ui'
 import {fromJS, Map} from 'immutable'
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
-import {queryAllPops} from '../../shared/queries/pop'
 import {getPops} from '../../shared/services/pop'
 import {updateWorkOrder} from '../../shared/actions/workOrder'
 
