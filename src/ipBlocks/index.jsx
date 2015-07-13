@@ -4,6 +4,8 @@ import Layout from  '../shared/components/layout'
 import Details from  '../shared/components/details'
 import DropDown from '../shared/components/dropDown'
 import Table from  '../shared/components/table'
+import Typeahead from '../shared/components/typeahead/typeahead'
+import _ from 'lodash'
 
 import {
   RadioButtonGroup,
@@ -28,7 +30,7 @@ import {Navigation} from 'react-router'
 
 let IpBlocks = React.createClass({
   mixins: [Navigation],
-  proptypes: {
+  propTypes: {
     blocks: React.PropTypes.object
   },
   getBlocks() {
@@ -292,8 +294,8 @@ let IpBlocks = React.createClass({
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[
-              { label: 'Subnet', name: 'subnet', value: <TextField value={''}/>, detailType: 'muiTextField'},
-              { label: 'Keyword', name: 'keyword', value: <TextField value={66}/>, detailType: 'muiTextField'},
+              { label: 'Subnet', name: 'subnet', value: <TextField defaultValue={''} />, detailType: 'muiTextField'},
+              { label: 'Keyword', name: 'keyword', value: <Typeahead options={_.map(this.getBlocks(), _.property('block'))} maxVisible={10} /> , detailType: 'muiTextField'},
               { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px'}}/><RaisedButton label="Assign New Block" /></div>, detaildetailType: 'muiButton'}
           ]}
         />

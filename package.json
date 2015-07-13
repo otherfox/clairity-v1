@@ -49,8 +49,10 @@
   },
   "dependencies": {
     "@brainbytes/immutable-store": "^0.3.1",
+    "classnames": "^1.2.0",
     "event-emitter": "^0.3.3",
     "fixed-data-table": "0.3.0",
+    "fuzzy": "^0.1.0",
     "fynx": "^1.6.0",
     "immutable": "^3.7.0",
     "jss": "^1.0.8",

@@ -35,19 +35,34 @@ var LeftNav = React.createClass ({
 
   style: function() {
     return {
-      position: 'absolute',
-      width: Settings.leftNavWidth
+      root: {
+        position: 'absolute',
+        width: Settings.leftNavWidth,
+        height: '100%',
+        backgroundColor: this.context.muiTheme.component.menu.backgroundColor,
+        borderRight: '1px solid '+this.context.muiTheme.palette.borderColor,
+      },
+      menu: {
+        backgroundColor: this.context.muiTheme.component.menu.backgroundColor,
+        zIndex: 3,
+      }
     }
+  },
+
+  contextTypes: {
+    muiTheme: React.PropTypes.object
   },
 
   render: function() {
       return (
-        <div style={this.style()}>
-          <Menu menuItems={nestedMenuItems} zDepth={0} style={{zIndex: 3}}/>
+        <div style={this.style().root}>
+          <Menu menuItems={nestedMenuItems} zDepth={0} style={this.style().menu}/>
         </div>
       )
   }
 
 });
+
+
 
 export default LeftNav;
