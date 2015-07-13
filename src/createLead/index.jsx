@@ -5,6 +5,16 @@ import Details from  '../shared/components/details'
 import Header from '../shared/components/header'
 
 import {
+  networkModelRenderer,
+  queryRenderer,
+  modelQuery
+} from '../shared/components/networkRenderer'
+
+import {usersFetched} from '../shared/actions/users'
+import {queryAccountOwners} from '../shared/queries/users'
+import {getAccountOwners} from '../shared/services/users'
+
+import {
   RadioButtonGroup,
   RadioButton,
   Checkbox,
@@ -23,6 +33,22 @@ import {
 import controllable from 'react-controllables'
 import {List} from 'immutable'
 import {State} from 'react-router'
+
+let AccountOwners = queryRenderer(class AccountOwnersView extends React.Component {
+  render() {
+    return <DropDown selectedValue={owner.id} menuItems={this.props.owners} />
+  }
+}, {
+  queries: [
+    {
+      writeMethod: usersFetched,
+      shouldFetch: e => e.state.data,
+      cacheMethod: queryAccountOwners,
+      serviceMethod: getAccountOwners,
+      propName: 'owners'
+    }
+  ]
+})
 
 let createLead = React.createClass({
   mixins: [State],
@@ -140,8 +166,6 @@ let createLead = React.createClass({
     );
   }
 });
-
-import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
 
 let CreateLead = queryRenderer(createLead, {
   queries: [
