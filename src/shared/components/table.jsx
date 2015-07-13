@@ -194,8 +194,12 @@ let DataTable = React.createClass({
             /* Fix gradient header */
             .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
               background-image: none;
-              background-color: ${this.context.muiTheme.palette.primary1Color};
-              color: ${Styles.Colors.white};
+              background-color: ${this.context.muiTheme.palette.canvasColor};
+              color: ${this.context.muiTheme.palette.primary1Color};
+              border: none;
+            }
+            .public_fixedDataTable_header .public_fixedDataTableCell_main {
+                border-bottom: 3px solid ${this.context.muiTheme.palette.primary1Color};
             }
 
             /* Fix z-index and border */

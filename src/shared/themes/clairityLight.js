@@ -32,7 +32,7 @@ let ClairityLightTheme = {
     spacing = spacing || Spacing;
     let obj = {
       appBar: {
-        color: Colors.blue400,
+        color: Colors.blueGrey700,
         textColor: Colors.white,
         height: spacing.desktopKeylineIncrement
       },
@@ -78,8 +78,8 @@ let ClairityLightTheme = {
         color: Colors.white
       },
       menu: {
-        backgroundColor: Colors.white,
-        containerBackgroundColor: Colors.white,
+        backgroundColor: Colors.grey100,
+        containerBackgroundColor: Colors.grey100,
       },
       menuItem: {
         dataHeight: 32,
