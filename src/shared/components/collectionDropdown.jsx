@@ -23,7 +23,7 @@ CollectionDropdownView.defaultProps = {
   valueKey: 'id'
 }
 
-export default function(tableName) {
+export function collectionDowndown(tableName) {
   return networkCollectionRenderer(CollectionDropdownView, {
     tableName,
     propName: 'collection'
