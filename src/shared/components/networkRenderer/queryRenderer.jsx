@@ -29,7 +29,7 @@ export default function multiQueryRenderer(Component, options) {
     }
 
     shouldComponentUpdate(props, state) {
-      return this._dirty || (this.state.ready != state.ready);
+      return this._dirty || this.state.queryState != this.getQueryState();
     }
 
     componentDidMount() {
@@ -48,7 +48,8 @@ export default function multiQueryRenderer(Component, options) {
 
     update() {
       this.setState({
-        ready: this.ready()
+        ready: this.ready(),
+        queryState: this.getQueryState()
       });
     }
 
