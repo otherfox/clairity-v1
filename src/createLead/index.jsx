@@ -12,6 +12,7 @@ import {
 
 import AccountOwners from './owners'
 import ProjectTypes from './projectTypes'
+import SalesStages from './salesStage'
 
 import {
   RadioButtonGroup,
@@ -64,15 +65,7 @@ let createLead = React.createClass({
               { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
               { label: 'Change Account Owner?', name: 'user_id', value: <AccountOwners owner={owner} />, detailType: 'muiDropDown' },
               { label: 'Project Type', name: 'project_type', value: <ProjectTypes />, detailType: 'muiDropDown' },
-                { label: 'Stage', name: 'stage', value: <DropDown selectedValue={0} menuItems={ new List([
-                { label: '', value: 0},
-                { label: 'Closed Won', value: 5 },
-                { label: 'Clost Lost', value: 6 },
-                { label: 'Needs Analysis', value: 2 },
-                { label: 'Negotiation', value: 4 },
-                { label: 'Proposal', value: 3 },
-                { label: 'Qualification', value: 1 },
-              ])} />, detailType: 'muiDropDown' },
+              { label: 'Stage', name: 'stage', value: <SalesStages />, detailType: 'muiDropDown' },
               { label: 'Lead Source', name: 'lead_source_id', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Advertisement', value: 1 },
