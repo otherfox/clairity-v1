@@ -17,11 +17,9 @@ import {
 import AccountOwners from './owners'
 
 let ProjectTypes = collectionDropdown('projectType')
-
-//import ProjectTypes from './projectTypes'
-import SalesStages from './salesStage'
-import LeadSources from './leadSource'
-import CampaignSources from './campaignSource'
+let SalesStages = collectionDropdown('salesStage')
+let LeadSources = collectionDropdown('leadSource')
+let CampaignSources = collectionDropdown('campaignSource')
 
 import {
   RaisedButton,
