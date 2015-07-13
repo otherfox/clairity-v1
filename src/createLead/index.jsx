@@ -30,16 +30,6 @@ let createLead = React.createClass({
   render() {
     let event = 'controller.cfm?event=convertLead';
 
-    let hiddenValues = {
-      customer_id: "1480",
-      contact_id: "7223",
-      createdbyuser_id: "130",
-      lastmodifiedbyuser_id: "130",
-      entrykey: "1C86AA75-F0C6-4FA7-9D4F4E8C2452772D",
-      dt_created: "{ts '2015-07-03 19:16:41'}",
-      dt_lastmodified: "{ts '2015-07-03 19:16:41'}",
-    };
-
     let opp = this.props.lead.toJS();
     let owner = this.props.agent.toJS();
 
