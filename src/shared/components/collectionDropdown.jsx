@@ -10,7 +10,7 @@ class CollectionDropdownView extends React.Component {
     return this.props.collection.map(o => new Map({
       label: o.get(this.props.labelKey),
       value: o.get(this.props.valueKey)
-    }));
+    })).unshift(new Map({label: '', value: ''}));
   }
   render() {
     return <DropDown {...this.props}
