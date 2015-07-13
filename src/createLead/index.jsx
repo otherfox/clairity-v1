@@ -61,7 +61,7 @@ let createLead = React.createClass({
             data={[
               { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
-              { label: 'Change Account Owner?', name: 'user_id', value: <AccountOwners />, detailType: 'muiDropDown' },
+              { label: 'Change Account Owner?', name: 'user_id', value: <AccountOwners owner={owner} />, detailType: 'muiDropDown' },
               { label: 'Project Type', name: 'project_type', value: <DropDown selectedValue={0} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Fiber Data (Existing)', value: 6 },
