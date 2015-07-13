@@ -22,13 +22,15 @@ import {getPops} from './pop'
 import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
 import {getLeads} from './contacts'
 import {getProjectTypes} from './projectType'
+import {getSalesStages} from './salesStage'
 
 const collection = {
   pop: getPops,
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
   lead: getLeads,
-  projectType: getProjectTypes
+  projectType: getProjectTypes,
+  salesStage: getSalesStages
 };
 
 export function getCollection(tableName) {
