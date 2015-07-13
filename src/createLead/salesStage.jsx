@@ -5,7 +5,7 @@ import {
   networkCollectionRenderer
 } from '../shared/components/networkRenderer'
 
-class ProjectTypesView extends React.Component {
+class SalesStagesView extends React.Component {
   getMenuItems() {
     return this.props.salesStages.map(o => new Map({
       label: o.get('name'),
@@ -17,12 +17,12 @@ class ProjectTypesView extends React.Component {
                      menuItems={this.getMenuItems()} />
   }
 }
-ProjectTypesView.displayName = 'ProjectTypesInternal';
+SalesStagesView.displayName = 'SalesStagesInternal';
 
-let ProjectTypes = networkCollectionRenderer(ProjectTypesView, {
+let SalesStages = networkCollectionRenderer(SalesStagesView, {
   tableName: 'salesStage',
 });
 
-ProjectTypes.displayName = 'ProjectTypes';
+SalesStages.displayName = 'SalesStages';
 
-export default ProjectTypes;
+export default SalesStages;
