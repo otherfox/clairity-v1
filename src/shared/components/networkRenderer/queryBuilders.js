@@ -27,7 +27,6 @@ export function collectionQuery(tableName, propName, replace = true) {
     serviceMethod: props => getCollection(tableName),
     cacheMethod: () => {
       let results = Store.data.get(tableName).toList();
-      if (tableName == "user") debugger;
       return results.size > 0 ? results : null;
     },
     writeMethod: data => Store.handleMessage({
