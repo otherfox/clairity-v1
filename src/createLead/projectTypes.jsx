@@ -1,7 +1,4 @@
 import React, {PropTypes} from 'react'
-import {projectTypesFetched} from '../shared/actions/projectType'
-import {queryProjectTypes} from '../shared/queries/projectType'
-import {getProjectTypes} from '../shared/services/projectType'
 import DropDown from '../shared/components/dropDown'
 import {Map} from 'immutable'
 import {
