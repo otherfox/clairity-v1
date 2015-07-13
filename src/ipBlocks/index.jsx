@@ -300,7 +300,7 @@ let IpBlocks = React.createClass({
           ]}
         />
         <div>
-          <div style={{ fontWeight: 'bold', float: 'left', width: 'initial', lineHeight: '1.75em', marginRight: '20px' }}>Show:</div>
+          <div style={{ fontWeight: 'bold', float: 'left', width: 'initial', lineHeight: '1.75em', marginRight: '20px', color: this.context.muiTheme.palette.textColor }}>Show:</div>
           <RadioButtonGroup name={"status"} style={{float: 'left', width: 'initial'}}>
             <RadioButton value={"active"} label={"Acitve"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
             <RadioButton value={"inactive"} label={"Inactive"} defaultChecked={true} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>

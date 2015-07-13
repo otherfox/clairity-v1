@@ -373,10 +373,8 @@ var Typeahead = React.createClass({
     this.setState({ visible: false})
   },
 
-  // Todo research on focus
-  _onFocus(event) {
-    this.setState({ visible: this.getOptionsForValue(this._generateOptionToStringFor(this.props.displayOption), this.props.options) });
-  }
+  // Todo onfocus show options
+
 
 
 });
