@@ -1,18 +1,18 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, addons} from 'react/addons'
 import Layout from  '../shared/components/layout'
-import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
 import Header from '../shared/components/header'
-
+import { collectionDropdown } from '../shared/components/collectionDropdown'
+import {State} from 'react-router'
 import {
-  networkModelRenderer,
+  RaisedButton,
+  TextField,
+  Paper
+} from 'material-ui'
+import {
   queryRenderer,
   modelQuery
 } from '../shared/components/networkRenderer'
-
-import {
-  collectionDropdown
-} from '../shared/components/collectionDropdown'
 
 import AccountOwners from './owners'
 
@@ -21,22 +21,24 @@ let SalesStages = collectionDropdown('salesStage')
 let LeadSources = collectionDropdown('leadSource')
 let CampaignSources = collectionDropdown('campaignSource')
 
-import {
-  RaisedButton,
-  TextField,
-  Paper
-} from 'material-ui'
-
-import controllable from 'react-controllables'
-import {List} from 'immutable'
-import {State} from 'react-router'
-
 let createLead = React.createClass({
-  mixins: [State],
+  mixins: [State, addons.LinkedStateMixin],
+
+  getInitialState() {
+    return {
+      owner: this.props.agent.get('id'),
+      projectType: '',
+      salesStage: '',
+      leadSource: '',
+      campaignSource: ''
+    }
+  },
+
+  convertLead() {
+    console.log('Convert lead: ', this.state);
+  },
 
   render() {
-    let event = 'controller.cfm?event=convertLead';
-
     let opp = this.props.lead.toJS();
     let owner = this.props.agent.toJS();
 
@@ -50,12 +52,12 @@ let createLead = React.createClass({
             data={[
               { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
-              { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners owner={owner} />, detailType: 'muiDropDown' },
-              { label: 'Project Type', name: 'project_type', value: <ProjectTypes />, detailType: 'muiDropDown' },
-              { label: 'Stage', name: 'stage', value: <SalesStages />, detailType: 'muiDropDown' },
-              { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources />, detailType: 'muiDropDown' },
-              { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources />, detailType: 'muiDropDown' },
-              {label: '', value: <RaisedButton primary={true} linkButton={true} label="Update" href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().agentId+'/edit'}/>, detaildetailType: 'muiButton'}
+              { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('owner')} />, detailType: 'muiDropDown' },
+              { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('projectType')}/>, detailType: 'muiDropDown' },
+              { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('salesStage')} />, detailType: 'muiDropDown' },
+              { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('leadSource')} />, detailType: 'muiDropDown' },
+              { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources valueLink={this.linkState('campaignSource')} />, detailType: 'muiDropDown' },
+              {label: '', value: <RaisedButton primary={true} label="Update" onClick={this.convertLead} />, detaildetailType: 'muiButton'}
             ]}
           />
         </Layout>
@@ -64,6 +66,7 @@ let createLead = React.createClass({
     );
   }
 });
+//href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().agentId+'/edit'}
 
 let CreateLead = queryRenderer(createLead, {
   queries: [
