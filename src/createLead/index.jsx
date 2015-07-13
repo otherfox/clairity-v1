@@ -10,7 +10,7 @@ import {
   modelQuery
 } from '../shared/components/networkRenderer'
 
-import {usersFetched} from '../shared/actions/users'
+import {usersFetched} from '../shared/actions/user'
 import {queryAccountOwners} from '../shared/queries/users'
 import {getAccountOwners} from '../shared/services/users'
 
