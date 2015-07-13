@@ -14,6 +14,7 @@ import AccountOwners from './owners'
 import ProjectTypes from './projectTypes'
 import SalesStages from './salesStage'
 import LeadSources from './leadSource'
+import CampaignSources from './campaignSource'
 
 import {
   RaisedButton,
@@ -48,12 +49,7 @@ let createLead = React.createClass({
               { label: 'Project Type', name: 'project_type', value: <ProjectTypes />, detailType: 'muiDropDown' },
               { label: 'Stage', name: 'stage', value: <SalesStages />, detailType: 'muiDropDown' },
               { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources />, detailType: 'muiDropDown' },
-              { label: 'Lead Campaign Source', name: 'lead_source', value: <DropDown selectedValue={0} menuItems={ new List([
-                { label: '', value: 0},
-                { label: 'Conference - 2015', value: 2 },
-                { label: 'Oz', value: 1 },
-                { label: 'Spring Webinar - 2015', value: 3 },
-              ])} />, detailType: 'muiDropDown' },
+              { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources />, detailType: 'muiDropDown' },
               {label: '', value: <RaisedButton primary={true} linkButton={true} label="Update" href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().agentId+'/edit'}/>, detaildetailType: 'muiButton'}
             ]}
           />
