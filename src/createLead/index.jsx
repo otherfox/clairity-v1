@@ -15,17 +15,7 @@ import ProjectTypes from './projectTypes'
 import SalesStages from './salesStage'
 
 import {
-  RadioButtonGroup,
-  RadioButton,
-  Checkbox,
-  FlatButton,
   RaisedButton,
-  FloatingActionButton,
-  IconButton,
-  Toggle,
-  Slider,
-  DropDownMenu,
-  DatePicker,
   TextField,
   Paper
 } from 'material-ui'
