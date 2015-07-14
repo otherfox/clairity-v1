@@ -59,7 +59,7 @@ let WorkOrders = React.createClass({
 
         <Layout cPadding={'0 20px 0 0'}>
           <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
-          <Link to="view-customer" params={{id: wo.location_id}}>View Customer Details</Link>
+          <Link to="view-account" params={{id: wo.location_id}}>View Customer Details</Link>
           <div style={{position: 'absolute', right: '20px'}} >
             <Toggle
               labelStyle={{ minWidth: '100px'}}
