@@ -82,6 +82,7 @@ export default (
               <Route path="contracts" handler={RouteHandler}>
                 <DefaultRoute name="view-contracts" handler={ListContracts} />
                 <Route name="add-contract" handler={CreateContract} />
+                <Route name="list-contracts" handler={ListContracts} />
               </Route>
             </Route>
           </Route>
