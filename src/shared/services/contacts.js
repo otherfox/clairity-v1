@@ -23,7 +23,7 @@ export function getContact(id) {
 }
 
 export function getContactsForCustomer(id) {
-  return new Promise(function(s, f) {
+  return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByCustomerId&customer_id=${id}`)
       .withCredentials()
       .end((err, res) => {
@@ -37,7 +37,7 @@ export function getContactsForCustomer(id) {
 }
 
 export function getLeads() {
-  return new Promise(function(s, f) {
+  return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsWithoutOpportunities`)
       .withCredentials()
       .end((err, res) => {
@@ -47,5 +47,11 @@ export function getLeads() {
           f(err);
         }
       });
+  });
+}
+
+export function postConverLead() {
+  return new Promise((s, f) => {
+
   });
 }
