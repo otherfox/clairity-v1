@@ -2,28 +2,44 @@ import React from 'react'
 import {Route, RouteHandler, DefaultRoute, NotFoundRoute, Redirect} from 'react-router'
 
 import {App, NavigationLayout} from '../../app'
-import AgingReports from '../../agingReports'
-import CreateContract from '../../createContract'
-import CreateOpportunity from '../../createOpportunity'
-import CreateIpBlock from '../../createIpBlock'
-import CreateIpZone from '../../createIpZone'
-import EditCustomer  from '../../editCustomer'
-import EditLead from '../../editLead'
-import EditIpBlock from '../../editIpBlock'
-import EditIpZone from '../../editIpZone'
-import IpBlocks from '../../ipBlocks'
-import IpZones from '../../ipZones'
+
+/* Session Management */
 import Login from '../../login'
-import OpenInstalls from '../../openInstalls'
 import Settings from '../../settings'
+
+/* Reports */
+import AgingReports from '../../reports/aging'
+import OpenInstalls from '../../openInstalls'
+
+/* Accounts */
+import ViewAccount from '../../accounts'
+import EditAccount  from '../../account/edit'
+import SearchAccount from '../../accounts/search'
+
+/* Contacts */
+import ViewLead from '../../contacts'
+import EditLead from '../../contact/edit'
+import ViewLeads from '../../contacts/leads'
+import CreateContract from '../../contract/create'
+
+/* Opportunities */
+import CreateOpportunity from '../../opportunities/create'
+
+/* Ip Zones */
+import IpZones from '../../ipZones'
+import EditIpZone from '../../ipZones/edit'
+import ViewIpZone from '../../ipZones/view'
+import CreateIpZone from '../../ipZones/create'
+
+/* Ip Blocks */
+import IpBlocks from '../../ipBlocks'
+import EditIpBlock from '../../ipBlocks/edit'
+import ViewIpBlock from '../../ipBlocks/view'
+import CreateIpBlock from '../../ipBlocks/create'
+
+/* Work Orders */
 import WorkOrders from '../../workOrders'
-import WorkOrderUpload from '../../workOrderUpload'
-import ViewAccount from '../../viewAccount'
-import SearchAccount from '../../SearchAccount'
-import ViewLead from '../../viewLead'
-import ViewLeads from '../../viewLeads'
-import ViewIpBlock from '../../viewIpBlock'
-import ViewIpZone from '../../viewIpZone'
+import WorkOrderUpload from '../../workOrders/upload'
 
 export default (
   <Route>
@@ -32,11 +48,7 @@ export default (
       <Route name="login" path="/login" handler={Login} />
       <Route name="root-layout" path="/" handler={NavigationLayout}>
         <Route name="aging-reports" handler={AgingReports} />
-        <Route name="customer" path="customer/:id" handler={RouteHandler}>
-          <DefaultRoute name="view-customer" handler={ViewAccount} />
-          <Route name="edit-customer" path="edit" handler={EditCustomer} />
-        </Route>
-        <Route name="create-contract" handler={CreateContract} />
+
 
         <Route {/***** IP Blocks *****/...{}}>
           <Redirect from="ip-blocks" to="all-ip-blocks" />
@@ -64,6 +76,11 @@ export default (
             <Route name="search-accounts" path="search" handler={SearchAccount} />
             <Route path=":accountId/:locationId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
+              <Route path="edit" name="edit-customer" handler={EditAccount} />
+              <Route path="contracts" handler={RouteHandler}>
+                <DefaultRoute name="view-contracts" handler={ListContracts} />
+                <Route name="add-contract" handler={CreateContract} />
+              </Route>
             </Route>
           </Route>
         </Route>
