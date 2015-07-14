@@ -29,7 +29,7 @@ export default (
     <Redirect from="/" to="login" />
     <Route handler={App}>
       <Route name="login" path="/login" handler={Login} />
-      <Route name="root-layout" handler={NavigationLayout}>
+      <Route name="root-layout" path="/" handler={NavigationLayout}>
         <Route name="aging-reports" handler={AgingReports} />
         <Route name="customer" path="customer/:id" handler={RouteHandler}>
           <DefaultRoute name="view-customer" handler={ViewCustomer} />
