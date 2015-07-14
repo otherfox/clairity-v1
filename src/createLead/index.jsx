@@ -5,8 +5,9 @@ import Header from '../shared/components/header'
 import _ from 'lodash'
 import { collectionDropdown } from '../shared/components/collectionDropdown'
 import {State} from 'react-router'
-import {uuid} from 'uuid'
+import {v4} from 'uuid'
 import {convertLead} from './actions'
+import moment from 'moment'
 import {
   RaisedButton,
   TextField,
@@ -40,8 +41,15 @@ let createLead = React.createClass({
 
   convertLead() {
     let data = _.clone(this.state);
-    let entrykey = uuid.v4();
-    data.entrykey = entrykey.slice(0, 23) + entrykey.slice(24, entrykey.length);
+    let entrykey = v4();
+    let now = moment();
+    data.entrykey = (entrykey.slice(0, 23) + entrykey.slice(24, entrykey.length)).toUpperCase();
+    data.customer_id = this.props.lead.get('customer_id');
+    data.contact_id = +this.getParams().contactId;
+    data.createdbyuser_id = +this.getParams().agentId;
+    data.lastmodifiedbyuser_id = +this.getParams().agentId;
+    data.dt_created = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
+    data.dt_lastmodified = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     convertLead({contact: this.props.lead.toJS(), formData: data});
   },
 
