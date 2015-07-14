@@ -50,8 +50,20 @@ export function getLeads() {
   });
 }
 
-export function postConverLead() {
-  return new Promise((s, f) => {
+import {eventConvertLead} from '../gateways/contact'
 
+export function postConvertLead(contact) {
+  return new Promise((s, f) => {
+    req.post(`http://lab.rairity.com/controller.cfm?event=convertLead`)
+      .withCredentials()
+      .type('form')
+      .send(eventConvertLead(contact))
+      .end((err, res) => {
+        if (res.ok && res.xhr.responseURL.match(/controller\.cfm/i)) {
+          return getContact(id);
+        } else {
+          f(err);
+        }
+      })
   });
 }
