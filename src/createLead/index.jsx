@@ -2,8 +2,10 @@ import React, {PropTypes, addons} from 'react/addons'
 import Layout from  '../shared/components/layout'
 import Details from  '../shared/components/details'
 import Header from '../shared/components/header'
+import _ from 'lodash'
 import { collectionDropdown } from '../shared/components/collectionDropdown'
 import {State} from 'react-router'
+import {uuid} from 'uuid'
 import {convertLead} from './actions'
 import {
   RaisedButton,
@@ -37,7 +39,10 @@ let createLead = React.createClass({
   },
 
   convertLead() {
-    convertLead({contact: this.props.lead, formData: this.state});
+    let data = _.clone(this.state);
+    let entrykey = uuid.v4();
+    data.entrykey = entrykey.slice(0, 23) + entrykey.slice(24, entrykey.length);
+    convertLead({contact: this.props.lead.toJS(), formData: data});
   },
 
   render() {
@@ -47,24 +52,24 @@ let createLead = React.createClass({
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>Convert Lead - {opp.company}</h1></Header>
-      <Paper>
-        <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
-          <Details
-            title={'Opportunity Details'}
-            data={[
-              { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
-              { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
-              { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('owner')} />, detailType: 'muiDropDown' },
-              { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('projectType')}/>, detailType: 'muiDropDown' },
-              { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('salesStage')} />, detailType: 'muiDropDown' },
-              { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('leadSource')} />, detailType: 'muiDropDown' },
-              { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources valueLink={this.linkState('campaignSource')} />, detailType: 'muiDropDown' },
-              {label: '', value: <RaisedButton primary={true} label="Update" onClick={this.convertLead} />, detaildetailType: 'muiButton'}
-            ]}
-          />
-        </Layout>
-      </Paper>
-    </Layout>
+        <Paper>
+          <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
+            <Details
+              title={'Opportunity Details'}
+              data={[
+                { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
+                { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
+                { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('owner')} />, detailType: 'muiDropDown' },
+                { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('projectType')}/>, detailType: 'muiDropDown' },
+                { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('salesStage')} />, detailType: 'muiDropDown' },
+                { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('leadSource')} />, detailType: 'muiDropDown' },
+                { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources valueLink={this.linkState('campaignSource')} />, detailType: 'muiDropDown' },
+                { label: '', value: <RaisedButton primary={true} label="Update" onClick={this.convertLead} />, detaildetailType: 'muiButton'}
+              ]}
+            />
+          </Layout>
+        </Paper>
+      </Layout>
     );
   }
 });
