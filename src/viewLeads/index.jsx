@@ -43,7 +43,7 @@ let viewLeads = React.createClass({
       data: leads.map(s => {
         s.__lead_conversion = (
           <div style={{textAlign: 'center'}}>
-            <Link to="add-opportunity" params={{contactId: s.id, agentId: s.agent_id}}>
+            <Link to="add-contact-opportunity" params={{contactId: s.id, agentId: s.agent_id}}>
               <RaisedButton label={'Convert Lead'}/>
             </Link>
           </div>
