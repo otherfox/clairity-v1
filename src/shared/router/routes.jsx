@@ -26,10 +26,10 @@ import ViewIpZone from '../../viewIpZone'
 
 export default (
   <Route>
-    <Redirect from="root" to="login" />
-    <Route name="root" handler={App}>
+    <Redirect from="/" to="login" />
+    <Route handler={App}>
       <Route name="login" path="/login" handler={Login} />
-      <Route path="/" handler={NavigationLayout}>
+      <Route name="root-layout" handler={NavigationLayout}>
         <Route name="aging-reports" handler={AgingReports} />
         <Route name="customer" path="customer/:id" handler={RouteHandler}>
           <DefaultRoute name="view-customer" handler={ViewCustomer} />
