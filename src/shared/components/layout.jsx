@@ -38,10 +38,6 @@ let Layout = React.createClass({
     style: React.PropTypes.object
   },
 
-  shouldComponentUpdate() {
-    return false;
-  },
-
   getDefaultProps() {
     return {
       breakpoints: {
