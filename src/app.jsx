@@ -11,13 +11,24 @@ import Wrapper from './shared/components/wrapper'
 
 import ThemeManager from './shared/themes/themeManager'
 
-export default class App extends React.Component {
-
+export class App extends React.Component {
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getCurrentTheme()
+      muiTheme: ThemeManager.getCurrentTheme(),
+      lang: {}
     };
   }
+  render() {
+    return <RouteHandler />;
+  }
+}
+
+App.childContextTypes = {
+  muiTheme: React.PropTypes.object,
+  lang: React.PropTypes.object
+};
+
+export class NavigationLayout extends React.Component {
 
   render() {
     return (
@@ -33,8 +44,4 @@ export default class App extends React.Component {
       </div>
     )
   }
-}
-
-App.childContextTypes = {
-  muiTheme: React.PropTypes.object
 }
