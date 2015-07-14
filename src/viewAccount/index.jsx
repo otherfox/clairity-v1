@@ -46,4 +46,6 @@ let Account = React.createClass({
   }
 });
 
-export default Account;
+import {networkModelRenderer} from '../shared/components/networkRenderer'
+
+export default networkModelRenderer(Account, 'account');
