@@ -3,6 +3,7 @@ import {getLocation} from './location'
 import {getWorkOrder} from './workOrder'
 import {getContract} from './contracts'
 import {getUser} from './users'
+import {getAccount} from './account'
 
 const resource = {
   contact: getContact,
@@ -10,7 +11,8 @@ const resource = {
   workorder: getWorkOrder,
   contract: getContract,
   lead: getContact,
-  user: getUser
+  user: getUser,
+  account: getAccount
 };
 
 export function getResource(id, tableName) {
