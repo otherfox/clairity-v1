@@ -13,14 +13,16 @@ import OpenInstalls from '../../openInstalls'
 
 /* Accounts */
 import ViewAccount from '../../accounts'
-import EditAccount  from '../../account/edit'
+import EditAccount  from '../../accounts/edit'
 import SearchAccount from '../../accounts/search'
 
 /* Contacts */
 import ViewLead from '../../contacts'
-import EditLead from '../../contact/edit'
+import EditLead from '../../contacts/edit'
 import ViewLeads from '../../contacts/leads'
-import CreateContract from '../../contract/create'
+
+/* Contracts */
+import CreateContract from '../../contracts/create'
 
 /* Opportunities */
 import CreateOpportunity from '../../opportunities/create'
