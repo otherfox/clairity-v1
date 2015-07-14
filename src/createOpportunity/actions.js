@@ -6,6 +6,5 @@ import {postConvertLead} from '../shared/services/contacts'
 export const convertLead = Fynx.createAsyncAction();
 
 convertLead.listen(leadInfo => {
-  console.log('converting lead...', leadInfo)
-  postConvertLead(leadInfo);
+  postConvertLead(leadInfo.data).then(a => leadInfo.completed());
 });
