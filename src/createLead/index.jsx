@@ -4,6 +4,7 @@ import Details from  '../shared/components/details'
 import Header from '../shared/components/header'
 import { collectionDropdown } from '../shared/components/collectionDropdown'
 import {State} from 'react-router'
+import {convertLead} from './actions'
 import {
   RaisedButton,
   TextField,
@@ -35,7 +36,7 @@ let createLead = React.createClass({
   },
 
   convertLead() {
-    console.log('Convert lead: ', this.state);
+    convertLead({contact: this.props.lead, formData: this.state});
   },
 
   render() {
