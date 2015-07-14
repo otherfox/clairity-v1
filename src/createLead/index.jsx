@@ -31,11 +31,11 @@ let createLead = React.createClass({
   getInitialState() {
     return {
       name: '',
-      owner: this.props.agent.get('id'),
-      projectType: '',
-      salesStage: '',
-      leadSource: '',
-      campaignSource: ''
+      user_id: this.props.agent.get('id'),
+      project_type: '',
+      stage: '',
+      lead_source_id: '',
+      lead_source: ''
     }
   },
 
@@ -67,11 +67,11 @@ let createLead = React.createClass({
               data={[
                 { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
                 { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
-                { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('owner')} />, detailType: 'muiDropDown' },
-                { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('projectType')}/>, detailType: 'muiDropDown' },
-                { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('salesStage')} />, detailType: 'muiDropDown' },
-                { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('leadSource')} />, detailType: 'muiDropDown' },
-                { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources valueLink={this.linkState('campaignSource')} />, detailType: 'muiDropDown' },
+                { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('user_id')} />, detailType: 'muiDropDown' },
+                { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('project_type')}/>, detailType: 'muiDropDown' },
+                { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('stage')} />, detailType: 'muiDropDown' },
+                { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('lead_source_id')} />, detailType: 'muiDropDown' },
+                { label: 'Lead Campaign Source', name: 'lead_source', value: <CampaignSources valueLink={this.linkState('lead_source')} />, detailType: 'muiDropDown' },
                 { label: '', value: <RaisedButton primary={true} label="Update" onClick={this.convertLead} />, detaildetailType: 'muiButton'}
               ]}
             />
