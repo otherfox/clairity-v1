@@ -61,7 +61,7 @@ export function postConvertLead(contact) {
       .send(eventConvertLead(contact))
       .end((err, res) => {
         if (res.ok && res.xhr.responseURL.match(/controller\.cfm/i)) {
-          return s(id);
+          return s(res);
         } else {
           f(err);
         }
