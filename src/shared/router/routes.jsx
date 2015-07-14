@@ -24,9 +24,6 @@ import ViewLeads from '../../viewLeads'
 import ViewIpBlock from '../../viewIpBlock'
 import ViewIpZone from '../../viewIpZone'
 
-class ViewOpp extends React.Component{render(){return<div/>;}};
-
-
 export default (
   <Route>
     <DefaultRoute handler={Login} />
@@ -40,7 +37,7 @@ export default (
       <Route name="create-contract" handler={CreateContract} />
 
       <Route name="ip-block" path="ip-block" handler={RouteHandler}>
-        <DefaultRoute name="ip-blocks" path="all" handler={IpBlocks} />
+        <DefaultRoute name="ip-blocks" handler={IpBlocks} />
         <Route name="view-ip-block" path=":blockId" handler={ViewIpBlock} />
         <Route name="create-ip-block" path="create" handler={CreateIpBlock} />
         <Route name="edit-ip-block" path=":blockId/edit" handler={EditIpBlock} />
@@ -59,7 +56,6 @@ export default (
           <Route name="edit-lead" path="edit" handler={EditLead} />
           <Route name="contact-opps" path="opps" handler={RouteHandler}>
             <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
-            <Route name="view-contact-opp" path=":oppId" handler={ViewOpp} />
             <Route name="add-contact-opp" path="add" handler={CreateOpportunity} />
           </Route>
         </Route>
