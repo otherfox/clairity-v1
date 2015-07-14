@@ -24,6 +24,8 @@ import ViewLeads from '../../viewLeads'
 import ViewIpBlock from '../../viewIpBlock'
 import ViewIpZone from '../../viewIpZone'
 
+class ViewOpp extends React.Component{render(){return<div/>;}};
+
 
 export default (
   <Route>
@@ -53,10 +55,12 @@ export default (
       <Redirect from="leads" to="all-leads" />
       <Route name="leads" handler={RouteHandler}>
         <Route path=":contactId/:agentId" name="view-lead" handler={RouteHandler}>
-          <DefaultRoute handler={ViewLead} />
+          <DefaultRoute name="lead-index" handler={ViewLead} />
           <Route name="edit-lead" path="edit" handler={EditLead} />
-          <Route name="contact-opportunites" path="opps" handler={RouteHandler}>
-            <Route name="add-contact-opportunity" path="add" handler={CreateOpportunity} />
+          <Route name="contact-opps" path="opps" handler={RouteHandler}>
+            <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
+            <Route name="view-contact-opp" path=":oppId" handler={ViewOpp} />
+            <Route name="add-contact-opp" path="add" handler={CreateOpportunity} />
           </Route>
         </Route>
         <Route name="all-leads" path="all" handler={ViewLeads} />
