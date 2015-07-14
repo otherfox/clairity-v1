@@ -28,7 +28,7 @@ import controllable from 'react-controllables'
 import {State} from 'react-router'
 
 
-let WorkOrders = React.createClass({
+let Account = React.createClass({
   mixins: [State],
 
   getOrderId() {
@@ -46,4 +46,4 @@ let WorkOrders = React.createClass({
   }
 });
 
-export default WorkOrders;
+export default Account;
