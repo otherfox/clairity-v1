@@ -59,6 +59,15 @@ export default (
           </Route>
         </Route>
 
+        <Route {/***** Accounts *****/...{}}>
+          <Route name="accounts" handler={RouteHandler}>
+            <Route name="search-accounts" path="search" handler={SearchAccount} />
+            <Route path=":accountId/:locationId" handler={RouteHandler}>
+              <DefaultRoute name="view-account" handler={ViewAccount} />
+            </Route>
+          </Route>
+        </Route>
+
         <Route {/***** Leads *****/...{}}>
           <Redirect from="leads" to="all-leads" />
           <Route name="leads" handler={RouteHandler}>
