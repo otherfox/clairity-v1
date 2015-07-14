@@ -18,7 +18,7 @@ import OpenInstalls from '../../openInstalls'
 import Settings from '../../settings'
 import WorkOrders from '../../workOrders'
 import WorkOrderUpload from '../../workOrderUpload'
-import ViewCustomer from '../../viewCustomer'
+import ViewAccount from '../../viewAccount'
 import ViewLead from '../../viewLead'
 import ViewLeads from '../../viewLeads'
 import ViewIpBlock from '../../viewIpBlock'
@@ -32,7 +32,7 @@ export default (
       <Route name="root-layout" path="/" handler={NavigationLayout}>
         <Route name="aging-reports" handler={AgingReports} />
         <Route name="customer" path="customer/:id" handler={RouteHandler}>
-          <DefaultRoute name="view-customer" handler={ViewCustomer} />
+          <DefaultRoute name="view-customer" handler={ViewAccount} />
           <Route name="edit-customer" path="edit" handler={EditCustomer} />
         </Route>
         <Route name="create-contract" handler={CreateContract} />
