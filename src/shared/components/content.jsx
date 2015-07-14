@@ -17,6 +17,11 @@ let Content = React.createClass ({
     };
   },
 
+  shouldComponentUpdate() {
+    // WARN: No update
+    return false;
+  },
+
   render: function() {
     return (
       <div style={ _.assign(this.style(), this.props.style)} >

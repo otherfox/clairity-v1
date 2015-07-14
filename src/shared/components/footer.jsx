@@ -24,6 +24,10 @@ class Footer extends React.Component {
     }
   }
 
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
 
     return (
