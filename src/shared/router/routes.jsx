@@ -19,6 +19,7 @@ import Settings from '../../settings'
 import WorkOrders from '../../workOrders'
 import WorkOrderUpload from '../../workOrderUpload'
 import ViewAccount from '../../viewAccount'
+import SearchAccount from '../../SearchAccount'
 import ViewLead from '../../viewLead'
 import ViewLeads from '../../viewLeads'
 import ViewIpBlock from '../../viewIpBlock'
@@ -61,8 +62,8 @@ export default (
         <Route {/***** Leads *****/...{}}>
           <Redirect from="leads" to="all-leads" />
           <Route name="leads" handler={RouteHandler}>
-            <Route path=":contactId/:agentId" name="view-lead" handler={RouteHandler}>
-              <DefaultRoute name="lead-index" handler={ViewLead} />
+            <Route path=":contactId/:agentId" handler={RouteHandler}>
+              <DefaultRoute name="view-lead" handler={ViewLead} />
               <Route name="edit-lead" path="edit" handler={EditLead} />
               <Route name="contact-opps" path="opps" handler={RouteHandler}>
                 <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
