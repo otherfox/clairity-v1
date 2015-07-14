@@ -4,7 +4,7 @@ import {
   RouteHandler,
   DefaultRoute,
   NotFoundRoute,
-  Redirec
+  Redirect
 } from 'react-router'
 
 import {App, NavigationLayout} from '../../app'
