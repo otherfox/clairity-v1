@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, RouteHandler, DefaultRoute, NotFoundRoute, Redirect} from 'react-router'
 
-import App from '../../app'
+import {App, NavigationLayout} from '../../app'
 import AgingReports from '../../agingReports'
 import CreateContract from '../../createContract'
 import CreateOpportunity from '../../createOpportunity'
@@ -25,10 +25,10 @@ import ViewIpBlock from '../../viewIpBlock'
 import ViewIpZone from '../../viewIpZone'
 
 export default (
-  <Route>
+  <Route handler={App}>
     <DefaultRoute handler={Login} />
     <Route name="login" path="/login" handler={Login} />
-    <Route path="/" handler={App}>
+    <Route path="/" handler={NavigationLayout}>
       <Route name="aging-reports" handler={AgingReports} />
       <Route name="customer" path="customer/:id" handler={RouteHandler}>
         <DefaultRoute name="view-customer" handler={ViewCustomer} />
@@ -36,12 +36,16 @@ export default (
       </Route>
       <Route name="create-contract" handler={CreateContract} />
 
-      <Route name="ip-block" path="ip-block" handler={RouteHandler}>
-        <DefaultRoute name="ip-blocks" handler={IpBlocks} />
-        <Route name="view-ip-block" path=":blockId" handler={ViewIpBlock} />
+      <Redirect from="ip-blocks" to="all-ip-blocks" />
+      <Route name="ip-blocks" path="ip-block" handler={RouteHandler}>
+        <Route name="all-ip-blocks" path="all" handler={IpBlocks} />
+        <Route name="view-ip-block" path=":blockId" handler={RouteHandler}>
+          <DefaultRoute name="view-ip-block-index" handler={ViewIpBlock} />
+          <Route name="edit-ip-block" path="edit" handler={EditIpBlock} />
+        </Route>
         <Route name="create-ip-block" path="create" handler={CreateIpBlock} />
-        <Route name="edit-ip-block" path=":blockId/edit" handler={EditIpBlock} />
       </Route>
+
       <Route name="ip-zones" handler={IpZones} />
       <Route name="ip-zone" path="ip-zone" handler={RouteHandler}>
         <DefaultRoute name="view-ip-zone" handler={ViewIpZone} />
