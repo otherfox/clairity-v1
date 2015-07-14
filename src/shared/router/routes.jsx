@@ -4,7 +4,7 @@ import {Route, RouteHandler, DefaultRoute, NotFoundRoute} from 'react-router'
 import App from '../../app'
 import AgingReports from '../../agingReports'
 import CreateContract from '../../createContract'
-import CreateLead from '../../createLead'
+import CreateOpportunity from '../../createOpportunity'
 import CreateIpBlock from '../../createIpBlock'
 import CreateIpZone from '../../createIpZone'
 import EditCustomer  from '../../editCustomer'
@@ -36,9 +36,10 @@ export default (
         <Route name="edit-customer" path="edit" handler={EditCustomer} />
       </Route>
       <Route name="create-contract" handler={CreateContract} />
-      <Route name="ip-blocks" handler={IpBlocks} />
+      
       <Route name="ip-block" path="ip-block" handler={RouteHandler}>
-        <DefaultRoute name="view-ip-block" handler={ViewIpBlock} />
+        <DefaultRoute name="ip-blocks" path="all" handler={IpBlocks} />
+        <Route name="view-ip-block" path=":blockId" handler={ViewIpBlock} />
         <Route name="create-ip-block" path="create" handler={CreateIpBlock} />
         <Route name="edit-ip-block" path=":blockId/edit" handler={EditIpBlock} />
       </Route>
@@ -51,7 +52,7 @@ export default (
       <Route name="lead" path="lead/:contactId/:agentId" handler={RouteHandler}>
         <DefaultRoute name="view-lead" handler={ViewLead} />
         <Route name="edit-lead" path="edit" handler={EditLead} />
-        <Route name="create-lead" path="create" handler={CreateLead} />
+        <Route name="create-lead" path="create" handler={CreateOpportunity} />
       </Route>
       <Route name="open-installs" handler={OpenInstalls} />
       <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
