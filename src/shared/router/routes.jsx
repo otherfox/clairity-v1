@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route, RouteHandler, DefaultRoute, NotFoundRoute} from 'react-router'
+import {Route, RouteHandler, DefaultRoute, NotFoundRoute, Redirect} from 'react-router'
 
 import App from '../../app'
 import AgingReports from '../../agingReports'
@@ -36,7 +36,7 @@ export default (
         <Route name="edit-customer" path="edit" handler={EditCustomer} />
       </Route>
       <Route name="create-contract" handler={CreateContract} />
-      
+
       <Route name="ip-block" path="ip-block" handler={RouteHandler}>
         <DefaultRoute name="ip-blocks" path="all" handler={IpBlocks} />
         <Route name="view-ip-block" path=":blockId" handler={ViewIpBlock} />
@@ -49,17 +49,24 @@ export default (
         <Route name="create-ip-zone" path="create" handler={CreateIpZone} />
         <Route name="edit-ip-zone" path=":zoneId/edit" handler={EditIpZone} />
       </Route>
-      <Route name="lead" path="lead/:contactId/:agentId" handler={RouteHandler}>
-        <DefaultRoute name="view-lead" handler={ViewLead} />
-        <Route name="edit-lead" path="edit" handler={EditLead} />
-        <Route name="create-lead" path="create" handler={CreateOpportunity} />
+
+      <Redirect from="leads" to="all-leads" />
+      <Route name="leads" handler={RouteHandler}>
+        <Route path=":contactId/:agentId" name="view-lead" handler={RouteHandler}>
+          <DefaultRoute handler={ViewLead} />
+          <Route name="edit-lead" path="edit" handler={EditLead} />
+          <Route name="contact-opportunites" path="opps" handler={RouteHandler}>
+            <Route name="add-contact-opportunity" path="add" handler={CreateOpportunity} />
+          </Route>
+        </Route>
+        <Route name="all-leads" path="all" handler={ViewLeads} />
       </Route>
+
       <Route name="open-installs" handler={OpenInstalls} />
       <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
         <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
       </Route>
       <Route name="settings" handler={Settings} />
-      <Route name="leads" handler={ViewLeads} />
     </Route>
   </Route>
 );
