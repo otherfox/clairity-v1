@@ -54,16 +54,38 @@ import {eventConvertLead} from '../gateways/contact'
 
 export function postConvertLead(contact) {
   return new Promise((s, f) => {
+    patchRequest();
     req.post(`http://lab.rairity.com/controller.cfm?event=convertLead`)
       .withCredentials()
       .type('form')
       .send(eventConvertLead(contact))
       .end((err, res) => {
         if (res.ok && res.xhr.responseURL.match(/controller\.cfm/i)) {
-          return getContact(id);
+          return s(id);
         } else {
           f(err);
         }
       })
+    unpatchRequest();
   });
+}
+
+let _s = req.prototype.serialize;
+
+function patchRequest() {
+  req.prototype.serialize = function (obj) {
+    if (!isObject(obj)) return obj;
+    var pairs = [];
+    for (var key in obj) {
+      if (null != obj[key]) {
+        pairs.push(encodeURIComponent(key).replace('%20', '+')
+          + '=' + encodeURIComponent(obj[key]).replace('%20', '+'));
+      }
+    }
+    return pairs.join('&');
+  };
+}
+
+function unpatchRequest() {
+  req.prototype.serialize = _s;
 }
