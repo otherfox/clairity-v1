@@ -22,7 +22,7 @@ import {
 
 import controllable from 'react-controllables'
 
-import {Navigation} from 'react-router'
+import {Navigation, Link} from 'react-router'
 
 let viewLeads = React.createClass({
   mixins: [Navigation],
@@ -41,7 +41,13 @@ let viewLeads = React.createClass({
         { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string'}
       ],
       data: leads.map(s => {
-        s.__lead_conversion = <div style={{textAlign: 'center'}}><RaisedButton label={'Convert Lead'} linkButton={true} href={`/#/lead/${s.id}/${s.agent_id}/create`} /></div>;
+        s.__lead_conversion = (
+          <div style={{textAlign: 'center'}}>
+            <Link to="add-opportunity" params={{contactId: s.id, agentId: s.agent_id}}>
+              <RaisedButton label={'Convert Lead'}/>
+            </Link>
+          </div>
+        );
         return s;
       }),
       colWidths: [5,4,4,3],
