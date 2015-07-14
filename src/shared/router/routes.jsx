@@ -23,6 +23,7 @@ import ViewLeads from '../../contacts/leads'
 
 /* Contracts */
 import CreateContract from '../../contracts/create'
+import ListContracts from '../../contracts/list'
 
 /* Opportunities */
 import CreateOpportunity from '../../opportunities/create'
