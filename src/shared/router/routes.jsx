@@ -1,5 +1,11 @@
 import React from 'react'
-import {Route, RouteHandler, DefaultRoute, NotFoundRoute, Redirect} from 'react-router'
+import {
+  Route,
+  RouteHandler,
+  DefaultRoute,
+  NotFoundRoute,
+  Redirec
+} from 'react-router'
 
 import {App, NavigationLayout} from '../../app'
 
