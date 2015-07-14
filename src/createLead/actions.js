@@ -1,5 +1,5 @@
 import Fynx from 'fynx'
-import Store from '../store'
+import Store from '../shared/store'
 
 export const convertLead = Fynx.createAsyncAction();
 
