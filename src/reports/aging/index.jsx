@@ -1,17 +1,17 @@
 import React from 'react'
-import Layout from  '../shared/components/layout'
-import Header from  '../shared/components/header'
-import Footer from  '../shared/components/footer'
-import TopNav from '../shared/components/topnav'
-import LeftNav from '../shared/components/leftnav'
-import Table from '../shared/components/table'
-import Content from '../shared/components/content'
-import Filters from '../shared/components/filters'
+import Layout from  '../../shared/components/layout'
+import Header from  '../../shared/components/header'
+import Footer from  '../../shared/components/footer'
+import TopNav from '../../shared/components/topnav'
+import LeftNav from '../../shared/components/leftnav'
+import Table from '../../shared/components/table'
+import Content from '../../shared/components/content'
+import Filters from '../../shared/components/filters'
 
 import {fromJS, List} from 'immutable'
 
 // TODO: Get view listening to the store correctly. (Generic solution?)
-import Store from '../shared/store'
+import Store from '../../shared/store'
 
 import {fetchAgingReports} from './actions'
 import {queryActive, queryInactive, queryAll} from './queries'

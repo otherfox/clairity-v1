@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import Store from '../shared/store'
+import Store from '../../shared/store'
 
 function nonzero(v) {
   return  v.get('balance')  != 0 ||
