@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react'
-import {usersFetched} from '../shared/actions/user'
-import {queryAccountOwners} from '../shared/queries/users'
-import {getAccountOwners} from '../shared/services/users'
-import DropDown from '../shared/components/dropDown'
+import {usersFetched} from '../../shared/actions/user'
+import {queryAccountOwners} from '../../shared/queries/users'
+import {getAccountOwners} from '../../shared/services/users'
+import DropDown from '../../shared/components/dropDown'
 import {Map} from 'immutable'
 import {
   networkModelRenderer,
   queryRenderer,
   modelQuery
-} from '../shared/components/networkRenderer'
+} from '../../shared/components/networkRenderer'
 
 class AccountOwnersView extends React.Component {
   getMenuItems() {

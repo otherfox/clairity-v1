@@ -1,9 +1,9 @@
 import React, {PropTypes, addons} from 'react/addons'
-import Layout from  '../shared/components/layout'
-import Details from  '../shared/components/details'
-import Header from '../shared/components/header'
+import Layout from  '../../shared/components/layout'
+import Details from  '../../shared/components/details'
+import Header from '../../shared/components/header'
 import _ from 'lodash'
-import { collectionDropdown } from '../shared/components/collectionDropdown'
+import { collectionDropdown } from '../../shared/components/collectionDropdown'
 import {State, Navigation} from 'react-router'
 import {v4} from 'uuid'
 import {convertLead} from './actions'
@@ -16,7 +16,7 @@ import {
 import {
   queryRenderer,
   modelQuery
-} from '../shared/components/networkRenderer'
+} from '../../shared/components/networkRenderer'
 
 import AccountOwners from './owners'
 
