@@ -27,6 +27,7 @@ let createLead = React.createClass({
 
   getInitialState() {
     return {
+      name: '',
       owner: this.props.agent.get('id'),
       projectType: '',
       salesStage: '',
@@ -45,13 +46,13 @@ let createLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Header><h1>Convert Lead - {opp.name}</h1></Header>
+        <Header><h1>Convert Lead - {opp.company}</h1></Header>
       <Paper>
         <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
           <Details
             title={'Opportunity Details'}
             data={[
-              { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
+              { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
               { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
               { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('owner')} />, detailType: 'muiDropDown' },
               { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('projectType')}/>, detailType: 'muiDropDown' },
