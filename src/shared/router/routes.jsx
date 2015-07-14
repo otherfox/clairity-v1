@@ -27,6 +27,7 @@ import ListContracts from '../../contracts/list'
 
 /* Opportunities */
 import CreateOpportunity from '../../opportunities/create'
+import ListOpportunities from '../../opportunities/list'
 
 /* Ip Zones */
 import IpZones from '../../ipZones'
@@ -84,6 +85,7 @@ export default (
                 <DefaultRoute name="view-contracts" handler={ListContracts} />
                 <Route name="add-contract" handler={CreateContract} />
                 <Route name="list-contracts" handler={ListContracts} />
+                <Route name="list-opps" handler={ListOpportunities} />
               </Route>
             </Route>
           </Route>
