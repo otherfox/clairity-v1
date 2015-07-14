@@ -19,7 +19,8 @@ let DropDown = React.createClass({
 
   style() {
     return {
-      root: {},
+      root: {
+      },
       underlineStyle: {
         marginLeft: 0
       },
@@ -28,7 +29,9 @@ let DropDown = React.createClass({
         zIndex: 0,
       },
       menuItemStyle: {
-        zIndex: 3
+        zIndex: 3,
+        maxHeight: '500px',
+        overflow: 'auto'
       }
     }
   },
@@ -50,12 +53,19 @@ let DropDown = React.createClass({
 
     return (
       <div style={_.assign(this.style().root, this.props.style)}>
+        <style>{`
+            .maxHeight div:nth-child(2){
+              max-height: 500px;
+              overflow: auto !important;
+            }
+        `}</style>
         <DropDownMenu menuItems={data}
                       selectedIndex={index < 0 ? 0 : +index}
                       onChange={link ? this.handleLink : this.handleChange}
                       labelStyle={_.assign(this.style().labelStyle, this.props.labelStyle)}
                       underlineStyle={_.assign(this.style().underlineStyle, this.props.underlineStyle)}
                       menuItemStyle={_.assign(this.style().menuItemStyle, this.props.menuItemStyle)}
+                      className={'maxHeight'}
                       />
       </div>
     );
