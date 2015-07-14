@@ -50,7 +50,7 @@ let createLead = React.createClass({
     data.lastmodifiedbyuser_id = +this.getParams().agentId;
     data.dt_created = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     data.dt_lastmodified = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
-    convertLead({contact: this.props.lead.toJS(), formData: data});
+    convertLead(data);
   },
 
   render() {
