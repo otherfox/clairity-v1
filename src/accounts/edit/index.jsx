@@ -1,10 +1,10 @@
 import React from 'react'
-import Layout from  '../shared/components/layout'
-import Header from '../shared/components/header'
-import Footer from  '../shared/components/footer'
-import TopNav from '../shared/components/topnav'
-import LeftNav from '../shared/components/leftnav'
-import Content from '../shared/components/content'
+import Layout from  '../../shared/components/layout'
+import Header from '../../shared/components/header'
+import Footer from  '../../shared/components/footer'
+import TopNav from '../../shared/components/topnav'
+import LeftNav from '../../shared/components/leftnav'
+import Content from '../../shared/components/content'
 import {
   RadioButtonGroup,
   RadioButton,
