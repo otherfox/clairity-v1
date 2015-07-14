@@ -4,7 +4,7 @@ import Details from  '../shared/components/details'
 import Header from '../shared/components/header'
 import _ from 'lodash'
 import { collectionDropdown } from '../shared/components/collectionDropdown'
-import {State} from 'react-router'
+import {State, Navigation} from 'react-router'
 import {v4} from 'uuid'
 import {convertLead} from './actions'
 import moment from 'moment'
@@ -26,7 +26,7 @@ let LeadSources = collectionDropdown('leadSource')
 let CampaignSources = collectionDropdown('campaignSource')
 
 let createLead = React.createClass({
-  mixins: [State, addons.LinkedStateMixin],
+  mixins: [State, Navigation, addons.LinkedStateMixin],
 
   getInitialState() {
     return {
@@ -49,7 +49,10 @@ let createLead = React.createClass({
     data.lastmodifiedbyuser_id = +this.getParams().agentId;
     data.dt_created = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     data.dt_lastmodified = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
-    convertLead(data);
+    convertLead({
+      data,
+      completed: () => this.transitionTo('view-lead', this.getParams())
+    });
   },
 
   render() {
