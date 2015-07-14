@@ -31,7 +31,6 @@ let createLead = React.createClass({
   getInitialState() {
     return {
       name: '',
-      user_id: this.props.agent.get('id'),
       project_type: '',
       stage: '',
       lead_source_id: '',
@@ -67,7 +66,6 @@ let createLead = React.createClass({
               data={[
                 { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
                 { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
-                { label: 'Change Account Owner to:', name: 'user_id', value: <AccountOwners valueLink={this.linkState('user_id')} />, detailType: 'muiDropDown' },
                 { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('project_type')}/>, detailType: 'muiDropDown' },
                 { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('stage')} />, detailType: 'muiDropDown' },
                 { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('lead_source_id')} />, detailType: 'muiDropDown' },
