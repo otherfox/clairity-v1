@@ -52,7 +52,7 @@ var Filters = React.createClass ({
 		}, this);
 
     return (
-      <div style={this.style()} className="filters">
+      <div style={this.style()}>
 				<div>{filters}</div>
       </div>
     );

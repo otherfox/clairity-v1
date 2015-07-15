@@ -61,11 +61,11 @@ let createLead = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Header><h1>Convert Lead - {opp.company}</h1></Header>
+        <Header><h1>Convert Lead</h1></Header>
         <Paper>
           <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
             <Details
-              title={'Opportunity Details'}
+              title={'Create Opportunity with '+opp.name+' @ '+opp.company}
               data={[
                 { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
                 { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
