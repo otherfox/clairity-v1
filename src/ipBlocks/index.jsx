@@ -260,14 +260,15 @@ let IpBlocks = React.createClass({
     let blocks = getBlocks;
     return {
       colNames: [
-        { label: 'Edit', name: 'edit', cellType: 'string'},
         { label: 'Block', name: 'block', cellType: 'string'},
         { label: 'Status', name: 'status', cellType: 'string'},
         { label: 'Notes', name: 'notes', cellType: 'string'},
         { label: 'Downstream Org ID', name: 'downstream_org_id', cellType: 'string'},
         { label: 'Reverse DNS 1', name: 'reverse_dns_1', cellType: 'string'},
         { label: 'Reverse DNS 2', name: 'reverse_dns_2', cellType: 'string'},
-        { label: 'Associations', name: 'associations', cellType: 'string' } ],
+        { label: 'Associations', name: 'associations', cellType: 'string' },
+        { label: '', name: 'edit', cellType: 'string', style: {textAlign: 'center'}}
+      ],
       data: blocks.map(s => {
         s.edit = <div style={{textAlign: 'center'}}><RaisedButton label={'EDIT'} linkButton={true} href={`/#/ip-block/${s.blockId}/edit`} /></div>;
         return s;
@@ -294,7 +295,6 @@ let IpBlocks = React.createClass({
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[
-              { label: 'Subnet', name: 'subnet', value: <TextField defaultValue={''} />, detailType: 'muiTextField'},
               { label: 'Keyword', name: 'keyword', value: <Typeahead options={_.map(this.getBlocks(), _.property('block'))} maxVisible={10} /> , detailType: 'muiTextField'},
               { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px'}}/><RaisedButton label="Assign New Block" /></div>, detaildetailType: 'muiButton'}
           ]}

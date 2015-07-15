@@ -1,6 +1,6 @@
 import React from 'react'
 import Store, {MessageTypes} from '../../store'
-import {getResource, getCollection} from '../../services/getResource'
+import {getResource, getCollection, getCollectionVia} from '../../services/getResource'
 import {fromJS} from 'immutable'
 
 export function modelQuery(tableName, propName, idName) {
@@ -35,6 +35,26 @@ export function collectionQuery(tableName, propName, replace = true) {
         rows: data,
         table: tableName
       }
+    })
+  }
+}
+
+export function collectionViaQuery(options) {
+  let { table, viaTable, propName, idName, keyName } = options;
+  let id = idName || `${table}Id`;
+  return {
+    tableName: table,
+    propName: propName || table + 's',
+    serviceMethod: props => getCollectionVia(table, viaTable, props[idName]),
+    cacheMethod: props => {
+      let results = Store.data.get(table)
+        .toList()
+        .filter(r => r.get(keyName) == props[idName]);
+      return results.size > 0 ? results : null;
+    },
+    writeMethod: rows => Store.handleMessage({
+      type: MessageTypes.Write,
+      payload: { rows, table }
     })
   }
 }

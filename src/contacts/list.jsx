@@ -2,13 +2,13 @@ import React from "react"
 import {Link} from 'react-router'
 import {FontIcon, ClearFix} from 'material-ui'
 
-export default class ListOpportunities extends React.Component {
+export default class ListContacts extends React.Component {
   style() {
       return {
         root: {},
         icon: {
           float: 'left',
-          color: this.context.muiTheme.palette.accent1Color
+          color: this.context.muiTheme.palette.primary1Color
         },
         link: {
           float: 'left',
@@ -18,15 +18,14 @@ export default class ListOpportunities extends React.Component {
         }
       }
   }
-
   render() {
     return (
       <div style={this.style().root}>
         {
-          this.props.opportunities.map(o =>
+          this.props.contacts.map(o =>
             <ClearFix>
-              <Link to="view-opp" params={{oppId: o.get('id')}}>
-                <FontIcon className={'md md-stars'} style={this.style().icon}/> <div style={this.style().link}>{o.get('name')}</div>
+              <Link to="view-contact" params={{contactId: o.get('id')}}>
+                <FontIcon className={'md md-account-circle'} style={this.style().icon}/> <div style={this.style().link}>{o.get('name')}</div>
               </Link>
             </ClearFix>
           )
@@ -36,6 +35,6 @@ export default class ListOpportunities extends React.Component {
   }
 }
 
-ListOpportunities.contextTypes = {
+ListContacts.contextTypes = {
   muiTheme: React.PropTypes.object
 }

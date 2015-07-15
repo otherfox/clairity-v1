@@ -28,6 +28,7 @@ import controllable from 'react-controllables'
 import {tryLogin, loginSuccess} from './actions'
 import {} from './queries'
 
+@controllable(['username', 'password'])
 class LoginForm extends React.Component {
   changeUsername(ev) {
     if (!this.props.onUsernameChange) return;
@@ -44,7 +45,7 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <Layout widths={{lg: ['400px'], md: ['400px'], sm: ['400px'], xs: ['400px']}} type={'center-b'} style={{ backgroundColor: '#ffffff' }}>
+      <Layout widths={{lg: ['400px'], md: ['400px'], sm: ['400px'], xs: ['400px']}} type={'center-v'} style={{ backgroundColor: '#fafafa', display: 'block', height: window.innerHeight+'px' }}>
         <div>
           <Paper>
             <div style={{position: 'relative', margin: '0 auto', padding: '3em 0 5em', display: 'table'}}>
@@ -74,35 +75,25 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.defaultProps = { username: '', password: '' }
 LoginForm.propTypes = {
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onLogin: PropTypes.func
 }
 
-let Form = controllable(LoginForm, ['username', 'password']);
 import {Navigation} from 'react-router'
 
 const Login = React.createClass({
   mixins: [Navigation],
-  childContextTypes: {
-    muiTheme: PropTypes.object
-  },
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    }
-  },
   componentDidMount() {
-    loginSuccess.listen(() => this.transitionTo('work-orders', {id: 1538}));
+    loginSuccess.listen(() => this.transitionTo('leads'));
   },
   tryLogin(username, password) {
     tryLogin(username, password);
   },
   render() {
     return (
-      <Form defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} />
+      <LoginForm defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} />
     );
   }
 });
