@@ -1,8 +1,9 @@
 import React, {PropTypes, addons} from 'react/addons'
-import {Paper, TextField, Checkbox, RaisedButton, DatePicker} from 'material-ui'
+import {Paper, TextField, Checkbox, RaisedButton } from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
+import DatePicker from '../../shared/components/datePicker'
 import { collectionDropdown } from '../../shared/components/collectionDropdown'
 import {List} from 'immutable'
 
@@ -61,10 +62,10 @@ let OpportunityDetails = React.createClass({
             widths={{ lg: [4,8]}}
             title={null}
             data={[
-              { label: 'Date Offer Made', name: 'dt_offer_made', value: <DatePicker />, detailType: 'muiTextField' },
-              { label: 'Closing Date', name: 'dt_closing', value: <DatePicker />, detailType: 'muiTextField' },
-              { label: 'Date Project Started', name: 'dt_project_start', value: <DatePicker />, detailType: 'muiTextField' },
-              { label: 'Project Ending Date', name: 'dt_project_end', value: <DatePicker />, detailType: 'muiTextField' },
+              { label: 'Date Offer Made', name: 'dt_offer_made', value: <DatePicker valueLink={this.linkState('dt_offer_made')} />, detailType: 'muiTextField' },
+              { label: 'Closing Date', name: 'dt_closing', value: <DatePicker valueLink={this.linkState('dt_closing')} />, detailType: 'muiTextField' },
+              { label: 'Date Project Started', name: 'dt_project_start', value: <DatePicker valueLink={this.linkState('dt_project_start')} />, detailType: 'muiTextField' },
+              { label: 'Project Ending Date', name: 'dt_project_end', value: <DatePicker valueLink={this.linkState('dt_project_end')} />, detailType: 'muiTextField' },
               { label: 'Sales Amount', name: 'sales', value: <TextField valueLink={this.linkState('sales')} />, detailType: 'muiTextField' },
               { label: 'Probability Pct.', name: 'probability', value: <TextField valueLink={this.linkState('probability')}/>, detailType: 'muiTextField' },
             ]}
