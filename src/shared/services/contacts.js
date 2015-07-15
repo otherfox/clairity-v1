@@ -22,9 +22,37 @@ export function getContact(id) {
   });
 }
 
-export function getContactsForCustomer(id) {
+export function getContactsByAccount(id) {
   return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByCustomerId&customer_id=${id}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      })
+  });
+}
+
+export function getContactsByOpportunity(id) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByOppId&opp_id=${id}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      })
+  });
+}
+
+export function getContactsByLocation(id) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByLocationId&location_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
