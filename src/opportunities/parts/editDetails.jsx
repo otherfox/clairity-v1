@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, addons} from 'react/addons'
 import {Paper, TextField, Checkbox, RaisedButton, DatePicker} from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
@@ -11,7 +11,26 @@ let SalesStages = collectionDropdown('salesStage')
 let LeadSources = collectionDropdown('leadSource')
 let CampaignSources = collectionDropdown('campaignSource')
 
-export default class OpportunityDetails extends React.Component {
+let OpportunityDetails = React.createClass({
+  mixins: [addons.LinkedStateMixin],
+  propTypes: {
+    opportunity: PropTypes.object.isRequired
+  },
+  getInitialState() {
+    let o = this.props.opportunity.toJS();
+    return {
+      name: o.name,
+      stage: o.stage,
+      lead_source_id: o.lead_source_id,
+      lead_source: o.lead_source,
+      project_type: o.project_type,
+      offer_made: o.offer_made == 1 ? true : false,
+      project_started: o.project_started == 1 ? true : false,
+      project_result: o.project_result == 1 ? true : false,
+      sales: o.sales,
+      probability: o.probability
+    };
+  },
   render() {
     let opp = this.props.opportunity.toJS();
     return (
@@ -23,15 +42,16 @@ export default class OpportunityDetails extends React.Component {
             widths={{ lg: [4,8]}}
             title={'Opportunity Details'}
             data={[
-              { label: 'Name', name: 'oppName', value: <TextField value={opp.name}/>, detailType: 'muiTextField' },
-              { label: 'Stage', name: 'salesStageId', value: <SalesStages />, detailType: 'muiDropDown' },
-              { label: 'Project Type', name: 'salesProjectTypeId', value: <ProjectTypes />, detailType: 'muiDropDown' },
-              { label: 'Lead Source', name: 'salesLeadSrcId', value: <LeadSources />, detailType: 'muiDropDown' },
-              { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <CampaignSources />, detailType: 'muiDropDown' },
+              { label: 'Name', name: 'oppName', value: <TextField valueLink={this.linkState('name')} />, detailType: 'muiTextField' },
+              { label: 'Stage', name: 'salesStageId', value: <SalesStages valueLink={this.linkState('stage')} />, detailType: 'muiDropDown' },
+              { label: 'Project Type', name: 'salesProjectTypeId', value: <ProjectTypes valueLink={this.linkState('project_type')} />, detailType: 'muiDropDown' },
+              { label: 'Lead Source', name: 'salesLeadSrcId', value: <LeadSources valueLink={this.linkState('lead_source_id')} />, detailType: 'muiDropDown' },
+              { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <CampaignSources valueLink={this.linkState('lead_source')} />, detailType: 'muiDropDown' },
               { label: '', names: ['offer_made', 'project_started'], value:
                 <Layout widths={{lg: [6,6], sm: [12]}}>
-                  <Checkbox name="offer_made" defaultChecked={!!opp.offer_made} label={'Offer Made'} />
-                  <Checkbox name="project_started" defaultChecked={!!opp.project_started} label={'Project Started'} />
+                  <Checkbox name="offer_made" checkedLink={this.linkState('offer_made')} label="Offer Made" />
+                  <Checkbox name="project_started" checkedLink={this.linkState('project_started')} label="Project Started" />
+                  <Checkbox name="project_result" checkedLink={this.linkState('project_result')}label="Project Successful" />
                 </Layout>
               , detailType: 'muiCheckbox'}
             ]}
@@ -45,17 +65,14 @@ export default class OpportunityDetails extends React.Component {
               { label: 'Closing Date', name: 'dt_closing', value: <DatePicker />, detailType: 'muiTextField' },
               { label: 'Date Project Started', name: 'dt_project_start', value: <DatePicker />, detailType: 'muiTextField' },
               { label: 'Project Ending Date', name: 'dt_project_end', value: <DatePicker />, detailType: 'muiTextField' },
-              { label: 'Sales Amount', name: 'sales', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: 'Probability Pct.', name: 'probability', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: '', name: 'project_result', value: <Checkbox name={'project_result'} value={1} label={'Project Successful'} defaultSwitched={false} switched/>, detailType: 'muiCheckbox' },
+              { label: 'Sales Amount', name: 'sales', value: <TextField valueLink={this.linkState('sales')} />, detailType: 'muiTextField' },
+              { label: 'Probability Pct.', name: 'probability', value: <TextField valueLink={this.linkState('probability')}/>, detailType: 'muiTextField' },
             ]}
           />
         </Layout>
       </Paper>
     );
   }
-}
+})
 
-OpportunityDetails.propTypes = {
-  account: PropTypes.object.isRequired
-};
+export default OpportunityDetails;
