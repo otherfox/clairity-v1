@@ -35,18 +35,12 @@ let viewOpportunity = React.createClass({
   }
 });
 
-let ViewOpportunity = queryRenderer(viewOpportunity, {
-  queries: [
-    modelQuery('opportunity', 'opportunity', 'opportunityId')
-  ]
-});
+let ViewOpportunity = networkModelRenderer(viewOpportunity, 'opportunity');
 
 let ViewOpportunityPage = React.createClass({
   mixins: [State],
   render() {
-    return (
-      <ViewOpportunity opportunityId={+this.getParams().oppId} />
-    );
+    return <ViewOpportunity id={+this.getParams().oppId} />;
   }
 });
 
