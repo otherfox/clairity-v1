@@ -9,8 +9,8 @@ import { State, Link } from 'react-router'
 import EditDetails from './parts/editDetails'
 import { fromJS } from 'immutable'
 
-import editAccountDetails from '../accounts/parts/editDetails'
-let EditAccountDetails = networkModelRenderer(editAccountDetails, 'user');
+import EditAccountDetails from '../accounts/parts/editDetails'
+let EditAccountDetailsAgent = networkModelRenderer(EditAccountDetails, 'user');
 
 /*
 let event = 'controller.cfm?event=updateSalesOpp';
@@ -42,6 +42,12 @@ let editOpportunity = React.createClass({
             <RaisedButton style={{float: 'right', marginTop: 25}} secondary label="Return" />
           </Link>
         </Layout>
+        {
+          opp.customer.user_id ?
+            <EditAccountDetailsAgent account={fromJS(opp.customer)} id={opp.customer.user_id} />
+          :
+            <EditAccountDetails account={fromJS(opp.customer)} user={null} />
+        }
         <EditAccountDetails account={fromJS(opp.customer)} id={opp.customer.user_id} />
         <EditDetails {...this.props} />
         <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Update" />

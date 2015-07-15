@@ -7,8 +7,8 @@ import { State, Link } from 'react-router'
 import { fromJS } from 'immutable'
 import OpportunityDetails from './parts/details'
 
-import accountDetails from '../accounts/parts/details'
-let AccountDetails = networkModelRenderer(accountDetails, 'user');
+import AccountDetails from '../accounts/parts/details'
+let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
 
 let viewOpportunity = React.createClass({
@@ -26,7 +26,12 @@ let viewOpportunity = React.createClass({
             <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Edit" />
           </Link>
         </Layout>
-        <AccountDetails account={fromJS(opp.customer)} id={opp.customer.user_id} />
+        {
+          opp.customer.user_id ?
+            <AccountDetailsAgent account={fromJS(opp.customer)} id={opp.customer.user_id} />
+          :
+            <AccountDetails account={fromJS(opp.customer)} user={null} />
+        }
         <OpportunityDetails {...this.props} />
       </Layout>
     );

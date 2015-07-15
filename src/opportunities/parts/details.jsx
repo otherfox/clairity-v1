@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import {Paper, TextField, Checkbox, RaisedButton} from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
-import DropDown from '../../shared/components/dropdown'
+import DropDown from '../../shared/components/dropDown'
 import {List} from 'immutable'
 
 export default class OpportunityDetails extends React.Component {

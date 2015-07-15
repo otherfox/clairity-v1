@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Paper, TextField} from 'material-ui'
 import Layout from '../../shared/components/layout'
-import DropDown from '../../shared/components/dropdown'
+import DropDown from '../../shared/components/dropDown'
 import Details from '../../shared/components/details'
 import { List } from 'immutable'
 

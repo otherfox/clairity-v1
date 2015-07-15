@@ -34,6 +34,7 @@ import controllable from 'react-controllables'
 import {State} from 'react-router'
 
 import AccountDetails from './parts/details'
+let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
 let accountView = React.createClass({
   render() {
@@ -42,7 +43,12 @@ let accountView = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>Account - {account.name}</h1></Header>
         <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-          <AccountDetails agent={null} account={this.props.account} />
+          {
+              account.user_id ?
+                <AccountDetailsAgent id={account.user_id} account={this.props.account} />
+              :
+                <AccountDetails user={null} account={this.props.account} />
+          }
         </Layout>
       </Layout>
     )
