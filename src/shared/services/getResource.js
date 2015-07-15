@@ -19,6 +19,29 @@ export function getResource(id, tableName) {
   return resource[tableName.toLowerCase()](id);
 }
 
+const resourceVia = {
+  contact: {
+    account: getContactsByAccount,
+    opportunity: getContactsByOpportunity
+  },
+  opportunity: {
+    account: getOpportunitiesByAccount
+  },
+  account: {
+    user: getAccountsByAgent,
+    contact: getAccountsByContact
+  },
+  location: {
+    pop: getLocationsByPop,
+    contact: getLocationsByContact,
+    locationStatus: getLocationsByStatus
+  },
+};
+
+export function getResourcesVia(resourceTable, throughTable, throughId) {
+  return resourceVia[resourceTable][throughTable](throughId);
+}
+
 
 import {getPops} from './pop'
 import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
