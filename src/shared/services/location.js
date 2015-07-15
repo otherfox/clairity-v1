@@ -29,6 +29,56 @@ export function getLocation(id) {
   });
 }
 
+export function getLocationsByPop(id) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByPopId&pop_id=${id}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      });
+  });
+}
+
+export function getLocationsByContact(id) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByContact&contact_id=${id}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      });
+  });
+}
+
+export function getLocationsByStatus(status) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getAllLocationsByStatus&status=${status}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      });
+  });
+}
+
+export function getLocationsByStatus(id) {
+
+}
+
+export function getLocationsByContact(id) {
+
+}
+
 export function putLocation(location, sameAsCustomer = false) {
   return new Promise((s, f) => {
     let payload = {};
