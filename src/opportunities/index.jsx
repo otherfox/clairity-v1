@@ -3,7 +3,7 @@ import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import {networkModelRenderer} from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
-import {State, Link} from 'react-router'
+import { State, Link } from 'react-router'
 
 import OpportunityDetails from './parts/details'
 
