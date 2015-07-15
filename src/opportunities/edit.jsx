@@ -48,7 +48,6 @@ let editOpportunity = React.createClass({
           :
             <EditAccountDetails account={fromJS(opp.customer)} user={null} />
         }
-        <EditAccountDetails account={fromJS(opp.customer)} id={opp.customer.user_id} />
         <EditDetails {...this.props} />
         <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Update" />
       </Layout>
