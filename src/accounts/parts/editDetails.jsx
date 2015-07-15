@@ -7,6 +7,8 @@ import { List } from 'immutable'
 
 export default class EditDetails extends React.Component {
   render() {
+    let account = this.props.account.toJS();
+    let agent = this.props.user ? this.props.user.toJS() : {};
     return (
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
@@ -16,9 +18,9 @@ export default class EditDetails extends React.Component {
             widths={{ lg: [4,8]}}
             title={'Account Details'}
             data={[
-              { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled={true} />, detailType: 'muiTextField' },
-              { label: 'Name', name: 'name', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: 'Type', name: 'customerTypeId', value: <DropDown selectedValue={0} menuItems={ new List([
+              agent.name ? { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled={true} />, detailType: 'muiTextField' } : null,
+              { label: 'Name', name: 'name', value: <TextField value={account.name} />, detailType: 'muiTextField' },
+              { label: 'Type', name: 'customerTypeId', value: <DropDown selectedValue={account.customer_type} menuItems={ new List([
                 { label: '', value: 0},
                 { label: 'Business', value: 1 },
                 { label: 'Residential', value: 2 },

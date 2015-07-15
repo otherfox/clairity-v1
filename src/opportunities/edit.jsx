@@ -1,23 +1,16 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
+import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
-import {networkModelRenderer} from '../shared/components/networkRenderer'
-import Header from '../shared/components/header'
-import {
-  Checkbox,
-  RaisedButton,
-  TextField,
-  Paper
-} from 'material-ui'
-
-import { List, Map } from 'immutable'
+import { networkModelRenderer } from '../shared/components/networkRenderer'
+import { RaisedButton } from 'material-ui'
 import { State, Link } from 'react-router'
+import EditDetails from './parts/editDetails'
+import { fromJS } from 'immutable'
 
 import editAccountDetails from '../accounts/parts/editDetails'
-let EditAccountDetails = networkModelRenderer(editAccountDetails, 'account');
-
-import EditDetails from './parts/editDetails'
+let EditAccountDetails = networkModelRenderer(editAccountDetails, 'user');
 
 /*
 let event = 'controller.cfm?event=updateSalesOpp';
@@ -49,7 +42,7 @@ let editOpportunity = React.createClass({
             <RaisedButton style={{float: 'right', marginTop: 25}} secondary label="Return" />
           </Link>
         </Layout>
-        <EditAccountDetails id={opp.customer_id} />
+        <EditAccountDetails account={fromJS(opp.customer)} id={opp.customer.user_id} />
         <EditDetails {...this.props} />
         <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Update" />
       </Layout>
