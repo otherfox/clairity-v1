@@ -3,6 +3,7 @@ import {Paper, TextField} from 'material-ui'
 import Layout from '../../shared/components/layout'
 import DropDown from '../../shared/components/dropdown'
 import Details from '../../shared/components/details'
+import { List } from 'immutable'
 
 export default class EditDetails extends React.Component {
   render() {
