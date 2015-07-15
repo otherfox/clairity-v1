@@ -37,6 +37,18 @@ import {State} from 'react-router'
 import AccountDetails from './parts/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
+import ContractsList from '../contracts/list'
+let ContractsListQuery = queryRenderer(ContractsList, {
+  queries: [
+    collectionViaQuery({
+      table: 'contract',
+      viaTable: 'account',
+      idName: 'accountId',
+      keyName: 'customer_id'
+    })
+  ]
+});
+
 import OppsList from '../opportunities/list'
 let OppsListQuery = queryRenderer(OppsList, {
   queries: [
@@ -68,7 +80,7 @@ let accountView = React.createClass({
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
         <Header><h1>Account - {account.name}</h1></Header>
-        <Layout widths={{ lg: [12, 6, 6]}} cPadding={'20px 20px 0 0'}>
+        <Layout widths={{ lg: [12, 6, 6, 12]}} cPadding={'20px 20px 0 0'}>
           {
               account.user_id ?
                 <AccountDetailsAgent id={account.user_id} account={this.props.account} />
@@ -77,6 +89,7 @@ let accountView = React.createClass({
           }
           <Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper>
           <Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper>
+          <Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Contracts</h3><ContractsListQuery accountId={account.id} /></Paper>
         </Layout>
 
       </Layout>

@@ -63,7 +63,7 @@ export default (
 
         <Route {/***** IP Blocks *****/...{}}>
           <Redirect from="ip-blocks" to="all-ip-blocks" />
-          <Route name="ip-blocks" path="ip-block" handler={RouteHandler}>
+          <Route name="ip-blocks" path="ip-blocks" handler={RouteHandler}>
             <Route name="all-ip-blocks" path="all" handler={IpBlocks} />
             <Route name="view-ip-block" path=":blockId" handler={RouteHandler}>
               <DefaultRoute name="view-ip-block-index" handler={ViewIpBlock} />

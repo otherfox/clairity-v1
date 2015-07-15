@@ -56,7 +56,7 @@ let createLead = React.createClass({
     data.dt_lastmodified = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     convertLead({
       data,
-      completed: () => this.transitionTo('view-lead', this.getParams())
+      completed: () => this.transitionTo('view-account', this.props.lead.get('customer_id'))
     });
   },
 
