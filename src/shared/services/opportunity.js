@@ -31,3 +31,7 @@ export function getOpportunitiesByAccount(id) {
       })
   });
 }
+
+export function putOpportunity(opp) {
+  
+}
