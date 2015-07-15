@@ -8,6 +8,9 @@ import { RaisedButton } from 'material-ui'
 import { State, Link } from 'react-router'
 import EditDetails from './parts/editDetails'
 import { fromJS } from 'immutable'
+import _ from 'lodash'
+
+import { updateSalesOpp } from './actions'
 
 import EditAccountDetails from '../accounts/parts/editDetails'
 let EditAccountDetailsAgent = networkModelRenderer(EditAccountDetails, 'user');
@@ -30,7 +33,13 @@ let hiddenValues = {
 
 let editOpportunity = React.createClass({
   mixins: [State],
-
+  submit() {
+    let data = {
+      account: this.refs.account.state,
+      opps: this.refs.details.state
+    };
+    updateSalesOpp({ data, completed: a => alert('saved!') });
+  },
   render() {
     let opp = this.props.opportunity.toJS();
 
@@ -44,12 +53,12 @@ let editOpportunity = React.createClass({
         </Layout>
         {
           opp.customer.user_id ?
-            <EditAccountDetailsAgent account={fromJS(opp.customer)} id={opp.customer.user_id} />
+            <EditAccountDetailsAgent ref="account" account={fromJS(opp.customer)} id={opp.customer.user_id} />
           :
-            <EditAccountDetails account={fromJS(opp.customer)} user={null} />
+            <EditAccountDetails ref="account" account={fromJS(opp.customer)} user={null} />
         }
-        <EditDetails {...this.props} />
-        <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Update" />
+        <EditDetails ref="details" {...this.props} />
+        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" />
       </Layout>
     );
   }
