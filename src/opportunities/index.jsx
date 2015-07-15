@@ -3,7 +3,7 @@ import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
-
+import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -20,104 +20,40 @@ import {
   Paper
 } from 'material-ui'
 
+import accountDetails from '../accounts/parts/details'
+let AccountDetails = modelQuery(accountDetails, 'account');
+
 import controllable from 'react-controllables'
 import {List} from 'immutable'
 import {State} from 'react-router'
 
-let viewLead = React.createClass({
+/*
+  Form INFO
+  let event = 'controller.cfm?event=updateSalesOpp';
+  let hiddenValues = {
+    customer_id: "1480",
+    contact_id: "7223",
+    tax_exempt: false,
+    summary_billing: false,
+    show_international: true,
+    show_long_distance: false,
+    email_invoice: false,
+    invoice_weekly: false,
+    vip: false,
+    auto_pay: false,
+  };
+*/
+
+let viewOpportunity = React.createClass({
 
   render() {
-    let event = 'controller.cfm?event=updateSalesOpp';
 
-    let hiddenValues = {
-      customer_id: "1480",
-      contact_id: "7223",
-      tax_exempt: false,
-      summary_billing: false,
-      show_international: true,
-      show_long_distance: false,
-      email_invoice: false,
-      invoice_weekly: false,
-      vip: false,
-      auto_pay: false,
-    };
-
-    let opp = this.props.lead.toJS();
-    let owner = this.props.agent.toJS();
+    let opp = this.props.opportunity.toJS();
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>View Lead - {opp.company}</h1></Header>
-      <Paper>
-        <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
-          <Details
-            cStyles={{ lg: [{textAlign: 'left'}]}}
-            rowStyle={{marginLeft: '15%'}}
-            widths={{ lg: [4,8]}}
-            title={'Customer Details'}
-            data={[
-              { label: 'Current Account Owner', value: <TextField value={owner.name} disabled />, detailType: 'muiTextField' },
-              { label: 'Change Account Owner?', name: 'user_id', value: <DropDown selectedValue={0} menuItems={ new List([
-                { label: '', value: 0},
-                { label: 'Brad Hackett', value: 20 },
-                { label: 'Casey Pinedo', value: 199 },
-                { label: 'Chris Suttles', value: 254 },
-                { label: 'Christy Davis', value: 252 },
-                { label: 'D. Garcia', value: 168 },
-                { label: 'Dave Weaver', value: 35 },
-                { label: 'Donna Viviano', value: 85 },
-                { label: 'Jason Fisher', value: 43 },
-                { label: 'Jerry Rainey', value: 240 },
-                { label: 'Jody Rodgers', value: 216 },
-                { label: 'John Jenkins', value: 107 },
-                { label: 'Joshua Phoenix', value: 189 },
-                { label: 'Kelli Bedel', value: 128 },
-                { label: 'Kit Carker', value: 130 },
-                { label: 'Kris Maher', value: 10 },
-                { label: 'Loren Watson', value: 265 },
-                { label: 'Matt Yaun', value: 123 },
-                { label: 'Nancy Morefield', value: 165 },
-                { label: 'ORN Employee', value: 292 },
-                { label: 'Patty Valencia', value: 184 },
-                { label: 'Rhea Topolski', value: 166 },
-                { label: 'Ricardo Kourchenko', value: 264 },
-                { label: 'Rick Clines', value: 40 },
-                { label: 'Ricky Potash', value: 1 },
-                { label: 'Ryan Carney', value: 7 },
-                { label: 'S. Garcia', value: 167 },
-                { label: 'Sotheara Leang', value: 36 },
-                { label: 'Spencer Anderson', value: 214 },
-                { label: 'Stehpen Holmes', value: 231 },
-                { label: 'Summer Greer', value: 200 },
-                { label: 'Taryn Moseley', value: 215 },
-                { label: 'Ted Abbott', value: 291 },
-                { label: 'Thomas Dudley', value: 115 },
-                { label: 'William Dobbins', value: 283 }
-              ])} />, detailType: 'muiDropDown' },
-              { label: 'Name', name: 'name', value: <TextField value={''} />, detailType: 'muiTextField' },
-              { label: 'Type', name: 'customerTypeId', value: <DropDown selectedValue={0} menuItems={ new List([
-                { label: '', value: 0},
-                { label: 'Business', value: 1 },
-                { label: 'Residential', value: 2 },
-                { label: 'Telenational - Business', value: 3 },
-                { label: 'Telenational - Residential', value: 4 }
-              ])} />, detailType: 'muiDropDown' },
-            ]}
-          />
-          <Details
-            cStyles={{ lg: [{textAlign: 'left'}]}}
-            widths={{ lg: [2,10]}}
-            title={null}
-            data={[
-              { label: 'Street 1', name: 'customerStreet1', value: <TextField value={'15400 Knoll Trail'}/>, detailType: 'muiTextField' },
-              { label: 'Street 2', name: 'customerStreet2', value: <TextField value={'Suite 400'}/>, detailType: 'muiTextField' },
-              { label: 'City', name: 'customerCity', value: <TextField value={'Dallas'} />, detailType: 'muiTextField' },
-              { label: 'State', name: 'customerState', value: <TextField value={'TX'} />, detailType: 'muiTextField' },
-              { label: 'Zip Code', name: 'customerZip', value: <TextField value={75248} />, detailType: 'muiTextField' }
-            ]}
-          />
-        </Layout>
-      </Paper>
+      <AccountDetails id={this.customer_id} />
       <Paper>
         <Layout widths={{ lg: [6,6] }} cPadding={'0 20px 20px 20px'}>
           <Details
@@ -193,22 +129,19 @@ let viewLead = React.createClass({
   }
 });
 
-import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
-
-let ViewLead = queryRenderer(viewLead, {
+let ViewOpportunity = queryRenderer(viewOpportunity, {
   queries: [
-    modelQuery('contact', 'lead', 'contactId'),
-    modelQuery('user', 'agent', 'agentId')
+    modelQuery('opportunity', 'opportunity', 'opportunityId')
   ]
 });
 
-let ViewLeadPage = React.createClass({
+let ViewOpportunityPage = React.createClass({
   mixins: [State],
   render() {
     return (
-      <ViewLead contactId={+this.getParams().contactId} agentId={+this.getParams().agentId} />
+      <ViewOpportunity opportunityId={+this.getParams().oppId} />
     );
   }
 });
 
-export default ViewLeadPage;
+export default ViewOpportunityPage;
