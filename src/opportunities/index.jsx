@@ -53,7 +53,10 @@ let viewOpportunity = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Header><h1>View Opportunity - {opp.name}</h1></Header>
+        <Layout widths={{lg:[8,4], sm:[12,12]}} cPadding={'0 20px 0 0'}>
+          <Header><h1>View Opportunity - {opp.name}</h1></Header>
+          <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Edit" />
+        </Layout>
         <AccountDetails id={opp.customer_id} />
         <OpportunityDetails {...this.props} />
       </Layout>
