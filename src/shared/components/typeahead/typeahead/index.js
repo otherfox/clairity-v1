@@ -375,8 +375,6 @@ var Typeahead = React.createClass({
 
   // Todo onfocus show options
 
-
-
 });
 
 module.exports = Typeahead;

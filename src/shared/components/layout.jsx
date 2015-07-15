@@ -39,7 +39,7 @@ let Layout = React.createClass({
   },
 
   shouldComponentUpdate() {
-    return true;
+    return false;
   },
 
   getDefaultProps() {
@@ -173,19 +173,21 @@ let Layout = React.createClass({
             @media (max-width: ${this.props.breakpoints.md}px) {
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'md')};
-                  ${this.getChildStyleCSS(i, 'lg')}
+                  ${this.getChildStyleCSS(i, 'md')}
               }
             }
             /* sm */
             @media (max-width: ${this.props.breakpoints.sm}px) {
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'sm')};
+                  ${this.getChildStyleCSS(i, 'sm')}
               }
             }
             /* xs */
             @media (max-width: ${this.props.breakpoints.xs}px) {
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'xs')};
+                  ${this.getChildStyleCSS(i, 'xs')}
               }
             }
             /* xxs */
