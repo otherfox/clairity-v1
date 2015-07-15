@@ -29,7 +29,11 @@ let OpportunityDetails = React.createClass({
       project_started: o.project_started == 1 ? true : false,
       project_result: o.project_result == 1 ? true : false,
       sales: o.sales,
-      probability: o.probability
+      probability: o.probability,
+      dt_offer_made: o.dt_offer_made,
+      dt_closing: o.dt_closing,
+      dt_project_start: o.dt_project_start,
+      dt_project_end: o.dt_project_end
     };
   },
   render() {
