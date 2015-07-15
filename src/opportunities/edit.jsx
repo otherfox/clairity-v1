@@ -13,7 +13,7 @@ import _ from 'lodash'
 import { updateSalesOpp } from './actions'
 
 import EditAccountDetails from '../accounts/parts/editDetails'
-let EditAccountDetailsAgent = networkModelRenderer(EditAccountDetails, 'user');
+let EditAccountDetailsAgent = networkModelRenderer(EditAccountDetails, 'user',{methods:['getState']});
 
 /*
 let event = 'controller.cfm?event=updateSalesOpp';
@@ -35,10 +35,14 @@ let editOpportunity = React.createClass({
   mixins: [State],
   submit() {
     let data = {
-      account: this.refs.account.state,
+      props: {
+        opportunity: this.props.opportunity,
+        account: this.props.opportunity.get('customer')
+      },
+      account: this.refs.account.getState(),
       opps: this.refs.details.state
     };
-    updateSalesOpp({ data, completed: a => alert('saved!') });
+    updateSalesOpp({ data, completed: a => console.log('saved!') });
   },
   render() {
     let opp = this.props.opportunity.toJS();

@@ -1,5 +1,5 @@
 import Fynx from 'fynx'
-import Store from '../../shared/store'
+import Store from '../shared/store'
 
 import { postConvertLead } from '../shared/services/contacts'
 import { putOpportunity } from '../shared/services/opportunity'
