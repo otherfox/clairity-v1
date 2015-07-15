@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Paper, TextField, Checkbox, RaisedButton} from 'material-ui'
+import {Paper, TextField, Checkbox, RaisedButton, DatePicker} from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
@@ -30,8 +30,8 @@ export default class OpportunityDetails extends React.Component {
               { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <CampaignSources />, detailType: 'muiDropDown' },
               { label: '', names: ['offer_made', 'project_started'], value:
                 <Layout widths={{lg: [6,6], sm: [12]}}>
-                  <Checkbox name="offer_made" checked={!!opp.offer_made} label={'Offer Made'} />
-                  <Checkbox name="project_started" checked={!!opp.project_started} label={'Project Started'} />
+                  <Checkbox name="offer_made" defaultChecked={!!opp.offer_made} label={'Offer Made'} />
+                  <Checkbox name="project_started" defaultChecked={!!opp.project_started} label={'Project Started'} />
                 </Layout>
               , detailType: 'muiCheckbox'}
             ]}
@@ -41,10 +41,10 @@ export default class OpportunityDetails extends React.Component {
             widths={{ lg: [4,8]}}
             title={null}
             data={[
-              { label: 'Date Offer Made', name: 'dt_offer_made', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: 'Date Project Started', name: 'dt_project_start', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: 'Closing Date', name: 'dt_closing', value: <TextField value={''}/>, detailType: 'muiTextField' },
-              { label: 'Project Ending Date', name: 'dt_project_end', value: <TextField value={''}/>, detailType: 'muiTextField' },
+              { label: 'Date Offer Made', name: 'dt_offer_made', value: <DatePicker />, detailType: 'muiTextField' },
+              { label: 'Closing Date', name: 'dt_closing', value: <DatePicker />, detailType: 'muiTextField' },
+              { label: 'Date Project Started', name: 'dt_project_start', value: <DatePicker />, detailType: 'muiTextField' },
+              { label: 'Project Ending Date', name: 'dt_project_end', value: <DatePicker />, detailType: 'muiTextField' },
               { label: 'Sales Amount', name: 'sales', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Probability Pct.', name: 'probability', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: '', name: 'project_result', value: <Checkbox name={'project_result'} value={1} label={'Project Successful'} defaultSwitched={false} switched/>, detailType: 'muiCheckbox' },
