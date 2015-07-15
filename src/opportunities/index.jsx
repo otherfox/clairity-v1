@@ -4,21 +4,7 @@ import Layout from  '../shared/components/layout'
 import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
 import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
-import {
-  RadioButtonGroup,
-  RadioButton,
-  Checkbox,
-  FlatButton,
-  RaisedButton,
-  FloatingActionButton,
-  IconButton,
-  Toggle,
-  Slider,
-  DropDownMenu,
-  DatePicker,
-  TextField,
-  Paper
-} from 'material-ui'
+import { RaisedButton } from 'material-ui'
 
 import accountDetails from '../accounts/parts/details'
 import OpportunityDetails from './parts/details'
