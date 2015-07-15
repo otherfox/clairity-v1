@@ -74,7 +74,6 @@ export default class OpportunityDetails extends React.Component {
               { label: 'Sales Amount', name: 'sales', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: 'Probability Pct.', name: 'probability', value: <TextField value={''}/>, detailType: 'muiTextField' },
               { label: '', name: 'project_result', value: <Checkbox name={'project_result'} value={1} label={'Project Successful'} defaultSwitched={false} switched/>, detailType: 'muiCheckbox' },
-              { label: '', value: <RaisedButton primary label="Update" />, detaildetailType: 'muiButton'}
             ]}
           />
         </Layout>
