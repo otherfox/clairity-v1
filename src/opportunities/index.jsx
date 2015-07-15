@@ -25,8 +25,7 @@ import OpportunityDetails from './parts/details'
 let AccountDetails = networkModelRenderer(accountDetails, 'account');
 
 import controllable from 'react-controllables'
-import {List} from 'immutable'
-import {State} from 'react-router'
+import {State, Link} from 'react-router'
 
 /*
   Form INFO
@@ -46,6 +45,7 @@ import {State} from 'react-router'
 */
 
 let viewOpportunity = React.createClass({
+  mixins: [State],
 
   render() {
 
@@ -55,7 +55,9 @@ let viewOpportunity = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Layout widths={{lg:[8,4], sm:[12,12]}} cPadding={'0 20px 0 0'}>
           <Header><h1>View Opportunity - {opp.name}</h1></Header>
-          <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Edit" />
+          <Link to="edit-opp" params={this.getParams()}>
+            <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Edit" />
+          </Link>
         </Layout>
         <AccountDetails id={opp.customer_id} />
         <OpportunityDetails {...this.props} />
