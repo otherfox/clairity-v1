@@ -121,7 +121,7 @@ export default (
                 <Route name="add-contact-opp" path="add" handler={CreateOpportunity} />
               </Route>
             </Route>
-            <Route name="all-leads" path="all" handler={ViewOpportunity} />
+            <Route name="all-leads" path="all" handler={ViewLeads} />
           </Route>
         </Route>
 
