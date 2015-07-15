@@ -11,7 +11,8 @@ import Table from '../shared/components/table'
 import {
   networkModelRenderer,
   queryRenderer,
-  modelQuery
+  modelQuery,
+  collectionViaQuery
 } from '../shared/components/networkRenderer'
 
 import {
@@ -36,6 +37,31 @@ import {State} from 'react-router'
 import AccountDetails from './parts/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
+import OppsList from '../opportunities/list'
+let OppsListQuery = queryRenderer(OppsList, {
+  queries: [
+    collectionViaQuery({
+      table: 'opportunity',
+      viaTable: 'account',
+      propName: 'opportunities',
+      idName: 'accountId',
+      keyName: 'customer_id'
+    })
+  ]
+});
+
+import ContactList from '../contacts/list'
+let ContactListQuery = queryRenderer(ContactList, {
+  queries: [
+    collectionViaQuery({
+      table: 'contact',
+      viaTable: 'account',
+      idName: 'accountId',
+      keyName: 'customer_id'
+    })
+  ]
+});
+
 let accountView = React.createClass({
   render() {
     let account = this.props.account.toJS();
@@ -49,7 +75,10 @@ let accountView = React.createClass({
               :
                 <AccountDetails user={null} account={this.props.account} />
           }
+          <OppsListQuery accountId={account.id} />
+          <ContactListQuery accountId={account.id} />
         </Layout>
+
       </Layout>
     )
   }
