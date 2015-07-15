@@ -23,6 +23,7 @@ import EditAccount  from '../../accounts/edit'
 import SearchAccount from '../../accounts/search'
 
 /* Contacts */
+import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
 
 /* Contracts */
@@ -112,14 +113,24 @@ export default (
           </Route>
         </Route>
 
+        <Route {/***** Contacts *****/...{}}>
+          <Redirect from="contacts" to="all-contacts" />
+          <Route name="contacts" handler={RouteHandler}>
+            <Route path=":contactId" handler={RouteHandler}>
+              <DefaultRoute name="view-contact" handler={ViewContact} />
+              <Route name="contact-opps" path="opps" handler={RouteHandler}>
+                <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
+              </Route>
+            </Route>
+            <Route name="all-contacts" path="all" handler={ViewLeads} />
+          </Route>
+        </Route>
+
         <Route {/***** Leads *****/...{}}>
           <Redirect from="leads" to="all-leads" />
           <Route name="leads" handler={RouteHandler}>
             <Route path=":contactId/:agentId" handler={RouteHandler}>
-              <Route name="contact-opps" path="opps" handler={RouteHandler}>
-                <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
-                <Route name="add-contact-opp" path="add" handler={CreateOpportunity} />
-              </Route>
+              <Route name="add-contact-opp" path="convert" handler={CreateOpportunity} />
             </Route>
             <Route name="all-leads" path="all" handler={ViewLeads} />
           </Route>
