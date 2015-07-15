@@ -1,17 +1,15 @@
 import React, {PropTypes} from 'react'
 import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
-import DropDown from '../shared/components/dropDown'
-import Details from  '../shared/components/details'
-import {networkModelRenderer, queryRenderer, modelQuery} from '../shared/components/networkRenderer'
+import {networkModelRenderer} from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
+import {State, Link} from 'react-router'
+
+import OpportunityDetails from './parts/details'
 
 import accountDetails from '../accounts/parts/details'
-import OpportunityDetails from './parts/details'
 let AccountDetails = networkModelRenderer(accountDetails, 'account');
 
-import controllable from 'react-controllables'
-import {State, Link} from 'react-router'
 
 let viewOpportunity = React.createClass({
   mixins: [State],
