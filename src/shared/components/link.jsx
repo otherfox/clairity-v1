@@ -1,18 +1,20 @@
 import React from 'react'
 import {State, Link} from 'react-router'
+import _ from 'lodash'
 
 class CustomLink extends React.Component {
 
   style() {
     let textColor = this.context.muiTheme.palette.primary1Color;
     return {
-      color: textColor
+      color: textColor,
+      textDecoration: 'none'
     }
   }
 
   render() {
     return (
-      <Link to={this.props.to} params={this.props.params} style={this.style()}>
+      <Link to={this.props.to} params={this.props.params} style={_.assign(this.style(), this.props.style)}>
         {this.props.children}
       </Link>
     );
