@@ -4,6 +4,7 @@ import {getWorkOrder} from './workOrder'
 import {getContract} from './contracts'
 import {getUser} from './users'
 import {getAccount} from './account'
+import {getOpportunity} from './opportunity'
 
 const resource = {
   contact: getContact,
@@ -12,11 +13,41 @@ const resource = {
   contract: getContract,
   lead: getContact,
   user: getUser,
-  account: getAccount
+  account: getAccount,
+  opportunity: getOpportunity
 };
 
 export function getResource(id, tableName) {
   return resource[tableName.toLowerCase()](id);
+}
+
+import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
+import { getOpportunitiesByAccount } from './opportunity'
+import { getAccountsByAgent, getAccountsByContact } from './account'
+import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
+
+const resourceVia = {
+  contact: {
+    account: getContactsByAccount,
+    opportunity: getContactsByOpportunity,
+    location: getContactsByLocation
+  },
+  opportunity: {
+    account: getOpportunitiesByAccount
+  },
+  account: {
+    user: getAccountsByAgent,
+    contact: getAccountsByContact
+  },
+  location: {
+    pop: getLocationsByPop,
+    contact: getLocationsByContact,
+    locationStatus: getLocationsByStatus
+  },
+};
+
+export function getCollectionVia(resourceTable, throughTable, throughId) {
+  return resourceVia[resourceTable][throughTable](throughId);
 }
 
 

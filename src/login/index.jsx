@@ -28,6 +28,7 @@ import controllable from 'react-controllables'
 import {tryLogin, loginSuccess} from './actions'
 import {} from './queries'
 
+@controllable(['username', 'password'])
 class LoginForm extends React.Component {
   changeUsername(ev) {
     if (!this.props.onUsernameChange) return;
@@ -74,35 +75,25 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.defaultProps = { username: '', password: '' }
 LoginForm.propTypes = {
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onLogin: PropTypes.func
 }
 
-let Form = controllable(LoginForm, ['username', 'password']);
 import {Navigation} from 'react-router'
 
 const Login = React.createClass({
   mixins: [Navigation],
-  childContextTypes: {
-    muiTheme: PropTypes.object
-  },
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    }
-  },
   componentDidMount() {
-    loginSuccess.listen(() => this.transitionTo('work-orders', {id: 1538}));
+    loginSuccess.listen(() => this.transitionTo('leads'));
   },
   tryLogin(username, password) {
     tryLogin(username, password);
   },
   render() {
     return (
-      <Form defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} />
+      <LoginForm defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} />
     );
   }
 });

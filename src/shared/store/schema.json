@@ -12,5 +12,6 @@
   "salesStage": {},
   "leadSource": {},
   "campaignSource": {},
-  "account": {}
+  "account": {},
+  "opportunity": {}
 }

@@ -59,7 +59,7 @@ export default function multiQueryRenderer(Component, options) {
 
     render() {
       if (this.state.ready) {
-        return <Component {...this.props} {...this.getQueryState()} />;
+        return <Component ref="inner" {...this.props} {...this.getQueryState()} />;
       } else {
         return false;
       }

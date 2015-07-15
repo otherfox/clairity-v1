@@ -80,12 +80,15 @@ let Details = React.createClass ({
     let fData = false;
     if (this.props.data && Array.isArray(this.props.data)) {
       fData = this.props.data.map((dataObj,idx) =>
+        dataObj ?
         <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
           <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles) }>
             <div style={_.assign(this.style(dataObj.detailType).label, this.props.label)}>{dataObj.label}</div>
             <div style={_.assign(this.style(dataObj.detailType).value, this.props.value)}>{dataObj.value}</div>
           </Layout>
-        </div>);
+        </div>
+        : false
+      );
     }
 
     let title = (this.props.title || this.props.title === null) ? <div><h3 style={_.assign(this.style().header, this.props.headerStyle)}>{this.props.title}</h3></div> : null ;

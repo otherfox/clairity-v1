@@ -9,6 +9,13 @@ import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 
 import {
+  networkModelRenderer,
+  queryRenderer,
+  modelQuery,
+  collectionViaQuery
+} from '../shared/components/networkRenderer'
+
+import {
   RadioButtonGroup,
   RadioButton,
   Checkbox,
@@ -27,25 +34,63 @@ import {
 import controllable from 'react-controllables'
 import {State} from 'react-router'
 
+import AccountDetails from './parts/details'
+let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
-let Account = React.createClass({
-  mixins: [State],
+import OppsList from '../opportunities/list'
+let OppsListQuery = queryRenderer(OppsList, {
+  queries: [
+    collectionViaQuery({
+      table: 'opportunity',
+      viaTable: 'account',
+      propName: 'opportunities',
+      idName: 'accountId',
+      keyName: 'customer_id'
+    })
+  ]
+});
 
-  getOrderId() {
-    return Number(this.getParams().id || 1538);
-  },
+import ContactList from '../contacts/list'
+let ContactListQuery = queryRenderer(ContactList, {
+  queries: [
+    collectionViaQuery({
+      table: 'contact',
+      viaTable: 'account',
+      idName: 'accountId',
+      keyName: 'customer_id'
+    })
+  ]
+});
 
+let accountView = React.createClass({
   render() {
+    let account = this.props.account.toJS();
     return (
-      <div>
-        <div className="section-header">
-          <Header><h1>Customer Details</h1></Header>
-        </div>
-      </div>
+      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+        <Header><h1>Account - {account.name}</h1></Header>
+        <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+          {
+              account.user_id ?
+                <AccountDetailsAgent id={account.user_id} account={this.props.account} />
+              :
+                <AccountDetails user={null} account={this.props.account} />
+          }
+          <OppsListQuery accountId={account.id} />
+          <ContactListQuery accountId={account.id} />
+        </Layout>
+
+      </Layout>
     )
   }
 });
 
-import {networkModelRenderer} from '../shared/components/networkRenderer'
+let Account = networkModelRenderer(accountView, 'account');
 
-export default networkModelRenderer(Account, 'account');
+let AccountPage = React.createClass({
+  mixins: [State],
+  render() {
+    return <Account id={+this.getParams().accountId} />;
+  }
+});
+
+export default AccountPage;
