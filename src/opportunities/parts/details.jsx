@@ -36,12 +36,12 @@ export default class OpportunityDetails extends React.Component {
             widths={{ lg: [4,8]}}
             title={null}
             data={[
-              opp.offer_made ? { label: 'Date Offer Made', name: 'dt_offer_made', value: opp.dt_offer_made } : null,
-              opp.project_started ? { label: 'Date Project Started', name: 'dt_project_start', value: opp.dt_project_start } : null,
-              opp.dt_closing ? { label: 'Closing Date', name: 'dt_closing', value: opp.dt_closing } : null,
-              opp.dt_project_end ? { label: 'Project Ending Date', name: 'dt_project_end', value: opp.dt_project_end } : null,
-              opp.sales ? { label: 'Sales Amount', name: 'sales', value: opp.sales } : null,
-              opp.probability ? { label: 'Probability Pct.', name: 'probability', value: opp.probability } : null,
+              { label: 'Date Offer Made', name: 'dt_offer_made', value: opp.dt_offer_made },
+              { label: 'Date Project Started', name: 'dt_project_start', value: opp.dt_project_start } ,
+              { label: 'Closing Date', name: 'dt_closing', value: opp.dt_closing } ,
+              { label: 'Project Ending Date', name: 'dt_project_end', value: opp.dt_project_end } ,
+              { label: 'Sales Amount', name: 'sales', value: opp.sales } ,
+              { label: 'Probability Pct.', name: 'probability', value: opp.probability } ,
             ]}
           />
         </Layout>

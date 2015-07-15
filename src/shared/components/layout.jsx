@@ -39,7 +39,7 @@ let Layout = React.createClass({
   },
 
   shouldComponentUpdate() {
-    return false;
+    return true;
   },
 
   getDefaultProps() {
