@@ -28,7 +28,12 @@ export default class OpportunityDetails extends React.Component {
               { label: 'Project Type', name: 'salesProjectTypeId', value: <ProjectTypes />, detailType: 'muiDropDown' },
               { label: 'Lead Source', name: 'salesLeadSrcId', value: <LeadSources />, detailType: 'muiDropDown' },
               { label: 'Lead Campaign Source', name: 'salesCampSrcId', value: <CampaignSources />, detailType: 'muiDropDown' },
-              { label: '', names: ['offer_made', 'project_started'], value: <Layout widths={{lg: [6,6], sm: [12]}}><Checkbox name={'offer_made'} value={1} label={'Offer Made'} defaultSwitched={true} switched/><Checkbox name={'project_started'} value={1} label={'Project Started'} defaultSwitched={true} switched/></Layout>, detailType: 'muiCheckbox'}
+              { label: '', names: ['offer_made', 'project_started'], value:
+                <Layout widths={{lg: [6,6], sm: [12]}}>
+                  <Checkbox name="offer_made" checked={!!opp.offer_made} label={'Offer Made'} />
+                  <Checkbox name="project_started" checked={!!opp.project_started} label={'Project Started'} />
+                </Layout>
+              , detailType: 'muiCheckbox'}
             ]}
           />
           <Details
