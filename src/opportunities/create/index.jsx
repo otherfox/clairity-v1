@@ -4,7 +4,7 @@ import Details from  '../../shared/components/details'
 import Header from '../../shared/components/header'
 import _ from 'lodash'
 import { collectionDropdown } from '../../shared/components/collectionDropdown'
-import {State, Navigation} from 'react-router'
+import {State, Navigation, Link} from 'react-router'
 import {v4} from 'uuid'
 import {convertLead} from '../actions'
 import moment from 'moment'
@@ -58,10 +58,12 @@ let createLead = React.createClass({
   render() {
     let opp = this.props.lead.toJS();
     let owner = this.props.agent.toJS();
-
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>Convert Lead - {opp.company}</h1></Header>
+        <Link to="view-account" params={{locationId: 1, accountId: opp.customer_id}}>
+          View Account
+        </Link>
         <Paper>
           <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
             <Details
