@@ -97,12 +97,25 @@ export default (
           </Route>
         </Route>
 
+        <Route {/***** Opportunities *****/...{}}>
+          <Redirect from="opps" to="all-opps" />
+          <Route name="opps" handler={RouteHandler}>
+            <Route path=":oppId" handler={RouteHandler}>
+              <DefaultRoute name="view-opp" handler={ViewOpportunity} />
+              <Route name="edit-lead" path="edit" handler={EditOpportunity} />
+              <Route name="opps-contacts" path="contacts" handler={RouteHandler}>
+                <DefaultRoute name="opps-contact-list" handler={RouteHandler} />
+                <Route name="add-opp-contact" path="add" handler={CreateOpportunity} />
+              </Route>
+            </Route>
+            <Route name="all-opps" path="all" handler={ListOpportunities} />
+          </Route>
+        </Route>
+
         <Route {/***** Leads *****/...{}}>
           <Redirect from="leads" to="all-leads" />
           <Route name="leads" handler={RouteHandler}>
             <Route path=":contactId/:agentId" handler={RouteHandler}>
-              <DefaultRoute name="view-lead" handler={ViewLead} />
-              <Route name="edit-lead" path="edit" handler={EditOpportunity} />
               <Route name="contact-opps" path="opps" handler={RouteHandler}>
                 <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
                 <Route name="add-contact-opp" path="add" handler={CreateOpportunity} />
