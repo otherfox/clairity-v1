@@ -102,7 +102,7 @@ export default (
           <Route name="opps" handler={RouteHandler}>
             <Route path=":oppId" handler={RouteHandler}>
               <DefaultRoute name="view-opp" handler={ViewOpportunity} />
-              <Route name="edit-lead" path="edit" handler={EditOpportunity} />
+              <Route name="edit-opp" path="edit" handler={EditOpportunity} />
               <Route name="opps-contacts" path="contacts" handler={RouteHandler}>
                 <DefaultRoute name="opps-contact-list" handler={RouteHandler} />
                 <Route name="add-opp-contact" path="add" handler={CreateOpportunity} />
