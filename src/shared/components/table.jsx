@@ -2,6 +2,8 @@ import React from 'react'
 import Settings from './settings'
 import {RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
+import Details from './details'
+import {Typeahead} from './typeahead'
 import _ from 'lodash'
 
 import numeral from 'numeral'
@@ -107,7 +109,9 @@ let DataTable = React.createClass({
       data: this.props.data,
       width: this.getWidth(),
       active: '',
-      sorted: {}
+      sorted: {},
+      filters: {},
+      height: (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300
     }
   },
 
@@ -185,21 +189,39 @@ let DataTable = React.createClass({
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
 
+  setFilters(event) {
+    let value = (typeof event === 'string') ? event : event.target.value;
+    this.setState({ filters : value });
+
+    if(typeof event === 'string') {
+      let idx = _.findIndex(this.props.data, 'name', event);
+      this.setState( { height: this.props.rowHeight + 52, data: [this.props.data[idx]]});
+    }
+  },
+
+  filter(event) {
+    debugger;
+    let idx = _.findIndex(this.props.data, 'name', this.state.filters);
+    this.setState( { height: this.props.rowHeight + 52, data: [this.props.data[idx]]});
+  },
+
   render: function() {
-    filters = (this.props.filters) ? <Details
-      widths={this.props.filters.widths}
-      rowStyle={this.props.filters.rowStyle}
-      cStyles={this.props.filters.cStyles}
-      cStyle={}
+    let filters = (this.props.filters) ? <Details
+      widths={this.props.filters.widths || {lg: ['auto', '320px']}}
+      rowStyle={this.props.filters.rowStyle || { float: 'left' }}
+      cStyles={this.props.filters.cStyles || {lg: [{textAlign: 'left'}]}}
+      cStyle={this.props.filters.cStyle}
+      cPadding={this.props.filters.cPadding || '0 20px 30px 0'}
       data={
         _.map(this.props.filters.data, (filter, i) => {
-            if(filter.filterType === 'typeahead') {
-              return { label: filter.label, value: <Typeahead options={filter.options} maxVisible={10} />, detailType: 'muiTextField' }
-            }
+          if(filter.filterType === 'typeahead') {
+            return { label: filter.label, value: <Typeahead options={filter.options} maxVisible={10} onChange={this.setFilters} onOptionSelected={this.setFilters} />, detailType: 'muiTextField' }
           }
-        )
+          else if (filter.filterType === 'button') {
+            return { label: '', value: <RaisedButton primary label={'Filter'} onClick={this.filter} />, detailType: 'muiTextField'}
+          }
+        })
       }
-    }
     /> : '';
     let columns =
       <Group fixed={true}>
@@ -224,7 +246,6 @@ let DataTable = React.createClass({
           , this)
         }
       </Group>;
-    let height = (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
 
     return (
       <div style={_.assign(this.style().root, this.props.style)}>
@@ -286,7 +307,7 @@ let DataTable = React.createClass({
           rowsCount={this.props.data.length}
           rowClassNameGetter={this.getRowClass}
           width={this.getWidth()}
-          height={height}
+          height={this.state.height}
           headerHeight={50}>
             {columns}
         </Table>

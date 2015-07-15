@@ -22,15 +22,15 @@ let viewLeads = React.createClass({
 
     let leads = getLeads;
     let names = _.map(leads, _.property('name'));
-    let accounts = _.map(leads, _.property('name'));
-    let owners = _.map(leads, _.property('name'));
+    let accounts = _.map(leads, _.property('customer_name'));
+    let owners = _.map(leads, _.property('agent_name'));
 
     return {
       colNames: [
         { label: 'Lead Name', name: 'name', cellType: 'string'},
         { label: 'Account', name: 'customer_name', cellType: 'string'},
         { label: 'Account Owner', name: 'agent_name', cellType: 'string'},
-        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string'}
+        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: {textAlign: 'center'}}
       ],
       data: leads.map(s => {
         s.__lead_conversion = (
@@ -43,16 +43,10 @@ let viewLeads = React.createClass({
         return s;
       }),
       filters: {
-        component: <Details
-            widths={ {lg: ['auto', '320px']}}
-            rowStyle={{ float: 'left' }}
-            cStyles={{ lg: [{textAlign: 'left'}] }}
-            data={[
-              { label: 'Name', value: <Typeahead options={names} maxVisible={10} />, detailType: 'muiTextField' },
-              { label: 'Account', value: <Typeahead options={accounts} maxVisible={10} />, detailType: 'muiTextField' },
-              { label: 'Owner', value: <Typeahead options={owners} maxVisible={10} />, detailType: 'muiTextField' }
-          ]}
-        />
+        data: [
+          { label: 'Name', options: names, filterType: 'typeahead', name: 'name' },
+          { filterType: 'button'}
+        ]
       },
       colWidths: [5,4,4,3],
       maxWidth: 16,
