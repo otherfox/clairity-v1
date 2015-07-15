@@ -1,7 +1,18 @@
 import React from "react"
+import {Link} from 'react-router'
 
-export default class ViewIpBlock extends React.Component {
+export default class ListOpportunities extends React.Component {
   render() {
-    return <div>List Opportunities page</div>;
+    return (
+      <div>
+        {
+          this.props.opportunities.map(o =>
+            <Link to="view-opp" params={{oppId: o.get('id')}}>
+              {o.get('name')}
+            </Link>
+          )
+        }
+      </div>
+    );
   }
 }
