@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react'
 import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
-import {networkModelRenderer} from '../shared/components/networkRenderer'
+import { networkModelRenderer } from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
 import { State, Link } from 'react-router'
-
+import { fromJS } from 'immutable'
 import OpportunityDetails from './parts/details'
 
 import accountDetails from '../accounts/parts/details'
-let AccountDetails = networkModelRenderer(accountDetails, 'account');
+let AccountDetails = networkModelRenderer(accountDetails, 'user');
 
 
 let viewOpportunity = React.createClass({
@@ -26,7 +26,7 @@ let viewOpportunity = React.createClass({
             <RaisedButton style={{float: 'right', marginTop: 25}} primary label="Edit" />
           </Link>
         </Layout>
-        <AccountDetails id={opp.customer_id} />
+        <AccountDetails account={fromJS(opp.customer)} id={opp.customer.user_id} />
         <OpportunityDetails {...this.props} />
       </Layout>
     );
