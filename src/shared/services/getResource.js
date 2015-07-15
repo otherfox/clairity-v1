@@ -19,10 +19,16 @@ export function getResource(id, tableName) {
   return resource[tableName.toLowerCase()](id);
 }
 
+import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
+import { getOpportunitiesByAccount } from './opportunity'
+import { getAccountsByAgent, getAccountsByContact } from './account'
+import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
+
 const resourceVia = {
   contact: {
     account: getContactsByAccount,
-    opportunity: getContactsByOpportunity
+    opportunity: getContactsByOpportunity,
+    location: getContactsByLocation
   },
   opportunity: {
     account: getOpportunitiesByAccount
