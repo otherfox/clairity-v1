@@ -46,7 +46,7 @@ const resourceVia = {
   },
 };
 
-export function getResourcesVia(resourceTable, throughTable, throughId) {
+export function getCollectionVia(resourceTable, throughTable, throughId) {
   return resourceVia[resourceTable][throughTable](throughId);
 }
 
