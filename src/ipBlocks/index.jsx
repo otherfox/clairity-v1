@@ -295,7 +295,6 @@ let IpBlocks = React.createClass({
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
           data={[
-              { label: 'Subnet', name: 'subnet', value: <TextField defaultValue={''} />, detailType: 'muiTextField'},
               { label: 'Keyword', name: 'keyword', value: <Typeahead options={_.map(this.getBlocks(), _.property('block'))} maxVisible={10} /> , detailType: 'muiTextField'},
               { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px'}}/><RaisedButton label="Assign New Block" /></div>, detaildetailType: 'muiButton'}
           ]}
