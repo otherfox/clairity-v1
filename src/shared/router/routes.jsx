@@ -23,8 +23,6 @@ import EditAccount  from '../../accounts/edit'
 import SearchAccount from '../../accounts/search'
 
 /* Contacts */
-import ViewLead from '../../contacts'
-import EditLead from '../../contacts/edit'
 import ViewLeads from '../../contacts/leads'
 
 /* Contracts */
@@ -32,8 +30,10 @@ import CreateContract from '../../contracts/create'
 import ListContracts from '../../contracts/list'
 
 /* Opportunities */
-import CreateOpportunity from '../../opportunities/create'
+import ViewOpportunity from '../../opportunities'
+import EditOpportunity from '../../opportunities/edit'
 import ListOpportunities from '../../opportunities/list'
+import CreateOpportunity from '../../opportunities/create'
 
 /* Ip Zones */
 import IpZones from '../../ipZones'
@@ -102,13 +102,13 @@ export default (
           <Route name="leads" handler={RouteHandler}>
             <Route path=":contactId/:agentId" handler={RouteHandler}>
               <DefaultRoute name="view-lead" handler={ViewLead} />
-              <Route name="edit-lead" path="edit" handler={EditLead} />
+              <Route name="edit-lead" path="edit" handler={EditOpportunity} />
               <Route name="contact-opps" path="opps" handler={RouteHandler}>
                 <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
                 <Route name="add-contact-opp" path="add" handler={CreateOpportunity} />
               </Route>
             </Route>
-            <Route name="all-leads" path="all" handler={ViewLeads} />
+            <Route name="all-leads" path="all" handler={ViewOpportunity} />
           </Route>
         </Route>
 
