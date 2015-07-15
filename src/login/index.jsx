@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <Layout widths={{lg: ['400px'], md: ['400px'], sm: ['400px'], xs: ['400px']}} type={'center-v'} style={{ backgroundColor: , display: 'block', height: window.innerHeight+'px' }}>
+      <Layout widths={{lg: ['400px'], md: ['400px'], sm: ['400px'], xs: ['400px']}} type={'center-v'} style={{ backgroundColor: '#fafafa', display: 'block', height: window.innerHeight+'px' }}>
         <div>
           <Paper>
             <div style={{position: 'relative', margin: '0 auto', padding: '3em 0 5em', display: 'table'}}>
