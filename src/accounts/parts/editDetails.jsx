@@ -1,11 +1,24 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, addons} from 'react/addons'
 import {Paper, TextField} from 'material-ui'
 import Layout from '../../shared/components/layout'
 import DropDown from '../../shared/components/dropDown'
 import Details from '../../shared/components/details'
 import { List } from 'immutable'
 
-export default class EditDetails extends React.Component {
+let EditDetails = React.createClass({
+  mixins: [addons.LinkedStateMixin],
+  getInitialState() {
+    let o = this.props.account.toJS();
+    return {
+      name: o.name,
+      customer_type: o.customer_type,
+      street1: o.street1,
+      street2: o.street2,
+      city: o.city,
+      state: o.state,
+      zip: o.zip
+    };
+  },
   render() {
     let account = this.props.account.toJS();
     let agent = this.props.user ? this.props.user.toJS() : {};
@@ -19,9 +32,9 @@ export default class EditDetails extends React.Component {
             title={'Account Details'}
             data={[
               agent.name ? { label: 'Current Account Owner', value: <TextField value={'Kit Carker'} disabled={true} />, detailType: 'muiTextField' } : null,
-              { label: 'Name', name: 'name', value: <TextField value={account.name} />, detailType: 'muiTextField' },
-              { label: 'Type', name: 'customerTypeId', value: <DropDown selectedValue={account.customer_type} menuItems={ new List([
-                { label: '', value: 0},
+              { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')} />, detailType: 'muiTextField' },
+              { label: 'Type', name: 'customerTypeId', value: <DropDown valueLink={this.linkState('customer_type')} menuItems={ new List([
+                { label: '', value: 0 /* TODO: make this a real `collectionDropdown` */},
                 { label: 'Business', value: 1 },
                 { label: 'Residential', value: 2 },
                 { label: 'Telenational - Business', value: 3 },
@@ -34,15 +47,17 @@ export default class EditDetails extends React.Component {
             widths={{ lg: [2,10]}}
             title={null}
             data={[
-              { label: 'Street 1', name: 'customerStreet1', value: <TextField value={'15400 Knoll Trail'}/>, detailType: 'muiTextField' },
-              { label: 'Street 2', name: 'customerStreet2', value: <TextField value={'Suite 400'}/>, detailType: 'muiTextField' },
-              { label: 'City', name: 'customerCity', value: <TextField value={'Dallas'} />, detailType: 'muiTextField' },
-              { label: 'State', name: 'customerState', value: <TextField value={'TX'} />, detailType: 'muiTextField' },
-              { label: 'Zip Code', name: 'customerZip', value: <TextField value={75248} />, detailType: 'muiTextField' }
+              { label: 'Street 1', name: 'customerStreet1', value: <TextField valueLink={this.linkState('street1')} />, detailType: 'muiTextField' },
+              { label: 'Street 2', name: 'customerStreet2', value: <TextField valueLink={this.linkState('street2')} />, detailType: 'muiTextField' },
+              { label: 'City', name: 'customerCity', value: <TextField valueLink={this.linkState('city')} />, detailType: 'muiTextField' },
+              { label: 'State', name: 'customerState', value: <TextField valueLink={this.linkState('state')} />, detailType: 'muiTextField' },
+              { label: 'Zip Code', name: 'customerZip', value: <TextField valueLink={this.linkState('zip')} />, detailType: 'muiTextField' }
             ]}
           />
         </Layout>
       </Paper>
     );
   }
-}
+});
+
+export default EditDetails;
