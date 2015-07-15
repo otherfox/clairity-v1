@@ -75,7 +75,7 @@ let accountView = React.createClass({
               :
                 <AccountDetails user={null} account={this.props.account} />
           }
-          <Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Oppotunities</h3><OppsListQuery accountId={account.id} /></Paper>
+          <Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper>
           <Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper>
         </Layout>
 

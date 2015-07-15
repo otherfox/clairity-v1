@@ -62,7 +62,7 @@ let editOpportunity = React.createClass({
             <EditAccountDetails ref="account" account={fromJS(opp.customer)} user={null} />
         }
         <EditDetails ref="details" {...this.props} />
-        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" />
+        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" /> 
       </Layout>
     );
   }

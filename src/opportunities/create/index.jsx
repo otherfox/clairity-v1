@@ -38,6 +38,10 @@ let createLead = React.createClass({
     }
   },
 
+  contextTypes: {
+    muiThemes: React.PropTypes.object
+  },
+
   convertLead() {
     let data = _.clone(this.state);
     let entrykey = v4();
