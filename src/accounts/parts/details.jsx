@@ -1,9 +1,12 @@
 import React, {PropTypes} from 'react'
+import {Paper} from 'material-ui'
+import Layout from '../../shared/components/layout'
+import Details from '../../shared/components/details'
 
 export default class AccountDetails extends React.Component {
   render() {
     let account = this.props.account.toJS();
-    let agent = this.props.agent.toJS();
+    let agent = this.props.agent ? this.props.agent.toJS() : {};
     return (
       <Paper>
         <Layout widths={{ lg: [6,6] }} cPadding={'0 20px 20px 20px'}>
@@ -13,7 +16,7 @@ export default class AccountDetails extends React.Component {
             widths={{ lg: [4,8]}}
             title={'Account Details'}
             data={[
-              { label: 'Current Account Owner', value: agent.name },
+              agent.name ? { label: 'Current Account Owner', value: agent.name } : null,
               { label: 'Name', name: 'name', value: account.name },
               { label: 'Type', name: 'customerTypeId', value: account.type.name },
             ]}
