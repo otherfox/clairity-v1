@@ -27,23 +27,6 @@ let AccountDetails = networkModelRenderer(accountDetails, 'account');
 import controllable from 'react-controllables'
 import {State, Link} from 'react-router'
 
-/*
-  Form INFO
-  let event = 'controller.cfm?event=updateSalesOpp';
-  let hiddenValues = {
-    customer_id: "1480",
-    contact_id: "7223",
-    tax_exempt: false,
-    summary_billing: false,
-    show_international: true,
-    show_long_distance: false,
-    email_invoice: false,
-    invoice_weekly: false,
-    vip: false,
-    auto_pay: false,
-  };
-*/
-
 let viewOpportunity = React.createClass({
   mixins: [State],
 
