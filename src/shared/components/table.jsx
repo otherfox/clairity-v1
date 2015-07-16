@@ -197,22 +197,31 @@ let DataTable = React.createClass({
   setFilters(filterName) {
     return event => {
       let value = event.target.value;
-      let options = _.map(this.props.data, row => row[filterName]);
-      let output = fuzzy.filter(value, options).map( res => this.props.data[res.index]);
+      let filters = _.omit(_.assign(this.state.filters,{[filterName]: value }), _.isEmpty);
+      let ids = [];
+
+      _.forEach( _.keys(filters), (filterName, idx) => {
+        let options = _.map(this.props.data, row => row[filterName]);
+        ids[idx] = fuzzy.filter(value, options).map( res => res.index);
+      })
+
+      if(ids.length > 1){
+        debugger;
+        let all = _.flatten(ids);
+        let uniq = _.uniq(all);
+        let dif = _.difference(all, uniq);
+        ids = _.uniq(dif);
+      } else {
+        ids = ids[0];
+      }
+
+      let output = _.map(ids, id => this.props.data[id]);
+
       this.setState({
         data: output,
-        filters: _.assign(this.state.filters,{[filterName]: value })
+        filters: filters
       });
     }
-  },
-
-  clearFilters() {
-    this.setState({ data : this.props.data, height: this.calcHeight() });
-  },
-
-  filter(event) {
-    let output = _.filter(this.props.data, {[filterName] : event});
-    this.setState( { data: output});
   },
 
   render: function() {
@@ -224,11 +233,8 @@ let DataTable = React.createClass({
       cPadding={this.props.filters.cPadding || '0 20px 30px 0'}
       data={
         _.map(this.props.filters.data, (filter, i) => {
-          if(filter.filterType === 'typeahead') {
+          if(filter.filterType === 'textfield') {
             return { label: filter.label, value: <TextField onChange={this.setFilters(filter.name)} />, detailType: 'muiTextField' }
-          }
-          else if (filter.filterType === 'button') {
-            return { label: '', value: <div><RaisedButton primary label={'Filter'} onClick={this.filter} /><RaisedButton style={{marginLeft: '20px'}} label={'Clear'} onClick={this.clearFilters} /></div>, detailType: 'muiTextField'}
           }
         })
       }
