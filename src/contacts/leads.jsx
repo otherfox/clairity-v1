@@ -43,9 +43,10 @@ let viewLeads = React.createClass({
         return s;
       }),
       filters: {
+        cStyle: {float: 'left'},
         data: [
           { label: 'Name', options: names, filterType: 'typeahead', name: 'name' },
-          { filterType: 'button'}
+          { filterType: 'button'},
         ]
       },
       colWidths: [5,4,4,3],

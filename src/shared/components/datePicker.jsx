@@ -10,10 +10,13 @@ let DatePickerWrapper = React.createClass({
     this.props.valueLink.requestChange(this.refs.datepicker.getDate());
   },
   render() {
+    let date = new Date(this.props.valueLink.value);
+    if (isNaN(date.getMonth()))
+      date = undefined;
     return <DatePicker ref="datepicker"
-                       {...this.props}
+                       //{...this.props}
                        onChange={this.handleChange}
-                       defaultDate={this.props.valueLink.value} />;
+                       defaultDate={date}/>;
   }
 });
 

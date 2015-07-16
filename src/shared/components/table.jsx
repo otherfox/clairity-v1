@@ -1,6 +1,6 @@
 import React from 'react'
 import Settings from './settings'
-import {RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
+import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import Details from './details'
 import {Typeahead} from './typeahead'
@@ -111,8 +111,12 @@ let DataTable = React.createClass({
       active: '',
       sorted: {},
       filters: {},
-      height: (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300
+      height: this.calcHeight()
     }
+  },
+
+  calcHeight() {
+    return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
   },
 
   rowGetter: function(rowIndex) {
@@ -189,20 +193,24 @@ let DataTable = React.createClass({
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
 
-  setFilters(event) {
-    let value = (typeof event === 'string') ? event : event.target.value;
-    this.setState({ filters : value });
-
-    if(typeof event === 'string') {
-      let idx = _.findIndex(this.props.data, 'name', event);
-      this.setState( { height: this.props.rowHeight + 52, data: [this.props.data[idx]]});
+  setFilters(filterName) {
+    return event => {
+      let value = event.target.value;
+      let output = _.filter(this.props.data, row => _.contains(row[filterName].toLowerCase(), value.toLowerCase()));
+      this.setState({
+        data: output,
+        filters: _.assign(this.state.filters,{[filterName]: value })
+      });
     }
   },
 
+  clearFilters() {
+    this.setState({ data : this.props.data, height: this.calcHeight() });
+  },
+
   filter(event) {
-    debugger;
-    let idx = _.findIndex(this.props.data, 'name', this.state.filters);
-    this.setState( { height: this.props.rowHeight + 52, data: [this.props.data[idx]]});
+    let output = _.filter(this.props.data, {[filterName] : event});
+    this.setState( { data: output});
   },
 
   render: function() {
@@ -215,10 +223,10 @@ let DataTable = React.createClass({
       data={
         _.map(this.props.filters.data, (filter, i) => {
           if(filter.filterType === 'typeahead') {
-            return { label: filter.label, value: <Typeahead options={filter.options} maxVisible={10} onChange={this.setFilters} onOptionSelected={this.setFilters} />, detailType: 'muiTextField' }
+            return { label: filter.label, value: <TextField onChange={this.setFilters(filter.name)} />, detailType: 'muiTextField' }
           }
           else if (filter.filterType === 'button') {
-            return { label: '', value: <RaisedButton primary label={'Filter'} onClick={this.filter} />, detailType: 'muiTextField'}
+            return { label: '', value: <div><RaisedButton primary label={'Filter'} onClick={this.filter} /><RaisedButton style={{marginLeft: '20px'}} label={'Clear'} onClick={this.clearFilters} /></div>, detailType: 'muiTextField'}
           }
         })
       }
@@ -304,7 +312,7 @@ let DataTable = React.createClass({
           rowHeight={this.props.rowHeight}
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
-          rowsCount={this.props.data.length}
+          rowsCount={this.state.data.length}
           rowClassNameGetter={this.getRowClass}
           width={this.getWidth()}
           height={this.state.height}
