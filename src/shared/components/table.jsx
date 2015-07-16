@@ -3,6 +3,7 @@ import Settings from './settings'
 import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import Details from './details'
+import fuzzy from 'fuzzy'
 import {Typeahead} from './typeahead'
 import _ from 'lodash'
 
@@ -196,7 +197,8 @@ let DataTable = React.createClass({
   setFilters(filterName) {
     return event => {
       let value = event.target.value;
-      let output = _.filter(this.props.data, row => _.contains(row[filterName].toLowerCase(), value.toLowerCase()));
+      let options = _.map(this.props.data, row => row[filterName]);
+      let output = fuzzy.filter(value, options).map( res => this.props.data[res.index]);
       this.setState({
         data: output,
         filters: _.assign(this.state.filters,{[filterName]: value })
