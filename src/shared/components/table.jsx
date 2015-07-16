@@ -194,25 +194,26 @@ let DataTable = React.createClass({
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
 
-  setFilters(filterName) {
+  setFilters(valueFilterName) {
     return event => {
       let value = event.target.value;
-      let filters = _.omit(_.assign(this.state.filters,{[filterName]: value }), _.isEmpty);
+      let filters = _.omit(_.assign(this.state.filters,{[valueFilterName]: value }), _.isEmpty);
       let ids = [];
 
       _.forEach( _.keys(filters), (filterName, idx) => {
         let options = _.map(this.props.data, row => row[filterName]);
-        ids[idx] = fuzzy.filter(value, options).map( res => res.index);
+        ids[idx] = fuzzy.filter(filters[filterName], options).map( res => res.index);
       })
 
       if(ids.length > 1){
-        debugger;
-        let all = _.flatten(ids);
-        let uniq = _.uniq(all);
-        let dif = _.difference(all, uniq);
-        ids = _.uniq(dif);
+        let outputIds = [];
+        for(let i = 0; i < ids.length - 1; i++) {
+          let start = (outputIds.length > 0) ? outputIds : ids[i];
+          outputIds = _.intersection(start,ids[i+1]);
+        }
+        ids = outputIds;
       } else {
-        ids = ids[0];
+        ids = (ids.length > 0) ? ids[0] : _.map(_.keys(this.props.data), id => parseInt(id));
       }
 
       let output = _.map(ids, id => this.props.data[id]);
