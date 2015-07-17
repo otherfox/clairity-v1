@@ -273,6 +273,17 @@ let IpBlocks = React.createClass({
         s.edit = <div style={{textAlign: 'center'}}><RaisedButton label={'EDIT'} linkButton={true} href={`/#/ip-block/${s.blockId}/edit`} /></div>;
         return s;
       }),
+      filters: {
+        data: [
+          { label: 'Block', filterType: 'muiTextField', name: 'block' },
+          { label: 'Associations', filterType: 'muiTextField', name: 'associations' },
+          { label: 'Status', filterType: 'muiRadioButtons', name: 'status', buttonGroup: { name: 'status', defaultSelected: 'both'}, buttons: [
+            { label: 'Active', value: 'Active'},
+            { label: 'Inactive', value: 'Inactive'},
+            { label: 'Both', value: 'Both', defaultChecked: true}
+          ] }
+        ]
+      },
       colWidths: [2,2,2,2,2,2,2,2],
       maxWidth: 16,
       widthAdj: -30
@@ -291,22 +302,14 @@ let IpBlocks = React.createClass({
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Details
           title={'IP Blocks'}
-          widths={ {lg: ['auto', '320px']}}
+          widths={ {lg: ['0', '320px']}}
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}
+          cPadding={'0'}
           data={[
-              { label: 'Keyword', name: 'keyword', value: <Typeahead options={_.map(this.getBlocks(), _.property('block'))} maxVisible={10} /> , detailType: 'muiTextField'},
-              { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px'}}/><RaisedButton label="Assign New Block" /></div>, detaildetailType: 'muiButton'}
+              { label: '', value: <RaisedButton label="Assign New Block" />, detaildetailType: 'muiButton'}
           ]}
         />
-        <div>
-          <div style={{ fontWeight: 'bold', float: 'left', width: 'initial', lineHeight: '1.75em', marginRight: '20px', color: this.context.muiTheme.palette.textColor }}>Show:</div>
-          <RadioButtonGroup name={"status"} style={{float: 'left', width: 'initial'}}>
-            <RadioButton value={"active"} label={"Acitve"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
-            <RadioButton value={"inactive"} label={"Inactive"} defaultChecked={true} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
-            <RadioButton value={"both"} label={"Both"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
-            </RadioButtonGroup>
-        </div>
         <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>
     );

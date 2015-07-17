@@ -1,6 +1,6 @@
 import React from 'react'
 import Settings from './settings'
-import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
+import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton } from 'material-ui'
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import Details from './details'
 import fuzzy from 'fuzzy'
@@ -194,7 +194,7 @@ let DataTable = React.createClass({
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
 
-  setFilters(valueFilterName) {
+  setFilters(valueFilterName, isFuzzy = true) {
     return event => {
       let value = event.target.value;
       let filters = _.omit(_.assign(this.state.filters,{[valueFilterName]: value }), _.isEmpty);
@@ -202,7 +202,7 @@ let DataTable = React.createClass({
 
       _.forEach( _.keys(filters), (filterName, idx) => {
         let options = _.map(this.props.data, row => row[filterName]);
-        ids[idx] = fuzzy.filter(filters[filterName], options).map( res => res.index);
+        ids[idx] = (isFuzzy) ? fuzzy.filter(filters[filterName], options).map( res => res.index) : fuzzy.filter(filters[filterName], options).map( res => res.index);
       })
 
       if(ids.length > 1){
@@ -230,12 +230,21 @@ let DataTable = React.createClass({
       widths={this.props.filters.widths || {lg: ['auto', '320px']}}
       rowStyle={this.props.filters.rowStyle || { float: 'left' }}
       cStyles={this.props.filters.cStyles || {lg: [{textAlign: 'left'}]}}
-      cStyle={this.props.filters.cStyle}
+      cStyle={this.props.filters.cStyle || {float: 'left'}}
       cPadding={this.props.filters.cPadding || '0 20px 30px 0'}
       data={
         _.map(this.props.filters.data, (filter, i) => {
-          if(filter.filterType === 'textfield') {
+          if(filter.filterType === 'muiTextField') {
             return { label: filter.label, value: <TextField onChange={this.setFilters(filter.name)} />, detailType: 'muiTextField' }
+          }
+          if(filter.filterType === 'muiRadioButtons') {
+            return { label: filter.label, value:
+              <RadioButtonGroup name={filter.buttonGroup.name} style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)} onChange={this.setFilters(filter.name, filter.fuzzy)}>
+                {_.map( filter.buttons, button =>
+                  <RadioButton value={button.value} label={button.label} defaultChecked={(!!button.defaultChecked)} style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)}/>
+                )}
+              </RadioButtonGroup>
+            , detailType: 'muiRadioButtons' }
           }
         })
       }

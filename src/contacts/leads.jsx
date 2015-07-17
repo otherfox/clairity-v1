@@ -43,11 +43,10 @@ let viewLeads = React.createClass({
         return s;
       }),
       filters: {
-        cStyle: {float: 'left'},
         data: [
-          { label: 'Name', filterType: 'textfield', name: 'name' },
-          { label: 'Account', filterType: 'textfield', name: 'customer_name' },
-          { label: 'Account Owner', filterType: 'textfield', name: 'agent_name' }
+          { label: 'Name', filterType: 'muiTextField', name: 'name' },
+          { label: 'Account', filterType: 'muiTextField', name: 'customer_name' },
+          { label: 'Account Owner', filterType: 'muiTextField', name: 'agent_name' }
         ]
       },
       colWidths: [5,4,4,3],
