@@ -282,7 +282,8 @@ let IpBlocks = React.createClass({
             { label: 'Active', value: 'Active'},
             { label: 'Inactive', value: 'Inactive'},
             { label: 'Both', value: '', defaultChecked: true}
-          ] }
+          ] },
+          { label: '', value: '', button: {label: 'Assign New Block'}, filterType: 'muiButton'}
         ]
       },
       colWidths: [2,2,2,2,2,2,2,2],
@@ -302,15 +303,6 @@ let IpBlocks = React.createClass({
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>IP Blocks</h1></Header>
-        <Details
-          widths={ {lg: ['0', '320px']}}
-          rowStyle={{ float: 'left' }}
-          cStyles={{ lg: [{textAlign: 'left'}] }}
-          cPadding={'0'}
-          data={[
-              { label: '', value: <RaisedButton label="Assign New Block" />, detaildetailType: 'muiButton'}
-          ]}
-        />
         <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>
     );
