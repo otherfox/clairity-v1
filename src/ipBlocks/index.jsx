@@ -2,6 +2,7 @@
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import Details from  '../shared/components/details'
+import Header from  '../shared/components/header'
 import DropDown from '../shared/components/dropDown'
 import Table from  '../shared/components/table'
 import Typeahead from '../shared/components/typeahead/typeahead'
@@ -275,12 +276,12 @@ let IpBlocks = React.createClass({
       }),
       filters: {
         data: [
-          { label: 'Block', filterType: 'muiTextField', name: 'block' },
+          { label: 'Block', filterType: 'muiTextField', name: 'block', fuzzy: false },
           { label: 'Associations', filterType: 'muiTextField', name: 'associations' },
-          { label: 'Status', filterType: 'muiRadioButtons', name: 'status', buttonGroup: { name: 'status', defaultSelected: 'both'}, buttons: [
+          { label: 'Status', filterType: 'muiRadioButtons', name: 'status', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
             { label: 'Active', value: 'Active'},
             { label: 'Inactive', value: 'Inactive'},
-            { label: 'Both', value: 'Both', defaultChecked: true}
+            { label: 'Both', value: '', defaultChecked: true}
           ] }
         ]
       },
@@ -300,8 +301,8 @@ let IpBlocks = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+        <Header><h1>IP Blocks</h1></Header>
         <Details
-          title={'IP Blocks'}
           widths={ {lg: ['0', '320px']}}
           rowStyle={{ float: 'left' }}
           cStyles={{ lg: [{textAlign: 'left'}] }}

@@ -194,15 +194,23 @@ let DataTable = React.createClass({
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
 
-  setFilters(valueFilterName, isFuzzy = true) {
+  setFilters(filter) {
+
     return event => {
       let value = event.target.value;
-      let filters = _.omit(_.assign(this.state.filters,{[valueFilterName]: value }), _.isEmpty);
+      let filters = _.omit(_.assign(this.state.filters,{[filter.name]: value }), _.isEmpty);
       let ids = [];
 
       _.forEach( _.keys(filters), (filterName, idx) => {
         let options = _.map(this.props.data, row => row[filterName]);
-        ids[idx] = (isFuzzy) ? fuzzy.filter(filters[filterName], options).map( res => res.index) : fuzzy.filter(filters[filterName], options).map( res => res.index);
+        let index = _.findIndex(this.props.filters.data, function(filter) { return filter.name == filterName; });
+        ids[idx] = (this.props.filters.data[index].fuzzy === false ) ?
+          _.filter(
+            _.map(options, (row, idx) => {
+              return (_.contains(row, filters[filterName])) ? idx : ''
+            }),
+          row => _.isNumber(row))
+          : fuzzy.filter(filters[filterName], options).map( res => res.index);
       })
 
       if(ids.length > 1){
@@ -217,6 +225,7 @@ let DataTable = React.createClass({
       }
 
       let output = _.map(ids, id => this.props.data[id]);
+
 
       this.setState({
         data: output,
@@ -235,16 +244,16 @@ let DataTable = React.createClass({
       data={
         _.map(this.props.filters.data, (filter, i) => {
           if(filter.filterType === 'muiTextField') {
-            return { label: filter.label, value: <TextField onChange={this.setFilters(filter.name)} />, detailType: 'muiTextField' }
+            return { label: filter.label, value: <TextField onChange={this.setFilters(filter)} />, detailType: 'muiTextField' }
           }
           if(filter.filterType === 'muiRadioButtons') {
             return { label: filter.label, value:
-              <RadioButtonGroup name={filter.buttonGroup.name} style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)} onChange={this.setFilters(filter.name, filter.fuzzy)}>
+              <RadioButtonGroup name={filter.buttonGroup.name} style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)} onChange={this.setFilters(filter)}>
                 {_.map( filter.buttons, button =>
-                  <RadioButton value={button.value} label={button.label} defaultChecked={(!!button.defaultChecked)} style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)}/>
+                  <RadioButton value={button.value} label={button.label} style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)} defaultChecked={button.defaultChecked}/>
                 )}
               </RadioButtonGroup>
-            , detailType: 'muiRadioButtons' }
+            , rowStyle: {marginTop: '10px'}, detailType: 'muiRadioButtons' }
           }
         })
       }
