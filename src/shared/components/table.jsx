@@ -252,9 +252,9 @@ let DataTable = React.createClass({
                   <RadioButton value={button.value} label={button.label} style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)} defaultChecked={button.defaultChecked}/>
                 )}
               </RadioButtonGroup>
-            , rowStyle: {marginTop: '10px'}, detailType: 'muiRadioButtons' }
+            , rowStyle: {marginTop: '40px'}, detailType: 'muiRadioButtons' }
           } else if (filter.filterType === 'muiButton') {
-            return { label: filter.label, value: <RaisedButton label={filter.button.label} href={filter.button.href} primary={(filter.button.primary) ? true : false } linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton'}
+            return { label: filter.label, value: <RaisedButton label={filter.button.label} href={filter.button.href} primary={(filter.button.primary) ? true : false } linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton', rowStyle:  {marginTop: '30px'}}
           }
         })
       }
