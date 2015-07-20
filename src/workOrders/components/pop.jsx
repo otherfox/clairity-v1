@@ -3,6 +3,7 @@ let {LinkedStateMixin} = React.addons;
 import Settings from '../../shared/components/settings'
 import Layout from '../../shared/components/layout'
 import DropDown from '../../shared/components/dropDown'
+import {Typeahead} from '../../shared/components/typeahead'
 import Details from '../../shared/components/details'
 import {
   RadioButtonGroup,
@@ -46,7 +47,7 @@ let ExistingPopsView = React.createClass({
   },
   render() {
     return (
-      <DropDown valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
+      <Typeahead valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
     );
   },
   submit() {

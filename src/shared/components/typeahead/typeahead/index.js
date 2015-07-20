@@ -8,6 +8,7 @@ var KeyEvent = require('../keyevent');
 var fuzzy = require('fuzzy');
 var classNames = require('classnames');
 var TextField = require('material-ui').TextField;
+var _ = require('lodash');
 
 var IDENTITY_FN = function(input) { return input; };
 var _generateAccessor = function(field) {
@@ -25,12 +26,13 @@ var Typeahead = React.createClass({
     name: React.PropTypes.string,
     customClasses: React.PropTypes.object,
     maxVisible: React.PropTypes.number,
-    options: React.PropTypes.array,
+    menuItems: React.PropTypes.array,
     allowCustomValues: React.PropTypes.number,
     defaultValue: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     inputProps: React.PropTypes.object,
     onOptionSelected: React.PropTypes.func,
+    valueLink: React.PropTypes.string,
     onChange: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,
     onKeyUp: React.PropTypes.func,
@@ -52,7 +54,7 @@ var Typeahead = React.createClass({
 
   getDefaultProps: function() {
     return {
-      options: [],
+      mapItems: [],
       customClasses: {},
       allowCustomValues: 0,
       defaultValue: "",
@@ -71,10 +73,10 @@ var Typeahead = React.createClass({
   getInitialState: function() {
     return {
       // The currently visible set of options
-      visible: this.getOptionsForValue(this.props.defaultValue, this.props.options),
+      visible: this.getOptionsForValue(this.props.defaultValue, _.map(this.props.menuItems.toJS(), 'label')),
 
       // This should be called something else, "entryValue"
-      entryValue: this.props.defaultValue,
+      entryValue: _.result(_.find(this.props.menuItems.toJS(), 'value', this.props.valueLink.value), 'label'),
 
       // A valid typeahead value
       selection: null,
@@ -168,15 +170,23 @@ var Typeahead = React.createClass({
     var formInputOptionString = formInputOption(option);
 
     nEntry.value = optionString;
-    this.setState({visible: this.getOptionsForValue(optionString, this.props.options),
+    this.setState({visible: this.getOptionsForValue(optionString, _.map(this.props.menuItems.toJS(), 'label')),
                    selection: formInputOptionString,
                    entryValue: optionString});
-    return this.props.onOptionSelected(option, event);
+
+    if (this.props.valueLink) {
+      let matches = this.props.menuItems.toJS().filter(function(m) { return m.label === option; });
+      if (matches.length > 0) {
+        return this.props.valueLink.requestChange(matches[0].value)
+      }
+    } else {
+      return this.props.onOptionSelected(option, event);
+    }
   },
 
   _onTextEntryUpdated: function(event) {
     var value = event.target.value;
-    this.setState({visible: this.getOptionsForValue(value, this.props.options),
+    this.setState({visible: this.getOptionsForValue(value, _.map(this.props.menuItems.toJS(), 'label')),
                    selection: null,
                    entryValue: value});
   },
@@ -276,7 +286,7 @@ var Typeahead = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      visible: this.getOptionsForValue(this.state.entryValue, nextProps.options)
+      visible: this.getOptionsForValue(this.state.entryValue, _.map(nextProps.menuItems.toJS(), 'label'))
     });
   },
 
@@ -298,7 +308,6 @@ var Typeahead = React.createClass({
     };
     classes[this.props.className] = !!this.props.className;
     var classList = classNames(classes);
-
     return (
       <div className={classList} style={this.style().root}>
         { this._renderHiddenInput() }
@@ -307,7 +316,6 @@ var Typeahead = React.createClass({
           placeholder={this.props.placeholder}
           className={inputClassList}
           value={this.state.entryValue}
-          defaultValue={this.props.defaultValue}
           onChange={this._onChange}
           onKeyDown={this._onKeyDown}
           onKeyUp={this.props.onKeyUp}
