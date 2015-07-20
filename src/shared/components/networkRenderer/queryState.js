@@ -12,6 +12,7 @@ export default class QueryState {
     this.cb = cb;
     this.update = this.update.bind(this);
     this.write = this.write.bind(this);
+    this.table = Store.data.get(this.tableName);
   }
 
   get state() {
@@ -27,7 +28,10 @@ export default class QueryState {
   }
 
   update() {
-    this.cb();
+    let table = Store.data.get(this.tableName);
+    if (table !== this.table) {
+      this.cb();
+    }
     return this;
   }
 
@@ -38,6 +42,7 @@ export default class QueryState {
   }
 
   listen() {
+    this.table = Store.data.get(this.tableName);
     Store.on(['update', this.tableName], this.update);
     return this;
   }
