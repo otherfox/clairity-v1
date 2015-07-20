@@ -244,7 +244,7 @@ let DataTable = React.createClass({
       data={
         _.map(this.props.filters.data, (filter, i) => {
           if(filter.filterType === 'muiTextField') {
-            return { label: filter.label, value: <TextField onChange={this.setFilters(filter)} />, detailType: 'muiTextField' }
+            return { label: '' , value: <TextField floatingLabelText={filter.label} onChange={this.setFilters(filter)} />, detailType: 'muiTextField', labelStyle: { padding: '0' } }
           } else if (filter.filterType === 'muiRadioButtons') {
             return { label: filter.label, value:
               <RadioButtonGroup name={filter.buttonGroup.name} style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)} onChange={this.setFilters(filter)}>
