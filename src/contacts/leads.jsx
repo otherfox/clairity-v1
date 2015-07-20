@@ -4,7 +4,6 @@ import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import Table from  '../shared/components/table'
 import Details from '../shared/components/details'
-import { Typeahead } from '../shared/components/typeahead'
 import { RaisedButton } from 'material-ui'
 
 import _ from 'lodash'

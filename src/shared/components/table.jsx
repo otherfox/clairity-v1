@@ -4,7 +4,6 @@ import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, 
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import Details from './details'
 import fuzzy from 'fuzzy'
-import {Typeahead} from './typeahead'
 import _ from 'lodash'
 
 import numeral from 'numeral'

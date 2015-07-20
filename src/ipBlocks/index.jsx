@@ -5,7 +5,6 @@ import Details from  '../shared/components/details'
 import Header from  '../shared/components/header'
 import DropDown from '../shared/components/dropDown'
 import Table from  '../shared/components/table'
-import Typeahead from '../shared/components/typeahead/typeahead'
 import _ from 'lodash'
 
 import {
