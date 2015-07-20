@@ -36,6 +36,7 @@ export default class CreateLocation extends React.Component {
       submitDisabled: false,
       selectedIndex: 0
     };
+    this.updateState = this.updateState.bind(this);
   }
   updateState() {
     let location = queryLocation(this.getLocationId());
@@ -77,7 +78,10 @@ export default class CreateLocation extends React.Component {
   }
   componentDidMount() {
     this.updateState();
-    Store.on('update', () => this.updateState());
+    Store.on('update.*', this.updateState);
+  }
+  componentWillDismount() {
+    Store.off('update.*', this.udpateState);
   }
   handleCustomerChange(event) {
     let location = this.state.location;
