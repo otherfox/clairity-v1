@@ -55,7 +55,16 @@ var LeftNav = React.createClass ({
 
   render: function() {
       return (
-        <div style={this.style().root}>
+        <div className={'leftNav'} style={this.style().root}>
+          <style>
+            {`
+              @media (max-width: ${Settings.breakpoints.sm}px) {
+                .leftNav {
+                  display: none;
+                }
+              }
+            `}
+          </style>
           <Menu menuItems={nestedMenuItems} zDepth={0} style={this.style().menu}/>
         </div>
       )
