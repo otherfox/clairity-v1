@@ -32,6 +32,7 @@ var Typeahead = React.createClass({
     placeholder: React.PropTypes.string,
     inputProps: React.PropTypes.object,
     onOptionSelected: React.PropTypes.func,
+    valueLink: React.PropTypes.string,
     onChange: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,
     onKeyUp: React.PropTypes.func,
@@ -75,7 +76,7 @@ var Typeahead = React.createClass({
       visible: this.getOptionsForValue(this.props.defaultValue, _.map(this.props.menuItems.toJS(), 'label')),
 
       // This should be called something else, "entryValue"
-      entryValue: this.props.defaultValue,
+      entryValue: _.result(_.find(this.props.menuItems.toJS(), 'value', this.props.valueLink.value), 'label'),
 
       // A valid typeahead value
       selection: null,
@@ -172,7 +173,15 @@ var Typeahead = React.createClass({
     this.setState({visible: this.getOptionsForValue(optionString, _.map(this.props.menuItems.toJS(), 'label')),
                    selection: formInputOptionString,
                    entryValue: optionString});
-    return this.props.onOptionSelected(option, event);
+
+    if (this.props.valueLink) {
+      let matches = this.props.menuItems.toJS().filter(function(m) { return m.label === option; });
+      if (matches.length > 0) {
+        return this.props.valueLink.requestChange(matches[0].value)
+      }
+    } else {
+      return this.props.onOptionSelected(option, event);
+    }
   },
 
   _onTextEntryUpdated: function(event) {
@@ -307,7 +316,6 @@ var Typeahead = React.createClass({
           placeholder={this.props.placeholder}
           className={inputClassList}
           value={this.state.entryValue}
-          defaultValue={this.props.defaultValue}
           onChange={this._onChange}
           onKeyDown={this._onKeyDown}
           onKeyUp={this.props.onKeyUp}
