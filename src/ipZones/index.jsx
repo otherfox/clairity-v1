@@ -2,6 +2,7 @@
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import Details from  '../shared/components/details'
+import Header from  '../shared/components/header'
 import DropDown from '../shared/components/dropDown'
 import Table from  '../shared/components/table'
 
@@ -39,14 +40,21 @@ let IpZones = React.createClass({
     let zones = getZones;
     return {
       colNames: [
-        { label: 'Edit', name: 'edit', cellType: 'string'},
         { label: 'Name', name: 'name', cellType: 'string'},
-        { label: 'blocks', name: 'blocks', cellType: 'muiDropDown' } ],
+        { label: 'blocks', name: 'blocks', cellType: 'muiDropDown' },
+        { label: 'Edit', name: 'edit', cellType: 'string', style: {textAlign: 'center'}}
+      ],
       data: zones.map(s => {
         s.edit = <div style={{textAlign: 'center'}}><RaisedButton label={'EDIT'} linkButton={true} href={`/#/ip-zone/${s.zoneId}/edit`} /></div>;
         return s;
       }),
-      colWidths: [2,6,6],
+      filters: {
+        data: [
+          { label: 'Name', name: 'name', filterType: 'muiTextField'},
+          { label: '', button: {primary: true, linkButton:true, href:`/#/ip-zone/create`, label:'Add New Zone'}, filterType: 'muiButton'}
+        ]
+      },
+      colWidths: [6,6,2],
       maxWidth: 14,
       widthAdj: -30,
       rowHeight: 80
@@ -59,16 +67,7 @@ let IpZones = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Details
-          title={'IP Zones'}
-          widths={ {lg: ['auto', '320px']}}
-          rowStyle={{ float: 'left' }}
-          cStyles={{ lg: [{textAlign: 'left'}] }}
-          data={[
-              { label: 'Keyword', name: 'keyword', value: <TextField />, detailType: 'muiTextField'},
-              { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px', position: 'relative', top: '-12px'}}/><RaisedButton style={{  }} linkButton={true} href={`/#/ip-zone/create`} label="Add New Zone" /></div>, detaildetailType: 'muiButton'}
-          ]}
-        />
+        <Header><h1>IP Zones</h1></Header>
         <Table {...this.getZoneTable(this.getZones())} />
     </Layout>
     );

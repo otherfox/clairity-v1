@@ -83,9 +83,9 @@ let Details = React.createClass ({
       fData = this.props.data.map((dataObj,idx) =>
         dataObj ?
         <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
-          <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles) } cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle) }>
-            <div style={_.assign(this.style(dataObj.detailType).label, this.props.label)}>{dataObj.label}</div>
-            <div style={_.assign(this.style(dataObj.detailType).value, this.props.value)}>{dataObj.value}</div>
+          <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)} cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)} style={dataObj.rowStyle}>
+            <div style={_.assign(this.style(dataObj.detailType).label, this.props.labelStyle, dataObj.labelStyle)}>{dataObj.label}</div>
+            <div style={_.assign(this.style(dataObj.detailType).value, this.props.valueStyle, dataObj.valueStyle)}>{dataObj.value}</div>
           </Layout>
         </div>
         : false
