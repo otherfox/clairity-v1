@@ -68,6 +68,23 @@ class ButtonCell extends React.Component {
     <div style={{textAlign: 'center'}} ><RaisedButton label={this.props.children} /></div>;
   }
 }
+
+class BooleanCell extends React.Component {
+  style() {
+    return {
+        true: {
+          color: Styles.Colors.green500
+        },
+        false: {
+          color: Styles.Colors.red500
+        }
+    }
+  }
+  render() {
+    return <div style={this.style()[this.props.cellStyle[this.props.children]]} >{this.props.children}</div>;
+  }
+}
+
 const cellTypes = {
   string: StringCell,
   number: NumberCell,
@@ -75,7 +92,8 @@ const cellTypes = {
   currency: CurrencyCell,
   uri: UriCell,
   link: LinkCell,
-  button: ButtonCell
+  button: ButtonCell,
+  boolean: BooleanCell
 };
 
 let DataTable = React.createClass({
@@ -147,7 +165,7 @@ let DataTable = React.createClass({
     if (this.state.sorted[col.name]) {
       sortIcon = (this.state.sorted[col.name] === 'asc') ? <ArrowDropDown style={this.style().icon} /> : <ArrowDropUp style={this.style().icon} /> ;
     }
-    
+
     return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} {sortIcon}</div>
   },
 
