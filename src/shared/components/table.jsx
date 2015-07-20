@@ -6,6 +6,9 @@ import Details from './details'
 import fuzzy from 'fuzzy'
 import _ from 'lodash'
 
+import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
+import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
+
 import numeral from 'numeral'
 class StringCell extends React.Component {
   render() {
@@ -139,7 +142,13 @@ let DataTable = React.createClass({
   },
 
   getHeader(col, i) {
-    return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} <FontIcon className="muidocs-icon-action-home" /></div>
+    let sortIcon = '';
+
+    if (this.state.sorted[col.name]) {
+      sortIcon = (this.state.sorted[col.name] === 'asc') ? <ArrowDropDown style={this.style().icon} /> : <ArrowDropUp style={this.style().icon} /> ;
+    }
+    
+    return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} {sortIcon}</div>
   },
 
   sortData(col, e) {
@@ -174,6 +183,10 @@ let DataTable = React.createClass({
       root: {
         width: '100%',
         margin: this.props.margin || '0'
+      },
+      icon: {
+        fill: this.context.muiTheme.palette.primary1Color,
+        verticalAlign: 'middle'
       }
     };
   },
