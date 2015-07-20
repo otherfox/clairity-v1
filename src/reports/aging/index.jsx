@@ -63,6 +63,7 @@ export default class Aging extends React.Component {
       filter: 'active'
     };
     this.getStateFromStore = this.getStateFromStore.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
   updateState() {
     this.setState({rows: this.getState()});
@@ -86,11 +87,11 @@ export default class Aging extends React.Component {
   }
   componentDidMount() {
     this.updateState();
-    Store.on('update', () => this.updateState());
+    Store.on('update.*', this.updateState);
   }
   componentWillDismount() {
     // TODO: Add a Store.off method
-    //Store.off('update', this.getStateFromStore);
+    Store.off('update.*', this.updateState);
   }
   computeRows() {
     return this.state.rows.toList().toJS()
