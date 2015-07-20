@@ -174,7 +174,7 @@ let DataTable = React.createClass({
     return {
       root: {
         width: '100%',
-        margin: this.props.margin || "20px 0"
+        margin: this.props.margin || '0'
       }
     };
   },

@@ -301,7 +301,7 @@ let IpBlocks = React.createClass({
     let action = "controller.cfm?event=manageIpBlocks";
 
     return (
-      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+      <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>IP Blocks</h1></Header>
         <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>
