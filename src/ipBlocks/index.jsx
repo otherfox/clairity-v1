@@ -2,6 +2,7 @@
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import Details from  '../shared/components/details'
+import Header from  '../shared/components/header'
 import DropDown from '../shared/components/dropDown'
 import Table from  '../shared/components/table'
 import Typeahead from '../shared/components/typeahead/typeahead'
@@ -273,6 +274,18 @@ let IpBlocks = React.createClass({
         s.edit = <div style={{textAlign: 'center'}}><RaisedButton label={'EDIT'} linkButton={true} href={`/#/ip-block/${s.blockId}/edit`} /></div>;
         return s;
       }),
+      filters: {
+        data: [
+          { label: 'Block', filterType: 'muiTextField', name: 'block', fuzzy: false },
+          { label: 'Associations', filterType: 'muiTextField', name: 'associations' },
+          { label: 'Status', filterType: 'muiRadioButtons', name: 'status', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
+            { label: 'Active', value: 'Active'},
+            { label: 'Inactive', value: 'Inactive'},
+            { label: 'Both', value: '', defaultChecked: true}
+          ] },
+          { label: '', value: '', button: {label: 'Assign New Block'}, filterType: 'muiButton'}
+        ]
+      },
       colWidths: [2,2,2,2,2,2,2,2],
       maxWidth: 16,
       widthAdj: -30
@@ -289,24 +302,7 @@ let IpBlocks = React.createClass({
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-        <Details
-          title={'IP Blocks'}
-          widths={ {lg: ['auto', '320px']}}
-          rowStyle={{ float: 'left' }}
-          cStyles={{ lg: [{textAlign: 'left'}] }}
-          data={[
-              { label: 'Keyword', name: 'keyword', value: <Typeahead options={_.map(this.getBlocks(), _.property('block'))} maxVisible={10} /> , detailType: 'muiTextField'},
-              { label: '', value: <div><RaisedButton primary label="Search" style={{ marginRight: '20px'}}/><RaisedButton label="Assign New Block" /></div>, detaildetailType: 'muiButton'}
-          ]}
-        />
-        <div>
-          <div style={{ fontWeight: 'bold', float: 'left', width: 'initial', lineHeight: '1.75em', marginRight: '20px', color: this.context.muiTheme.palette.textColor }}>Show:</div>
-          <RadioButtonGroup name={"status"} style={{float: 'left', width: 'initial'}}>
-            <RadioButton value={"active"} label={"Acitve"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
-            <RadioButton value={"inactive"} label={"Inactive"} defaultChecked={true} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
-            <RadioButton value={"both"} label={"Both"} style={{float: 'left', width: 'initial', marginRight: '20px'}}/>
-            </RadioButtonGroup>
-        </div>
+        <Header><h1>IP Blocks</h1></Header>
         <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>
     );
