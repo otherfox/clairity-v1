@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {addons} from 'react/addons'
 import Store, {MessageTypes} from '../../store'
 import {getResource} from '../../services/getResource'
 import {exposeMethods} from './methods'
 import {fromJS} from 'immutable'
 import _ from 'lodash'
+
+let {CSSTransitionGroup} = addons;
 
 import QueryState from './queryState'
 
@@ -58,11 +60,15 @@ export default function multiQueryRenderer(Component, options) {
     }
 
     render() {
-      if (this.state.ready) {
-        return <Component ref="inner" {...this.props} {...this.getQueryState()} />;
-      } else {
-        return false;
-      }
+      let innerComponent = this.state.ready ?
+          <Component key="inner" ref="inner" {...this.props} {...this.getQueryState()} />
+        :
+          <div key="null" />;
+      return (
+        <CSSTransitionGroup transitionName="fade">
+          {innerComponent}
+        </CSSTransitionGroup>
+      );
     }
 
   }
