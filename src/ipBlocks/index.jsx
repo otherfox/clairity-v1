@@ -5,7 +5,6 @@ import Details from  '../shared/components/details'
 import Header from  '../shared/components/header'
 import DropDown from '../shared/components/dropDown'
 import Table from  '../shared/components/table'
-import Typeahead from '../shared/components/typeahead/typeahead'
 import _ from 'lodash'
 
 import {
@@ -262,7 +261,7 @@ let IpBlocks = React.createClass({
     return {
       colNames: [
         { label: 'Block', name: 'block', cellType: 'string'},
-        { label: 'Status', name: 'status', cellType: 'string'},
+        { label: 'Status', name: 'status', cellType: 'boolean', props: {cellStyle: { Active: 'true', Inactive: 'false' }}},
         { label: 'Notes', name: 'notes', cellType: 'string'},
         { label: 'Downstream Org ID', name: 'downstream_org_id', cellType: 'string'},
         { label: 'Reverse DNS 1', name: 'reverse_dns_1', cellType: 'string'},
@@ -301,7 +300,7 @@ let IpBlocks = React.createClass({
     let action = "controller.cfm?event=manageIpBlocks";
 
     return (
-      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+      <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>IP Blocks</h1></Header>
         <Table {...this.getBlockTable(this.getBlocks())} />
     </Layout>

@@ -3,6 +3,7 @@ let {LinkedStateMixin} = React.addons;
 import Settings from '../../shared/components/settings'
 import Layout from '../../shared/components/layout'
 import DropDown from '../../shared/components/dropDown'
+import {Typeahead} from '../../shared/components/typeahead'
 import Details from '../../shared/components/details'
 import {
   RadioButtonGroup,
@@ -20,7 +21,7 @@ import {
   Paper
 } from 'material-ui'
 import {fromJS, Map} from 'immutable'
-import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
+import {queryRenderer, collectionQuery, networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {getPops} from '../../shared/services/pop'
 import {updateWorkOrder} from '../../shared/actions/workOrder'
 
@@ -46,7 +47,7 @@ let ExistingPopsView = React.createClass({
   },
   render() {
     return (
-      <DropDown valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
+      <Typeahead valueLink={this.linkState('popId')} menuItems={this.getMenuItems()} />
     );
   },
   submit() {
@@ -57,12 +58,10 @@ let ExistingPopsView = React.createClass({
     });
   }
 })
-//
-let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
-  tableName: 'pop',
-  serviceMethod: getPops,
-  propName: 'pops',
-  methods: ['submit']
+
+let ExistingPops = queryRenderer(ExistingPopsView, {
+  methods: ['submit'],
+  queries: [ collectionQuery('pop', 'pops') ]
 });
 
 let NewPopForm = React.createClass({

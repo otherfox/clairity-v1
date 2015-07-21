@@ -155,7 +155,7 @@ let Layout = React.createClass({
     let pclass = 'p'+uid();
 		let children = React.Children.map(this.props.children, (child, i) => {
       let cclass = 'c'+uid();
-      return <ClearFix className={cclass} >
+      return <ClearFix className={cclass} style={child.props.style}>
         <style>
           {`
             /* general style */
