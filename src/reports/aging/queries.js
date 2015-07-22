@@ -35,3 +35,16 @@ export function queryAll(includeZeros) {
     .filter(includeZeros ? all : nonzero)
     .toMap()
 }
+
+export function queryAgingReports(props) {
+  console.log('queryAgingReports', props);
+  let fn = props.status == 'both' ?
+      queryAll
+    :
+      (props.status == 'active' ?
+          queryActive
+        :
+          queryInactive);
+  let results = fn(!props.nonzero);
+  return results.size > 0 ? results : null;
+}

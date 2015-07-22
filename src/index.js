@@ -1,9 +1,11 @@
 import {} from 'babel/polyfill'
 import {} from './less/main'
-import React from 'react'
+import React, {addons} from 'react/addons'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import Router from './shared/router'
+
+window.Perf = addons.Perf;
 
 injectTapEventPlugin();
 

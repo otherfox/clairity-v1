@@ -13,6 +13,7 @@ export default class QueryState {
     this.update = this.update.bind(this);
     this.write = this.write.bind(this);
     this.table = Store.data.get(this.tableName);
+    this._data = null;
   }
 
   get state() {
@@ -20,7 +21,10 @@ export default class QueryState {
   }
 
   get data() {
-    return this.options.cacheMethod(this.props, this.options)
+    if (this._data == null) {
+      this._data = this.options.cacheMethod(this.props, this.options);
+    }
+    return this._data;
   }
 
   get ready() {
@@ -30,6 +34,7 @@ export default class QueryState {
   update() {
     let table = Store.data.get(this.tableName);
     if (table !== this.table) {
+      this._data = null;
       this.cb();
     }
     return this;
