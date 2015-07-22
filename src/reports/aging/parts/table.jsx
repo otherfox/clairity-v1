@@ -69,10 +69,16 @@ class AgingTable extends React.Component {
       ],
       filters: {
         data: [
-          {label: '', name: 'name', filterType: 'muiTextField'}
+          {label: 'Customer', name: 'name', filterType: 'muiTextField'},
+          {label: 'Status', filterType: 'muiRadioButtons', name: 'status', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
+            { label: 'Active', value: 'Active'},
+            { label: 'Inactive', value: 'Inactive'},
+            { label: 'Both', value: '', defaultChecked: true}
+          ] },
+          {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'status', fuzzy: false, func: this.checkNonzero }
         ]
       },
-      rowHeight: 150,
+      rowHeight: 100,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
       maxWidth: 19
     }

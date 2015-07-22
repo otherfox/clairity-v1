@@ -205,6 +205,8 @@ let DataTable = React.createClass({
             , rowStyle: {marginTop: '40px'}, detailType: 'muiRadioButtons' }
           } else if (filter.filterType === 'muiButton') {
             return { label: filter.label, value: <RaisedButton label={filter.button.label} href={filter.button.href} primary={(filter.button.primary) ? true : false } linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton', rowStyle:  {marginTop: '30px'}}
+          } else if (filter.filterType === 'muiCheckBox') {
+            return '';
           }
         })
       }
