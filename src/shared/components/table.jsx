@@ -97,7 +97,7 @@ let DataTable = React.createClass({
     muiTheme: React.PropTypes.object
   },
 
-  getDefaultProps() {
+  getDefaultProps: function() {
     return {
       widthPerc: 100,
       widthAdj: 0,
@@ -106,7 +106,7 @@ let DataTable = React.createClass({
     }
   },
 
-  getInitialState() {
+  getInitialState: function() {
     return {
       data: this.props.data,
       width: this.getWidth(),
@@ -117,7 +117,11 @@ let DataTable = React.createClass({
     }
   },
 
-  calcHeight() {
+  componentWillReceiveProps: function(props) {
+    this.setState({data: props.data});
+  },
+
+  calcHeight: function() {
     return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
   },
 
@@ -140,11 +144,11 @@ let DataTable = React.createClass({
      }
   },
 
-  getHeader(col, i) {
+  getHeader: function(col, i) {
     return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} <FontIcon className="muidocs-icon-action-home" /></div>
   },
 
-  sortData(col, e) {
+  sortData: function(col, e) {
     let name = col.name;
     let obj = {}
 
@@ -195,7 +199,7 @@ let DataTable = React.createClass({
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
 
-  setFilters(filter) {
+  setFilters: function(filter) {
 
     return event => {
       let value = event.target.value;
