@@ -48,9 +48,9 @@ class AgingTable extends React.Component {
   }
 
   shouldComponentUpdate(props, state) {
-    // if (props.status == this.props.status &&
-    //     props.nonzero == this.props.nonzero &&
-    //     props.date == this.props.date) return false;
+    if (props.status == this.props.status &&
+        props.nonzero == this.props.nonzero &&
+        props.date == this.props.date) return false;
     return true;
   }
 
@@ -58,8 +58,6 @@ class AgingTable extends React.Component {
     this.setState({
       rows: this.computeRows(next)
     });
-    console.log('aging table gotProps', next);
-    console.log('aging table updated state', this.state);
   }
 
   computeRows(props) {
@@ -69,8 +67,6 @@ class AgingTable extends React.Component {
   }
 
   render() {
-    window.agingTable = this;
-    console.log('aging table render', this.state.rows, this.state.rows.length)
     return (
       <Table
         data={this.state.rows}
