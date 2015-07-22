@@ -282,7 +282,6 @@ let DataTable = React.createClass({
           , this)
         }
       </Group>;
-    console.log('data table render', this.state.data, this.state.data.length);
     return (
       <div style={_.assign(this.style().root, this.props.style)}>
         <style>
