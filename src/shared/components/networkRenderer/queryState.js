@@ -31,6 +31,15 @@ export default class QueryState {
     return this.data != null;
   }
 
+  get props() {
+    return this._props;
+  }
+
+  set props(props) {
+    this._props = props;
+    this._data = null;
+  }
+
   update() {
     let table = Store.data.get(this.tableName);
     if (table !== this.table) {
