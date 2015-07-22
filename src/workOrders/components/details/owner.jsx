@@ -1,6 +1,6 @@
 import React, {addons} from 'react/addons'
 import DropDown from '../../../shared/components/dropDown'
-import query from '../../../shared/components/networkRenderer/queryRenderer'
+import queryRenderer from '../../../shared/components/networkRenderer/queryRenderer'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
 import {getWorkOrderOwners} from '../../../shared/services/users'
@@ -36,8 +36,9 @@ let WorkOrderDetailsOwner = React.createClass({
   }
 });
 
-export default query(WorkOrderDetailsOwner, {
+export default queryRenderer(WorkOrderDetailsOwner, {
   queries: [{
+    tableName: 'user',
     writeMethod: ownersFetched,
     shouldFetch: e => e.state.data,
     cacheMethod: queryWorkOrderOwners,

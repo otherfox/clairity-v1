@@ -1,7 +1,8 @@
 
 import React from 'react'
 import Settings from './settings'
-import { AppBar, LeftNav, Utils } from 'material-ui'
+import { AppBar, LeftNav, Utils, FlatButton } from 'material-ui'
+import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import _ from 'lodash'
 
 let ColorManipulator = Utils.ColorManipulator;
@@ -44,17 +45,24 @@ var TopNav = React.createClass ({
     },
 */
     style() {
-      let headerColor = this.context.muiTheme.palette.primary1Color;
-
       return {
         root: {},
         header: {
-          color: headerColor,
+          color: this.context.muiTheme.palette.primary1Color,
           padding: '10px 20px',
           fontSize: '2em',
-          borderBottom: '2px solid '+headerColor
+          borderBottom: '2px solid '+this.context.muiTheme.palette.primary1Color
+        },
+        icon: {
+          fill: this.context.muiTheme.palette.canvasColor,
+          border: '10px',
+          margin: '12px',
         }
       }
+    },
+
+    contextTypes: {
+      muiTheme: React.PropTypes.object
     },
 
     _onLeftNavChange: function(e, key, payload) {
@@ -71,28 +79,28 @@ var TopNav = React.createClass ({
     },
 
     render: function() {
-        var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
+      var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
 
-        return (
-          <div style={this.style().root}>
-            <AppBar
-              onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
-              title= "Clairity"
-              zDepth={0}
-            />
+      return (
+        <div style={this.style().root}>
+          <AppBar
+            onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
+            iconElementRight={<SettingsIcon style={this.style().icon} />}
+            title= "Clairity"
+            zDepth={0}
+          />
 
-            <LeftNav
-              ref="topNav"
-              docked={false}
-              isInitiallyOpen={false}
-              header={header}
-              menuItems={menuItems}
+          <LeftNav
+            ref="topNav"
+            docked={false}
+            isInitiallyOpen={false}
+            header={header}
+            menuItems={menuItems}
+            onChange={this._onLeftNavChange}
+          />
 
-              onChange={this._onLeftNavChange}
-            />
-
-          </div>
-        )
+        </div>
+      )
     },
 
 });

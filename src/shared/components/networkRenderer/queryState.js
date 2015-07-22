@@ -5,9 +5,15 @@ export default class QueryState {
   constructor(props, options, cb) {
     this.props = props;
     this.options = options;
+    this.tableName = options.tableName;
+    if (!options.tableName) {
+      throw new Error('Cannot construct a queryState object without a tableName option.');
+    }
     this.cb = cb;
     this.update = this.update.bind(this);
     this.write = this.write.bind(this);
+    this.table = Store.data.get(this.tableName);
+    this._data = null;
   }
 
   get state() {
@@ -15,15 +21,31 @@ export default class QueryState {
   }
 
   get data() {
-    return this.options.cacheMethod(this.props, this.options)
+    if (this._data == null) {
+      this._data = this.options.cacheMethod(this.props, this.options);
+    }
+    return this._data;
   }
 
   get ready() {
     return this.data != null;
   }
 
+  get props() {
+    return this._props;
+  }
+
+  set props(props) {
+    this._props = props;
+    this._data = null;
+  }
+
   update() {
-    this.cb();
+    let table = Store.data.get(this.tableName);
+    if (table !== this.table) {
+      this._data = null;
+      this.cb();
+    }
     return this;
   }
 
@@ -34,12 +56,13 @@ export default class QueryState {
   }
 
   listen() {
-    Store.on('update', this.update);
+    this.table = Store.data.get(this.tableName);
+    Store.on(['update', this.tableName], this.update);
     return this;
   }
 
   stop() {
-    Store.off('update', this.update);
+    Store.off(['update', this.tableName], this.update);
     return this;
   }
 

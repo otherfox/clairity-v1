@@ -55,11 +55,13 @@ import WorkOrderUpload from '../../workOrders/upload'
 export default (
   <Route>
     <Redirect from="/" to="login" />
-    <Route handler={App}>
+    <Route handler={App} >
       <Route name="login" path="/login" handler={Login} />
       <Route name="root-layout" path="/" handler={NavigationLayout}>
-        <Route name="aging-reports" handler={AgingReports} />
 
+        <Route {/***** Aging Reports *****/...{}}>
+          <Route name="aging-reports" handler={AgingReports} />
+        </Route>
 
         <Route {/***** IP Blocks *****/...{}}>
           <Redirect from="ip-blocks" to="all-ip-blocks" />
@@ -136,11 +138,20 @@ export default (
           </Route>
         </Route>
 
-        <Route name="open-installs" handler={OpenInstalls} />
-        <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
-          <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
+        <Route {/***** Open Intstalls *****/...{}}>
+          <Route name="open-installs" handler={OpenInstalls} />
         </Route>
-        <Route name="settings" handler={Settings} />
+
+        <Route {/***** Work Orders *****/...{}}>
+          <Route name="work-orders" path="work-orders/:id" handler={WorkOrders}>
+            <Route name="work-order-upload" path="upload" handler={WorkOrderUpload} />
+          </Route>
+        </Route>
+
+        <Route {/***** Settings *****/...{}}>
+          <Route name="settings" handler={Settings} />
+        </Route>
+
       </Route>
     </Route>
   </Route>

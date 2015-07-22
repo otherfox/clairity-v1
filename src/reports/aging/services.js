@@ -28,5 +28,4 @@ export function getAgingReports(date = Date.now()) {
         }
       });
   });
-  //return new Promise((res, rej) => _.defer(() => res(data)));
 }

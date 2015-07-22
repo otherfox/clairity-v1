@@ -303,7 +303,7 @@ let IpBlocks = React.createClass({
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>IP Blocks</h1></Header>
         <Table {...this.getBlockTable(this.getBlocks())} />
-    </Layout>
+      </Layout>
     );
   }
 });
