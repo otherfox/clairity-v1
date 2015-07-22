@@ -1,12 +1,9 @@
 import React from 'react'
 import Settings from './settings'
-import {Menu, MenuItem, MenuDivider} from 'material-ui'
-import Router, {Navigation, State} from 'react-router'
 import _ from 'lodash'
+import {Menu, MenuItem} from 'material-ui'
 
 var LeftNav = React.createClass ({
-
-  mixins: [Navigation, State],
 
   style: function() {
     return {
@@ -40,22 +37,21 @@ var LeftNav = React.createClass ({
               }
             `}
           </style>
-          <Menu zDepth={0} style={this.style().menu}>
-            <MenuItem primaryText="Aging Reports" value="aging-reports"/>
-            <MenuItem primaryText="IP Blocks" value="ip-blocks"/>
-            <MenuItem primaryText="IP Zones" value="ip-zones"/>
-            <MenuItem primaryText="Accounts" value="accounts"/>
-            <MenuItem primaryText="Opportunites" value="opps" />
-            <MenuItem primaryText="Contacts" value="contacts" />
-            <MenuItem primaryText="Leads" value="leads" />
-            <MenuItem primaryText="Open Installs" value="open-installs" />
-            <MenuItem primaryText="Work Orders" value="work-orders"/>
-            <MenuDivider />
-            <MenuItem primaryText="Settings" value="login"/>
-            <MenuItem primaryText="Login" value="login"/>
-          </Menu>
+          <Menu zDepth={0} style={this.style().menu} menuItems={[
+            { text:"Aging Reports", type: MenuItem.Types.LINK, target:"aging-reports"},
+            { text:"IP Blocks", type: MenuItem.Types.LINK, target:"ip-blocks"},
+            { text:"IP Zones", type: MenuItem.Types.LINK, target:"ip-zones"},
+            { text:"Accounts", type: MenuItem.Types.LINK, target:"accounts"},
+            { text:"Opportunites", type: MenuItem.Types.LINK, target:"opps"},
+            { text:"Contacts", type: MenuItem.Types.LINK, target:"contacts"},
+            { text:"Leads", type: MenuItem.Types.LINK, target:"leads"},
+            { text:"Open Installs", type: MenuItem.Types.LINK, target:"open-installs"},
+            { text:"Work Orders", type: MenuItem.Types.LINK, target:"work-orders"},
+            { text:"Settings", type: MenuItem.Types.LINK, target:"settings"},
+            { text:"Login", type: MenuItem.Types.LINK, target:"login"}
+          ]} />
         </div>
-      )
+      );
   }
 
 });
