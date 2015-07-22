@@ -21,7 +21,7 @@ import {
   Paper
 } from 'material-ui'
 import {fromJS, Map} from 'immutable'
-import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
+import {queryRenderer, collectionQuery, networkCollectionRenderer} from '../../shared/components/networkRenderer'
 import {getPops} from '../../shared/services/pop'
 import {updateWorkOrder} from '../../shared/actions/workOrder'
 
@@ -58,12 +58,10 @@ let ExistingPopsView = React.createClass({
     });
   }
 })
-//
-let ExistingPops = networkCollectionRenderer(ExistingPopsView, {
-  tableName: 'pop',
-  serviceMethod: getPops,
-  propName: 'pops',
-  methods: ['submit']
+
+let ExistingPops = queryRenderer(ExistingPopsView, {
+  methods: ['submit'],
+  queries: [ collectionQuery('pop', 'pops') ]
 });
 
 let NewPopForm = React.createClass({

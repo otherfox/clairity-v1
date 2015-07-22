@@ -261,7 +261,7 @@ let IpBlocks = React.createClass({
     return {
       colNames: [
         { label: 'Block', name: 'block', cellType: 'string'},
-        { label: 'Status', name: 'status', cellType: 'string'},
+        { label: 'Status', name: 'status', cellType: 'boolean', props: {cellStyle: { Active: 'true', Inactive: 'false' }}},
         { label: 'Notes', name: 'notes', cellType: 'string'},
         { label: 'Downstream Org ID', name: 'downstream_org_id', cellType: 'string'},
         { label: 'Reverse DNS 1', name: 'reverse_dns_1', cellType: 'string'},
