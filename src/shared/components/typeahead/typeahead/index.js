@@ -60,6 +60,7 @@ var Typeahead = React.createClass({
       defaultValue: "",
       placeholder: "",
       inputProps: {},
+      maxVisible: 10,
       onOptionSelected: function(option) {},
       onChange: function(event) {},
       onKeyDown: function(event) {},
@@ -73,7 +74,7 @@ var Typeahead = React.createClass({
   getInitialState: function() {
     return {
       // The currently visible set of options
-      visible: this.getOptionsForValue(this.props.defaultValue, _.map(this.props.menuItems.toJS(), 'label')),
+      visible: this.getOptionsForValue(this.props.defaultValue, []),
 
       // This should be called something else, "entryValue"
       entryValue: _.result(_.find(this.props.menuItems.toJS(), 'value', this.props.valueLink.value), 'label'),

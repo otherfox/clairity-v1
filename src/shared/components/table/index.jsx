@@ -1,100 +1,16 @@
 import React from 'react'
-import Settings from './settings'
+import Settings from '../settings'
 import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton } from 'material-ui'
+
+import {CellTypes} from './tableCells'
+
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
-import Details from './details'
+import Details from '../details'
 import fuzzy from 'fuzzy'
 import _ from 'lodash'
 
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
-
-import numeral from 'numeral'
-class StringCell extends React.Component {
-  render() {
-    return (<div>{this.props.children}</div>);
-  }
-}
-
-class NumberCell extends React.Component {
-  render() {
-    return (
-      <div>
-        {numeral(this.props.children).format('0,0.0000')}
-      </div>
-    );
-  }
-}
-
-class DateCell extends React.Component {
-  formatDate(c) {
-    if(c) {
-      var d = new Date(c);
-      c = d.toLocaleDateString();
-    }
-    return c;
-  }
-  render() {
-    return (<div>{this.formatDate(this.props.children)}</div>);
-  }
-}
-
-class CurrencyCell extends React.Component {
-  render() {
-    return (
-      <div>
-        {numeral(this.props.children).format('$0,0.00')}
-      </div>
-    );
-  }
-}
-
-class UriCell extends React.Component {
-  render() {
-    return (
-      <a href='#'>{this.props.children}</a>
-    );
-  }
-}
-
-class LinkCell extends React.Component {
-  render() {
-
-  }
-}
-
-class ButtonCell extends React.Component {
-  render() {
-    <div style={{textAlign: 'center'}} ><RaisedButton label={this.props.children} /></div>;
-  }
-}
-
-class BooleanCell extends React.Component {
-  style() {
-    return {
-        true: {
-          color: Styles.Colors.green500
-        },
-        false: {
-          color: Styles.Colors.red500
-        }
-    }
-  }
-  render() {
-    return <div style={this.style()[this.props.cellStyle[this.props.children]]} >{this.props.children}</div>;
-  }
-}
-
-const cellTypes = {
-  string: StringCell,
-  number: NumberCell,
-  date: DateCell,
-  currency: CurrencyCell,
-  uri: UriCell,
-  link: LinkCell,
-  button: ButtonCell,
-  boolean: BooleanCell
-};
 
 let DataTable = React.createClass({
 
@@ -132,7 +48,7 @@ let DataTable = React.createClass({
       active: '',
       sorted: {},
       filters: {},
-      height: this.calcHeight()
+      height: this.getHeight()
     }
   },
 
@@ -140,12 +56,8 @@ let DataTable = React.createClass({
     this.setState({data: props.data});
   },
 
-  calcHeight: function() {
+  getHeight: function() {
     return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
-  },
-
-  rowGetter: function(rowIndex) {
-      return this.state.data[rowIndex];
   },
 
   getWidth: function() {
@@ -161,6 +73,10 @@ let DataTable = React.createClass({
      } else {
        return 100;
      }
+  },
+
+  rowGetter: function(rowIndex) {
+      return this.state.data[rowIndex];
   },
 
   getHeader(col, i) {
@@ -193,7 +109,7 @@ let DataTable = React.createClass({
   },
 
   handleResize: function() {
-    this.setState({width: this.getWidth()});
+    this.setState({width: this.getWidth(), height: this.getHeight()});
   },
 
   componentDidMount: function() {
@@ -223,7 +139,7 @@ let DataTable = React.createClass({
 
   formatCell: function(cell, col) {
     let CellClass = _.isString(col.cellType) ?
-      (cellTypes[col.cellType] || StringCell) :
+      (CellTypes[col.cellType] || CellTypes.string) :
       col.cellType;
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
@@ -371,6 +287,7 @@ let DataTable = React.createClass({
         {filters}
         <Table
           rowHeight={this.props.rowHeight}
+          rowHeightGetter={this.getRowHeight}
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
           rowsCount={this.state.data.length}

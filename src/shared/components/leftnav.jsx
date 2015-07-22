@@ -1,37 +1,12 @@
 import React from 'react'
 import Settings from './settings'
-import {Menu, MenuItem} from 'material-ui'
-
-var nestedMenuItems = [
-  { type: MenuItem.Types.NESTED, text: 'Apply', items: [
-    { payload: '1', text: 'Nested Item 1' }
-  ] },
-  { type: MenuItem.Types.NESTED, text: 'Expenses', items: [
-    { payload: '1', text: 'Nested Item 1' }
-  ] },
-  { type: MenuItem.Types.NESTED, text: 'Quickbooks', items: [
-    { payload: '1', text: 'Nested Item 1' }
-  ] },
-  { payload: '1', text: 'Invoice Customer'},
-  { payload: '2', text: 'Agent Summary'},
-  { payload: '3', text: 'Aging Report'},
-  { payload: '4', text: 'Credit Memos'},
-  { payload: '5', text: 'Customer Statement'},
-  { payload: '6', text: 'E-Billing Worksheet'},
-  { payload: '7', text: 'Manage Tax Rates'},
-  { payload: '8', text: 'Manage Emailed Invoices'},
-  { payload: '9', text: 'Manage Provider Circuits'},
-  { payload: '10', text: 'Overdue Balances'},
-  { payload: '11', text: 'Search Transactions'},
-  { payload: '12', text: 'Sprint Invoice'},
-  { payload: '13', text: 'Support Notes'},
-  { payload: '14', text: 'Transaction Journal'},
-  { payload: '15', text: 'View Invoices'},
-];
+import {Menu, MenuItem, MenuDivider} from 'material-ui'
+import Router, {Navigation, State} from 'react-router'
+import _ from 'lodash'
 
 var LeftNav = React.createClass ({
 
-  /* mixins: [Router.Navigation, Router.State],*/
+  mixins: [Navigation, State],
 
   style: function() {
     return {
@@ -65,7 +40,20 @@ var LeftNav = React.createClass ({
               }
             `}
           </style>
-          <Menu menuItems={nestedMenuItems} zDepth={0} style={this.style().menu}/>
+          <Menu zDepth={0} style={this.style().menu}>
+            <MenuItem primaryText="Aging Reports" value="aging-reports"/>
+            <MenuItem primaryText="IP Blocks" value="ip-blocks"/>
+            <MenuItem primaryText="IP Zones" value="ip-zones"/>
+            <MenuItem primaryText="Accounts" value="accounts"/>
+            <MenuItem primaryText="Opportunites" value="opps" />
+            <MenuItem primaryText="Contacts" value="contacts" />
+            <MenuItem primaryText="Leads" value="leads" />
+            <MenuItem primaryText="Open Installs" value="open-installs" />
+            <MenuItem primaryText="Work Orders" value="work-orders"/>
+            <MenuDivider />
+            <MenuItem primaryText="Settings" value="login"/>
+            <MenuItem primaryText="Login" value="login"/>
+          </Menu>
         </div>
       )
   }

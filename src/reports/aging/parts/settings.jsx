@@ -10,6 +10,7 @@ import {
 } from 'material-ui'
 
 @controllable(['status', 'nonzero', 'date'])
+
 class AgingSettings extends React.Component {
   render() {
     return (

@@ -71,28 +71,27 @@ var TopNav = React.createClass ({
     },
 
     render: function() {
-        var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
+      var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
 
-        return (
-          <div style={this.style().root}>
-            <AppBar
-              onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
-              title= "Clairity"
-              zDepth={0}
-            />
+      return (
+        <div style={this.style().root}>
+          <AppBar
+            onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
+            title= "Clairity"
+            zDepth={0}
+          />
 
-            <LeftNav
-              ref="topNav"
-              docked={false}
-              isInitiallyOpen={false}
-              header={header}
-              menuItems={menuItems}
+          <LeftNav
+            ref="topNav"
+            docked={false}
+            isInitiallyOpen={false}
+            header={header}
+            menuItems={menuItems}
+            onChange={this._onLeftNavChange}
+          />
 
-              onChange={this._onLeftNavChange}
-            />
-
-          </div>
-        )
+        </div>
+      )
     },
 
 });
