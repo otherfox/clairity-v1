@@ -23,7 +23,7 @@ export function getResource(id, tableName) {
 
 import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
 import { getOpportunitiesByAccount } from './opportunity'
-import { getContractsByAccount } from './contracts'
+import { getContractsByAccount, getContractsByLocation } from './contracts'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
 
@@ -34,7 +34,8 @@ const resourceVia = {
     location: getContactsByLocation
   },
   contract: {
-    account: getContractsByAccount
+    account: getContractsByAccount,
+    location: getContractsByLocation
   },
   opportunity: {
     account: getOpportunitiesByAccount
