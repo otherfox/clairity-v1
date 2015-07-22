@@ -66,6 +66,7 @@ class ButtonCell extends React.Component {
     <div style={{textAlign: 'center'}} ><RaisedButton label={this.props.children} /></div>;
   }
 }
+
 const cellTypes = {
   string: StringCell,
   number: NumberCell,

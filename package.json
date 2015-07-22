@@ -52,7 +52,7 @@
     "classnames": "^1.2.0",
     "d3-react-squared": "^0.1.9",
     "event-emitter": "^0.3.3",
-    "fixed-data-table": "0.3.0",
+    "fixed-data-table": "0.4.1",
     "fuzzy": "^0.1.0",
     "fynx": "^1.6.0",
     "immutable": "^3.7.0",
