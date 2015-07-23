@@ -45,11 +45,11 @@ var Filters = React.createClass ({
 
   render: function() {
 
-		var filters = React.Children.map(this.props.children, function(child, i) {
-
-    if(child.props.children) return <div style={this.childStyle()} className={"inline"}>{React.cloneElement(child)}</div>;;
-				return <div style={this.childStyle()}>{React.cloneElement(child)}</div>;
-		}, this);
+		let filters = React.Children.map(this.props.children, (c, i) =>
+      <div style={this.childStyle()} className={c.props.children ? "inline":""}>
+        {React.cloneElement(c)}
+      </div>
+    );
 
     return (
       <div style={this.style()}>

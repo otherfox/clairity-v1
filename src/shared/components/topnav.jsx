@@ -2,6 +2,7 @@
 import React from 'react'
 import Settings from './settings'
 import { AppBar, LeftNav, Utils, FlatButton } from 'material-ui'
+import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import _ from 'lodash'
 
 let ColorManipulator = Utils.ColorManipulator;
@@ -57,17 +58,24 @@ var TopNav = React.createClass ({
     },
 
     style() {
-      let headerColor = this.context.muiTheme.palette.primary1Color;
-
       return {
         root: {},
         header: {
-          color: headerColor,
+          color: this.context.muiTheme.palette.primary1Color,
           padding: '10px 20px',
           fontSize: '2em',
-          borderBottom: '2px solid '+headerColor
+          borderBottom: '2px solid '+this.context.muiTheme.palette.primary1Color
+        },
+        icon: {
+          fill: this.context.muiTheme.palette.canvasColor,
+          border: '10px',
+          margin: '12px',
         }
       }
+    },
+
+    contextTypes: {
+      muiTheme: React.PropTypes.object
     },
 
     _onLeftNavChange: function(e, key, payload) {
@@ -86,6 +94,7 @@ var TopNav = React.createClass ({
     render: function() {
         var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
         var mobileMenu = (this.state.mobile) ? <FlatButton label="Menu"/> : null;
+        var settingsMenu = <SettingsIcon style={this.style().icon} />;
 
         return (
           <div style={this.style().root}>
@@ -94,7 +103,7 @@ var TopNav = React.createClass ({
               onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
               title= "Clairity"
               zDepth={0}
-              iconElementRight={<div>{mobileMenu}</div>} />
+              iconElementRight={<div>{settingsMenu}{mobileMenu}</div>} />
 
             <LeftNav
               ref="topNav"

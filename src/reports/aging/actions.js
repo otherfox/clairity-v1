@@ -4,7 +4,7 @@ import Store from '../../shared/store'
 
 export const fetchAgingReports = Fynx.createAsyncAction();
 
-const agingReportsFetched = Fynx.createAsyncAction();
+export const agingReportsFetched = Fynx.createAsyncAction();
 
 // Fetch the data
 fetchAgingReports.listen(date => {

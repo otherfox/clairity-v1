@@ -1,37 +1,11 @@
 import React from 'react'
 import Settings from './settings'
+import _ from 'lodash'
 import {Menu, MenuItem} from 'material-ui'
-
-var nestedMenuItems = [
-  { type: MenuItem.Types.NESTED, text: 'Apply', items: [
-    { payload: '1', text: 'Nested Item 1' }
-  ] },
-  { type: MenuItem.Types.NESTED, text: 'Expenses', items: [
-    { payload: '1', text: 'Nested Item 1' }
-  ] },
-  { type: MenuItem.Types.NESTED, text: 'Quickbooks', items: [
-    { payload: '1', text: 'Nested Item 1' }
-  ] },
-  { payload: '1', text: 'Invoice Customer'},
-  { payload: '2', text: 'Agent Summary'},
-  { payload: '3', text: 'Aging Report'},
-  { payload: '4', text: 'Credit Memos'},
-  { payload: '5', text: 'Customer Statement'},
-  { payload: '6', text: 'E-Billing Worksheet'},
-  { payload: '7', text: 'Manage Tax Rates'},
-  { payload: '8', text: 'Manage Emailed Invoices'},
-  { payload: '9', text: 'Manage Provider Circuits'},
-  { payload: '10', text: 'Overdue Balances'},
-  { payload: '11', text: 'Search Transactions'},
-  { payload: '12', text: 'Sprint Invoice'},
-  { payload: '13', text: 'Support Notes'},
-  { payload: '14', text: 'Transaction Journal'},
-  { payload: '15', text: 'View Invoices'},
-];
+import {Navigation,State} from 'react-router'
 
 var LeftNav = React.createClass ({
-
-  /* mixins: [Router.Navigation, Router.State],*/
+  mixins: [Navigation,State],
 
   style: function() {
     return {
@@ -53,6 +27,11 @@ var LeftNav = React.createClass ({
     muiTheme: React.PropTypes.object
   },
 
+  link(e, idx, item) {
+    debugger;
+    this.transitionTo(item.target);
+  },
+
   render: function() {
       return (
         <div className={'leftNav'} style={this.style().root}>
@@ -65,9 +44,21 @@ var LeftNav = React.createClass ({
               }
             `}
           </style>
-          <Menu menuItems={nestedMenuItems} zDepth={0} style={this.style().menu}/>
+          <Menu zDepth={0} style={this.style().menu} onItemTap={this.link} menuItems={[
+            { text: "Aging Reports", target: "aging-reports"},
+            { text: "IP Blocks", target: "ip-blocks"},
+            { text: "IP Zones", target: "ip-zones"},
+            { text: "Accounts", target: "accounts"},
+            { text: "Opportunites", target: "opps"},
+            { text: "Contacts", target: "contacts"},
+            { text: "Leads", target: "leads"},
+            { text: "Open Installs", target: "open-installs"},
+            { text: "Work Orders", target: "work-orders"},
+            { text: "Settings", target: "settings"},
+            { text: "Login", target: "login"}
+          ]} />
         </div>
-      )
+      );
   }
 
 });

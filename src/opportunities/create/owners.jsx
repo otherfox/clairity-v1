@@ -27,6 +27,7 @@ AccountOwnersView.displayName = 'AccountOwnersInternal';
 let AccountOwners = queryRenderer(AccountOwnersView, {
   queries: [
     {
+      tableName: 'user',
       writeMethod: usersFetched,
       shouldFetch: e => e.state.data,
       cacheMethod: queryAccountOwners,
