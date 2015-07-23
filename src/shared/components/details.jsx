@@ -42,6 +42,7 @@ let Details = React.createClass ({
     let labelLineHeight = {
       muiDropDown: '4em',
       muiTextField: '3.2em',
+      muiDatePicker: '3.2em'
     }
 
     return {

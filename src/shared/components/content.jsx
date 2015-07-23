@@ -19,7 +19,12 @@ let Content = React.createClass ({
 
   render: function() {
     return (
-      <div style={ _.assign(this.style(), this.props.style)} >
+      <div style={ _.assign(this.style(), this.props.style)} className={'content'}>
+        <style>{`
+          .content {
+            padding-left: $
+          }
+        `}</style>
         {this.props.children}
       </div>
     );

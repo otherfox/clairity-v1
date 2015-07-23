@@ -16,7 +16,7 @@ export default class AgingPage extends React.Component {
   }
   render() {
     return (
-      <Layout widths={{}}>
+      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>Aging Reports</h1></Header>
         <AgingSettings {...this.state}
                        onStatusChange={s => this.setState({status: s})}

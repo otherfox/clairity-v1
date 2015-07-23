@@ -66,7 +66,7 @@ let IpZones = React.createClass({
     let action = "controller.cfm?event=manageIpZones";
 
     return (
-      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+      <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>IP Zones</h1></Header>
         <Table {...this.getZoneTable(this.getZones())} />
     </Layout>
