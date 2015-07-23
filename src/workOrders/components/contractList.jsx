@@ -1,9 +1,10 @@
-import React, {addons} from 'react/addons'
+import React, {PropTypes, addons} from 'react/addons'
 import {collectionViaDropdown} from '../../shared/components/collectionDropdown'
 
 let ContractsDropdown = collectionViaDropdown('contract', 'location_id', 'location');
 
-export default class ContractsList extends React.Component {
+class ContractsList extends React.Component {
+
   getContractLabel(contract) {
     let signed = new Date(contract.get('signed'));
     return contract.get('services') ?
@@ -11,9 +12,11 @@ export default class ContractsList extends React.Component {
       :
         `Signed ${signed.toDateString()}`
   }
+
   filterContract(contract) {
     return contract.has('signed');
   }
+
   render() {
     return (
       <ContractsDropdown {...this.props}
@@ -23,3 +26,9 @@ export default class ContractsList extends React.Component {
     );
   }
 }
+
+ContractsList.propTypes = {
+  locationId: PropTypes.number.isRequired
+};
+
+export default ContractsList;
