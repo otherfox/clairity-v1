@@ -20,7 +20,7 @@ import OpenInstalls from '../../openInstalls'
 /* Accounts */
 import ViewAccount from '../../accounts'
 import EditAccount  from '../../accounts/edit'
-import SearchAccount from '../../accounts/search'
+import ListAccounts from '../../accounts/all'
 
 /* Contacts */
 import ViewContact from '../../contacts'
@@ -86,9 +86,10 @@ export default (
         </Route>
 
         <Route {/***** Accounts *****/...{}}>
+          <Redirect from="accounts" to="all-accounts" />
           <Route name="accounts" handler={RouteHandler}>
-            <Route name="search-accounts" path="search" handler={SearchAccount} />
-            <Route path=":accountId/:locationId" handler={RouteHandler}>
+            <Route name="all-accounts" path="all" handler={ListAccounts} />
+            <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
               <Route path="edit" name="edit-customer" handler={EditAccount} />
               <Route path="contracts" handler={RouteHandler}>
