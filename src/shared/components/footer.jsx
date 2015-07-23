@@ -1,10 +1,32 @@
 import React from 'react'
 import Settings from './settings'
+import _ from 'lodash'
 import {Utils, Styles} from 'material-ui'
 
 let ColorManipulator = Utils.ColorManipulator;
 
-class Footer extends React.Component {
+let Footer = React.createClass({
+  contextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+
+  getInitialState() {
+    return {
+      position: { position: this.getPosition() }
+    }
+  },
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  getPosition() {
+      return (window.innerHeight > Settings.contentMinHeight + Settings.footerHeight + Settings.appBarHeight) ? 'absolute' : 'relative';
+  },
+
+  handleResize() {
+    this.setState({ position : { position: this.getPosition() }})
+  },
 
   style() {
 
@@ -14,7 +36,6 @@ class Footer extends React.Component {
     return {
       padding: '20px',
       textAlign: 'center',
-			position: 'absolute',
     	width: '100%',
       height: Settings.footerHeight+'px',
       color: textColor,
@@ -22,24 +43,16 @@ class Footer extends React.Component {
     	bottom: '0',
       zIndex: 2
     }
-  }
-
-  shouldComponentUpdate() {
-    return false;
-  }
+  },
 
   render() {
 
     return (
-      <div style={this.style()}>
+      <div style={_.assign(this.style(), this.state.position)}>
         Copywrite 2015 One Ring Networks
       </div>
     );
   }
-}
-
-Footer.contextTypes = {
-  muiTheme: React.PropTypes.object
-};
+});
 
 export default Footer;

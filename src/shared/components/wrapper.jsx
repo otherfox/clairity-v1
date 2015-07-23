@@ -5,8 +5,8 @@ let Wrapper = React.createClass ({
 
   style: function() {
     return {
-      position: 'relative',
-      minHeight: '100%'
+      height: '100%',
+      paddingTop: '64px'
     };
   },
 
