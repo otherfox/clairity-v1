@@ -27,8 +27,8 @@ let viewLeads = React.createClass({
     return {
       colNames: [
         { label: 'Lead Name', name: 'name', cellType: 'string'},
-        { label: 'Account', name: 'customer_name', cellType: 'string'},
-        { label: 'Account Owner', name: 'agent_name', cellType: 'string'},
+        { label: 'Account', name: 'customer_name', cellType: 'customer'},
+        { label: 'Account Owner', name: 'agent_name', cellType: 'user'},
         { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: {textAlign: 'center'}}
       ],
       data: leads.map(s => {
