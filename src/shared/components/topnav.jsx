@@ -61,18 +61,30 @@ var TopNav = React.createClass ({
       return {
         root: {},
         header: {
-          color: this.context.muiTheme.component.appBar.textColor,
+          color: this.context.muiTheme.component.appBar.color,
           padding: '10px 20px',
           fontSize: '2em',
-          borderBottom: '2px solid '+this.context.muiTheme.component.appBar.textColor
+          borderBottom: '2px solid '+this.context.muiTheme.component.appBar.color
         },
         icon: {
           fill: this.context.muiTheme.component.appBar.textColor,
-          border: '10px',
-          margin: '12px',
+          verticalAlign: 'middle'
         },
         appBar: {
-          position: 'relative'
+          position: 'absolute',
+          width: '100%'
+        },
+        flatButton: {
+          backgroundColor: this.context.muiTheme.component.appBar.color,
+          color: this.context.muiTheme.component.appBar.textColor,
+          verticalAlign: 'middle'
+        },
+        appBarRight: {
+          position: 'absolute',
+          top: '50%',
+          right: '0',
+          marginRight:'20px',
+          transform: 'translateY(-50%)',
         }
       }
     },
@@ -96,7 +108,7 @@ var TopNav = React.createClass ({
 
     render: function() {
         var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
-        var mobileMenu = (this.state.mobile) ? <FlatButton label="Menu"/> : null;
+        var mobileMenu = (this.state.mobile) ? <FlatButton style={this.style().flatButton} label="Menu"/> : null;
         var settingsMenu = <SettingsIcon style={this.style().icon} />;
 
         return (
@@ -106,7 +118,7 @@ var TopNav = React.createClass ({
               onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
               title="Clairity"
               zDepth={1}
-              iconElementRight={<div>{settingsMenu}{mobileMenu}</div>}
+              iconElementRight={<div style={this.style().appBarRight}>{settingsMenu}{mobileMenu}</div>}
               style={this.style().appBar}
             />
 

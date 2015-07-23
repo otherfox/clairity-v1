@@ -13,6 +13,8 @@ var LeftNav = React.createClass ({
         position: 'absolute',
         width: Settings.leftNavWidth,
         height: '100%',
+        top: 0,
+        paddingTop: '64px',
         backgroundColor: this.context.muiTheme.component.menu.backgroundColor,
         borderRight: '1px solid '+this.context.muiTheme.palette.borderColor,
       },

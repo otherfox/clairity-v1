@@ -12,6 +12,7 @@ let Content = React.createClass ({
       width: '100%',
       backgroundColor: canvasColor,
       paddingBottom: Settings.footerHeight+Settings.contentPadding+'px',
+      height: '100%',
       minHeight: Settings.contentMinHeight+'px'
     };
   },
