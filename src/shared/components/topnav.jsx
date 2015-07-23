@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Settings from './settings'
-import { AppBar, LeftNav, Utils } from 'material-ui'
+import { AppBar, LeftNav, Utils, FlatButton } from 'material-ui'
 import _ from 'lodash'
 
 let ColorManipulator = Utils.ColorManipulator;
@@ -25,7 +25,8 @@ var TopNav = React.createClass ({
 
     getInitialState: function() {
         return {
-            selectedIndex: null
+            selectedIndex: null,
+            mobile: this.getBreakpoint()
         }
     },
 
@@ -43,6 +44,18 @@ var TopNav = React.createClass ({
         };
     },
 */
+    getBreakpoint() {
+      return !(window.innerWidth > Settings.breakpoints.sm)
+    },
+
+    handleResize() {
+      this.setState({mobile: this.getBreakpoint()});
+    },
+
+    componentDidMount: function() {
+      window.addEventListener('resize', this.handleResize);
+    },
+
     style() {
       let headerColor = this.context.muiTheme.palette.primary1Color;
 
@@ -72,14 +85,16 @@ var TopNav = React.createClass ({
 
     render: function() {
         var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
+        var mobileMenu = (this.state.mobile) ? <FlatButton label="Menu"/> : null;
 
         return (
           <div style={this.style().root}>
+
             <AppBar
               onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
               title= "Clairity"
               zDepth={0}
-            />
+              iconElementRight={<div>{mobileMenu}</div>} />
 
             <LeftNav
               ref="topNav"

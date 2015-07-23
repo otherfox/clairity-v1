@@ -7,6 +7,7 @@ let Settings = {
   rowPadding: 15,
   widthBuffer: 20,
   footerHeight: 60,
+  mobilePadding: 20,
 }
 
 export default Settings;
