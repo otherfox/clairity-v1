@@ -5,9 +5,9 @@ import { networkModelRenderer } from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
 import { State, Link } from 'react-router'
 import { fromJS } from 'immutable'
-import OpportunityDetails from './parts/details'
+import OpportunityDetails from './public/details'
 
-import AccountDetails from '../accounts/parts/details'
+import AccountDetails from '../accounts/public/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
 

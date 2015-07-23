@@ -6,13 +6,13 @@ import Details from  '../shared/components/details'
 import { networkModelRenderer } from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
 import { State, Link } from 'react-router'
-import EditDetails from './parts/editDetails'
+import EditDetails from './public/editDetails'
 import { fromJS } from 'immutable'
 import _ from 'lodash'
 
 import { updateSalesOpp } from './actions'
 
-import EditAccountDetails from '../accounts/parts/editDetails'
+import EditAccountDetails from '../accounts/public/editDetails'
 let EditAccountDetailsAgent = networkModelRenderer(EditAccountDetails, 'user',{methods:['getState']});
 
 /*

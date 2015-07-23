@@ -34,7 +34,7 @@ import {
 import controllable from 'react-controllables'
 import {State} from 'react-router'
 
-import AccountDetails from './parts/details'
+import AccountDetails from './public/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
 import ContractsList from '../contracts/list'
