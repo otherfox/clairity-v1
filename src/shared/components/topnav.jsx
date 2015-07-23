@@ -26,7 +26,8 @@ var TopNav = React.createClass ({
 
     getInitialState: function() {
         return {
-            selectedIndex: null
+            selectedIndex: null,
+            mobile: this.getBreakpoint()
         }
     },
 
@@ -44,19 +45,34 @@ var TopNav = React.createClass ({
         };
     },
 */
+    getBreakpoint() {
+      return !(window.innerWidth > Settings.breakpoints.sm)
+    },
+
+    handleResize() {
+      this.setState({mobile: this.getBreakpoint()});
+    },
+
+    componentDidMount: function() {
+      window.addEventListener('resize', this.handleResize);
+    },
+
     style() {
       return {
         root: {},
         header: {
-          color: this.context.muiTheme.palette.primary1Color,
+          color: this.context.muiTheme.component.appBar.textColor,
           padding: '10px 20px',
           fontSize: '2em',
-          borderBottom: '2px solid '+this.context.muiTheme.palette.primary1Color
+          borderBottom: '2px solid '+this.context.muiTheme.component.appBar.textColor
         },
         icon: {
-          fill: this.context.muiTheme.palette.canvasColor,
+          fill: this.context.muiTheme.component.appBar.textColor,
           border: '10px',
           margin: '12px',
+        },
+        appBar: {
+          position: 'relative'
         }
       }
     },
@@ -79,28 +95,32 @@ var TopNav = React.createClass ({
     },
 
     render: function() {
-      var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
+        var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
+        var mobileMenu = (this.state.mobile) ? <FlatButton label="Menu"/> : null;
+        var settingsMenu = <SettingsIcon style={this.style().icon} />;
 
-      return (
-        <div style={this.style().root}>
-          <AppBar
-            onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
-            iconElementRight={<SettingsIcon style={this.style().icon} />}
-            title= "Clairity"
-            zDepth={0}
-          />
+        return (
+          <div style={this.style().root}>
 
-          <LeftNav
-            ref="topNav"
-            docked={false}
-            isInitiallyOpen={false}
-            header={header}
-            menuItems={menuItems}
-            onChange={this._onLeftNavChange}
-          />
+            <AppBar
+              onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
+              title="Clairity"
+              zDepth={1}
+              iconElementRight={<div>{settingsMenu}{mobileMenu}</div>}
+              style={this.style().appBar}
+            />
 
-        </div>
-      )
+            <LeftNav
+              ref="topNav"
+              docked={false}
+              isInitiallyOpen={false}
+              header={header}
+              menuItems={menuItems}
+              onChange={this._onLeftNavChange}
+            />
+
+          </div>
+        )
     },
 
 });

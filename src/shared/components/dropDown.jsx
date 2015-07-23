@@ -4,6 +4,7 @@ import _ from 'lodash'
 import {
   DropDownMenu
 } from 'material-ui'
+import uid from 'uid'
 
 import {Map, List} from 'immutable'
 
@@ -50,13 +51,18 @@ let DropDown = React.createClass({
     let items = (this.props.menuItems || new List()).toJS();
     let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
     let index = data.findIndex(item => item.value === searchValue);
+    let overflow =  data.length > 15 ?
+                      `max-height: 500px;
+                      overflow: auto !important;`
+                    :
+                      '';
+    let menuClass = 'm'+uid();
 
     return (
       <div style={_.assign(this.style().root, this.props.style)}>
         <style>{`
-            .maxHeight div:nth-child(2){
-              max-height: 500px;
-              overflow: auto !important;
+            .${menuClass} div:nth-child(2){
+              ${overflow}
             }
         `}</style>
         <DropDownMenu menuItems={data}
@@ -65,7 +71,7 @@ let DropDown = React.createClass({
                       labelStyle={_.assign(this.style().labelStyle, this.props.labelStyle)}
                       underlineStyle={_.assign(this.style().underlineStyle, this.props.underlineStyle)}
                       menuItemStyle={_.assign(this.style().menuItemStyle, this.props.menuItemStyle)}
-                      className={'maxHeight'}
+                      className={menuClass}
                       />
       </div>
     );
