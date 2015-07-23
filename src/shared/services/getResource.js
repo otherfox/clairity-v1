@@ -57,6 +57,7 @@ export function getCollectionVia(resourceTable, throughTable, throughId) {
 
 
 import {getPops} from './pop'
+import {getAccounts} from './account'
 import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
 import {getLeads} from './contacts'
 import {getProjectTypes} from './projectType'
@@ -66,6 +67,7 @@ import {getCampaignSources} from './campaignSource'
 
 const collection = {
   pop: getPops,
+  account: getAccounts,
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
   lead: getLeads,
