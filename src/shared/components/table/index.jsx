@@ -143,7 +143,7 @@ let DataTable = React.createClass({
       :
         col.cellType;
     return (
-      <CellClass {...col.props} data={rowData}>
+      <CellClass {...col.props} data={rowData} width={width} index={rowIndex}>
         {rowData[col.name]}
       </CellClass>
     );
