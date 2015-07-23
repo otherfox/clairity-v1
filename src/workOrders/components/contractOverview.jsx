@@ -34,7 +34,6 @@ const ContractOverview = React.createClass({
   },
 
   render() {
-    console.log('contract summary', this.props);
     return (
       <div style={this.props.style}>
         <Paper zDepth={1} rounded={true}>
