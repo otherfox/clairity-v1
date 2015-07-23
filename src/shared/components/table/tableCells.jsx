@@ -10,7 +10,7 @@ import SendIcon from 'material-ui/lib/svg-icons/content/send'
 export class AgentCell extends React.Component {
   render() {
     return (this.props.children) ?
-      <Link to={'/'} style={_.assign({ color: this.context.muiTheme.palette.primary1Color }, this.props.cellStyle)}>
+      <Link to='/' style={_.assign({ color: this.context.muiTheme.palette.primary1Color }, this.props.cellStyle)}>
         <AgentIcon
               style={_.assign({ fill: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .5), marginRight: '5px', position: 'absolute' }, this.props.iconStyle)} />
         <div style={_.assign({ paddingLeft: '30px', lineHeight: '25px' }, this.props.labelStyle )}>{this.props.children}</div>
@@ -34,7 +34,7 @@ export class AccountCell extends React.Component {
 export class ContactCell extends React.Component {
   render() {
     return (this.props.children) ?
-      <Link to={'/'} style={_.assign({ color: this.context.muiTheme.palette.accent2Color }, this.props.cellStyle)}>
+      <Link to="view-contact" params={{contactId: 0}} style={_.assign({ color: this.context.muiTheme.palette.accent2Color }, this.props.cellStyle)}>
         <ContactIcon
               style={_.assign({  fill: Utils.ColorManipulator.fade(this.context.muiTheme.palette.accent2Color, .5), marginRight: '5px', position: 'absolute' }, this.props.iconStyle)} />
         <div style={_.assign({  paddingLeft: '30px', lineHeight: '25px' }, this.props.labelStyle)}>{this.props.children}</div>
