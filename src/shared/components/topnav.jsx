@@ -61,15 +61,18 @@ var TopNav = React.createClass ({
       return {
         root: {},
         header: {
-          color: this.context.muiTheme.palette.primary1Color,
+          color: this.context.muiTheme.component.appBar.textColor,
           padding: '10px 20px',
           fontSize: '2em',
-          borderBottom: '2px solid '+this.context.muiTheme.palette.primary1Color
+          borderBottom: '2px solid '+this.context.muiTheme.component.appBar.textColor
         },
         icon: {
-          fill: this.context.muiTheme.palette.canvasColor,
+          fill: this.context.muiTheme.component.appBar.textColor,
           border: '10px',
           margin: '12px',
+        },
+        appBar: {
+          position: 'relative'
         }
       }
     },
@@ -101,9 +104,11 @@ var TopNav = React.createClass ({
 
             <AppBar
               onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
-              title= "Clairity"
-              zDepth={0}
-              iconElementRight={<div>{settingsMenu}{mobileMenu}</div>} />
+              title="Clairity"
+              zDepth={1}
+              iconElementRight={<div>{settingsMenu}{mobileMenu}</div>}
+              style={this.style().appBar}
+            />
 
             <LeftNav
               ref="topNav"
@@ -111,7 +116,6 @@ var TopNav = React.createClass ({
               isInitiallyOpen={false}
               header={header}
               menuItems={menuItems}
-
               onChange={this._onLeftNavChange}
             />
 

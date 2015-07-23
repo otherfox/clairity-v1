@@ -54,14 +54,14 @@ class AgingTable extends React.Component {
     return {
       data: data,
       colNames: [
-        { label: 'Customer', name: 'name',    cellType: 'customer'},
-      	{ label: 'Status',   name: 'active',  cellType: 'boolean', props: {cellStyle: { Active: 'true', Inactive: 'false' }} },
+        { label: 'Customer', name: 'name',    cellType: 'account'},
+      	{ label: 'Status',   name: 'active',  cellType: 'boolean', props: {cellClasses: { Active: 'true', Inactive: 'false' }, cellStyle: {textAlign: 'center'}}, style: {textAlign: 'center'} },
         { label: 'Balance',  name: 'balance', cellType: 'currency'},
         { label: '0 - 30',   name: 'b_0_30',  cellType: 'currency'},
         { label: '31 - 60',  name: 'b_31_60', cellType: 'currency'},
         { label: '61 - 90',  name: 'b_61_90', cellType: 'currency'},
         { label: '91+',      name: 'b_91',    cellType: 'currency'},
-        { label: 'Agent',    name: 'agent',   cellType: 'user'},
+        { label: 'Agent',    name: 'agent',   cellType: 'agent'},
         { label: 'Send Late Notice',    name: 'button', cellType: 'send'},
         { label: 'Last Weekly Notice',  name: 'weekly_late_notice_sent', cellType: 'date'},
         { label: 'Last Monthly Notice', name: 'late_notice_sent', cellType: 'date'},
