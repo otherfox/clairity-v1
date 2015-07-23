@@ -70,7 +70,8 @@ class AgingTable extends React.Component {
       filters: {
         data: [
           {label: 'Customer', name: 'name', filterType: 'muiTextField'},
-          {label: 'Status', filterType: 'muiRadioButtons', name: 'status', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
+          {label: 'Agent', name: 'agent', filterType: 'muiTextField'},
+          {label: 'Status', filterType: 'muiRadioButtons', name: 'active', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
             { label: 'Active', value: 'Active'},
             { label: 'Inactive', value: 'Inactive'},
             { label: 'Both', value: '', defaultChecked: true}
@@ -80,7 +81,8 @@ class AgingTable extends React.Component {
       },
       rowHeight: 100,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
-      maxWidth: 19
+      maxWidth: 19,
+      widthAdj: -30
     }
   }
 
