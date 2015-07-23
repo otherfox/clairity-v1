@@ -35,6 +35,7 @@ import ViewOpportunity from '../../opportunities'
 import EditOpportunity from '../../opportunities/edit'
 import ListOpportunities from '../../opportunities/list'
 import CreateOpportunity from '../../opportunities/create'
+import CreateUnlinkedOpportunity from '../../opportunities/create/unlinked'
 
 /* Ip Zones */
 import IpZones from '../../ipZones'
@@ -111,6 +112,7 @@ export default (
                 <Route name="add-opp-contact" path="add" handler={CreateOpportunity} />
               </Route>
             </Route>
+            <Route name="new-opp" path="create  " handler={CreateUnlinkedOpportunity} />
             <Route name="all-opps" path="all" handler={ListOpportunities} />
           </Route>
         </Route>
