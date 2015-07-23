@@ -71,8 +71,7 @@ var TopNav = React.createClass ({
           verticalAlign: 'middle'
         },
         appBar: {
-          position: 'absolute',
-          width: '100%'
+          position: 'relative'
         },
         flatButton: {
           backgroundColor: this.context.muiTheme.component.appBar.color,
