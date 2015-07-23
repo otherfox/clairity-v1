@@ -24,7 +24,7 @@ export default class ListOpportunities extends React.Component {
       <div style={this.style().root}>
         {
           this.props.opportunities.map(o =>
-            <ClearFix>
+            <ClearFix key={o.get('id')}>
               <Link to="view-opp" params={{oppId: o.get('id')}}>
                 <FontIcon className={'md md-stars'} style={this.style().icon}/> <div style={this.style().link}>{o.get('name')}</div>
               </Link>
