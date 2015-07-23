@@ -137,11 +137,16 @@ let DataTable = React.createClass({
     return (this.state.active === index ) ? 'active' : '';
   },
 
-  formatCell: function(cell, col) {
+  formatCell: function(rowData, col, width, rowIndex) {
     let CellClass = _.isString(col.cellType) ?
-      (CellTypes[col.cellType] || CellTypes.string) :
-      col.cellType;
-    return <CellClass {...col.props} data={cell}>{cell}</CellClass>;
+        (CellTypes[col.cellType] || CellTypes.string)
+      :
+        col.cellType;
+    return (
+      <CellClass {...col.props} data={rowData}>
+        {rowData[col.name]}
+      </CellClass>
+    );
   },
 
   setFilters: function(filter) {
@@ -218,19 +223,11 @@ let DataTable = React.createClass({
             <Column
               label={col.label}
               key={i}
-              headerRenderer={
-                function() {
-                  return this.getHeader(col, i);
-                }.bind(this)
-              }
+              headerRenderer={() => this.getHeader(col, i)}
               dataKey={col.name || i}
               width={this.getColWidth(i)}
               flexGrow={(this.props.flexGrow.length > 0) ? this.props.flexGrow[i] : 1 }
-              cellRenderer={
-                function(cellData) {
-                  return this.formatCell(cellData, col);
-                }.bind(this)
-              }/>
+              cellRenderer={(cellData, cellDataKey, rowData, rowIndex, columnData, width) => this.formatCell(rowData, col, width, rowIndex)} />
           , this)
         }
       </Group>;
