@@ -23,7 +23,9 @@ export function getContractsByAccount(id) {
       .withCredentials()
       .end((err, res) => {
         if (!err) {
-          s(JSON.parse(res.text));
+          let contracts = JSON.parse(res.text);
+          contracts.forEach(c => c.customer_id = id);
+          s(contracts);
         } else {
           f(err);
         }
