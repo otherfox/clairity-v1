@@ -141,7 +141,7 @@ let DataTable = React.createClass({
     let CellClass = _.isString(col.cellType) ?
       (CellTypes[col.cellType] || CellTypes.string) :
       col.cellType;
-    return <CellClass {...col.props}>{cell}</CellClass>;
+    return <CellClass {...col.props} data={cell}>{cell}</CellClass>;
   },
 
   setFilters: function(filter) {
