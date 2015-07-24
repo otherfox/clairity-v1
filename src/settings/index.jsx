@@ -2,6 +2,7 @@
 import React, {PropTypes} from 'react'
 import Layout from  '../shared/components/layout'
 import Details from  '../shared/components/details'
+import SettingsManager from '../shared/settings'
 
 import {
   RadioButtonGroup,
@@ -22,6 +23,34 @@ import {
 import controllable from 'react-controllables'
 
 import {Navigation} from 'react-router'
+
+@controllable(['theme', 'compact'])
+class SettingsForm extends React.Component {
+  render() {
+    let compactToggle = (
+      <Layout>
+        <Toggle labelStyle={{minWidth: 100}}
+                name="compactView"
+                value={this.props.compact}
+                label="Compact View" />
+      </Layout>
+    );
+    return (
+      <Details
+        title={'Settings'}
+        data={[
+            {label: '', value: compactToggle},
+            {},
+        ]}
+      />
+    );
+  }
+}
+
+SettingsForm.propTypes = {
+  theme: PropTypes.string.isRequired,
+  compact: PropTypes.bool.isRequired
+};
 
 let Settings = React.createClass({
   mixins: [Navigation],
