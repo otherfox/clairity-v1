@@ -43,6 +43,8 @@ let DataTable = React.createClass({
   },
 
   getInitialState: function() {
+
+    //todo add pre filtering
     return {
       data: this.props.data,
       width: this.getWidth(),
