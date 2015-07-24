@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import {ThemeManager, ClairityLight, ClairityDark} from '../themes'
+import {EventEmitter} from 'eventemitter2'
 
 const themesMap = {
   light: ClairityLight,
@@ -14,6 +15,7 @@ class SettingsManager {
 
   constructor() {
     this.initializeSettings();
+    this.vent = new EventEmitter();
   }
 
   initializeSettings() {
@@ -26,7 +28,9 @@ class SettingsManager {
   }
 
   _write(data) {
-    localStorage.setItem('settingsData', JSON.serialize(data));
+    let value = JSON.serialize(data);
+    localStorage.setItem('settingsData', value);
+    this.vent.emit('settingsChanged', value);
   }
 
   _read() {
