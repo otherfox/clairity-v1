@@ -28,7 +28,6 @@ var LeftNav = React.createClass ({
   },
 
   link(e, idx, item) {
-    debugger;
     this.transitionTo(item.target);
   },
 
