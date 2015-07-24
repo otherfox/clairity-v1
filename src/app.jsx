@@ -10,8 +10,16 @@ import Footer from './shared/components/footer'
 import Wrapper from './shared/components/wrapper'
 
 import ThemeManager from './shared/themes/themeManager'
+import SettingsManager from './shared/settings'
 
 export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      key: JSON.serialize(SettingsManager.data)
+    };
+    SettingsManager.vent.on('settingsChanged', key => this.setState({key}));
+  }
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
@@ -19,7 +27,7 @@ export class App extends React.Component {
     };
   }
   render() {
-    return <RouteHandler />;
+    return <RouteHandler key={this.state.key} />;
   }
 }
 
