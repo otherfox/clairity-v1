@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import {ThemeManager, ClairityLight, ClairityDark} from '../themes'
-import {EventEmitter} from 'eventemitter2'
+import EventEmitter from 'eventemitter2'
 
 const themesMap = {
   light: ClairityLight,
@@ -14,8 +14,8 @@ themesMapInverse.set(ClairityDark, 'dark');
 class SettingsManager {
 
   constructor() {
-    this.initializeSettings();
     this.vent = new EventEmitter();
+    this.initializeSettings();
   }
 
   initializeSettings() {
@@ -24,11 +24,11 @@ class SettingsManager {
       this._write(this.defaultSettings);
     }
     this.data = this._read();
-    ThemeManager.setTheme(themeMap[this.data.theme]);
+    ThemeManager.setTheme(themesMap[this.data.theme]);
   }
 
   _write(data) {
-    let value = JSON.serialize(data);
+    let value = JSON.stringify(data);
     localStorage.setItem('settingsData', value);
     this.vent.emit('settingsChanged', value);
   }
@@ -52,14 +52,14 @@ class SettingsManager {
     if (_.isString(newTheme)) {
       if (themesMap[newTheme]) {
         this.data.theme = newTheme;
-        ThemeManager.setTheme(themeMap[this.data.theme]);
+        ThemeManager.setTheme(themesMap[this.data.theme]);
         this._write(this.data);
         return;
       }
     } else if (_.isObject(newTheme)) {
       if (themesMapInverse.has(newTheme)) {
         this.data.theme = themesMapInverse.get(newTheme);
-        ThemeManager.setTheme(themeMap[this.data.theme]);
+        ThemeManager.setTheme(themesMap[this.data.theme]);
         this._write(this.data);
         return;
       }

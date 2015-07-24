@@ -16,7 +16,7 @@ export class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: JSON.serialize(SettingsManager.data)
+      key: JSON.stringify(SettingsManager.data)
     };
     SettingsManager.vent.on('settingsChanged', key => this.setState({key}));
   }
