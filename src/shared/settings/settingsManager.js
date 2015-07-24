@@ -1,11 +1,14 @@
-import {ThemeManager, ClairityLight, ClairityDark} from '../themes'
 import _ from 'lodash'
-import { mapify } from 'es6-mapify'
+import {ThemeManager, ClairityLight, ClairityDark} from '../themes'
 
 const themesMap = {
   light: ClairityLight,
   dark: ClairityDark
 };
+
+const themesMapInverse = new Map();
+themesMapInverse.set(ClairityLight, 'light');
+themesMapInverse.set(ClairityDark, 'dark');
 
 class SettingsManager {
 
@@ -19,6 +22,7 @@ class SettingsManager {
       this._write(this.defaultSettings);
     }
     this.data = this._read();
+    ThemeManager.setTheme(themeMap[this.data.theme]);
   }
 
   _write(data) {
@@ -42,12 +46,30 @@ class SettingsManager {
 
   set theme(newTheme) {
     if (_.isString(newTheme)) {
-      this.data;
+      if (themesMap[newTheme]) {
+        this.data.theme = newTheme;
+        ThemeManager.setTheme(themeMap[this.data.theme]);
+        this._write(this.data);
+        return;
+      }
+    } else if (_.isObject(newTheme)) {
+      if (themesMapInverse.has(newTheme)) {
+        this.data.theme = themesMapInverse.get(newTheme);
+        ThemeManager.setTheme(themeMap[this.data.theme]);
+        this._write(this.data);
+        return;
+      }
     }
+    throw new TypeError('Tried to set SettingsManager.theme to an unknown theme');
   }
 
   get compact() {
-    return true;
+    return this.data.compact;
+  }
+
+  set compact(val) {
+    this.data.compact = val;
+    this._write(val);
   }
 
 }
