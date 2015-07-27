@@ -1,81 +1,16 @@
 import React from 'react'
-import Settings from './settings'
+import Settings from '../settings'
 import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton } from 'material-ui'
+
+import {CellTypes} from './tableCells'
+
 import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
-import Details from './details'
+import Details from '../details'
 import fuzzy from 'fuzzy'
-import {Typeahead} from './typeahead'
 import _ from 'lodash'
 
-import numeral from 'numeral'
-class StringCell extends React.Component {
-  render() {
-    return (<div>{this.props.children}</div>);
-  }
-}
-
-class NumberCell extends React.Component {
-  render() {
-    return (
-      <div>
-        {numeral(this.props.children).format('0,0.0000')}
-      </div>
-    );
-  }
-}
-
-class DateCell extends React.Component {
-  formatDate(c) {
-    if(c) {
-      var d = new Date(c);
-      c = d.toLocaleDateString();
-    }
-    return c;
-  }
-  render() {
-    return (<div>{this.formatDate(this.props.children)}</div>);
-  }
-}
-
-class CurrencyCell extends React.Component {
-  render() {
-    return (
-      <div>
-        {numeral(this.props.children).format('$0,0.00')}
-      </div>
-    );
-  }
-}
-
-class UriCell extends React.Component {
-  render() {
-    return (
-      <a href='#'>{this.props.children}</a>
-    );
-  }
-}
-
-class LinkCell extends React.Component {
-  render() {
-
-  }
-}
-
-class ButtonCell extends React.Component {
-  render() {
-    <div style={{textAlign: 'center'}} ><RaisedButton label={this.props.children} /></div>;
-  }
-}
-
-const cellTypes = {
-  string: StringCell,
-  number: NumberCell,
-  date: DateCell,
-  currency: CurrencyCell,
-  uri: UriCell,
-  link: LinkCell,
-  button: ButtonCell
-};
+import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
+import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 
 let DataTable = React.createClass({
 
@@ -113,7 +48,7 @@ let DataTable = React.createClass({
       active: '',
       sorted: {},
       filters: {},
-      height: this.calcHeight()
+      height: this.getHeight()
     }
   },
 
@@ -121,17 +56,13 @@ let DataTable = React.createClass({
     this.setState({data: props.data});
   },
 
-  calcHeight: function() {
+  getHeight: function() {
     return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
-  },
-
-  rowGetter: function(rowIndex) {
-      return this.state.data[rowIndex];
   },
 
   getWidth: function() {
     let widthPerc = this.props.widthPerc / 100;
-    let width = widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj);
+    let width = (window.innerWidth > Settings.breakpoints.sm) ? widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj) : widthPerc * (window.innerWidth - Settings.mobilePadding + this.props.widthAdj) ;
     return width;
   },
 
@@ -144,8 +75,18 @@ let DataTable = React.createClass({
      }
   },
 
-  getHeader: function(col, i) {
-    return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} <FontIcon className="muidocs-icon-action-home" /></div>
+  rowGetter: function(rowIndex) {
+      return this.state.data[rowIndex];
+  },
+
+  getHeader(col, i) {
+    let sortIcon = '';
+
+    if (this.state.sorted[col.name]) {
+      sortIcon = (this.state.sorted[col.name] === 'asc') ? <ArrowDropDown style={this.style().icon} /> : <ArrowDropUp style={this.style().icon} /> ;
+    }
+
+    return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} {sortIcon}</div>
   },
 
   sortData: function(col, e) {
@@ -168,7 +109,7 @@ let DataTable = React.createClass({
   },
 
   handleResize: function() {
-    this.setState({width: this.getWidth()});
+    this.setState({width: this.getWidth(), height: this.getHeight()});
   },
 
   componentDidMount: function() {
@@ -179,7 +120,11 @@ let DataTable = React.createClass({
     return {
       root: {
         width: '100%',
-        margin: this.props.margin || "20px 0"
+        margin: this.props.margin || '0'
+      },
+      icon: {
+        fill: this.context.muiTheme.palette.primary1Color,
+        verticalAlign: 'middle'
       }
     };
   },
@@ -194,7 +139,7 @@ let DataTable = React.createClass({
 
   formatCell: function(cell, col) {
     let CellClass = _.isString(col.cellType) ?
-      (cellTypes[col.cellType] || StringCell) :
+      (CellTypes[col.cellType] || CellTypes.string) :
       col.cellType;
     return <CellClass {...col.props}>{cell}</CellClass>;
   },
@@ -249,7 +194,7 @@ let DataTable = React.createClass({
       data={
         _.map(this.props.filters.data, (filter, i) => {
           if(filter.filterType === 'muiTextField') {
-            return { label: filter.label, value: <TextField onChange={this.setFilters(filter)} />, detailType: 'muiTextField' }
+            return { label: '' , value: <TextField floatingLabelText={filter.label} onChange={this.setFilters(filter)} />, detailType: 'muiTextField', labelStyle: { padding: '0' } }
           } else if (filter.filterType === 'muiRadioButtons') {
             return { label: filter.label, value:
               <RadioButtonGroup name={filter.buttonGroup.name} style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)} onChange={this.setFilters(filter)}>
@@ -257,9 +202,11 @@ let DataTable = React.createClass({
                   <RadioButton value={button.value} label={button.label} style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)} defaultChecked={button.defaultChecked}/>
                 )}
               </RadioButtonGroup>
-            , rowStyle: {marginTop: '10px'}, detailType: 'muiRadioButtons' }
+            , rowStyle: {marginTop: '40px'}, detailType: 'muiRadioButtons' }
           } else if (filter.filterType === 'muiButton') {
-            return { label: filter.label, value: <RaisedButton label={filter.button.label} href={filter.button.href} primary={(filter.button.primary) ? true : false } linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton'}
+            return { label: filter.label, value: <RaisedButton label={filter.button.label} href={filter.button.href} primary={(filter.button.primary) ? true : false } linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton', rowStyle:  {marginTop: '30px'}}
+          } else if (filter.filterType === 'muiCheckBox') {
+            return '';
           }
         })
       }
@@ -342,6 +289,7 @@ let DataTable = React.createClass({
         {filters}
         <Table
           rowHeight={this.props.rowHeight}
+          rowHeightGetter={this.getRowHeight}
           onRowClick={this.onRowClick}
           rowGetter={this.rowGetter}
           rowsCount={this.state.data.length}

@@ -60,7 +60,7 @@ var TypeaheadOption = React.createClass({
     var hoverStyle = (this.props.hover || this.state.hover) ? _.assign(this.style().root, this.style().hover) : this.style().root;
 
     return (
-      <li style={hoverStyle} onClick={this._onClick} onMouseOver={this._onHover} onMouseOut={this._onHover}>
+      <li style={hoverStyle} onMouseOver={this._onHover} onMouseOut={this._onHover} onMouseDown={this._onClick} >
         <a href="javascript: void 0;" style={this.style().link} className={this._getClasses()} ref="anchor">
           { this.props.children }
         </a>

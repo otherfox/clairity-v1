@@ -10,17 +10,11 @@ import {
 } from 'material-ui'
 
 @controllable(['status', 'nonzero', 'date'])
+
 class AgingSettings extends React.Component {
   render() {
     return (
       <Filters>
-        <RadioButtonGroup name="status"
-                          valueSelected={this.props.status}
-                          onChange={(e, status) => this.props.onStatusChange(status)}>
-          <RadioButton value="active" label="Active" />
-          <RadioButton value="inactive" label="Inactive" />
-          <RadioButton value="both" label="Both" />
-        </RadioButtonGroup>
         <Checkbox checked={this.props.nonzero}
                   onCheck={(e, nonzero) => this.props.onNonzeroChange(nonzero)}
                   label="Hide $0 Credit Balances" />

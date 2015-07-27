@@ -11,15 +11,25 @@ let Content = React.createClass ({
     return {
       width: '100%',
       backgroundColor: canvasColor,
-      paddingLeft: Settings.leftNavWidth+Settings.contentPadding+'px',
-      paddingBottom: Settings.footerHeight+'px',
+      paddingBottom: Settings.footerHeight+Settings.contentPadding+'px',
       minHeight: Settings.contentMinHeight+'px'
     };
   },
 
   render: function() {
     return (
-      <div style={ _.assign(this.style(), this.props.style)} >
+      <div style={ _.assign(this.style(), this.props.style)} className={'content'}>
+        <style>{`
+          .content {
+            padding-left: ${Settings.leftNavWidth+Settings.contentPadding}px;
+          }
+
+          @media (max-width: ${Settings.breakpoints.sm}px) {
+            .content {
+              padding-left: ${Settings.mobilePadding}px};
+            }
+          }
+        `}</style>
         {this.props.children}
       </div>
     );

@@ -19,9 +19,9 @@ let ClairityLightTheme = {
       primary1Color: Colors.blue400,
       primary2Color: Colors.blue700,
       primary3Color: Colors.blue200,
-      accent1Color: Colors.red400,
-      accent2Color: Colors.red900,
-      accent3Color: Colors.red100,
+      accent1Color: Colors.cyanA700,
+      accent2Color: Colors.deepOrange400,
+      accent3Color: Colors.cyanA200,
       textColor: Colors.darkBlack,
       canvasColor: Colors.white,
       borderColor: Colors.grey300,
@@ -32,7 +32,7 @@ let ClairityLightTheme = {
     spacing = spacing || Spacing;
     let obj = {
       appBar: {
-        color: Colors.blueGrey700,
+        color: Colors.lightBlue600,
         textColor: Colors.white,
         height: spacing.desktopKeylineIncrement
       },

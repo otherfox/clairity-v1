@@ -12,7 +12,6 @@ const blankMap = new Map({label: '', value: ''});
 
 class CollectionDropdownView extends React.Component {
   getMenuItems() {
-    console.log('collection getMenuItems', this.props.collection.toJS())
     let items = this.props.collection
       .filter(this.props.filterBy)
       .map(o => new Map({

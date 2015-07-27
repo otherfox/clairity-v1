@@ -1,7 +1,8 @@
 
 import React from 'react'
 import Settings from './settings'
-import { AppBar, LeftNav, Utils } from 'material-ui'
+import { AppBar, LeftNav, Utils, FlatButton } from 'material-ui'
+import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import _ from 'lodash'
 
 let ColorManipulator = Utils.ColorManipulator;
@@ -25,7 +26,8 @@ var TopNav = React.createClass ({
 
     getInitialState: function() {
         return {
-            selectedIndex: null
+            selectedIndex: null,
+            mobile: this.getBreakpoint()
         }
     },
 
@@ -43,18 +45,40 @@ var TopNav = React.createClass ({
         };
     },
 */
-    style() {
-      let headerColor = this.context.muiTheme.palette.primary1Color;
+    getBreakpoint() {
+      return !(window.innerWidth > Settings.breakpoints.sm)
+    },
 
+    handleResize() {
+      this.setState({mobile: this.getBreakpoint()});
+    },
+
+    componentDidMount: function() {
+      window.addEventListener('resize', this.handleResize);
+    },
+
+    style() {
       return {
         root: {},
         header: {
-          color: headerColor,
+          color: this.context.muiTheme.component.appBar.textColor,
           padding: '10px 20px',
           fontSize: '2em',
-          borderBottom: '2px solid '+headerColor
+          borderBottom: '2px solid '+this.context.muiTheme.component.appBar.textColor
+        },
+        icon: {
+          fill: this.context.muiTheme.component.appBar.textColor,
+          border: '10px',
+          margin: '12px',
+        },
+        appBar: {
+          position: 'relative'
         }
       }
+    },
+
+    contextTypes: {
+      muiTheme: React.PropTypes.object
     },
 
     _onLeftNavChange: function(e, key, payload) {
@@ -72,13 +96,18 @@ var TopNav = React.createClass ({
 
     render: function() {
         var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
+        var mobileMenu = (this.state.mobile) ? <FlatButton label="Menu"/> : null;
+        var settingsMenu = <SettingsIcon style={this.style().icon} />;
 
         return (
           <div style={this.style().root}>
+
             <AppBar
               onLeftIconButtonTouchTap={this._onMenuIconButtonTouchTap}
-              title= "Clairity"
-              zDepth={0}
+              title="Clairity"
+              zDepth={1}
+              iconElementRight={<div>{settingsMenu}{mobileMenu}</div>}
+              style={this.style().appBar}
             />
 
             <LeftNav
@@ -87,7 +116,6 @@ var TopNav = React.createClass ({
               isInitiallyOpen={false}
               header={header}
               menuItems={menuItems}
-
               onChange={this._onLeftNavChange}
             />
 

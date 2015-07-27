@@ -4,7 +4,6 @@ import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import Table from  '../shared/components/table'
 import Details from '../shared/components/details'
-import { Typeahead } from '../shared/components/typeahead'
 import { RaisedButton } from 'material-ui'
 
 import _ from 'lodash'
@@ -27,9 +26,9 @@ let viewLeads = React.createClass({
 
     return {
       colNames: [
-        { label: 'Lead Name', name: 'name', cellType: 'string'},
-        { label: 'Account', name: 'customer_name', cellType: 'string'},
-        { label: 'Account Owner', name: 'agent_name', cellType: 'string'},
+        { label: 'Lead Name', name: 'name', cellType: 'contact'},
+        { label: 'Account', name: 'customer_name', cellType: 'account'},
+        { label: 'Account Owner', name: 'agent_name', cellType: 'agent'},
         { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: {textAlign: 'center'}}
       ],
       data: leads.map(s => {
@@ -60,12 +59,10 @@ let viewLeads = React.createClass({
     let leads = this.props.leads.toJS();
 
     return (
-      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
-      <div>
-        <Header><h1>View Leads</h1></Header>
-        <Table {...this.getLeads(this.props.leads.toJS())} />
-      </div>
-    </Layout>
+      <Layout widths={{}} pPadding={'20px 20px 0 0'}>
+          <Header><h1>View Leads</h1></Header>
+          <Table {...this.getLeads(this.props.leads.toJS())} />
+      </Layout>
     );
   }
 });
