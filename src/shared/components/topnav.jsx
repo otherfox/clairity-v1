@@ -4,6 +4,8 @@ import Settings from './settings'
 import { AppBar, LeftNav, Utils, FlatButton } from 'material-ui'
 import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import _ from 'lodash'
+import {Link} from 'react-router'
+
 
 let ColorManipulator = Utils.ColorManipulator;
 
@@ -21,8 +23,6 @@ var menuItems = [
 ];
 
 var TopNav = React.createClass ({
-
-/*    mixins: [Router.Navigation, Router.State],*/
 
     getInitialState: function() {
         return {
@@ -108,7 +108,7 @@ var TopNav = React.createClass ({
     render: function() {
         var header = <div style={this.style().header} onClick={this._onHeaderClick}>Clairity</div>;
         var mobileMenu = (this.state.mobile) ? <FlatButton style={this.style().flatButton} label="Menu"/> : null;
-        var settingsMenu = <SettingsIcon style={this.style().icon} />;
+        var settingsMenu = <Link to="settings"><SettingsIcon style={this.style().icon} /></Link>;
 
         return (
           <div style={this.style().root}>
