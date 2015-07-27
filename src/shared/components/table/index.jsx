@@ -272,6 +272,7 @@ let DataTable = React.createClass({
             /* Fix for dynamic cell constructors. */
             .public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
                 padding: 8px;
+                word-break: break-word;
             }
 
             /* Fix gradient header */

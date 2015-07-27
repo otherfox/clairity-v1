@@ -61,7 +61,7 @@ class AgingTable extends React.Component {
         ],
         active: ['balance']
       },
-      rowHeight: 100,
+      rowHeight: 120,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
       maxWidth: 19,
       widthAdj: -30
