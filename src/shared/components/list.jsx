@@ -92,7 +92,7 @@ let CustomList = React.createClass ({
         {dataObj.label.charAt(0)}
       </Avatar>}
             primaryText={dataObj.label}
-            secondaryText={<div><div style={{color: this.context.muiTheme.palette.accent1Color}}>{dataObj.date}</div>{dataObj.value}</div>}
+            secondaryText={<div><div style={{color: this.context.muiTheme.palette.accent1Color}}>{dataObj.date}</div><div style={{color: this.context.muiTheme.palette.textColor}}>{dataObj.value}</div></div>}
             secondaryTextLines={2}
         />
         );
