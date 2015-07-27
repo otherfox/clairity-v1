@@ -58,7 +58,8 @@ class AgingTable extends React.Component {
             { label: 'Both', value: '', defaultChecked: true}
           ] },
           {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'balance', fuzzy: false, defaultChecked: true, value: 0, not: true }
-        ]
+        ],
+        active: ['balance']
       },
       rowHeight: 100,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],

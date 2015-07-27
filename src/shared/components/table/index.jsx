@@ -26,7 +26,6 @@ let DataTable = React.createClass({
     flexGrow: React.PropTypes.array,
     filters: React.PropTypes.object,
     sortBy: React.PropTypes.string,
-    active: React.PropTypes.object
   },
 
   contextTypes: {
@@ -44,13 +43,14 @@ let DataTable = React.createClass({
 
   getInitialState: function() {
 
-    //todo add pre filtering
+    let data = (this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
+
     return {
-      data: this.props.data,
+      data: data.output,
       width: this.getWidth(),
       active: '',
       sorted: {},
-      filters: {},
+      filters: data.filters,
       height: this.getHeight()
     }
   },
@@ -152,28 +152,31 @@ let DataTable = React.createClass({
     );
   },
 
-  setFilters(filter) {
+  setFiltersOnChange(filter) {
     return event => {
       let opp = (filter.not) ? true : false;
       let value = ((event.target.type === 'checkbox' && !event.target.checked) || event.target.value === '') ? '' : [event.target.value, opp];
       let filters = _.omit(_.assign(this.state.filters,{[filter.name]: value }), _.isEmpty);
       let ids = this.getFilteredIds(filters);
-      let data = this.updateData(ids, filters);
-      this.setData(data);
+      let data = this.getData(ids, filters);
+      this.setDataState(data);
     }
   },
 
-  fireFilter(name, value, opp) {
-    let filters = _.omit(_.assign(this.state.filters,{[name]: [value, opp] }), _.isEmpty);
-    let ids = this.getFilteredIds(filters);
-    return this.updateData(ids, filters);
+  setFiltersOnLoad(filters) {
+    let filterState = {}
+    _.forEach( filters.active, (filterName) => {
+      let idx = _.findIndex(filters.data, 'name', filterName );
+      filterState = _.assign(filterState,{[filterName]: [filters.data[idx].value, filters.data[idx].not] });
+    });
+    let ids = this.getFilteredIds(filterState);
+    return this.getData(ids, filters);
   },
 
   getFilteredIds(filters) {
     let ids = [];
 
     _.forEach( _.keys(filters), (filterName, idx) => {
-      debugger;
       let options = _.map(this.props.data, row => row[filterName]);
       let index = _.findIndex(this.props.filters.data, function(filter) { return filter.name == filterName; });
       ids[idx] = (this.props.filters.data[index].fuzzy === false ) ?
@@ -191,7 +194,7 @@ let DataTable = React.createClass({
     return ids;
   },
 
-  updateData(ids, filters) {
+  getData(ids, filters) {
     if(ids.length > 1){
       let outputIds = [];
       for(let i = 0; i < ids.length - 1; i++) {
@@ -207,7 +210,7 @@ let DataTable = React.createClass({
     return { output: output, filters: filters }
   },
 
-  setData(data) {
+  setDataState(data) {
     this.setState({
       data: data.output,
       filters: data.filters
@@ -225,12 +228,12 @@ let DataTable = React.createClass({
         _.map(this.props.filters.data, (filter, i) => {
           if(filter.filterType === 'muiTextField') {
             return { label: '' , value: <TextField  floatingLabelText={filter.label}
-                                                    onChange={this.setFilters(filter)} />, detailType: 'muiTextField', labelStyle: { padding: '0' } }
+                                                    onChange={this.setFiltersOnChange(filter)} />, detailType: 'muiTextField', labelStyle: { padding: '0' } }
           } else if (filter.filterType === 'muiRadioButtons') {
             return { label: filter.label, value:
               <RadioButtonGroup name={filter.buttonGroup.name}
                                 style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)}
-                                onChange={this.setFilters(filter)}>
+                                onChange={this.setFiltersOnChange(filter)}>
                 {_.map( filter.buttons, button =>
                   <RadioButton  value={button.value}
                                 label={button.label}
@@ -246,7 +249,7 @@ let DataTable = React.createClass({
                                                                 linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton', rowStyle:  {marginTop: '30px'}}
           } else if (filter.filterType === 'muiCheckBox') {
             return { label: '' , value: <Checkbox defaultChecked={filter.defaultChecked}
-                                                  onCheck={this.setFilters(filter)}
+                                                  onCheck={this.setFiltersOnChange(filter)}
                                                   value={filter.value}
                                                   style={_.assign({}, filter.style)}
                                                   label={filter.label}/>, detailType: 'muiCheckBox', rowStyle: {marginTop: '40px'} }
