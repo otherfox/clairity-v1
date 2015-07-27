@@ -93,21 +93,14 @@ let DataTable = React.createClass({
   },
 
   sortData: function(col, e) {
+
     let name = col.name;
     let obj = {}
 
     if(typeof this.state.sorted[name] === 'undefined' || this.state.sorted[name] === 'dsc') {
-      this.setState( {data: this.state.data.sort(function(a, b) {
-        let first = a[col.name].replace(/\W/g, '');
-        let second = b[col.name].replace(/\W/g, '');
-        return first.localeCompare(second);
-      }), sorted: {[name]: 'asc'} });
+      this.setState( {data: _.sortBy( this.state.data, name), sorted: {[name]: 'asc'} });
     } else if (this.state.sorted[name] === 'asc') {
-      this.setState( {data: this.state.data.sort(function(a, b) {
-        let first = a[col.name].replace(/\W/g, '');
-        let second = b[col.name].replace(/\W/g, '');
-        return second.localeCompare(first);
-      }), sorted: {[name]: 'dsc'} });
+      this.setState( {data: _.sortBy( this.state.data, name).reverse(), sorted: {[name]: 'dsc'} });
     }
   },
 
@@ -170,7 +163,7 @@ let DataTable = React.createClass({
       filterState = _.assign(filterState,{[filterName]: [filters.data[idx].value, filters.data[idx].not] });
     });
     let ids = this.getFilteredIds(filterState);
-    return this.getData(ids, filters);
+    return this.getData(ids, filterState);
   },
 
   getFilteredIds(filters) {
