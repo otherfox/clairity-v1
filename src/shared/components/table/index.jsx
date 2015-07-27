@@ -43,7 +43,7 @@ let DataTable = React.createClass({
 
   getInitialState: function() {
 
-    let data = (this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
+    let data = (this.props.filters && this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
 
     return {
       data: data.output,
