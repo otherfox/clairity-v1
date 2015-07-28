@@ -86,18 +86,37 @@ export default (
         </Route>
 
         <Route {/***** Accounts *****/...{}}>
+
           <Redirect from="accounts" to="all-accounts" />
           <Route name="accounts" handler={RouteHandler}>
             <Route name="all-accounts" path="all" handler={ListAccounts} />
+
             <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
-              <Route path="edit" name="edit-customer" handler={EditAccount} />
-              <Route path="contracts" handler={RouteHandler}>
-                <DefaultRoute name="view-contracts" handler={ListContracts} />
-                <Route name="add-contract" handler={CreateContract} />
-                <Route name="list-contracts" handler={ListContracts} />
-                <Route name="list-opps" handler={ListOpportunities} />
+
+              <Route path="edit" name="edit-account" handler={EditAccount} />
+
+              <Redirect from="account-contacts" to="all-account-contacts" />
+              <Route name="account-contacts" path="contacts" handler={RouteHandler}>
+                <Route name="all-account-contacts" handler={ListContacts} />
+                <Route name="view-account-contact" path=":contactId" handler={ViewContact} />
+                <Route name="add-account-contact" path="add" handler={AddContact} />
               </Route>
+
+              <Redirect from="account-opps" to="all-account-opps" />
+              <Route name="account-opps" path="opps" handler={RouteHandler}>
+                <Route name="all-account-opps" handler={ListOpportunities} />
+                <Route name="view-account-opp" path=":oppId" handler={ViewOpportunity} />
+                <Route name="add-account-opp" handler={CreateOpportunity} />
+              </Route>
+
+              <Redirect from="account-contracts" to="all-account-contracts" />
+              <Route name="account-contracts" path="contracts" handler={RouteHandler}>
+                <Route name="all-account-contracts" path="all" handler={ListContracts} />
+                <Route name="view-account-contracts" path=":contractId" handler={ListContracts} />
+                <Route name="add-account-contract" path="add" handler={CreateContract} />
+              </Route>
+
             </Route>
           </Route>
         </Route>
@@ -113,7 +132,7 @@ export default (
                 <Route name="add-opp-contact" path="add" handler={CreateOpportunity} />
               </Route>
             </Route>
-            <Route name="new-opp" path="create  " handler={CreateUnlinkedOpportunity} />
+            <Route name="new-opp" path="create" handler={CreateUnlinkedOpportunity} />
             <Route name="all-opps" path="all" handler={ListOpportunities} />
           </Route>
         </Route>
