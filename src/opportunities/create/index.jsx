@@ -69,7 +69,7 @@ let createLead = React.createClass({
         <Paper>
           <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
             <Details
-              title={'Create Opportunity with '+opp.name+' @ '+opp.company}
+              title={`Create Opportunity with ${opp.name} @ ${opp.company}`}
               headerStyle={{color: '#aaa', marginLeft: '32%', marginBottom: '30px'}}
               data={[
                 { label: 'Opportunity Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
