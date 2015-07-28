@@ -21,14 +21,15 @@ import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
 
 import queryRenderer from '../../shared/components/networkRenderer/queryRenderer'
-import workOrderTypesFetched from '../actions'
-import {queryWorkOrderTypes} from '../queries'
-import {getWorkOrderTypes} from '../../shared/services/workOrder'
 
 import ServiceTypes from '../services/stubs/serviceTypes.json'
 import OrderTypes from '../services/stubs/workOrderTypes.json'
 
 import OwnerView from './details/owner'
+
+import {collectionDropdown} from '../../shared/components/collectionDropdown'
+
+let WorkOrderTypesDropdown = collectionDropdown('workOrderType');
 
 import {List, Map, fromJS} from 'immutable'
 
@@ -128,7 +129,7 @@ let WorkOrderDetails = React.createClass ({
     let colNames = [
       { label: 'Owners', name: 'owners', value: <OwnerView workOrder={this.props.workOrder} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
-      { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Work Order Type', name: 'type_id', value: <WorkOrderTypesDropdown selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
       { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [6,6,6,6,6,6,6,6,6,6,6,6], sm: [12]}} breakpoints={{ md: 1550 }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
       { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
@@ -162,13 +163,4 @@ let WorkOrderDetails = React.createClass ({
   }
 });
 
-export default queryRenderer(WorkOrderDetails, {
-  queries: [{
-    writeMethod: workOrderTypesFetched,
-    tableName: 'workOrderType',
-    shouldFetch: e => e.state.data,
-    cacheMethod: queryWorkOrderTypes,
-    serviceMethod: getWorkOrderTypes,
-    propName: 'orderTypes'
-  }]
-});
+export default WorkOrderDetails;
