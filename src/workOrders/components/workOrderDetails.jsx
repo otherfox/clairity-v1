@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {addons} from 'react'
 import Settings from '../../shared/components/settings'
 import {
   RadioButtonGroup,
@@ -25,15 +25,20 @@ import Contract from '../services/stubs/contract7416.json'
 import ServiceTypes from '../services/stubs/serviceTypes.json'
 import OrderTypes from '../services/stubs/workOrderTypes.json'
 
+import queryRenderer from '../../shared/components/networkRenderer/queryRenderer'
+import {fetchWorkOrder} from '../actions'
+import {queryWorkOrder} from '../queries'
+
 import OwnerView from './details/owner'
 
 import {List, Map, fromJS} from 'immutable'
 
 let WorkOrderDetails = React.createClass ({
+  mixins: [addons.LinkedStateMixin],
 
   getDefaultProps() {
     return {
-      order: fromJS(WorkOrder),
+      workOrder: fromJS(WorkOrder),
       serviceTypes: fromJS(ServiceTypes),
       orderTypes: fromJS(OrderTypes)
     };
@@ -55,7 +60,7 @@ let WorkOrderDetails = React.createClass ({
 
   getServiceTypes() {
 
-    let order = this.props.order;
+    let order = this.props.workOrder;
     let os = [];
     let orderServices = order.get('services').forEach((service, idx) => {
       os.push(service.get('id'));
@@ -107,7 +112,7 @@ let WorkOrderDetails = React.createClass ({
 
   getWorkOrderTypes() {
 
-    let orderTypes = this.props.orderTypes.map((orderType, idx) => {
+    let orderTypes = this.props.workOrderTypes.map((orderType, idx) => {
       let data = new Map({
           key: idx,
           value: orderType.get('id'),
@@ -153,7 +158,7 @@ let WorkOrderDetails = React.createClass ({
       <div style={this.style()}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{ lg: [12], md: [12], sm: [12], xs: [12], xxs: [12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
-            <Details {...this.getDetails(this.props.order)} />
+            <Details {...this.getDetails(this.props.workOrder)} />
           </Layout>
         </Paper>
       </div>

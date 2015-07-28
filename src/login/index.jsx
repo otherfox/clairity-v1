@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <Layout widths={{lg: ['400px']}} type={'center-v'} style={{ backgroundColor: '#fafafa', display: 'block', height: window.innerHeight+'px' }}>
+      <Layout widths={{lg: ['400px']}} type={'center-v'} style={{ backgroundColor: this.props.backgroundColor , display: 'block', height: window.innerHeight+'px' }}>
         <div>
           <Paper>
             <div style={{position: 'relative', margin: '0 auto', padding: '3em 0 5em', display: 'table'}}>
@@ -84,6 +84,7 @@ LoginForm.propTypes = {
 import {Navigation} from 'react-router'
 
 const Login = React.createClass({
+  contextTypes: { muiTheme: React.PropTypes.object},
   mixins: [Navigation],
   componentDidMount() {
     loginSuccess.listen(() => this.transitionTo('leads'));
@@ -93,7 +94,7 @@ const Login = React.createClass({
   },
   render() {
     return (
-      <LoginForm defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} />
+      <LoginForm defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} backgroundColor={this.context.muiTheme.palette.canvasColor}/>
     );
   }
 });
