@@ -15,5 +15,6 @@
   "account": {},
   "serviceType": {},
   "workOrderType": {},
+  "workOrderStatus": {},
   "opportunity": {}
 }
