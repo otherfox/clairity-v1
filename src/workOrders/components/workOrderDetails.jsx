@@ -39,8 +39,8 @@ let WorkOrderDetails = React.createClass ({
   getDefaultProps() {
     return {
       workOrder: fromJS(WorkOrder),
-      serviceTypes: fromJS(ServiceTypes),
-      orderTypes: fromJS(OrderTypes)
+      serviceTypes: new List(fromJS(ServiceTypes)),
+      orderTypes: new List(fromJS(OrderTypes))
     };
   },
 
@@ -60,9 +60,10 @@ let WorkOrderDetails = React.createClass ({
 
   getServiceTypes() {
 
-    let order = this.props.workOrder;
+    let order = new Map(this.props.workOrder);
     let os = [];
     let orderServices = order.get('services').forEach((service, idx) => {
+      service = new Map(service);
       os.push(service.get('id'));
     });
 
@@ -112,7 +113,7 @@ let WorkOrderDetails = React.createClass ({
 
   getWorkOrderTypes() {
 
-    let orderTypes = this.props.workOrderTypes.map((orderType, idx) => {
+    let orderTypes = this.props.orderTypes.map((orderType, idx) => {
       let data = new Map({
           key: idx,
           value: orderType.get('id'),
@@ -126,7 +127,8 @@ let WorkOrderDetails = React.createClass ({
   },
 
   getDetails(order) {
-
+    debugger;
+    order = new Map(order);
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [
