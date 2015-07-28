@@ -110,6 +110,7 @@ export default (
                 <Route name="all-account-opps" handler={ListOpportunities} />
                 <Route name="view-account-opp" path=":oppId" handler={ViewOpportunity} />
                 <Route name="add-account-opp" handler={CreateOpportunity} />
+
               </Route>
 
               <Redirect from="account-contracts" to="all-account-contracts" />
