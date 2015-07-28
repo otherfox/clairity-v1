@@ -153,10 +153,10 @@ export default (
         <Route {/***** Leads *****/...{}}>
           <Redirect from="leads" to="all-leads" />
           <Route name="leads" handler={RouteHandler}>
-            <Route path=":contactId/:agentId" handler={RouteHandler}>
+            <Route name="all-leads" path="all" handler={ViewLeads} />
+            <Route path=":contactId/:userId" handler={RouteHandler}>
               <Route name="add-contact-opp" path="convert" handler={CreateOpportunity} />
             </Route>
-            <Route name="all-leads" path="all" handler={ViewLeads} />
           </Route>
         </Route>
 

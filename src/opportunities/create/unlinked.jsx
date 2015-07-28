@@ -50,8 +50,8 @@ let createLead = React.createClass({
     data.entrykey = (entrykey.slice(0, 23) + entrykey.slice(24, entrykey.length)).toUpperCase();
     data.customer_id = this.props.lead.get('customer_id');
     data.contact_id = +this.getParams().contactId;
-    data.createdbyuser_id = +this.getParams().agentId;
-    data.lastmodifiedbyuser_id = +this.getParams().agentId;
+    data.createdbyuser_id = +this.getParams().userId;
+    data.lastmodifiedbyuser_id = +this.getParams().userId;
     data.dt_created = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     data.dt_lastmodified = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     convertLead({
@@ -87,12 +87,12 @@ let createLead = React.createClass({
     );
   }
 });
-//href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().agentId+'/edit'}
+//href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().userId+'/edit'}
 
 let CreateLead = queryRenderer(createLead, {
   queries: [
     modelQuery('contact', 'lead', 'contactId'),
-    modelQuery('user', 'agent', 'agentId')
+    modelQuery('user', 'agent', 'userId')
   ]
 });
 
