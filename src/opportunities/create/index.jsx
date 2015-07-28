@@ -50,8 +50,8 @@ let createLead = React.createClass({
     data.entrykey = (entrykey.slice(0, 23) + entrykey.slice(24, entrykey.length)).toUpperCase();
     data.customer_id = this.props.lead.get('customer_id');
     data.contact_id = +this.getParams().contactId;
-    data.createdbyuser_id = +this.getParams().agentId;
-    data.lastmodifiedbyuser_id = +this.getParams().agentId;
+    data.createdbyuser_id = +this.getParams().userId;
+    data.lastmodifiedbyuser_id = +this.getParams().userId;
     data.dt_created = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     data.dt_lastmodified = `{ts '${now.format("YYYY-MM-DD HH:MM:SS")}'}`;
     convertLead({
@@ -69,11 +69,11 @@ let createLead = React.createClass({
         <Paper>
           <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
             <Details
-              title={'Create Opportunity with '+opp.name+' @ '+opp.company}
+              title={`Create Opportunity with ${opp.name} @ ${opp.company}`}
               headerStyle={{color: '#aaa', marginLeft: '32%', marginBottom: '30px'}}
               data={[
                 { label: 'Opportunity Name', name: 'name', value: <TextField valueLink={this.linkState('name')}/>, detailType: 'muiTextField' },
-                { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled= {true}/>, detailType: 'muiTextField' },
+                { label: 'Current Account Owner:', value: <TextField value={owner.name} disabled={true} />, detailType: 'muiTextField' },
                 { label: 'Project Type', name: 'project_type', value: <ProjectTypes valueLink={this.linkState('project_type')}/>, detailType: 'muiDropDown' },
                 { label: 'Stage', name: 'stage', value: <SalesStages valueLink={this.linkState('stage')} />, detailType: 'muiDropDown' },
                 { label: 'Lead Source', name: 'lead_source_id', value: <LeadSources valueLink={this.linkState('lead_source_id')} />, detailType: 'muiDropDown' },
@@ -87,12 +87,12 @@ let createLead = React.createClass({
     );
   }
 });
-//href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().agentId+'/edit'}
+//href={'/#/lead/'+this.getParams().contactId+'/'+this.getParams().userId+'/edit'}
 
 let CreateLead = queryRenderer(createLead, {
   queries: [
     modelQuery('contact', 'lead', 'contactId'),
-    modelQuery('user', 'agent', 'agentId')
+    modelQuery('user', 'agent', 'userId')
   ]
 });
 
@@ -100,7 +100,7 @@ let CreateLeadPage = React.createClass({
   mixins: [State],
   render() {
     return (
-      <CreateLead contactId={+this.getParams().contactId} agentId={+this.getParams().agentId} />
+      <CreateLead contactId={+this.getParams().contactId} userId={+this.getParams().userId} />
     );
   }
 });

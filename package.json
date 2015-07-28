@@ -58,7 +58,7 @@
     "fuzzy": "^0.1.0",
     "fynx": "^1.6.0",
     "immutable": "^3.7.0",
-    "jss": "^1.0.8",
+    "jss": "^2.1.1",
     "material-design-iconfont": "^0.1.7",
     "material-ui": "0.10.1",
     "memoize-promise": "^0.1.0",
