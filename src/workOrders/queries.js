@@ -9,6 +9,10 @@ export function queryWorkOrder(id) {
   return Store.data.getIn(['workOrder', id]);
 }
 
+export function queryWorkOrderTypes() {
+  return Store.data.get('workOrderType');
+}
+
 export function queryWorkOrderOwners() {
   let result = Store.data.get('user') // get all users
     .toList() // as a list/collection

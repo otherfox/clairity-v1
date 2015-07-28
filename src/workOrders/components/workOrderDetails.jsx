@@ -20,6 +20,11 @@ import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
 
+import queryRenderer from '../../shared/components/networkRenderer/queryRenderer'
+import workOrderTypesFetched from '../actions'
+import {queryWorkOrderTypes} from '../queries'
+import {getWorkOrderTypes} from '../../shared/services/workOrder'
+
 import ServiceTypes from '../services/stubs/serviceTypes.json'
 import OrderTypes from '../services/stubs/workOrderTypes.json'
 
@@ -31,8 +36,7 @@ let WorkOrderDetails = React.createClass ({
 
   getDefaultProps() {
     return {
-      serviceTypes: fromJS(ServiceTypes),
-      orderTypes: fromJS(OrderTypes)
+      serviceTypes: fromJS(ServiceTypes)
     };
   },
 
@@ -158,4 +162,13 @@ let WorkOrderDetails = React.createClass ({
   }
 });
 
-export default WorkOrderDetails;
+export default queryRenderer(WorkOrderDetails, {
+  queries: [{
+    writeMethod: workOrderTypesFetched,
+    tableName: 'workOrderType',
+    shouldFetch: e => e.state.data,
+    cacheMethod: queryWorkOrderTypes,
+    serviceMethod: getWorkOrderTypes,
+    propName: 'orderTypes'
+  }]
+});
