@@ -1,4 +1,4 @@
-import React, {addons} from 'react'
+import React from 'react'
 import Settings from '../../shared/components/settings'
 import {
   RadioButtonGroup,
@@ -20,27 +20,19 @@ import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
 
-import WorkOrder from '../services/stubs/order1583.json'
-import Contract from '../services/stubs/contract7416.json'
 import ServiceTypes from '../services/stubs/serviceTypes.json'
 import OrderTypes from '../services/stubs/workOrderTypes.json'
-
-import queryRenderer from '../../shared/components/networkRenderer/queryRenderer'
-import {fetchWorkOrder} from '../actions'
-import {queryWorkOrder} from '../queries'
 
 import OwnerView from './details/owner'
 
 import {List, Map, fromJS} from 'immutable'
 
 let WorkOrderDetails = React.createClass ({
-  mixins: [addons.LinkedStateMixin],
 
   getDefaultProps() {
     return {
-      workOrder: fromJS(WorkOrder),
-      serviceTypes: new List(fromJS(ServiceTypes)),
-      orderTypes: new List(fromJS(OrderTypes))
+      serviceTypes: fromJS(ServiceTypes),
+      orderTypes: fromJS(OrderTypes)
     };
   },
 
@@ -60,11 +52,10 @@ let WorkOrderDetails = React.createClass ({
 
   getServiceTypes() {
 
-    let order = new Map(this.props.workOrder);
+    let order = this.props.workOrder;
     let os = [];
     let orderServices = order.get('services').forEach((service, idx) => {
-      service = new Map(service);
-      os.push(service.get('id'));
+      os.push(service);
     });
 
     let services = this.props.serviceTypes.map( (serviceType, idx) =>
@@ -127,8 +118,7 @@ let WorkOrderDetails = React.createClass ({
   },
 
   getDetails(order) {
-    debugger;
-    order = new Map(order);
+
     let owners = [{value: 'Owner',label:'Label'}];
 
     let colNames = [

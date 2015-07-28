@@ -7,6 +7,7 @@ import Table from '../shared/components/table'
 import Link from '../shared/components/link'
 import Header from '../shared/components/header'
 import {Tabs, Tab} from '../shared/components/tabs'
+import {fromJS} from 'immutable'
 
 import {networkModelRenderer} from '../shared/components/networkRenderer'
 
@@ -82,7 +83,7 @@ let WorkOrders = React.createClass({
                   <Provisioning />
                 </Layout>
               </div>
-              <WorkOrderDetails workOrder={wo} />
+              <WorkOrderDetails workOrder={fromJS(wo)} />
             </Layout>
           </Tab>
 
