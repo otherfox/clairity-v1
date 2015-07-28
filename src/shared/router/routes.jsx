@@ -25,6 +25,8 @@ import ListAccounts from '../../accounts/all'
 /* Contacts */
 import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
+import ListContacts from '../../contacts/list'
+import AddContact from '../../contacts/create'
 
 /* Contracts */
 import CreateContract from '../../contracts/create'
