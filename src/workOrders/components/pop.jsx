@@ -25,11 +25,10 @@ import {queryRenderer, collectionQuery, networkCollectionRenderer} from '../../s
 import {getPops} from '../../shared/services/pop'
 import {updateWorkOrder} from '../../shared/actions/workOrder'
 
-// // Make available for use in all components
-let widths = { lg: [12,12,12,12], md: [12,12,12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12] };
+// Make available for use in all components
+let widths = {};
 let cPadding = '0 20px 20px 20px';
 
-//
 let ExistingPopsView = React.createClass({
   mixins: [LinkedStateMixin],
   getInitialState() {
