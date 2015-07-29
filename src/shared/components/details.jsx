@@ -38,7 +38,7 @@ let Details = React.createClass ({
 
     let textColor = this.context.muiTheme.palette.textColor;
     let labelColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .6 );
-    let headerColor = ColorManipulator.fade(this.context.muiTheme.palette.accent1Color, 1 );
+    let headerColor = ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1 );
     let labelLineHeight = {
       muiDropDown: '4em',
       muiTextField: '3.2em',

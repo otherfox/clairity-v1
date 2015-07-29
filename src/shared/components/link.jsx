@@ -5,7 +5,7 @@ import _ from 'lodash'
 class CustomLink extends React.Component {
 
   style() {
-    let textColor = this.context.muiTheme.palette.primary1Color;
+    let textColor = this.context.muiTheme.palette.accent1Color;
     return {
       color: textColor,
       textDecoration: 'none'
