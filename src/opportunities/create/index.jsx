@@ -61,8 +61,8 @@ let createLead = React.createClass({
   },
 
   render() {
-    let opp = this.props.lead.toJS();
-    let owner = this.props.agent.toJS();
+    let opp = this.props.lead;
+    let owner = this.props.agent;
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         <Header><h1>Convert Lead - {opp.company}</h1></Header>

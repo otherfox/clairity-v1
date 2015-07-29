@@ -12,10 +12,7 @@ import {
 
 class AccountOwnersView extends React.Component {
   getMenuItems() {
-    return this.props.owners.map(o => new Map({
-      label: o.get('name'),
-      value: o.get('id')
-    })).unshift(new Map({label: "", value: ""}));
+    return this.props.owners.unshift({label: "", value: ""});
   }
   render() {
     return <DropDown {...this.props}

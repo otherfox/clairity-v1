@@ -29,7 +29,7 @@ class AgingTable extends React.Component {
   }
 
   computeRows(props) {
-    return props.rows.toList().toJS();
+    return props.rows;
   }
 
   getAgingReportsTable(data){

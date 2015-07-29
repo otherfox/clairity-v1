@@ -45,7 +45,7 @@ let editOpportunity = React.createClass({
     updateSalesOpp({ data, completed: a => console.log('saved!') });
   },
   render() {
-    let opp = this.props.opportunity.toJS();
+    let opp = this.props.opportunity;
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
@@ -62,7 +62,7 @@ let editOpportunity = React.createClass({
             <EditAccountDetails ref="account" account={fromJS(opp.customer)} user={null} />
         }
         <EditDetails ref="details" {...this.props} />
-        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" /> 
+        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" />
       </Layout>
     );
   }

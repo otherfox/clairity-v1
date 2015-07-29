@@ -56,12 +56,12 @@ let viewLeads = React.createClass({
 
   render() {
 
-    let leads = this.props.leads.toJS();
+    let leads = this.props.leads;
 
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
           <Header><h1>View Leads</h1></Header>
-          <Table {...this.getLeads(this.props.leads.toJS())} />
+          <Table {...this.getLeads(this.props.leads)} />
       </Layout>
     );
   }

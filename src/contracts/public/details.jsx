@@ -76,7 +76,7 @@ const ContractSingle = React.createClass({
   },
 
   getTableConfig(contract) {
-    let services = contract.get('services').toJS();
+    let services = contract.get('services');
     return {
       colNames: [
         { label: 'Service', name: 'full_name', cellType: 'string'},

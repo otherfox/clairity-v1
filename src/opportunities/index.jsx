@@ -16,7 +16,7 @@ let viewOpportunity = React.createClass({
 
   render() {
 
-    let opp = this.props.opportunity.toJS();
+    let opp = this.props.opportunity;
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>

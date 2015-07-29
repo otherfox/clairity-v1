@@ -39,10 +39,12 @@ let ExistingPopsView = React.createClass({
   },
   getMenuItems() {
     return this.props.pops
-      .map(p => new Map({
-        value: p.get('id'),
-        label: p.get('name')
-      }));
+      .map(p => {
+        return {
+          value: p.get('id'),
+          label: p.get('name')
+        }
+      });
   },
   render() {
     return (
