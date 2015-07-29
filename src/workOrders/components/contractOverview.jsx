@@ -23,13 +23,13 @@ const ContractOverview = React.createClass({
 
   getDefaultProps() {
     return {
-      order: fromJS(WorkOrder)
+      order: WorkOrder
     }
   },
 
   getInitialState() {
     return {
-      selectedContract: this.props.order.get('contract_id')
+      selectedContract: this.props.order.contract_id
     };
   },
 

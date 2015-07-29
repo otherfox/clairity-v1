@@ -41,31 +41,34 @@ let LocationInfo = React.createClass ({
   render() {
 
     let location = this.props.location;
-    let title = location.getIn(['customer', 'name'])+' at '+location.get('name');
+    let title = `${location.customer.name} at ${location.name}`;
     let data = [
       {
         label:  'Customer (Billing) Address',
-        value:  location.getIn(['customer', 'street1'])+', '+
-                location.getIn(['customer', 'street2'])+', '+
-                location.getIn(['customer', 'city'])+', '+
-                location.getIn(['customer', 'state'])+' '+
-                location.getIn(['customer', 'zip_code'])
+        value:  `${location.customer.street1},
+                 ${location.customer.street2},
+                 ${location.customer.city},
+                 ${location.customer.state},
+                 ${location.customer.zip_code}`
       },
       {
         label:  'Location (Service) Address',
-        value:  location.get('street1')+', '+
-                location.get('street2')+', '+
-                location.get('city')+', '+
-                location.get('state')+' '+
-                location.get('zip_code')
+        value:  `${location.street1},
+                 ${location.street2},
+                 ${location.city},
+                 ${location.state},
+                 ${location.zip_code}`
       },
       {
         label: 'Account #',
-        value: '100'+'-'+location.getIn(['customer','id'])+'-'+location.get('id')
+        value: `100-${location.customer.id}-${location.id}`
       },
       {
-        label:  'Status',
-        value:  (location.getIn(['status','description'])) ? location.getIn(['status','name'])+' - '+location.getIn(['status','description']) : location.getIn(['status','name'])
+        label: 'Status',
+        value: (location.status.description) ?
+                  `${location.status.name} - ${location.status.description}`
+                :
+                  location.status.name
       }
     ];
 

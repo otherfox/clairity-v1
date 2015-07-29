@@ -25,7 +25,7 @@ export default class ListContracts extends React.Component {
       <div style={this.style().root}>
         {
           this.props.contracts.map(contract =>
-            <ClearFix key={contract.get('id')}>
+            <ClearFix key={contract.id}>
               <Paper><ContractInfo contract={contract} /></Paper>
             </ClearFix>
           )

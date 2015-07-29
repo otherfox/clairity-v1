@@ -57,8 +57,8 @@ class WorkOrderDetailsView extends React.Component {
     let orderTypes = this.props.orderTypes.map((orderType, idx) => {
       let data = {
           key: idx,
-          value: orderType.get('id'),
-          label: orderType.get('name')
+          value: orderType.id,
+          label: orderType.name
         };
       return data;
     });
@@ -115,7 +115,7 @@ class WorkOrderDetails extends React.Component {
   }
 
   render() {
-    let order = fromJS(this.props.workOrder);
+    let order = this.props.workOrder;
     return (
       <WorkOrderDetailsView onSubmit={(state) => this.handleSubmit(state)}
                             defaultStatus={this.props.workOrder.status}

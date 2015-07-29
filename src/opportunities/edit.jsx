@@ -37,7 +37,7 @@ let editOpportunity = React.createClass({
     let data = {
       props: {
         opportunity: this.props.opportunity,
-        account: this.props.opportunity.get('customer')
+        account: this.props.opportunity.customer
       },
       account: this.refs.account.getState(),
       opps: this.refs.details.state
@@ -57,9 +57,9 @@ let editOpportunity = React.createClass({
         </Layout>
         {
           opp.customer.user_id ?
-            <EditAccountDetailsAgent ref="account" account={fromJS(opp.customer)} id={opp.customer.user_id} />
+            <EditAccountDetailsAgent ref="account" account={opp.customer} id={opp.customer.user_id} />
           :
-            <EditAccountDetails ref="account" account={fromJS(opp.customer)} user={null} />
+            <EditAccountDetails ref="account" account={opp.customer} user={null} />
         }
         <EditDetails ref="details" {...this.props} />
         <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" />

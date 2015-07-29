@@ -8,7 +8,7 @@ import { List } from 'immutable'
 let EditDetails = React.createClass({
   mixins: [addons.LinkedStateMixin],
   getInitialState() {
-    let o = this.props.account.toJS();
+    let o = this.props.account;
     return {
       name: o.name,
       customerTypeId: o.type.id,
@@ -23,8 +23,8 @@ let EditDetails = React.createClass({
     return this.state;
   },
   render() {
-    let account = this.props.account.toJS();
-    let agent = this.props.user ? this.props.user.toJS() : {};
+    let account = this.props.account;
+    let agent = this.props.user ? this.props.user : {};
     return (
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>

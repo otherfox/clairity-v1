@@ -17,8 +17,8 @@ let WorkOrderDetailsOwner = React.createClass({
     let result = this.props.owners
       .map(o => {
         return {
-          label: o.get('name'),
-          value: o.get('id')
+          label: o.name,
+          value: o.id
         }
       })
       .unshift({value: '', label: ''});
