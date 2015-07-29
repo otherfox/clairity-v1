@@ -14,7 +14,7 @@ class CustomLink extends React.Component {
 
   render() {
     return (
-      <Link to={this.props.to} params={this.props.params} style={_.assign(this.style(), this.props.style)}>
+      <Link onClick={() => alert('link clicked!')} to={this.props.to} params={this.props.params} style={_.assign(this.style(), this.props.style)}>
         {this.props.children}
       </Link>
     );
