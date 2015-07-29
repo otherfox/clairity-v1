@@ -126,6 +126,7 @@ let WorkOrderDetailsView = React.createClass ({
 });
 
 let WorkOrderDetails = queryRenderer(WorkOrderDetailsView, {
+  method: ['update'],
   queries: [ collectionQuery('serviceType', 'serviceTypes') ]
 });
 
