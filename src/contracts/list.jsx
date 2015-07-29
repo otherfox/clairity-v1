@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from 'react-router'
+import Link from '../shared/components/link'
 import {FontIcon, ClearFix, Paper} from 'material-ui'
 import ContractInfo from './public/details'
 

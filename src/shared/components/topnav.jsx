@@ -4,7 +4,7 @@ import Settings from './settings'
 import { AppBar, LeftNav, Utils, FlatButton } from 'material-ui'
 import SettingsIcon from 'material-ui/lib/svg-icons/action/settings'
 import _ from 'lodash'
-import {Link} from 'react-router'
+import Link from './link'
 
 
 let ColorManipulator = Utils.ColorManipulator;
