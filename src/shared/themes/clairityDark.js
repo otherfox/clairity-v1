@@ -12,6 +12,11 @@ let ClairityDarkTheme = {
             borderColor: ColorManipulator.fade(Colors.fullWhite, 0.3), //Colors.grey300
             disabledColor: ColorManipulator.fade(Colors.fullWhite, 0.3),
             primary1Color: Colors.teal200,
+            primary2Color: Colors.blue700,
+            primary3Color: Colors.blue200,
+            accent1Color: Colors.cyanA700,
+            accent2Color: Colors.deepOrange400,
+            accent3Color: Colors.cyanA200,
         };
     },
     getComponentThemes(palette) {
