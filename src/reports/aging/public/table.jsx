@@ -87,7 +87,7 @@ export default queryRenderer(AgingTable, {
       serviceMethod: props => getAgingReports(props.date),
       cacheMethod: props => {
         let results = Store.data.get('agingReport');
-        return results.size > 0 ? results : null;
+        return results.size > 0 ? results.toJS() : null;
       },
     }
   ]
