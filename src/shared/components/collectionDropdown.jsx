@@ -26,13 +26,13 @@ class CollectionDropdownView extends React.Component {
     if (this.props.getValue) {
       return this.props.getValue(item);
     }
-    return item.get(this.props.valueKey);
+    return item[this.props.valueKey];
   }
   getItemLabel(item) {
     if (this.props.getLabel) {
       return this.props.getLabel(item);
     }
-    return item.get(this.props.labelKey);
+    return item[this.props.labelKey];
   }
   render() {
     return <DropDown {...this.props}

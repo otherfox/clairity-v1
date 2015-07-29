@@ -34,15 +34,15 @@ let ExistingPopsView = React.createClass({
   getInitialState() {
     return {
       popId: this.props.workOrder.pop_id ||
-             this.props.pops.first().get('id')
+             this.props.pops[0].id
     };
   },
   getMenuItems() {
     return this.props.pops
       .map(p => {
         return {
-          value: p.get('id'),
-          label: p.get('name')
+          value: p.id,
+          label: p.name
         }
       });
   },

@@ -14,6 +14,7 @@ import {
   DropDownMenu,
   TimePicker,
   TextField,
+  DatePicker,
   Paper
 } from 'material-ui'
 
@@ -22,7 +23,6 @@ import {queryRenderer, collectionQuery} from '../../shared/components/networkRen
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
-import DatePicker from '../../shared/components/datePicker'
 import DropDown from '../../shared/components/dropDown'
 import {collectionDropdown} from '../../shared/components/collectionDropdown'
 

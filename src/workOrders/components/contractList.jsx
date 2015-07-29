@@ -14,7 +14,7 @@ class ContractsList extends React.Component {
   }
 
   filterContract(contract) {
-    return contract.has('signed');
+    return contract.signed;
   }
 
   render() {
