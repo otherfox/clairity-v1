@@ -8,9 +8,9 @@ import { RaisedButton } from 'material-ui'
 import _ from 'lodash'
 import controllable from 'react-controllables'
 import {Navigation} from 'react-router'
-import Link from '../shared/components/link'
+import Link from '../../shared/components/link'
 
-let viewAccounts = React.createClass({
+let ViewAccounts = React.createClass({
   mixins: [Navigation],
 
   propTypes: {
@@ -43,8 +43,8 @@ let viewAccounts = React.createClass({
 
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-          <Header><h1>View Accounts</h1></Header>
-          <Table {...this.getAccounts(accounts)} />
+        <Header><h1>View Accounts</h1></Header>
+        <Table {...this.getAccounts(accounts)} />
       </Layout>
     );
   }
@@ -52,4 +52,4 @@ let viewAccounts = React.createClass({
 
 import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
 
-export default networkCollectionRenderer(viewAccounts, { tableName: 'account' });
+export default networkCollectionRenderer(ViewAccounts, { tableName: 'account' });
