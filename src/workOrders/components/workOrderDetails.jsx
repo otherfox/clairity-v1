@@ -12,6 +12,7 @@ import {
   Slider,
   DropDownMenu,
   DatePicker,
+  TimePicker,
   TextField,
   Paper
 } from 'material-ui'
@@ -98,10 +99,10 @@ let WorkOrderDetailsView = React.createClass ({
       { label: 'Work Order Type', name: 'type_id', value: <WorkOrderTypesDropdown selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
       { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [6,6,6,6,6,6,6,6,6,6,6,6], sm: [12]}} breakpoints={{ md: 1550 }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
-      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : undefined} /> , cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Close Date', name: 'close_date', value: <DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <div><DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <div><DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : undefined} /><TimePicker format="ampm" hintText="12hr Format"  defaultTime={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : new Date()}/></div> , cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Install Date', name: 'work_order_date', value: <div><DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : undefined} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Close Date', name: 'close_date', value: <div><DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : undefined} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(order.get('close_date')) ? new Date(order.get('close_date')) : new Date() } /></div>, cellType: 'string', detailType: 'muiDatePicker' },
       { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={(order.get('general_notes')) ? order.get('general_notes'): ''} />, cellType: 'string', detailType: 'muiTextField' },
       { label: '', name: 'submit', value: <RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, cellType: 'button', detailType: 'muiButton'}
     ];
