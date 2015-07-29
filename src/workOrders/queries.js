@@ -22,5 +22,5 @@ export function queryWorkOrderOwners() {
          r.get('name') == 'provisioning' || // the name provisioning
          r.get('name') == 'field_ops')  // or field_ops
        .size > 0); // return users whose role query returned one or more entry
-  return result.size > 0 ? result : null;
+  return result.size > 0 ? result.toJS() : null;
 }
