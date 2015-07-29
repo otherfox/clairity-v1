@@ -42,7 +42,7 @@ let WorkOrderDetailsView = React.createClass ({
     let serviceTypes = new List(this.props.serviceTypes);
     let services = serviceTypes.map((serviceType, idx) =>
       <div key={idx}>
-        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
+        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultChecked={(_.indexOf(os, serviceType.get('id')) !== -1) ? true : false} switched/>
       </div>
     );
     return services
