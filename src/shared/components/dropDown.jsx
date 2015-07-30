@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Settings from './settings'
 import _ from 'lodash'
 import {
@@ -9,11 +9,15 @@ import uid from 'uid'
 let DropDown = React.createClass({
 
   propTypes: {
-    menuItems: React.PropTypes.object,
-    menuItemStyle: React.PropTypes.object,
-    labelStyle: React.PropTypes.object,
-    underlineStyle: React.PropTypes.object,
-    selectedValue: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
+    menuItems: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    })),
+    menuItemStyle: PropTypes.object,
+    labelStyle: PropTypes.object,
+    underlineStyle: PropTypes.object,
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   },
 
   style() {
@@ -45,7 +49,7 @@ let DropDown = React.createClass({
 
   render() {
     let link = this.props.valueLink;
-    let searchValue = link ? link.value : this.props.selectedValue;
+    let searchValue = link ? link.value : (this.props.value || this.props.selectedValue);
     let items = this.props.menuItems || [];
     let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
     let index = data.findIndex(item => item.value === searchValue);
