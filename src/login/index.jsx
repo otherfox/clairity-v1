@@ -53,19 +53,19 @@ class LoginForm extends React.Component {
               <div>
                 <TextField
                   value={this.props.username}
-                  onChange={this.changeUsername.bind(this)}
+                  onChange={e => this.changeUsername(e)}
                   floatingLabelText="Username" />
               </div>
               <div>
                 <TextField
                   value={this.props.password}
                   floatingLabelText="Password"
-                  onChange={this.changePassword.bind(this)}
-                  onEnterKeyDown={this.fireLogin.bind(this)}
+                  onChange={e => this.changePassword(e)}
+                  onEnterKeyDown={() => this.fireLogin()}
                   type="password" />
               </div>
               <div style={{marginTop: '1em'}}>
-                <RaisedButton onClick={this.fireLogin.bind(this)} secondary={true} label={'Login'} />
+                <RaisedButton onClick={() => this.fireLogin()} secondary={true} label={'Login'} />
               </div>
             </div>
           </Paper>

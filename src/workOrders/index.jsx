@@ -24,6 +24,8 @@ import Messaging from './components/messaging'
 import Pop from './components/pop'
 import Provisioning from './components/provisioning'
 
+import SettingsManager from '../shared/settings'
+
 import {
   RadioButtonGroup,
   RadioButton,
@@ -61,18 +63,9 @@ let WorkOrders = React.createClass({
         <Layout cPadding={'0 20px 0 0'}>
           <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
           <Link to="view-account" params={{accountId: wo.location_id, locationId: wo.location_id}}>View Customer Details</Link>
-          <div style={{position: 'absolute', width: '150px', right: '20px'}} >
-            <Toggle
-              labelStyle={{ minWidth: '100px'}}
-              name="compactView"
-              value="false"
-              label="Compact View"
-              onToggle={this.setCompact}
-            />
-          </div>
         </Layout>
 
-        <Tabs compact={this.state.compact}>
+        <Tabs compact={SettingsManager.compact}>
 
           <Tab label="Details">
             <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12] }} cPadding={'20px 20px 0 0'}>

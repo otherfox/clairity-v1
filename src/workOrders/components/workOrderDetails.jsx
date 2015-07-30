@@ -15,65 +15,40 @@ import {
   TextField,
   Paper
 } from 'material-ui'
+import {List, Map, fromJS} from 'immutable'
+import _ from 'lodash'
+import {queryRenderer, collectionQuery} from '../../shared/components/networkRenderer'
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
-
-import queryRenderer from '../../shared/components/networkRenderer/queryRenderer'
-
-import ServiceTypes from '../services/stubs/serviceTypes.json'
-import OrderTypes from '../services/stubs/workOrderTypes.json'
-
-import OwnerView from './details/owner'
-
 import {collectionDropdown} from '../../shared/components/collectionDropdown'
 
+import OwnerView from './details/owner'
 let WorkOrderTypesDropdown = collectionDropdown('workOrderType');
 
-import {List, Map, fromJS} from 'immutable'
-
-let WorkOrderDetails = React.createClass ({
-
-  getDefaultProps() {
-    return {
-      serviceTypes: fromJS(ServiceTypes)
-    };
-  },
+let WorkOrderDetailsView = React.createClass ({
 
   style() {
-    let style = {
-      width: '100%'
-    };
-
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
+    return {}
   },
 
   getServiceTypes() {
-
     let order = this.props.workOrder;
     let os = [];
     let orderServices = order.get('services').forEach((service, idx) => {
       os.push(service);
     });
-
-    let services = this.props.serviceTypes.map( (serviceType, idx) =>
+    let serviceTypes = new List(this.props.serviceTypes);
+    let services = serviceTypes.map((serviceType, idx) =>
       <div key={idx}>
-        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
+        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultChecked={(_.indexOf(os, serviceType.get('id')) !== -1) ? true : false} switched/>
       </div>
     );
-
     return services
   },
 
   getUsers() {
-
     let users = [
       new Map({
         key: 0,
@@ -81,9 +56,7 @@ let WorkOrderDetails = React.createClass ({
         value: 7416
       })
     ];
-
     users = new List(users);
-
     return users;
   },
 
@@ -100,15 +73,11 @@ let WorkOrderDetails = React.createClass ({
         value: 'Closed'
       })
     ];
-
     status = new List(status);
-
     return status;
-
   },
 
   getWorkOrderTypes() {
-
     let orderTypes = this.props.orderTypes.map((orderType, idx) => {
       let data = new Map({
           key: idx,
@@ -117,15 +86,12 @@ let WorkOrderDetails = React.createClass ({
         });
       return data;
     });
-
     orderTypes= new List(orderTypes);
     return orderTypes;
   },
 
   getDetails(order) {
-
     let owners = [{value: 'Owner',label:'Label'}];
-
     let colNames = [
       { label: 'Owners', name: 'owners', value: <OwnerView workOrder={this.props.workOrder} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
@@ -142,25 +108,25 @@ let WorkOrderDetails = React.createClass ({
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
     let data = [c];
-
     let details = {title: 'Details', data: colNames};
-
     return details;
-
   },
 
   render() {
-
     return (
-      <div style={this.style()}>
+      <div style={_.assign(this.style(), this.props.style)}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [12], md: [12], sm: [12], xs: [12], xxs: [12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
+          <Layout widths={{}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
             <Details {...this.getDetails(this.props.workOrder)} />
           </Layout>
         </Paper>
       </div>
     );
   }
+});
+
+let WorkOrderDetails = queryRenderer(WorkOrderDetailsView, {
+  queries: [ collectionQuery('serviceType', 'serviceTypes') ]
 });
 
 export default WorkOrderDetails;
