@@ -8,7 +8,8 @@ import {
 
 import Layout from '../layout'
 
-export { default as DetailRow } from './detailRow'
+import DetailsRow from './detailRow'
+export {DetailsRow};
 
 let { ColorManipulator } = Utils;
 
@@ -73,12 +74,14 @@ class Details extends React.Component {
     let style = this.style();
     let layout = this.layout();
     let count = 0;
-    return React.Children.map(this.props.children, child =>
-      child.type == DetailRow.type ?
+    if (this.props.children == null) return null;
+    return React.Children.map(this.props.children, child => {
+      if (child == null) return null;
+      return child.type == DetailsRow ?
         addons.cloneWithProps(child, {...this.props, ...child.props, style, layout, key: count++})
       :
-        addons.cloneWithProps(child, {key: count++})
-    );
+        addons.cloneWithProps(child, {key: count++});
+    });
   }
 
   render() {
