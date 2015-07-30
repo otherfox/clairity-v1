@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, addons} from 'react/addons'
 import Settings from './settings'
 import _ from 'lodash'
 import {
@@ -69,7 +69,10 @@ class Details extends React.Component {
   }
 
   getContent() {
-    return false;
+    let style = this.style();
+    return React.Children.map(this.props.children, child =>
+      addons.cloneWithProps(child, {style})
+    );
   }
 
   render() {
@@ -116,7 +119,6 @@ Details.defaultProps = {
 Details.contextTypes = {
   muiTheme: React.PropTypes.object
 };
-
 
 
 export default Details;
