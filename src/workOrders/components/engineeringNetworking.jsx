@@ -99,7 +99,6 @@ class EngineeringNetworking extends React.Component {
   }
 
   render() {
-    debugger;
     return (
       <EngineeringNetworkingView  onSubmit={(state) => this.handleSubmit(state)}
                                   defaultIpsRequested={this.props.workOrder.ips_requested}
