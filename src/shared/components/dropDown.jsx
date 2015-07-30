@@ -51,7 +51,7 @@ let DropDown = React.createClass({
     let index = data.findIndex(item => item.value === searchValue);
     let overflow =  data.length > 15 ?
                       `max-height: 500px;
-                      overflow: auto !important;`
+                       overflow: auto !important;`
                     :
                       '';
     let menuClass = 'm'+uid();
