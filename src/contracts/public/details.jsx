@@ -44,17 +44,17 @@ const ContractSingle = React.createClass({
   getContractData(contract) {
 
     let colNames = [
-      { label: 'Agent', name: 'agent_name',value: contract.get('agent_name'), cellType: 'string' },
-      { label: 'Type', name: 'type_name',value: contract.getIn(['type','name']), cellType: 'string' },
-      { label: 'Term', name: 'term',value: (contract.get('term')) ? contract.get('term')+' Months' : Date(contract.get('start_date')).toDateString()+' to '+Date(contract.get('end_date')).toDateString(), cellType: 'string' },
-      { label: 'Days Until Install', name: 'est_days_till_install',value: contract.get('est_days_till_install'), cellType: 'string' },
-      { label: 'Total NRC', name: 'total_nrc',value: contract.get('total_nrc'), cellType: 'string' },
-      { label: 'Total MRC', name: 'total_mrc',value: contract.get('total_mrc'), cellType: 'string' },
-      { label: 'Signed', name: 'signed',value: new Date(contract.get('signed')).toDateString(), cellType: 'string' },
-      { label: 'Installed', name: 'install_date',value: (contract.get('install_date')) ? new Date(contract.get('install_date')).toDateString() : '', cellType: 'string' },
-      { label: 'Disconnected', name: 'disconnect_date',value: (contract.get('disconnect_date')) ? new Date(contract.get('disconnect_date')).toDateString() : '', cellType: 'string' },
-      { label: 'Status', name: 'status',value: contract.getIn(['status','name']), cellType: 'string' },
-      { label: 'Billable', name: 'billable',value: contract.get('billable') ? 'Yes' : 'No', cellType: 'string' },
+      { label: 'Agent', name: 'agent_name',value: contract.agent_name, cellType: 'string' },
+      { label: 'Type', name: 'type_name',value: contract.type.name, cellType: 'string' },
+      { label: 'Term', name: 'term',value: (contract.term) ? contract.term+' Months' : Date(contract.start_date).toDateString()+' to '+Date(contract.end_date).toDateString(), cellType: 'string' },
+      { label: 'Days Until Install', name: 'est_days_till_install',value: contract.est_days_till_install, cellType: 'string' },
+      { label: 'Total NRC', name: 'total_nrc',value: contract.total_nrc, cellType: 'string' },
+      { label: 'Total MRC', name: 'total_mrc',value: contract.total_mrc, cellType: 'string' },
+      { label: 'Signed', name: 'signed',value: new Date(contract.signed).toDateString(), cellType: 'string' },
+      { label: 'Installed', name: 'install_date',value: (contract.install_date) ? new Date(contract.install_date).toDateString() : '', cellType: 'string' },
+      { label: 'Disconnected', name: 'disconnect_date',value: (contract.disconnect_date) ? new Date(contract.disconnect_date).toDateString() : '', cellType: 'string' },
+      { label: 'Status', name: 'status',value: contract.status.name, cellType: 'string' },
+      { label: 'Billable', name: 'billable',value: contract.billable ? 'Yes' : 'No', cellType: 'string' },
       { label: 'Telecomm Tax Estimate (17%)', name: 'tax_estimate',value: '// TODO', cellType: 'string' }
     ];
     let c = {};
@@ -76,7 +76,7 @@ const ContractSingle = React.createClass({
   },
 
   getTableConfig(contract) {
-    let services = contract.get('services').toJS();
+    let services = contract.services;
     return {
       colNames: [
         { label: 'Service', name: 'full_name', cellType: 'string'},

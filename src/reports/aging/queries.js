@@ -46,5 +46,5 @@ export function queryAgingReports(props) {
         :
           queryInactive);
   let results = fn(!props.nonzero);
-  return results.size > 0 ? results : null;
+  return results.size > 0 ? results.toJS() : null;
 }

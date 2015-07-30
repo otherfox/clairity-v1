@@ -3,7 +3,8 @@ import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import { networkModelRenderer } from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
-import { State, Link } from 'react-router'
+import { State } from 'react-router'
+import Link from '../shared/components/link'
 import { fromJS } from 'immutable'
 import OpportunityDetails from './public/details'
 
@@ -16,7 +17,7 @@ let viewOpportunity = React.createClass({
 
   render() {
 
-    let opp = this.props.opportunity.toJS();
+    let opp = this.props.opportunity;
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
@@ -28,9 +29,9 @@ let viewOpportunity = React.createClass({
         </Layout>
         {
           opp.customer.user_id ?
-            <AccountDetailsAgent account={fromJS(opp.customer)} id={opp.customer.user_id} />
+            <AccountDetailsAgent account={opp.customer} id={opp.customer.user_id} />
           :
-            <AccountDetails account={fromJS(opp.customer)} user={null} />
+            <AccountDetails account={opp.customer} user={null} />
         }
         <OpportunityDetails {...this.props} />
       </Layout>

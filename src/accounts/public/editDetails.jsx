@@ -8,7 +8,7 @@ import { List } from 'immutable'
 let EditDetails = React.createClass({
   mixins: [addons.LinkedStateMixin],
   getInitialState() {
-    let o = this.props.account.toJS();
+    let o = this.props.account;
     return {
       name: o.name,
       customerTypeId: o.type.id,
@@ -23,8 +23,8 @@ let EditDetails = React.createClass({
     return this.state;
   },
   render() {
-    let account = this.props.account.toJS();
-    let agent = this.props.user ? this.props.user.toJS() : {};
+    let account = this.props.account;
+    let agent = this.props.user ? this.props.user : {};
     return (
       <Paper>
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
@@ -36,13 +36,13 @@ let EditDetails = React.createClass({
             data={[
               agent.name ? { label: 'Current Account Owner', value: <TextField value={agent.name} disabled={true} />, detailType: 'muiTextField' } : null,
               { label: 'Name', name: 'name', value: <TextField valueLink={this.linkState('name')} />, detailType: 'muiTextField' },
-              { label: 'Type', name: 'customerTypeId', value: <DropDown valueLink={this.linkState('customerTypeId')} menuItems={ new List([
+              { label: 'Type', name: 'customerTypeId', value: <DropDown valueLink={this.linkState('customerTypeId')} menuItems={[
                 { label: '', value: 0 /* TODO: make this a real `collectionDropdown` */},
                 { label: 'Business', value: 1 },
                 { label: 'Residential', value: 2 },
                 { label: 'Telenational - Business', value: 3 },
                 { label: 'Telenational - Residential', value: 4 }
-              ])} />, detailType: 'muiDropDown' },
+              ]} />, detailType: 'muiDropDown' },
             ]}
           />
           <Details

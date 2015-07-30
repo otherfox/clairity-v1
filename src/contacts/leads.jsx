@@ -8,7 +8,8 @@ import { RaisedButton } from 'material-ui'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
-import {Navigation, Link} from 'react-router'
+import {Navigation} from 'react-router'
+import Link from '../shared/components/link'
 
 let viewLeads = React.createClass({
   mixins: [Navigation],
@@ -34,7 +35,7 @@ let viewLeads = React.createClass({
       data: leads.map(s => {
         s.__lead_conversion = (
           <div style={{textAlign: 'center'}}>
-            <Link to="add-contact-opp" params={{contactId: s.id, agentId: s.agent_id}}>
+            <Link to="add-contact-opp" params={{contactId: s.id, userId: s.agent_id}}>
               <RaisedButton label={'convert lead'}/>
             </Link>
           </div>
@@ -56,12 +57,12 @@ let viewLeads = React.createClass({
 
   render() {
 
-    let leads = this.props.leads.toJS();
+    let leads = this.props.leads;
 
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
           <Header><h1>View Leads</h1></Header>
-          <Table {...this.getLeads(this.props.leads.toJS())} />
+          <Table {...this.getLeads(this.props.leads)} />
       </Layout>
     );
   }

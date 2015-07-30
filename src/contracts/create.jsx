@@ -106,7 +106,7 @@ export default class CreateContract extends React.Component {
   constructor() {
     super();
     this.state = {
-      services: new List()
+      services: []
     };
   }
   addService() {

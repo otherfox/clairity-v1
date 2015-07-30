@@ -1,9 +1,9 @@
 import _ from 'lodash'
 
 export function eventUpdateSalesOpp(data) {
-  let customer = data.props.account.toJS();
+  let customer = data.props.account;
   let account = data.account;
-  let opp = _.extend({}, data.props.opportunity.toJS(), data.opps);
+  let opp = _.extend({}, data.props.opportunity, data.opps);
   let payload = {};
   payload.customer_id = customer.id;
   payload.opportunity_id = opp.id;

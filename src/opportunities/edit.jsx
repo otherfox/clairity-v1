@@ -5,7 +5,8 @@ import DropDown from '../shared/components/dropDown'
 import Details from  '../shared/components/details'
 import { networkModelRenderer } from '../shared/components/networkRenderer'
 import { RaisedButton } from 'material-ui'
-import { State, Link } from 'react-router'
+import { State } from 'react-router'
+import Link from '../shared/components/link'
 import EditDetails from './public/editDetails'
 import { fromJS } from 'immutable'
 import _ from 'lodash'
@@ -37,7 +38,7 @@ let editOpportunity = React.createClass({
     let data = {
       props: {
         opportunity: this.props.opportunity,
-        account: this.props.opportunity.get('customer')
+        account: this.props.opportunity.customer
       },
       account: this.refs.account.getState(),
       opps: this.refs.details.state
@@ -45,7 +46,7 @@ let editOpportunity = React.createClass({
     updateSalesOpp({ data, completed: a => console.log('saved!') });
   },
   render() {
-    let opp = this.props.opportunity.toJS();
+    let opp = this.props.opportunity;
 
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
@@ -57,12 +58,12 @@ let editOpportunity = React.createClass({
         </Layout>
         {
           opp.customer.user_id ?
-            <EditAccountDetailsAgent ref="account" account={fromJS(opp.customer)} id={opp.customer.user_id} />
+            <EditAccountDetailsAgent ref="account" account={opp.customer} id={opp.customer.user_id} />
           :
-            <EditAccountDetails ref="account" account={fromJS(opp.customer)} user={null} />
+            <EditAccountDetails ref="account" account={opp.customer} user={null} />
         }
         <EditDetails ref="details" {...this.props} />
-        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" /> 
+        <RaisedButton onClick={this.submit} style={{float: 'right', marginTop: 25}} primary label="Update" />
       </Layout>
     );
   }

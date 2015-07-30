@@ -38,7 +38,7 @@ let Details = React.createClass ({
 
     let textColor = this.context.muiTheme.palette.textColor;
     let labelColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .6 );
-    let headerColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .3 );
+    let headerColor = ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1 );
     let labelLineHeight = {
       muiDropDown: '4em',
       muiTextField: '3.2em',
@@ -51,7 +51,7 @@ let Details = React.createClass ({
         sm: [{ textAlign: 'left'}]
       },
       header: {
-        color: textColor,
+        color: headerColor,
         margin: '1em 0',
         lineHeight: '1.8em',
         height: (this.props.title === null) ? '1.8em' : 'auto'

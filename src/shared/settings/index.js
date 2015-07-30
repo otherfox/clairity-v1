@@ -73,7 +73,7 @@ class SettingsManager {
 
   set compact(val) {
     this.data.compact = val;
-    this._write(val);
+    this._write(this.data);
   }
 
 }

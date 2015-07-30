@@ -8,7 +8,10 @@ export function modelQuery(tableName, propName, idName) {
   return {
     tableName,
     propName: propName || tableName,
-    cacheMethod: props => Store.data.getIn([tableName, props[id]]),
+    cacheMethod: props => {
+      let result = Store.data.getIn([tableName, props[id]]);
+      return result ? result.toJS() : null;
+    },
     serviceMethod: props => getResource(props[id], tableName),
     writeMethod: data => Store.handleMessage({
       type: MessageTypes.Write,
@@ -27,7 +30,7 @@ export function collectionQuery(tableName, propName, replace = true) {
     serviceMethod: props => getCollection(tableName),
     cacheMethod: () => {
       let results = Store.data.get(tableName).toList();
-      return results.size > 0 ? results : null;
+      return results.size > 0 ? results.toJS() : null;
     },
     writeMethod: data => Store.handleMessage({
       type: replace ? MessageTypes.ReplaceAll : MessageTypes.Write,
@@ -50,7 +53,7 @@ export function collectionViaQuery(options) {
       let results = Store.data.get(table)
         .toList()
         .filter(r => r.get(keyName) == props[idName]);
-      return results.size > 0 ? results : null;
+      return results.size > 0 ? results.toJS() : null;
     },
     writeMethod: rows => Store.handleMessage({
       type: MessageTypes.Write,

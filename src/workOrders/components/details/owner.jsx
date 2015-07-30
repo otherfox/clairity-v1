@@ -15,14 +15,14 @@ let WorkOrderDetailsOwner = React.createClass({
   },
   getMenuItems() {
     let result = this.props.owners
-      .map(o =>
-          new Map({
-            label: o.get('name'),
-            value: o.get('id')
-          })
-      )
-      .unshift(new Map({value: '', label: ''}));
-    return new List(result);
+      .map(o => {
+        return {
+          label: o.name,
+          value: o.id
+        }
+      })
+      .unshift({value: '', label: ''});
+    return result;
   },
   render() {
 
