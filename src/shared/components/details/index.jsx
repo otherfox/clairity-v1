@@ -9,6 +9,8 @@ import {
 
 import Layout from '../layout'
 
+import DetailRow from './detailRow'
+
 let { ColorManipulator } = Utils;
 
 class Details extends React.Component {
@@ -72,7 +74,10 @@ class Details extends React.Component {
     let style = this.style();
     let count = 0;
     return React.Children.map(this.props.children, child =>
-      addons.cloneWithProps(child, {style, key: count++})
+      child.type == DetailRow.type ?
+        addons.cloneWithProps(child, {style, key: count++})
+      :
+        addons.cloneWithProps(child, {key: count++})
     );
   }
 
