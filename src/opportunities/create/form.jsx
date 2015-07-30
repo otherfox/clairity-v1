@@ -1,7 +1,9 @@
-import React, {PropTypes, addons} from 'react/addons'
+import React, { PropTypes, addons } from 'react/addons'
 import controllable from 'react-controllables'
-import Details, {DetailsRow} from '../../shared/components/details'
-
+import Details, { DetailsRow } from '../../shared/components/details'
+import { Paper, TextField } from 'material-ui'
+import Layout from '../../shared/components/layout'
+import Header from '../../shared/components/header'
 import { collectionDropdown } from '../../shared/components/collectionDropdown'
 
 let ProjectTypes = collectionDropdown('projectType');
@@ -16,16 +18,16 @@ class CreateFormComponent extends React.Component {
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
         {
           this.props.linked ?
-            <Header><h1>Convert Lead - {opp.company}</h1></Header>
+            <Header><h1>Convert Lead - {this.props.agent.company}</h1></Header>
           :
-            <Header><h1>Create Opportunity with {account.name}</h1></Header>
+            <Header><h1>Create Opportunity with {this.props.account.name}</h1></Header>
         }
         <Paper>
           <Layout widths={{lg: [12,6,6], sm: [12]}} cPadding={'0 20px 20px 20px'}>
-            <Details title={`Create Opportunity with ${opp.name} @ ${opp.company}`}
+            <Details title={`Create Opportunity with `}
                      headerStyle={{color: '#aaa', marginLeft: '32%', marginBottom: '30px'}}>
               <DetailsRow label="Opportunity Name">
-                <TextField value={this.props.name} onChange={this.props.onNameChange} />
+                <TextField value={this.props.name} onChange={e =>this.props.onNameChange(e.target.value)} />
               </DetailsRow>
               {
                 this.props.linked ?
@@ -34,7 +36,7 @@ class CreateFormComponent extends React.Component {
                   false
               }
               <DetailsRow label="Project Type">
-                <ProjectTypes value={this.props.value}
+                <ProjectTypes value={this.props.projectType}
                               onChange={this.props.onProjectTypeChange} />
               </DetailsRow>
               <DetailsRow label="Stage">
@@ -57,7 +59,7 @@ class CreateFormComponent extends React.Component {
   }
 }
 
-CreateFormComponents.contextTypes = {
+CreateFormComponent.contextTypes = {
   lang: PropTypes.object.isRequired
 };
 
@@ -67,8 +69,13 @@ CreateFormComponent.propTypes = {
   project_type: PropTypes.number.isRequired,
   lead_source: PropTypes.number.isRequired,
   lead_source_id: PropTypes.number.isRequired,
+  linked: PropTypes.bool.isRequired,
+  account: PropTypes.shape({
+    name: PropTypes.string.isRequired
+  }).isRequired
 };
 
+export default CreateFormComponent;
 /*
 export const CreateForm = React.createClass({
   mixins: [addons.LinkedStateMixin],
