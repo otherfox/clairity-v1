@@ -58,7 +58,7 @@ class Details extends React.Component {
   }
 
   getLegacyContent() {
-    this.props.data.map((dataObj,idx) =>
+    return this.props.data.map((dataObj,idx) =>
       dataObj ?
       <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
         <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)} cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)} style={dataObj.rowStyle}>
