@@ -10,7 +10,7 @@ import CreateOppFormComponent from '../opportunities/create/form'
 class TestbedPage extends React.Component {
   render() {
     return (
-      <CreateOppFormComponent />
+      <CreateOppFormComponent linked={false} account={{name: 'TestName'}} />
     );
   }
 }
