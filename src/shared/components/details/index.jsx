@@ -70,8 +70,9 @@ class Details extends React.Component {
 
   getContent() {
     let style = this.style();
+    let count = 0;
     return React.Children.map(this.props.children, child =>
-      addons.cloneWithProps(child, {style})
+      addons.cloneWithProps(child, {style, key: count++})
     );
   }
 
@@ -91,7 +92,7 @@ class Details extends React.Component {
     return (
       <div style={this.style().root}>
         <ClearFix>{title}</ClearFix>
-        <ClearFix>{fData}</ClearFix>
+        <ClearFix>{content}</ClearFix>
       </div>
     );
   }
