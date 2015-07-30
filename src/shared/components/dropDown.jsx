@@ -6,8 +6,6 @@ import {
 } from 'material-ui'
 import uid from 'uid'
 
-import {Map, List} from 'immutable'
-
 let DropDown = React.createClass({
 
   propTypes: {
@@ -48,7 +46,7 @@ let DropDown = React.createClass({
   render() {
     let link = this.props.valueLink;
     let searchValue = link ? link.value : this.props.selectedValue;
-    let items = (this.props.menuItems || new List()).toJS();
+    let items = this.props.menuItems || [];
     let data = items.map((item, i) => {return {text: item.label, key: i, value: item.value}});
     let index = data.findIndex(item => item.value === searchValue);
     let overflow =  data.length > 15 ?

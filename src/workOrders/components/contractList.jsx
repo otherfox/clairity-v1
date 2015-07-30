@@ -6,15 +6,15 @@ let ContractsDropdown = collectionViaDropdown('contract', 'location_id', 'locati
 class ContractsList extends React.Component {
 
   getContractLabel(contract) {
-    let signed = new Date(contract.get('signed'));
-    return contract.get('services') ?
-        `Signed ${signed.toDateString()} - ${contract.getIn(['services', 0, 'actual_name'])}`
+    let signed = new Date(contract.signed);
+    return contract.services ?
+        `Signed ${signed.toDateString()} - ${contract.services[0].actual_name}`
       :
         `Signed ${signed.toDateString()}`
   }
 
   filterContract(contract) {
-    return contract.has('signed');
+    return contract.signed;
   }
 
   render() {

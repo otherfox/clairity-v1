@@ -39,7 +39,7 @@ let ViewAccounts = React.createClass({
 
   render() {
 
-    let accounts = this.props.accounts.toJS();
+    let accounts = this.props.accounts;
 
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>

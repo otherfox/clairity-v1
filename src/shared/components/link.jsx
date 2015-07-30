@@ -6,15 +6,11 @@ import {navStack} from '../router/navigationStack'
 class CustomLink extends React.Component {
 
   style() {
-    let textColor = this.context.muiTheme.palette.primary1Color;
+    let textColor = this.context.muiTheme.palette.accent1Color;
     return {
       color: textColor,
       textDecoration: 'none'
     }
-  }
-
-  get self() {
-    return this.refs.self.props;
   }
 
   handleNavigation() {
@@ -23,7 +19,7 @@ class CustomLink extends React.Component {
 
   render() {
     return (
-      <Link ref="self" onClick={() => this.handleNavigation()} to={this.props.to} params={this.props.params} style={_.assign(this.style(), this.props.style)}>
+      <Link onClick={() => this.handleNavigation()} to={this.props.to} params={this.props.params} style={_.assign(this.style(), this.props.style)}>
         {this.props.children}
       </Link>
     );

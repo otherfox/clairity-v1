@@ -76,7 +76,7 @@ let ContactListQuery = queryRenderer(ContactList, {
 
 let accountView = React.createClass({
   render() {
-    let account = this.props.account.toJS();
+    let account = this.props.account;
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
         <Header><h1>Account - {account.name}</h1></Header>

@@ -18,7 +18,7 @@ function deleteFalseFields(w, o, fields) {
 
 export function eventUpdateWorkOrder(workOrder) {
   let o = _.cloneDeep(workOrder);
-  let l = queryLocation(workOrder.location_id).toJS();
+  let l = queryLocation(workOrder.location_id);
   if (l == null) {
     throw new Error("Cannot update work order without corresponding location object");
   }

@@ -55,7 +55,7 @@ let WorkOrders = React.createClass({
     this.setState({compact: toggled});
   },
   render() {
-    let wo = this.props.workOrder.toJS();
+    let wo = this.props.workOrder;
     return (
       <div>
         <Header><h1>Update Work Order #{wo.id}</h1></Header>
@@ -76,7 +76,7 @@ let WorkOrders = React.createClass({
                   <Provisioning />
                 </Layout>
               </div>
-              <WorkOrderDetails workOrder={fromJS(wo)} />
+              <WorkOrderDetails workOrder={wo} />
             </Layout>
           </Tab>
 

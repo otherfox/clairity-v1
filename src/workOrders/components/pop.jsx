@@ -34,15 +34,17 @@ let ExistingPopsView = React.createClass({
   getInitialState() {
     return {
       popId: this.props.workOrder.pop_id ||
-             this.props.pops.first().get('id')
+             this.props.pops[0].id
     };
   },
   getMenuItems() {
     return this.props.pops
-      .map(p => new Map({
-        value: p.get('id'),
-        label: p.get('name')
-      }));
+      .map(p => {
+        return {
+          value: p.id,
+          label: p.name
+        }
+      });
   },
   render() {
     return (
@@ -131,7 +133,7 @@ export default React.createClass({
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg:[12,12], md:[12,12], sm:[12,12], xs:[12,12]}} pPadding={'0 20px 20px 20px'}>
             <Details title={'POP Types'} data={[
-              {label: 'POP Type', value:<DropDown style={{}} menuItems={fromJS([{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}])} valueLink={this.linkState('popType')} />, detailType: 'muiDropDown'},
+              {label: 'POP Type', value:<DropDown style={{}} menuItems={[{label: 'Existing POP', value: 0}, {label: 'New POP', value: 1}, {label: 'Unknown POP', value: 2}]} valueLink={this.linkState('popType')} />, detailType: 'muiDropDown'},
               {label: '', value:<PopDisplay {...this.props} ref="pop" />},
               {label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton'}
             ]} />

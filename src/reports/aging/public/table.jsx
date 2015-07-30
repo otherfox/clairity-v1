@@ -29,7 +29,7 @@ class AgingTable extends React.Component {
   }
 
   computeRows(props) {
-    return props.rows.toList().toJS();
+    return props.rows;
   }
 
   getAgingReportsTable(data){
@@ -86,8 +86,8 @@ export default queryRenderer(AgingTable, {
       writeMethod: reports => agingReportsFetched(reports),
       serviceMethod: props => getAgingReports(props.date),
       cacheMethod: props => {
-        let results = Store.data.get('agingReport');
-        return results.size > 0 ? results : null;
+        let results = Store.data.get('agingReport').toList();
+        return results.size > 0 ? results.toJS() : null;
       },
     }
   ]

@@ -18,7 +18,7 @@ let OpportunityDetails = React.createClass({
     opportunity: PropTypes.object.isRequired
   },
   getInitialState() {
-    let o = this.props.opportunity.toJS();
+    let o = this.props.opportunity;
     return {
       name: o.name,
       stage: o.stage,
@@ -37,7 +37,7 @@ let OpportunityDetails = React.createClass({
     };
   },
   render() {
-    let opp = this.props.opportunity.toJS();
+    let opp = this.props.opportunity;
     return (
       <Paper>
         <Layout widths={{ lg: [6,6] }} cPadding={'0 20px 20px 20px'}>

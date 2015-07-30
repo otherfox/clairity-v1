@@ -1,15 +1,13 @@
 import Store from '../../shared/store'
 
 export function queryAllCustomerTypes() {
-  return Store.data
+  let results = Store.data
     .get('customerType')
-    .toList().toJS()
+    .toList();
+  return results ? results.toJS() : [];
 }
 
 export function queryLocation(id) {
-  let location = Store.data.getIn(['location', id], null);
-  if(location) {
-    location = location.toJS();
-  }
-  return location;
+  let location = Store.data.getIn(['location', id]);
+  return location ? location.toJS() : null;
 }
