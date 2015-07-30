@@ -7,7 +7,7 @@ import {
   ClearFix
 } from 'material-ui'
 
-import Layout from './layout'
+import Layout from '../layout'
 
 let { ColorManipulator } = Utils;
 
