@@ -109,3 +109,5 @@ Details.contextTypes = {
 };
 
 export default Details;
+
+export {default as DetailsRow} from './detailRow'
