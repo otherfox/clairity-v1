@@ -1,5 +1,4 @@
 import React, {PropTypes, addons} from 'react/addons'
-import Settings from './settings'
 import _ from 'lodash'
 import {
   Utils,
@@ -9,7 +8,7 @@ import {
 
 import Layout from '../layout'
 
-import DetailRow from './detailRow'
+export { default as DetailRow } from './detailRow'
 
 let { ColorManipulator } = Utils;
 
@@ -72,10 +71,11 @@ class Details extends React.Component {
 
   getContent() {
     let style = this.style();
+    let layout = this.layout();
     let count = 0;
     return React.Children.map(this.props.children, child =>
       child.type == DetailRow.type ?
-        addons.cloneWithProps(child, {style, key: count++})
+        addons.cloneWithProps(child, {...this.props, ...child.props, style, layout, key: count++})
       :
         addons.cloneWithProps(child, {key: count++})
     );
@@ -128,5 +128,3 @@ Details.contextTypes = {
 
 
 export default Details;
-
-export {default as DetailsRow} from './detailRow'
