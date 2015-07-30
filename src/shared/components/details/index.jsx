@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Settings from './settings'
 import _ from 'lodash'
 import {
@@ -9,31 +9,9 @@ import {
 
 import Layout from './layout'
 
-let ColorManipulator = Utils.ColorManipulator;
+let { ColorManipulator } = Utils;
 
-let Details = React.createClass ({
-
-  propTypes: {
-    data: React.PropTypes.array,
-    title: React.PropTypes.string,
-    labelTop: React.PropTypes.bool,
-    headerStyle: React.PropTypes.object,
-    rowStyle: React.PropTypes.object,
-    labelStyle: React.PropTypes.object,
-    valueStyle: React.PropTypes.object,
-    cStyle: React.PropTypes.object,
-    cStyles: React.PropTypes.object,
-    cPadding: React.PropTypes.string,
-    widths: React.PropTypes.object
-  },
-
-  getDefaultProps() {
-    return {
-      widths: {lg: [5,7], md: [4,8], sm: [12]},
-      cPadding: '0 20px 5px 0'
-    }
-  },
-
+class Details extends React.Component {
   style(detailType) {
 
     let textColor = this.context.muiTheme.palette.textColor;
@@ -71,30 +49,42 @@ let Details = React.createClass ({
         marginTop: (detailType === 'muiButton') ? '20px' : 'initial'
       }
     };
-  },
+  }
 
   layout() {
     return (this.props.labelTop === true) ? {} : this.props.widths;
-  },
+  }
+
+  getLegacyContent() {
+    this.props.data.map((dataObj,idx) =>
+      dataObj ?
+      <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
+        <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)} cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)} style={dataObj.rowStyle}>
+          <div style={_.assign(this.style(dataObj.detailType).label, this.props.labelStyle, dataObj.labelStyle)}>{dataObj.label}</div>
+          <div style={_.assign(this.style(dataObj.detailType).value, this.props.valueStyle, dataObj.valueStyle)}>{dataObj.value}</div>
+        </Layout>
+      </div>
+      : false
+    );
+  }
+
+  getContent() {
+    return false;
+  }
 
   render() {
-
-    let fData = false;
-    if (this.props.data && Array.isArray(this.props.data)) {
-      fData = this.props.data.map((dataObj,idx) =>
-        dataObj ?
-        <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
-          <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)} cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)} style={dataObj.rowStyle}>
-            <div style={_.assign(this.style(dataObj.detailType).label, this.props.labelStyle, dataObj.labelStyle)}>{dataObj.label}</div>
-            <div style={_.assign(this.style(dataObj.detailType).value, this.props.valueStyle, dataObj.valueStyle)}>{dataObj.value}</div>
-          </Layout>
-        </div>
-        : false
-      );
-    }
-
-    let title = (this.props.title || this.props.title === null) ? <div><h3 style={_.assign(this.style().header, this.props.headerStyle)}>{this.props.title}</h3></div> : null ;
-
+    let title = (this.props.title || this.props.title === null) ?
+        (<div>
+          <h3 style={_.assign(this.style().header, this.props.headerStyle)}>
+            {this.props.title}
+          </h3>
+        </div>)
+      :
+        null;
+    let content = (this.props.data && Array.isArray(this.props.data)) ?
+        this.getLegacyContent()
+      :
+        this.getContent()
     return (
       <div style={this.style().root}>
         <ClearFix>{title}</ClearFix>
@@ -102,11 +92,32 @@ let Details = React.createClass ({
       </div>
     );
   }
-});
+}
+
+Details.propTypes = {
+  data: React.PropTypes.array,
+  title: React.PropTypes.string,
+  labelTop: React.PropTypes.bool,
+  headerStyle: React.PropTypes.object,
+  rowStyle: React.PropTypes.object,
+  labelStyle: React.PropTypes.object,
+  valueStyle: React.PropTypes.object,
+  cStyle: React.PropTypes.object,
+  cStyles: React.PropTypes.object,
+  cPadding: React.PropTypes.string,
+  widths: React.PropTypes.object
+};
+
+Details.defaultProps = {
+  widths: {lg: [5,7], md: [4,8], sm: [12]},
+  cPadding: '0 20px 5px 0'
+};
 
 Details.contextTypes = {
   muiTheme: React.PropTypes.object
 };
+
+
 
 export default Details;
 
