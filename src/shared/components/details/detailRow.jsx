@@ -1,5 +1,6 @@
 import React from 'react'
 import DropDown from '../dropDown'
+import Layout from '../layout'
 import {
   TextField
 } from 'material-ui'
@@ -23,7 +24,7 @@ export default class DetailRow extends React.Component {
 
           <div style={this.props.style.label}>{this.props.label}</div>
           <div style={this.props.style.value}>{this.props.children}</div>
-          
+
         </Layout>
       </div>
     );
