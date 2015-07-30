@@ -8,20 +8,6 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
-function checkStatus(row, status) {
-  if (status == 'both') return true;
-  return row.active.toLowerCase() == status;
-}
-
-function checkNonzero(row, nonzero) {
-  if (!nonzero) return true;
-  return row.balance != 0 ||
-         row.b_0_30  != 0 ||
-         row.b_31_60 != 0 ||
-         row.b_61_90 != 0 ||
-         row.b_91    != 0;
-}
-
 class AgingTable extends React.Component {
 
   constructor(props) {
@@ -32,9 +18,7 @@ class AgingTable extends React.Component {
   }
 
   shouldComponentUpdate(props, state) {
-    if (props.status == this.props.status &&
-        props.nonzero == this.props.nonzero &&
-        props.date == this.props.date) return false;
+    if (props.date == this.props.date) return false;
     return true;
   }
 
@@ -45,9 +29,7 @@ class AgingTable extends React.Component {
   }
 
   computeRows(props) {
-    return props.rows.toList().toJS()
-      .filter(r => checkStatus(r, props.status))
-      .filter(r => checkNonzero(r, props.nonzero));
+    return props.rows.toList().toJS();
   }
 
   getAgingReportsTable(data){
@@ -70,16 +52,16 @@ class AgingTable extends React.Component {
       filters: {
         data: [
           {label: 'Customer', name: 'name', filterType: 'muiTextField'},
-          {label: 'Agent', name: 'agent', filterType: 'muiTextField'},
           {label: 'Status', filterType: 'muiRadioButtons', name: 'active', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
             { label: 'Active', value: 'Active'},
             { label: 'Inactive', value: 'Inactive'},
             { label: 'Both', value: '', defaultChecked: true}
           ] },
-          {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'status', fuzzy: false, func: this.checkNonzero }
-        ]
+          {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'balance', fuzzy: false, defaultChecked: true, value: 0, not: true }
+        ],
+        active: ['balance']
       },
-      rowHeight: 100,
+      rowHeight: 120,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
       maxWidth: 19,
       widthAdj: -30
@@ -92,6 +74,8 @@ class AgingTable extends React.Component {
     );
   }
 }
+
+// ['balance', 'b_0_30', 'b_31_60','b_61_90','b_91']
 
 export default queryRenderer(AgingTable, {
   queries: [

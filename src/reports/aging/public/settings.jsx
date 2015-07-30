@@ -1,35 +1,31 @@
 import React, {PropTypes} from 'react'
-import Filters from '../../../shared/components/filters'
+import Details from '../../../shared/components/details'
 import controllable from 'react-controllables'
 import {
-  RadioButton,
-  RadioButtonGroup,
-  Checkbox,
-  RaisedButton,
   DatePicker,
 } from 'material-ui'
 
-@controllable(['status', 'nonzero', 'date'])
+@controllable(['date'])
 
 class AgingSettings extends React.Component {
   render() {
     return (
-      <Filters>
-        <Checkbox checked={this.props.nonzero}
-                  onCheck={(e, nonzero) => this.props.onNonzeroChange(nonzero)}
-                  label="Hide $0 Credit Balances" />
-        <DatePicker defaultDate={this.props.date}
-                    onChange={(e, date) => this.props.onDateChange(date)}
-                    hintText="As of"
-                    mode="landscape" />
-      </Filters>
+      <Details  widths={{lg: ['auto', '320px']}}
+                rowStyle={{ float: 'left' }}
+                cStyles={{lg: [{textAlign: 'left'}]}}
+                cStyle={{float: 'left'}}
+                data={[
+                  { label: 'Date', value: <DatePicker defaultDate={this.props.date}
+                              onChange={(e, date) => this.props.onDateChange(date)}
+                              hintText="As of"
+                              mode="landscape" />, detailType: 'muiDatePicker' }
+                ]}
+      />
     );
   }
 }
 
 AgingSettings.propTypes = {
-  status: PropTypes.oneOf(['active', 'inactive', 'both']).isRequired,
-  nonzero: PropTypes.bool.isRequired,
   date: PropTypes.instanceOf(Date)
 };
 

@@ -9,8 +9,6 @@ export default class AgingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'both',
-      nonzero: true,
       date: new Date()
     };
   }
