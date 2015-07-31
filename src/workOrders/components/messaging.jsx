@@ -19,38 +19,24 @@ import {
   Paper
 } from 'material-ui'
 
-let data = [];
+import _ from 'lodash'
+import controllable from 'react-controllables'
 
-let Messaging = React.createClass ({
+@controllable([])
 
-  propTypes: {
-    style: React.PropTypes.object,
-    data: React.PropTypes.array
-  },
-
-  getDefaultProps() {
-    return {
-      data: data
-    };
-  },
+class MessagingView extends React.Component {
 
   style() {
-    let style = {};
+    return {}
+  }
 
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
-  },
+  submit(){
+    this.props.onSumbmit(this.props)
+  }
 
   render() {
-
     return (
-      <div style={this.props.style}>
+      <div style={_.assign(this.style(), this.props.style)}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg:[12],md:[12],sm:[12],xs:[12]}} pPadding={'0 20px 20px 20px'}>
             <div>
@@ -93,6 +79,20 @@ let Messaging = React.createClass ({
       </div>
     );
   }
-});
+}
+
+// wom = wmDAO.getAllWorkOrderMessagesByWorkOrderId(url.id)
+// for wom
+// userDAO.getUserById(woms[i].user_id)
+
+class Messaging extends React.Component {
+  handleSubmit(state) {
+    console.log(state)
+  }
+
+  render() {
+    return <MessagingView onSubmit={state => this.handleSubmit(state)} />
+  }
+}
 
 export default Messaging;

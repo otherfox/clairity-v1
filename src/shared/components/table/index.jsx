@@ -163,6 +163,7 @@ let DataTable = React.createClass({
       filterState = _.assign(filterState,{[filterName]: [filters.data[idx].value, filters.data[idx].not] });
     });
     let ids = this.getFilteredIds(filterState);
+
     return this.getData(ids, filterState);
   },
 
@@ -183,7 +184,6 @@ let DataTable = React.createClass({
         row => _.isNumber(row))
         : fuzzy.filter(filters[filterName][0], options).map( res => res.index);
     });
-
     return ids;
   },
 

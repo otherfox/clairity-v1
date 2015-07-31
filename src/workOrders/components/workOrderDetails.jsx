@@ -70,14 +70,14 @@ class WorkOrderDetailsView extends React.Component {
     let colNames = [
       { label: 'Owners', name: 'owners', value: <OwnerView workOrder={this.props.workOrder} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()}  />, cellType: 'string', detailType: 'muiDropDown' },
-      { label: 'Work Order Type', name: 'type_id', value: <WorkOrderTypesDropdown selectedIndex={this.props.workOrder.defaultWorkOrderType} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Work Order Type', name: 'type_id', value: <WorkOrderTypesDropdown selectedIndex={this.props.workOrderType} />, cellType: 'string', detailType: 'muiDropDown' },
       { label: 'Description', name: 'description', value: <TextField multiLine={true}  />, cellType: 'string', detailType: 'muiTextField' },
       { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [6,6,6,6,6,6,6,6,6,6,6,6], sm: [12]}} breakpoints={{ md: 1550 }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
-      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <div><DatePicker defaultDate={(this.props.defaultExpectedInstallDate) ? new Date(this.props.defaultExpectedInstallDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.defaultExpectedInstallDate) ? new Date(this.props.defaultExpectedInstallDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <div><DatePicker defaultDate={(this.props.defaultExpectedInstallDateEnd) ? new Date(this.props.defaultExpectedInstallDateEnd) : new Date()} /><TimePicker format="ampm" hintText="12hr Format"  defaultTime={(this.props.defaultExpectedInstallDateEnd) ? new Date(this.props.defaultExpectedInstallDateEnd) : new Date()} /></div> , cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Install Date', name: 'work_order_date', value: <div><DatePicker defaultDate={(this.props.defaultWorkOrderDate) ? new Date(this.props.defaultWorkOrderDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.defaultWorkOrderDate) ? new Date(this.props.defaultWorkOrderDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Close Date', name: 'close_date', value: <div><DatePicker defaultTime={(this.props.defaultCloseDate) ? new Date(this.props.defaultCloseDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.defaultCloseDate) ? new Date(this.props.defaultCloseDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={this.props.defaultGeneralNotes} />, cellType: 'string', detailType: 'muiTextField' },
+      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <div><DatePicker defaultDate={(this.props.expectedInstallDate) ? new Date(this.props.expectedInstallDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.expectedInstallDate) ? new Date(this.props.expectedInstallDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <div><DatePicker defaultDate={(this.props.expectedInstallDateEnd) ? new Date(this.props.expectedInstallDateEnd) : new Date()} /><TimePicker format="ampm" hintText="12hr Format"  defaultTime={(this.props.expectedInstallDateEnd) ? new Date(this.props.expectedInstallDateEnd) : new Date()} /></div> , cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Install Date', name: 'work_order_date', value: <div><DatePicker defaultDate={(this.props.workOrderDate) ? new Date(this.props.workOrderDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.workOrderDate) ? new Date(this.props.workOrderDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Close Date', name: 'close_date', value: <div><DatePicker defaultTime={(this.props.closeDate) ? new Date(this.props.closeDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.closeDate) ? new Date(this.props.closeDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={this.props.generalNotes} />, cellType: 'string', detailType: 'muiTextField' },
       { label: '', name: 'submit', value: <RaisedButton onClick={() => this.submit()} primary label="Update" />, cellType: 'button', detailType: 'muiButton'}
     ];
     let c = {};
@@ -88,12 +88,7 @@ class WorkOrderDetailsView extends React.Component {
   }
 
   submit() {
-    console.log('Update Work Order `details`:', this.state.popId);
     this.props.onSubmit(this.props);
-    updateWorkOrder({
-      id: this.props.workOrder.id,
-      workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'existing', pop_id: this.state.popId})
-    });
   }
 
   render() {
@@ -111,13 +106,16 @@ class WorkOrderDetailsView extends React.Component {
 
 class WorkOrderDetails extends React.Component {
   handleSubmit(state) {
-
+    console.log(state);
+    /*updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: this.props.workOrder
+    });*/
   }
 
   render() {
-    let order = this.props.workOrder;
     return (
-      <WorkOrderDetailsView onSubmit={(state) => this.handleSubmit(state)}
+      <WorkOrderDetailsView onSubmit={state => this.handleSubmit(state)}
                             defaultStatus={this.props.workOrder.status}
                             defaultWorkOrderType={this.props.workOrder.type.id}
                             defaultDescription={this.props.workOrder.description}
