@@ -12,7 +12,7 @@ import _ from 'lodash'
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 
-class DataTable extends React.Component {
+class DataTableView extends React.Component {
   constructor(props) {
     super(props);
     let data = (this.props.filters && this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
@@ -30,7 +30,16 @@ class DataTable extends React.Component {
     this.setState({width: this.getWidth(), height: this.getHeight()});
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({data: props.data});
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
+  }
+
   getHeight() {
+    debugger;
     return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
   }
 
@@ -285,8 +294,8 @@ class DataTable extends React.Component {
         {filters}
         <Table
           rowHeight={this.props.rowHeight}
-          rowHeightGetter={this.getRowHeight}
-          onRowClick={this.onRowClick}
+          rowHeightGetter={i => this.getRowHeight(i)}
+          onRowClick={i => this.onRowClick(i)}
           rowGetter={i => this.rowGetter(i)}
           rowsCount={this.state.data.length}
           rowClassNameGetter={i => this.getRowClass}
@@ -300,7 +309,7 @@ class DataTable extends React.Component {
   }
 }
 
-DataTable.propTypes = {
+DataTableView.propTypes = {
   colNames: React.PropTypes.array,
   data: React.PropTypes.array,
   colWidths : React.PropTypes.array,
@@ -314,23 +323,21 @@ DataTable.propTypes = {
   sortBy: React.PropTypes.string,
 }
 
-DataTable.contextTypes = {
+DataTableView.contextTypes = {
   muiTheme: React.PropTypes.object
 }
 
-DataTable.defaultProps = {
+DataTableView.defaultProps = {
   widthPerc: 100,
   widthAdj: 0,
   rowHeight: 50,
   flexGrow: []
 }
 
-DataTable.componentDidMount = function() {
-  window.addEventListener('resize', this.handleResize);
-}
-
-DataTable.componentWillReceiveProps = function(props) {
-  this.setState({data: props.data});
+class DataTable extends React.Component {
+  render() {
+    return <DataTableView {...this.props}/>
+  }
 }
 
 export default DataTable;
