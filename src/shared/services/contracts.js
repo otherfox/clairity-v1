@@ -19,11 +19,13 @@ export function getContract(id) {
 
 export function getContractsByAccount(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getSummaryContractsByCustomerId&customer_id=${id}`)
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getContractsByCustomerId&customer_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
-          s(JSON.parse(res.text));
+          let contracts = JSON.parse(res.text);
+          contracts.forEach(c => c.customer_id = id);
+          s(contracts);
         } else {
           f(err);
         }

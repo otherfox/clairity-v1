@@ -7,7 +7,7 @@ import {List} from 'immutable'
 
 export default class OpportunityDetails extends React.Component {
   render() {
-    let opp = this.props.opportunity.toJS();
+    let opp = this.props.opportunity;
     return (
       <Paper>
         <Layout widths={{ lg: [6,6] }} cPadding={'0 20px 20px 20px'}>

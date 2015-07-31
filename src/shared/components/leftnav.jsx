@@ -28,7 +28,6 @@ var LeftNav = React.createClass ({
   },
 
   link(e, idx, item) {
-    debugger;
     this.transitionTo(item.target);
   },
 
@@ -53,8 +52,7 @@ var LeftNav = React.createClass ({
             { text: "Contacts", target: "contacts"},
             { text: "Leads", target: "leads"},
             { text: "Open Installs", target: "open-installs"},
-            { text: "Work Orders", target: "work-orders"},
-            { text: "Settings", target: "settings"},
+            { text: "Work Orders", target: "/work-orders/1538"},
             { text: "Login", target: "login"}
           ]} />
         </div>

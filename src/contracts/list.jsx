@@ -1,6 +1,7 @@
 import React from "react"
-import {Link} from 'react-router'
-import {FontIcon, ClearFix} from 'material-ui'
+import Link from '../shared/components/link'
+import {FontIcon, ClearFix, Paper} from 'material-ui'
+import ContractInfo from './public/details'
 
 export default class ListContracts extends React.Component {
   style() {
@@ -20,15 +21,12 @@ export default class ListContracts extends React.Component {
   }
 
   render() {
-    debugger;
     return (
       <div style={this.style().root}>
         {
-          this.props.contracts.map(o =>
-            <ClearFix>
-              <Link to="view-opp" params={{oppId: o.get('id')}}>
-                <FontIcon className={'md md-stars'} style={this.style().icon}/> <div style={this.style().link}>{o.toJS().toString()}</div>
-              </Link>
+          this.props.contracts.map(contract =>
+            <ClearFix key={contract.id}>
+              <Paper><ContractInfo contract={contract} /></Paper>
             </ClearFix>
           )
         }

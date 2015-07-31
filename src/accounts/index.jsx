@@ -34,11 +34,11 @@ import {
 import controllable from 'react-controllables'
 import {State} from 'react-router'
 
-import AccountDetails from './parts/details'
+import AccountDetails from './public/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
 
-import ContractsList from '../contracts/list'
-let ContractsListQuery = queryRenderer(ContractsList, {
+import ContractList from '../contracts/list'
+let ContractsListQuery = queryRenderer(ContractList, {
   queries: [
     collectionViaQuery({
       table: 'contract',
@@ -76,7 +76,7 @@ let ContactListQuery = queryRenderer(ContactList, {
 
 let accountView = React.createClass({
   render() {
-    let account = this.props.account.toJS();
+    let account = this.props.account;
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
         <Header><h1>Account - {account.name}</h1></Header>

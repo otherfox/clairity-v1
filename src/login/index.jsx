@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
   }
   render() {
     return (
-      <Layout widths={{lg: ['400px'], md: ['400px'], sm: ['400px'], xs: ['400px']}} type={'center-v'} style={{ backgroundColor: '#fafafa', display: 'block', height: window.innerHeight+'px' }}>
+      <Layout widths={{lg: ['400px']}} type={'center-v'} style={{ backgroundColor: this.props.backgroundColor , display: 'block', height: window.innerHeight+'px' }}>
         <div>
           <Paper>
             <div style={{position: 'relative', margin: '0 auto', padding: '3em 0 5em', display: 'table'}}>
@@ -53,19 +53,19 @@ class LoginForm extends React.Component {
               <div>
                 <TextField
                   value={this.props.username}
-                  onChange={this.changeUsername.bind(this)}
+                  onChange={e => this.changeUsername(e)}
                   floatingLabelText="Username" />
               </div>
               <div>
                 <TextField
                   value={this.props.password}
                   floatingLabelText="Password"
-                  onChange={this.changePassword.bind(this)}
-                  onEnterKeyDown={this.fireLogin.bind(this)}
+                  onChange={e => this.changePassword(e)}
+                  onEnterKeyDown={() => this.fireLogin()}
                   type="password" />
               </div>
               <div style={{marginTop: '1em'}}>
-                <RaisedButton onClick={this.fireLogin.bind(this)} secondary={true} label={'Login'} />
+                <RaisedButton onClick={() => this.fireLogin()} secondary={true} label={'Login'} />
               </div>
             </div>
           </Paper>
@@ -84,6 +84,7 @@ LoginForm.propTypes = {
 import {Navigation} from 'react-router'
 
 const Login = React.createClass({
+  contextTypes: { muiTheme: React.PropTypes.object},
   mixins: [Navigation],
   componentDidMount() {
     loginSuccess.listen(() => this.transitionTo('leads'));
@@ -93,7 +94,7 @@ const Login = React.createClass({
   },
   render() {
     return (
-      <LoginForm defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} />
+      <LoginForm defaultUsername="ornemployee@yahoo.com" onLogin={this.tryLogin} backgroundColor={this.context.muiTheme.palette.canvasColor}/>
     );
   }
 });

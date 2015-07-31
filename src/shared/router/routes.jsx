@@ -9,6 +9,8 @@ import {
 
 import {App, NavigationLayout} from '../../app'
 
+import Testbed from '../../testbed'
+
 /* Session Management */
 import Login from '../../login'
 import Settings from '../../settings'
@@ -20,11 +22,13 @@ import OpenInstalls from '../../openInstalls'
 /* Accounts */
 import ViewAccount from '../../accounts'
 import EditAccount  from '../../accounts/edit'
-import SearchAccount from '../../accounts/search'
+import ListAccounts from '../../accounts/all'
 
 /* Contacts */
 import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
+import ListContacts from '../../contacts/list'
+import AddContact from '../../contacts/create'
 
 /* Contracts */
 import CreateContract from '../../contracts/create'
@@ -57,6 +61,9 @@ export default (
   <Route>
     <Redirect from="/" to="login" />
     <Route handler={App} >
+
+      <Route name="testbed" handler={Testbed} />
+
       <Route name="login" path="/login" handler={Login} />
       <Route name="root-layout" path="/" handler={NavigationLayout}>
 
@@ -86,17 +93,38 @@ export default (
         </Route>
 
         <Route {/***** Accounts *****/...{}}>
+
+          <Redirect from="accounts" to="all-accounts" />
           <Route name="accounts" handler={RouteHandler}>
-            <Route name="search-accounts" path="search" handler={SearchAccount} />
-            <Route path=":accountId/:locationId" handler={RouteHandler}>
+            <Route name="all-accounts" path="all" handler={ListAccounts} />
+
+            <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
-              <Route path="edit" name="edit-customer" handler={EditAccount} />
-              <Route path="contracts" handler={RouteHandler}>
-                <DefaultRoute name="view-contracts" handler={ListContracts} />
-                <Route name="add-contract" handler={CreateContract} />
-                <Route name="list-contracts" handler={ListContracts} />
-                <Route name="list-opps" handler={ListOpportunities} />
+
+              <Route path="edit" name="edit-account" handler={EditAccount} />
+
+              <Redirect from="account-contacts" to="all-account-contacts" />
+              <Route name="account-contacts" path="contacts" handler={RouteHandler}>
+                <Route name="all-account-contacts" handler={ListContacts} />
+                <Route name="view-account-contact" path=":contactId" handler={ViewContact} />
+                <Route name="add-account-contact" path="add" handler={AddContact} />
               </Route>
+
+              <Redirect from="account-opps" to="all-account-opps" />
+              <Route name="account-opps" path="opps" handler={RouteHandler}>
+                <Route name="all-account-opps" handler={ListOpportunities} />
+                <Route name="view-account-opp" path=":oppId" handler={ViewOpportunity} />
+                <Route name="add-account-opp" handler={CreateOpportunity} />
+
+              </Route>
+
+              <Redirect from="account-contracts" to="all-account-contracts" />
+              <Route name="account-contracts" path="contracts" handler={RouteHandler}>
+                <Route name="all-account-contracts" path="all" handler={ListContracts} />
+                <Route name="view-account-contracts" path=":contractId" handler={ListContracts} />
+                <Route name="add-account-contract" path="add" handler={CreateContract} />
+              </Route>
+
             </Route>
           </Route>
         </Route>
@@ -112,7 +140,7 @@ export default (
                 <Route name="add-opp-contact" path="add" handler={CreateOpportunity} />
               </Route>
             </Route>
-            <Route name="new-opp" path="create  " handler={CreateUnlinkedOpportunity} />
+            <Route name="new-opp" path="create" handler={CreateUnlinkedOpportunity} />
             <Route name="all-opps" path="all" handler={ListOpportunities} />
           </Route>
         </Route>
@@ -133,10 +161,10 @@ export default (
         <Route {/***** Leads *****/...{}}>
           <Redirect from="leads" to="all-leads" />
           <Route name="leads" handler={RouteHandler}>
-            <Route path=":contactId/:agentId" handler={RouteHandler}>
+            <Route name="all-leads" path="all" handler={ViewLeads} />
+            <Route path=":contactId/:userId" handler={RouteHandler}>
               <Route name="add-contact-opp" path="convert" handler={CreateOpportunity} />
             </Route>
-            <Route name="all-leads" path="all" handler={ViewLeads} />
           </Route>
         </Route>
 

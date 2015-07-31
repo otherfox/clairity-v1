@@ -1,4 +1,5 @@
 import React from 'react'
+import controllable from 'react-controllables'
 import Settings from '../../shared/components/settings'
 import {
   RadioButtonGroup,
@@ -11,154 +12,125 @@ import {
   Toggle,
   Slider,
   DropDownMenu,
-  DatePicker,
+  TimePicker,
   TextField,
+  DatePicker,
   Paper
 } from 'material-ui'
+
+import _ from 'lodash'
+import {queryRenderer, collectionQuery} from '../../shared/components/networkRenderer'
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
-
-import WorkOrder from '../services/stubs/order1583.json'
-import Contract from '../services/stubs/contract7416.json'
-import ServiceTypes from '../services/stubs/serviceTypes.json'
-import OrderTypes from '../services/stubs/workOrderTypes.json'
+import {collectionDropdown} from '../../shared/components/collectionDropdown'
 
 import OwnerView from './details/owner'
+let WorkOrderTypesDropdown = collectionDropdown('workOrderType');
 
-import {List, Map, fromJS} from 'immutable'
+@controllable(['status', 'workOrderDate', 'workOrderType', 'description', 'expectedInstallDate', 'expectedInstallDateEnd', 'workOrderDate', 'closeDate', 'generalNotes'])
 
-let WorkOrderDetails = React.createClass ({
-
-  getDefaultProps() {
-    return {
-      order: fromJS(WorkOrder),
-      serviceTypes: fromJS(ServiceTypes),
-      orderTypes: fromJS(OrderTypes)
-    };
-  },
-
+class WorkOrderDetailsView extends React.Component {
   style() {
-    let style = {
-      width: '100%'
-    };
-
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
-  },
+    return {}
+  }
 
   getServiceTypes() {
-
-    let order = this.props.order;
     let os = [];
-    let orderServices = order.get('services').forEach((service, idx) => {
-      os.push(service.get('id'));
-    });
-
-    let services = this.props.serviceTypes.map( (serviceType, idx) =>
+    this.props.workOrder.services.forEach((service, idx) => { os.push(service) });
+    return this.props.serviceTypes.map((serviceType, idx) =>
       <div key={idx}>
-        <Checkbox name={serviceType.get('name')} value={serviceType.get('id').toString()} label={serviceType.get('name')} defaultSwitched={(os[serviceType.get('id')]) ? true : false} switched/>
+        <Checkbox name={serviceType.name} value={serviceType.id} label={serviceType.name} defaultChecked={(_.indexOf(os, serviceType.id) !== -1) ? true : false } />
       </div>
-    );
-
-    return services
-  },
-
-  getUsers() {
-
-    let users = [
-      new Map({
-        key: 0,
-        label: 'test',
-        value: 7416
-      })
-    ];
-
-    users = new List(users);
-
-    return users;
-  },
+    )
+  }
 
   getStatus() {
-    let status = [
-      new Map({
-        key: 0,
-        label: 'Open',
-        value: 'Open'
-      }),
-      new Map({
-        key: 1,
-        label: 'Closed',
-        value: 'Closed'
-      })
-    ];
-
-    status = new List(status);
-
-    return status;
-
-  },
+    return [
+      { key: 0, label: 'Open', value: 'Open' },
+      { key: 1, label: 'Closed', value: 'Closed'}
+    ]
+  }
 
   getWorkOrderTypes() {
-
     let orderTypes = this.props.orderTypes.map((orderType, idx) => {
-      let data = new Map({
+      let data = {
           key: idx,
-          value: orderType.get('id'),
-          label: orderType.get('name')
-        });
+          value: orderType.id,
+          label: orderType.name
+        };
       return data;
     });
-
-    orderTypes= new List(orderTypes);
     return orderTypes;
-  },
+  }
 
   getDetails(order) {
-
     let owners = [{value: 'Owner',label:'Label'}];
-
     let colNames = [
       { label: 'Owners', name: 'owners', value: <OwnerView workOrder={this.props.workOrder} />, cellType: 'string', detailType: 'muiDropDown' },
-      { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()} selectedValue={order.getIn(['status', 'name'])} />, cellType: 'string', detailType: 'muiDropDown' },
-      { label: 'Work Order Type', name: 'type_id', value: <DropDown menuItems={this.getWorkOrderTypes()} selectedValue={order.getIn(['type', 'id'])} />, cellType: 'string', detailType: 'muiDropDown' },
-      { label: 'Description', name: 'description', value: <TextField multiLine={true} defaultValue={(order.get('description')) ? order.get('description') : ''} />, cellType: 'string', detailType: 'muiTextField' },
+      { label: 'Work Order Status', name: 'status', value: <DropDown menuItems={this.getStatus()}  />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Work Order Type', name: 'type_id', value: <WorkOrderTypesDropdown selectedIndex={this.props.workOrderType} />, cellType: 'string', detailType: 'muiDropDown' },
+      { label: 'Description', name: 'description', value: <TextField multiLine={true}  />, cellType: 'string', detailType: 'muiTextField' },
       { label: 'Services', name: 'services', value: <Layout widths={{lg: [4,4,4,4,4,4,4,4,4,4,4,4], md: [6,6,6,6,6,6,6,6,6,6,6,6], sm: [12]}} breakpoints={{ md: 1550 }}>{this.getServiceTypes()}</Layout>, cellType: 'string', detailType: 'mui' },
-      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <DatePicker defaultDate={(order.get('expected_install_date')) ? new Date(order.get('expected_install_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <DatePicker defaultDate={(order.get('expected_install_date_end')) ? new Date(order.get('expected_install_date_end')) : undefined} /> , cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Install Date', name: 'work_order_date', value: <DatePicker defaultDate={(order.get('work_order_date')) ? new Date(order.get('work_order_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'Close Date', name: 'close_date', value: <DatePicker defaultDate={(order.get('close_date')) ? new Date(order.get('close_date')) : undefined} />, cellType: 'string', detailType: 'muiDatePicker' },
-      { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={(order.get('general_notes')) ? order.get('general_notes'): ''} />, cellType: 'string', detailType: 'muiTextField' },
-      { label: '', name: 'submit', value: <RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, cellType: 'button', detailType: 'muiButton'}
+      { label: 'Expected Install Date (Earliest)', name: 'expected_install_date', value: <div><DatePicker defaultDate={(this.props.expectedInstallDate) ? new Date(this.props.expectedInstallDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.expectedInstallDate) ? new Date(this.props.expectedInstallDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Expected Install Data (Latest)', name: 'expected_install_date_end', value: <div><DatePicker defaultDate={(this.props.expectedInstallDateEnd) ? new Date(this.props.expectedInstallDateEnd) : new Date()} /><TimePicker format="ampm" hintText="12hr Format"  defaultTime={(this.props.expectedInstallDateEnd) ? new Date(this.props.expectedInstallDateEnd) : new Date()} /></div> , cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Install Date', name: 'work_order_date', value: <div><DatePicker defaultDate={(this.props.workOrderDate) ? new Date(this.props.workOrderDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.workOrderDate) ? new Date(this.props.workOrderDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'Close Date', name: 'close_date', value: <div><DatePicker defaultTime={(this.props.closeDate) ? new Date(this.props.closeDate) : new Date()} /><TimePicker format="ampm" hintText="12hr Format" defaultTime={(this.props.closeDate) ? new Date(this.props.closeDate) : new Date()} /></div>, cellType: 'string', detailType: 'muiDatePicker' },
+      { label: 'notes', name: 'general_notes', value: <TextField multiLine={true} defaultValue={this.props.generalNotes} />, cellType: 'string', detailType: 'muiTextField' },
+      { label: '', name: 'submit', value: <RaisedButton onClick={() => this.submit()} primary label="Update" />, cellType: 'button', detailType: 'muiButton'}
     ];
     let c = {};
     colNames.forEach((col, idx) => { c[col.name] = col.value;});
     let data = [c];
-
     let details = {title: 'Details', data: colNames};
-
     return details;
+  }
 
-  },
+  submit() {
+    this.props.onSubmit(this.props);
+  }
 
   render() {
-
     return (
-      <div style={this.style()}>
+      <div style={_.assign(this.style(), this.props.style)}>
         <Paper zDepth={1} rounded={true}>
-          <Layout widths={{ lg: [12], md: [12], sm: [12], xs: [12], xxs: [12]}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
-            <Details {...this.getDetails(this.props.order)} />
+          <Layout widths={{}} pPadding={'0 20px 20px 20px'} cPadding={'0 0 20px 0'}>
+            <Details {...this.getDetails(this.props.workOrder)} />
           </Layout>
         </Paper>
       </div>
     );
   }
+}
+
+class WorkOrderDetails extends React.Component {
+  handleSubmit(state) {
+    console.log(state);
+    /*updateWorkOrder({
+      id: this.props.workOrder.id,
+      workOrder: this.props.workOrder
+    });*/
+  }
+
+  render() {
+    return (
+      <WorkOrderDetailsView onSubmit={state => this.handleSubmit(state)}
+                            defaultStatus={this.props.workOrder.status}
+                            defaultWorkOrderType={this.props.workOrder.type.id}
+                            defaultDescription={this.props.workOrder.description}
+                            defaultExpectedInstallDate ={this.props.workOrder.expected_install_date}
+                            defaultExpectedInstallDateEnd ={this.props.workOrder.expected_install_date_end}
+                            defaultWorkOrderDate = {this.props.workOrder.work_order_date}
+                            defaultCloseDate = {this.props.workOrder.closedDate}
+                            defaultGeneralNotes = {this.props.workOrder.generalNotes}/>
+    );
+  }
+};
+
+WorkOrderDetails = queryRenderer(WorkOrderDetailsView, {
+  method: ['update'],
+  queries: [ collectionQuery('serviceType', 'serviceTypes') ]
 });
 
 export default WorkOrderDetails;

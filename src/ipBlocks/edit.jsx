@@ -47,23 +47,23 @@ let EditIpBlock = React.createClass({
             cStyles={{ lg: [{textAlign: 'right'}]}}
             widths={{ lg: [5,7]}}
             data={[
-              { label: 'Block', name: 'zoneName', value: <div><TextField value={'66.187.176.8/32'} style={{ }} /></div>, detailType: 'muiTextField' },
-              { label: 'Status', name: 'zoneName', value: <div><TextField value={'active'} style={{ }} /></div>, detailType: 'muiTextField' },
-              { label: 'Downstream Org ID', name: 'zoneName', value: <div><TextField value={''} style={{ }} /></div>, detailType: 'muiTextField' },
-              { label: 'Reverse DNS 1', name: 'zoneName', value: <div><TextField value={''} style={{ }} /></div>, detailType: 'muiTextField' },
-              { label: 'Reverse DNS 2', name: 'zoneName', value: <div><TextField value={''} style={{ }} /></div>, detailType: 'muiTextField' },
-              { label: 'notes', name: 'zoneName', value: <div><TextField mutiline={true} value={''} style={{ }} /></div>, detailType: 'muiTextField' }
+              { label: 'Block', name: 'zoneName', value: <div><TextField value={'66.187.176.8/32'} /></div>, detailType: 'muiTextField' },
+              { label: 'Status', name: 'zoneName', value: <div><TextField value={'active'} /></div>, detailType: 'muiTextField' },
+              { label: 'Downstream Org ID', name: 'zoneName', value: <div><TextField value={''} /></div>, detailType: 'muiTextField' },
+              { label: 'Reverse DNS 1', name: 'zoneName', value: <div><TextField value={''} /></div>, detailType: 'muiTextField' },
+              { label: 'Reverse DNS 2', name: 'zoneName', value: <div><TextField value={''} /></div>, detailType: 'muiTextField' },
+              { label: 'notes', name: 'zoneName', value: <div><TextField mutiline={true} value={''} /></div>, detailType: 'muiTextField' }
             ]}
           />
           <Details
             cStyles={{ lg: [{textAlign: 'right'}]}}
             widths={{ lg: [3,9]}}
             data={[
-              { label: 'Customer', name: 'zoneName', value: <div><DropDown menuItems={new List([{ label: 'Customer', value: 2}])} style={{ }} /></div>, detailType: 'muiDropDown' },
-              { label: 'POP', name: 'zoneName', value: <div><DropDown menuItems={new List([{ label: '', value: 2}])} style={{ }} /></div>, detailType: 'muiDropDown' },
-              { label: 'Transit Circuit', name: 'zoneName', value: <div><DropDown menuItems={new List([{ label: '', value: 2}])} style={{ }} /></div>, detailType: 'muiDropDown' },
-              { label: 'Provider Circuit', name: 'zoneName', value: <div><DropDown menuItems={new List([{ label: '', value: 2}])} style={{ }} /></div>, detailType: 'muiDropDown' },
-              { label: 'Internal', name: 'zoneName', value: <div><TextField mutiline={true} value={''} style={{ }} /></div>, detailType: 'muiTextField' }
+              { label: 'Customer', name: 'zoneName', value: <div><DropDown menuItems={[{ label: 'Customer', value: 2}]} /></div>, detailType: 'muiDropDown' },
+              { label: 'POP', name: 'zoneName', value: <div><DropDown menuItems={[{ label: '', value: 2}]} /></div>, detailType: 'muiDropDown' },
+              { label: 'Transit Circuit', name: 'zoneName', value: <div><DropDown menuItems={[{ label: '', value: 2}]} /></div>, detailType: 'muiDropDown' },
+              { label: 'Provider Circuit', name: 'zoneName', value: <div><DropDown menuItems={[{ label: '', value: 2}]} /></div>, detailType: 'muiDropDown' },
+              { label: 'Internal', name: 'zoneName', value: <div><TextField mutiline={true} value={''} /></div>, detailType: 'muiTextField' }
             ]}
           />
         </Layout>

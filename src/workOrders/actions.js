@@ -5,6 +5,7 @@ import Store from '../shared/store'
 export const fetchWorkOrder = Fynx.createAsyncAction();
 export const updateWorkOrder = Fynx.createAsyncAction();
 export const ownersFetched = Fynx.createAsyncAction();
+export const workOrderTypesFetched = Fynx.createAsyncAction();
 const workOrderRecieved = Fynx.createAsyncAction();
 
 // Fetch the data
@@ -45,4 +46,14 @@ ownersFetched.listen(owners => {
       rows: owners
     }
   });
-})
+});
+
+workOrderTypesFetched.listen(types => {
+  Store.handleMessage({
+    type: Store.MessageTypes.Write,
+    payload: {
+      table: 'workOrderType',
+      rows: Types
+    }
+  });
+});

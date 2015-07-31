@@ -8,20 +8,6 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
-function checkStatus(row, status) {
-  if (status == 'both') return true;
-  return row.active.toLowerCase() == status;
-}
-
-function checkNonzero(row, nonzero) {
-  if (!nonzero) return true;
-  return row.balance != 0 ||
-         row.b_0_30  != 0 ||
-         row.b_31_60 != 0 ||
-         row.b_61_90 != 0 ||
-         row.b_91    != 0;
-}
-
 class AgingTable extends React.Component {
 
   constructor(props) {
@@ -32,9 +18,7 @@ class AgingTable extends React.Component {
   }
 
   shouldComponentUpdate(props, state) {
-    if (props.status == this.props.status &&
-        props.nonzero == this.props.nonzero &&
-        props.date == this.props.date) return false;
+    if (props.date == this.props.date) return false;
     return true;
   }
 
@@ -45,23 +29,21 @@ class AgingTable extends React.Component {
   }
 
   computeRows(props) {
-    return props.rows.toList().toJS()
-      .filter(r => checkStatus(r, props.status))
-      .filter(r => checkNonzero(r, props.nonzero));
+    return props.rows;
   }
 
   getAgingReportsTable(data){
     return {
       data: data,
       colNames: [
-        { label: 'Customer', name: 'name',    cellType: 'account'},
+        { label: 'Customer', name: 'name',    cellType: 'account', props: { idField: 'id' } },
       	{ label: 'Status',   name: 'active',  cellType: 'boolean', props: {cellClasses: { Active: 'true', Inactive: 'false' }, cellStyle: {textAlign: 'center'}}, style: {textAlign: 'center'} },
         { label: 'Balance',  name: 'balance', cellType: 'currency'},
         { label: '0 - 30',   name: 'b_0_30',  cellType: 'currency'},
         { label: '31 - 60',  name: 'b_31_60', cellType: 'currency'},
         { label: '61 - 90',  name: 'b_61_90', cellType: 'currency'},
         { label: '91+',      name: 'b_91',    cellType: 'currency'},
-        { label: 'Agent',    name: 'agent',   cellType: 'agent'},
+        { label: 'Agent',    name: 'agent',   cellType: 'agent', props: { idField: 'agent_id' } },
         { label: 'Send Late Notice',    name: 'button', cellType: 'send'},
         { label: 'Last Weekly Notice',  name: 'weekly_late_notice_sent', cellType: 'date'},
         { label: 'Last Monthly Notice', name: 'late_notice_sent', cellType: 'date'},
@@ -70,16 +52,16 @@ class AgingTable extends React.Component {
       filters: {
         data: [
           {label: 'Customer', name: 'name', filterType: 'muiTextField'},
-          {label: 'Agent', name: 'agent', filterType: 'muiTextField'},
           {label: 'Status', filterType: 'muiRadioButtons', name: 'active', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
             { label: 'Active', value: 'Active'},
             { label: 'Inactive', value: 'Inactive'},
             { label: 'Both', value: '', defaultChecked: true}
           ] },
-          {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'status', fuzzy: false, func: this.checkNonzero }
-        ]
+          {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'balance', fuzzy: false, defaultChecked: true, value: 0, not: true }
+        ],
+        active: ['balance']
       },
-      rowHeight: 100,
+      rowHeight: 120,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
       maxWidth: 19,
       widthAdj: -30
@@ -93,6 +75,8 @@ class AgingTable extends React.Component {
   }
 }
 
+// ['balance', 'b_0_30', 'b_31_60','b_61_90','b_91']
+
 export default queryRenderer(AgingTable, {
   queries: [
     {
@@ -102,8 +86,8 @@ export default queryRenderer(AgingTable, {
       writeMethod: reports => agingReportsFetched(reports),
       serviceMethod: props => getAgingReports(props.date),
       cacheMethod: props => {
-        let results = Store.data.get('agingReport');
-        return results.size > 0 ? results : null;
+        let results = Store.data.get('agingReport').toList();
+        return results.size > 0 ? results.toJS() : null;
       },
     }
   ]

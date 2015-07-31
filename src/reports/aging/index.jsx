@@ -2,15 +2,13 @@ import React, {PropTypes} from 'react'
 import Layout from  '../../shared/components/layout'
 import Header from  '../../shared/components/header'
 
-import AgingSettings from './parts/settings'
-import AgingTable from './parts/table'
+import AgingSettings from './public/settings'
+import AgingTable from './public/table'
 
 export default class AgingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'both',
-      nonzero: true,
       date: new Date()
     };
   }

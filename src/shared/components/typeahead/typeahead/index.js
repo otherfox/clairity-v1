@@ -77,7 +77,7 @@ var Typeahead = React.createClass({
       visible: this.getOptionsForValue(this.props.defaultValue, []),
 
       // This should be called something else, "entryValue"
-      entryValue: _.result(_.find(this.props.menuItems.toJS(), 'value', this.props.valueLink.value), 'label'),
+      entryValue: _.result(_.find(this.props.menuItems, 'value', this.props.valueLink.value), 'label'),
 
       // A valid typeahead value
       selection: null,
@@ -171,12 +171,12 @@ var Typeahead = React.createClass({
     var formInputOptionString = formInputOption(option);
 
     nEntry.value = optionString;
-    this.setState({visible: this.getOptionsForValue(optionString, _.map(this.props.menuItems.toJS(), 'label')),
+    this.setState({visible: this.getOptionsForValue(optionString, _.map(this.props.menuItems, 'label')),
                    selection: formInputOptionString,
                    entryValue: optionString});
 
     if (this.props.valueLink) {
-      let matches = this.props.menuItems.toJS().filter(function(m) { return m.label === option; });
+      let matches = this.props.menuItems.filter(m => m.label == option);
       if (matches.length > 0) {
         return this.props.valueLink.requestChange(matches[0].value)
       }
@@ -187,7 +187,7 @@ var Typeahead = React.createClass({
 
   _onTextEntryUpdated: function(event) {
     var value = event.target.value;
-    this.setState({visible: this.getOptionsForValue(value, _.map(this.props.menuItems.toJS(), 'label')),
+    this.setState({visible: this.getOptionsForValue(value, _.map(this.props.menuItems, 'label')),
                    selection: null,
                    entryValue: value});
   },
@@ -287,7 +287,7 @@ var Typeahead = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     this.setState({
-      visible: this.getOptionsForValue(this.state.entryValue, _.map(nextProps.menuItems.toJS(), 'label'))
+      visible: this.getOptionsForValue(this.state.entryValue, _.map(nextProps.menuItems, 'label'))
     });
   },
 

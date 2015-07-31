@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react'
 import DropDown from './dropDown'
-import {Map} from 'immutable'
 import {
   networkCollectionRenderer,
   queryRenderer,
@@ -8,32 +7,32 @@ import {
   collectionQuery
 } from './networkRenderer'
 
-const blankMap = new Map({label: '', value: ''});
+const blankMap = {label: '', value: ''};
 
 class CollectionDropdownView extends React.Component {
   getMenuItems() {
     let items = this.props.collection
       .filter(this.props.filterBy)
-      .map(o => new Map({
-        label: this.getItemLabel(o),
-        value: this.getItemValue(o)
-      }));
-    return this.props.includeBlank ?
-        items.unshift(blankMap)
-      :
-        items;
+      .map(o => {
+        return {
+          label: this.getItemLabel(o),
+          value: this.getItemValue(o)
+        }
+      });
+    if (this.props.includeBlank) items.unshift(blankMap);
+    return items;
   }
   getItemValue(item) {
     if (this.props.getValue) {
       return this.props.getValue(item);
     }
-    return item.get(this.props.valueKey);
+    return item[this.props.valueKey];
   }
   getItemLabel(item) {
     if (this.props.getLabel) {
       return this.props.getLabel(item);
     }
-    return item.get(this.props.labelKey);
+    return item[this.props.labelKey];
   }
   render() {
     return <DropDown {...this.props}

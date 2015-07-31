@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from 'react-router'
+import Link from '../shared/components/link'
 import {FontIcon, ClearFix} from 'material-ui'
 
 export default class ListContacts extends React.Component {
@@ -24,8 +24,8 @@ export default class ListContacts extends React.Component {
         {
           this.props.contacts.map(o =>
             <ClearFix>
-              <Link to="view-contact" params={{contactId: o.get('id')}}>
-                <FontIcon className={'md md-account-circle'} style={this.style().icon}/> <div style={this.style().link}>{o.get('name')}</div>
+              <Link to="view-contact" params={{contactId: o.id}}>
+                <FontIcon className={'md md-account-circle'} style={this.style().icon}/> <div style={this.style().link}>{o.name}</div>
               </Link>
             </ClearFix>
           )

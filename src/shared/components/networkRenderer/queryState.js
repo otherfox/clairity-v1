@@ -44,6 +44,7 @@ export default class QueryState {
     let table = Store.data.get(this.tableName);
     if (table !== this.table) {
       this._data = null;
+      this.table = table;
       this.cb();
     }
     return this;

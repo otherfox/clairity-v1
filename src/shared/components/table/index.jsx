@@ -1,6 +1,6 @@
 import React from 'react'
 import Settings from '../settings'
-import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton } from 'material-ui'
+import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton, Checkbox } from 'material-ui'
 
 import {CellTypes} from './tableCells'
 
@@ -25,7 +25,7 @@ let DataTable = React.createClass({
     margin: React.PropTypes.string,
     flexGrow: React.PropTypes.array,
     filters: React.PropTypes.object,
-    sortBy: React.PropTypes.string
+    sortBy: React.PropTypes.string,
   },
 
   contextTypes: {
@@ -42,12 +42,15 @@ let DataTable = React.createClass({
   },
 
   getInitialState: function() {
+
+    let data = (this.props.filters && this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
+
     return {
-      data: this.props.data,
+      data: data.output,
       width: this.getWidth(),
       active: '',
       sorted: {},
-      filters: {},
+      filters: data.filters,
       height: this.getHeight()
     }
   },
@@ -90,21 +93,14 @@ let DataTable = React.createClass({
   },
 
   sortData: function(col, e) {
+
     let name = col.name;
     let obj = {}
 
     if(typeof this.state.sorted[name] === 'undefined' || this.state.sorted[name] === 'dsc') {
-      this.setState( {data: this.state.data.sort(function(a, b) {
-        let first = a[col.name].replace(/\W/g, '');
-        let second = b[col.name].replace(/\W/g, '');
-        return first.localeCompare(second);
-      }), sorted: {[name]: 'asc'} });
+      this.setState( {data: _.sortBy( this.state.data, name), sorted: {[name]: 'asc'} });
     } else if (this.state.sorted[name] === 'asc') {
-      this.setState( {data: this.state.data.sort(function(a, b) {
-        let first = a[col.name].replace(/\W/g, '');
-        let second = b[col.name].replace(/\W/g, '');
-        return second.localeCompare(first);
-      }), sorted: {[name]: 'dsc'} });
+      this.setState( {data: _.sortBy( this.state.data, name).reverse(), sorted: {[name]: 'dsc'} });
     }
   },
 
@@ -137,51 +133,81 @@ let DataTable = React.createClass({
     return (this.state.active === index ) ? 'active' : '';
   },
 
-  formatCell: function(cell, col) {
+  formatCell: function(rowData, col, width, rowIndex) {
     let CellClass = _.isString(col.cellType) ?
-      (CellTypes[col.cellType] || CellTypes.string) :
-      col.cellType;
-    return <CellClass {...col.props}>{cell}</CellClass>;
+        (CellTypes[col.cellType] || CellTypes.string)
+      :
+        col.cellType;
+    return (
+      <CellClass {...col.props} data={rowData} width={width} index={rowIndex}>
+        {rowData[col.name]}
+      </CellClass>
+    );
   },
 
-  setFilters: function(filter) {
-
+  setFiltersOnChange(filter) {
     return event => {
-      let value = event.target.value;
+      let opp = (filter.not) ? true : false;
+      let value = ((event.target.type === 'checkbox' && !event.target.checked) || event.target.value === '') ? '' : [event.target.value, opp];
       let filters = _.omit(_.assign(this.state.filters,{[filter.name]: value }), _.isEmpty);
-      let ids = [];
-
-      _.forEach( _.keys(filters), (filterName, idx) => {
-        let options = _.map(this.props.data, row => row[filterName]);
-        let index = _.findIndex(this.props.filters.data, function(filter) { return filter.name == filterName; });
-        ids[idx] = (this.props.filters.data[index].fuzzy === false ) ?
-          _.filter(
-            _.map(options, (row, idx) => {
-              return (_.contains(row, filters[filterName])) ? idx : ''
-            }),
-          row => _.isNumber(row))
-          : fuzzy.filter(filters[filterName], options).map( res => res.index);
-      })
-
-      if(ids.length > 1){
-        let outputIds = [];
-        for(let i = 0; i < ids.length - 1; i++) {
-          let start = (outputIds.length > 0) ? outputIds : ids[i];
-          outputIds = _.intersection(start,ids[i+1]);
-        }
-        ids = outputIds;
-      } else {
-        ids = (ids.length > 0) ? ids[0] : _.map(_.keys(this.props.data), id => parseInt(id));
-      }
-
-      let output = _.map(ids, id => this.props.data[id]);
-
-
-      this.setState({
-        data: output,
-        filters: filters
-      });
+      let ids = this.getFilteredIds(filters);
+      let data = this.getData(ids, filters);
+      this.setDataState(data);
     }
+  },
+
+  setFiltersOnLoad(filters) {
+    let filterState = {}
+    _.forEach( filters.active, (filterName) => {
+      let idx = _.findIndex(filters.data, 'name', filterName );
+      filterState = _.assign(filterState,{[filterName]: [filters.data[idx].value, filters.data[idx].not] });
+    });
+    let ids = this.getFilteredIds(filterState);
+
+    return this.getData(ids, filterState);
+  },
+
+  getFilteredIds(filters) {
+    let ids = [];
+
+    _.forEach( _.keys(filters), (filterName, idx) => {
+      let options = _.map(this.props.data, row => row[filterName]);
+      let index = _.findIndex(this.props.filters.data, function(filter) { return filter.name == filterName; });
+      ids[idx] = (this.props.filters.data[index].fuzzy === false ) ?
+        _.filter(
+          _.map(options, (row, idx) => {
+            let filterValue = (isNaN(filters[filterName][0])) ? filters[filterName][0] : +filters[filterName][0];
+            let compare = (isNaN(filterValue)) ? _.contains(row, filterValue) : _.isEqual(row, filterValue);
+            compare = (filters[filterName][1]) ? !compare : compare;
+            return (compare) ? idx : '';
+          }),
+        row => _.isNumber(row))
+        : fuzzy.filter(filters[filterName][0], options).map( res => res.index);
+    });
+    return ids;
+  },
+
+  getData(ids, filters) {
+    if(ids.length > 1){
+      let outputIds = [];
+      for(let i = 0; i < ids.length - 1; i++) {
+        let start = (outputIds.length > 0) ? outputIds : ids[i];
+        outputIds = _.intersection(start,ids[i+1]);
+      }
+      ids = outputIds;
+    } else {
+      ids = (ids.length > 0) ? ids[0] : _.map(_.keys(this.props.data), id => parseInt(id));
+    }
+    let output = _.map(ids, id => this.props.data[id]);
+
+    return { output: output, filters: filters }
+  },
+
+  setDataState(data) {
+    this.setState({
+      data: data.output,
+      filters: data.filters
+    });
   },
 
   render: function() {
@@ -194,19 +220,32 @@ let DataTable = React.createClass({
       data={
         _.map(this.props.filters.data, (filter, i) => {
           if(filter.filterType === 'muiTextField') {
-            return { label: '' , value: <TextField floatingLabelText={filter.label} onChange={this.setFilters(filter)} />, detailType: 'muiTextField', labelStyle: { padding: '0' } }
+            return { label: '' , value: <TextField  floatingLabelText={filter.label}
+                                                    onChange={this.setFiltersOnChange(filter)} />, detailType: 'muiTextField', labelStyle: { padding: '0' } }
           } else if (filter.filterType === 'muiRadioButtons') {
             return { label: filter.label, value:
-              <RadioButtonGroup name={filter.buttonGroup.name} style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)} onChange={this.setFilters(filter)}>
+              <RadioButtonGroup name={filter.buttonGroup.name}
+                                style={_.assign({float: 'left', width: 'initial'}, filter.buttonGroup.style)}
+                                onChange={this.setFiltersOnChange(filter)}>
                 {_.map( filter.buttons, button =>
-                  <RadioButton value={button.value} label={button.label} style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)} defaultChecked={button.defaultChecked}/>
+                  <RadioButton  value={button.value}
+                                label={button.label}
+                                style={_.assign({float: 'left', width: 'initial', marginRight: '20px'}, button.style)}
+                                defaultChecked={button.defaultChecked}/>
                 )}
               </RadioButtonGroup>
             , rowStyle: {marginTop: '40px'}, detailType: 'muiRadioButtons' }
           } else if (filter.filterType === 'muiButton') {
-            return { label: filter.label, value: <RaisedButton label={filter.button.label} href={filter.button.href} primary={(filter.button.primary) ? true : false } linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton', rowStyle:  {marginTop: '30px'}}
+            return { label: filter.label, value: <RaisedButton  label={filter.button.label}
+                                                                href={filter.button.href}
+                                                                primary={(filter.button.primary) ? true : false }
+                                                                linkButton={(filter.button.linkButton) ? true : false } />, detaildetailType: 'muiButton', rowStyle:  {marginTop: '30px'}}
           } else if (filter.filterType === 'muiCheckBox') {
-            return '';
+            return { label: '' , value: <Checkbox defaultChecked={filter.defaultChecked}
+                                                  onCheck={this.setFiltersOnChange(filter)}
+                                                  value={filter.value}
+                                                  style={_.assign({}, filter.style)}
+                                                  label={filter.label}/>, detailType: 'muiCheckBox', rowStyle: {marginTop: '40px'} }
           }
         })
       }
@@ -218,19 +257,11 @@ let DataTable = React.createClass({
             <Column
               label={col.label}
               key={i}
-              headerRenderer={
-                function() {
-                  return this.getHeader(col, i);
-                }.bind(this)
-              }
+              headerRenderer={() => this.getHeader(col, i)}
               dataKey={col.name || i}
               width={this.getColWidth(i)}
               flexGrow={(this.props.flexGrow.length > 0) ? this.props.flexGrow[i] : 1 }
-              cellRenderer={
-                function(cellData) {
-                  return this.formatCell(cellData, col);
-                }.bind(this)
-              }/>
+              cellRenderer={(cellData, cellDataKey, rowData, rowIndex, columnData, width) => this.formatCell(rowData, col, width, rowIndex)} />
           , this)
         }
       </Group>;
@@ -241,6 +272,7 @@ let DataTable = React.createClass({
             /* Fix for dynamic cell constructors. */
             .public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
                 padding: 8px;
+                word-break: break-word;
             }
 
             /* Fix gradient header */

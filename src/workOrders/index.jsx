@@ -7,6 +7,7 @@ import Table from '../shared/components/table'
 import Link from '../shared/components/link'
 import Header from '../shared/components/header'
 import {Tabs, Tab} from '../shared/components/tabs'
+import {fromJS} from 'immutable'
 
 import {networkModelRenderer} from '../shared/components/networkRenderer'
 
@@ -22,6 +23,8 @@ import Installation from './components/installation'
 import Messaging from './components/messaging'
 import Pop from './components/pop'
 import Provisioning from './components/provisioning'
+
+import SettingsManager from '../shared/settings'
 
 import {
   RadioButtonGroup,
@@ -52,7 +55,7 @@ let WorkOrders = React.createClass({
     this.setState({compact: toggled});
   },
   render() {
-    let wo = this.props.workOrder.toJS();
+    let wo = this.props.workOrder;
     return (
       <div>
         <Header><h1>Update Work Order #{wo.id}</h1></Header>
@@ -60,23 +63,14 @@ let WorkOrders = React.createClass({
         <Layout cPadding={'0 20px 0 0'}>
           <Link to="work-order-upload" params={{id: wo.id}}>Attach / View Files</Link>
           <Link to="view-account" params={{accountId: wo.location_id, locationId: wo.location_id}}>View Customer Details</Link>
-          <div style={{position: 'absolute', width: '150px', right: '20px'}} >
-            <Toggle
-              labelStyle={{ minWidth: '100px'}}
-              name="compactView"
-              value="false"
-              label="Compact View"
-              onToggle={this.setCompact}
-            />
-          </div>
         </Layout>
 
-        <Tabs compact={this.state.compact}>
+        <Tabs compact={SettingsManager.compact}>
 
           <Tab label="Details">
-            <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12] }} cPadding={'20px 20px 0 0'}>
+            <Layout widths={{lg: [6,6],md: [12,12]}} cPadding={'20px 20px 0 0'}>
               <div>
-                <Layout widths={{lg: [12,12,12],md: [12,12,12], sm: [12,12,12], xs: [12,12,12], xxs: [12,12,12], }} cPadding={'0 0 20px 0'}>
+                <Layout widths={{}} cPadding={'0 0 20px 0'}>
                   <LocationInfo id={wo.location_id} />
                   <Pop workOrder={wo} />
                   <Provisioning />
@@ -87,38 +81,38 @@ let WorkOrders = React.createClass({
           </Tab>
 
           <Tab label="Contracts">
-            <Layout widths={{lg: [12], md: [12], sm: [12], xs: [12], xxs: [12] }} cPadding={'20px 20px 0 0'}>
+            <Layout widths={{}} cPadding={'20px 20px 0 0'}>
               <ContractOverview locationId={wo.location_id} />
             </Layout>
           </Tab>
 
           <Tab label="Engineering">
-            <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12], }} cPadding={'20px 20px 0 0'}>
+            <Layout widths={{lg: [6,6],md: [12,12]}} cPadding={'20px 20px 0 0'}>
               <div>
-                <Layout widths={{lg: [12,12],md: [12,12], sm: [12,12], xs: [12,12], xxs: [2,12], }} cPadding={'0 0 20px 0'}>
-                  <EngineeringNetworking></EngineeringNetworking>
+                <Layout widths={{}} cPadding={'0 0 20px 0'}>
+                  <EngineeringNetworking workOrder={wo}></EngineeringNetworking>
                 </Layout>
               </div>
               <div>
-                <Layout widths={{lg: [12,12,  12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
-                  <EngineeringHardware></EngineeringHardware>
-                  <Installation></Installation>
-                  <Engineering></Engineering>
+                <Layout widths={{}} cPadding={'0 0 20px 0'}>
+                  <EngineeringHardware workOrder={wo}></EngineeringHardware>
+                  <Installation workOrder={wo}></Installation>
+                  <Engineering workOrder={wo}></Engineering>
                 </Layout>
               </div>
             </Layout>
           </Tab>
 
           <Tab label="Messages">
-            <Layout widths={{lg: [6,6],md: [12,12], sm: [12,12], xs: [12,12], xxs: [12,12], }} cPadding={'20px 20px 0 0'}>
+            <Layout widths={{lg: [6,6],md: [12,12]}} cPadding={'20px 20px 0 0'}>
               <div>
-                <Layout widths={{lg: [12],md: [12], sm: [12], xs: [12], xxs: [12], }} cPadding={'0 0 20px 0'}>
-                  <Messaging />
+                <Layout widths={{}} cPadding={'0 0 20px 0'}>
+                  <Messaging workOrder={wo} />
                 </Layout>
               </div>
               <div>
-                <Layout widths={{lg: [12,12,  12,12],md: [12,12, 12,12], sm: [12,12,12,12], xs: [12,12,12,12], xxs: [12,12,12,12], }} cPadding={'0 0 20px 0'}>
-                  <ContactLogs />
+                <Layout widths={{}} cPadding={'0 0 20px 0'}>
+                  <ContactLogs workOrder={wo} />
                 </Layout>
               </div>
             </Layout>

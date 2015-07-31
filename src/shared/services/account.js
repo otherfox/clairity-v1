@@ -19,6 +19,20 @@ export function getAccount(id) {
   });
 }
 
+export function getAccounts() {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      });
+  });
+}
+
 export function getAccountsByAgent(id) {
   return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomersByAgentId&agent_id=${id}`)

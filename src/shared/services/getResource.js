@@ -57,22 +57,26 @@ export function getCollectionVia(resourceTable, throughTable, throughId) {
 
 
 import {getPops} from './pop'
+import {getAccounts} from './account'
 import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
 import {getLeads} from './contacts'
 import {getProjectTypes} from './projectType'
 import {getSalesStages} from './salesStage'
 import {getLeadSources} from './leadSource'
 import {getCampaignSources} from './campaignSource'
+import {getServiceTypes} from './serviceType'
 
 const collection = {
   pop: getPops,
+  account: getAccounts,
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
   lead: getLeads,
   projectType: getProjectTypes,
   salesStage: getSalesStages,
   leadSource: getLeadSources,
-  campaignSource: getCampaignSources
+  campaignSource: getCampaignSources,
+  serviceType: getServiceTypes
 };
 
 export function getCollection(tableName) {
