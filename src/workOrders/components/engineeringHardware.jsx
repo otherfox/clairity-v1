@@ -216,6 +216,6 @@ class EngineeringHardware extends React.Component {
                                 defaultHardwareNotes={this.props.workOrder.hardware_notes} />
     );
   }
-};
+}
 
 export default EngineeringHardware;

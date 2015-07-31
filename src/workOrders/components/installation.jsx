@@ -18,45 +18,45 @@ import {
   Paper
 } from 'material-ui'
 
-let data = [];
+import _ from 'lodash'
+import controllable from 'react-controllables'
 
-let Installation = React.createClass ({
+@controllable([ 'voiceServicesAccepted',
+                'circuitInstalledAndTested',
+                'ethernetErrorsChecked',
+                'voiceInstalledAndTested',
+                'voiceServicesAccepted',
+                'hardwareNotes',
+                'rss'
+              ])
 
-  propTypes: {
-    style: React.PropTypes.object,
-    data: React.PropTypes.array
-  },
-
-  getDefaultProps() {
-    return {
-      data: data
-    };
-  },
+class InstallationView extends React.Component {
 
   style() {
-    let style = {};
+    return {}
+  }
 
-    if(this.props.style) {
-      Object.keys(this.props.style).forEach(function(key, i){
-        console.log(key);
-        style[key] = this.props.style[key];
-      }, this);
-    }
-
-    return style;
-  },
+  submit() {
+    this.props.onSubmit(this.props)
+  }
 
   render() {
     return (
-      <div style={this.props.style}>
+      <div style={_.assign(this.style(), this.props.style)}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg:[12],md:[12],sm:[12],xs:[12]}} pPadding={'0 20px 20px 20px'}>
             <div>
               <Details title={'Installation'}
                 data = {[
-                  { label: '', value: <Layout widths={{lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12]}}><Checkbox label={'Circuit Installed and Tested'} defaultSwitched={true} switched /><Checkbox label={'Ethernet Errors Checked'} /><Checkbox label={'Circuit Accepted'} /><Checkbox label={'Voice Installed and Tested'} /><Checkbox label={'Voice Services Accepted'} /></Layout>, detailType: 'muiTextField' },
-                  { label: 'RSS', name: '60.0 dBm', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
-                  { label: 'Notes', name: 'hardware_notes', value: <TextField multiLine={true} />, detailType: 'muiTextField' },
+                  { label: '', value: <Layout widths={{lg: [12,12,12], md: [12,12,12], sm: [12,12,12], xs: [12,12,12]}}>
+                                        <Checkbox label={'Circuit Installed and Tested'} defaultChecked={this.props.circuitServicesInstalledAndTested}/>
+                                        <Checkbox label={'Ethernet Errors Checked'} defaultChecked={this.props.ethernetErrorsChecked}/>
+                                        <Checkbox label={'Circuit Accepted'} defaultChecked={this.props.circuitAccepted}/>
+                                        <Checkbox label={'Voice Installed and Tested'} defaultChecked={this.props.voiceInstalledAndTested} />
+                                        <Checkbox label={'Voice Services Accepted'} defaultChecked={this.props.voiceServicesAccepted} />
+                                      </Layout>, detailType: 'muiTextField' },
+                  { label: 'RSS', name: 'rss', value: <TextField multiLine={true} defaultValue={this.props.rss}/>, detailType: 'muiTextField' },
+                  { label: 'Notes', name: 'hardware_notes', value: <TextField multiLine={true} defaultValue={this.props.hardwareNotes} />, detailType: 'muiTextField' },
                   { label: '', value:<RaisedButton onClick={() => this.refs.pop.submit()} primary label="Update" />, detailType: 'muiButton' }
                 ]}
               />
@@ -66,6 +66,28 @@ let Installation = React.createClass ({
       </div>
     );
   }
-});
+}
+
+class Installation extends React.Component {
+  handleSubmit(state) {
+    console.log(state);
+    // updateWorkOrder({
+    //   id: this.props.workOrder.id,
+    //   workOrder: _.extend({}, this.props.workOrder, {pop_entry: 'existing', pop_id: this.state.popId})
+    // });
+  }
+
+  render() {
+    return (
+      <InstallationView onSubmit={(state) => this.handleSubmit(state)}
+                        defaultVoiceInstalledAndTested={this.props.workOrder.voice_installed_and_tested}
+                        defaultVoiceServicesAccepted={this.props.workOrder.voice_services_accepted}
+                        defaultCircuitInstalledAndTested={this.props.workOrder.circuit_installed_and_tested}
+                        defaultEthernetErrorsChecked={this.props.workOrder.ethernet_errors_checked}
+                        defaultHardwareNotes={this.props.workOrder.hardware_notes}
+                        defaultRss={this.props.workOrder.rss} />
+    );
+  }
+}
 
 export default Installation;
