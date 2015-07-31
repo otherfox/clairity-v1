@@ -9,6 +9,8 @@ import {
 
 import {App, NavigationLayout} from '../../app'
 
+import Testbed from '../../testbed'
+
 /* Session Management */
 import Login from '../../login'
 import Settings from '../../settings'
@@ -59,6 +61,9 @@ export default (
   <Route>
     <Redirect from="/" to="login" />
     <Route handler={App} >
+
+      <Route name="testbed" handler={Testbed} />
+
       <Route name="login" path="/login" handler={Login} />
       <Route name="root-layout" path="/" handler={NavigationLayout}>
 
