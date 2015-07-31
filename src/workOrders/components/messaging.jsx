@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Settings from '../../shared/components/settings'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import List from '../../shared/components/list'
+
+import {
+  queryRenderer,
+  collectionViaQuery
+} from '../../shared/components/networkRenderer'
+
 import {
   RadioButtonGroup,
   RadioButton,
@@ -18,6 +24,35 @@ import {
   TextField,
   Paper
 } from 'material-ui'
+
+class MessageList extends React.Component {
+  render() {
+
+  }
+}
+
+MessageList.propTypes = {
+
+};
+
+class Message extends React.Component {
+  render() {
+
+  }
+}
+
+
+let MessageListQuery = queryRenderer(MessageList, {
+  queries: [
+    collectionViaQuery({
+      table: 'opportunity',
+      viaTable: 'account',
+      propName: 'opportunities',
+      idName: 'accountId',
+      keyName: 'customer_id'
+    })
+  ]
+});
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
@@ -49,7 +84,7 @@ class MessagingView extends React.Component {
               />
 
               <List
-                data= {[
+                data={[
                 { label: 'Nancy Morefield', date:'07/16/2014 9:58 AM', value: '1-877-408-8967 added to account.  Physical location Stephen Exley, LLC in Spring, TX.'},
                 { label: 'D. Garcia', date:'07/15/2014 3:43 PM', value: ' LNP Order 147928 for TN 2812470011 has been rejected for no account found. Thank You!'},
                 { label: 'D. Garcia', date:'07/14/2014 5:04 PM', value: ' LNP Order Submitted:147928 for TN2812470011. Thank you!'},
