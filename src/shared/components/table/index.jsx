@@ -174,7 +174,7 @@ class DataTable extends React.Component {
   }
 
   render() {
-    debugger;
+
     let filters = (this.props.filters) ? <Details
       widths={this.props.filters.widths || {lg: ['auto', '320px']}}
       rowStyle={this.props.filters.rowStyle || { float: 'left' }}
