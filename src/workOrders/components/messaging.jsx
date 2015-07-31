@@ -36,7 +36,7 @@ class MessagingView extends React.Component {
 
   render() {
     return (
-      <div style={_assign(this.style(), this.props.style)}>
+      <div style={_.assign(this.style(), this.props.style)}>
         <Paper zDepth={1} rounded={true}>
           <Layout widths={{lg:[12],md:[12],sm:[12],xs:[12]}} pPadding={'0 20px 20px 20px'}>
             <div>
