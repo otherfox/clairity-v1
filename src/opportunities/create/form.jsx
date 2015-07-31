@@ -1,10 +1,11 @@
 import React, { PropTypes, addons } from 'react/addons'
 import controllable from 'react-controllables'
 import Details, { DetailsRow } from '../../shared/components/details'
-import { Paper, TextField } from 'material-ui'
+import { Paper, TextField, RaisedButton } from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Header from '../../shared/components/header'
 import { collectionDropdown } from '../../shared/components/collectionDropdown'
+import _ from 'lodash'
 
 let ProjectTypes = collectionDropdown('projectType');
 let SalesStages = collectionDropdown('salesStage');
@@ -13,6 +14,13 @@ let CampaignSources = collectionDropdown('campaignSource');
 
 @controllable(['name', 'projectType', 'stage', 'leadSource', 'leadSourceId'])
 class CreateFormComponent extends React.Component {
+
+  _onSubmit() {
+    let data = _.omit(_.clone(this.props), _.functions(this.props));
+    console.log('submitting data', data);
+    
+  }
+
   render() {
     return (
       <Layout widths={{}} cPadding={'20px 20px 0 0'}>
@@ -50,6 +58,9 @@ class CreateFormComponent extends React.Component {
               <DetailsRow label="Lead Campaign Source">
                 <CampaignSources value={this.props.leadSource}
                                  onChange={this.props.onLeadSourceChange} />
+              </DetailsRow>
+              <DetailsRow>
+                <RaisedButton primary label="Submit" onClick={() => this._onSubmit()} />
               </DetailsRow>
             </Details>
           </Layout>
