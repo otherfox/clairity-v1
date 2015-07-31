@@ -81,6 +81,10 @@ class MessagingView extends React.Component {
   }
 }
 
+// wom = wmDAO.getAllWorkOrderMessagesByWorkOrderId(url.id)
+// for wom
+// userDAO.getUserById(woms[i].user_id)
+
 class Messaging extends React.Component {
   handleSubmit(state) {
     console.log(state)
