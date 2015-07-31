@@ -12,75 +12,46 @@ import _ from 'lodash'
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 
-let DataTable = React.createClass({
-
-  propTypes: {
-    colNames: React.PropTypes.array,
-    data: React.PropTypes.array,
-    colWidths : React.PropTypes.array,
-    maxWidth: React.PropTypes.number,
-    widthAdj: React.PropTypes.number,
-    widthPerc: React.PropTypes.number,
-    rowHeight: React.PropTypes.number,
-    margin: React.PropTypes.string,
-    flexGrow: React.PropTypes.array,
-    filters: React.PropTypes.object,
-    sortBy: React.PropTypes.string,
-  },
-
-  contextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
-  getDefaultProps: function() {
-    return {
-      widthPerc: 100,
-      widthAdj: 0,
-      rowHeight: 50,
-      flexGrow: []
-    }
-  },
-
-  getInitialState: function() {
-
+class DataTable extends React.Component {
+  constructor(props) {
+    super(props);
     let data = (this.props.filters && this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
+    this.state = {
+        data: data.output,
+        width: this.getWidth(),
+        active: '',
+        sorted: {},
+        filters: data.filters,
+        height: this.getHeight()
+    };
+  }
 
-    return {
-      data: data.output,
-      width: this.getWidth(),
-      active: '',
-      sorted: {},
-      filters: data.filters,
-      height: this.getHeight()
-    }
-  },
+  handleResize() {
+    this.setState({width: this.getWidth(), height: this.getHeight()});
+  }
 
-  componentWillReceiveProps: function(props) {
-    this.setState({data: props.data});
-  },
-
-  getHeight: function() {
+  getHeight() {
     return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
-  },
+  }
 
-  getWidth: function() {
+  getWidth() {
     let widthPerc = this.props.widthPerc / 100;
     let width = (window.innerWidth > Settings.breakpoints.sm) ? widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj) : widthPerc * (window.innerWidth - Settings.mobilePadding + this.props.widthAdj) ;
     return width;
-  },
+  }
 
-  getColWidth: function(i) {
+  getColWidth(i) {
      let width = this.props.maxWidth;
      if(this.props.colWidths) {
        return (this.props.colWidths[i] / width);
      } else {
        return 100;
      }
-  },
+  }
 
-  rowGetter: function(rowIndex) {
+  rowGetter(rowIndex) {
       return this.state.data[rowIndex];
-  },
+  }
 
   getHeader(col, i) {
     let sortIcon = '';
@@ -90,9 +61,9 @@ let DataTable = React.createClass({
     }
 
     return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} {sortIcon}</div>
-  },
+  }
 
-  sortData: function(col, e) {
+  sortData(col, e) {
 
     let name = col.name;
     let obj = {}
@@ -102,17 +73,9 @@ let DataTable = React.createClass({
     } else if (this.state.sorted[name] === 'asc') {
       this.setState( {data: _.sortBy( this.state.data, name).reverse(), sorted: {[name]: 'dsc'} });
     }
-  },
+  }
 
-  handleResize: function() {
-    this.setState({width: this.getWidth(), height: this.getHeight()});
-  },
-
-  componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-  style: function() {
+  style() {
     return {
       root: {
         width: '100%',
@@ -123,17 +86,17 @@ let DataTable = React.createClass({
         verticalAlign: 'middle'
       }
     };
-  },
+  }
 
-  onRowClick: function(e, index) {
+  onRowClick(e, index) {
       this.setState({ active: index });
-  },
+  }
 
-  getRowClass: function(index) {
+  getRowClass(index) {
     return (this.state.active === index ) ? 'active' : '';
-  },
+  }
 
-  formatCell: function(rowData, col, width, rowIndex) {
+  formatCell(rowData, col, width, rowIndex) {
     let CellClass = _.isString(col.cellType) ?
         (CellTypes[col.cellType] || CellTypes.string)
       :
@@ -143,7 +106,7 @@ let DataTable = React.createClass({
         {rowData[col.name]}
       </CellClass>
     );
-  },
+  }
 
   setFiltersOnChange(filter) {
     return event => {
@@ -154,7 +117,7 @@ let DataTable = React.createClass({
       let data = this.getData(ids, filters);
       this.setDataState(data);
     }
-  },
+  }
 
   setFiltersOnLoad(filters) {
     let filterState = {}
@@ -165,7 +128,7 @@ let DataTable = React.createClass({
     let ids = this.getFilteredIds(filterState);
 
     return this.getData(ids, filterState);
-  },
+  }
 
   getFilteredIds(filters) {
     let ids = [];
@@ -185,7 +148,7 @@ let DataTable = React.createClass({
         : fuzzy.filter(filters[filterName][0], options).map( res => res.index);
     });
     return ids;
-  },
+  }
 
   getData(ids, filters) {
     if(ids.length > 1){
@@ -201,16 +164,17 @@ let DataTable = React.createClass({
     let output = _.map(ids, id => this.props.data[id]);
 
     return { output: output, filters: filters }
-  },
+  }
 
   setDataState(data) {
     this.setState({
       data: data.output,
       filters: data.filters
     });
-  },
+  }
 
-  render: function() {
+  render() {
+    debugger;
     let filters = (this.props.filters) ? <Details
       widths={this.props.filters.widths || {lg: ['auto', '320px']}}
       rowStyle={this.props.filters.rowStyle || { float: 'left' }}
@@ -323,9 +287,9 @@ let DataTable = React.createClass({
           rowHeight={this.props.rowHeight}
           rowHeightGetter={this.getRowHeight}
           onRowClick={this.onRowClick}
-          rowGetter={this.rowGetter}
+          rowGetter={i => this.rowGetter(i)}
           rowsCount={this.state.data.length}
-          rowClassNameGetter={this.getRowClass}
+          rowClassNameGetter={i => this.getRowClass}
           width={this.getWidth()}
           height={this.state.height}
           headerHeight={50}>
@@ -334,6 +298,39 @@ let DataTable = React.createClass({
       </div>
     );
   }
-});
+}
+
+DataTable.propTypes = {
+  colNames: React.PropTypes.array,
+  data: React.PropTypes.array,
+  colWidths : React.PropTypes.array,
+  maxWidth: React.PropTypes.number,
+  widthAdj: React.PropTypes.number,
+  widthPerc: React.PropTypes.number,
+  rowHeight: React.PropTypes.number,
+  margin: React.PropTypes.string,
+  flexGrow: React.PropTypes.array,
+  filters: React.PropTypes.object,
+  sortBy: React.PropTypes.string,
+}
+
+DataTable.contextTypes = {
+  muiTheme: React.PropTypes.object
+}
+
+DataTable.defaultProps = {
+  widthPerc: 100,
+  widthAdj: 0,
+  rowHeight: 50,
+  flexGrow: []
+}
+
+DataTable.componentDidMount = function() {
+  window.addEventListener('resize', this.handleResize);
+}
+
+DataTable.componentWillReceiveProps = function(props) {
+  this.setState({data: props.data});
+}
 
 export default DataTable;
