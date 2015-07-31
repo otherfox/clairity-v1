@@ -8,14 +8,22 @@ import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import Details from '../details'
 import fuzzy from 'fuzzy'
 import _ from 'lodash'
+import controllable from 'react-controllables'
+import {contextTypes} from '../../decorators'
 
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 
+
+
+@controllable(['data'])
+@contextTypes({
+  muiTheme: React.PropTypes.object
+})
 class DataTableView extends React.Component {
   constructor(props) {
     super(props);
-    let data = (this.props.filters && this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.data, filters: {}};
+    let data = (this.props.filters && this.props.filters.active) ? this.setFiltersOnLoad(this.props.filters) : { output: this.props.initialData, filters: {}};
     this.state = {
         data: data.output,
         width: this.getWidth(),
@@ -39,8 +47,7 @@ class DataTableView extends React.Component {
   }
 
   getHeight() {
-    debugger;
-    return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
+    return (((this.props.initialData.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.initialData.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
   }
 
   getWidth() {
@@ -64,11 +71,9 @@ class DataTableView extends React.Component {
 
   getHeader(col, i) {
     let sortIcon = '';
-
     if (this.state.sorted[col.name]) {
       sortIcon = (this.state.sorted[col.name] === 'asc') ? <ArrowDropDown style={this.style().icon} /> : <ArrowDropUp style={this.style().icon} /> ;
     }
-
     return <div style={_.assign(col.style)} onClick={this.sortData.bind(this, col)}>{col.label} {sortIcon}</div>
   }
 
@@ -143,7 +148,7 @@ class DataTableView extends React.Component {
     let ids = [];
 
     _.forEach( _.keys(filters), (filterName, idx) => {
-      let options = _.map(this.props.data, row => row[filterName]);
+      let options = _.map(this.props.initialData, row => row[filterName]);
       let index = _.findIndex(this.props.filters.data, function(filter) { return filter.name == filterName; });
       ids[idx] = (this.props.filters.data[index].fuzzy === false ) ?
         _.filter(
@@ -168,9 +173,9 @@ class DataTableView extends React.Component {
       }
       ids = outputIds;
     } else {
-      ids = (ids.length > 0) ? ids[0] : _.map(_.keys(this.props.data), id => parseInt(id));
+      ids = (ids.length > 0) ? ids[0] : _.map(_.keys(this.props.initialData), id => parseInt(id));
     }
-    let output = _.map(ids, id => this.props.data[id]);
+    let output = _.map(ids, id => this.props.initialData[id]);
 
     return { output: output, filters: filters }
   }
@@ -294,7 +299,6 @@ class DataTableView extends React.Component {
         {filters}
         <Table
           rowHeight={this.props.rowHeight}
-          rowHeightGetter={i => this.getRowHeight(i)}
           onRowClick={i => this.onRowClick(i)}
           rowGetter={i => this.rowGetter(i)}
           rowsCount={this.state.data.length}
@@ -309,34 +313,22 @@ class DataTableView extends React.Component {
   }
 }
 
-DataTableView.propTypes = {
-  colNames: React.PropTypes.array,
-  data: React.PropTypes.array,
-  colWidths : React.PropTypes.array,
-  maxWidth: React.PropTypes.number,
-  widthAdj: React.PropTypes.number,
-  widthPerc: React.PropTypes.number,
-  rowHeight: React.PropTypes.number,
-  margin: React.PropTypes.string,
-  flexGrow: React.PropTypes.array,
-  filters: React.PropTypes.object,
-  sortBy: React.PropTypes.string,
-}
-
-DataTableView.contextTypes = {
-  muiTheme: React.PropTypes.object
-}
-
-DataTableView.defaultProps = {
-  widthPerc: 100,
-  widthAdj: 0,
-  rowHeight: 50,
-  flexGrow: []
-}
-
 class DataTable extends React.Component {
   render() {
-    return <DataTableView {...this.props}/>
+    return  <div>
+      <DataTableView  defaultData = {this.props.data}
+                      initialData={this.props.data}
+                      colNames= {this.props.colNames}
+                      colWidths= {this.props.colWidths}
+                      maxWidth= {this.props.maxWidth}
+                      widthAdj= {this.props.widthAdj || 0}
+                      widthPerc= {this.props.widthPerc || 100}
+                      rowHeight= {this.props.rowHeight || 50}
+                      margin= {this.props.margin}
+                      flexGrow= {this.props.flexGrow || []}
+                      filters= {this.props.filters}
+                      sortBy= {this.props.sortBy} />
+    </div>
   }
 }
 
