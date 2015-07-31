@@ -1,5 +1,5 @@
 import React from 'react'
-import Settings from './settings'
+import Settings from '../settings'
 import _ from 'lodash'
 import {
   Utils,
@@ -7,7 +7,7 @@ import {
   ClearFix
 } from 'material-ui'
 
-import Layout from './layout'
+import Layout from '../layout'
 
 let ColorManipulator = Utils.ColorManipulator;
 
@@ -109,3 +109,5 @@ Details.contextTypes = {
 };
 
 export default Details;
+
+export {default as DetailsRow} from './detailRow'
