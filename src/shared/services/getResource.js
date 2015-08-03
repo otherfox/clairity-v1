@@ -26,8 +26,12 @@ import { getOpportunitiesByAccount } from './opportunity'
 import { getContractsByAccount, getContractsByLocation } from './contracts'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
+import {getWorkOrderMessagesByWorkOrder} from './messages'
 
 const resourceVia = {
+  workOrderMessage: {
+    workOrder: getWorkOrderMessagesByWorkOrder
+  },
   contact: {
     account: getContactsByAccount,
     opportunity: getContactsByOpportunity,
