@@ -13,12 +13,12 @@ import controllable from 'react-controllables'
 
 let { ColorManipulator } = Utils;
 
-@controllable([])
+@controllable(['value'])
 @contextTypes({
   muiTheme: React.PropTypes.object
 })
 
-class Filter extends Component {
+class FilterView extends Component {
   style() {
     return {
       label: {
@@ -46,34 +46,35 @@ class Filter extends Component {
       muiRaisedButton: {},
     }
   }
-  change() {
-    this.props.onChange(this.props)
+  change(e) {
+    this.props.value = (e.target.type === 'checkbox') ? e.target.checked : e.target.value;
+    this.props.handleOnChange(this.props)
   }
   getFilterByType(type) {
     switch(type) {
       case 'muiTextField':
         return <TextField style={_.assign(this.style().muiTextField, this.props.style)}
                           floatingLabelText={this.props.label}
+                          defaultValue={this.props.value}
                           onChange={e => this.change(e)} />
       case 'muiRadioButtons':
         return  <div style={_.assign(this.style().muiRadioButtons, this.props.style)}>
                   <span style={_.assign(this.style().label, this.props.labelStyle )}>{this.props.label}</span>
                   <RadioButtonGroup name={this.props.buttonGroup.name}
                                     style={_.assign(this.style().muiRadioButtonGroup, this.props.buttonGroup.style)}
-                                    defaultSelected={this.props.buttonGroup.defaultSelected}
+                                    defaultSelected={this.props.value}
                                     onChange={e => this.change(e)}>
                     {_.map( this.props.options, button =>
                       <RadioButton  value={button.value}
                                     label={button.label}
                                     style={_.assign(this.style().muiRadioButton, button.style)}
-                                    defaultChecked={button.defaultChecked}/>
+                                    defaultChecked= {button.defaultChecked}/>
                     )}
                   </RadioButtonGroup>
                 </div>
       case 'muiCheckBox':
-        return <Checkbox  defaultChecked={this.props.defaultChecked}
+        return <Checkbox  defaultChecked={this.props.value}
                           onCheck={e => this.change(e)}
-                          value={this.props.value}
                           style={_.assign(this.style().muiCheckBox, this.props.style)}
                           label={this.props.label}/>
     }
@@ -81,6 +82,17 @@ class Filter extends Component {
   render() {
     return (
       <div>{this.getFilterByType(this.props.type)}</div>
+    )
+  }
+}
+
+class Filter extends Component {
+  handleOnChange(state) {
+      this.props.onChange(state)
+  }
+  render() {
+    return (
+      <FilterView {..._.assign(this.props, {handleOnChange: state => this.handleOnChange(state), defaultValue: this.props.defaultValue})} />
     )
   }
 }

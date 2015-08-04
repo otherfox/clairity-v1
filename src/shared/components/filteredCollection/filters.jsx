@@ -1,6 +1,9 @@
 import React from 'react'
 import Filter from './filter'
 import _ from 'lodash'
+import controllable from 'react-controllables'
+
+@controllable(['data'])
 
 class Filters extends React.Component {
   style() {
@@ -13,20 +16,19 @@ class Filters extends React.Component {
       }
     }
   }
-  handleOnChange(state) {
-    console.log(state)
+
+  handleOnChange(filter) {
+    this.setFiltersOnChange(filter);
   }
 
-  // setFiltersOnChange(filter) {
-  //   return event => {
-  //     let opp = (filter.not) ? true : false;
-  //     let value = ((event.target.type === 'checkbox' && !event.target.checked) || event.target.value === '') ? '' : [event.target.value, opp];
-  //     let filters = _.omit(_.assign(this.state.filters,{[filter.name]: value }), _.isEmpty);
-  //     let ids = this.getFilteredIds(filters);
-  //     let data = this.getData(ids, filters);
-  //     this.setDataState(data);
-  //   }
-  // }
+  setFiltersOnChange(filter) {
+      let opp = (filter.not) ? true : false;
+      let value = (filter.value === '') ? '' : [event.target.value, opp];
+      let filters = _.omit(_.assign(this.state.filters,{[filter.name]: value }), _.isEmpty);
+      let ids = this.getFilteredIds(filters);
+      let data = this.getData(ids, filters);
+      // this.setDataState(data);
+  }
   //
   // setFiltersOnLoad(filters) {
   //   let filterState = {}

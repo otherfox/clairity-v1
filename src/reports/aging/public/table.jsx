@@ -77,13 +77,13 @@ class AgingTable extends React.Component {
       <div>
         <FilteredCollection data={this.state.rows}>
           <Filters active={['balance']}>
-            <Filter type={'muiTextField'} name={'name'} label={'Customer'} />
-            <Filter lable={'Status'} type={'muiRadioButtons'} name={'active'} fuzzy={false} buttonGroup={{name: 'status', defaultSelected: 'Both'}} options={[
+            <Filter type={'muiTextField'} name={'name'} label={'Customer'} defaultValue={'test'} />
+            <Filter lable={'Status'} type={'muiRadioButtons'} name={'active'} fuzzy={false} buttonGroup={{name: 'status'}} options={[
               { label: 'Active', value: 'Active'},
               { label: 'Inactive', value: 'Inactive'},
               { label: 'Both', value: '', defaultChecked: true}
             ]} />
-            <Filter type={'muiCheckBox'} label={'Hide $0 Balances'} name={'balance'} fuzzy={false} defaultChecked={true} value={0} not={true} />
+            <Filter type={'muiCheckBox'} label={'Hide $0 Balances'} name={'balance'} fuzzy={false} defaultValue={true} filterValue={0} not={true} />
           </Filters>
           <Table {...this.getAgingReportsTable(this.state.rows)} />
         </FilteredCollection>
