@@ -29,7 +29,7 @@ class Filter extends React.Component {
       muiRadioButtons: {
         marginTop: '40px'
       },
-      muiButtonGroup: {
+      muiRadioButtonGroup: {
         float: 'left',
         width: 'initial'
       },
@@ -38,7 +38,9 @@ class Filter extends React.Component {
         width: 'initial',
         marginRight: '20px'
       },
-      muiCheckBox: {},
+      muiCheckBox: {
+        marginTop: '40px'
+      },
       muiRaisedButton: {},
     }
   }
@@ -52,7 +54,7 @@ class Filter extends React.Component {
         return  <div style={_.assign(this.style().muiRadioButtons, this.props.style)}>
                   <span style={_.assign(this.style().label, this.props.labelStyle )}>{this.props.label}</span>
                   <RadioButtonGroup name={this.props.name}
-                                    style={_.assign(this.style().muiRadioGroup, this.props.groupStyle)}
+                                    style={_.assign(this.style().muiRadioButtonGroup, this.props.groupStyle)}
                                     onChange={this.props.onChange(this.props)}>
                     {_.map( this.props.options, button =>
                       <RadioButton  value={button.value}

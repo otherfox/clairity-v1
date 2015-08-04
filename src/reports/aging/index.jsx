@@ -5,6 +5,7 @@ import Header from  '../../shared/components/header'
 import AgingSettings from './public/settings'
 import AgingTable from './public/table'
 import {FilteredCollection, Filters, Filter} from '../../shared/components/filteredCollection'
+import {RaisedButton} from 'material-ui'
 
 export default class AgingPage extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class AgingPage extends React.Component {
         <AgingTable {...this.state} />
         <FilteredCollection>
           <Filters>
+            <RaisedButton label={'test'} />
             <Filter type={'muiTextField'} label={'name'} />
             <Filter type={'muiTextField'} label={'age'} />
             <Filter type={'muiCheckBox'} label={'certified?'} />
