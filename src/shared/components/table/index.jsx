@@ -64,7 +64,7 @@ class DataTableView extends React.Component {
   }
 
   rowGetter(rowIndex) {
-      return this.state.data[rowIndex];
+      return this.props.data[rowIndex];
   }
 
   getHeader(col, i) {
