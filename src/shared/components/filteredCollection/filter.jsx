@@ -47,7 +47,7 @@ class Filter extends React.Component {
   getFilterByType(type) {
     switch(type) {
       case 'muiTextField':
-        return <TextField style={this.props.style}
+        return <TextField style={_.assign(this.style().muiTextField, this.props.style)}
                           floatingLabelText={this.props.label}
                           onChange={this.props.onChange(this.props)} />
       case 'muiRadioButtons':

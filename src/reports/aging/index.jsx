@@ -27,7 +27,7 @@ export default class AgingPage extends React.Component {
           <Filters>
             <RaisedButton label={'test'} />
             <Filter type={'muiTextField'} label={'name'} />
-            <Filter type={'muiTextField'} label={'age'} />
+            <Filter type={'muiTextField'} label={'age'} style={{color: 'red'}}/>
             <Filter type={'muiCheckBox'} label={'certified?'} />
             <Filter type={'muiRadioButtons'} label={'gender'} options={[ { label: 'male' }, { label: 'female' } ]} />
           </Filters>
