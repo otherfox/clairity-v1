@@ -4,7 +4,7 @@ import Header from  '../../shared/components/header'
 
 import AgingSettings from './public/settings'
 import AgingTable from './public/table'
-// import {FilteredCollection, Filters, Filter} from '../../shared/components/filteredCollection'
+import {FilteredCollection, Filters, Filter} from '../../shared/components/filteredCollection'
 
 export default class AgingPage extends React.Component {
   constructor(props) {
@@ -22,6 +22,14 @@ export default class AgingPage extends React.Component {
                        onNonzeroChange={n => this.setState({nonzero: n})}
                        onDateChange={d => this.setState({date: d})} />
         <AgingTable {...this.state} />
+        <FilteredCollection>
+          <Filters>
+            <Filter type={'muiTextField'} label={'name'} />
+            <Filter type={'muiTextField'} label={'age'} />
+            <Filter type={'muiCheckBox'} label={'certified?'} />
+            <Filter type={'muiRadioButtons'} label={'gender'} options={[ { label: 'male' }, { label: 'female' } ]} />
+          </Filters>
+        </FilteredCollection>
       </Layout>
     );
   }
