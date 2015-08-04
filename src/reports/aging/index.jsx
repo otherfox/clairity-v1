@@ -4,6 +4,7 @@ import Header from  '../../shared/components/header'
 
 import AgingSettings from './public/settings'
 import AgingTable from './public/table'
+// import {FilteredCollection, Filters, Filter} from '../../shared/components/filteredCollection'
 
 export default class AgingPage extends React.Component {
   constructor(props) {
