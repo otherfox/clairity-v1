@@ -14,8 +14,6 @@ import {contextTypes} from '../../decorators'
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 
-
-
 @controllable(['data'])
 @contextTypes({
   muiTheme: React.PropTypes.object

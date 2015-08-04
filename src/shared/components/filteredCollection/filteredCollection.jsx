@@ -1,17 +1,35 @@
 import React, {Component} from 'react'
+import _ from 'lodash'
+import fuzzy from 'fuzzy'
+import controllable from 'react-controllables'
+
+@controllable(['data', 'filters'])
+
+class FilteredCollectionView extends Component {
+
+  onChange(filter) {
+    this.props.handleOnChange(filter)
+  }
+
+  render() {
+    let children = React.Children.map(this.props.children, (child, idx) => React.addons.cloneWithProps(child, {data: this.props.data, handleOnChange: filter => this.onChange(filter) }));
+    return (
+      <div>{children}</div>
+    )
+  }
+}
 
 class FilteredCollection extends Component {
-
   handleOnChange(filter) {
     console.log(filter);
   }
 
   render() {
-    let children = React.Children.map(this.props.children, (child, idx) => React.addons.cloneWithProps(child, {data: this.props.data, handleOnChange: filter => this.handleOnChange(filter) }));
     return (
-      <div>{children}</div>
+      <FilteredCollectionView {..._.assign(this.props, { handleOnChange: this.handleOnChange, defaultData: this.props.data, defaultFilters: this.props.filters })} />
     )
   }
+
 }
 
 // handleOnChange(filter) {
