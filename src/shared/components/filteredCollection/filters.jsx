@@ -13,11 +13,15 @@ class Filters extends React.Component {
       }
     }
   }
+  handleOnChange(state) {
+    console.log(state)
+  }
   render() {
-    let children = React.Children.map(this.props.children, (child, idx) => {
-      React.addons.cloneWithProps(child, {style: _.assign(this.style().filter, child.props.style) })
-    }
-    );
+    let children = React.Children.map(this.props.children, (child, idx) =>
+      React.addons.cloneWithProps(child, {
+        style: _.assign(this.style().filter, child.props.style),
+        onChange: state => this.handleOnChange(state)
+      }));
     return (
       <div>{children}</div>
     )

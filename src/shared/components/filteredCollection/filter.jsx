@@ -44,18 +44,21 @@ class Filter extends React.Component {
       muiRaisedButton: {},
     }
   }
+  change() {
+    this.props.onChange(this.props)
+  }
   getFilterByType(type) {
     switch(type) {
       case 'muiTextField':
         return <TextField style={_.assign(this.style().muiTextField, this.props.style)}
                           floatingLabelText={this.props.label}
-                          onChange={this.props.onChange(this.props)} />
+                          onChange={e => this.change(e)} />
       case 'muiRadioButtons':
         return  <div style={_.assign(this.style().muiRadioButtons, this.props.style)}>
                   <span style={_.assign(this.style().label, this.props.labelStyle )}>{this.props.label}</span>
                   <RadioButtonGroup name={this.props.name}
                                     style={_.assign(this.style().muiRadioButtonGroup, this.props.groupStyle)}
-                                    onChange={this.props.onChange(this.props)}>
+                                    onChange={e => this.change(e)}>
                     {_.map( this.props.options, button =>
                       <RadioButton  value={button.value}
                                     label={button.label}
@@ -66,7 +69,7 @@ class Filter extends React.Component {
                 </div>
       case 'muiCheckBox':
         return <Checkbox  defaultChecked={this.props.defaultChecked}
-                          onCheck={this.props.onChange(this.props)}
+                          onCheck={e => this.change(e)}
                           value={this.props.value}
                           style={_.assign(this.style().muiCheckBox, this.props.style)}
                           label={this.props.label}/>
