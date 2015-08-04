@@ -6,6 +6,8 @@ import SettingsManager from './shared/settings'
 
 import Router from './shared/router'
 
+let worker = new Worker('worker.js');
+
 window.Perf = addons.Perf;
 
 injectTapEventPlugin();

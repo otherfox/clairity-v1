@@ -1,2 +1,6 @@
-
-setInterval(() => alert('inside worker'), 2000);
+try {
+  !!window;
+  console.log('outside worker');
+} catch (e) {
+  console.log('inside worker!');
+}

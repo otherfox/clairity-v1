@@ -9,4 +9,11 @@ appStore.Queries = {};
 
 export default appStore;
 
-window.Store = appStore;
+
+try {
+  window.Store = appStore;
+  appStore.onWindow = true;
+} catch (e) {
+  appStore.onWindow = false;
+  // inside a worker;
+}
