@@ -16,5 +16,6 @@
   "serviceType": {},
   "workOrderType": {},
   "workOrderStatus": {},
+  "workOrderMessage": {},
   "opportunity": {}
 }
