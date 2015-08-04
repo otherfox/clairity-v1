@@ -43,7 +43,7 @@ class DataTableView extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener('resize', e => this.handleResize(e));
   }
 
   getHeight() {

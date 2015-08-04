@@ -8,6 +8,10 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
+
+import {FilteredCollection, Filters, Filter} from '../../../shared/components/filteredCollection'
+import {RaisedButton} from 'material-ui'
+
 class AgingTable extends React.Component {
 
   constructor(props) {
@@ -70,7 +74,20 @@ class AgingTable extends React.Component {
 
   render() {
     return (
-      <Table {...this.getAgingReportsTable(this.state.rows)} />
+      <div>
+        <FilteredCollection data={this.state.rows}>
+          <Filters active={['balance']}>
+            <Filter type={'muiTextField'} name={'name'} label={'Customer'} />
+            <Filter lable={'Status'} type={'muiRadioButtons'} name={'active'} fuzzy={false} buttonGroup={{name: 'status', defaultSelected: 'Both'}} options={[
+              { label: 'Active', value: 'Active'},
+              { label: 'Inactive', value: 'Inactive'},
+              { label: 'Both', value: '', defaultChecked: true}
+            ]} />
+            <Filter type={'muiCheckBox'} label={'Hide $0 Balances'} name={'balance'} fuzzy={false} defaultChecked={true} value={0} not={true} />
+          </Filters>
+          <Table {...this.getAgingReportsTable(this.state.rows)} />
+        </FilteredCollection>
+      </div>
     );
   }
 }

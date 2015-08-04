@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import {
   TextField,
   RadioButtonGroup,
@@ -9,14 +9,16 @@ import {
 } from 'material-ui'
 import _ from 'lodash'
 import {contextTypes} from '../../decorators'
+import controllable from 'react-controllables'
 
 let { ColorManipulator } = Utils;
 
+@controllable([])
 @contextTypes({
   muiTheme: React.PropTypes.object
 })
 
-class Filter extends React.Component {
+class Filter extends Component {
   style() {
     return {
       label: {
@@ -56,8 +58,9 @@ class Filter extends React.Component {
       case 'muiRadioButtons':
         return  <div style={_.assign(this.style().muiRadioButtons, this.props.style)}>
                   <span style={_.assign(this.style().label, this.props.labelStyle )}>{this.props.label}</span>
-                  <RadioButtonGroup name={this.props.name}
-                                    style={_.assign(this.style().muiRadioButtonGroup, this.props.groupStyle)}
+                  <RadioButtonGroup name={this.props.buttonGroup.name}
+                                    style={_.assign(this.style().muiRadioButtonGroup, this.props.buttonGroup.style)}
+                                    defaultSelected={this.props.buttonGroup.defaultSelected}
                                     onChange={e => this.change(e)}>
                     {_.map( this.props.options, button =>
                       <RadioButton  value={button.value}
