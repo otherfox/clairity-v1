@@ -5,13 +5,18 @@ var webpack = require('webpack');
 
 module.exports = {
   //devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server',
-    './src/index'
-  ],
+  entry: {
+    index: [
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      './src/index'
+    ],
+    worker: [
+      './src/workers/index'
+    ]
+  },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: __dirname + '/bin'
   },
   resolve: {
