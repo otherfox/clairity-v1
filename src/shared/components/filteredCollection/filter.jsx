@@ -10,6 +10,7 @@ import {
 import _ from 'lodash'
 import {contextTypes} from '../../decorators'
 import controllable from 'react-controllables'
+import fuzzy from 'fuzzy'
 
 let { ColorManipulator } = Utils;
 
@@ -86,9 +87,32 @@ class FilterView extends Component {
   }
 }
 
+export class TextFilter extends Component {
+  style() {
+    return {};
+  }
+  filter(data) {
+    let field = this.refs.internal.getValue();
+    let results = fuzzy.filter(field, data, {extract: row => row[this.props.name]});
+    return results.map(r => r.original);
+  }
+  render() {
+    return (
+      <TextField style={_.assign(this.style(), this.props.style)}
+                 floatingLabelText={this.props.label}
+                 defaultValue={this.props.value}
+                 onChange={this.props.onChange}
+                 ref="internal" />
+    );
+  }
+}
+
 class Filter extends Component {
   handleOnChange(state) {
       this.props.onChange(state)
+  }
+  filter(data) {
+    return data;
   }
   render() {
     return (

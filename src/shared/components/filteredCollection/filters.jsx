@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Filter from './filter'
 import _ from 'lodash'
+import {throttle} from 'throttle-debounce'
 
 class Filters extends Component {
   style() {
@@ -14,15 +15,23 @@ class Filters extends Component {
     }
   }
 
-  onChange(filter) {
-    this.props.handleOnChange(filter);
+  filterData(rawData) {
+    let numFilters = React.Children.count(this.props.children);
+    let filterComponents = [];
+    for (let ref in this.refs) {
+      if (ref.includes('filter'))
+        filterComponents.push(this.refs[ref]);
+    }
+    let results = filterComponents.reduce((data, child) => child.filter(data), rawData)
+    return results;
   }
 
   render() {
     let children = React.Children.map(this.props.children, (child, idx) =>
       React.addons.cloneWithProps(child, {
         style: _.assign(this.style().filter, child.props.style),
-        onChange: filter => this.onChange(filter)
+        onChange: throttle(250, false, this.props.onChange, false),
+        ref: `filter${idx}`
       }));
     return (
       <div>{children}</div>

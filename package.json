@@ -51,6 +51,7 @@
     "@brainbytes/immutable-store": "^0.4.0",
     "classnames": "^1.2.0",
     "d3-react-squared": "^0.1.9",
+    "debounce": "^1.0.0",
     "es6-mapify": "^1.0.0",
     "event-emitter": "^0.3.3",
     "eventemitter2": "^0.4.14",
@@ -73,6 +74,7 @@
     "react-transmit": "^2.6.1",
     "rx": "^2.5.2",
     "superagent": "^1.2.0",
+    "throttle-debounce": "^0.1.1",
     "underscore": "^1.8.3",
     "uuid": "^2.0.1"
   }

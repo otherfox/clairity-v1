@@ -8,7 +8,7 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
-import {FilteredCollection, Filters, Filter} from '../../../shared/components/filteredCollection'
+import {FilteredCollection, Filters, Filter, TextFilter} from '../../../shared/components/filteredCollection'
 import {RaisedButton} from 'material-ui'
 
 class AgingTable extends React.Component {
@@ -37,7 +37,6 @@ class AgingTable extends React.Component {
 
   getAgingReportsTable(data){
     return {
-      data: data,
       colNames: [
         { label: 'Customer', name: 'name',    cellType: 'account', props: { idField: 'id' } },
       	{ label: 'Status',   name: 'active',  cellType: 'boolean', props: {cellClasses: { Active: 'true', Inactive: 'false' }, cellStyle: {textAlign: 'center'}}, style: {textAlign: 'center'} },
@@ -76,7 +75,7 @@ class AgingTable extends React.Component {
       <div>
         <FilteredCollection data={this.state.rows}>
           <Filters active={['balance']}>
-            <Filter type={'muiTextField'} name={'name'} label={'Customer'} defaultValue={'test'} />
+            <TextFilter name={'name'} label={'Customer'} />
             <Filter label={'Status'} type={'muiRadioButtons'} name={'active'} fuzzy={false} buttonGroup={{name: 'status'}} options={[
               { label: 'Active', value: 'Active'},
               { label: 'Inactive', value: 'Inactive'},
