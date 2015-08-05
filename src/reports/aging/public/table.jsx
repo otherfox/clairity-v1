@@ -8,6 +8,9 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
+import {FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter} from '../../../shared/components/filteredCollection'
+import {RaisedButton} from 'material-ui'
+
 class AgingTable extends React.Component {
 
   constructor(props) {
@@ -29,12 +32,14 @@ class AgingTable extends React.Component {
   }
 
   computeRows(props) {
-    return props.rows;
+    return props.rows.map(row => {
+      row.has_zero_balance = row.balance == 0;
+      return row;
+    });
   }
 
   getAgingReportsTable(data){
     return {
-      data: data,
       colNames: [
         { label: 'Customer', name: 'name',    cellType: 'account', props: { idField: 'id' } },
       	{ label: 'Status',   name: 'active',  cellType: 'boolean', props: {cellClasses: { Active: 'true', Inactive: 'false' }, cellStyle: {textAlign: 'center'}}, style: {textAlign: 'center'} },
@@ -70,7 +75,20 @@ class AgingTable extends React.Component {
 
   render() {
     return (
-      <Table {...this.getAgingReportsTable(this.state.rows)} />
+      <div>
+        <FilteredCollection data={this.state.rows}>
+          <Filters active={['balance']}>
+            <TextFilter name={'name'} label={'Customer'} />
+            <RadioButtonFilter label={'Status'} name={'active'} buttonGroup={{name: 'status'}} options={[
+              { label: 'Active', value: 'Active'},
+              { label: 'Inactive', value: 'Inactive'},
+              { label: 'Both', value: '', defaultChecked: true}
+            ]} />
+          <CheckBoxFilter label={'Hide $0 Balances'} not name={'has_zero_balance'} defaultValue={false} />
+          </Filters>
+          <Table {...this.getAgingReportsTable(this.state.rows)} />
+        </FilteredCollection>
+      </div>
     );
   }
 }
