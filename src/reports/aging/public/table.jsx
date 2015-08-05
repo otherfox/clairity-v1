@@ -8,7 +8,7 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
-import {FilteredCollection, Filters, Filter, TextFilter} from '../../../shared/components/filteredCollection'
+import {FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter} from '../../../shared/components/filteredCollection'
 import {RaisedButton} from 'material-ui'
 
 class AgingTable extends React.Component {
@@ -32,7 +32,10 @@ class AgingTable extends React.Component {
   }
 
   computeRows(props) {
-    return props.rows;
+    return props.rows.map(row => {
+      row.has_zero_balance = row.balance == 0;
+      return row;
+    });
   }
 
   getAgingReportsTable(data){
@@ -76,12 +79,12 @@ class AgingTable extends React.Component {
         <FilteredCollection data={this.state.rows}>
           <Filters active={['balance']}>
             <TextFilter name={'name'} label={'Customer'} />
-            <Filter label={'Status'} type={'muiRadioButtons'} name={'active'} fuzzy={false} buttonGroup={{name: 'status'}} options={[
+            <RadioButtonFilter label={'Status'} name={'active'} buttonGroup={{name: 'status'}} options={[
               { label: 'Active', value: 'Active'},
               { label: 'Inactive', value: 'Inactive'},
               { label: 'Both', value: '', defaultChecked: true}
             ]} />
-            <Filter type={'muiCheckBox'} label={'Hide $0 Balances'} name={'balance'} fuzzy={false} defaultValue={true} filterValue={0} not={true} />
+          <CheckBoxFilter label={'Hide $0 Balances'} not name={'has_zero_balance'} defaultValue={false} />
           </Filters>
           <Table {...this.getAgingReportsTable(this.state.rows)} />
         </FilteredCollection>
