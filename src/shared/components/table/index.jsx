@@ -27,6 +27,7 @@ class DataTableView extends React.Component {
         sorted: {},
         height: this.getHeight()
     };
+    this.handleResize = this.handleResize.bind(this);
   }
 
   handleResize() {
@@ -34,7 +35,11 @@ class DataTableView extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', e => this.handleResize(e));
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillDismount() {
+    window.removeEventListener('resize', this.handleResize);
   }
 
   getHeight() {

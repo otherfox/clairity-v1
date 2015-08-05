@@ -1,9 +1,10 @@
 import Store, {MessageTypes} from '../../store'
+import _ from 'lodash'
 
 export default class QueryState {
 
   constructor(props, options, cb) {
-    this.props = props;
+    this._props = props;
     this.options = options;
     this.tableName = options.tableName;
     if (!options.tableName) {
@@ -36,7 +37,11 @@ export default class QueryState {
   }
 
   set props(props) {
+    let old = this._props;
     this._props = props;
+    if (!_.eq(props, old)) {
+      this.fetch();
+    }
     this._data = null;
   }
 
