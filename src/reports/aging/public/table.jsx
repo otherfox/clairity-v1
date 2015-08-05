@@ -20,11 +20,6 @@ class AgingTable extends React.Component {
     };
   }
 
-  shouldComponentUpdate(props, state) {
-    if (props.date == this.props.date) return false;
-    return true;
-  }
-
   componentWillReceiveProps(next) {
     this.setState({
       rows: this.computeRows(next)
@@ -92,8 +87,6 @@ class AgingTable extends React.Component {
     );
   }
 }
-
-// ['balance', 'b_0_30', 'b_31_60','b_61_90','b_91']
 
 export default queryRenderer(AgingTable, {
   queries: [
