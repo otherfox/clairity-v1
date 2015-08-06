@@ -1,11 +1,4 @@
 
-try {
-  !!window;
-  console.log('outside worker');
-} catch (e) {
-  console.log('inside worker!');
-}
-
 /*
 
 // Example implemention of bridge/hub for Worker
