@@ -49,18 +49,6 @@ class AgingTable extends React.Component {
         { label: 'Last Monthly Notice', name: 'late_notice_sent', cellType: 'date'},
         { label: 'State', name: 'state', cellType: 'string'},
       ],
-      filters: {
-        data: [
-          {label: 'Customer', name: 'name', filterType: 'muiTextField'},
-          {label: 'Status', filterType: 'muiRadioButtons', name: 'active', fuzzy: false, buttonGroup: { name: 'status', defaultSelected: 'Both'}, buttons: [
-            { label: 'Active', value: 'Active'},
-            { label: 'Inactive', value: 'Inactive'},
-            { label: 'Both', value: '', defaultChecked: true}
-          ] },
-          {label: 'Hide $0 Balances', filterType: 'muiCheckBox', name: 'balance', fuzzy: false, defaultChecked: true, value: 0, not: true }
-        ],
-        active: ['balance']
-      },
       rowHeight: 120,
       colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
       maxWidth: 19,
@@ -79,7 +67,7 @@ class AgingTable extends React.Component {
               { label: 'Inactive', value: 'Inactive'},
               { label: 'Both', value: '', defaultChecked: true}
             ]} />
-          <CheckBoxFilter label={'Hide $0 Balances'} not name={'has_zero_balance'} defaultValue={false} />
+          <CheckBoxFilter label={'Hide $0 Balances'} not name={'has_zero_balance'} defaultValue={true} />
           </Filters>
           <Table {...this.getAgingReportsTable(this.state.rows)} />
         </FilteredCollection>
