@@ -16,8 +16,8 @@ class WorkerBridge extends EventEmitter {
     if (message.token) {
       this.callbackMap.get(message.token)(message);
       this.callbackMap.delete(message.token);
-    } else {
-
+    } else if (message.event) {
+      
     }
   }
 
