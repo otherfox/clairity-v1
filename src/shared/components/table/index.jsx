@@ -8,8 +8,8 @@ import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
 import Details from '../details'
 import fuzzy from 'fuzzy'
 import _ from 'lodash'
-import controllable from 'react-controllables'
 import {contextTypes} from '../../decorators'
+import controllable from 'react-controllables'
 
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
@@ -18,10 +18,11 @@ import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 @contextTypes({
   muiTheme: React.PropTypes.object
 })
-class DataTableView extends React.Component {
+class DataTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+        data: this.props.data,
         width: this.getWidth(),
         active: '',
         sorted: {},
@@ -33,6 +34,23 @@ class DataTableView extends React.Component {
   handleResize() {
     this.setState({width: this.getWidth(), height: this.getHeight()});
   }
+
+  // Trying to get updated props
+
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps', this.props.data.length);
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate', this.props.data.length);
+  }
+
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate', this.props.data.length);
+    return true;
+  }
+
+  /////////
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
@@ -62,7 +80,7 @@ class DataTableView extends React.Component {
   }
 
   rowGetter(rowIndex) {
-      return this.props.data[rowIndex];
+    return this.props.data[rowIndex];
   }
 
   getHeader(col, i) {
@@ -74,7 +92,7 @@ class DataTableView extends React.Component {
   }
 
   sortData(col, e) {
-
+    console.log('sort', this.props.data.length);
     let name = col.name;
     let obj = {}
 
@@ -119,6 +137,7 @@ class DataTableView extends React.Component {
   }
 
   render() {
+    console.log('render', this.props.data.length);
     let columns =
       <Group fixed={true}>
         {
@@ -203,22 +222,11 @@ class DataTableView extends React.Component {
   }
 }
 
-class DataTable extends React.Component {
-  render() {
-    return  <div>
-      <DataTableView  data = {this.props.data}
-                      colNames= {this.props.colNames}
-                      colWidths= {this.props.colWidths}
-                      maxWidth= {this.props.maxWidth}
-                      widthAdj= {this.props.widthAdj || 0}
-                      widthPerc= {this.props.widthPerc || 100}
-                      rowHeight= {this.props.rowHeight || 50}
-                      margin= {this.props.margin}
-                      flexGrow= {this.props.flexGrow || []}
-                      filters= {this.props.filters}
-                      sortBy= {this.props.sortBy} />
-    </div>
-  }
+DataTable.defaultProps = {
+  widthAdj: 0,
+  widthPerc: 100,
+  rowHeight: 50,
+  flexGrow: []
 }
 
 export default DataTable;
