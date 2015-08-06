@@ -17,8 +17,7 @@ class ViewContact extends React.Component {
   }
 
   style() {
-    return {
-    }
+    return {}
   }
 
   generateDOM() {
