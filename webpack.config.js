@@ -32,7 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlPlugin({ title: 'Clairity', filename: 'index.html' }),
+    new HtmlPlugin({ title: 'Clairity', filename: 'index.html', excludeChunks:['worker'] }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
