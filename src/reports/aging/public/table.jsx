@@ -50,8 +50,8 @@ class AgingTable extends React.Component {
         { label: 'State', name: 'state', cellType: 'string'},
       ],
       rowHeight: 120,
-      colWidths: [4,1,1,1,1,1,1,2,1,2,2,1],
-      maxWidth: 19,
+      headerHeight: 80,
+      colWidths: [4,1,1,1,1,1,1,2,1,1,1,1],
       widthAdj: -30
     }
   }

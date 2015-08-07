@@ -50,7 +50,7 @@ let viewLeads = React.createClass({
         ]
       },
       colWidths: [5,4,4,3],
-      maxWidth: 16,
+      
       widthAdj: -30
     };
   },

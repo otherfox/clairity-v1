@@ -63,17 +63,17 @@ class DataTable extends React.Component {
   getWidth() {
     let widthPerc = this.props.widthPerc / 100;
     let width = (window.innerWidth > Settings.breakpoints.sm) ? widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj) : widthPerc * (window.innerWidth - Settings.mobilePadding + this.props.widthAdj) ;
-    return width;
+    return (this.props.minWidth && this.props.minWidth < width ) ? this.props.minWidth : width ;
   }
 
   getColWidth(i) {
-     let width = this.props.maxWidth;
-     if(this.props.colWidths) {
-       console.log(Math.round(this.props.colWidths[i] * 1000 / width));
-       return (Math.round(this.props.colWidths[i] * 1000 / width));
-     } else {
-       return 100;
-     }
+    let width = _.sum(this.props.colWidths);
+    if(this.props.colWidths) {
+      console.log(Math.round(this.props.colWidths[i] * 1000 / width));
+      return (Math.round(this.props.colWidths[i] * 1000 / width));
+    } else {
+      return 100;
+    }
   }
 
   rowGetter(rowIndex) {
@@ -144,6 +144,7 @@ class DataTable extends React.Component {
               headerRenderer={() => this.getHeader(col, i)}
               dataKey={col.name || i}
               width={this.getColWidth(i)}
+              minWidth={120}
               flexGrow={(this.props.flexGrow.length > 0) ? this.props.flexGrow[i] : 1 }
               cellRenderer={(cellData, cellDataKey, rowData, rowIndex, columnData, width) => this.formatCell(rowData, col, width, rowIndex)} />
           , this)
@@ -210,7 +211,7 @@ class DataTable extends React.Component {
           rowClassNameGetter={i => this.getRowClass}
           width={this.getWidth()}
           height={this.state.height}
-          headerHeight={50}>
+          headerHeight={this.props.headerHeight}>
             {columns}
         </Table>
       </div>
@@ -221,7 +222,9 @@ class DataTable extends React.Component {
 DataTable.defaultProps = {
   widthAdj: 0,
   widthPerc: 100,
+  minWidth: false,
   rowHeight: 50,
+  headerHeight: 50,
   flexGrow: []
 }
 

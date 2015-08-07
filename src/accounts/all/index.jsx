@@ -32,7 +32,7 @@ let ViewAccounts = React.createClass({
         ]
       },
       colWidths: [1],
-      maxWidth: 1,
+      
       widthAdj: -30
     };
   },
