@@ -80,7 +80,7 @@ export default class CreateLocation extends React.Component {
     this.updateState();
     Store.on('update.*', this.updateState);
   }
-  componentWillDismount() {
+  componentWillUnmount() {
     Store.off('update.*', this.udpateState);
   }
   handleCustomerChange(event) {
