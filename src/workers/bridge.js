@@ -12,12 +12,14 @@ class WorkerBridge extends EventEmitter {
     this.worker.onmessage = this._handleMessage.bind(this);
   }
 
-  _handleMessage(message) {
-    if (message.token) {
-      this.callbackMap.get(message.token)(message);
-      this.callbackMap.delete(message.token);
-    } else if (message.event) {
-      
+  _handleMessage(ev) {
+    console.log('main thread', 'got response', ev);
+    let {data} = ev;
+    if (data.token) {
+      this.callbackMap.get(data.token)(data);
+      this.callbackMap.delete(data.token);
+    } else if (data.event) {
+      console.log('worker event', message.event);
     }
   }
 
@@ -25,7 +27,7 @@ class WorkerBridge extends EventEmitter {
     return new Promise((resolve, reject) => {
       let token = v4();
       message.token = token;
-      callbackMap.put(token, resolve);
+      this.callbackMap.set(token, resolve);
       this.worker.postMessage(message);
     });
   }
