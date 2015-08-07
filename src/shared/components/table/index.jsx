@@ -57,20 +57,22 @@ class DataTable extends React.Component {
   }
 
   getHeight() {
-    return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
+    return  (((this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2) < window.innerHeight - 300) ?
+              (this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2 + this.props.heightAdj
+              : window.innerHeight - 300 + this.props.heightAdj;
   }
 
   getWidth() {
     let widthPerc = this.props.widthPerc / 100;
     let width = (window.innerWidth > Settings.breakpoints.sm) ? widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj) : widthPerc * (window.innerWidth - Settings.mobilePadding + this.props.widthAdj) ;
-    return (this.props.minWidth && this.props.minWidth < width ) ? this.props.minWidth : width ;
+    return width ;
   }
 
   getColWidth(i) {
     let width = _.sum(this.props.colWidths);
+    let minWidth = this.props.minWidth || 1000;
     if(this.props.colWidths) {
-      console.log(Math.round(this.props.colWidths[i] * 1000 / width));
-      return (Math.round(this.props.colWidths[i] * 1000 / width));
+      return (Math.round(this.props.colWidths[i] * minWidth / width));
     } else {
       return 100;
     }
@@ -221,6 +223,7 @@ class DataTable extends React.Component {
 
 DataTable.defaultProps = {
   widthAdj: 0,
+  heightAdj: 0,
   widthPerc: 100,
   minWidth: false,
   rowHeight: 50,

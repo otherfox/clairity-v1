@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Filter from './filter'
+import Layout from '../layout'
 import _ from 'lodash'
 import {throttle} from 'throttle-debounce'
 
@@ -9,8 +10,9 @@ class Filters extends Component {
       filter: {
         float: 'left',
         maxWidth: '360px',
-        width: 'initial',
-        marginRight: '30px'
+        width: '100%',
+        marginRight: '30px',
+        marginBottom: '10px'
       }
     }
   }
@@ -22,7 +24,7 @@ class Filters extends Component {
       if (ref.includes('filter'))
         filterComponents.push(this.refs[ref]);
     }
-    let results = filterComponents.reduce((data, child) => child.filter(data), rawData)
+    let results = filterComponents.reduce((data, child) => child.filter(data), rawData);
     return results;
   }
 
@@ -34,7 +36,7 @@ class Filters extends Component {
         ref: `filter${idx}`
       }));
     return (
-      <div>{children}</div>
+      <Layout widths={{}}>{children}</Layout>
     )
   }
 }
