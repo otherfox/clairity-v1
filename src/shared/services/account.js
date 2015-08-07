@@ -1,11 +1,9 @@
 import _ from 'lodash'
-import moment from 'moment'
-
-import {debug} from '../mixins/debug'
-
 import req from 'superagent'
+import moment from 'moment'
+import memoize from 'memoize-promise'
 
-export function getAccount(id) {
+let getAccount = memoize(id => {
   return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomerById&id=${id}`)
       .withCredentials()
@@ -17,9 +15,9 @@ export function getAccount(id) {
         }
       });
   });
-}
+});
 
-export function getAccounts() {
+let getAccounts = memoize(() => {
   return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
       .withCredentials()
@@ -31,9 +29,9 @@ export function getAccounts() {
         }
       });
   });
-}
+});
 
-export function getAccountsByAgent(id) {
+let getAccountsByAgent = memoize(id => {
   return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomersByAgentId&agent_id=${id}`)
       .withCredentials()
@@ -45,9 +43,9 @@ export function getAccountsByAgent(id) {
         }
       });
   });
-}
+});
 
-export function getAccountsByContact(id) {
+let getAccountsByContact = memoize(id => {
   return new Promise((s, f) => {
     req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomersByContactId&contact_id=${id}`)
       .withCredentials()
@@ -59,4 +57,6 @@ export function getAccountsByContact(id) {
         }
       });
   });
-}
+});
+
+export { getAccount, getAccounts, getAccountsByAgent, getAccountsByContact };

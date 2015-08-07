@@ -56,7 +56,7 @@ class DataTable extends React.Component {
     window.addEventListener('resize', this.handleResize);
   }
 
-  componentWillDismount() {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
 
