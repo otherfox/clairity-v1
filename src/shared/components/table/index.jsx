@@ -69,8 +69,8 @@ class DataTable extends React.Component {
   getColWidth(i) {
      let width = this.props.maxWidth;
      if(this.props.colWidths) {
-       console.log(this.props.colWidths[i] * 100 / width);
-       return (this.props.colWidths[i] * 100 / width);
+       console.log(Math.round(this.props.colWidths[i] * 1000 / width));
+       return (Math.round(this.props.colWidths[i] * 1000 / width));
      } else {
        return 100;
      }
