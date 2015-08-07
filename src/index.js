@@ -5,8 +5,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import SettingsManager from './shared/settings'
 
 import Router from './shared/router'
+import WorkerBridge, {instance} from './workers/bridge'
 
-let worker = new Worker('worker.js');
+instance.dispatch({}).then(m => console.log('message received', m));
 
 window.Perf = addons.Perf;
 
