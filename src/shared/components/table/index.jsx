@@ -35,22 +35,18 @@ class DataTable extends React.Component {
     this.setState({width: this.getWidth(), height: this.getHeight()});
   }
 
-  // Trying to get updated props
-
-  componentWillReceiveProps() {
-    console.log('componentWillReceiveProps', this.props.data.length);
+  componentWillReceiveProps(props) {
+    let name = _.keys(this.state.sorted)[0];
+    if (name) {
+      if(this.state.sorted[name] === 'asc') {
+        this.setState( {data: _.sortBy( props.data, name) });
+      } else {
+        this.setState( {data: _.sortBy( props.data, name).reverse() });
+      }
+    } else {
+      this.setState({data: props.data});
+    }
   }
-
-  componentWillUpdate() {
-    console.log('componentWillUpdate', this.props.data.length);
-  }
-
-  shouldComponentUpdate() {
-    console.log('shouldComponentUpdate', this.props.data.length);
-    return true;
-  }
-
-  /////////
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
@@ -73,14 +69,15 @@ class DataTable extends React.Component {
   getColWidth(i) {
      let width = this.props.maxWidth;
      if(this.props.colWidths) {
-       return (this.props.colWidths[i] / width);
+       console.log(this.props.colWidths[i] * 100 / width);
+       return (this.props.colWidths[i] * 100 / width);
      } else {
        return 100;
      }
   }
 
   rowGetter(rowIndex) {
-    return this.props.data[rowIndex];
+    return this.state.data[rowIndex];
   }
 
   getHeader(col, i) {
@@ -92,14 +89,13 @@ class DataTable extends React.Component {
   }
 
   sortData(col, e) {
-    console.log('sort', this.props.data.length);
     let name = col.name;
     let obj = {}
 
     if(typeof this.state.sorted[name] === 'undefined' || this.state.sorted[name] === 'dsc') {
-      this.setState( {data: _.sortBy( this.props.data, name), sorted: {[name]: 'asc'} });
+      this.setState( {data: _.sortBy( this.state.data, name), sorted: {[name]: 'asc'} });
     } else if (this.state.sorted[name] === 'asc') {
-      this.setState( {data: _.sortBy( this.props.data, name).reverse(), sorted: {[name]: 'dsc'} });
+      this.setState( {data: _.sortBy( this.state.data, name).reverse(), sorted: {[name]: 'dsc'} });
     }
   }
 
