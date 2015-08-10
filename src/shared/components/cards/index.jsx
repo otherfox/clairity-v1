@@ -48,7 +48,6 @@ class Cards extends React.Component {
   }
 
   generateLayout() {
-    var p = this.props;
     return _.map(_.range(0, 25), function(item, i) {
       var y = 16;
       return {x: _.random(0, 5) % 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
@@ -61,16 +60,6 @@ class Cards extends React.Component {
     });
   }
 
-  onLayoutChange(layout) {
-    this.props.onLayoutChange(layout);
-  }
-
-  onNewLayout() {
-    this.setState({
-      layouts: {lg: this.generateLayout()}
-    });
-  }
-
   render() {
     return (
       <Layout widths={{}} cPadding={'20px 0 0 0'}>
@@ -78,7 +67,7 @@ class Cards extends React.Component {
           <ResponsiveReactGridLayout
               layouts={this.state.layouts}
               onBreakpointChange={e => this.onBreakpointChange()}
-              useCSSTransforms={true}
+              useCSSTransforms={false}
               {...this.props}>
             {this.generateDOM()}
           </ResponsiveReactGridLayout>
