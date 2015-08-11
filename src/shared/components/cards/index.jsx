@@ -16,7 +16,7 @@ class Cards extends React.Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(props) {
     this.setState({ data: props.data });
   }
 
@@ -25,7 +25,7 @@ class Cards extends React.Component {
   }
 
   generateDOM() {
-    return _.map(this.state.layouts.lg, function(l, i) {
+    return _.map(this.state.data, function(l, i) {
       let props = [];
       for(let prop in this.state.data[i]) {
         if(_.find(this.props.colNames, 'name', prop)) {

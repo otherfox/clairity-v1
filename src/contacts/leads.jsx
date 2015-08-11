@@ -14,7 +14,17 @@ import controllable from 'react-controllables'
 import Link from '../shared/components/link'
 
 class ViewLeads extends Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      leads: this.props.leads
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    this.setState({ leads: props.leads });
+  }
+
   getLeads(getLeads) {
 
     let leads = getLeads;
@@ -56,7 +66,14 @@ class ViewLeads extends Component {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
           <Header><h1>View Leads</h1></Header>
-          <Cards {...this.getLeads(this.props.leads)} />
+          <FilteredCollection data={this.state.leads}>
+            <Filters>
+              <TextFilter name={'name'} label={'Name'} />
+              <TextFilter name={'customer_name'} label={'Account'} />
+              <TextFilter name={'agent_name'} label={'Account Owner'} />
+            </Filters>
+            <Cards {...this.getLeads(this.state.leads)} />
+          </FilteredCollection>
       </Layout>
     );
   }
