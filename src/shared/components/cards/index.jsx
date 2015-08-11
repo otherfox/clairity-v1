@@ -28,7 +28,9 @@ class Cards extends React.Component {
     return _.map(this.state.layouts.lg, function(l, i) {
       let props = [];
       for(let prop in this.state.data[i]) {
-        props.push((<div>{this.state.data[i][prop]}</div>))
+        if(_.find(this.props.colNames, 'name', prop)) {
+          props.push((<div>{_.result(_.find(this.props.colNames, 'name', prop), 'label')+': '+this.state.data[i][prop]}</div>));
+        }
       }
       return (
         // <Card key={i} transitionEnabled={false}>
