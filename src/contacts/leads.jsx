@@ -72,7 +72,7 @@ class ViewLeads extends Component {
               <TextFilter name={'customer_name'} label={'Account'} />
               <TextFilter name={'agent_name'} label={'Account Owner'} />
             </Filters>
-            <Cards {...this.getLeads(this.state.leads)} />
+            <Table {...this.getLeads(this.state.leads)} cardTitle={'name'} />
           </FilteredCollection>
       </Layout>
     );

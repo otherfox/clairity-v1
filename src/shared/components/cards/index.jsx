@@ -35,32 +35,14 @@ class Cards extends React.Component {
       let props = [];
       for(let prop in data[i]) {
         if(_.find(this.props.colNames, 'name', prop)) {
-          props.push((<div>{_.result(_.find(this.props.colNames, 'name', prop), 'label')+': '+data[i][prop]}</div>));
+          props.push((<div>{(typeof data[i][prop] === 'string') ? _.result(_.find(this.props.colNames, 'name', prop), 'label')+': '+data[i][prop] : data[i][prop]}</div>));
         }
       }
+      let CardClass = CardTypes[this.props.cardType];
       return (
-        // <Card key={i} transitionEnabled={false}>
-        //   <CardHeader
-        //     title="Demo Url Based Avatar"
-        //     subtitle="Subtitle"
-        //     avatar="http://lorempixel.com/100/100/nature/"/>
-        //   <CardTitle title="Title" subtitle="Subtitle"/>
-        //   <CardMedia overlay={<CardTitle title="Title" subtitle="Subtitle"/>}>
-        //     <img src="http://lorempixel.com/600/337/nature/"/>
-        //   </CardMedia>
-        //   <CardActions>
-        //     <FlatButton label="Action1"/>
-        //     <FlatButton label="Action2"/>
-        //   </CardActions>
-        // </Card>
-
-        // Material-ui Smoothness Test
-        <Paper key={i} transitionEnabled={false}>{props}</Paper>
-
-        //  <Paper key={i}>This is a Test</Paper>
-
-        // Regular Smoothness Test
-        // <div key={i} style={{border: '1px solid #cccccc'}}>This is a Test</div>
+        <CardClass key={i} i={i} {...this.props}>
+            {props}
+        </CardClass>
       )}.bind(this)
     );
   }
@@ -71,10 +53,10 @@ class Cards extends React.Component {
                   : (this.state) ?
                     this.state.data.length
                     : this.props.data.length;
-    console.log('data', count);
-    return _.map(_.range(0, count), function(item, i) {
-      var y = 16;
-      return {x: (i + 3)% 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
+    let maxCols = this.props.cols.lg;
+    return _.map(_.range(0, count), (item, i) => {
+      var y = this.props.rowHeight;
+      return {x: (i + maxCols) % maxCols, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
     });
   }
 
@@ -118,6 +100,8 @@ class Cards extends React.Component {
               layouts={this.state.layouts}
               onBreakpointChange={e => this.onBreakpointChange()}
               useCSSTransforms={false}
+              isDraggable={false}
+              isResizable={false}
               {...this.props}>
             {this.state.dom}
           </ResponsiveReactGridLayout>
@@ -128,14 +112,15 @@ class Cards extends React.Component {
 }
 
 Cards.propTypes = {
-  onLayoutChange: React.PropTypes.func.isRequired
+
 }
 
 Cards.defaultProps = {
   data: [],
   className: "layout",
-  rowHeight: 30,
-  cols: {lg: 3, md: 2, sm: 1, xs: 1, xxs: 1}
+  rowHeight: 14,
+  cols: {lg: 4, md: 2, sm: 1, xs: 1, xxs: 1},
+  cardType: 'default'
 }
 
 export default Cards;
