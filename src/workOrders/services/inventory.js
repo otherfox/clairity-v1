@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function getInventoryTypes() {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.InventoryTypeDAO&_m=getAllInventoryTypes`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.InventoryTypeDAO&_m=getAllInventoryTypes`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {

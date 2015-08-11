@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function getUser(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getUserById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getUserById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -19,7 +19,7 @@ export function getUser(id) {
 
 export function getPermissionByRole(role) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getPermissionByRoleName&roleName=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getPermissionByRoleName&roleName=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -33,7 +33,7 @@ export function getPermissionByRole(role) {
 
 export function getUsersByRole(role, active = true) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getAllUsersByRoleName&roleName=${role}&active=${active}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getAllUsersByRoleName&roleName=${role}&active=${active}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -47,7 +47,7 @@ export function getUsersByRole(role, active = true) {
 
 export function getUsersByType(type, active = true) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getAllUsersByType&type=${type}&active=${active}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getAllUsersByType&type=${type}&active=${active}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {

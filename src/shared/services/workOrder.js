@@ -6,7 +6,7 @@ import req from 'superagent'
 
 export function getWorkOrder(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderDAO&_m=getWorkOrderById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderDAO&_m=getWorkOrderById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -22,7 +22,7 @@ export function getWorkOrder(id) {
 
 export function getWorkOrderMessages(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderMessageDAO&_m=getAllWorkOrderMessagesByWorkOrderId&work_order_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderMessageDAO&_m=getAllWorkOrderMessagesByWorkOrderId&work_order_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -36,7 +36,7 @@ export function getWorkOrderMessages(id) {
 
 export function getWorkOrderTypes() {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderTypeDAO&_m=getAllWorkOrderTypes`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderTypeDAO&_m=getAllWorkOrderTypes`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -50,7 +50,7 @@ export function getWorkOrderTypes() {
 
 export function getWorkOrderStatuses() {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderStatusDAO&_m=getAllWorkOrderStatuses`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.WorkOrderStatusDAO&_m=getAllWorkOrderStatuses`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -66,7 +66,7 @@ import {eventUpdateWorkOrder} from '../gateways/workOrder'
 
 export function putWorkOrder(id, data) {
     return new Promise((s, f) => {
-      req.post(`http://lab.rairity.com/controller.cfm?event=updateWorkOrders`)
+      req.post(`https://lab.rairity.com/controller.cfm?event=updateWorkOrders`)
         .withCredentials()
         .type('form')
         .send(eventUpdateWorkOrder(data))

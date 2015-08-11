@@ -7,7 +7,7 @@ import req from 'superagent'
 
 export function getAccount(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomerById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomerById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -21,7 +21,7 @@ export function getAccount(id) {
 
 export function getAccounts() {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -35,7 +35,7 @@ export function getAccounts() {
 
 export function getAccountsByAgent(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomersByAgentId&agent_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomersByAgentId&agent_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -49,7 +49,7 @@ export function getAccountsByAgent(id) {
 
 export function getAccountsByContact(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomersByContactId&contact_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomersByContactId&contact_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {

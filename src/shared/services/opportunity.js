@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function getOpportunity(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getSalesOppById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getSalesOppById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -20,7 +20,7 @@ export function getOpportunity(id) {
 
 export function getOpportunitiesByAccount(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getAllSalesOppsByCustomerId&customer_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getAllSalesOppsByCustomerId&customer_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -37,7 +37,7 @@ import {eventUpdateSalesOpp} from '../gateways/opportunity'
 export function putOpportunity(opp) {
   return new Promise((s, f) => {
     patchRequest();
-    req.post(`http://lab.rairity.com/controller.cfm?event=updateSalesOpp`)
+    req.post(`https://lab.rairity.com/controller.cfm?event=updateSalesOpp`)
       .withCredentials()
       .type('form')
       .send(eventUpdateSalesOpp(opp))
