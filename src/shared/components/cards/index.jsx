@@ -12,24 +12,30 @@ class Cards extends React.Component {
     this.state = {
       layouts: {lg: this.generateLayout()},
       currentBreakpoint: 'lg',
-      data: this.props.data
+      data: this.props.data,
+      dom: this.generateDOM(),
     }
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ data: props.data });
+    this.setState({ data: props.data, layouts: {lg: this.generateLayout()}, dom: this.generateDOM(props) });
   }
 
   style() {
     return {}
   }
 
-  generateDOM() {
-    return _.map(this.state.data, function(l, i) {
+  generateDOM(props) {
+    let data =  (props) ?
+                  props.data
+                  : (this.state) ?
+                    this.state.data
+                    : this.props.data;
+    return _.map(data, function(l, i) {
       let props = [];
-      for(let prop in this.state.data[i]) {
+      for(let prop in data[i]) {
         if(_.find(this.props.colNames, 'name', prop)) {
-          props.push((<div>{_.result(_.find(this.props.colNames, 'name', prop), 'label')+': '+this.state.data[i][prop]}</div>));
+          props.push((<div>{_.result(_.find(this.props.colNames, 'name', prop), 'label')+': '+data[i][prop]}</div>));
         }
       }
       return (
@@ -60,8 +66,9 @@ class Cards extends React.Component {
   }
 
   generateLayout() {
-    let count = (this.state) ? this.state.data.length : 25;
-    return _.map(_.range(0, count ), function(item, i) {
+    let count = (this.state) ? this.state.data.length : this.props.data.length;
+    console.log('data', count);
+    return _.map(_.range(0, count), function(item, i) {
       var y = 16;
       return {x: _.random(0, 5) % 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
     });
@@ -108,7 +115,7 @@ class Cards extends React.Component {
               onBreakpointChange={e => this.onBreakpointChange()}
               useCSSTransforms={false}
               {...this.props}>
-            {this.generateDOM()}
+            {this.state.dom}
           </ResponsiveReactGridLayout>
         </div>
       </Layout>
