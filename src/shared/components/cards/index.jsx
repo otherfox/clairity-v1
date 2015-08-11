@@ -18,7 +18,7 @@ class Cards extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ data: props.data, layouts: {lg: this.generateLayout()}, dom: this.generateDOM(props) });
+    this.setState({ data: props.data, layouts: {lg: this.generateLayout(props)}, dom: this.generateDOM(props) });
   }
 
   style() {
@@ -65,12 +65,16 @@ class Cards extends React.Component {
     );
   }
 
-  generateLayout() {
-    let count = (this.state) ? this.state.data.length : this.props.data.length;
+  generateLayout(props) {
+    let count = (props) ?
+                  props.data.length
+                  : (this.state) ?
+                    this.state.data.length
+                    : this.props.data.length;
     console.log('data', count);
     return _.map(_.range(0, count), function(item, i) {
       var y = 16;
-      return {x: _.random(0, 5) % 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
+      return {x: (i + 3)% 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
     });
   }
 
