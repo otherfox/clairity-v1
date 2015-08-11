@@ -11,8 +11,13 @@ class Cards extends React.Component {
     super(props);
     this.state = {
       layouts: {lg: this.generateLayout()},
-      currentBreakpoint: 'lg'
+      currentBreakpoint: 'lg',
+      data: this.props.data
     }
+  }
+
+  componentWillReceiveProps() {
+    this.setState({ data: props.data });
   }
 
   style() {
@@ -22,23 +27,23 @@ class Cards extends React.Component {
   generateDOM() {
     return _.map(this.state.layouts.lg, function(l, i) {
       return (
-        <Card key={i} transitionEnabled={false}>
-          <CardHeader
-            title="Demo Url Based Avatar"
-            subtitle="Subtitle"
-            avatar="http://lorempixel.com/100/100/nature/"/>
-          <CardTitle title="Title" subtitle="Subtitle"/>
-          <CardMedia overlay={<CardTitle title="Title" subtitle="Subtitle"/>}>
-            <img src="http://lorempixel.com/600/337/nature/"/>
-          </CardMedia>
-          <CardActions>
-            <FlatButton label="Action1"/>
-            <FlatButton label="Action2"/>
-          </CardActions>
-        </Card>
+        // <Card key={i} transitionEnabled={false}>
+        //   <CardHeader
+        //     title="Demo Url Based Avatar"
+        //     subtitle="Subtitle"
+        //     avatar="http://lorempixel.com/100/100/nature/"/>
+        //   <CardTitle title="Title" subtitle="Subtitle"/>
+        //   <CardMedia overlay={<CardTitle title="Title" subtitle="Subtitle"/>}>
+        //     <img src="http://lorempixel.com/600/337/nature/"/>
+        //   </CardMedia>
+        //   <CardActions>
+        //     <FlatButton label="Action1"/>
+        //     <FlatButton label="Action2"/>
+        //   </CardActions>
+        // </Card>
 
         // Material-ui Smoothness Test
-        // <Paper key={i} transitionEnabled={false}>This is a Test</Paper>
+        <Paper key={i} transitionEnabled={false}>Test</Paper>
 
         //  <Paper key={i}>This is a Test</Paper>
 
@@ -49,7 +54,8 @@ class Cards extends React.Component {
   }
 
   generateLayout() {
-    return _.map(_.range(0, 25), function(item, i) {
+    let count = (this.state) ? this.state.data.length : this.props.data.length;
+    return _.map(_.range(0, count ), function(item, i) {
       var y = 16;
       return {x: _.random(0, 5) % 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
     });
