@@ -26,6 +26,10 @@ class Cards extends React.Component {
 
   generateDOM() {
     return _.map(this.state.layouts.lg, function(l, i) {
+      let props = [];
+      for(let prop in this.state.data[i]) {
+        props.push((<div>{this.state.data[i][prop]}</div>))
+      }
       return (
         // <Card key={i} transitionEnabled={false}>
         //   <CardHeader
@@ -43,18 +47,18 @@ class Cards extends React.Component {
         // </Card>
 
         // Material-ui Smoothness Test
-        <Paper key={i} transitionEnabled={false}>Test</Paper>
+        <Paper key={i} transitionEnabled={false}>{props}</Paper>
 
         //  <Paper key={i}>This is a Test</Paper>
 
         // Regular Smoothness Test
         // <div key={i} style={{border: '1px solid #cccccc'}}>This is a Test</div>
-      );
-    });
+      )}.bind(this)
+    );
   }
 
   generateLayout() {
-    let count = (this.state) ? this.state.data.length : this.props.data.length;
+    let count = (this.state) ? this.state.data.length : 25;
     return _.map(_.range(0, count ), function(item, i) {
       var y = 16;
       return {x: _.random(0, 5) % 3, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
