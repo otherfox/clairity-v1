@@ -2,6 +2,7 @@ import React from "react"
 import {Paper, RaisedButton, Card, CardHeader, CardActions, CardText, CardMedia, FlatButton, Avatar, CardTitle} from 'material-ui'
 import ReactGridLayout from 'react-grid-layout'
 import Layout from '../layout'
+import {CardTypes} from './cards'
 
 let ResponsiveReactGridLayout = ReactGridLayout.Responsive;
 
@@ -108,6 +109,7 @@ Cards.propTypes = {
 }
 
 Cards.defaultProps = {
+  data: [],
   className: "layout",
   rowHeight: 30,
   cols: {lg: 3, md: 2, sm: 1, xs: 1, xxs: 1}

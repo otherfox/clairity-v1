@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react'
 import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import Table from  '../shared/components/table'
+import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
 import { RaisedButton } from 'material-ui'
 
@@ -50,7 +51,7 @@ let viewLeads = React.createClass({
         ]
       },
       colWidths: [5,4,4,3],
-      
+
       widthAdj: -30
     };
   },
@@ -62,7 +63,7 @@ let viewLeads = React.createClass({
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
           <Header><h1>View Leads</h1></Header>
-          <Table {...this.getLeads(this.props.leads)} />
+          <Cards {...this.getLeads(this.props.leads)} />
       </Layout>
     );
   }
