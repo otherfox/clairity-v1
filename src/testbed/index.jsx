@@ -3,14 +3,19 @@
  * etc.
  */
 
-import React from 'react'
+import React, {PropTypes} from 'react'
+import {contextTypes} from '../shared/decorators'
+import {PieGraph, BarGraph, LineGraph} from '../shared/components/graphs'
 
-import CreateOppFormComponent from '../opportunities/create/form'
-
+@contextTypes({muiTheme: PropTypes.object})
 class TestbedPage extends React.Component {
   render() {
     return (
-      <CreateOppFormComponent linked={false} account={{name: 'TestName'}} />
+      <div style={{backgroundColor: this.context.muiTheme.palette.canvasColor}}>
+        <PieGraph />
+        <BarGraph />
+        <LineGraph />
+      </div>
     );
   }
 }
