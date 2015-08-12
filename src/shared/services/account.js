@@ -5,7 +5,7 @@ import memoize from 'memoize-promise'
 
 let getAccount = memoize(id => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomerById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomerById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -19,7 +19,7 @@ let getAccount = memoize(id => {
 
 let getAccounts = memoize(() => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -33,7 +33,7 @@ let getAccounts = memoize(() => {
 
 let getAccountsByAgent = memoize(id => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomersByAgentId&agent_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomersByAgentId&agent_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -47,7 +47,7 @@ let getAccountsByAgent = memoize(id => {
 
 let getAccountsByContact = memoize(id => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomersByContactId&contact_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getCustomersByContactId&contact_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {

@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function getLocation(id) {
   return new Promise((s, f) => {
-    req.get("http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationById&id="+id)
+    req.get("https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationById&id="+id)
       .withCredentials()
       .end((err, res) => {
         if(!err) {
@@ -31,7 +31,7 @@ export function getLocation(id) {
 
 export function getLocationsByPop(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByPopId&pop_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByPopId&pop_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -45,7 +45,7 @@ export function getLocationsByPop(id) {
 
 export function getLocationsByContact(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByContact&contact_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByContact&contact_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -59,7 +59,7 @@ export function getLocationsByContact(id) {
 
 export function getLocationsByStatus(status) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getAllLocationsByStatus&status=${status}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getAllLocationsByStatus&status=${status}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -117,7 +117,7 @@ export function putLocation(location, sameAsCustomer = false) {
     payload.location_reference_number = location.reference_number || "";
     payload.legacy_account_number = location.legacy_account_number || "";
 
-    req.post('http://lab.rairity.com/controller.cfm?event=updateCustomerLocation')
+    req.post('https://lab.rairity.com/controller.cfm?event=updateCustomerLocation')
       .withCredentials()
       .type('form')
       .send(payload)

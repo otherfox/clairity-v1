@@ -10,7 +10,7 @@ import req from 'superagent'
 
 export function getContact(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getContactById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getContactById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -24,7 +24,7 @@ export function getContact(id) {
 
 export function getContactsByAccount(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByCustomerId&customer_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByCustomerId&customer_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -38,7 +38,7 @@ export function getContactsByAccount(id) {
 
 export function getContactsByOpportunity(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByOppId&opp_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByOppId&opp_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -52,7 +52,7 @@ export function getContactsByOpportunity(id) {
 
 export function getContactsByLocation(id) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByLocationId&location_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByLocationId&location_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -66,7 +66,7 @@ export function getContactsByLocation(id) {
 
 export function getLeads() {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsWithoutOpportunities`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsWithoutOpportunities`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -83,7 +83,7 @@ import {eventConvertLead} from '../gateways/contact'
 export function postConvertLead(contact) {
   return new Promise((s, f) => {
     patchRequest();
-    req.post(`http://lab.rairity.com/controller.cfm?event=convertLead`)
+    req.post(`https://lab.rairity.com/controller.cfm?event=convertLead`)
       .withCredentials()
       .type('form')
       .send(eventConvertLead(contact))

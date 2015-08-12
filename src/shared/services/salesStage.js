@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function getSalesStages() {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesStageDAO&_m=getAllSalesStages`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesStageDAO&_m=getAllSalesStages`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {

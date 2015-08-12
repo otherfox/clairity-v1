@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function tryUserLogin(creds) {
   return new Promise((s, f) => {
-    req.post("http://lab.rairity.com/login.cfm")
+    req.post("https://lab.rairity.com/login.cfm")
       .withCredentials()
       .type('form')
       .send(creds)
