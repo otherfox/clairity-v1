@@ -2,7 +2,8 @@ import React from "react"
 import {Paper, RaisedButton, Card, CardHeader, CardActions, CardText, CardMedia, FlatButton, Avatar, CardTitle} from 'material-ui'
 import ReactGridLayout from 'react-grid-layout'
 import Layout from '../layout'
-import {CardTypes} from './cards'
+// import {CardTypes} from './cards'
+let CardTypes = {};
 
 let ResponsiveReactGridLayout = ReactGridLayout.Responsive;
 
