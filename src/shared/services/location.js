@@ -3,7 +3,11 @@ import moment from 'moment'
 
 import req from 'superagent'
 
-export function getLocation(id) {
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
+
+let getLocation = memoize(id => {
   return new Promise((s, f) => {
     req.get("https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationById&id="+id)
       .withCredentials()
@@ -27,9 +31,9 @@ export function getLocation(id) {
         }
       });
   });
-}
+});
 
-export function getLocationsByPop(id) {
+let getLocationsByPop = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByPopId&pop_id=${id}`)
       .withCredentials()
@@ -41,9 +45,9 @@ export function getLocationsByPop(id) {
         }
       });
   });
-}
+});
 
-export function getLocationsByContact(id) {
+let getLocationsByContact = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationsByContact&contact_id=${id}`)
       .withCredentials()
@@ -55,9 +59,9 @@ export function getLocationsByContact(id) {
         }
       });
   });
-}
+});
 
-export function getLocationsByStatus(status) {
+let getLocationsByStatus = memoize(status => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getAllLocationsByStatus&status=${status}`)
       .withCredentials()
@@ -69,15 +73,12 @@ export function getLocationsByStatus(status) {
         }
       });
   });
-}
+});
 
-export function getLocationsByStatus(id) {
-
-}
-
-export function getLocationsByContact(id) {
-
-}
+export {
+  getLocation, getLocationsByPop, getLocationsByContact, getLocationsByStatus,
+  getLocationsByContact
+};
 
 export function putLocation(location, sameAsCustomer = false) {
   return new Promise((s, f) => {
