@@ -33,7 +33,7 @@ export default function multiQueryRenderer(Component, options) {
       this.queries.forEach(q => q.listen().fetch());
     }
 
-    componentWillDismount() {
+    componentWillUnmount() {
       this.queries.forEach(q => q.stop());
     }
 

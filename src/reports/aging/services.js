@@ -5,7 +5,7 @@ import req from 'superagent'
 
 export function getAgingReports(date = Date.now()) {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=agingReport&as_of_date=${moment(date).format('MM/DD/YYYY')}&json`)//"http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TransactionDAO&_m=getAging&as_of_date="+moment(date).format())
+    req.get(`https://lab.rairity.com/controller.cfm?event=agingReport&as_of_date=${moment(date).format('MM/DD/YYYY')}&json`)//"https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TransactionDAO&_m=getAging&as_of_date="+moment(date).format())
       .withCredentials()
       .end((err, res) => {
         if(!err){
