@@ -11,7 +11,7 @@ import { withDelay } from 'memoize-promise'
 
 const memoize = withDelay(10000); // ten second delay
 
-export function getContact(id) {
+let getContact = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getContactById&id=${id}`)
       .withCredentials()
@@ -23,9 +23,9 @@ export function getContact(id) {
         }
       });
   });
-}
+});
 
-export function getContactsByAccount(id) {
+let getContactsByAccount = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByCustomerId&customer_id=${id}`)
       .withCredentials()
@@ -37,9 +37,9 @@ export function getContactsByAccount(id) {
         }
       })
   });
-}
+});
 
-export function getContactsByOpportunity(id) {
+let getContactsByOpportunity = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByOppId&opp_id=${id}`)
       .withCredentials()
@@ -51,9 +51,9 @@ export function getContactsByOpportunity(id) {
         }
       })
   });
-}
+});
 
-export function getContactsByLocation(id) {
+let getContactsByLocation = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsByLocationId&location_id=${id}`)
       .withCredentials()
@@ -65,9 +65,9 @@ export function getContactsByLocation(id) {
         }
       })
   });
-}
+});
 
-export function getLeads() {
+let getLeads = memoize(() => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContactsWithoutOpportunities`)
       .withCredentials()
@@ -79,7 +79,12 @@ export function getLeads() {
         }
       });
   });
-}
+});
+
+export {
+  getContact, getContactsByAccount, getContactsByOpportunity,
+  getContactsByLocation, getLeads
+};
 
 import {eventConvertLead} from '../gateways/contact'
 
