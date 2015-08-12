@@ -1,4 +1,3 @@
-// TODO: Memoize network traffic.
 // TODO: Integrate network traffic w/ actions implicitly.
 
 import _ from 'lodash'
@@ -7,6 +6,10 @@ import moment from 'moment'
 import {debug} from '../mixins/debug'
 
 import req from 'superagent'
+
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
 
 export function getContact(id) {
   return new Promise((s, f) => {
