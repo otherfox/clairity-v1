@@ -55,7 +55,6 @@ let IpZones = React.createClass({
         ]
       },
       colWidths: [6,6,2],
-      
       widthAdj: -30,
       rowHeight: 80
     };

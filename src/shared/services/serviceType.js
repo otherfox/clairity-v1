@@ -3,9 +3,13 @@ import moment from 'moment'
 
 import req from 'superagent'
 
-export function getServiceTypes() {
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
+
+let getServiceTypes = memoize(() => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ServiceTypeDAO&_m=getAllServiceTypes`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ServiceTypeDAO&_m=getAllServiceTypes`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -15,4 +19,6 @@ export function getServiceTypes() {
         }
       });
   });
-}
+});
+
+export { getServiceTypes };

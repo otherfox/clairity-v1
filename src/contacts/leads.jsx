@@ -1,22 +1,29 @@
 
-import React, {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import Header from '../shared/components/header'
 import Layout from  '../shared/components/layout'
 import Table from  '../shared/components/table'
+import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
 import { RaisedButton } from 'material-ui'
+import { Filters, FilteredCollection, TextFilter} from '../shared/components/filteredCollection'
+import {networkCollectionRenderer} from '../shared/components/networkRenderer'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
-import {Navigation} from 'react-router'
 import Link from '../shared/components/link'
 
-let viewLeads = React.createClass({
-  mixins: [Navigation],
+class ViewLeads extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      leads: this.props.leads
+    }
+  }
 
-  propTypes: {
-    leads: React.PropTypes.object
-  },
+  componentWillReceiveProps(props) {
+    this.setState({ leads: props.leads });
+  }
 
   getLeads(getLeads) {
 
@@ -50,26 +57,26 @@ let viewLeads = React.createClass({
         ]
       },
       colWidths: [5,4,4,3],
-      
+
       widthAdj: -30
     };
-  },
+  }
 
   render() {
-
-    let leads = this.props.leads;
-
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
           <Header><h1>View Leads</h1></Header>
-          <Table {...this.getLeads(this.props.leads)} />
+          <FilteredCollection data={this.state.leads}>
+            <Filters>
+              <TextFilter name={'name'} label={'Name'} />
+              <TextFilter name={'customer_name'} label={'Account'} />
+              <TextFilter name={'agent_name'} label={'Account Owner'} />
+            </Filters>
+            <Table {...this.getLeads(this.state.leads)} cardTitle={'name'} />
+          </FilteredCollection>
       </Layout>
     );
   }
-});
+}
 
-import {networkCollectionRenderer} from '../shared/components/networkRenderer'
-
-export default networkCollectionRenderer(viewLeads, { tableName: 'lead' });
-
-//export default viewLeads;
+export default networkCollectionRenderer(ViewLeads, { tableName: 'lead' });
