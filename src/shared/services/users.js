@@ -3,7 +3,11 @@ import moment from 'moment'
 
 import req from 'superagent'
 
-export function getUser(id) {
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
+
+let getUser = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getUserById&id=${id}`)
       .withCredentials()
@@ -15,9 +19,9 @@ export function getUser(id) {
         }
       });
   });
-}
+});
 
-export function getPermissionByRole(role) {
+let getPermissionByRole = memoize(role => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getPermissionByRoleName&roleName=${id}`)
       .withCredentials()
@@ -29,9 +33,9 @@ export function getPermissionByRole(role) {
         }
       });
   });
-}
+});
 
-export function getUsersByRole(role, active = true) {
+let getUsersByRole = memoize((role, active = true) => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getAllUsersByRoleName&roleName=${role}&active=${active}`)
       .withCredentials()
@@ -43,9 +47,9 @@ export function getUsersByRole(role, active = true) {
         }
       });
   });
-}
+});
 
-export function getUsersByType(type, active = true) {
+let getUsersByType = memoize((type, active = true) => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.UserDAO&_m=getAllUsersByType&type=${type}&active=${active}`)
       .withCredentials()
@@ -57,13 +61,18 @@ export function getUsersByType(type, active = true) {
         }
       });
   });
-}
+});
 
-export function getWorkOrderOwners() {
+let getWorkOrderOwners = memoize(() => {
   return Promise.all([getUsersByRole('provisioning'), getUsersByRole('field_ops')])
     .then(results => _.uniq(results[0].concat(results[1]), 'id'));
-}
+});
 
-export function getAccountOwners() {
+let getAccountOwners = memoize(() => {
   return getUsersByType('Employee');
-}
+});
+
+export {
+  getUser, getPermissionByRole, getUsersByRole, getUsersByType,
+  getWorkOrderOwners, getAccountOwners
+};
