@@ -1,33 +1,9 @@
+import Store from '../shared/store'
 
-try {
-  !!window;
-  console.log('outside worker');
-} catch (e) {
-  console.log('inside worker!');
-}
-
-/*
-
-// Example implemention of bridge/hub for Worker
-
-import {v4} from 'uuid'
-
-const callbackMap = new Map();
-
-let worker = {postMessage(){}}
-
-worker.onmessage = msg => {
-  let token = msg.token;
-  callbackMap.get(token)(msg);
-  callbackMap.delete(token);
+onmessage = function handleMessage(message) {
+  console.log('worker thread', 'got message', message.data);
+  setTimeout(function() {
+    console.log('worker thread', 'sending response');
+    postMessage(message.data);
+  }, 1000);
 };
-
-
-function getPromiseForMessage(message) {
-  return new Promise((resolve, reject) => {
-    let token = Symbol(v4());
-    message.token = token;
-    callbackMap.put(token, resolve);
-  });
-}
-*/
