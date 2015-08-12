@@ -3,7 +3,11 @@ import moment from 'moment'
 
 import req from 'superagent'
 
-export function getOpportunity(id) {
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
+
+let getOpportunity = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getSalesOppById&id=${id}`)
       .withCredentials()
@@ -15,10 +19,10 @@ export function getOpportunity(id) {
         }
       })
   });
-}
+});
 
 
-export function getOpportunitiesByAccount(id) {
+let getOpportunitiesByAccount = memoize(id => {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getAllSalesOppsByCustomerId&customer_id=${id}`)
       .withCredentials()
@@ -30,7 +34,9 @@ export function getOpportunitiesByAccount(id) {
         }
       })
   });
-}
+});
+
+export { getOpportunity, getOpportunitiesByAccount };
 
 import {eventUpdateSalesOpp} from '../gateways/opportunity'
 
