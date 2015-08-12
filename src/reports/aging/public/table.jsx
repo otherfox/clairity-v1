@@ -3,6 +3,7 @@ import Table from '../../../shared/components/table'
 import {agingReportsFetched} from '../actions'
 import {queryAll} from '../queries'
 import {getAgingReports} from '../services'
+import AgingSettings from './settings'
 import {
   collectionQuery,
   queryRenderer,
@@ -50,15 +51,18 @@ class AgingTable extends React.Component {
         { label: 'State', name: 'state', cellType: 'string'},
       ],
       rowHeight: 120,
-      colWidths: [4,1,1,1,1,1,1,2,2,2,2,1],
-      maxWidth: 19,
-      widthAdj: -30
+      headerHeight: 80,
+      colWidths: [3,1,1,1,1,1,1,2,1,1,1,1],
+      minWidth: 1400,
+      widthAdj: -30,
+      heightAdj: -60,
     }
   }
 
   render() {
     return (
       <div>
+        <AgingSettings onDateChange={this.props.onDateChange} />
         <FilteredCollection data={this.state.rows}>
           <Filters active={['balance']}>
             <TextFilter name={'name'} label={'Customer'} />

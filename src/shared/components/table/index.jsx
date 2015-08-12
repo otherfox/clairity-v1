@@ -35,52 +35,51 @@ class DataTable extends React.Component {
     this.setState({width: this.getWidth(), height: this.getHeight()});
   }
 
-  // Trying to get updated props
-
-  componentWillReceiveProps() {
-    console.log('componentWillReceiveProps', this.props.data.length);
+  componentWillReceiveProps(props) {
+    let name = _.keys(this.state.sorted)[0];
+    if (name) {
+      if(this.state.sorted[name] === 'asc') {
+        this.setState( {data: _.sortBy( props.data, name) });
+      } else {
+        this.setState( {data: _.sortBy( props.data, name).reverse() });
+      }
+    } else {
+      this.setState({data: props.data});
+    }
   }
-
-  componentWillUpdate() {
-    console.log('componentWillUpdate', this.props.data.length);
-  }
-
-  shouldComponentUpdate() {
-    console.log('shouldComponentUpdate', this.props.data.length);
-    return true;
-  }
-
-  /////////
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
   }
 
-  componentWillDismount() {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
 
   getHeight() {
-    return (((this.props.data.length * this.props.rowHeight) + 52) < window.innerHeight - 300) ? (this.props.data.length * this.props.rowHeight) + 52 : window.innerHeight - 300;
+    return  (((this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2) < window.innerHeight - 300) ?
+              (this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2 + this.props.heightAdj
+              : window.innerHeight - 300 + this.props.heightAdj;
   }
 
   getWidth() {
     let widthPerc = this.props.widthPerc / 100;
     let width = (window.innerWidth > Settings.breakpoints.sm) ? widthPerc * (window.innerWidth - Settings.leftNavWidth - Settings.contentPadding - Settings.widthBuffer + this.props.widthAdj) : widthPerc * (window.innerWidth - Settings.mobilePadding + this.props.widthAdj) ;
-    return width;
+    return width ;
   }
 
   getColWidth(i) {
-     let width = this.props.maxWidth;
-     if(this.props.colWidths) {
-       return (this.props.colWidths[i] / width);
-     } else {
-       return 100;
-     }
+    let width = _.sum(this.props.colWidths);
+    let minWidth = this.props.minWidth || 1000;
+    if(this.props.colWidths) {
+      return (Math.round(this.props.colWidths[i] * minWidth / width));
+    } else {
+      return 100;
+    }
   }
 
   rowGetter(rowIndex) {
-    return this.props.data[rowIndex];
+    return this.state.data[rowIndex];
   }
 
   getHeader(col, i) {
@@ -92,14 +91,13 @@ class DataTable extends React.Component {
   }
 
   sortData(col, e) {
-    console.log('sort', this.props.data.length);
     let name = col.name;
     let obj = {}
 
     if(typeof this.state.sorted[name] === 'undefined' || this.state.sorted[name] === 'dsc') {
-      this.setState( {data: _.sortBy( this.props.data, name), sorted: {[name]: 'asc'} });
+      this.setState( {data: _.sortBy( this.state.data, name), sorted: {[name]: 'asc'} });
     } else if (this.state.sorted[name] === 'asc') {
-      this.setState( {data: _.sortBy( this.props.data, name).reverse(), sorted: {[name]: 'dsc'} });
+      this.setState( {data: _.sortBy( this.state.data, name).reverse(), sorted: {[name]: 'dsc'} });
     }
   }
 
@@ -148,6 +146,7 @@ class DataTable extends React.Component {
               headerRenderer={() => this.getHeader(col, i)}
               dataKey={col.name || i}
               width={this.getColWidth(i)}
+              minWidth={120}
               flexGrow={(this.props.flexGrow.length > 0) ? this.props.flexGrow[i] : 1 }
               cellRenderer={(cellData, cellDataKey, rowData, rowIndex, columnData, width) => this.formatCell(rowData, col, width, rowIndex)} />
           , this)
@@ -214,7 +213,7 @@ class DataTable extends React.Component {
           rowClassNameGetter={i => this.getRowClass}
           width={this.getWidth()}
           height={this.state.height}
-          headerHeight={50}>
+          headerHeight={this.props.headerHeight}>
             {columns}
         </Table>
       </div>
@@ -224,8 +223,11 @@ class DataTable extends React.Component {
 
 DataTable.defaultProps = {
   widthAdj: 0,
+  heightAdj: 0,
   widthPerc: 100,
+  minWidth: false,
   rowHeight: 50,
+  headerHeight: 50,
   flexGrow: []
 }
 

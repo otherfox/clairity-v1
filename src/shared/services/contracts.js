@@ -3,9 +3,13 @@ import moment from 'moment'
 
 import req from 'superagent'
 
-export function getContract(id) {
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
+
+let getContract = memoize(id => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getContractById&id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getContractById&id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -15,11 +19,11 @@ export function getContract(id) {
         }
       });
   });
-}
+});
 
-export function getContractsByAccount(id) {
+let getContractsByAccount = memoize(id => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getContractsByCustomerId&customer_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getContractsByCustomerId&customer_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -31,11 +35,11 @@ export function getContractsByAccount(id) {
         }
       });
   });
-}
+});
 
-export function getContractsByLocation(id) {
+let getContractsByLocation = memoize(id => {
   return new Promise((s, f) => {
-    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getAllContractsByLocationId&location_id=${id}`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContractDAO&_m=getAllContractsByLocationId&location_id=${id}`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -45,4 +49,6 @@ export function getContractsByLocation(id) {
         }
       });
   });
-}
+});
+
+export { getContract, getContractsByAccount, getContractsByLocation };
