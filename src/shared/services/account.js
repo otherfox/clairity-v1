@@ -1,7 +1,9 @@
 import _ from 'lodash'
 import req from 'superagent'
 import moment from 'moment'
-import memoize from 'memoize-promise'
+import { withDelay } from 'memoize-promise'
+
+const memoize = withDelay(10000); // ten second delay
 
 let getAccount = memoize(id => {
   return new Promise((s, f) => {
