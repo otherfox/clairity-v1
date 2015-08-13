@@ -32,6 +32,20 @@ export function getOpportunitiesByAccount(id) {
   });
 }
 
+export function getSalesMetricsByMonth(month) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getSalesMetricsOverMonths&months_ago=${month}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          s(JSON.parse(res.text));
+        } else {
+          f(err);
+        }
+      })
+  });
+}
+
 import {eventUpdateSalesOpp} from '../gateways/opportunity'
 
 export function putOpportunity(opp) {
