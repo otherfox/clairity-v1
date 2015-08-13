@@ -50,7 +50,6 @@
   "dependencies": {
     "@brainbytes/immutable-store": "^0.4.0",
     "classnames": "^1.2.0",
-    "d3-react-squared": "^0.2.3",
     "debounce": "^1.0.0",
     "es6-mapify": "^1.0.0",
     "event-emitter": "^0.3.3",
