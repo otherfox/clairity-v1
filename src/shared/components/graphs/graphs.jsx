@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import _ from 'lodash'
 import {PieChart, BarChart, LineChart, Brush} from 'react-d3-components'
-import {Paper, Utils} from 'material-ui'
+import {Paper, Utils, Slider} from 'material-ui'
 import {contextTypes} from '../../decorators'
 
 @contextTypes({ muiTheme: PropTypes.object })
@@ -46,16 +46,19 @@ export class BarGraph extends Component {
 
   render() {
     return (
-    <Paper>
-        <style>
-        </style>
+      <div>
+        <style>{`
+          svg .tick text {
+            fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+          }
+        `}</style>
         <BarChart
           data={this.getData()}
           width={400}
           height={400}
           margin={{top: 10, bottom: 50, left: 50, right: 10}}
           tooltipHtml={(x, y0, y) => this.getTooltip(x,y0,y)}/>
-    </Paper>
+      </div>
     )
   }
 }
@@ -170,14 +173,19 @@ export class LineGraph extends Component {
       <div>
         <style>{`
             .brush .extent {
-              stroke: ${this.context.muiTheme.palette.textColor};
-              fill-opacity: .125;
+              stroke: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary2Color, 1)};
+              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary2Color, 1)};
               shape-rendering: crispEdges;
             }
 
             .brush .background {
+              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)};
+              height: 2px;
+            }
+
+            svg .tick text {
               fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
-              
+            }
         }`}</style>
         <LineChart
            data={this.state.data}
@@ -199,6 +207,7 @@ export class LineGraph extends Component {
            xAxis={{tickValues: this.state.xScaleBrush.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
         />
         </div>
+        <Slider />
       </div>
     );
   }
