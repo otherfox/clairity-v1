@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import _ from 'lodash'
-import {PieChart, BarChart, LineChart, Brush} from 'react-d3-components'
+import {PieChart, BarChart, LineChart, Brush} from 'react-d3-components/src'
 import {Paper, Utils, Slider} from 'material-ui'
 import {contextTypes} from '../../decorators'
 
@@ -49,7 +49,8 @@ export class BarGraph extends Component {
       <div>
         <style>{`
           svg .tick text {
-            fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+            fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.canvasColor, .8)};
+            fontFamily: 'Roboto, sans-serif',
           }
         `}</style>
         <BarChart
@@ -104,6 +105,15 @@ export class PieGraph extends Component {
   render() {
     return (
       <div>
+        <style>{`
+          svg .arc text {
+            fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+            fontFamily: 'Roboto, sans-serif',
+          }
+          svg .arc polyline {
+            stroke: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+          }
+        `}</style>
         <PieChart
       				data={this.getData()}
       				width={600}
@@ -173,18 +183,21 @@ export class LineGraph extends Component {
       <div>
         <style>{`
             .brush .extent {
-              stroke: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary2Color, 1)};
-              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary2Color, 1)};
+              stroke: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)};
+              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)};
               shape-rendering: crispEdges;
+              height:6px;
             }
 
             .brush .background {
-              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)};
+              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .25)};
               height: 2px;
+              y: 2;
             }
 
             svg .tick text {
               fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+              fontFamily: 'Roboto, sans-serif',
             }
         }`}</style>
         <LineChart
