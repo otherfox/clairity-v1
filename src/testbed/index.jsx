@@ -5,7 +5,7 @@
 
 import React, {PropTypes} from 'react'
 import {contextTypes} from '../shared/decorators'
-import {PieGraph, BarGraph, LineGraph} from '../shared/components/graphs'
+import {PieGraph, BarGraph, LineGraph, ScatterPlotGraph, AreaGraph} from '../shared/components/graphs'
 
 @contextTypes({muiTheme: PropTypes.object})
 class TestbedPage extends React.Component {
@@ -15,6 +15,8 @@ class TestbedPage extends React.Component {
         <PieGraph />
         <BarGraph />
         <LineGraph />
+        <ScatterPlotGraph />
+        <AreaGraph />
       </div>
     );
   }

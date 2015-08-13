@@ -1,5 +1,7 @@
 export {
   PieGraph,
   LineGraph,
-  BarGraph
+  BarGraph,
+  ScatterPlotGraph,
+  AreaGraph
 } from './graphs'

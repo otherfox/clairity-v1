@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import _ from 'lodash'
-import {PieChart, BarChart, LineChart, Brush} from 'react-d3-components/src'
+import {PieChart, BarChart, LineChart, Brush, ScatterPlot, AreaChart} from 'react-d3-components/src'
 import {Paper, Utils, Slider} from 'material-ui'
 import {contextTypes} from '../../decorators'
 
@@ -58,7 +58,8 @@ export class BarGraph extends Component {
           width={400}
           height={400}
           margin={{top: 10, bottom: 50, left: 50, right: 10}}
-          tooltipHtml={(x, y0, y) => this.getTooltip(x,y0,y)}/>
+          tooltipHtml={(x, y0, y) => this.getTooltip(x,y0,y)}
+          onClick={(e, data) => console.log(e,data)} />
       </div>
     )
   }
@@ -120,7 +121,8 @@ export class PieGraph extends Component {
       				height={400}
       				margin={{top: 10, bottom: 10, left: 100, right: 100}}
       				sort={this.getSort()}
-              tooltipHtml={(x, y) => this.getTooltip(x,y)} />
+              tooltipHtml={(x, y) => this.getTooltip(x,y)}
+              onClick={(e, data) => console.log(e,data)} />
       </div>
     )
   }
@@ -208,24 +210,140 @@ export class LineGraph extends Component {
            tooltipHtml={(x,coords) => this.getTooltip(coords)}
            xScale={this.state.xScale}
            xAxis={{tickValues: this.state.xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
+           onClick={(e, data) => console.log(e,data)}
         />
         <div className="brush" style={{float: 'none'}}>
-        <Brush
-           width={400}
-           height={50}
-           margin={{top: 0, bottom: 30, left: 50, right: 20}}
-           xScale={this.state.xScaleBrush}
-           extent={[new Date(2015, 2, 10), new Date(2015, 2, 12)]}
-           onChange={e => this._onChange(e)}
-           xAxis={{tickValues: this.state.xScaleBrush.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
-        />
+          <Brush
+             width={400}
+             height={50}
+             margin={{top: 0, bottom: 30, left: 50, right: 20}}
+             xScale={this.state.xScaleBrush}
+             extent={[new Date(2015, 2, 10), new Date(2015, 2, 12)]}
+             onChange={e => this._onChange(e)}
+             xAxis={{tickValues: this.state.xScaleBrush.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
+          />
         </div>
-        <Slider />
       </div>
     );
   }
 
   _onChange(extent) {
       this.setState({xScale: d3.time.scale().domain([extent[0], extent[1]]).range([0, 400 - 70])});
+  }
+}
+
+@contextTypes({ muiTheme: PropTypes.object })
+export class ScatterPlotGraph extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  style() {
+    return {
+      tooltip: {
+        backgroundColor: this.context.muiTheme.component.paper.backgroundColor,
+        color: this.context.muiTheme.palette.textColor,
+        padding: '10px 20px',
+        fontFamily: 'Roboto, sans-serif',
+        boxShadow: '0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24)',
+        borderRadius: '2px',
+      }
+    }
+  }
+
+  getData() {
+    return [
+      {
+      label: 'somethingA',
+      values: [{x: 0, y: 2}, {x: 1.3, y: 5}, {x: 3, y: 6}, {x: 3.5, y: 6.5}, {x: 4, y: 6}, {x: 4.5, y: 6}, {x: 5, y: 7}, {x: 5.5, y: 8}]
+      },
+      {
+      label: 'somethingB',
+      values: [{x: 0, y: 3}, {x: 1.3, y: 4}, {x: 3, y: 7}, {x: 3.5, y: 8}, {x: 4, y: 7}, {x: 4.5, y: 7}, {x: 5, y: 7.8}, {x: 5.5, y: 9}]
+      }
+    ];
+  }
+
+  getTooltip(x, y) {
+    return (<div style={_.assign(this.style().tooltip, this.props.style)}>{'x: '+x+', y: '+y}</div>)
+  }
+
+  render() {
+    return (
+      <div>
+        <style>{`
+            svg .tick text {
+              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+              fontFamily: 'Roboto, sans-serif',
+            }
+        }`}</style>
+        <ScatterPlot
+           data={this.getData()}
+           width={400}
+           height={400}
+           margin={{top: 10, bottom: 50, left: 50, right: 20}}
+           tooltipHtml={(x,y) => this.getTooltip(x,y)}
+           onClick={(e, data) => console.log(e,data)}
+        />
+      </div>
+    );
+  }
+}
+
+@contextTypes({ muiTheme: PropTypes.object })
+export class AreaGraph extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  style() {
+    return {
+      tooltip: {
+        backgroundColor: this.context.muiTheme.component.paper.backgroundColor,
+        color: this.context.muiTheme.palette.textColor,
+        padding: '10px 20px',
+        fontFamily: 'Roboto, sans-serif',
+        boxShadow: '0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24)',
+        borderRadius: '2px',
+      }
+    }
+  }
+
+  getData() {
+    return [
+      {
+      label: 'somethingA',
+      values: [{x: 0, y: 2}, {x: 1.3, y: 5}, {x: 3, y: 6}, {x: 3.5, y: 6.5}, {x: 4, y: 6}, {x: 4.5, y: 6}, {x: 5, y: 7}, {x: 5.5, y: 8}]
+      },
+      {
+      label: 'somethingB',
+      values: [{x: 0, y: 3}, {x: 1.3, y: 4}, {x: 3, y: 7}, {x: 3.5, y: 8}, {x: 4, y: 7}, {x: 4.5, y: 7}, {x: 5, y: 7.8}, {x: 5.5, y: 9}]
+      }
+    ];
+  }
+
+  getTooltip(y, ySum) {
+    return (<div style={_.assign(this.style().tooltip, this.props.style)}>{'y: '+y+', ySum: '+ySum}</div>)
+  }
+
+  render() {
+    return (
+      <div>
+        <style>{`
+            svg .tick text {
+              fill: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .8)};
+              fontFamily: 'Roboto, sans-serif',
+            }
+        }`}</style>
+        <AreaChart
+           data={this.getData()}
+           width={400}
+           height={400}
+           margin={{top: 10, bottom: 50, left: 50, right: 20}}
+           tooltipHtml={(y,ySum) => this.getTooltip(y,ySum)}
+           onClick={(e,data) => console.log(e,data)}
+        />
+      </div>
+    );
   }
 }
