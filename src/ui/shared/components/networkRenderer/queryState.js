@@ -1,4 +1,4 @@
-import Store, {MessageTypes} from '../../store'
+import Store, {MessageTypes} from '../../../../core/store'
 import _ from 'lodash'
 
 export default class QueryState {

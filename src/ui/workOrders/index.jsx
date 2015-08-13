@@ -1,6 +1,6 @@
 
 import React, {PropTypes} from 'react'
-import Store from '../shared/store'
+import Store from '../../core/store'
 import Layout from '../shared/components/layout'
 import Footer from '../shared/components/footer'
 import Table from '../shared/components/table'

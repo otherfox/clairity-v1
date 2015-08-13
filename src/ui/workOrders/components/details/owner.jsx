@@ -3,7 +3,7 @@ import DropDown from '../../../shared/components/dropDown'
 import queryRenderer from '../../../shared/components/networkRenderer/queryRenderer'
 import {ownersFetched} from '../../actions'
 import {queryWorkOrderOwners} from '../../queries'
-import {getWorkOrderOwners} from '../../../shared/services/users'
+import {getWorkOrderOwners} from '../../../../core/services/users'
 import {Map, List} from 'immutable'
 
 let WorkOrderDetailsOwner = React.createClass({

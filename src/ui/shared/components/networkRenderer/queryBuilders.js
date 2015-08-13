@@ -1,6 +1,6 @@
 import React from 'react'
-import Store, {MessageTypes} from '../../store'
-import {getResource, getCollection, getCollectionVia} from '../../services/getResource'
+import Store, {MessageTypes} from '../../../../core/store'
+import {getResource, getCollection, getCollectionVia} from '../../../../core/services/getResource'
 import {fromJS} from 'immutable'
 
 export function modelQuery(tableName, propName, idName) {

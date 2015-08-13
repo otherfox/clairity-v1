@@ -22,8 +22,8 @@ import {
 } from 'material-ui'
 import {fromJS, Map} from 'immutable'
 import {queryRenderer, collectionQuery, networkCollectionRenderer} from '../../shared/components/networkRenderer'
-import {getPops} from '../../shared/services/pop'
-import {updateWorkOrder} from '../../shared/actions/workOrder'
+import {getPops} from '../../../core/services/pop'
+import {updateWorkOrder} from '../../../core/actions/workOrder'
 
 // Make available for use in all components
 let widths = {};

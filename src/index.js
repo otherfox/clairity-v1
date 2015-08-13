@@ -4,7 +4,7 @@ import React, {addons} from 'react/addons'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import SettingsManager from './ui/shared/settings'
 
-import Router from './shared/router'
+import Router from './ui/shared/router'
 import WorkerBridge, {instance} from './core/bridge'
 
 instance.dispatch({}).then(m => console.log('message received', m));

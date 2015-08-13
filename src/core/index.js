@@ -1,4 +1,4 @@
-import Store from '../shared/store'
+import Store from './store'
 
 onmessage = function handleMessage(message) {
   console.log('worker thread', 'got message', message.data);

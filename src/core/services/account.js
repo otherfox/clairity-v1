@@ -61,4 +61,18 @@ let getAccountsByContact = memoize(id => {
   });
 });
 
-export { getAccount, getAccounts, getAccountsByAgent, getAccountsByContact };
+let getAllAccountTypes = memoize(() => {
+  return new Promise((s, f) => {
+    req.get("https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomerTypes")
+      .withCredentials()
+      .end((err, res) => {
+        if(!err) {
+          s(JSON.parse(res.text));
+        } else{
+          f(err);
+        }
+      });
+  });
+});
+
+export { getAccount, getAccounts, getAccountsByAgent, getAccountsByContact, getAllAccountTypes };

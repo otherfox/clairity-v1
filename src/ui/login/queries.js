@@ -1,4 +1,4 @@
-import Store from '../shared/store'
+import Store from '../../core/store'
 
 export function isLoggedIn() {
   return Store.data.get('user')

@@ -1,6 +1,6 @@
 import React, {addons} from 'react/addons'
-import Store, {MessageTypes} from '../../store'
-import {getResource} from '../../services/getResource'
+import Store, {MessageTypes} from '../../../../core/store'
+import {getResource} from '../../../../core/services/getResource'
 import {exposeMethods} from './methods'
 import {fromJS} from 'immutable'
 import _ from 'lodash'

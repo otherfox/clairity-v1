@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
-import {usersFetched} from '../../shared/actions/user'
-import {queryAccountOwners} from '../../shared/queries/users'
-import {getAccountOwners} from '../../shared/services/users'
+import {usersFetched} from '../../../core/actions/user'
+import {queryAccountOwners} from '../../../core/queries/users'
+import {getAccountOwners} from '../../../core/services/users'
 import DropDown from '../../shared/components/dropDown'
 import {Map} from 'immutable'
 import {
