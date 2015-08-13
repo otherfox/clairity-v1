@@ -50,7 +50,7 @@
   "dependencies": {
     "@brainbytes/immutable-store": "^0.4.0",
     "classnames": "^1.2.0",
-    "d3-react-squared": "^0.1.9",
+    "d3-react-squared": "^0.2.3",
     "debounce": "^1.0.0",
     "es6-mapify": "^1.0.0",
     "event-emitter": "^0.3.3",
@@ -68,6 +68,7 @@
     "object-assign": "^2.1.1",
     "react": "^0.13.3",
     "react-controllables": "^0.3.3",
+    "react-d3-components": "^0.4.8",
     "react-grid-layout": "^0.8.5",
     "react-intl": "^1.2.0",
     "react-router": "^0.13.2",
