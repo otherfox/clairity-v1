@@ -100,8 +100,8 @@ class Cards extends React.Component {
               layouts={this.state.layouts}
               onBreakpointChange={e => this.onBreakpointChange()}
               useCSSTransforms={false}
-              isDraggable={false}
-              isResizable={false}
+              // isDraggable={false}
+              // isResizable={false}
               {...this.props}>
             {this.state.dom}
           </ResponsiveReactGridLayout>

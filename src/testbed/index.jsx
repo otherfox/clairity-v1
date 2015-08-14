@@ -5,7 +5,7 @@
 
 import React, {PropTypes} from 'react'
 import {contextTypes} from '../shared/decorators'
-import {PieGraph, BarGraph, LineGraphWithBrush, ScatterPlotGraph, AreaGraph} from '../shared/components/graphs'
+import {PieGraph, BarGraph, LineGraphWithBrush, ScatterPlotGraph, AreaGraph, LineGraph} from '../shared/components/graphs'
 import {queryRenderer} from '../shared/components/networkRenderer'
 import {salesMetricsFetched} from '../shared/actions/salesMetric'
 import {querySalesMetrics} from '../shared/queries/salesMetric'
@@ -19,12 +19,17 @@ class TestbedView extends React.Component {
     super(props);
   }
   render() {
-    // let data = this.props.salesMetrics.map(r => ({x: new Date(r.id), y: r.running_sales}));
-    // let domain = [_.min(data, r => new Date(r.id)), _.max(data, r => new Date(r.id))];
+    let data = this.props.salesMetrics
+      .map(r => {
+        let x = new Date(r.id);
+        return {x: x, y: r.running_sales}})
+      .sort((a, b) => b.x - a.x );
+    let domain = [_.min(data, r => r.x).x, _.max(data, r => r.x).x];
     return (
       <div style={{backgroundColor: this.context.muiTheme.palette.canvasColor}}>
         <PieGraph />
         <BarGraph />
+        <LineGraph data={{label: '', values:data}} domain={domain} width={1000} />
         <LineGraphWithBrush />
         <ScatterPlotGraph />
         <AreaGraph />

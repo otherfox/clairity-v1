@@ -220,7 +220,7 @@ export class LineGraphWithBrush extends Component {
            margin={{top: 10, bottom: 50, left: 50, right: 20}}
            tooltipHtml={(x,coords) => this.getTooltip(coords)}
            xScale={this.state.xScale}
-           xAxis={{tickValues: this.state.xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
+           xAxis={{tickValues: this.state.xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%d")}}
            onClick={(e, data) => console.log(e,data)}
         />
         <div className="brush" style={{float: 'none'}}>
@@ -231,7 +231,7 @@ export class LineGraphWithBrush extends Component {
              xScale={this.state.xScaleBrush}
              extent={[new Date(2015, 2, 10), new Date(2015, 2, 12)]}
              onChange={e => this._onChange(e)}
-             xAxis={{tickValues: this.state.xScaleBrush.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
+             xAxis={{tickValues: this.state.xScaleBrush.ticks(d3.time.day, 2), tickFormat: d3.time.format("%d")}}
           />
         </div>
       </div>
@@ -267,9 +267,8 @@ export class LineGraph extends Component {
   }
 
   render() {
-
     let xScale = d3.time.scale().domain(this.props.domain).range([0, 400 - 70]);
-
+    console.log(this.props.data);
     return (
       <div>
         <style>{`
@@ -278,6 +277,7 @@ export class LineGraph extends Component {
               fontFamily: 'Roboto, sans-serif',
             }
         }`}</style>
+
         <LineChart
            data={this.props.data}
            width={400}
@@ -285,7 +285,7 @@ export class LineGraph extends Component {
            margin={{top: 10, bottom: 50, left: 50, right: 20}}
            tooltipHtml={(x,coords) => this.getTooltip(coords)}
            xScale={xScale}
-           xAxis={{tickValues: xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
+           xAxis={{tickValues: xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%d")}}
            onClick={(e, data) => console.log(e,data)}
         />
       </div>
