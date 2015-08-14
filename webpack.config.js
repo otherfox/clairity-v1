@@ -12,7 +12,7 @@ module.exports = {
       './src/index'
     ],
     worker: [
-      './src/workers/index'
+      './src/core/index'
     ]
   },
   output: {
