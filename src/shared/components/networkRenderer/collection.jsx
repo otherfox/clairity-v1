@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {collectionQuery} from './queryBuilders'
+import {collectionQuery, collectionViaQuery} from './queryBuilders'
 import multiQueryRenderer from './queryRenderer'
 
 export function networkCollectionRenderer(Component, options) {
@@ -12,4 +12,13 @@ export function networkCollectionRenderer(Component, options) {
     ]
   });
 
+}
+export function networkCollectionRendererByProp(Component, options = {}) {
+
+  return multiQueryRenderer(Component, {
+    methods: options.methods || [],
+    queries: [
+      collectionViaQuery(options)
+    ]
+  });
 }

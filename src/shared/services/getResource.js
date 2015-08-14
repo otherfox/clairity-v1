@@ -4,7 +4,7 @@ import {getWorkOrder} from './workOrder'
 import {getContract} from './contracts'
 import {getUser} from './users'
 import {getAccount} from './account'
-import {getOpportunity} from './opportunity'
+import {getOpportunity, getSale} from './opportunity'
 
 const resource = {
   contact: getContact,
@@ -22,11 +22,11 @@ export function getResource(id, tableName) {
 }
 
 import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
-import { getOpportunitiesByAccount } from './opportunity'
+import { getOpportunitiesByAccount, getSalesMetricsByMonth } from './opportunity'
 import { getContractsByAccount, getContractsByLocation } from './contracts'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
-import {getWorkOrderMessagesByWorkOrder} from './messages'
+import { getWorkOrderMessagesByWorkOrder } from './messages'
 
 const resourceVia = {
   workOrderMessage: {
@@ -53,6 +53,9 @@ const resourceVia = {
     contact: getLocationsByContact,
     locationStatus: getLocationsByStatus
   },
+  sale: {
+    month: getSalesMetricsByMonth
+  }
 };
 
 export function getCollectionVia(resourceTable, throughTable, throughId) {
