@@ -38,7 +38,14 @@ export function getSalesMetricsByMonth(month) {
       .withCredentials()
       .end((err, res) => {
         if (!err) {
-          s(JSON.parse(res.text));
+          let raw = JSON.parse(res.text).DATA;
+          let data = raw.map(r => ({
+            id: r[0],
+            month: r[0].split('-').slice(0, 2).join('-'),
+            sales: r[1],
+            running_sales: r[2]
+          }));
+          s(data);
         } else {
           f(err);
         }

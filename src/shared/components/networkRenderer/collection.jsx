@@ -13,12 +13,12 @@ export function networkCollectionRenderer(Component, options) {
   });
 
 }
-export function networkCollectionRendererByProp(Component, options = {}) {
-
-  return multiQueryRenderer(Component, {
-    methods: options.methods || [],
-    queries: [
-      collectionViaQuery(options)
-    ]
-  });
-}
+// export function networkCollectionRendererByProp(Component, options = {}) {
+//
+//   return multiQueryRenderer(Component, {
+//     methods: options.methods || [],
+//     queries: [
+//       collectionViaQuery(options)
+//     ]
+//   });
+// }

@@ -22,7 +22,7 @@ export function getResource(id, tableName) {
 }
 
 import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
-import { getOpportunitiesByAccount, getSalesMetricsByMonth } from './opportunity'
+import { getOpportunitiesByAccount} from './opportunity'
 import { getContractsByAccount, getContractsByLocation } from './contracts'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
@@ -52,9 +52,6 @@ const resourceVia = {
     pop: getLocationsByPop,
     contact: getLocationsByContact,
     locationStatus: getLocationsByStatus
-  },
-  sale: {
-    month: getSalesMetricsByMonth
   }
 };
 
