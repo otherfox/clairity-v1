@@ -4,7 +4,7 @@ import {getWorkOrder} from './workOrder'
 import {getContract} from './contracts'
 import {getUser} from './users'
 import {getAccount} from './account'
-import {getTicket} from './tickets'
+import {getTicket} from './ticket'
 import {getOpportunity, getSale} from './opportunity'
 
 const resource = {
@@ -71,7 +71,7 @@ import {getSalesStages} from './salesStage'
 import {getLeadSources} from './leadSource'
 import {getCampaignSources} from './campaignSource'
 import {getServiceTypes} from './serviceType'
-import {getTickets} from './tickets'
+import {getTickets} from './ticket'
 
 const collection = {
   pop: getPops,
