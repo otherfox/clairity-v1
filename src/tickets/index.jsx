@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import {networkCollectionRenderer} from '../shared/components/networkRenderer'
 
-export default class ViewTickets extends Component {
+class ViewTickets extends Component {
   render() {
     console.log(this.props.tickets);
     return (
