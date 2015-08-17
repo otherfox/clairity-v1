@@ -19,10 +19,12 @@ export function getTicket(id) {
   });
 }
 
+// TODO: Added param getActive to true. Need to add more services etc.
+
 export function getTickets() {
   console.log('service tickets')
   return new Promise((s, f) => {
-    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TicketDAO&_m=getAllTicketHeaders`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TicketDAO&_m=getAllTicketHeaders&getActive=true`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
