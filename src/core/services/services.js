@@ -1,4 +1,3 @@
-// import data from './stubs/orders'
 import _ from 'lodash'
 import moment from 'moment'
 
