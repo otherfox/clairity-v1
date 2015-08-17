@@ -1,4 +1,3 @@
-import data from './stubs/auth'
 import _ from 'lodash'
 
 import req from 'superagent'
