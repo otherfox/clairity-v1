@@ -35,7 +35,7 @@ class TestbedView extends React.Component {
         return {x: x.getDate(), y: r.running_sales}})
       .sort((a, b) => b.x - a.x );
     let domain = [_.min(data, r => r.x).x, _.max(data, r => r.x).x];
-    let xAxis = {}; 
+    let xAxis = {};
     return (
       <div style={{backgroundColor: this.context.muiTheme.palette.canvasColor}}>
         <PieGraph />
