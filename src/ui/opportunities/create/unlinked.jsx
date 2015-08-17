@@ -7,7 +7,7 @@ import _ from 'lodash'
 import { collectionDropdown } from '../../shared/components/collectionDropdown'
 import {State, Navigation} from 'react-router'
 import {v4} from 'uuid'
-import {convertLead} from '../actions'
+import {convertLead} from '../../../core/actions/opportunity'
 import moment from 'moment'
 import {
   RaisedButton,
