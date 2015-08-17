@@ -25,8 +25,8 @@ import {
 
 import controllable from 'react-controllables'
 
-import {tryLogin, loginSuccess} from './actions'
-import {} from './queries'
+import {tryLogin, loginSuccess} from '../../core/actions/login'
+import {} from '../../core/queries/login'
 
 @controllable(['username', 'password'])
 class LoginForm extends React.Component {

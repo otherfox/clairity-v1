@@ -5,16 +5,32 @@
 
 import React, {PropTypes} from 'react'
 import {contextTypes} from '../shared/decorators'
-import {PieGraph, BarGraph, LineGraph, ScatterPlotGraph, AreaGraph} from '../shared/components/graphs'
+import {PieGraph, BarGraph, LineGraphWithBrush, ScatterPlotGraph, AreaGraph, LineGraph} from '../shared/components/graphs'
+import {queryRenderer} from '../shared/components/networkRenderer'
+import {salesMetricsFetched} from '../../core/actions/salesMetric'
+import {querySalesMetrics} from '../../core/queries/salesMetric'
+import {getSalesMetricsByMonth} from '../../core/services/opportunity'
+import { State } from 'react-router'
+import _ from 'lodash'
 
 @contextTypes({muiTheme: PropTypes.object})
-class TestbedPage extends React.Component {
+class TestbedView extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+    let data = this.props.salesMetrics
+      .map(r => {
+        let x = new Date(r.id);
+        return {x: x, y: r.running_sales}})
+      .sort((a, b) => b.x - a.x );
+    let domain = [_.min(data, r => r.x).x, _.max(data, r => r.x).x];
     return (
       <div style={{backgroundColor: this.context.muiTheme.palette.canvasColor}}>
         <PieGraph />
         <BarGraph />
-        <LineGraph />
+        <LineGraph data={{label: '', values:data}} domain={domain} width={1000} />
+        <LineGraphWithBrush />
         <ScatterPlotGraph />
         <AreaGraph />
       </div>
@@ -22,4 +38,20 @@ class TestbedPage extends React.Component {
   }
 }
 
-export default TestbedPage;
+// let TestbedPage = React.createClass({
+//   mixins: [State],
+//   render() {
+//     return <TestbedView month={0} />;
+//   }
+// });
+
+export default queryRenderer(TestbedView, {
+  queries: [{
+    tableName: 'salesMetric',
+    writeMethod: salesMetricsFetched,
+    shouldFetch: e => e.state.data,
+    cacheMethod: props => querySalesMetrics(props.month || '2015-08'),
+    serviceMethod: props => getSalesMetricsByMonth(props.months_ago || 0),
+    propName: 'salesMetrics'
+  }]
+});

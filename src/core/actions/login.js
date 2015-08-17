@@ -1,6 +1,6 @@
 import Fynx from 'fynx'
-import {tryUserLogin} from './services'
-import Store, {MessageTypes} from '../../core/store'
+import { tryUserLogin } from '../services/login'
+import Store, { MessageTypes } from '../store'
 
 export const tryLogin = Fynx.createAsyncAction();
 

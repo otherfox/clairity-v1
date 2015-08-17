@@ -38,6 +38,27 @@ let getOpportunitiesByAccount = memoize(id => {
 
 export { getOpportunity, getOpportunitiesByAccount };
 
+export function getSalesMetricsByMonth(month) {
+  return new Promise((s, f) => {
+    req.get(`http://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.SalesOppDAO&_m=getSalesMetricsOverMonths&months_ago=${month}`)
+      .withCredentials()
+      .end((err, res) => {
+        if (!err) {
+          let raw = JSON.parse(res.text).DATA;
+          let data = raw.map(r => ({
+            id: r[0],
+            month: r[0].split('-').slice(0, 2).join('-'),
+            sales: r[1],
+            running_sales: r[2]
+          }));
+          s(data);
+        } else {
+          f(err);
+        }
+      })
+  });
+}
+
 import {eventUpdateSalesOpp} from '../gateways/opportunity'
 
 export function putOpportunity(opp) {

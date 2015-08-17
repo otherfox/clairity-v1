@@ -17,5 +17,7 @@
   "workOrderType": {},
   "workOrderStatus": {},
   "workOrderMessage": {},
-  "opportunity": {}
+  "opportunity": {},
+  "locationStatus": {},
+  "salesMetric": {}
 }

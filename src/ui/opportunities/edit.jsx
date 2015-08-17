@@ -11,26 +11,10 @@ import EditDetails from './public/editDetails'
 import { fromJS } from 'immutable'
 import _ from 'lodash'
 
-import { updateSalesOpp } from './actions'
+import { updateSalesOpp } from '../../core/actions/opportunity'
 
 import EditAccountDetails from '../accounts/public/editDetails'
 let EditAccountDetailsAgent = networkModelRenderer(EditAccountDetails, 'user',{methods:['getState']});
-
-/*
-let event = 'controller.cfm?event=updateSalesOpp';
-let hiddenValues = {
-  customer_id: "1480",
-  oportunity_id: "7223",
-  tax_exempt: false,
-  summary_billing: false,
-  show_international: true,
-  show_long_distance: false,
-  email_invoice: false,
-  invoice_weekly: false,
-  vip: false,
-  auto_pay: false,
-};
-*/
 
 let editOpportunity = React.createClass({
   mixins: [State],
