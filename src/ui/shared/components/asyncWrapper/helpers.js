@@ -22,36 +22,48 @@ function consumeArguments() {
 
 export function model() {
   let { table, options } = consumeArguments(arguments);
-  return Object.assign(id => ({
+  return {
     type: 'query',
     name: 'model',
-    params: { id, table }
-  }), options);
+    getParams(props) {
+      return {
+        table,
+        id: props[options.idPropName]
+      };
+    }
+  }
 }
 
 export function collection() {
   let { table, options } = consumeArguments(arguments);
   return {
     all() {
-      return Object.assign(() => ({
+      return {
         type: 'query',
         name: 'collection',
-        params: { table }
-      }), options);
+        getParams(props) {
+          return { table };
+        }
+      }
     },
     by() {
       let argInfo = consumeArguments(arguments);
-      return Object.assign(filterId => ({
+      return {
         type: 'query',
         name: 'collectionVia',
-        params: {
-          table, filterId,
-          filterTable: argInfo.table,
+        getParams(props) {
+          return {
+            table,
+            filterTable: argInfo.table,
+            filterId: props[argInfo.idPropName]
+          };
         }
-      }), options, argInfo.options);
+      }
     }
   }
 }
+
+
 
 export function action() {
   let args = Array.from(arguments);
