@@ -19,17 +19,28 @@ class TestbedView extends React.Component {
     super(props);
   }
   render() {
-    let data = this.props.salesMetrics
+    let data = this.props.salesMetrics0
       .map(r => {
         let x = new Date(r.id);
-        return {x: x, y: r.running_sales}})
+        return {x: x.getDate(), y: r.running_sales}})
+      .sort((a, b) => b.x - a.x );
+    let data1 = this.props.salesMetrics1
+      .map(r => {
+        let x = new Date(r.id);
+        return {x: x.getDate(), y: r.running_sales}})
+      .sort((a, b) => b.x - a.x );
+    let data2 = this.props.salesMetrics2
+      .map(r => {
+        let x = new Date(r.id);
+        return {x: x.getDate(), y: r.running_sales}})
       .sort((a, b) => b.x - a.x );
     let domain = [_.min(data, r => r.x).x, _.max(data, r => r.x).x];
+    let xAxis = {}; 
     return (
       <div style={{backgroundColor: this.context.muiTheme.palette.canvasColor}}>
         <PieGraph />
         <BarGraph />
-        <LineGraph data={{label: '', values:data}} domain={domain} width={1000} />
+        <LineGraph data={[{label: 'Aug', values:data},{label: 'Jul', values:data1},{label: 'Jun', values:data2}]} domain={domain} xAxis={xAxis} />
         <LineGraphWithBrush />
         <ScatterPlotGraph />
         <AreaGraph />
@@ -51,7 +62,21 @@ export default queryRenderer(TestbedView, {
     writeMethod: salesMetricsFetched,
     shouldFetch: e => e.state.data,
     cacheMethod: props => querySalesMetrics(props.month || '2015-08'),
-    serviceMethod: props => getSalesMetricsByMonth(props.months_ago || 0),
-    propName: 'salesMetrics'
+    serviceMethod: props => getSalesMetricsByMonth(0),
+    propName: 'salesMetrics0'
+  },{
+    tableName: 'salesMetric',
+    writeMethod: salesMetricsFetched,
+    shouldFetch: e => e.state.data,
+    cacheMethod: props => querySalesMetrics(props.month || '2015-07'),
+    serviceMethod: props => getSalesMetricsByMonth(1),
+    propName: 'salesMetrics1'
+  },{
+    tableName: 'salesMetric',
+    writeMethod: salesMetricsFetched,
+    shouldFetch: e => e.state.data,
+    cacheMethod: props => querySalesMetrics(props.month || '2015-06'),
+    serviceMethod: props => getSalesMetricsByMonth(2),
+    propName: 'salesMetrics2'
   }]
 });
