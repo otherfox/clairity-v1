@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { networkCollectionRenderer } from '../shared/components/networkRenderer'
+import { FilteredCollection, Filters, TextFilter, RadioButtonFilter } from '../shared/components/filteredCollection'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
+import Header from '../shared/components/header'
 import { RaisedButton } from 'material-ui'
 
 class ViewTickets extends Component {
@@ -10,7 +12,6 @@ class ViewTickets extends Component {
     console.log(tickets);
     return {
       colNames: [
-        { label: '', name: '', cellType: 'string'},
         { label: 'ID', name: 'id'},
         { label: 'Subject', name: 'subject'},
         { label: 'Status', name: 'status'},
@@ -19,21 +20,28 @@ class ViewTickets extends Component {
         { label: 'Modified', name: 'last_mod_date_time'},
         { label: 'Owner', name: 'owner'}
       ],
-      data: tickets.map(r => ({
-        id: r.id,
-        subject: r.subject,
-        status: r.status,
-        priority: r.priority,
-        received_date_time: r.received_date_time,
-        last_mod_date_time: r.last_mod_date_time,
-        owner: r.owner
-      }))
+      data: tickets,
+      colWidths: [1,3,1,1,1,1,1],
+      widthAdj: -30
     }
   }
 
   render() {
     return (
-      <div><Table {...this.getTickets(this.props.tickets)}/></div>
+      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+        <Header><h1>Tickets</h1></Header>
+        <FilteredCollection data={this.props.tickets}>
+          <Filters>
+            <TextFilter label='subject' name='subject' />
+            <RadioButtonFilter label={'Status'} name={'status'} buttonGroup={{name: 'status'}} options={[
+              { label: 'Open', value: 'Open'},
+              { label: 'New', value: 'New'},
+              { label: 'Both', value: '', defaultChecked: true}
+            ]} />
+          </Filters>
+          <Table {...this.getTickets(this.props.tickets)} />
+        </FilteredCollection>
+      </Layout>
     )
   }
 }
