@@ -2,6 +2,11 @@
 import {instance} from '../../../core/bridge'
 import _ from 'lodash'
 
+function* entries(obj) {
+  for (key of Object.keys(obj))
+    yield [key, obj[key]];
+}
+
 export default function asyncWrapper() {
 
   const args = Array.from(arguments);
@@ -27,12 +32,23 @@ export default function asyncWrapper() {
 
     constructor(props) {
       super(props);
+      this.state = { ready: false };
+      this.requestState();
+    }
+
+    requestState() {
+      for (let [key, value] of entries(queries)) {
+        value.params = value.getParams(this.props, this.key);
+      }
+    }
+
+    getInnerProps() {
 
     }
 
     render() {
       let innerComponent = this.state.ready ?
-          <Component key="inner" ref="inner" {...this.props} {...this.getQueryState()} />
+          <Component key="inner" ref="inner" {...this.props} {...this.getInnerProps()} />
         :
           <div key="null" />;
       return (
