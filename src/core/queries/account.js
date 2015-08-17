@@ -1,4 +1,4 @@
-import Store from '../../../core/store'
+import Store from '../store'
 
 export function queryAllCustomerTypes() {
   let results = Store.data
