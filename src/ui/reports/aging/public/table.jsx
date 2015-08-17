@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import Table from '../../../shared/components/table'
-import {agingReportsFetched} from '../actions'
+import {agingReportsFetched} from '../../../../core/actions/agingReport'
 import {queryAll} from '../queries'
 import {getAgingReports} from '../services'
 import AgingSettings from './settings'
