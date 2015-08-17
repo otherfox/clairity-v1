@@ -1,6 +1,6 @@
 import Fynx from 'fynx'
 import {getAgingReports} from './services'
-import Store from '../../../core/store'
+import Store from '../store'
 
 export const fetchAgingReports = Fynx.createAsyncAction();
 
