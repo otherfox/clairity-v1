@@ -4,6 +4,7 @@ import {getWorkOrder} from './workOrder'
 import {getContract} from './contracts'
 import {getUser} from './users'
 import {getAccount} from './account'
+import {getTicket} from './tickets'
 import {getOpportunity, getSale} from './opportunity'
 
 const resource = {
@@ -14,7 +15,8 @@ const resource = {
   lead: getContact,
   user: getUser,
   account: getAccount,
-  opportunity: getOpportunity
+  opportunity: getOpportunity,
+  ticket: getTicket
 };
 
 export function getResource(id, tableName) {
@@ -69,6 +71,7 @@ import {getSalesStages} from './salesStage'
 import {getLeadSources} from './leadSource'
 import {getCampaignSources} from './campaignSource'
 import {getServiceTypes} from './serviceType'
+import {getTickets} from './tickets'
 
 const collection = {
   pop: getPops,
@@ -80,7 +83,8 @@ const collection = {
   salesStage: getSalesStages,
   leadSource: getLeadSources,
   campaignSource: getCampaignSources,
-  serviceType: getServiceTypes
+  serviceType: getServiceTypes,
+  ticket: getTickets
 };
 
 export function getCollection(tableName) {

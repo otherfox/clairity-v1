@@ -19,5 +19,6 @@
   "workOrderMessage": {},
   "opportunity": {},
   "locationStatus": {},
-  "salesMetric": {}
+  "salesMetric": {},
+  "ticket": {}
 }
