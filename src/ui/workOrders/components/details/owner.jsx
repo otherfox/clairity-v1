@@ -1,8 +1,8 @@
 import React, {addons} from 'react/addons'
 import DropDown from '../../../shared/components/dropDown'
 import queryRenderer from '../../../shared/components/networkRenderer/queryRenderer'
-import {ownersFetched} from '../../actions'
-import {queryWorkOrderOwners} from '../../queries'
+import {ownersFetched} from '../../../../core/actions/workOrder'
+import {queryWorkOrderOwners} from '../../../../core/queries/workOrder'
 import {getWorkOrderOwners} from '../../../../core/services/users'
 import {Map, List} from 'immutable'
 
