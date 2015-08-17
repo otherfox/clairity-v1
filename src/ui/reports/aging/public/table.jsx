@@ -1,16 +1,16 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes } from 'react'
 import Table from '../../../shared/components/table'
-import {agingReportsFetched} from '../../../../core/actions/agingReport'
-import {queryAll} from '../queries'
-import {getAgingReports} from '../services'
+import { agingReportsFetched } from '../../../../core/actions/agingReport'
+import { queryAll } from '../../../../core/queries/agingReport'
+import { getAgingReports } from '../../../../core/services/agingReport'
 import AgingSettings from './settings'
 import {
   collectionQuery,
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
-import {FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter} from '../../../shared/components/filteredCollection'
-import {RaisedButton} from 'material-ui'
+import { FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter } from '../../../shared/components/filteredCollection'
+import { RaisedButton } from 'material-ui'
 
 class AgingTable extends React.Component {
 
