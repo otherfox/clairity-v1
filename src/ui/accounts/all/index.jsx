@@ -2,8 +2,9 @@ import React, {PropTypes} from 'react'
 import Header from '../../shared/components/header'
 import Layout from  '../../shared/components/layout'
 import Table from  '../../shared/components/table'
+import Cards from '../../shared/components/cards'
 import Details from '../../shared/components/details'
-import { RaisedButton } from 'material-ui'
+import {RaisedButton} from 'material-ui'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
@@ -32,7 +33,7 @@ let ViewAccounts = React.createClass({
         ]
       },
       colWidths: [1],
-      
+
       widthAdj: -30
     };
   },
@@ -44,7 +45,7 @@ let ViewAccounts = React.createClass({
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>View Accounts</h1></Header>
-        <Table {...this.getAccounts(accounts)} />
+        <Cards {...this.getAccounts(accounts)} />
       </Layout>
     );
   }
