@@ -53,6 +53,7 @@ var LeftNav = React.createClass ({
             { text: "Leads", target: "leads"},
             { text: "Open Installs", target: "open-installs"},
             { text: "Work Orders", target: "/work-orders/1538"},
+            { text: "Tickets", target: "/tickets"},
             { text: "Login", target: "login"}
           ]} />
         </div>
