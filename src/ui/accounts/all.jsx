@@ -1,29 +1,24 @@
-import React, {PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
-import {RaisedButton} from 'material-ui'
+import { RaisedButton } from 'material-ui'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
 import {Navigation} from 'react-router'
 import Link from '../shared/components/link'
 
-import query from '../shared/components/async'
+import query, { collection } from '../shared/components/async'
+import { propTypes } from '../shared/decorators'
 
-let ViewAccounts = React.createClass({
-  mixins: [Navigation],
-
-  propTypes: {
-    accounts: React.PropTypes.object
-  },
+@query({ accounts: collection('account').all() })
+@propTypes({ accounts: PropTypes.array.isRequired })
+class ViewAccounts extends Component {
 
   getAccounts(accounts) {
-
-    let names = accounts.map(a => a.name);
-
     return {
       colNames: [
         { label: 'Accounts', name: 'name', cellType: 'account', props: { idField: 'id'} },
@@ -35,10 +30,9 @@ let ViewAccounts = React.createClass({
         ]
       },
       colWidths: [1],
-
       widthAdj: -30
     };
-  },
+  }
 
   render() {
 
@@ -47,12 +41,11 @@ let ViewAccounts = React.createClass({
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>View Accounts</h1></Header>
-        <Cards {...this.getAccounts(accounts)} />
+        <Table {...this.getAccounts(accounts)} />
       </Layout>
     );
   }
-});
 
-import {networkCollectionRenderer} from '../shared/components/networkRenderer'
+}
 
-export default networkCollectionRenderer(ViewAccounts, { tableName: 'account' });
+export default ViewAccounts;
