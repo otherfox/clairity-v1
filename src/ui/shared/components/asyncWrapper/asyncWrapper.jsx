@@ -13,35 +13,43 @@ export default function asyncWrapper() {
   const Component = args[0];
   const options = args[1];
 
+  const merge = (s, p) => (s[p[0]] = p[1]) && s;
+
   const actions = _.chain(options)
                    .pairs()  // convert to arrays to maintain key names
                    .filter(p => p[1].type === 'action')  // filter by action
                    .map(p => [p[0], a => instance.dispatch(p[1](a, p[0]))])  // convert function to promise
-                   .reduce((s, p) => (s[p[0]] = p[1]) && s, {});  // create action dictionary
+                   .reduce(merge, {});  // create action dictionary
 
   const queries = _.chain(options)
                    .pairs()
                    .filter(p => p[1].type === 'query')
-                   //.reduce((s, p) => (s[p[0]] = p[1]) && s, {});
 
   class AsyncWrapper extends React.Component {
 
     constructor(props) {
       super(props);
       this.state = { ready: false };
-      this.requestState();
+      this.requestState(props);
     }
 
-    requestState() {
+    componentWillReceiveProps(props) {
+      if (!_.eq(props, this.props)) {
+        this.setState({ready: false});
+        this.requestState(props);
+      }
+    }
+
+    requestState(props) {
       let promises = [];
       this.reqs = queries.map(q => {  // q - [propName, queryInfo]
         let { type, name } = q[1];
-        let params = q[1].getParams(this.props, q[0]);
+        let params = q[1].getParams(props, q[0]);
         let promise = instance.dispatch({ type, name, params });
         promises.push(promise);
         promise.then(this.queryFinished(q[0]));
         return [q[0], promise];
-      }).reduce((s, p) => (s[p[0]] = p[1]) && s, {});
+      }).reduce(merge, {});
       Promise.all(promises).then(() => this.setState({ ready: true }));
     }
 
