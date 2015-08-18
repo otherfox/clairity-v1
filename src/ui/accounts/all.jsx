@@ -1,15 +1,15 @@
 import React, {PropTypes} from 'react'
-import Header from '../../shared/components/header'
-import Layout from  '../../shared/components/layout'
-import Table from  '../../shared/components/table'
-import Cards from '../../shared/components/cards'
-import Details from '../../shared/components/details'
+import Header from '../shared/components/header'
+import Layout from '../shared/components/layout'
+import Table from '../shared/components/table'
+import Cards from '../shared/components/cards'
+import Details from '../shared/components/details'
 import {RaisedButton} from 'material-ui'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
 import {Navigation} from 'react-router'
-import Link from '../../shared/components/link'
+import Link from '../shared/components/link'
 
 let ViewAccounts = React.createClass({
   mixins: [Navigation],
@@ -51,6 +51,6 @@ let ViewAccounts = React.createClass({
   }
 });
 
-import {networkCollectionRenderer} from '../../shared/components/networkRenderer'
+import {networkCollectionRenderer} from '../shared/components/networkRenderer'
 
 export default networkCollectionRenderer(ViewAccounts, { tableName: 'account' });
