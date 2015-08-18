@@ -1,8 +1,6 @@
 import _ from 'lodash'
 import moment from 'moment'
 
-import {debug} from '../mixins/debug'
-
 import req from 'superagent'
 
 export function getTicket(id) {
