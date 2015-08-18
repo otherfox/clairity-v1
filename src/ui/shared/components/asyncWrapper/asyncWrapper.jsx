@@ -2,6 +2,11 @@
 import {instance} from '../../../core/bridge'
 import _ from 'lodash'
 
+function* entries(obj) {
+  for (key of Object.keys(obj))
+    yield [key, obj[key]];
+}
+
 export default function asyncWrapper() {
 
   const args = Array.from(arguments);
@@ -13,16 +18,37 @@ export default function asyncWrapper() {
   const Component = args[0];
   const options = args[1];
 
+  const actions = _.chain(options)
+                   .pairs()  // convert to arrays to maintain key names
+                   .filter(p => p[1].type === 'action')
+                   .reduce((s, p) => s[p[0]] = p[1], {});
+
+  const queries = _.chain(options)
+                   .pairs()
+                   .filter(p => p[1].type === 'query')
+                   .reduce((s, p) => s[p[0]] = p[1], {});
+
   class AsyncWrapper extends React.Component {
 
     constructor(props) {
       super(props);
+      this.state = { ready: false };
+      this.requestState();
+    }
+
+    requestState() {
+      for (let [key, value] of entries(queries)) {
+        value.params = value.getParams(this.props, this.key);
+      }
+    }
+
+    getInnerProps() {
 
     }
 
     render() {
       let innerComponent = this.state.ready ?
-          <Component key="inner" ref="inner" {...this.props} {...this.getQueryState()} />
+          <Component key="inner" ref="inner" {...this.props} {...this.getInnerProps()} />
         :
           <div key="null" />;
       return (
