@@ -9,7 +9,7 @@ export default function asyncWrapper() {
   const args = Array.from(arguments);
 
   if (args.length === 1) {
-    return Component => asyncWrapper(Component, args);
+    return Component => asyncWrapper(Component, ...args);
   }
 
   const Component = args[0];
@@ -21,11 +21,13 @@ export default function asyncWrapper() {
                    .pairs()  // convert to arrays to maintain key names
                    .filter(p => p[1].type === 'action')  // filter by action
                    .map(p => [p[0], a => instance.dispatch(p[1](a, p[0]))])  // convert function to promise
-                   .reduce(merge, {});  // create action dictionary
+                   .reduce(merge, {})  // create action dictionary
+                   .value();
 
   const queries = _.chain(options)
                    .pairs()
                    .filter(p => p[1].type === 'query')
+                   .value();
 
   class AsyncWrapper extends Component {
 
