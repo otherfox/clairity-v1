@@ -2,11 +2,6 @@
 import {instance} from '../../../core/bridge'
 import _ from 'lodash'
 
-function* entries(obj) {
-  for (key of Object.keys(obj))
-    yield [key, obj[key]];
-}
-
 export default function asyncWrapper() {
 
   const args = Array.from(arguments);
@@ -20,13 +15,14 @@ export default function asyncWrapper() {
 
   const actions = _.chain(options)
                    .pairs()  // convert to arrays to maintain key names
-                   .filter(p => p[1].type === 'action')
-                   .reduce((s, p) => s[p[0]] = p[1], {});
+                   .filter(p => p[1].type === 'action')  // filter by action
+                   .map(p => [p[0], a => instance.dispatch(p[1](a, p[0]))])  // convert function to promise
+                   .reduce((s, p) => (s[p[0]] = p[1]) && s, {});  // create action dictionary
 
   const queries = _.chain(options)
                    .pairs()
                    .filter(p => p[1].type === 'query')
-                   .reduce((s, p) => s[p[0]] = p[1], {});
+                   //.reduce((s, p) => (s[p[0]] = p[1]) && s, {});
 
   class AsyncWrapper extends React.Component {
 
@@ -37,13 +33,27 @@ export default function asyncWrapper() {
     }
 
     requestState() {
-      for (let [key, value] of entries(queries)) {
-        value.params = value.getParams(this.props, this.key);
-      }
+      let promises = [];
+      this.reqs = queries.map(q => {  // q - [propName, queryInfo]
+        let { type, name } = q[1];
+        let params = q[1].getParams(this.props, q[0]);
+        let promise = instance.dispatch({ type, name, params });
+        promises.push(promise);
+        promise.then(this.queryFinished(q[0]));
+        return [q[0], promise];
+      }).reduce((s, p) => (s[p[0]] = p[1]) && s, {});
+      Promise.all(promises).then(() => this.setState({ ready: true }));
+    }
+
+    queryFinished(name) {
+      return query => this.reqs[name] = query;
     }
 
     getInnerProps() {
-
+      return {
+        actions,
+        ...this.reqs
+      }
     }
 
     render() {
