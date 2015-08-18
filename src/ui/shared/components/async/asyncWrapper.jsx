@@ -1,5 +1,5 @@
 
-import {instance} from '../../../core/bridge'
+import {instance} from '../../../../core/bridge'
 import _ from 'lodash'
 
 export default function asyncWrapper() {
