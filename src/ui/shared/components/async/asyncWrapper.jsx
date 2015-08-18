@@ -7,7 +7,7 @@ export default function asyncWrapper() {
   const args = Array.from(arguments);
 
   if (args.length === 1) {
-    return Component => queryWrapper(Component, args);
+    return Component => asyncWrapper(Component, args);
   }
 
   const Component = args[0];
