@@ -11,6 +11,8 @@ import controllable from 'react-controllables'
 import {Navigation} from 'react-router'
 import Link from '../shared/components/link'
 
+import query from '../shared/components/async'
+
 let ViewAccounts = React.createClass({
   mixins: [Navigation],
 
