@@ -7,14 +7,14 @@ import { contextTypes } from '../decorators'
 export default class Content extends Component {
   render() {
     return (
-      <div style={this._style()} ref={'content'} className={'content'}>
+      <div style={this._style()} ref={'content'} id={'content'}>
         <style>{`
-          .content {
+          #content {
             padding-left: ${Settings.leftNavWidth+Settings.contentPadding}px;
           }
 
           @media (max-width: ${Settings.breakpoints.sm}px) {
-            .content {
+            #content {
               padding-left: ${Settings.mobilePadding}px};
             }
           }

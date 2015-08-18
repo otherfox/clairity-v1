@@ -16,8 +16,16 @@ let LeftNav = React.createClass ({
     }
   },
 
+  _bodyresize() {
+    console.log('body resize');
+    console.log(document.getElementById('content').offsetHeight);
+  },
+
   componentDidMount() {
     this._setHeight();
+    console.log('content: ',document.getElementById('content').offsetHeight);
+    console.log('body: ',document.body.offsetHeight);
+    document.getElementById('content').onresize = this._bodyresize;
     window.addEventListener('resize', e => this._setHeight());
   },
 
@@ -76,7 +84,7 @@ let LeftNav = React.createClass ({
 
   _setHeight() {
     let extraHeight = Settings.footerHeight + Settings.headerHeight;
-    this.setState({ height: (window.innerHeight > Settings.contentMinHeight + extraHeight) ? window.innerHeight - extraHeight+ 'px' : window.innerHeight +'px'});
+    this.setState({ height: (window.innerHeight > Settings.contentMinHeight + extraHeight) ? document.getElementById('content').offsetHeight + extraHeight + 20 + 'px' : window.innerHeight + 20 +'px'});
   }
 
 });
