@@ -126,7 +126,7 @@ class DataTable extends React.Component {
     let CellClass = _.isString(col.cellType) ?
         (CellTypes[col.cellType] || CellTypes.string)
       :
-        col.cellType;
+        col.cellType || CellTypes.string;
     return (
       <CellClass {...col.props} data={rowData} width={width} index={rowIndex}>
         {rowData[col.name]}
@@ -196,7 +196,7 @@ class DataTable extends React.Component {
 
             /* removes background colors */
             .public_fixedDataTableCell_main {
-              background-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.canvasColor, 0.9)};
+              background-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.canvasColor, 0.96)};
               color: ${this.context.muiTheme.palette.textColor};
             }
             .public_fixedDataTableRow_highlighted, .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {

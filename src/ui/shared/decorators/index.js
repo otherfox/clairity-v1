@@ -1,1 +1,2 @@
-export {contextTypes} from './contextTypes'
+export { contextTypes } from './contextTypes'
+export { propTypes } from './propTypes'

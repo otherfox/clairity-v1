@@ -267,8 +267,7 @@ export class LineGraph extends Component {
   }
 
   render() {
-    let xScale = d3.time.scale().domain(this.props.domain).range([0, 400 - 70]);
-    console.log(this.props.data);
+    console.log(this.props.domain);
     return (
       <div>
         <style>{`
@@ -284,8 +283,6 @@ export class LineGraph extends Component {
            height={400}
            margin={{top: 10, bottom: 50, left: 50, right: 20}}
            tooltipHtml={(x,coords) => this.getTooltip(coords)}
-           xScale={xScale}
-           xAxis={{tickValues: xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%d")}}
            onClick={(e, data) => console.log(e,data)}
         />
       </div>
