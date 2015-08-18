@@ -1,4 +1,4 @@
-
+import React, { Component } from 'react'
 import {instance} from '../../../../core/bridge'
 import _ from 'lodash'
 
@@ -25,7 +25,7 @@ export default function asyncWrapper() {
                    .pairs()
                    .filter(p => p[1].type === 'query')
 
-  class AsyncWrapper extends React.Component {
+  class AsyncWrapper extends Component {
 
     constructor(props) {
       super(props);
@@ -78,5 +78,5 @@ export default function asyncWrapper() {
 
   }
 
-  return QueryRenderer;
+  return AsyncWrapper;
 }
