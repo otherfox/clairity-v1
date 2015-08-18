@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, addons } from 'react/addons'
 import {instance} from '../../../../core/bridge'
 import _ from 'lodash'
+
+const { CSSTransitionGroup } = addons;
 
 export default function asyncWrapper() {
 
