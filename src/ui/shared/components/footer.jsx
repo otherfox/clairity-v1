@@ -1,45 +1,53 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Settings from './settings'
 import {Utils, Styles} from 'material-ui'
-
+import {contextTypes} from '../decorators'
 let ColorManipulator = Utils.ColorManipulator;
 
-class Footer extends React.Component {
+@contextTypes({ muiTheme: PropTypes.object })
+export default class Footer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      position: 'relative'
+    }
+  }
 
-  style() {
+  componentDidMount() {
+    this._setPosition();
+    window.addEventListener('resize', e => this._setPosition());
+  }
 
+  componentWillDismount() {
+    window.removeEventListener('resize', e => this._setPosition());
+  }
+
+  render() {
+    return (
+      <div style={this._style()}>
+        Copywrite 2015 One Ring Networks
+      </div>
+    );
+  }
+
+  _style() {
     let textColor = Styles.Colors.white;
     let backgroundColor = Styles.Colors.black;
 
     return {
       padding: '20px',
       textAlign: 'center',
-			position: 'absolute',
-    	width: '100%',
+      position: this.state.position,
+      width: '100%',
       height: Settings.footerHeight+'px',
       color: textColor,
       backgroundColor: backgroundColor,
-    	bottom: '0',
+      bottom: '0',
       zIndex: 2
     }
   }
 
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  render() {
-
-    return (
-      <div style={this.style()}>
-        Copywrite 2015 One Ring Networks
-      </div>
-    );
+  _setPosition() {
+    this.setState({ position: (window.innerHeight > Settings.contentMinHeight + Settings.footerHeight + Settings.headerHeight) ? 'fixed' : 'relative'});
   }
 }
-
-Footer.contextTypes = {
-  muiTheme: React.PropTypes.object
-};
-
-export default Footer;
