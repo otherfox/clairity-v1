@@ -1,24 +1,13 @@
-import React from 'react'
+import React, { Component, PropTypes, Children } from 'react'
 import Settings from './settings'
 import _ from 'lodash'
+import { contextTypes } from '../decorators'
 
-let Content = React.createClass ({
-
-  style: function() {
-
-    let canvasColor = this.context.muiTheme.palette.canvasColor;
-
-    return {
-      width: '100%',
-      backgroundColor: canvasColor,
-      paddingBottom: Settings.footerHeight+Settings.contentPadding+'px',
-      minHeight: Settings.contentMinHeight+'px'
-    };
-  },
-
-  render: function() {
+@contextTypes({ muiTheme: PropTypes.object })
+export default class Content extends Component {
+  render() {
     return (
-      <div style={ _.assign(this.style(), this.props.style)} className={'content'}>
+      <div style={this._style()} ref={'content'} className={'content'}>
         <style>{`
           .content {
             padding-left: ${Settings.leftNavWidth+Settings.contentPadding}px;
@@ -34,10 +23,14 @@ let Content = React.createClass ({
       </div>
     );
   }
-});
+  _style() {
+    let canvasColor = this.context.muiTheme.palette.canvasColor;
 
-Content.contextTypes = {
-  muiTheme: React.PropTypes.object
+    return {
+      width: '100%',
+      backgroundColor: canvasColor,
+      paddingBottom: Settings.footerHeight+Settings.contentPadding+'px',
+      minHeight: Settings.contentMinHeight+'px'
+    };
+  }
 }
-
-export default Content;
