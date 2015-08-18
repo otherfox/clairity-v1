@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import Settings from './settings'
 import {Utils, Styles} from 'material-ui'
-
+import {contextTypes} from '../decorators'
 let ColorManipulator = Utils.ColorManipulator;
 
-class Footer extends React.Component {
+@contextTypes({ muiTheme: PropTypes.object })
+export default class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +14,7 @@ class Footer extends React.Component {
   }
 
   componentDidMount() {
-    this.getPosition();
+    this._getPosition();
     window.addEventListener('resize', e => this._getPosition());
   }
 
@@ -50,9 +51,3 @@ class Footer extends React.Component {
     this.setState({ position: (window.innerHeight > Settings.contentMinHeight + 122) ? 'fixed' : 'relative'});
   }
 }
-
-Footer.contextTypes = {
-  muiTheme: React.PropTypes.object
-};
-
-export default Footer;
