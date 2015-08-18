@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 function consumeArguments() {
-  let args = Array.from(arguments);
+  let args = Array.from(arguments[0]);
   if (args.length !== 1)
     throw new Error('Async query helpers only takes a single argument');
   let options;
