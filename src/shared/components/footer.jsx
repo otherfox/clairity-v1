@@ -14,12 +14,12 @@ export default class Footer extends React.Component {
   }
 
   componentDidMount() {
-    this._getPosition();
-    window.addEventListener('resize', e => this._getPosition());
+    this._setPosition();
+    window.addEventListener('resize', e => this._setPosition());
   }
 
   componentWillDismount() {
-    window.removeEventListener('resize', e => this._getPosition());
+    window.removeEventListener('resize', e => this._setPosition());
   }
 
   render() {
@@ -47,7 +47,7 @@ export default class Footer extends React.Component {
     }
   }
 
-  _getPosition() {
-    this.setState({ position: (window.innerHeight > Settings.contentMinHeight + 122) ? 'fixed' : 'relative'});
+  _setPosition() {
+    this.setState({ position: (window.innerHeight > Settings.contentMinHeight + Settings.footerHeight + Settings.headerHeight) ? 'fixed' : 'relative'});
   }
 }

@@ -4,15 +4,62 @@ import _ from 'lodash'
 import {Menu, MenuItem} from 'material-ui'
 import {Navigation,State} from 'react-router'
 
-var LeftNav = React.createClass ({
+let LeftNav = React.createClass ({
   mixins: [Navigation,State],
+  contextTypes: {
+    muiTheme: React.PropTypes.object
+  },
 
-  style: function() {
+  getInitialState() {
+    return {
+      height: 'auto'
+    }
+  },
+
+  componentDidMount() {
+    this._setHeight();
+    window.addEventListener('resize', e => this._setHeight());
+  },
+
+  componentWillDismount() {
+    window.removeEventListener('resize', e => this._setHeight());
+  },
+
+  render() {
+    return (
+      <div className={'leftNav'} style={this._style().root}>
+        <style>
+          {`
+            @media (max-width: ${Settings.breakpoints.sm}px) {
+              .leftNav {
+                display: none;
+              }
+            }
+          `}
+        </style>
+        <Menu zDepth={0} style={this._style().menu} onItemTap={this._link} menuItems={[
+          { text: "Aging Reports", target: "aging-reports"},
+          { text: "IP Blocks", target: "ip-blocks"},
+          { text: "IP Zones", target: "ip-zones"},
+          { text: "Accounts", target: "accounts"},
+          { text: "Opportunites", target: "opps"},
+          { text: "Contacts", target: "contacts"},
+          { text: "Leads", target: "leads"},
+          { text: "Open Installs", target: "open-installs"},
+          { text: "Work Orders", target: "/work-orders/1538"},
+          { text: "Tickets", target: "/tickets"},
+          { text: "Login", target: "login"}
+        ]} />
+      </div>
+    );
+  },
+
+  _style() {
     return {
       root: {
         position: 'absolute',
         width: Settings.leftNavWidth,
-        height: '100%',
+        height: this.state.height,
         backgroundColor: this.context.muiTheme.component.menu.backgroundColor,
         borderRight: '1px solid '+this.context.muiTheme.palette.borderColor,
       },
@@ -23,41 +70,13 @@ var LeftNav = React.createClass ({
     }
   },
 
-  contextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-
-  link(e, idx, item) {
+  _link(e, idx, item) {
     this.transitionTo(item.target);
   },
 
-  render: function() {
-      return (
-        <div className={'leftNav'} style={this.style().root}>
-          <style>
-            {`
-              @media (max-width: ${Settings.breakpoints.sm}px) {
-                .leftNav {
-                  display: none;
-                }
-              }
-            `}
-          </style>
-          <Menu zDepth={0} style={this.style().menu} onItemTap={this.link} menuItems={[
-            { text: "Aging Reports", target: "aging-reports"},
-            { text: "IP Blocks", target: "ip-blocks"},
-            { text: "IP Zones", target: "ip-zones"},
-            { text: "Accounts", target: "accounts"},
-            { text: "Opportunites", target: "opps"},
-            { text: "Contacts", target: "contacts"},
-            { text: "Leads", target: "leads"},
-            { text: "Open Installs", target: "open-installs"},
-            { text: "Work Orders", target: "/work-orders/1538"},
-            { text: "Tickets", target: "/tickets"},
-            { text: "Login", target: "login"}
-          ]} />
-        </div>
-      );
+  _setHeight() {
+    let extraHeight = Settings.footerHeight + Settings.headerHeight;
+    this.setState({ height: (window.innerHeight > Settings.contentMinHeight + extraHeight) ? window.innerHeight - extraHeight+ 'px' : window.innerHeight +'px'});
   }
 
 });
