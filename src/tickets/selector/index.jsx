@@ -1,4 +1,6 @@
 import React, { Component, addons, PropTypes } from 'react'
+import Table from '../../shared/components/table'
+import {Filters} from '../../shared/components/filteredCollection'
 
 export default class Selector extends Component {
 
@@ -11,7 +13,7 @@ export default class Selector extends Component {
 
   componentWillReceiveProps(props) {
     this.setState({
-      data: this.refs.selected
+      data: this.refs.selected.selectedRows(props.selected)
     });
   }
 
@@ -20,17 +22,19 @@ export default class Selector extends Component {
   }
 
   updateSelected() {
-    let selected = this.refs.selected;
-    this.setState({ selected: selected });
+    console.log(this.refs.selected.state.active);
+    this.setState({ selected: this.refs.selected.state.active });
   }
 
   render() {
     let CollectionChild = null;
     React.Children.forEach(this.props.children, child => {
-      if (CollectionChild == null) {
-          CollectionChild = addons.cloneWithProps(child, { data: this.props.data, ref: 'selected', onChange: () => this.updateSelected() });
-        } else {
-          throw new Error('Only one collection component can be given to a FilteredCollection');
+      if(child.type == Table) {
+        if (CollectionChild == null) {
+            CollectionChild = addons.cloneWithProps(child, { data: this.props.data, ref: 'selected', onSelect: () => this.updateSelected() });
+          } else {
+            throw new Error('Only one collection component can be given to a FilteredCollection');
+          }
         }
       }
     );

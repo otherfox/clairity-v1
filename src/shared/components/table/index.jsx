@@ -9,12 +9,10 @@ import Details from '../details'
 import fuzzy from 'fuzzy'
 import _ from 'lodash'
 import {contextTypes} from '../../decorators'
-import controllable from 'react-controllables'
 
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'
 
-@controllable(['data'])
 @contextTypes({
   muiTheme: React.PropTypes.object
 })
@@ -152,7 +150,8 @@ class DataTable extends React.Component {
           rowClassNameGetter={i => this.getRowClass(i)}
           width={this.getWidth()}
           height={this.state.height}
-          headerHeight={this.props.headerHeight}>
+          headerHeight={this.props.headerHeight}
+          ref='internal'>
             {columns}
         </Table>
       </div>
@@ -219,10 +218,14 @@ class DataTable extends React.Component {
 
   onRowMouseDown(e, index) {
     if(this.state.active.indexOf(index) != -1) {
-      this.setState({ active: _.remove(this.state.active, n => n!=index)});
+      this.setState({ active: _.remove(this.state.active, n => n!=index)}, () => this.props.onSelect(this.state.active));
     } else {
-      this.setState({ active: this.state.active.concat(index) });
+      this.setState({ active: this.state.active.concat(index) }, () => this.props.onSelect(this.state.active));
     }
+  }
+
+  selectedRows() {
+    return this.state.active;
   }
 
   onRowMouseEnter(e, index) {
@@ -236,7 +239,6 @@ class DataTable extends React.Component {
     }
   }
 
-
   getRowClass(index) {
     let highlighted = (this.props.rowSelect) ?
       _.includes(_.map(
@@ -245,7 +247,6 @@ class DataTable extends React.Component {
         , true)
       : false;
     highlighted = (highlighted) ? 'highlighted' : '';
-    console.log(this.state.active)
     let active = (_.includes(this.state.active, index)) ? 'active' : '';
     return highlighted+' '+active;
   }
