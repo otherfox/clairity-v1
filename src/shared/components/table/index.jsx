@@ -53,7 +53,6 @@ class DataTable extends React.Component {
   }
 
   render() {
-    console.log('render', this.props.data.length);
     let columns =
       <Group fixed={true}>
         {
@@ -222,7 +221,7 @@ class DataTable extends React.Component {
     if(this.state.active.indexOf(index) != -1) {
       this.setState({ active: _.remove(this.state.active, n => n!=index)});
     } else {
-      this.setState({ active: this.state.active.concat(index) }, () => console.log('add', this.state.active));
+      this.setState({ active: this.state.active.concat(index) });
     }
   }
 
@@ -232,7 +231,7 @@ class DataTable extends React.Component {
       if(this.state.active.indexOf(index) != -1) {
         this.setState({ active: _.remove(this.state.active, n => n!=index)});
       } else {
-        this.setState({ active: this.state.active.concat(index) }, () => console.log('add', this.state.active));
+        this.setState({ active: this.state.active.concat(index) });
       }
     }
   }
