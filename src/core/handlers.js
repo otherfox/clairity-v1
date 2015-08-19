@@ -9,6 +9,6 @@ export default {
   },
   action(message) {
     console.log('action request received', message);
-    return Promise.resolve(message);
+    return Promise.resolve(Actions[message.name](message.params));
   }
 }
