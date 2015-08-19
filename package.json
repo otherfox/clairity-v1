@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "@brainbytes/immutable-store": "^0.4.0",
+    "aws-sdk": "^2.1.45",
     "classnames": "^1.2.0",
     "debounce": "^1.0.0",
     "es6-mapify": "^1.0.0",
