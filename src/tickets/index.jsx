@@ -6,6 +6,7 @@ import Table from '../shared/components/table'
 import Header from '../shared/components/header'
 import { RaisedButton, Utils } from 'material-ui'
 import {contextTypes} from '../shared/decorators'
+import Selector from './selector'
 
 @contextTypes({ muiTheme: PropTypes.object })
 class ViewTickets extends Component {
@@ -44,7 +45,9 @@ class ViewTickets extends Component {
             <DateFilter label='Received Min' name='received_date_time' future />
             <DateFilter label='Received Max' name='received_date_time' past />
           </Filters>
-          <Table {...this.getTickets(this.props.tickets)} />
+          <Selector>
+            <Table {...this.getTickets(this.props.tickets)} />
+          </Selector>
         </FilteredCollection>
       </Layout>
     )
