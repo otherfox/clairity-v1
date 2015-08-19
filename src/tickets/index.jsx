@@ -34,6 +34,7 @@ class ViewTickets extends Component {
         <Header><h1>Tickets</h1></Header>
         <FilteredCollection data={this.props.tickets}>
           <Filters breakpoints={{md: 1200}}>
+            <TextFilter label='Subject' name='subject' />
             <TextFilter label='Owner' name='owner' />
             <RadioButtonFilter label={'Status'} name={'status'} buttonGroup={{name: 'status'}} options={[
               { label: 'Open', value: 'Open'},

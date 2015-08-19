@@ -24,7 +24,7 @@ class DataTable extends React.Component {
     this.state = {
         data: this.props.data,
         width: this.getWidth(),
-        active: '',
+        active: [],
         sorted: {},
         height: this.getHeight()
     };
@@ -80,6 +80,19 @@ class DataTable extends React.Component {
                 word-break: break-word;
             }
 
+            /* Fix Select */
+            .public_fixedDataTable_header,
+            .fixedDataTable_hasBottomBorder,
+            .public_fixedDataTableCell_main,
+            .fixedDataTableColumnResizerLine_main,
+            .fixedDataTableRow_fixedColumnsDivider,
+            .public_fixedDataTable_main {
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            }
+
             /* Fix gradient header */
             .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
               background-image: none;
@@ -133,7 +146,8 @@ class DataTable extends React.Component {
         </style>
         <Table
           rowHeight={this.props.rowHeight}
-          onRowClick={(e, i) => this.onRowClick(e, i)}
+          onRowMouseDown={(e, i) => this.onRowMouseDown(e, i)}
+          onRowMouseEnter={(e, i) => this.onRowMouseEnter(e, i)}
           rowGetter={i => this.rowGetter(i)}
           rowsCount={this.props.data.length}
           rowClassNameGetter={i => this.getRowClass(i)}
@@ -204,22 +218,37 @@ class DataTable extends React.Component {
     };
   }
 
-  onRowClick(e, index) {
-    if(this.state.active === index) {
-      this.setState({ active: null });
+  onRowMouseDown(e, index) {
+    if(this.state.active.indexOf(index) != -1) {
+      this.setState({ active: _.remove(this.state.active, n => n!=index)});
     } else {
-      this.setState({ active: index });
+      this.setState({ active: this.state.active.concat(index) }, () => console.log('add', this.state.active));
     }
   }
+
+  onRowMouseEnter(e, index) {
+    e.preventDefault();
+    if(e.buttons == 1 || e.buttons == 3){
+      if(this.state.active.indexOf(index) != -1) {
+        this.setState({ active: _.remove(this.state.active, n => n!=index)});
+      } else {
+        this.setState({ active: this.state.active.concat(index) }, () => console.log('add', this.state.active));
+      }
+    }
+  }
+
 
   getRowClass(index) {
     let highlighted = (this.props.rowSelect) ?
       _.includes(_.map(
         _.keys( this.props.rowSelect),
-                key => !!(this.state.data[index][key] === this.props.rowSelect[key]))
+          key => !!(this.state.data[index][key] === this.props.rowSelect[key]))
         , true)
       : false;
-    return ((index === this.state.active) || highlighted) ? 'active' : '';
+    highlighted = (highlighted) ? 'highlighted' : '';
+    console.log(this.state.active)
+    let active = (_.includes(this.state.active, index)) ? 'active' : '';
+    return highlighted+' '+active;
   }
 
   formatCell(rowData, col, width, rowIndex) {

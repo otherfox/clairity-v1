@@ -105,10 +105,10 @@ export class TextFilter extends Component {
     let field = this.refs.internal.getValue();
 
     // TODO: Here I'm setting an empty string as _ so it does throw you can now filter empty fields
-    
+
     let results = fuzzy.filter(field, data, { extract: row =>
       (row[this.props.name]) ? row[this.props.name] : '_'
-    }) ;
+    });
     return results.map(r => r.original);
   }
   render() {
