@@ -14,7 +14,7 @@ class ViewTickets extends Component {
       colNames: [
         { label: 'ID', name: 'id'},
         { label: 'Subject', name: 'subject'},
-        { label: 'Status', name: 'status', cellType: 'boolean', props: {cellClasses: { New: true, Open: false}}},
+        { label: 'Status', name: 'status', cellType: 'boolean'},
         { label: 'Priority', name: 'priority', cellType: 'range', props: {cellClasses: { Low: 0, Medium: 2, High: 4}}},
         { label: 'Received', name: 'received_date_time', cellType:'date'},
         { label: 'Modified', name: 'last_mod_date_time', cellType:'date'},
@@ -22,16 +22,17 @@ class ViewTickets extends Component {
       ],
       data: tickets,
       colWidths: [1,3,1,1,1,1,1],
-      widthAdj: -20
+      widthAdj: -20,
+      rowSelect: {status: 'New'},
     }
   }
 
   render() {
     return (
-      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+      <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>Tickets</h1></Header>
         <FilteredCollection data={this.props.tickets}>
-          <Filters>
+          <Filters breakpoints={{md: 1200}}>
             <TextFilter label='Subject' name='subject' />
             <RadioButtonFilter label={'Status'} name={'status'} buttonGroup={{name: 'status'}} options={[
               { label: 'Open', value: 'Open'},

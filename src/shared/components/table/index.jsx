@@ -31,10 +31,6 @@ class DataTable extends React.Component {
     this.handleResize = this.handleResize.bind(this);
   }
 
-  handleResize() {
-    this.setState({width: this.getWidth(), height: this.getHeight()});
-  }
-
   componentWillReceiveProps(props) {
     let name = _.keys(this.state.sorted)[0];
     if (name) {
@@ -54,6 +50,100 @@ class DataTable extends React.Component {
 
   componentWillDismount() {
     window.removeEventListener('resize', this.handleResize);
+  }
+
+  render() {
+    console.log('render', this.props.data.length);
+    let columns =
+      <Group fixed={true}>
+        {
+          this.props.colNames.map((col, i) =>
+            <Column
+              label={col.label}
+              key={i}
+              headerRenderer={() => this.getHeader(col, i)}
+              dataKey={col.name || i}
+              width={this.getColWidth(i)}
+              minWidth={120}
+              flexGrow={(this.props.flexGrow.length > 0) ? this.props.flexGrow[i] : 1 }
+              cellRenderer={(cellData, cellDataKey, rowData, rowIndex, columnData, width) => this.formatCell(rowData, col, width, rowIndex)} />
+          , this)
+        }
+      </Group>;
+    return (
+      <div style={_.assign(this.style().root, this.props.style)}>
+        <style>
+          {`
+            /* Fix for dynamic cell constructors. */
+            .public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
+                padding: 8px;
+                word-break: break-word;
+            }
+
+            /* Fix gradient header */
+            .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
+              background-image: none;
+              background-color: ${this.context.muiTheme.palette.canvasColor};
+              color: ${this.context.muiTheme.palette.primary1Color};
+              border: none;
+            }
+
+            .public_fixedDataTable_header {
+              background: transparent;
+            }
+
+            .public_fixedDataTable_header .public_fixedDataTableCell_main {
+                border-bottom: 3px solid ${this.context.muiTheme.palette.primary1Color};
+                cursor: pointer;
+            }
+
+            /* Fix z-index and border */
+            .public_fixedDataTable_main {
+              z-index: 0;
+            }
+
+            /* makes active class */
+            .public_fixedDataTable_main .active .public_fixedDataTableCell_main {
+              background-color: transparent;
+            }
+            .public_fixedDataTable_main .active {
+              background-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.accent1Color, .3)}
+            }
+
+            /* changes border color */
+            .public_fixedDataTable_header,
+            .fixedDataTable_hasBottomBorder,
+            .public_fixedDataTableCell_main,
+            .fixedDataTableColumnResizerLine_main,
+            .fixedDataTableRow_fixedColumnsDivider,
+            .public_fixedDataTable_main {
+              border-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, 0.15)};
+            }
+
+            /* removes background colors */
+            .public_fixedDataTableCell_main {
+              background-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.canvasColor, 0.96)};
+              color: ${this.context.muiTheme.palette.textColor};
+            }
+            .public_fixedDataTableRow_highlighted, .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
+              background-color: ${Utils.ColorManipulator.darken(this.context.muiTheme.palette.canvasColor, 0.04)};
+              color: ${this.context.muiTheme.palette.textColor};
+            }
+          `}
+        </style>
+        <Table
+          rowHeight={this.props.rowHeight}
+          onRowClick={(e, i) => this.onRowClick(e, i)}
+          rowGetter={i => this.rowGetter(i)}
+          rowsCount={this.props.data.length}
+          rowClassNameGetter={i => this.getRowClass(i)}
+          width={this.getWidth()}
+          height={this.state.height}
+          headerHeight={this.props.headerHeight}>
+            {columns}
+        </Table>
+      </div>
+    );
   }
 
   getHeight() {
@@ -115,11 +205,21 @@ class DataTable extends React.Component {
   }
 
   onRowClick(e, index) {
+    if(this.state.active === index) {
+      this.setState({ active: null });
+    } else {
       this.setState({ active: index });
+    }
   }
 
   getRowClass(index) {
-    return (this.state.active === index ) ? 'active' : '';
+    let highlighted = (this.props.rowSelect) ?
+      _.includes(_.map(
+        _.keys( this.props.rowSelect),
+                key => !!(this.state.data[index][key] === this.props.rowSelect[key]))
+        , true)
+      : false;
+    return ((index === this.state.active) || highlighted) ? 'active' : '';
   }
 
   formatCell(rowData, col, width, rowIndex) {
@@ -134,90 +234,8 @@ class DataTable extends React.Component {
     );
   }
 
-  render() {
-    console.log('render', this.props.data.length);
-    let columns =
-      <Group fixed={true}>
-        {
-          this.props.colNames.map((col, i) =>
-            <Column
-              label={col.label}
-              key={i}
-              headerRenderer={() => this.getHeader(col, i)}
-              dataKey={col.name || i}
-              width={this.getColWidth(i)}
-              minWidth={120}
-              flexGrow={(this.props.flexGrow.length > 0) ? this.props.flexGrow[i] : 1 }
-              cellRenderer={(cellData, cellDataKey, rowData, rowIndex, columnData, width) => this.formatCell(rowData, col, width, rowIndex)} />
-          , this)
-        }
-      </Group>;
-    return (
-      <div style={_.assign(this.style().root, this.props.style)}>
-        <style>
-          {`
-            /* Fix for dynamic cell constructors. */
-            .public_fixedDataTable_bodyRow .public_fixedDataTableCell_wrap3 {
-                padding: 8px;
-                word-break: break-word;
-            }
-
-            /* Fix gradient header */
-            .public_fixedDataTable_header, .public_fixedDataTable_header .public_fixedDataTableCell_main {
-              background-image: none;
-              background-color: ${this.context.muiTheme.palette.canvasColor};
-              color: ${this.context.muiTheme.palette.primary1Color};
-              border: none;
-            }
-
-            .public_fixedDataTable_header {
-              background: transparent;
-            }
-
-            .public_fixedDataTable_header .public_fixedDataTableCell_main {
-                border-bottom: 3px solid ${this.context.muiTheme.palette.primary1Color};
-                cursor: pointer;
-            }
-
-            /* Fix z-index and border */
-            .public_fixedDataTable_main {
-              z-index: 0;
-            }
-
-            /* changes border color */
-            .public_fixedDataTable_header,
-            .fixedDataTable_hasBottomBorder,
-            .public_fixedDataTableCell_main,
-            .fixedDataTableColumnResizerLine_main,
-            .fixedDataTableRow_fixedColumnsDivider,
-            .public_fixedDataTable_main {
-              border-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, 0.15)};
-            }
-
-            /* removes background colors */
-            .public_fixedDataTableCell_main {
-              background-color: ${Utils.ColorManipulator.fade(this.context.muiTheme.palette.canvasColor, 0.96)};
-              color: ${this.context.muiTheme.palette.textColor};
-            }
-            .public_fixedDataTableRow_highlighted, .public_fixedDataTableRow_highlighted .public_fixedDataTableCell_main {
-              background-color: ${Utils.ColorManipulator.darken(this.context.muiTheme.palette.canvasColor, 0.04)};
-              color: ${this.context.muiTheme.palette.textColor};
-            }
-          `}
-        </style>
-        <Table
-          rowHeight={this.props.rowHeight}
-          onRowClick={i => this.onRowClick(i)}
-          rowGetter={i => this.rowGetter(i)}
-          rowsCount={this.props.data.length}
-          rowClassNameGetter={i => this.getRowClass}
-          width={this.getWidth()}
-          height={this.state.height}
-          headerHeight={this.props.headerHeight}>
-            {columns}
-        </Table>
-      </div>
-    );
+  handleResize() {
+    this.setState({width: this.getWidth(), height: this.getHeight()});
   }
 }
 

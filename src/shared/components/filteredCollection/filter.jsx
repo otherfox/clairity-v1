@@ -121,24 +121,34 @@ export class TextFilter extends Component {
 export class DateFilter extends Component {
   style() {
     return {
-      paddingTop: '24px',
-      height: '72px'
+      root: {
+        paddingTop: '24px',
+        height: '72px',
+        width: '130px'
+      },
+      textField: {
+        width: '130px'
+      }
     };
   }
   filter(data) {
     let field = this.refs.internal.getDate();
     let results = (field) ? data.filter(row => {
-      let date = (row[this.props.name] instanceof Date) ? row[this.props.name] : new Date(row[this.props.name]);
-      return (this.props.past) ? _.gt(field, date) :  _.gt(date, field) ;
+      let date =  (row[this.props.name] instanceof Date) ?
+                    row[this.props.name]
+                  :
+                    new Date(row[this.props.name]);
+      return (this.props.past) ? _.gt(field, date) : _.gt(date, field) ;
     }) : data;
     return results;
   }
   render() {
     return (
-      <DatePicker  style={_.assign(this.style(), this.props.style)}
-                   hintText={this.props.label}
-                   onChange={this.props.onChange}
-                   ref="internal" />
+      <DatePicker style={_.assign(this.style().root, this.props.style)}
+                  textFieldStyle={_.assign(this.style().textField, this.props.textFieldStyle)}
+                  hintText={this.props.label}
+                  onChange={this.props.onChange}
+                  ref="internal" />
     );
   }
 }
