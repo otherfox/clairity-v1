@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { networkCollectionRenderer } from '../shared/components/networkRenderer'
-import { FilteredCollection, Filters, TextFilter, RadioButtonFilter } from '../shared/components/filteredCollection'
+import { FilteredCollection, Filters, TextFilter, RadioButtonFilter, DateRangeFilter } from '../shared/components/filteredCollection'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 import Header from '../shared/components/header'
@@ -38,6 +38,7 @@ class ViewTickets extends Component {
               { label: 'New', value: 'New'},
               { label: 'Both', value: '', defaultChecked: true}
             ]} />
+            <DateRangeFilter label='Received' name='received_data_time' />
           </Filters>
           <Table {...this.getTickets(this.props.tickets)} />
         </FilteredCollection>

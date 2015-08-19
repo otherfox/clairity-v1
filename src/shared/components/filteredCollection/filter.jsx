@@ -4,6 +4,7 @@ import {
   RadioButtonGroup,
   RadioButton,
   RaisedButton,
+  DatePicker,
   Checkbox,
   Utils
 } from 'material-ui'
@@ -108,6 +109,28 @@ export class TextFilter extends Component {
                  defaultValue={this.props.value}
                  onChange={this.props.onChange}
                  ref="internal" />
+    );
+  }
+}
+
+export class DateRangeFilter extends Component {
+  style() {
+    return {};
+  }
+  filter(data) {
+    let field = this.refs.internal.getDate();
+    let results = (field) ? data.filter(row => _.gt(row[this.props.name], field)) : data;
+    return results;
+  }
+  render() {
+    return (
+      <DatePicker   style={_.assign(this.style(), this.props.style)}
+                   hintText={this.props.label}
+                   minDate={true}
+                   maxDate={true}
+                   onChange={this.props.onChange}
+                   showYearSelector={true}
+                   ref="internal" />
     );
   }
 }
