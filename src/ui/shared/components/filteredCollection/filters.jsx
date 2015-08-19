@@ -9,7 +9,8 @@ class Filters extends Component {
   style() {
     return {
       lg: {
-        maxWidth: '380px'
+        maxWidth: '380px',
+        width: 'auto'
       },
       md: {
         maxWidth: '100%',
