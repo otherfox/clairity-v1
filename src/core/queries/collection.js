@@ -1,8 +1,11 @@
 
+import Store from '../store'
+
 export function collection(args) {
   let { table } = args;
   let result = Store.data.get(table);
-  return result.size > 0 ? result : null;
+  console.log('collection query', result.toJS());
+  return result.size > 0 ? result.toJS() : null;
 }
 
 export function collectionVia(args) {

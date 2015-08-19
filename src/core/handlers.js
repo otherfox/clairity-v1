@@ -9,7 +9,11 @@ export default {
     let { params } = message;
     let local = Queries[message.name](params);
     let remote = Services[message.name](params);
-    remote.then(data => _.defer(() => Actions[message.name]({ data, params })));
+    remote.then(data => {
+      console.log('remote promise resolved, deferring write', data)
+      _.defer(() => Actions[message.name]({ data, params }));
+    });
+    console.log('return promise resolved with', local || remote);
     return Promise.resolve(local || remote);
   },
   action(message) {

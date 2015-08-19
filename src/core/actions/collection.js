@@ -2,6 +2,7 @@
 import Store, { MessageTypes } from '../store'
 
 export function collection(request) {
+  console.log('collection write action received', request);
   let { data, params } = request;
   Store.dispatchMessage({
     type: MessageTypes.ReplaceAll,
