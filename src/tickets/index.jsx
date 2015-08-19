@@ -4,15 +4,17 @@ import { FilteredCollection, Filters, TextFilter, RadioButtonFilter, DateFilter 
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 import Header from '../shared/components/header'
-import { RaisedButton } from 'material-ui'
+import { RaisedButton, Utils } from 'material-ui'
+import {contextTypes} from '../shared/decorators'
 
+@contextTypes({ muiTheme: PropTypes.object })
 class ViewTickets extends Component {
 
   getTickets(tickets) {
     console.log(tickets);
     return {
       colNames: [
-        { label: 'ID', name: 'id'},
+        { label: 'ID', name: 'id', props: { cellStyle: { color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .75) } } },
         { label: 'Subject', name: 'subject'},
         { label: 'Status', name: 'status', cellType: 'boolean'},
         { label: 'Priority', name: 'priority', cellType: 'range', props: {cellClasses: { Low: 0, Medium: 2, High: 4}}},
