@@ -1,10 +1,7 @@
 
-import Fynx from 'fynx'
 import Store, { MessageTypes } from '../store'
 
-export const model = Fynx.createAsyncAction();
-
-model.listen(request => {
+export function model(request) {
   let { data, params } = request;
   Store.dispatchMessage({
     type: MessageTypes.Write,
@@ -12,5 +9,6 @@ model.listen(request => {
       table: params.table,
       row: data
     }
-  })
-});
+  });
+  return Promise.resolve(Store.data);
+}
