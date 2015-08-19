@@ -16,7 +16,7 @@ class ViewTickets extends Component {
       colNames: [
         { label: 'ID', name: 'id', props: { cellStyle: { color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .75) } } },
         { label: 'Subject', name: 'subject'},
-        { label: 'Status', name: 'status', cellType: 'boolean'},
+        { label: 'Status', name: 'status', cellType: 'boolean', props: {cellClasses: { New: true }}},
         { label: 'Priority', name: 'priority', cellType: 'range', props: {cellClasses: { Low: 0, Medium: 2, High: 4}}},
         { label: 'Received', name: 'received_date_time', cellType:'date'},
         { label: 'Modified', name: 'last_mod_date_time', cellType:'date'},
@@ -24,8 +24,7 @@ class ViewTickets extends Component {
       ],
       data: tickets,
       colWidths: [1,3,1,1,1,1,1],
-      widthAdj: -20,
-      rowSelect: {status: 'New'},
+      widthAdj: -20
     }
   }
 
@@ -35,7 +34,7 @@ class ViewTickets extends Component {
         <Header><h1>Tickets</h1></Header>
         <FilteredCollection data={this.props.tickets}>
           <Filters breakpoints={{md: 1200}}>
-            <TextFilter label='Subject' name='subject' />
+            <TextFilter label='Owner' name='owner' />
             <RadioButtonFilter label={'Status'} name={'status'} buttonGroup={{name: 'status'}} options={[
               { label: 'Open', value: 'Open'},
               { label: 'New', value: 'New'},
