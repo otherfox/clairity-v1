@@ -32,7 +32,7 @@ class ViewTickets extends Component {
         <Header><h1>Tickets</h1></Header>
         <FilteredCollection data={this.props.tickets}>
           <Filters>
-            <TextFilter label='subject' name='subject' />
+            <TextFilter label='Subject' name='subject' />
             <RadioButtonFilter label={'Status'} name={'status'} buttonGroup={{name: 'status'}} options={[
               { label: 'Open', value: 'Open'},
               { label: 'New', value: 'New'},
