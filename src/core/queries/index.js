@@ -1,3 +1,7 @@
 
-export { model } from './model'
-export { collection, collectionVia } from './collection'
+import { model } from './model'
+import { collection, collectionVia } from './collection'
+
+export default {
+  model, collection, collectionVia
+}
