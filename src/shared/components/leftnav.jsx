@@ -12,26 +12,27 @@ let LeftNav = React.createClass ({
 
   getInitialState() {
     return {
-      height: 'auto'
+      height: '100%'
     }
   },
 
-  _bodyresize() {
-    console.log('body resize');
-    console.log(document.getElementById('content').offsetHeight);
-  },
-
-  componentDidMount() {
-    this._setHeight();
-    console.log('content: ',document.getElementById('content').offsetHeight);
-    console.log('body: ',document.body.offsetHeight);
-    document.getElementById('content').onresize = this._bodyresize;
-    window.addEventListener('resize', e => this._setHeight());
-  },
-
-  componentWillDismount() {
-    window.removeEventListener('resize', e => this._setHeight());
-  },
+  // _bodyresize() {
+  //   console.log('body resize');
+  //   console.log(document.getElementById('content').offsetHeight);
+  // },
+  //
+  // componentDidMount() {
+  //   this._setHeight();
+  //   console.log('content: ',document.getElementById('content').offsetHeight);
+  //   console.log('body: ',document.body.offsetHeight);
+  //   document.getElementById('content').onresize = this._bodyresize;
+  //   document.body.onresize = this._bodyresize;
+  //   window.addEventListener('resize', e => this._setHeight());
+  // },
+  //
+  // componentWillDismount() {
+  //   window.removeEventListener('resize', e => this._setHeight());
+  // },
 
   render() {
     return (
@@ -82,10 +83,10 @@ let LeftNav = React.createClass ({
     this.transitionTo(item.target);
   },
 
-  _setHeight() {
-    let extraHeight = Settings.footerHeight + Settings.headerHeight;
-    this.setState({ height: (window.innerHeight > Settings.contentMinHeight + extraHeight) ? document.getElementById('content').offsetHeight + extraHeight + 20 + 'px' : window.innerHeight + 20 +'px'});
-  }
+  // _setHeight() {
+  //   let extraHeight = Settings.footerHeight + Settings.headerHeight;
+  //   this.setState({ height: (window.innerHeight > Settings.contentMinHeight + extraHeight) ? document.getElementById('content').offsetHeight + extraHeight + 'px' : window.innerHeight +'px'});
+  // }
 
 });
 

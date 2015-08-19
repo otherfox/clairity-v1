@@ -30,7 +30,7 @@ export default class Content extends Component {
       width: '100%',
       backgroundColor: canvasColor,
       paddingBottom: Settings.footerHeight+Settings.contentPadding+'px',
-      minHeight: Settings.contentMinHeight+'px'
+      minHeight: window.innerHeight
     };
   }
 }
