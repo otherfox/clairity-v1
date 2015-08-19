@@ -23,6 +23,11 @@ export function getResource(id, tableName) {
   return resource[tableName.toLowerCase()](id);
 }
 
+export function model(args) {
+  let { id, table } = args;
+  return getResource(id, table);
+}
+
 import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
 import { getOpportunitiesByAccount} from './opportunity'
 import { getContractsByAccount, getContractsByLocation } from './contracts'
@@ -61,6 +66,11 @@ export function getCollectionVia(resourceTable, throughTable, throughId) {
   return resourceVia[resourceTable][throughTable](throughId);
 }
 
+export function collectionVia(args) {
+  let { table, filterTable, filterId } = args;
+  return getCollectionVia(table, filterTable, filterId);
+}
+
 
 import {getPops} from './pop'
 import {getAccounts} from './account'
@@ -73,7 +83,7 @@ import {getCampaignSources} from './campaignSource'
 import {getServiceTypes} from './serviceType'
 import {getTickets} from './ticket'
 
-const collection = {
+const collectionMap = {
   pop: getPops,
   account: getAccounts,
   workOrderType: getWorkOrderTypes,
@@ -88,5 +98,10 @@ const collection = {
 };
 
 export function getCollection(tableName) {
-  return collection[tableName]();
+  return collectionMap[tableName]();
+}
+
+export function collection(args) {
+  let { table } = args;
+  return getCollection(table);
 }
