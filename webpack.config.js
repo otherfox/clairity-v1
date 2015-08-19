@@ -5,6 +5,7 @@ var webpack = require('webpack');
 
 module.exports = {
   //devtool: 'eval',
+  //debug: true,
   entry: {
     index: [
       'webpack-dev-server/client?http://localhost:3000',
@@ -28,11 +29,14 @@ module.exports = {
       {test: /src.*\.json$/, loaders: ['json-loader']},
       {test: /src.*\.less$/,  loader: 'style-loader!css-loader!less-loader'},
       {test: /src.*\.(ttf|woff)$/, loader: 'url-loader?limit=100000' },
-			{test: /node_modules.*\.(ttf|woff)$/, loader: 'url-loader?limit=100000' }
+			{test: /node_modules.*\.(ttf|woff)$/, loader: 'url-loader?limit=100000' },
     ]
   },
+  externals: {
+    'aws-sdk': 'AWS'
+  },
   plugins: [
-    new HtmlPlugin({ title: 'Clairity', filename: 'index.html', excludeChunks:['worker'] }),
+    new HtmlPlugin({ title: 'Clairity', template: 'build/index.html', filename: 'index.html', excludeChunks:['worker'] }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
