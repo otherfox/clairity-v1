@@ -57,6 +57,9 @@ import CreateIpBlock from '../../ipBlocks/create'
 import WorkOrders from '../../workOrders'
 import WorkOrderUpload from '../../workOrders/upload'
 
+/* Tickets */
+import Tickets from '../../tickets'
+
 export default (
   <Route>
     <Redirect from="/" to="login" />
@@ -170,6 +173,10 @@ export default (
 
         <Route {/***** Open Intstalls *****/...{}}>
           <Route name="open-installs" handler={OpenInstalls} />
+        </Route>
+
+        <Route {/***** Tickets *****/...{}}>
+          <Route name="tickets" handler={Tickets} />
         </Route>
 
         <Route {/***** Work Orders *****/...{}}>

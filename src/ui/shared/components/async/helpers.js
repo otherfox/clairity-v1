@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 function consumeArguments() {
-  let args = Array.from(arguments);
+  let args = Array.from(arguments[0]);
   if (args.length !== 1)
     throw new Error('Async query helpers only takes a single argument');
   let options;
@@ -63,16 +63,12 @@ export function collection() {
   }
 }
 
-
-
 export function action() {
   let args = Array.from(arguments);
-  let fn = name => params => ({
-    name, params,
+  let argName = args[0];
+  let fn = (params, name) => ({
+    params,
+    name: argName || name,
     type: 'action'
   });
-  if (args.length === 0) {
-    return fn;
-  }
-  return fn(args[0]);
 }
