@@ -1,6 +1,7 @@
 import Queries from './queries'
 import Actions from './actions'
 import Services from './services'
+import _ from 'lodash'
 
 export default {
   query(message) {
@@ -8,7 +9,7 @@ export default {
     let { params } = message;
     let local = Queries[message.name](params);
     let remote = Services[message.name](params);
-    remote.then(data => Actions[message.name]({ data, params }));
+    remote.then(data => _.defer(() => Actions[message.name]({ data, params })));
     return Promise.resolve(local || remote);
   },
   action(message) {
