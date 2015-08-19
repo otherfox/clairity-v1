@@ -1,10 +1,14 @@
+import Queries from './queries'
+import Actions from './actions'
+import Services from './services'
+
 export default {
-  query(info) {
-    console.log('query request received', info);
-    return Promise.resolve(info);
+  query(message) {
+    console.log('query request received', message);
+    return Promise.resolve(Queries[message.name](message.params));
   },
-  action(info) {
-    console.log('action request received', info);
-    return Promise.resolve(info);
+  action(message) {
+    console.log('action request received', message);
+    return Promise.resolve(message);
   }
 }
