@@ -131,6 +131,31 @@ export class BooleanCell extends React.Component {
   }
 }
 
+export class RangeCell extends React.Component {
+  style() {
+    return {
+        0: {
+          color: Styles.Colors.green500
+        },
+        1: {
+          color: Styles.Colors.yellow500
+        },
+        2: {
+          color: Styles.Colors.amber500
+        },
+        3: {
+          color: Styles.Colors.orange500
+        },
+        4: {
+          color: Styles.Colors.red500
+        }
+    }
+  }
+  render() {
+    return <div style={_.assign(this.style()[this.props.cellClasses[this.props.children]], this.props.cellStyle)} >{this.props.children}</div>;
+  }
+}
+
 let CellTypes = {
     string: StringCell,
     number: NumberCell,
@@ -143,7 +168,8 @@ let CellTypes = {
     account: AccountCell,
     contact: ContactCell,
     agent: AgentCell,
-    send: SendCell
+    send: SendCell,
+    range: RangeCell
 };
 
 export {CellTypes};

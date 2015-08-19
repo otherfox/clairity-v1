@@ -53,7 +53,8 @@ export class RadioButtonFilter extends Component {
         paddingRight: '20px'
       },
       muiRadioButtons: {
-        marginTop: '40px'
+        marginTop: '40px',
+        height: '32px'
       },
       muiRadioButtonGroup: {
         float: 'left',
@@ -95,7 +96,10 @@ export class RadioButtonFilter extends Component {
 
 export class TextFilter extends Component {
   style() {
-    return {};
+    return {
+      root: {},
+      underline: {}
+    };
   }
   filter(data) {
     let field = this.refs.internal.getValue();
@@ -104,32 +108,36 @@ export class TextFilter extends Component {
   }
   render() {
     return (
-      <TextField style={_.assign(this.style(), this.props.style)}
+      <TextField style={_.assign(this.style().root, this.props.style)}
                  floatingLabelText={this.props.label}
                  defaultValue={this.props.value}
                  onChange={this.props.onChange}
+                 underlineStyle={_.assign(this.style().underline, this.props.underlineStyle)}
                  ref="internal" />
     );
   }
 }
 
-export class DateRangeFilter extends Component {
+export class DateFilter extends Component {
   style() {
-    return {};
+    return {
+      paddingTop: '24px',
+      height: '72px'
+    };
   }
   filter(data) {
     let field = this.refs.internal.getDate();
-    let results = (field) ? data.filter(row => _.gt(row[this.props.name], field)) : data;
+    let results = (field) ? data.filter(row => {
+      let date = (row[this.props.name] instanceof Date) ? row[this.props.name] : new Date(row[this.props.name]);
+      return (this.props.past) ? _.gt(field, date) :  _.gt(date, field) ;
+    }) : data;
     return results;
   }
   render() {
     return (
-      <DatePicker   style={_.assign(this.style(), this.props.style)}
+      <DatePicker  style={_.assign(this.style(), this.props.style)}
                    hintText={this.props.label}
-                   minDate={true}
-                   maxDate={true}
                    onChange={this.props.onChange}
-                   showYearSelector={true}
                    ref="internal" />
     );
   }

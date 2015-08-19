@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { networkCollectionRenderer } from '../shared/components/networkRenderer'
-import { FilteredCollection, Filters, TextFilter, RadioButtonFilter, DateRangeFilter } from '../shared/components/filteredCollection'
+import { FilteredCollection, Filters, TextFilter, RadioButtonFilter, DateFilter } from '../shared/components/filteredCollection'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 import Header from '../shared/components/header'
@@ -14,15 +14,15 @@ class ViewTickets extends Component {
       colNames: [
         { label: 'ID', name: 'id'},
         { label: 'Subject', name: 'subject'},
-        { label: 'Status', name: 'status'},
-        { label: 'Priority', name: 'priority'},
-        { label: 'Received', name: 'received_date_time'},
-        { label: 'Modified', name: 'last_mod_date_time'},
-        { label: 'Owner', name: 'owner'}
+        { label: 'Status', name: 'status', cellType: 'boolean', props: {cellClasses: { New: true, Open: false}}},
+        { label: 'Priority', name: 'priority', cellType: 'range', props: {cellClasses: { Low: 0, Medium: 2, High: 4}}},
+        { label: 'Received', name: 'received_date_time', cellType:'date'},
+        { label: 'Modified', name: 'last_mod_date_time', cellType:'date'},
+        { label: 'Owner', name: 'owner', cellType: 'agent'}
       ],
       data: tickets,
       colWidths: [1,3,1,1,1,1,1],
-      widthAdj: -30
+      widthAdj: -20
     }
   }
 
@@ -38,7 +38,8 @@ class ViewTickets extends Component {
               { label: 'New', value: 'New'},
               { label: 'Both', value: '', defaultChecked: true}
             ]} />
-            <DateRangeFilter label='Received' name='received_data_time' />
+            <DateFilter label='Received Min' name='received_date_time' future />
+            <DateFilter label='Received Max' name='received_date_time' past />
           </Filters>
           <Table {...this.getTickets(this.props.tickets)} />
         </FilteredCollection>
