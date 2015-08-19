@@ -57,9 +57,9 @@ class DataTable extends React.Component {
   }
 
   getHeight() {
-    return  (((this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2) < window.innerHeight - 300) ?
+    return  (((this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2) < window.innerHeight - (Settings.footerHeight + Settings.headerHeight)) ?
               (this.props.data.length * this.props.rowHeight) + this.props.headerHeight + 2 + this.props.heightAdj
-              : window.innerHeight - 300 + this.props.heightAdj;
+              : window.innerHeight - (Settings.footerHeight + Settings.headerHeight) + this.props.heightAdj;
   }
 
   getWidth() {

@@ -48,6 +48,7 @@ export default class Footer extends React.Component {
   }
 
   _setPosition() {
-    this.setState({ position: (window.innerHeight > Settings.contentMinHeight + Settings.footerHeight + Settings.headerHeight) ? 'fixed' : 'relative'});
+    let position = (window.innerHeight > Settings.contentMinHeight + Settings.footerHeight + Settings.headerHeight) ? 'fixed' : 'relative';
+    this.setState({ position: 'fixed'});
   }
 }
