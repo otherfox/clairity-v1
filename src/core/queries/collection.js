@@ -12,5 +12,5 @@ export function collectionVia(args) {
   let result = Store.data.get(table)
                          .toList()
                          .filter(r => r.get(filterKey) == filterId);
-  return result.size > 0 ? result : null;
+  return result.size > 0 ? result.toJS() : null;
 }
