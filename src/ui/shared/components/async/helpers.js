@@ -63,6 +63,13 @@ export function collection() {
   }
 }
 
+export function request(name, getParams) {
+  return {
+    type: 'query',
+    name, getParams
+  }
+}
+
 export function action() {
   let args = Array.from(arguments);
   let argName = args[0];
