@@ -1,5 +1,5 @@
 
-import {v4} from 'uuid'
+import { v4 } from 'uuid'
 import EventEmitter from 'eventemitter2'
 
 class WorkerBridge extends EventEmitter {
@@ -14,7 +14,7 @@ class WorkerBridge extends EventEmitter {
 
   _handleMessage(ev) {
     console.log('main thread', 'got response', ev);
-    let {data} = ev;
+    let { data } = ev;
     if (data.token) {
       this.callbackMap.get(data.token)(data);
       this.callbackMap.delete(data.token);
