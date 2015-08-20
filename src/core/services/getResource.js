@@ -73,7 +73,7 @@ export function collectionVia(args) {
 
 
 import {getPops} from './pop'
-import {getAccounts} from './account'
+import {getAccounts, getAccountTypes} from './account'
 import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
 import {getLeads} from './contacts'
 import {getProjectTypes} from './projectType'
@@ -86,6 +86,7 @@ import {getTickets} from './ticket'
 const collectionMap = {
   pop: getPops,
   account: getAccounts,
+  accountType: getAccountTypes,
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
   lead: getLeads,
