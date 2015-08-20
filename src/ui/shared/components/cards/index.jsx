@@ -19,26 +19,37 @@ class Cards extends React.Component {
   }
 
   componentWillReceiveProps(props) {
+    console.log('recieved');
     this.setState({
       data: props.data,
-      layouts: {lg: this.generateLayout(props), md: this.generateLayout(props, 'md')},
+      layouts: {lg: this.generateLayout(props, 'lg'), md: this.generateLayout(props, 'md')},
       dom: this.generateDOM(props)});
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', e => this.handleScroll());
+    window.addEventListener('scroll', e => this.handleScroll(this.props));
   }
 
-  handleScroll() {
+  handleScroll(props) {
     let scrollPos = (document.body.scrollTop+window.innerHeight)/document.body.offsetHeight;
     if(scrollPos > .7) {
+      console.log('handle props', props.data);
+      console.log('handle this.props', this.props.data);
+      console.log('handle this.state', this.state.data.length);
       this.setState({ end: this.state.end + 12}, e => this.setState({dom: this.generateDOM(this.props), layouts: {lg: this.generateLayout(this.props, 'lg'), md: this.generateLayout(this.props, 'md')}}));
     }
   }
 
   generateDOM(props) {
+    if(this.state) {
+      console.log('state:',this.state.data.length);
+    }
+    if(this.props) {
+      console.log('this.props:',this.props.data.length);
+    }
+    console.log('passed props:', props.data.length)
     let breakpoint = (this.state) ? this.state.currentBreakpoint : 'lg';
-    let end = (this.state) ? this.state.end : 11;
+    let end = (this.state) ? this.state.end : 12;
     let data = (this.state) ? this.state.data.slice(0, end) : props.data.slice(0, end);
     return _.map(data, function(l, i) {
       let cardData = [];
