@@ -51,11 +51,11 @@ export class AccountCard extends Component {
         color: Styles.Colors.white,
         fontWeight: 'bold',
         fontSize: '1.1em',
-        width: this.props.width - 72
+        width: this.props.position.width - 72
       },
       subtitle: {
         color: Styles.Colors.darkWhite,
-        width: this.props.width - 72,
+        width: this.props.position.width - 72,
         paddingTop: '10px'
       }
     }
