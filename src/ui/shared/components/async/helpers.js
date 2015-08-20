@@ -63,7 +63,7 @@ export function collection() {
   }
 }
 
-export function request(name, getParams = (a => a)) {
+export function query(name, getParams = (a => a)) {
   return {
     name, getParams,
     type: 'query',

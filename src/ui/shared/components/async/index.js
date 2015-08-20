@@ -1,2 +1,2 @@
 export default from './asyncWrapper'
-export { model, action, collection } from './helpers'
+export { model, action, collection, query } from './helpers'
