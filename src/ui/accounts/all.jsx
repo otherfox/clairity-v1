@@ -3,14 +3,14 @@ import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 
-import query, { collection } from '../shared/components/async'
+import async, { collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 
 import {
   FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter
 } from '../shared/components/filteredCollection'
 
-@query({ accounts: collection('account').all() })
+@async({ accounts: collection('account').all() })
 @propTypes({ accounts: PropTypes.array.isRequired })
 class ViewAccounts extends Component {
 
