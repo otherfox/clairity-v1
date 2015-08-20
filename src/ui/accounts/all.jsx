@@ -6,6 +6,10 @@ import Table from '../shared/components/table'
 import query, { collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 
+import {
+  FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter
+} from '../shared/components/filteredCollection'
+
 @query({ accounts: collection('account').all() })
 @propTypes({ accounts: PropTypes.array.isRequired })
 class ViewAccounts extends Component {
@@ -33,7 +37,12 @@ class ViewAccounts extends Component {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>View Accounts</h1></Header>
-        <Table {...this.getAccounts(accounts)} />
+        <FilteredCollection data={accounts}>
+          <Filters>
+            <TextFilter name={'name'} label={'Account Name'} />
+          </Filters>
+          <Table {...this.getAccounts(accounts)} />
+        </FilteredCollection>
       </Layout>
     );
   }
