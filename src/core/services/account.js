@@ -21,12 +21,10 @@ let getAccount = memoize(id => {
 
 let getAccounts = memoize(() => {
   console.log('getting all accounts');
-  debugger;
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.CustomerDAO&_m=getAllCustomers`)
       .withCredentials()
       .end((err, res) => {
-        debugger;
         console.log('server responded with all accounts', JSON.parse(res.text));
         if (!err) {
           s(JSON.parse(res.text));
