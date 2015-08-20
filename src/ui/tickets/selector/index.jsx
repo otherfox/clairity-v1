@@ -1,6 +1,6 @@
 import React, { Component, addons, PropTypes } from 'react'
 import Table from '../../shared/components/table'
-import {Filters} from '../../shared/components/filteredCollection'
+import { Filters } from '../../shared/components/filteredCollection'
 
 export default class Selector extends Component {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import Store, {MessageTypes} from '../../../../core/store'
-import {getResource, getCollection, getCollectionVia} from '../../../../core/services/getResource'
-import {fromJS} from 'immutable'
+import { getResource, getCollection, getCollectionVia } from '../../../../core/services/getResource'
+import { fromJS } from 'immutable'
 
 export function modelQuery(tableName, propName, idName) {
   let id = idName || `${tableName}Id`;

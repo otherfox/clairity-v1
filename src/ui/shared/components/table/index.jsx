@@ -2,13 +2,13 @@ import React from 'react'
 import Settings from '../settings'
 import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton, Checkbox } from 'material-ui'
 
-import {CellTypes} from './tableCells'
+import { CellTypes } from './tableCells'
 
-import {Table, Column, ColumnGroup as Group} from 'fixed-data-table'
+import { Table, Column, ColumnGroup as Group } from 'fixed-data-table'
 import Details from '../details'
 import fuzzy from 'fuzzy'
 import _ from 'lodash'
-import {contextTypes} from '../../decorators'
+import { contextTypes } from '../../decorators'
 
 import ArrowDropDown from 'material-ui/lib/svg-icons/navigation/arrow-drop-down'
 import ArrowDropUp from 'material-ui/lib/svg-icons/navigation/arrow-drop-up'

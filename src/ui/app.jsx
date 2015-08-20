@@ -1,6 +1,6 @@
 
 import React from 'react'
-import {RouteHandler} from 'react-router'
+import { RouteHandler } from 'react-router'
 
 import TopNav from './shared/components/topnav'
 import LeftNav from './shared/components/leftnav'

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Settings from './settings'
-import {Utils, Styles} from 'material-ui'
-import {contextTypes} from '../decorators'
+import { Utils, Styles } from 'material-ui'
+import { contextTypes } from '../decorators'
 let ColorManipulator = Utils.ColorManipulator;
 
 @contextTypes({ muiTheme: PropTypes.object })

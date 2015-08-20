@@ -1,4 +1,4 @@
-import {Styles, Utils} from 'material-ui'
+import { Styles, Utils } from 'material-ui'
 
 let Settings = {
   breakpoints: {lg: 1600, md: 1200, sm: 750, xs: 480, xxs: 380},

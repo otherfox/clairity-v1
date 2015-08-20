@@ -1,5 +1,5 @@
 import React from 'react'
-import {Tabs, Tab} from 'material-ui'
+import { Tabs, Tab } from 'material-ui'
 import Layout from '../layout'
 
 let CustomTabs = React.createClass ({

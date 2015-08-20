@@ -5,7 +5,7 @@ import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
 import DatePicker from '../../shared/components/datePicker'
 import { collectionDropdown } from '../../shared/components/collectionDropdown'
-import {List} from 'immutable'
+import { List } from 'immutable'
 
 let ProjectTypes = collectionDropdown('projectType')
 let SalesStages = collectionDropdown('salesStage')

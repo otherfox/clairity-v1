@@ -84,7 +84,7 @@ export {
   getContactsByLocation, getLeads
 };
 
-import {eventConvertLead} from '../gateways/contact'
+import { $1 } from '../gateways/contact'
 
 export function postConvertLead(contact) {
   return new Promise((s, f) => {

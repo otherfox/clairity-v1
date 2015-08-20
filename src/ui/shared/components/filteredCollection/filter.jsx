@@ -9,7 +9,7 @@ import {
   Utils
 } from 'material-ui'
 import _ from 'lodash'
-import {contextTypes} from '../../decorators'
+import { contextTypes } from '../../decorators'
 import fuzzy from 'fuzzy'
 
 let { ColorManipulator } = Utils;

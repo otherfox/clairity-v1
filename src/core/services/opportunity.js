@@ -59,7 +59,7 @@ export function getSalesMetricsByMonth(month) {
   });
 }
 
-import {eventUpdateSalesOpp} from '../gateways/opportunity'
+import { $1 } from '../gateways/opportunity'
 
 export function putOpportunity(opp) {
   return new Promise((s, f) => {

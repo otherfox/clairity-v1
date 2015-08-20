@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import {queryLocation} from '../queries/location'
+import { $1 } from '../queries/location'
 
 function setDefaultStrings(object, defs, fields) {
   for (let n in fields) {

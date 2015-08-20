@@ -22,7 +22,7 @@ import {
 
 import controllable from 'react-controllables'
 
-import {Navigation} from 'react-router'
+import { Navigation } from 'react-router'
 
 @controllable(['theme', 'compact'])
 class SettingsForm extends React.Component {
