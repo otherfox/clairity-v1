@@ -15,7 +15,8 @@ export function enqueueUpdate(msg, cause) {
     }
     postMessage({
       cause, message,
-      type: 'event'
+      type: 'event',
+      event: true
     });
   }
 }
