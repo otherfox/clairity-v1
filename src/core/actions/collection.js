@@ -4,7 +4,7 @@ import Store, { MessageTypes } from '../store'
 export function collection(request) {
   console.log('collection write action received', request);
   let { data, params } = request;
-  Store.dispatchMessage({
+  Store.handleMessage({
     type: MessageTypes.ReplaceAll,
     payload: {
       table: params.table,
@@ -16,7 +16,7 @@ export function collection(request) {
 
 export function collectionVia(request) {
   let { data, params } = request;
-  Store.dispatchMessage({
+  Store.handleMessage({
     type: MessageTypes.Write,
     payload: {
       table: params.table,
