@@ -1,5 +1,17 @@
 import React, { Component, PropTypes} from 'react'
-import mui, { Utils, Styles, Card, CardHeader, CardActions, CardText, CardMedia, FlatButton, Avatar, CardTitle, Paper} from 'material-ui'
+import mui, {
+  Utils,
+  Styles,
+  Card,
+  CardHeader,
+  CardActions,
+  CardText,
+  CardMedia,
+  FlatButton, 
+  Avatar,
+  CardTitle,
+  Paper
+} from 'material-ui'
 import Link from '../link'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
