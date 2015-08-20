@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
+import Cards from '../shared/components/cards'
 
 import async, { collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
@@ -28,7 +29,7 @@ class ViewAccounts extends Component {
   render() {
 
     let accounts = this.props.accounts;
-
+    console.log(accounts);
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>View Accounts</h1></Header>
@@ -36,7 +37,7 @@ class ViewAccounts extends Component {
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
           </Filters>
-          <Table {...this.getAccounts(accounts)} />
+          <Cards {...this.getAccounts(accounts)} />
         </FilteredCollection>
       </Layout>
     );

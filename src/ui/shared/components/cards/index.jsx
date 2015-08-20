@@ -1,9 +1,8 @@
 import React from "react"
-import {Paper, RaisedButton, Card, CardHeader, CardActions, CardText, CardMedia, FlatButton, Avatar, CardTitle} from 'material-ui'
+import { Paper, RaisedButton, Card, CardHeader, CardActions, CardText, CardMedia, FlatButton, Avatar, CardTitle } from 'material-ui'
 import ReactGridLayout from 'react-grid-layout'
 import Layout from '../layout'
-// import {CardTypes} from './cards'
-let CardTypes = {};
+import { CardTypes } from './cards'
 
 let ResponsiveReactGridLayout = ReactGridLayout.Responsive;
 
@@ -11,15 +10,18 @@ class Cards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      layouts: {lg: this.generateLayout()},
+      layouts: {lg: this.generateLayout(this.props, 'lg'), md: this.generateLayout(this.props, 'md')},
       currentBreakpoint: 'lg',
       data: this.props.data,
-      dom: this.generateDOM(),
+      dom: this.generateDOM(this.props),
     }
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ data: props.data, layouts: {lg: this.generateLayout(props)}, dom: this.generateDOM(props) });
+    this.setState({
+      data: props.data,
+      layouts: {lg: this.generateLayout(props), md: this.generateLayout(props, 'md')},
+      dom: this.generateDOM(props)});
   }
 
   style() {
@@ -27,37 +29,40 @@ class Cards extends React.Component {
   }
 
   generateDOM(props) {
-    let data =  (props) ?
-                  props.data
-                  : (this.state) ?
-                    this.state.data
-                    : this.props.data;
+    let data =  props.data;
     return _.map(data, function(l, i) {
-      let props = [];
+      let cardData = [];
       for(let prop in data[i]) {
-        if(_.find(this.props.colNames, 'name', prop)) {
-          props.push((<div>{(typeof data[i][prop] === 'string') ? _.result(_.find(this.props.colNames, 'name', prop), 'label')+': '+data[i][prop] : data[i][prop]}</div>));
+        if(_.find(props.colNames, 'name', prop)) {
+          cardData.push((<div>{(typeof data[i][prop] === 'string') ?
+              _.result(
+                _.find(props.colNames, 'name', prop),
+                'label')+': '+ data[i][prop]
+            : data[i][prop]}</div>));
         }
       }
-      let CardClass = CardTypes[this.props.cardType];
+      let CardClass = CardTypes[props.cardType];
       return (
-        <CardClass key={i} i={i} {...this.props}>
-            {props}
+        <CardClass key={i} i={i} {...props}>
+            {cardData}
         </CardClass>
       )}.bind(this)
     );
   }
 
-  generateLayout(props) {
-    let count = (props) ?
-                  props.data.length
-                  : (this.state) ?
-                    this.state.data.length
-                    : this.props.data.length;
-    let maxCols = this.props.cols.lg;
+  generateLayout(props, breakpoint) {
+    let count = props.data.length
+    let maxCols = props.cols[breakpoint];
     return _.map(_.range(0, count), (item, i) => {
-      var y = this.props.rowHeight;
-      return {x: (i + maxCols) % maxCols, y: Math.floor(i / 4) * y, w: 1, h: y, i: i, static: false};
+      var y = props.rowHeight;
+      return {
+        x: (i + maxCols) % maxCols,
+        y: Math.floor(i / 4) * y,
+        w: 1,
+        h: y,
+        i: i,
+        static: false
+      };
     });
   }
 
@@ -68,6 +73,7 @@ class Cards extends React.Component {
   }
 
   render() {
+    console.log(this.state.data.length);
     return (
       <Layout widths={{}} cPadding={'20px 0 0 0'}>
         <style>{`
@@ -110,10 +116,6 @@ class Cards extends React.Component {
       </Layout>
     );
   }
-}
-
-Cards.propTypes = {
-
 }
 
 Cards.defaultProps = {
