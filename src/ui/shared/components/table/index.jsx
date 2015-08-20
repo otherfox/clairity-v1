@@ -217,10 +217,20 @@ class DataTable extends React.Component {
   }
 
   onRowMouseDown(e, index) {
-    if(this.state.active.indexOf(index) != -1) {
-      this.setState({ active: _.remove(this.state.active, n => n!=index)}, () => this.props.onSelect(this.state.active));
-    } else {
-      this.setState({ active: this.state.active.concat(index) }, () => this.props.onSelect(this.state.active));
+    if (this.props.selectable) {
+      if(this.state.active.indexOf(index) != -1) {
+        this.setState({ active: _.remove(this.state.active, n => n != index) },
+                      () => this.notifySelection());
+      } else {
+        this.setState({ active: this.state.active.concat(index) },
+                      () => this.notifySelection());
+      }
+    }
+  }
+
+  notifySelection() {
+    if (this.props.onSelect) {
+      this.props.onSelect(this.state.active);
     }
   }
 
