@@ -18,7 +18,8 @@ class ViewAccounts extends Component {
   getAccounts(accounts) {
     return {
       colNames: [
-        { label: 'Accounts', name: 'name', cellType: 'account', props: { idField: 'id'} },
+        { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
+        { label: 'Address', name: '' }
       ],
       data: accounts,
       colWidths: [1],
@@ -37,7 +38,7 @@ class ViewAccounts extends Component {
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
           </Filters>
-          <Cards {...this.getAccounts(accounts)} />
+          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'}/>
         </FilteredCollection>
       </Layout>
     );

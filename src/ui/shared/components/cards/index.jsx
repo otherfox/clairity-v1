@@ -29,29 +29,40 @@ class Cards extends React.Component {
   }
 
   generateDOM(props) {
-    let data =  props.data;
+    let data =  props.data.slice(0, 9);
     return _.map(data, function(l, i) {
       let cardData = [];
       for(let prop in data[i]) {
         if(_.find(props.colNames, 'name', prop)) {
-          cardData.push((<div>{(typeof data[i][prop] === 'string') ?
-              _.result(
-                _.find(props.colNames, 'name', prop),
-                'label')+': '+ data[i][prop]
-            : data[i][prop]}</div>));
+          cardData.push((
+            <div key={i}>{
+              (typeof data[i][prop] === 'string') ?
+                _.result(
+                  _.find(props.colNames, 'name', prop),
+                    'label')+': '+ data[i][prop]
+              : data[i][prop]
+            }</div>
+          ));
         }
       }
       let CardClass = CardTypes[props.cardType];
       return (
         <CardClass key={i} i={i} {...props}>
-            {cardData}
+          { cardData
+            .filter( r =>
+              r.props.children.indexOf(
+                _.result(_.find(props.colNames, {name: props.header}), 'label')
+              ) == -1
+            )
+          }
         </CardClass>
       )}.bind(this)
     );
   }
 
   generateLayout(props, breakpoint) {
-    let count = props.data.length
+    // let count = props.data.length;
+    let count = 10;
     let maxCols = props.cols[breakpoint];
     return _.map(_.range(0, count), (item, i) => {
       var y = props.rowHeight;
