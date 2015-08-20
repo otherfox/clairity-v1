@@ -20,11 +20,6 @@ class ViewAccounts extends Component {
         { label: 'Accounts', name: 'name', cellType: 'account', props: { idField: 'id'} },
       ],
       data: accounts,
-      filters: {
-        data: [
-          { label: 'Account Name', filterType: 'muiTextField', name: 'name' }
-        ]
-      },
       colWidths: [1],
       widthAdj: -30
     };
