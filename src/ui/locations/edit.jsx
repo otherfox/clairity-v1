@@ -21,10 +21,8 @@ import {
   Paper
 } from 'material-ui'
 
-import {List, fromJS} from 'immutable'
-
-import {fetchLocation, updateLocation, fetchAllCustomerTypes} from '../../../core/actions/account'
-import {queryAllCustomerTypes, queryLocation} from '../../../core/queries/account'
+import { fetchLocation, updateLocation, fetchAllCustomerTypes } from '../../../core/actions/account'
+import { queryAllCustomerTypes, queryLocation } from '../../../core/queries/account'
 
 // React Renders
 export default class CreateLocation extends React.Component {
