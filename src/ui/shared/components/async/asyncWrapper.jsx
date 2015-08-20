@@ -63,6 +63,7 @@ export default function asyncWrapper() {
 
     getInnerProps() {
       return {
+        ...this.props,
         actions,
         ...this.reqs
       }
@@ -70,7 +71,7 @@ export default function asyncWrapper() {
 
     render() {
       let innerComponent = this.state.ready ?
-          <Component key="inner" ref="inner" {...this.props} {...this.getInnerProps()} />
+          <Component key="inner" ref="inner" {...this.getInnerProps()} />
         :
           <div key="null" />;
       return (
