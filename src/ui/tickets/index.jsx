@@ -46,7 +46,7 @@ class ViewTickets extends Component {
             <DateFilter label='Received Max' name='received_date_time' past />
           </Filters>
           <Selector>
-            <Table {...this.getTickets(this.props.tickets)} />
+            <Table {...this.getTickets(this.props.tickets)} selectable />
           </Selector>
         </FilteredCollection>
       </Layout>
