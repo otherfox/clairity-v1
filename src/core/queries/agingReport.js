@@ -37,7 +37,6 @@ export function queryAll(includeZeros) {
 }
 
 export function queryAgingReports(props) {
-  console.log('queryAgingReports', props);
   let fn = props.status == 'both' ?
       queryAll
     :

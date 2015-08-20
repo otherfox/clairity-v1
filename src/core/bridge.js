@@ -13,7 +13,6 @@ class WorkerBridge extends EventEmitter {
   }
 
   _handleMessage(ev) {
-    console.log('main thread', 'got response', ev);
     let { data } = ev;
     if (data.token) {
       this.callbackMap.get(data.token)(data);
