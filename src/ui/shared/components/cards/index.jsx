@@ -14,6 +14,7 @@ class Cards extends React.Component {
       currentBreakpoint: 'lg',
       data: this.props.data,
       dom: this.generateDOM(this.props),
+      end: 11,
     }
   }
 
@@ -24,13 +25,21 @@ class Cards extends React.Component {
       dom: this.generateDOM(props)});
   }
 
-  style() {
-    return {}
+  componentDidMount() {
+    window.addEventListener('scroll', e => this.handleScroll());
+  }
+
+  handleScroll() {
+    let scrollPos = (document.body.scrollTop+window.innerHeight)/document.body.offsetHeight;
+    if(scrollPos > .7) {
+      this.setState({ end: this.state.end + 12}, e => this.setState({dom: this.generateDOM(this.props), layouts: {lg: this.generateLayout(this.props, 'lg'), md: this.generateLayout(this.props, 'md')}}));
+    }
   }
 
   generateDOM(props) {
     let breakpoint = (this.state) ? this.state.currentBreakpoint : 'lg';
-    let data =  props.data.slice(0, 9);
+    let end = (this.state) ? this.state.end : 11;
+    let data = (this.state) ? this.state.data.slice(0, end) : props.data.slice(0, end);
     return _.map(data, function(l, i) {
       let cardData = [];
       for(let prop in data[i]) {
@@ -62,8 +71,7 @@ class Cards extends React.Component {
   }
 
   generateLayout(props, breakpoint) {
-    // let count = props.data.length;
-    let count = 10;
+    let count = (this.state) ? this.state.end + 1 : 12 ;
     let maxCols = props.cols[breakpoint];
     return _.map(_.range(0, count), (item, i) => {
       var y = props.rowHeight;
@@ -122,7 +130,7 @@ class Cards extends React.Component {
               isDraggable={(this.props.draggable) ? true: false}
               isResizable={(this.props.resizable) ? true: false}
               {...this.props}>
-            {this.state.dom}
+                {this.state.dom}
           </ResponsiveReactGridLayout>
         </div>
       </Layout>

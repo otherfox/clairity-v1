@@ -7,7 +7,7 @@ import mui, {
   CardActions,
   CardText,
   CardMedia,
-  FlatButton, 
+  FlatButton,
   Avatar,
   CardTitle,
   Paper
