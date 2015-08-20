@@ -11,10 +11,16 @@ function consumeArguments() {
         filterKey: args[1].filterKey || `${args[0]}_id`
       });
       if (args[0] === 'account') {  // HACK: I don't really like this being here
-        options.filterKey == args[1].filterKey || 'customer_id';
+        options.filterKey = args[1].filterKey || 'customer_id';
       }
     } else {
-      options = { idPropName: `${args[0]}Id` };
+      options = {
+        idPropName: `${args[0]}Id`,
+        filterKey: `${args[0]}_id`
+      };
+      if (args[0] === 'account') { // HACK: Bad here too.
+        options.filterKey = 'customer_id';
+      }
     }
     table = args[0];
   } else if (_.isObject(args[0])) {
@@ -63,8 +69,8 @@ export function collection() {
           return {
             table,
             filterTable: argInfo.table,
-            filterId: props[argInfo.idPropName],
-            filterKey: argInfo.filterKey
+            filterId: props[argInfo.options.idPropName],
+            filterKey: argInfo.options.filterKey
           };
         }
       }
