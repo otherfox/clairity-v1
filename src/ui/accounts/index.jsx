@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, { PropTypes, Component } from 'react'
 import Header from '../shared/components/header'
 import Store from '../../core/store'
 import Layout from '../shared/components/layout'
@@ -7,7 +7,7 @@ import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
-
+import { propTypes } from '../shared/decorators'
 import {
   networkModelRenderer,
   queryRenderer,
@@ -32,7 +32,7 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {State} from 'react-router'
+import { State } from 'react-router'
 
 import AccountDetails from './public/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
@@ -74,7 +74,11 @@ let ContactListQuery = queryRenderer(ContactList, {
   ]
 });
 
-let accountView = React.createClass({
+import async, { model } from '../shared/components/async'
+
+@async({ account: model('account') })
+@propTypes({  })
+class AccountView extends Component {
   render() {
     let account = this.props.account;
     return (
@@ -93,16 +97,14 @@ let accountView = React.createClass({
         </Layout>
 
       </Layout>
-    )
+    );
   }
-});
-
-let Account = networkModelRenderer(accountView, 'account');
+}
 
 let AccountPage = React.createClass({
   mixins: [State],
   render() {
-    return <Account id={+this.getParams().accountId} />;
+    return <AccountView accountId={+this.getParams().accountId} />;
   }
 });
 
