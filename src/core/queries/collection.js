@@ -3,7 +3,7 @@ import Store from '../store'
 
 export function collection(args) {
   let { table } = args;
-  let result = Store.data.get(table);
+  let result = Store.data.get(table).toList();
   return result.size > 0 ? result.toJS() : null;
 }
 
