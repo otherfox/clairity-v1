@@ -29,6 +29,7 @@ class Cards extends React.Component {
   }
 
   generateDOM(props) {
+    let breakpoint = (this.state) ? this.state.currentBreakpoint : 'lg';
     let data =  props.data.slice(0, 9);
     return _.map(data, function(l, i) {
       let cardData = [];
@@ -47,7 +48,7 @@ class Cards extends React.Component {
       }
       let CardClass = CardTypes[props.cardType];
       return (
-        <CardClass key={i} i={i} {...props}>
+        <CardClass {..._.assign(props, {data: data[i] ,key:i, i:i})}>
           { cardData
             .filter( r =>
               r.props.children.indexOf(
@@ -113,13 +114,13 @@ class Cards extends React.Component {
             -moz-transform: none !important;
           }
         `}</style>
-        <div style={{position: 'relative', marginRight: '5px', marginLeft: '-5px'}}>
+      <div style={{position: 'relative', marginRight: '5px', marginLeft: '-5px'}} id={'cards'}>
           <ResponsiveReactGridLayout
               layouts={this.state.layouts}
               onBreakpointChange={e => this.onBreakpointChange()}
               useCSSTransforms={false}
-              // isDraggable={false}
-              // isResizable={false}
+              isDraggable={(this.props.draggable) ? true: false}
+              isResizable={(this.props.resizable) ? true: false}
               {...this.props}>
             {this.state.dom}
           </ResponsiveReactGridLayout>
@@ -133,7 +134,7 @@ Cards.defaultProps = {
   data: [],
   className: "layout",
   rowHeight: 14,
-  cols: {lg: 4, md: 2, sm: 1, xs: 1, xxs: 1},
+  cols: {lg: 4, md: 3, sm: 2, xs: 1, xxs: 1},
   cardType: 'default'
 }
 
