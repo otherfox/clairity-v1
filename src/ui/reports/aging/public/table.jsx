@@ -14,6 +14,7 @@ import async, { query } from '../../../shared/components/async'
 import { FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter } from '../../../shared/components/filteredCollection'
 import { RaisedButton } from 'material-ui'
 
+@async({ rows: query('agingReports') })
 class AgingTable extends React.Component {
 
   constructor(props) {
@@ -36,7 +37,7 @@ class AgingTable extends React.Component {
     });
   }
 
-  getAgingReportsTable(data){
+  getAgingReportsTable(data) {
     return {
       colNames: [
         { label: 'Customer', name: 'name',    cellType: 'account', props: { idField: 'id' } },
@@ -82,18 +83,20 @@ class AgingTable extends React.Component {
   }
 }
 
-export default queryRenderer(AgingTable, {
-  queries: [
-    {
-      tableName: 'agingReport',
-      propName: 'rows',
-      shouldFetch: () => true,
-      writeMethod: reports => agingReportsFetched(reports),
-      serviceMethod: props => getAgingReports(props.date),
-      cacheMethod: props => {
-        let results = Store.data.get('agingReport').toList();
-        return results.size > 0 ? results.toJS() : null;
-      },
-    }
-  ]
-});
+export default AgingTable;
+
+// export default queryRenderer(AgingTable, {
+//   queries: [
+//     {
+//       tableName: 'agingReport',
+//       propName: 'rows',
+//       shouldFetch: () => true,
+//       writeMethod: reports => agingReportsFetched(reports),
+//       serviceMethod: props => getAgingReports(props.date),
+//       cacheMethod: props => {
+//         let results = Store.data.get('agingReport').toList();
+//         return results.size > 0 ? results.toJS() : null;
+//       },
+//     }
+//   ]
+// });
