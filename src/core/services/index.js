@@ -1,6 +1,6 @@
 import { model, collection, collectionVia } from './getResource'
 
-import { agingReports } from './agingReports'
+import { agingReports } from './agingReport'
 
 export default {
   model, collection, collectionVia,
