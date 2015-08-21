@@ -4,5 +4,5 @@ import { collection, collectionVia } from './collection'
 
 export default {
   model, collection, collectionVia,
-  agingReports: () => collection('agingReport')
+  agingReports: () => collection({ table: 'agingReport' })
 }

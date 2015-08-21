@@ -19,9 +19,9 @@ export function agingReports(request) {
     type: MessageTypes.ReplaceAll,
     payload: {
       table: 'agingReport',
-      rows: data.rows
+      rows: data
     }
-  })
+  }, request);
 }
 
 // Store the data
