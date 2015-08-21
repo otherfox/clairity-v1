@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import Table from '../../../shared/components/table'
 import { agingReportsFetched } from '../../../../core/actions/agingReport'
 import { queryAll } from '../../../../core/queries/agingReport'
@@ -15,7 +15,7 @@ import { FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFil
 import { RaisedButton } from 'material-ui'
 
 @async({ rows: query('agingReports') })
-class AgingTable extends React.Component {
+class AgingTable extends Component {
 
   constructor(props) {
     super(props);
@@ -84,19 +84,3 @@ class AgingTable extends React.Component {
 }
 
 export default AgingTable;
-
-// export default queryRenderer(AgingTable, {
-//   queries: [
-//     {
-//       tableName: 'agingReport',
-//       propName: 'rows',
-//       shouldFetch: () => true,
-//       writeMethod: reports => agingReportsFetched(reports),
-//       serviceMethod: props => getAgingReports(props.date),
-//       cacheMethod: props => {
-//         let results = Store.data.get('agingReport').toList();
-//         return results.size > 0 ? results.toJS() : null;
-//       },
-//     }
-//   ]
-// });
