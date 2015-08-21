@@ -100,7 +100,8 @@ export class AccountCard extends Component {
         subtitle1 = [street1, street2].filter(r=>!!r).join(', '),
         subtitle2 = [city, state, zip_code].filter(r=>!!r).join(', '),
         subtitle = (<div>{subtitle1}<br />{subtitle2}</div>),
-        avatar = (<AccountIcon style={this.style().avatar}/>);
+        avatar = (<AccountIcon style={this.style().avatar}/>),
+        params = { 'accountId': data[this.props.linkParam] };
 
     return (
       <Card transitionEnabled={false} {...this.props}>
@@ -126,7 +127,12 @@ export class AccountCard extends Component {
         </CardText>
         <CardActions>
           <div>
-            <div style={this.style().action}><RaisedButton label="View Account"/></div>
+            <div style={this.style().action}>
+              <Link to="view-account"
+                    params={params} >
+                <RaisedButton label="View Account"/>
+              </Link>
+            </div>
           </div>
         </CardActions>
       </Card>
