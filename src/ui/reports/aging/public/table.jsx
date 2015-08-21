@@ -9,6 +9,8 @@ import {
   queryRenderer,
 } from '../../../shared/components/networkRenderer'
 
+import async, { query } from '../../../shared/components/async'
+
 import { FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter } from '../../../shared/components/filteredCollection'
 import { RaisedButton } from 'material-ui'
 

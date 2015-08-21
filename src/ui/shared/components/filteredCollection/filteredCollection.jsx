@@ -22,6 +22,7 @@ class FilteredCollection extends Component {
 
   updateFilters() {
     let filters = this.refs.filters;
+    console.log(this.refs.filters);
     let newData = filters.filterData(this.props.data);
     this.setState({
       data: newData

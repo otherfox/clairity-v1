@@ -59,7 +59,7 @@
     "fynx": "^1.6.0",
     "immutable": "^3.7.0",
     "material-design-iconfont": "^0.1.7",
-    "material-ui": "0.10.1",
+    "material-ui": "0.10.4",
     "memoize-promise": "^0.2.2",
     "moment": "^2.10.3",
     "normalize.css": "^3.0.2",
@@ -75,7 +75,7 @@
     "react-transmit": "^2.6.1",
     "react-window-mixins": "0.0.6",
     "rx": "^2.5.2",
-    "superagent": "^1.2.0",
+    "superagent": "https://github.com/brainbytes/superagent/tarball/master",
     "throttle-debounce": "^0.1.1",
     "underscore": "^1.8.3",
     "uuid": "^2.0.1"

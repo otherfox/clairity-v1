@@ -3,15 +3,14 @@ import Store from '../store'
 
 export function collection(args) {
   let { table } = args;
-  let result = Store.data.get(table);
-  console.log('collection query', result.toJS());
+  let result = Store.data.get(table).toList();
   return result.size > 0 ? result.toJS() : null;
 }
 
 export function collectionVia(args) {
-  let { table, filterId, idName } = args;
+  let { table, filterId, filterKey } = args;
   let result = Store.data.get(table)
                          .toList()
-                         .filter(r => r.get(idName) == filterId);
-  return result.size > 0 ? result : null;
+                         .filter(r => r.get(filterKey) == filterId);
+  return result.size > 0 ? result.toJS() : null;
 }

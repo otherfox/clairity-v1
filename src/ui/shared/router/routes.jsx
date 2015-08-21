@@ -21,8 +21,13 @@ import OpenInstalls from '../../openInstalls'
 
 /* Accounts */
 import ViewAccount from '../../accounts'
-import EditAccount  from '../../accounts/edit'
 import ListAccounts from '../../accounts/all'
+
+/* Locations */
+import ViewLocation from '../../locations'
+import EditLocation  from '../../locations/edit'
+import ListLocations from '../../locations/list'
+import AddLocation from '../../locations/create'
 
 /* Contacts */
 import ViewContact from '../../contacts'
@@ -104,7 +109,15 @@ export default (
             <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
 
-              <Route path="edit" name="edit-account" handler={EditAccount} />
+              <Redirect from="account-locations" to="all-account-locations" />
+              <Route name="account-locations" path="locations" handler={RouteHandler}>
+                <Route name="all-account-locations" handler={ListLocations} />
+                <Route name="view-account-location" path=":locationId" handler={ViewLocation} />
+                <Route name="add-account-location" path="add" handler={AddLocation} />
+                <Route name="edit-account-location" path="edit" handler={EditLocation} />
+              </Route>
+
+              <Route path="edit" name="edit-account" handler={EditLocation} />
 
               <Redirect from="account-contacts" to="all-account-contacts" />
               <Route name="account-contacts" path="contacts" handler={RouteHandler}>

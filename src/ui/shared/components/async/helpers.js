@@ -2,12 +2,26 @@ import _ from 'lodash'
 
 function consumeArguments() {
   let args = Array.from(arguments[0]);
-  if (args.length !== 1)
-    throw new Error('Async query helpers only takes a single argument');
   let options;
   let table;
   if (_.isString(args[0])) {
-    options = { idPropName: `${args[0]}Id` };
+    if (args.length == 2 && _.isObject(args[1])) {
+      options = Object.assign({}, args[1], {
+        idPropName: args[1].idPropName || `${args[0]}Id`,
+        filterKey: args[1].filterKey || `${args[0]}_id`
+      });
+      if (args[0] === 'account') {  // HACK: I don't really like this being here
+        options.filterKey = args[1].filterKey || 'customer_id';
+      }
+    } else {
+      options = {
+        idPropName: `${args[0]}Id`,
+        filterKey: `${args[0]}_id`
+      };
+      if (args[0] === 'account') { // HACK: Bad here too.
+        options.filterKey = 'customer_id';
+      }
+    }
     table = args[0];
   } else if (_.isObject(args[0])) {
     table = args[0].table;
@@ -55,11 +69,19 @@ export function collection() {
           return {
             table,
             filterTable: argInfo.table,
-            filterId: props[argInfo.idPropName]
+            filterId: props[argInfo.options.idPropName],
+            filterKey: argInfo.options.filterKey
           };
         }
       }
     }
+  }
+}
+
+export function query(name, getParams = (a => a)) {
+  return {
+    name, getParams,
+    type: 'query',
   }
 }
 

@@ -4,6 +4,7 @@ import {
   RadioButtonGroup,
   RadioButton,
   RaisedButton,
+  DatePicker,
   Checkbox,
   Utils
 } from 'material-ui'
@@ -52,7 +53,8 @@ export class RadioButtonFilter extends Component {
         paddingRight: '20px'
       },
       muiRadioButtons: {
-        marginTop: '40px'
+        marginTop: '40px',
+        height: '32px'
       },
       muiRadioButtonGroup: {
         float: 'left',
@@ -94,20 +96,64 @@ export class RadioButtonFilter extends Component {
 
 export class TextFilter extends Component {
   style() {
-    return {};
+    return {
+      root: {},
+      underline: {}
+    };
   }
   filter(data) {
     let field = this.refs.internal.getValue();
-    let results = fuzzy.filter(field, data, {extract: row => row[this.props.name]});
+
+    // TODO: Here I'm setting an empty string as _ so it does throw you can now filter empty fields
+
+    let results = fuzzy.filter(field, data, { extract: row =>
+      (row[this.props.name]) ? row[this.props.name] : '_'
+    });
     return results.map(r => r.original);
   }
   render() {
     return (
-      <TextField style={_.assign(this.style(), this.props.style)}
+      <TextField style={_.assign(this.style().root, this.props.style)}
                  floatingLabelText={this.props.label}
                  defaultValue={this.props.value}
                  onChange={this.props.onChange}
+                 underlineStyle={_.assign(this.style().underline, this.props.underlineStyle)}
                  ref="internal" />
+    );
+  }
+}
+
+export class DateFilter extends Component {
+  style() {
+    return {
+      root: {
+        paddingTop: '24px',
+        height: '72px',
+        width: '130px'
+      },
+      textField: {
+        width: '130px'
+      }
+    };
+  }
+  filter(data) {
+    let field = this.refs.internal.getDate();
+    let results = (field) ? data.filter(row => {
+      let date =  (row[this.props.name] instanceof Date) ?
+                    row[this.props.name]
+                  :
+                    new Date(row[this.props.name]);
+      return (this.props.past) ? _.gt(field, date) : _.gt(date, field) ;
+    }) : data;
+    return results;
+  }
+  render() {
+    return (
+      <DatePicker style={_.assign(this.style().root, this.props.style)}
+                  textFieldStyle={_.assign(this.style().textField, this.props.textFieldStyle)}
+                  hintText={this.props.label}
+                  onChange={this.props.onChange}
+                  ref="internal" />
     );
   }
 }

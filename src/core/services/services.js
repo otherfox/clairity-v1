@@ -10,7 +10,6 @@ export function getServiceTypes() {
       .end((err, res) => {
         if(!err){
           let order = JSON.parse(res.text);
-          console.log('get work order: ', order);
           s(order);
         } else {
           f(err);
