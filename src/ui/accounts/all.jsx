@@ -19,14 +19,11 @@ class ViewAccounts extends Component {
     return {
       colNames: [
         { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
-        { label: 'Auto Pay', name: 'auto_pay', cellType: 'account' },
-        { label: 'E Billing Sent', name: 'e_billing_sent', cellType: 'account' },
         { label: 'Email Invoice', name: 'email_invoice', cellType: 'account' },
         { label: 'Invoice Weekly', name: 'invoice_weekly', cellType: 'account' },
         { label: 'Show International', name: 'show_international', cellType: 'account' },
         { label: 'Show Log Distance', name: 'show_long_distance', cellType: 'account' },
         { label: 'Summary Billing', name: 'summary_billing', cellType: 'account' },
-        { label: 'Tax Exempt', name: 'tax_exempt', cellType: 'account' },
         { label: 'VIP', name: 'vip', cellType: 'account' }
       ],
       data: accounts,
@@ -46,7 +43,7 @@ class ViewAccounts extends Component {
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
           </Filters>
-          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={16}/>
+          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={18} link={'name'} />
         </FilteredCollection>
       </Layout>
     );
