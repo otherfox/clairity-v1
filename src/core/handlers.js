@@ -6,7 +6,7 @@ import _ from 'lodash'
 export default {
   query(message) {
     console.log('Query Message handler', message);
-    let { params } = message;
+    let { params, token } = message;
     let local = Queries[message.name](params);
     let remote = Services[message.name](params);
     remote.then(data => {
