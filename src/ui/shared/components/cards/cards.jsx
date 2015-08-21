@@ -119,7 +119,7 @@ export class AccountCard extends Component {
               <div style={this.style().row}>
                 <div style={this.style().label}>{r.label}</div>
                 <div style={this.style().value}>
-                  {this.props.data[r.name]}
+                  {(this.props.data[r.name] === 'true') ? 'Yes' : 'No'}
                 </div>
               </div>
             )
