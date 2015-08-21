@@ -1,6 +1,6 @@
 import React from 'react'
 import Settings from '../settings'
-import {TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton, Checkbox } from 'material-ui'
+import { TextField, RaisedButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles, RadioButtonGroup, RadioButton, Checkbox } from 'material-ui'
 
 import { CellTypes } from './tableCells'
 

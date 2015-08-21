@@ -1,5 +1,5 @@
 import Fynx from 'fynx'
-import { $1 } from '../services/location'
+import { getLocation } from '../services/location'
 import Store from '../store'
 
 export const fetchLocation = Fynx.createAsyncAction();

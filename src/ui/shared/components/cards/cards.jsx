@@ -3,7 +3,7 @@ import mui, { Utils, Styles, Card, CardHeader, CardActions, CardText, CardMedia,
 import Link from '../link'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
-import {contextTypes} from '../../decorators'
+import { contextTypes } from '../../decorators'
 
 @contextTypes({ muiTheme: PropTypes.object })
 export class DefaultCard extends Component {

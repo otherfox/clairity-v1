@@ -1,5 +1,5 @@
-import React, {PropTypes, addons} from 'react/addons'
-import {Paper, TextField, Checkbox, RaisedButton } from 'material-ui'
+import React, { PropTypes, addons } from 'react/addons'
+import { Paper, TextField, Checkbox, RaisedButton } from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'

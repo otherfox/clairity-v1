@@ -1,7 +1,6 @@
 import Fynx from 'fynx'
-import { $1 } from '../services/account'
-import { $1 } from '../services/location'
-import { $1 } from '../actions/location'
+import { getAllCustomerTypes } from '../services/account'
+import { updateLocation, fetchLocation } from '../actions/location'
 import Store from '../store'
 
 /* Customer Actions */
