@@ -28,7 +28,7 @@ export function getAgingReports(date = Date.now()) {
             delete row.b4;
             return row;
           });
-          s(resJSON);
+          s(resJSON.rows);
         } else {
           f(err);
         }
