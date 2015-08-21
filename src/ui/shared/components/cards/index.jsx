@@ -10,7 +10,11 @@ class Cards extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      layouts: {lg: this.generateLayout(this.props, 'lg'), md: this.generateLayout(this.props, 'md')},
+      layouts: {
+        lg: this.generateLayout(this.props, 'lg'),
+        md: this.generateLayout(this.props, 'md'),
+        sm: this.generateLayout(this.props, 'sm')
+      },
       currentBreakpoint: 'lg',
       data: this.props.data,
       dom: this.generateDOM(this.props),
@@ -19,10 +23,13 @@ class Cards extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log('recieved');
     this.setState({
       data: props.data,
-      layouts: {lg: this.generateLayout(props, 'lg'), md: this.generateLayout(props, 'md')},
+      layouts: {
+        lg: this.generateLayout(props, 'lg'),
+        md: this.generateLayout(props, 'md'),
+        sm: this.generateLayout(props, 'sm')
+      },
       dom: this.generateDOM(props)});
   }
 
@@ -31,54 +38,51 @@ class Cards extends React.Component {
   }
 
   handleScroll(props) {
-    let scrollPos = (document.body.scrollTop+window.innerHeight)/document.body.offsetHeight;
+    let body = document.body;
+    let scrollPos = (body.scrollTop + window.innerHeight) / body.offsetHeight;
     if(scrollPos > .7) {
-      console.log('handle props', props.data);
-      console.log('handle this.props', this.props.data);
-      console.log('handle this.state', this.state.data.length);
-      this.setState({ end: this.state.end + 12}, e => this.setState({dom: this.generateDOM(this.props), layouts: {lg: this.generateLayout(this.props, 'lg'), md: this.generateLayout(this.props, 'md')}}));
+      this.setState({
+          end: this.state.end + 12
+        },
+        e => this.setState({
+          dom: this.generateDOM(this.props),
+          layouts: {
+            lg: this.generateLayout(this.props, 'lg'),
+            md: this.generateLayout(this.props, 'md'),
+            sm: this.generateLayout(this.props, 'sm')
+          }
+        }
+      ));
     }
   }
 
   generateDOM(props) {
-    if(this.state) {
-      console.log('state:',this.state.data.length);
-    }
-    if(this.props) {
-      console.log('this.props:',this.props.data.length);
-    }
-    console.log('passed props:', props.data.length)
-    let breakpoint = (this.state) ? this.state.currentBreakpoint : 'lg';
     let end = (this.state) ? this.state.end : 12;
-    let data = (this.state) ? this.state.data.slice(0, end) : props.data.slice(0, end);
-    return _.map(data, function(l, i) {
+    let data = props.data.slice(0, end);
+    return data.map((r, i) => {
       let cardData = [];
-      for(let prop in data[i]) {
-        if(_.find(props.colNames, 'name', prop)) {
+      let j = 0;
+      for(let prop in r) {
+        if(_.find(props.colNames, 'name', prop) && prop !== props.header) {
           cardData.push((
-            <div key={i}>{
-              (typeof data[i][prop] === 'string') ?
-                _.result(
-                  _.find(props.colNames, 'name', prop),
-                    'label')+': '+ data[i][prop]
-              : data[i][prop]
+            <div key={j}>{
+              (typeof r[prop] === 'string') ?
+                _.result(_.find(props.colNames, 'name', prop),'label')+': '
+                + r[prop]
+              : r[prop]
             }</div>
           ));
+          j++;
         }
       }
       let CardClass = CardTypes[props.cardType];
+      let rawCardData = r;
+      let {data, ...other} = this.props;
       return (
-        <CardClass {..._.assign(props, {data: data[i] ,key:i, i:i})}>
-          { cardData
-            .filter( r =>
-              r.props.children.indexOf(
-                _.result(_.find(props.colNames, {name: props.header}), 'label')
-              ) == -1
-            )
-          }
+        <CardClass {...other} data={rawCardData} key={i} i={i}>
+          { cardData }
         </CardClass>
-      )}.bind(this)
-    );
+      )});
   }
 
   generateLayout(props, breakpoint) {
@@ -104,7 +108,6 @@ class Cards extends React.Component {
   }
 
   render() {
-    console.log(this.state.data.length);
     return (
       <Layout widths={{}} cPadding={'20px 0 0 0'}>
         <style>{`
@@ -133,7 +136,12 @@ class Cards extends React.Component {
             -moz-transform: none !important;
           }
         `}</style>
-      <div style={{position: 'relative', marginRight: '5px', marginLeft: '-5px'}} id={'cards'}>
+      <div  style={{
+              position: 'relative',
+              marginRight: '5px',
+              marginLeft: '-5px'
+            }}
+            id={'cards'}>
           <ResponsiveReactGridLayout
               layouts={this.state.layouts}
               onBreakpointChange={e => this.onBreakpointChange()}
