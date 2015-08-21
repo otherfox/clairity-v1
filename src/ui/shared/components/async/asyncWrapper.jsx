@@ -31,7 +31,7 @@ export default function asyncWrapper() {
                    .filter(p => p[1].type === 'query')
                    .value();
 
-  class AsyncWrapper extends Component {
+  class AsyncWrapper extends React.Component {
 
     constructor(props) {
       super(props);
