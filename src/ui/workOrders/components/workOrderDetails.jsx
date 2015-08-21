@@ -19,12 +19,12 @@ import {
 } from 'material-ui'
 
 import _ from 'lodash'
-import {queryRenderer, collectionQuery} from '../../shared/components/networkRenderer'
+import { queryRenderer, collectionQuery } from '../../shared/components/networkRenderer'
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 import DropDown from '../../shared/components/dropDown'
-import {collectionDropdown} from '../../shared/components/collectionDropdown'
+import { collectionDropdown } from '../../shared/components/collectionDropdown'
 
 import OwnerView from './details/owner'
 let WorkOrderTypesDropdown = collectionDropdown('workOrderType');

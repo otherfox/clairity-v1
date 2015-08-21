@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import Filter from './filter'
 import Layout from '../layout'
-import {Paper} from 'material-ui'
+import { Paper } from 'material-ui'
 import _ from 'lodash'
-import {throttle} from 'throttle-debounce'
+import { throttle } from 'throttle-debounce'
 
 class Filters extends Component {
   style() {

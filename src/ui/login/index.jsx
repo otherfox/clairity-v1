@@ -25,7 +25,7 @@ import {
 
 import controllable from 'react-controllables'
 
-import {tryLogin, loginSuccess} from '../../core/actions/login'
+import { tryLogin, loginSuccess } from '../../core/actions/login'
 import {} from '../../core/queries/login'
 
 @controllable(['username', 'password'])
@@ -81,7 +81,7 @@ LoginForm.propTypes = {
   onLogin: PropTypes.func
 }
 
-import {Navigation} from 'react-router'
+import { Navigation } from 'react-router'
 
 const Login = React.createClass({
   contextTypes: { muiTheme: React.PropTypes.object},

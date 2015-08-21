@@ -7,7 +7,7 @@ import {
   Redirect
 } from 'react-router'
 
-import {App, NavigationLayout} from '../../app'
+import { App, NavigationLayout } from '../../app'
 
 import Testbed from '../../testbed'
 

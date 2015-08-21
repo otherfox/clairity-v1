@@ -7,7 +7,7 @@ import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
 import { RaisedButton } from 'material-ui'
 import { Filters, FilteredCollection, TextFilter} from '../shared/components/filteredCollection'
-import {networkCollectionRenderer} from '../shared/components/networkRenderer'
+import { networkCollectionRenderer } from '../shared/components/networkRenderer'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'

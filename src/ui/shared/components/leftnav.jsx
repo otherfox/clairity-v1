@@ -1,8 +1,8 @@
 import React from 'react'
 import Settings from './settings'
 import _ from 'lodash'
-import {Menu, MenuItem} from 'material-ui'
-import {Navigation,State} from 'react-router'
+import { Menu, MenuItem } from 'material-ui'
+import { Navigation,State } from 'react-router'
 
 let LeftNav = React.createClass ({
   mixins: [Navigation,State],

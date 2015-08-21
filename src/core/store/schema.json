@@ -2,7 +2,7 @@
   "agingReport": {},
   "user": {},
   "location": {},
-  "customerType": {},
+  "accountType": {},
   "workOrder": {},
   "contact": {},
   "contract": {},
@@ -20,5 +20,5 @@
   "opportunity": {},
   "locationStatus": {},
   "salesMetric": {},
-  "ticket": {}
+  "ticket": {},
 }

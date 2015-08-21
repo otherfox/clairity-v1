@@ -21,8 +21,8 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {List} from 'immutable'
-import {Navigation} from 'react-router'
+import { List } from 'immutable'
+import { Navigation } from 'react-router'
 
 let editIpZone = React.createClass({
   mixins: [Navigation],

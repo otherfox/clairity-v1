@@ -3,7 +3,7 @@ let {LinkedStateMixin} = React.addons;
 import Settings from '../../shared/components/settings'
 import Layout from '../../shared/components/layout'
 import DropDown from '../../shared/components/dropDown'
-import {Typeahead} from '../../shared/components/typeahead'
+import { Typeahead } from '../../shared/components/typeahead'
 import Details from '../../shared/components/details'
 import {
   RadioButtonGroup,
@@ -20,10 +20,10 @@ import {
   TextField,
   Paper
 } from 'material-ui'
-import {fromJS, Map} from 'immutable'
-import {queryRenderer, collectionQuery, networkCollectionRenderer} from '../../shared/components/networkRenderer'
-import {getPops} from '../../../core/services/pop'
-import {updateWorkOrder} from '../../../core/actions/workOrder'
+import { fromJS, Map } from 'immutable'
+import { queryRenderer, collectionQuery, networkCollectionRenderer } from '../../shared/components/networkRenderer'
+import { getPops } from '../../../core/services/pop'
+import { updateWorkOrder } from '../../../core/actions/workOrder'
 
 // Make available for use in all components
 let widths = {};
