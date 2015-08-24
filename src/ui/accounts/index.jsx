@@ -1,12 +1,17 @@
 import React, { PropTypes, Component } from 'react'
-import Header from '../shared/components/header'
 import Store from '../../core/store'
-import Layout from '../shared/components/layout'
-import Footer from '../shared/components/footer'
-import TopNav from '../shared/components/topnav'
-import LeftNav from '../shared/components/leftnav'
-import Content from '../shared/components/content'
-import Table from '../shared/components/table'
+
+import {
+  Header,
+  Layout,
+  Footer,
+  TopNav,
+  LeftNav,
+  Content,
+  SubHeader,
+  Table
+} from '../shared/components'
+
 import async, { model, collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 import {
@@ -38,8 +43,9 @@ import { State } from 'react-router'
 import { contextTypes } from '../shared/decorators'
 
 import AccountDetails from './public/details'
-
-let AccountDetailsAgent = async(AccountDetails, { user: model('user') });
+let AccountDetailsAgent = async(AccountDetails, {
+  user: model('user')
+});
 
 import ContractList from '../contracts/list'
 let ContractsListQuery = async(ContractList, {
@@ -70,18 +76,29 @@ class AccountView extends Component {
   }
   render() {
     let account = this.props.account;
+    let { street1, street2, city, state, zip_code } = account;
+    let address =
+      [ street1, street2, city, state, zip_code ]
+      .filter( k => k )
+      .join(', ');
+
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
         <Header><h1>Account - {account.name}</h1></Header>
-        <Layout widths={{ lg: [12, 6, 6, 12]}} cPadding={'20px 20px 0 0'}>
+        <SubHeader>{ address }</SubHeader>
+        <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
           {
               account.user_id ?
                 <AccountDetailsAgent userId={account.user_id} account={this.props.account} />
               :
                 <AccountDetails user={null} account={this.props.account} />
           }
-          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
-          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
+          <div>
+            <Layout widths={{}} cPadding={'0 0 20px 0'}>
+              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
+              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
+            </Layout>
+          </div>
           <div><ContractsListQuery accountId={account.id} /></div>
         </Layout>
 

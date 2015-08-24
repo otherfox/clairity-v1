@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { contextTypes } from '../decorators'
 
 @contextTypes({ muiTheme: PropTypes.object })
-export default class Header extends Component {
+export default class SubHeader extends Component {
   style() {
     return {
       color: this.context.muiTheme.palette.textColor,
