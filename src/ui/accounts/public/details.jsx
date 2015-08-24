@@ -20,8 +20,6 @@ export default class AccountDetails extends React.Component {
             widths={{ lg: [4,8]}}
             title={'Account Details'}
             data={[
-              agent.name ? { label: 'Current Account Owner', value: agent.name } : null,
-              { label: 'Type', name: 'customerTypeId', value: account.type.name }
             ]}
           />
         <div></div>

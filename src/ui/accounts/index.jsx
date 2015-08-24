@@ -45,8 +45,8 @@ import controllable from 'react-controllables'
 import { State } from 'react-router'
 import { contextTypes } from '../shared/decorators'
 
-import { UserName } from '../users/public'
-let AccountAgent = async(UserName, {
+import { AccountName } from '../users/public'
+let AccountAgent = async(AccountName, {
   user: model('user')
 });
 
@@ -93,13 +93,14 @@ class AccountView extends Component {
           <h1>{account.name}</h1>
         </Header>
         <SubHeader>
+          { address }
           {
             (account.user_id) ?
-              <AgentCell><AccountAgent userId={account.user_id} /></AgentCell>
+              <AccountAgent userId={account.user_id} />
             :
               null
           }
-          { address }
+          { account.type.name }
         </SubHeader>
 
         <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
