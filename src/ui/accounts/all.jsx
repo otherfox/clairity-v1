@@ -19,7 +19,12 @@ class ViewAccounts extends Component {
     return {
       colNames: [
         { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
-        { label: 'Address', name: '' }
+        { label: 'Email Invoice', name: 'email_invoice', cellType: 'account' },
+        { label: 'Invoice Weekly', name: 'invoice_weekly', cellType: 'account' },
+        { label: 'Show International', name: 'show_international', cellType: 'account' },
+        { label: 'Show Log Distance', name: 'show_long_distance', cellType: 'account' },
+        { label: 'Summary Billing', name: 'summary_billing', cellType: 'account' },
+        { label: 'VIP', name: 'vip', cellType: 'account' }
       ],
       data: accounts,
       colWidths: [1],
@@ -28,7 +33,6 @@ class ViewAccounts extends Component {
   }
 
   render() {
-
     let accounts = this.props.accounts;
     console.log(accounts);
     return (
@@ -38,7 +42,7 @@ class ViewAccounts extends Component {
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
           </Filters>
-          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'}/>
+          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={18} linkParam={'id'} />
         </FilteredCollection>
       </Layout>
     );

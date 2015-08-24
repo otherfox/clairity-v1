@@ -3,6 +3,11 @@ import moment from 'moment'
 
 import req from 'superagent'
 
+export function agingReports(args = { date: Date.now() }) {
+  let { date } = args;
+  return getAgingReports(date);
+}
+
 export function getAgingReports(date = Date.now()) {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=agingReport&as_of_date=${moment(date).format('MM/DD/YYYY')}&json`)//"https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TransactionDAO&_m=getAging&as_of_date="+moment(date).format())
@@ -23,7 +28,7 @@ export function getAgingReports(date = Date.now()) {
             delete row.b4;
             return row;
           });
-          s(resJSON);
+          s(resJSON.rows);
         } else {
           f(err);
         }

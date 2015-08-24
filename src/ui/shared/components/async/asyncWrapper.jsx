@@ -21,8 +21,8 @@ export default function asyncWrapper() {
 
   const actions = _.chain(options)
                    .pairs()  // convert to arrays to maintain key names
-                   .filter(p => p[1].type === 'action')  // filter by action
-                   .map(p => [p[0], a => instance.dispatch(p[1](a, p[0]))])  // convert function to promise
+                   .filter(([, v]) => v.type === 'action')  // filter by action
+                   .map(([k, v]) => [k, a => instance.dispatch(v(a, k))])  // convert function to promise
                    .reduce(merge, {})  // create action dictionary
                    .value();
 
@@ -31,7 +31,7 @@ export default function asyncWrapper() {
                    .filter(p => p[1].type === 'query')
                    .value();
 
-  class AsyncWrapper extends Component {
+  class AsyncWrapper extends React.Component {
 
     constructor(props) {
       super(props);

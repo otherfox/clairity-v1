@@ -1,6 +1,7 @@
 
 import { v4 } from 'uuid'
 import EventEmitter from 'eventemitter2'
+import _ from 'lodash'
 
 class WorkerBridge extends EventEmitter {
 
@@ -28,9 +29,11 @@ class WorkerBridge extends EventEmitter {
     console.log('thread bridge', 'dispatching message', message);
     return new Promise((resolve, reject) => {
       let token = message.token || v4();
-      message.token = token;
+      let msg = _.cloneDeep(message);
+      msg.token = token;
+      msg.params = _.omit(message.params, _.functions(message.params));
       this.callbackMap.set(token, resolve);
-      this.worker.postMessage(message);
+      this.worker.postMessage(msg);
     });
   }
 
