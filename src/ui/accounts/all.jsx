@@ -33,7 +33,6 @@ class ViewAccounts extends Component {
   }
 
   render() {
-
     let accounts = this.props.accounts;
     console.log(accounts);
     return (

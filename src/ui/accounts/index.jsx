@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import Header from '../shared/components/header'
 import Store from '../../core/store'
 import Layout from '../shared/components/layout'
@@ -28,11 +28,13 @@ import {
   DropDownMenu,
   DatePicker,
   TextField,
-  Paper
+  Paper,
+  Utils
 } from 'material-ui'
 
 import controllable from 'react-controllables'
 import {State} from 'react-router'
+import {contextTypes} from '../shared/decorators'
 
 import AccountDetails from './public/details'
 let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
@@ -74,7 +76,16 @@ let ContactListQuery = queryRenderer(ContactList, {
   ]
 });
 
-let accountView = React.createClass({
+@contextTypes({ muiTheme: PropTypes.object })
+class accountView extends Component {
+  style() {
+    return {
+      header: {
+        marginBottom: '10px',
+        color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)
+      }
+    }
+  }
   render() {
     let account = this.props.account;
     return (
@@ -87,15 +98,15 @@ let accountView = React.createClass({
               :
                 <AccountDetails user={null} account={this.props.account} />
           }
-          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
-          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
+          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
+          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
           <div><ContractsListQuery accountId={account.id} /></div>
         </Layout>
 
       </Layout>
     )
   }
-});
+}
 
 let Account = networkModelRenderer(accountView, 'account');
 
