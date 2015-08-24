@@ -17,6 +17,10 @@ import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 import { contextTypes } from '../../decorators'
 import Details from '../details'
+import async, { model } from '../async'
+
+import { UserName } from '../../../users/public'
+let AccountAgent = async(UserName, { user: model('user') });
 
 @contextTypes({ muiTheme: PropTypes.object })
 export class DefaultCard extends Component {
@@ -113,7 +117,28 @@ export class AccountCard extends Component {
           avatar={avatar}
           style={this.style().header} />
         <CardText>
-          <User />
+          { //this.props.colNames
+          //   .filter(r => r.name!==this.props.header)
+          //   .map( r => (
+          //     <div style={this.style().row}>
+          //       <div style={this.style().label}>{r.label}</div>
+          //       <div style={this.style().value}>
+          //         {(this.props.data[r.name] === 'true') ? 'Yes' : 'No'}
+          //       </div>
+          //     </div>
+          //   )
+          // )
+          }
+          <div style={this.style().row}>
+            <div style={this.style().label}>Account Owner</div>
+            <div style={this.style().value}>
+              { (data.user_id) ?
+                  <AccountAgent userId={data.user_id} />
+                :
+                  <div>Unassigned</div>
+              }
+            </div>
+        </div>
         </CardText>
         <CardActions>
           <div>
