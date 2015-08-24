@@ -94,5 +94,6 @@ export function action() {
     name: argName || name,
     type: 'action'
   });
+  fn.type = 'action';
   return fn;
 }
