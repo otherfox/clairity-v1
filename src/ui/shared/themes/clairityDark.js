@@ -1,4 +1,4 @@
-import {Styles, Utils} from 'material-ui'
+import { Styles, Utils } from 'material-ui'
 
 let Colors = Styles.Colors;
 let Spacing = Styles.Spacing;

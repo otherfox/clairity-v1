@@ -1,7 +1,7 @@
 import React from 'react'
-import {State, Link} from 'react-router'
+import { State, Link } from 'react-router'
 import _ from 'lodash'
-import {navStack} from '../router/navigationStack'
+import { navStack } from '../router/navigationStack'
 
 class CustomLink extends React.Component {
 
@@ -27,7 +27,7 @@ class CustomLink extends React.Component {
 }
 
 CustomLink.proptypes = {
-  to: React.PropTypes.string,
+  to: React.PropTypes.string.required,
   params: React.PropTypes.object
 }
 

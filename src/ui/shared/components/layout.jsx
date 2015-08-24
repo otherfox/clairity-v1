@@ -2,8 +2,8 @@ import React from 'react'
 import Settings from './settings'
 import lodash from 'lodash'
 import uid from 'uid'
-import {ClearFix} from 'material-ui'
-import {List} from 'immutable'
+import { ClearFix } from 'material-ui'
+import { List } from 'immutable'
 
 let Layout = React.createClass({
   propTypes: {

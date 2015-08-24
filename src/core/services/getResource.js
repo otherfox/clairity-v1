@@ -1,11 +1,11 @@
-import {getContact} from './contacts'
-import {getLocation} from './location'
-import {getWorkOrder} from './workOrder'
-import {getContract} from './contracts'
-import {getUser} from './users'
-import {getAccount} from './account'
-import {getTicket} from './ticket'
-import {getOpportunity, getSale} from './opportunity'
+import { getContact } from './contacts'
+import { getLocation } from './location'
+import { getWorkOrder } from './workOrder'
+import { getContract } from './contracts'
+import { getUser } from './users'
+import { getAccount } from './account'
+import { getTicket } from './ticket'
+import { getOpportunity, getSale } from './opportunity'
 
 const resource = {
   contact: getContact,
@@ -72,20 +72,21 @@ export function collectionVia(args) {
 }
 
 
-import {getPops} from './pop'
-import {getAccounts} from './account'
-import {getWorkOrderTypes, getWorkOrderStatuses} from './workOrder'
-import {getLeads} from './contacts'
-import {getProjectTypes} from './projectType'
-import {getSalesStages} from './salesStage'
-import {getLeadSources} from './leadSource'
-import {getCampaignSources} from './campaignSource'
-import {getServiceTypes} from './serviceType'
-import {getTickets} from './ticket'
+import { getPops } from './pop'
+import { getAccounts, getAccountTypes } from './account'
+import { getWorkOrderTypes, getWorkOrderStatuses } from './workOrder'
+import { getLeads } from './contacts'
+import { getProjectTypes } from './projectType'
+import { getSalesStages } from './salesStage'
+import { getLeadSources } from './leadSource'
+import { getCampaignSources } from './campaignSource'
+import { getServiceTypes } from './serviceType'
+import { getTickets } from './ticket'
 
 const collectionMap = {
   pop: getPops,
   account: getAccounts,
+  accountType: getAccountTypes,
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
   lead: getLeads,

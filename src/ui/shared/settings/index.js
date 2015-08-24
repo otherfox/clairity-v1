@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import {ThemeManager, ClairityLight, ClairityDark} from '../themes'
+import { ThemeManager, ClairityLight, ClairityDark } from '../themes'
 import EventEmitter from 'eventemitter2'
 
 const themesMap = {

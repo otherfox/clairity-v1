@@ -1,8 +1,12 @@
-import React from "react"
+import React, { PropTypes, Component } from 'react'
+import async, { collection } from '../shared/components/async'
+import { contextTypes } from '../shared/decorators'
 import Link from '../shared/components/link'
-import {FontIcon, ClearFix} from 'material-ui'
+import { FontIcon, ClearFix } from 'material-ui'
 
-export default class ListContacts extends React.Component {
+@async({ contacts: collection('contact').all() })
+@contextTypes({ muiTheme: PropTypes.object })
+class ListContacts extends Component {
   style() {
       return {
         root: {},
@@ -35,6 +39,4 @@ export default class ListContacts extends React.Component {
   }
 }
 
-ListContacts.contextTypes = {
-  muiTheme: React.PropTypes.object
-}
+export default ListContacts;

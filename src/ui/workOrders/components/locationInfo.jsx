@@ -18,17 +18,13 @@ import {
 
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
-import {networkModelRenderer} from '../../shared/components/networkRenderer'
+import { networkModelRenderer } from '../../shared/components/networkRenderer'
 
 import controllable from 'react-controllables'
 
-import {fetchLocation} from '../../../core/actions/location'
-import {queryLocation} from '../../../core/queries/location'
-import {Navigation} from 'react-router'
-
-//import Location from '../services/stubs/location6384.json'
-
-import {Map, fromJS } from 'immutable'
+import { fetchLocation } from '../../../core/actions/location'
+import { queryLocation } from '../../../core/queries/location'
+import { Navigation } from 'react-router'
 
 let LocationInfo = React.createClass ({
 

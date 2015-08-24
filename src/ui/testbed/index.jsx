@@ -4,12 +4,12 @@
  */
 
 import React, {PropTypes} from 'react'
-import {contextTypes} from '../shared/decorators'
-import {PieGraph, BarGraph, LineGraphWithBrush, ScatterPlotGraph, AreaGraph, LineGraph} from '../shared/components/graphs'
-import {queryRenderer} from '../shared/components/networkRenderer'
-import {salesMetricsFetched} from '../../core/actions/salesMetric'
-import {querySalesMetrics} from '../../core/queries/salesMetric'
-import {getSalesMetricsByMonth} from '../../core/services/opportunity'
+import { contextTypes } from '../shared/decorators'
+import { PieGraph, BarGraph, LineGraphWithBrush, ScatterPlotGraph, AreaGraph, LineGraph } from '../shared/components/graphs'
+import { queryRenderer } from '../shared/components/networkRenderer'
+import { salesMetricsFetched } from '../../core/actions/salesMetric'
+import { querySalesMetrics } from '../../core/queries/salesMetric'
+import { getSalesMetricsByMonth } from '../../core/services/opportunity'
 import { State } from 'react-router'
 import _ from 'lodash'
 
