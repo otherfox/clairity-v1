@@ -4,6 +4,7 @@ import Store from '../../core/store'
 import {
   Header,
   Layout,
+  Link,
   Footer,
   TopNav,
   LeftNav,
@@ -84,8 +85,12 @@ class AccountView extends Component {
 
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
-        <Header><h1>Account - {account.name}</h1></Header>
-        <SubHeader>{ address }</SubHeader>
+        <Header>
+          <h1>Account - {account.name}</h1>
+          <SubHeader>
+            { address }
+          </SubHeader>
+        </Header>
         <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
           {
               account.user_id ?
