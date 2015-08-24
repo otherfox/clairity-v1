@@ -13,6 +13,8 @@ import {
   Table
 } from '../shared/components'
 
+import { AgentCell } from '../shared/components/table/tableCells'
+
 import async, { model, collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 import {
@@ -93,7 +95,7 @@ class AccountView extends Component {
         <SubHeader>
           {
             (account.user_id) ?
-              <AccountAgent userId={account.user_id} />
+              <AgentCell><AccountAgent userId={account.user_id} /></AgentCell>
             :
               null
           }
