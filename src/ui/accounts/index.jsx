@@ -8,7 +8,7 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
 import async, { model, collection } from '../shared/components/async'
-import { propTypes } from '../shared/decorators'
+import { propTypes, contextTypes } from '../shared/decorators'
 import {
   networkModelRenderer,
   queryRenderer,
@@ -56,13 +56,14 @@ let ContactListQuery = async(ContactList, {
 });
 
 @async({ account: model('account') })
+@contextTypes({ lang: PropTypes.object })
 @propTypes({ account: PropTypes.object })
 class AccountView extends Component {
   render() {
     let account = this.props.account;
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
-        <Header><h1>Account - {account.name}</h1></Header>
+        <Header><h1>{this.context.lang('Account')} - {account.name}</h1></Header>
         <Layout widths={{ lg: [12, 6, 6, 12]}} cPadding={'20px 20px 0 0'}>
           {
               account.user_id ?

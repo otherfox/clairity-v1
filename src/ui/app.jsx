@@ -12,6 +12,8 @@ import Wrapper from './shared/components/wrapper'
 import ThemeManager from './shared/themes/themeManager'
 import SettingsManager from './shared/settings'
 
+import lang from './shared/lang/en-us'
+
 export class App extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,10 @@ export class App extends React.Component {
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
-      lang: {}
+      lang: function(s) {
+        let key = s.toLowerCase().replace(/\s/g, '_').replace(/[^a-zA-Z\d:]/, '')
+        return lang[key] || throw new Error(`Key not found in translation: '${key}' for string '${s}'`)
+      }
     };
   }
   render() {
