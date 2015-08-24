@@ -35,11 +35,12 @@ function consumeArguments() {
 }
 
 export function model() {
-  let { table, options } = consumeArguments(arguments);
+  let args = arguments;
   return {
     type: 'query',
     name: 'model',
-    getParams(props) {
+    getParams(props, name) {
+      let { table, options } = consumeArguments(args.length > 0 ? args : [name]);
       return {
         table,
         id: props[options.idPropName]
