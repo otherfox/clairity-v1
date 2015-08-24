@@ -1,9 +1,22 @@
 import React, { Component, PropTypes} from 'react'
-import mui, { Utils, Styles, Card, CardHeader, CardActions, CardText, CardMedia, FlatButton, Avatar, CardTitle, Paper} from 'material-ui'
+import mui, {
+  Utils,
+  Styles,
+  Card,
+  CardHeader,
+  CardActions,
+  CardText,
+  CardMedia,
+  RaisedButton,
+  Avatar,
+  CardTitle,
+  Paper
+} from 'material-ui'
 import Link from '../link'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 import { contextTypes } from '../../decorators'
+import Details from '../details'
 
 @contextTypes({ muiTheme: PropTypes.object })
 export class DefaultCard extends Component {
@@ -39,8 +52,7 @@ export class AccountCard extends Component {
   style() {
     return {
       header: {
-        backgroundColor: Utils.ColorManipulator
-            .fade(this.context.muiTheme.palette.accent1Color, 1),
+        backgroundColor: this.context.muiTheme.palette.accent1Color,
         height: '102px'
       },
       avatar: {
@@ -57,9 +69,29 @@ export class AccountCard extends Component {
         color: Styles.Colors.darkWhite,
         width: this.props.position.width - 72,
         paddingTop: '10px'
+      },
+      row: {
+        paddingBottom: '5px'
+      },
+      label: {
+        color: Utils.ColorManipulator
+            .fade(this.context.muiTheme.palette.textColor, .6),
+        display: 'inline-block',
+        width: '50%',
+        textAlign: 'right',
+        paddingRight: '10px'
+      },
+      value: {
+        color: this.context.muiTheme.palette.textColor,
+        display: 'inline-block',
+        width: '50%'
+      },
+      action: {
+        textAlign: 'center'
       }
     }
   }
+
   render() {
     let i = this.props.i,
         data = this.props.data,
@@ -68,9 +100,10 @@ export class AccountCard extends Component {
         subtitle1 = [street1, street2].filter(r=>!!r).join(', '),
         subtitle2 = [city, state, zip_code].filter(r=>!!r).join(', '),
         subtitle = (<div>{subtitle1}<br />{subtitle2}</div>),
-        avatar = (<AccountIcon style={this.style().avatar}/>);
+        avatar = (<AccountIcon style={this.style().avatar}/>),
+        params = { 'accountId': data[this.props.linkParam] };
 
-    return (this.props.children) ?
+    return (
       <Card transitionEnabled={false} {...this.props}>
         <CardHeader
           title={title}
@@ -80,10 +113,30 @@ export class AccountCard extends Component {
           avatar={avatar}
           style={this.style().header} />
         <CardText>
-          {this.props.children}
+          {this.props.colNames
+            .filter(r => r.name!==this.props.header)
+            .map( r => (
+              <div style={this.style().row}>
+                <div style={this.style().label}>{r.label}</div>
+                <div style={this.style().value}>
+                  {(this.props.data[r.name] === 'true') ? 'Yes' : 'No'}
+                </div>
+              </div>
+            )
+          )}
         </CardText>
+        <CardActions>
+          <div>
+            <div style={this.style().action}>
+              <Link to="view-account"
+                    params={params} >
+                <RaisedButton label="View Account"/>
+              </Link>
+            </div>
+          </div>
+        </CardActions>
       </Card>
-      : null;
+    );
   }
 }
 
