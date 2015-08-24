@@ -94,4 +94,5 @@ export function action() {
     name: argName || name,
     type: 'action'
   });
+  return fn;
 }
