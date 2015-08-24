@@ -21,7 +21,7 @@ import Layout from '../../shared/components/layout'
 import DropDown from '../../shared/components/dropDown'
 import Details from '../../shared/components/details'
 
-import {Map, fromJS} from 'immutable'
+import { Map, fromJS } from 'immutable'
 
 class YesNoCell extends React.Component {
   render() {

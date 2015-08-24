@@ -1,5 +1,5 @@
 import React, {Component, PropTypes, addons} from 'react/addons'
-import {Filters} from '../filteredCollection'
+import { Filters } from '../filteredCollection'
 
 class FilteredCollection extends Component {
 

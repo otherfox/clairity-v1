@@ -70,7 +70,7 @@ export {
   getWorkOrder, getWorkOrderMessages, getWorkOrderTypes, getWorkOrderStatuses
 };
 
-import {eventUpdateWorkOrder} from '../gateways/workOrder'
+import { eventUpdateWorkOrder } from '../gateways/workOrder'
 
 export function putWorkOrder(id, data) {
     return new Promise((s, f) => {

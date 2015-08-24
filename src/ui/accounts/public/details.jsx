@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Paper} from 'material-ui'
+import { Paper } from 'material-ui'
 import Layout from '../../shared/components/layout'
 import Details from '../../shared/components/details'
 

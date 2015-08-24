@@ -22,9 +22,9 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {List} from 'immutable'
+import { List } from 'immutable'
 
-import {Navigation} from 'react-router'
+import { Navigation } from 'react-router'
 
 let IpBlocks = React.createClass({
   mixins: [Navigation],

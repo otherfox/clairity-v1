@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {modelQuery} from './queryBuilders'
+import { modelQuery } from './queryBuilders'
 import multiQueryRenderer from './queryRenderer'
 
 export function networkModelRenderer(Component, tableName, options = {}) {

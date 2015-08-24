@@ -1,5 +1,5 @@
 import React, {PropTypes, addons} from 'react/addons'
-import {collectionViaDropdown} from '../../shared/components/collectionDropdown'
+import { collectionViaDropdown } from '../../shared/components/collectionDropdown'
 
 let ContractsDropdown = collectionViaDropdown('contract', 'location_id', 'location');
 

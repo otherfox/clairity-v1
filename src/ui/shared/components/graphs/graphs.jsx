@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import _ from 'lodash'
-import {PieChart, BarChart, LineChart, Brush, ScatterPlot, AreaChart} from 'react-d3-components/src'
-import {Paper, Utils, Slider} from 'material-ui'
-import {contextTypes} from '../../decorators'
+import { PieChart, BarChart, LineChart, Brush, ScatterPlot, AreaChart } from 'react-d3-components/src'
+import { Paper, Utils, Slider } from 'material-ui'
+import { contextTypes } from '../../decorators'
 
 @contextTypes({ muiTheme: PropTypes.object })
 export class BarGraph extends Component {

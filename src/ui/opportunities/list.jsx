@@ -1,6 +1,6 @@
 import React from "react"
 import Link from '../shared/components/link'
-import {FontIcon, ClearFix} from 'material-ui'
+import { FontIcon, ClearFix } from 'material-ui'
 
 export default class ListOpportunities extends React.Component {
   style() {

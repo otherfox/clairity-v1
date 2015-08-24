@@ -21,7 +21,7 @@ import {
   Paper
 } from 'material-ui'
 
-import {List} from 'immutable'
+import { List } from 'immutable'
 
 // Dropdown Menu Data
 

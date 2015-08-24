@@ -6,10 +6,10 @@ import Footer from '../shared/components/footer'
 import Table from '../shared/components/table'
 import Link from '../shared/components/link'
 import Header from '../shared/components/header'
-import {Tabs, Tab} from '../shared/components/tabs'
-import {fromJS} from 'immutable'
+import { Tabs, Tab } from '../shared/components/tabs'
+import { fromJS } from 'immutable'
 
-import {networkModelRenderer} from '../shared/components/networkRenderer'
+import { networkModelRenderer } from '../shared/components/networkRenderer'
 
 import ContractOverview from './components/contractOverview'
 
@@ -43,7 +43,7 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {State} from 'react-router'
+import { State } from 'react-router'
 
 let WorkOrders = React.createClass({
   getInitialState() {

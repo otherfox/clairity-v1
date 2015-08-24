@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, { PropTypes, Component } from 'react'
 import Header from '../shared/components/header'
 import Store from '../../core/store'
 import Layout from '../shared/components/layout'
@@ -7,7 +7,8 @@ import TopNav from '../shared/components/topnav'
 import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Table from '../shared/components/table'
-
+import async, { model, collection } from '../shared/components/async'
+import { propTypes } from '../shared/decorators'
 import {
   networkModelRenderer,
   queryRenderer,
@@ -33,51 +34,33 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {State} from 'react-router'
-import {contextTypes} from '../shared/decorators'
+import { State } from 'react-router'
+import { contextTypes } from '../shared/decorators'
 
 import AccountDetails from './public/details'
-let AccountDetailsAgent = networkModelRenderer(AccountDetails, 'user')
+
+let AccountDetailsAgent = async(AccountDetails, { user: model('user') });
+
 
 import ContractList from '../contracts/list'
-let ContractsListQuery = queryRenderer(ContractList, {
-  queries: [
-    collectionViaQuery({
-      table: 'contract',
-      viaTable: 'account',
-      idName: 'accountId',
-      keyName: 'customer_id'
-    })
-  ]
+let ContractsListQuery = async(ContractList, {
+  contracts: collection('contract').by('account')
 });
 
 import OppsList from '../opportunities/list'
-let OppsListQuery = queryRenderer(OppsList, {
-  queries: [
-    collectionViaQuery({
-      table: 'opportunity',
-      viaTable: 'account',
-      propName: 'opportunities',
-      idName: 'accountId',
-      keyName: 'customer_id'
-    })
-  ]
-});
+let OppsListQuery = async(OppsList, {
+  opportunities: collection('opportunity').by('account')
+})
 
 import ContactList from '../contacts/list'
-let ContactListQuery = queryRenderer(ContactList, {
-  queries: [
-    collectionViaQuery({
-      table: 'contact',
-      viaTable: 'account',
-      idName: 'accountId',
-      keyName: 'customer_id'
-    })
-  ]
+let ContactListQuery = async(ContactList, {
+  contacts: collection('contact').by('account')
 });
 
+@async({ account: model('account') })
+@propTypes({ account: PropTypes.object })
 @contextTypes({ muiTheme: PropTypes.object })
-class accountView extends Component {
+class AccountView extends Component {
   style() {
     return {
       header: {
@@ -94,7 +77,7 @@ class accountView extends Component {
         <Layout widths={{ lg: [12, 6, 6, 12]}} cPadding={'20px 20px 0 0'}>
           {
               account.user_id ?
-                <AccountDetailsAgent id={account.user_id} account={this.props.account} />
+                <AccountDetailsAgent userId={account.user_id} account={this.props.account} />
               :
                 <AccountDetails user={null} account={this.props.account} />
           }
@@ -104,16 +87,14 @@ class accountView extends Component {
         </Layout>
 
       </Layout>
-    )
+    );
   }
 }
-
-let Account = networkModelRenderer(accountView, 'account');
 
 let AccountPage = React.createClass({
   mixins: [State],
   render() {
-    return <Account id={+this.getParams().accountId} />;
+    return <AccountView accountId={+this.getParams().accountId} />;
   }
 });
 

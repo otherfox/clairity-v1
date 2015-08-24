@@ -15,7 +15,7 @@ import mui, {
 import Link from '../link'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
-import {contextTypes} from '../../decorators'
+import { contextTypes } from '../../decorators'
 import Details from '../details'
 
 @contextTypes({ muiTheme: PropTypes.object })
