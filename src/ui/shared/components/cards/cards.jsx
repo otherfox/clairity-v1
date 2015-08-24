@@ -117,28 +117,25 @@ export class AccountCard extends Component {
           avatar={avatar}
           style={this.style().header} />
         <CardText>
-          { //this.props.colNames
-          //   .filter(r => r.name!==this.props.header)
-          //   .map( r => (
-          //     <div style={this.style().row}>
-          //       <div style={this.style().label}>{r.label}</div>
-          //       <div style={this.style().value}>
-          //         {(this.props.data[r.name] === 'true') ? 'Yes' : 'No'}
-          //       </div>
-          //     </div>
-          //   )
-          // )
+          { this.props.colNames
+            .filter(r => r.name!==this.props.header)
+            .map( r => (
+                <div style={this.style().row}>
+                  <div style={this.style().label}>{r.label}</div>
+                  <div style={this.style().value}>
+                    { (r.name === 'user_id') ?
+                        (data.user_id) ?
+                            <AccountAgent userId={data.user_id} />
+                          :
+                            <div>Unassigned</div>
+                        :
+                          (data[r.name] === 'true') ? 'Yes' : 'No'
+                    }
+                  </div>
+                </div>
+              )
+            )
           }
-          <div style={this.style().row}>
-            <div style={this.style().label}>Account Owner</div>
-            <div style={this.style().value}>
-              { (data.user_id) ?
-                  <AccountAgent userId={data.user_id} />
-                :
-                  <div>Unassigned</div>
-              }
-            </div>
-        </div>
         </CardText>
         <CardActions>
           <div>

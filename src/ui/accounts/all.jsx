@@ -18,7 +18,7 @@ class ViewAccounts extends Component {
     return {
       colNames: [
         { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
-        { label: 'Account Owner', name: 'user_id', cellType: 'account', props: { idField: 'user_id'} },
+        { label: 'Account Owner', name: 'user_id' },
         { label: 'Email Invoice', name: 'email_invoice', cellType: 'account' },
         { label: 'Invoice Weekly', name: 'invoice_weekly', cellType: 'account' },
         { label: 'Show International', name: 'show_international', cellType: 'account' },
