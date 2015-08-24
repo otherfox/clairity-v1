@@ -29,11 +29,13 @@ import {
   DropDownMenu,
   DatePicker,
   TextField,
-  Paper
+  Paper,
+  Utils
 } from 'material-ui'
 
 import controllable from 'react-controllables'
 import { State } from 'react-router'
+import { contextTypes } from '../shared/decorators'
 
 import AccountDetails from './public/details'
 
@@ -57,7 +59,16 @@ let ContactListQuery = async(ContactList, {
 
 @async({ account: model('account') })
 @propTypes({ account: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object })
 class AccountView extends Component {
+  style() {
+    return {
+      header: {
+        marginBottom: '10px',
+        color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)
+      }
+    }
+  }
   render() {
     let account = this.props.account;
     return (
@@ -70,8 +81,8 @@ class AccountView extends Component {
               :
                 <AccountDetails user={null} account={this.props.account} />
           }
-          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
-          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={{marginBottom: '10px'}}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
+          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
+          <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
           <div><ContractsListQuery accountId={account.id} /></div>
         </Layout>
 
