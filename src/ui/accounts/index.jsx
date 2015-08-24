@@ -43,8 +43,8 @@ import controllable from 'react-controllables'
 import { State } from 'react-router'
 import { contextTypes } from '../shared/decorators'
 
-import AccountDetails from './public/details'
-let AccountDetailsAgent = async(AccountDetails, {
+import { UserName } from '../users/public'
+let AccountAgent = async(UserName, {
   user: model('user')
 });
 
@@ -62,6 +62,8 @@ import ContactList from '../contacts/list'
 let ContactListQuery = async(ContactList, {
   contacts: collection('contact').by('account')
 });
+
+import AccountDetails from './public/details'
 
 @async({ account: model('account') })
 @propTypes({ account: PropTypes.object })
@@ -86,18 +88,20 @@ class AccountView extends Component {
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
         <Header>
-          <h1>Account - {account.name}</h1>
-          <SubHeader>
-            { address }
-          </SubHeader>
+          <h1>{account.name}</h1>
         </Header>
-        <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
+        <SubHeader>
           {
-              account.user_id ?
-                <AccountDetailsAgent userId={account.user_id} account={this.props.account} />
-              :
-                <AccountDetails user={null} account={this.props.account} />
+            (account.user_id) ?
+              <AccountAgent userId={account.user_id} />
+            :
+              null
           }
+          { address }
+        </SubHeader>
+
+        <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
+          <AccountDetails user={null} account={this.props.account} />
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
               <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>

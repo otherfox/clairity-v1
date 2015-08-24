@@ -1,8 +1,12 @@
 import React, {PropTypes} from 'react'
 import { Paper } from 'material-ui'
-import Layout from '../../shared/components/layout'
-import Details from '../../shared/components/details'
+import {
+  Layout,
+  Details
+} from '../../shared/components'
+import { propTypes } from '../../shared/decorators'
 
+@propTypes({ account: PropTypes.object.isRequired })
 export default class AccountDetails extends React.Component {
   render() {
     let account = this.props.account;
@@ -26,7 +30,3 @@ export default class AccountDetails extends React.Component {
     );
   }
 }
-
-AccountDetails.propTypes = {
-  account: PropTypes.object.isRequired
-};
