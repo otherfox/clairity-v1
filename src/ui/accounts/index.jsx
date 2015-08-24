@@ -41,7 +41,6 @@ import AccountDetails from './public/details'
 
 let AccountDetailsAgent = async(AccountDetails, { user: model('user') });
 
-
 import ContractList from '../contracts/list'
 let ContractsListQuery = async(ContractList, {
   contracts: collection('contract').by('account')

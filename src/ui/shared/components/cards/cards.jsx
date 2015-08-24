@@ -93,15 +93,15 @@ export class AccountCard extends Component {
   }
 
   render() {
-    let i = this.props.i,
-        data = this.props.data,
-        title = data[this.props.header],
-        {street1, street2, city, state, zip_code} = data,
-        subtitle1 = [street1, street2].filter(r=>!!r).join(', '),
-        subtitle2 = [city, state, zip_code].filter(r=>!!r).join(', '),
-        subtitle = (<div>{subtitle1}<br />{subtitle2}</div>),
-        avatar = (<AccountIcon style={this.style().avatar}/>),
-        params = { 'accountId': data[this.props.linkParam] };
+    let i = this.props.i;
+    let data = this.props.data;
+    let title = data[this.props.header];
+    let { street1, street2, city, state, zip_code } = data;
+    let subtitle1 = [street1, street2].filter(r=>!!r).join(', ');
+    let subtitle2 = [city, state, zip_code].filter(r=>!!r).join(', ');
+    let subtitle = (<div>{subtitle1}<br />{subtitle2}</div>);
+    let avatar = (<AccountIcon style={this.style().avatar}/>);
+    let params = { 'accountId': data[this.props.linkParam] };
 
     return (
       <Card transitionEnabled={false} {...this.props}>
@@ -113,17 +113,7 @@ export class AccountCard extends Component {
           avatar={avatar}
           style={this.style().header} />
         <CardText>
-          {this.props.colNames
-            .filter(r => r.name!==this.props.header)
-            .map( r => (
-              <div style={this.style().row}>
-                <div style={this.style().label}>{r.label}</div>
-                <div style={this.style().value}>
-                  {(this.props.data[r.name] === 'true') ? 'Yes' : 'No'}
-                </div>
-              </div>
-            )
-          )}
+          <User />
         </CardText>
         <CardActions>
           <div>

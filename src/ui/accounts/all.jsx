@@ -4,7 +4,7 @@ import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 import Cards from '../shared/components/cards'
 
-import async, { collection } from '../shared/components/async'
+import async, { collection, model } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 
 import {
@@ -14,11 +14,11 @@ import {
 @async({ accounts: collection('account').all() })
 @propTypes({ accounts: PropTypes.array.isRequired })
 class ViewAccounts extends Component {
-
   getAccounts(accounts) {
     return {
       colNames: [
         { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
+        { label: 'Account Owner', name: 'user_id', cellType: 'account', props: { idField: 'user_id'} },
         { label: 'Email Invoice', name: 'email_invoice', cellType: 'account' },
         { label: 'Invoice Weekly', name: 'invoice_weekly', cellType: 'account' },
         { label: 'Show International', name: 'show_international', cellType: 'account' },
@@ -34,7 +34,7 @@ class ViewAccounts extends Component {
 
   render() {
     let accounts = this.props.accounts;
-    console.log(accounts);
+
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>View Accounts</h1></Header>
@@ -47,7 +47,6 @@ class ViewAccounts extends Component {
       </Layout>
     );
   }
-
 }
 
 export default ViewAccounts;
