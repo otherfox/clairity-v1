@@ -42,7 +42,7 @@ class ViewAccounts extends Component {
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
           </Filters>
-          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={18} linkParam={'id'} />
+          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={19} linkParam={'id'} />
         </FilteredCollection>
       </Layout>
     );
