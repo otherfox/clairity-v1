@@ -25,7 +25,7 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div style={this._style()}>
-        Copywrite 2015 One Ring Networks
+        Copyright 2015 One Ring Networks
       </div>
     );
   }
