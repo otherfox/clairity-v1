@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = function(config) {
   return config.set({
     basePath: '',
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'sinon'],
     files: ['test/spec/**/*.js'],
     plugins: [
       require('karma-webpack'),
