@@ -20,15 +20,15 @@ module.exports = function(config) {
     },
     webpack: {
       resolve: {
-        extensions: ['', '.js', '.json'],
+        extensions: ['', '.js', '.json', '.jsx'],
         root: __dirname,
         modulesDirectories: ['', 'src', 'node_modules']
       },
       module: {
         loaders: [
           {
-            test: /\.js?$/,
-            loaders: ['babel-loader'],
+            test: /\.js[x*]?$/,
+            loaders: ['inject-loader!babel-loader'],
             exclude: path.join(__dirname, 'node_modules')
           }, {
             test: /\.json$/,
