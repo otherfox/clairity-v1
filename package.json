@@ -4,7 +4,7 @@
   "description": "Clairity's front-end",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest -c jest.config.json",
+    "test": "set BABEL_JEST_STAGE=1 & jest",
     "start": "node dev-server.js"
   },
   "repository": {
