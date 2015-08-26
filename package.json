@@ -4,7 +4,7 @@
   "description": "Clairity's front-end",
   "main": "src/index.js",
   "scripts": {
-    "test": "BABEL_JEST_STAGE=0 jest",
+    "test": "jest -c jest.config.json",
     "start": "node dev-server.js"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "less-loader": "^2.2.0",
     "lodash": "^3.10.0",
     "react-hot-loader": "^1.2.7",
+    "react-tools": "^0.13.3",
     "style-loader": "^0.11.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.10.1",
