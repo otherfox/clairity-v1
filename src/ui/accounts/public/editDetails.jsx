@@ -6,8 +6,11 @@ import DropDown from '../../shared/components/dropDown'
 import Details from '../../shared/components/details'
 import controllable from 'react-controllables'
 import capitalize from 'capitalize'
+import collectionDropdown from '../../shared/components/collectionDropdown'
 
-@controllable([])
+let AccountTypeDropdown = collectionDropdown('accountType');
+
+@controllable(['name', 'customerTypeId', 'street1', 'street2', 'city', 'state', 'zipCode'])
 @propTypes({
   name: PropTypes.string.isRequired,
   customerTypeId: PropTypes.number.isRequired,
@@ -19,11 +22,16 @@ import capitalize from 'capitalize'
   user: PropTypes.object
 })
 class EditDetail extends Component {
-  link(propName) {
+  link(propName, type = 'textfield') {
+    let cb = this.props[`on${capitalize(propName)}`];
+    let handlers = {
+      textfield: { change: 'onChange', handler: e => cb(e.target.value) },
+      dropdown: { change: 'onChange', handler: cb }
+    }
     return {
       value: this.props[propName],
-      onChange: this.props[`on${capitalize(propName)}Change`]
-    }
+      [handlers[textfield].change]: handlers[textfield].handler
+    };
   }
   render() {
     // let account = this.props.account;
@@ -39,13 +47,7 @@ class EditDetail extends Component {
             data={[
               agent.name ? { label: 'Current Account Owner', value: <TextField value={agent.name} disabled={true} />, detailType: 'muiTextField' } : null,
               { label: 'Name', name: 'name', value: <TextField {...this.link('name')} />, detailType: 'muiTextField' },
-              { label: 'Type', name: 'customerTypeId', value: <DropDown valueLink={this.linkState('customerTypeId')} menuItems={[
-                { label: '', value: 0 /* TODO: make this a real `collectionDropdown` */},
-                { label: 'Business', value: 1 },
-                { label: 'Residential', value: 2 },
-                { label: 'Telenational - Business', value: 3 },
-                { label: 'Telenational - Residential', value: 4 }
-              ]} />, detailType: 'muiDropDown' },
+              { label: 'Type', name: 'customerTypeId', value: <AccountTypeDropdown {...this.link('customerTypeId', 'dropdown')} />, detailType: 'muiDropDown' },
             ]}
           />
           <Details
