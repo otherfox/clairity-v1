@@ -11,6 +11,21 @@
     "type": "git",
     "url": "https://bitbucket.org/brainbytescreative/clairity.git"
   },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "jsx",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  },
   "author": "Ben Cochrane",
   "license": "ISC",
   "devDependencies": {
