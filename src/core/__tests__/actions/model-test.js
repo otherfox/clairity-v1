@@ -12,6 +12,7 @@ describe('model action', () => {
     };
     let a = require('../../update');
     let b = require('../../actions/model');
+    let old = a.enqueueUpdate;
     a.enqueueUpdate = jest.genMockFn();
     b.model(req);
     expect(a.enqueueUpdate).toBeCalledWith({
@@ -21,6 +22,7 @@ describe('model action', () => {
         row: { id: 1 }
       }
     }, req);
+    a.enqueueUpdate = old;
   });
 
 })
