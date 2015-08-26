@@ -1,8 +1,12 @@
-import React from "react"
+import React, { PropTypes, Component } from "react"
 import Link from '../shared/components/link'
 import { FontIcon, ClearFix } from 'material-ui'
+import { contextTypes } from '../shared/decorators'
+import async, { collection } from '../shared/components/async'
 
-export default class ListContacts extends React.Component {
+@async({ contacts: collection('contact').all() })
+@contextTypes({ muiTheme: PropTypes.object })
+export default class ListContacts extends Component {
   style() {
       return {
         root: {},
@@ -21,6 +25,7 @@ export default class ListContacts extends React.Component {
   render() {
     return (
       <div style={this.style().root}>
+        <h2>contacts</h2>
         {
           this.props.contacts.map(o =>
             <ClearFix>
