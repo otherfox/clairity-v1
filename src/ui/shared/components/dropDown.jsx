@@ -58,7 +58,7 @@ let DropDown = React.createClass({
                        overflow: auto !important;`
                     :
                       '';
-    let menuClass = 'm' + v4();
+    let menuClass = `m${v4()}`;
 
     return (
       <div style={_.assign(this.style().root, this.props.style)}>
