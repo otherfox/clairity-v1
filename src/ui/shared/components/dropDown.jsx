@@ -4,7 +4,7 @@ import _ from 'lodash'
 import {
   DropDownMenu
 } from 'material-ui'
-import uid from 'uid'
+import { v4 } from 'uuid'
 
 let DropDown = React.createClass({
 
@@ -58,7 +58,7 @@ let DropDown = React.createClass({
                        overflow: auto !important;`
                     :
                       '';
-    let menuClass = 'm'+uid();
+    let menuClass = 'm' + v4();
 
     return (
       <div style={_.assign(this.style().root, this.props.style)}>
