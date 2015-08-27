@@ -94,7 +94,7 @@ let getLeads = memoize(() => {
 });
 
 export {
-  getContact, getContactsByAccount, getContactsByOpportunity,
+  getContact, getContacts, getContactsByAccount, getContactsByOpportunity,
   getContactsByLocation, getLeads
 };
 
