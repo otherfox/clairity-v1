@@ -93,7 +93,7 @@ const ContractSingle = React.createClass({
         return s;
       }),
       colWidths: [5, 3, 5, 2, 2, 2, 2, 2],
-      
+
       widthAdj: -100,
       widthPerc: (900/12),
       margin: '0'
@@ -103,7 +103,7 @@ const ContractSingle = React.createClass({
   render() {
     return (
       <div style={this.props.style}>
-        <Layout widths = {{lg: [3, 9], md: [3, 9], sm: [12, 12], xs: [12, 12]}} pPadding = {'20px 0 0 0'}>
+        <Layout widths = {{lg: [3, 9], md: [3, 9], sm: [12, 12], xs: [12, 12]}} pPadding = {'20px'}>
           <div>
             <Details {...this.getContractData(this.props.contract)} />
           </div>
