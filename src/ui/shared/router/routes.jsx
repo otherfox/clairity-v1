@@ -34,6 +34,7 @@ import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
 import ListContacts from '../../contacts/list'
 import AddContact from '../../contacts/create'
+import AllContacts from '../../contacts/all'
 
 /* Contracts */
 import CreateContract from '../../contracts/create'
@@ -170,7 +171,7 @@ export default (
                 <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
               </Route>
             </Route>
-            <Route name="all-contacts" path="all" handler={ViewLeads} />
+            <Route name="all-contacts" path="all" handler={AllContacts} />
           </Route>
         </Route>
 
