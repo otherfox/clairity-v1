@@ -76,6 +76,7 @@ import { getPops } from './pop'
 import { getAccounts, getAccountTypes } from './account'
 import { getWorkOrderTypes, getWorkOrderStatuses } from './workOrder'
 import { getLeads } from './contacts'
+import { getContacts } from './contacts'
 import { getProjectTypes } from './projectType'
 import { getSalesStages } from './salesStage'
 import { getLeadSources } from './leadSource'
@@ -90,6 +91,7 @@ const collectionMap = {
   workOrderType: getWorkOrderTypes,
   workOrderStatus: getWorkOrderStatuses,
   lead: getLeads,
+  contact: getContacts,
   projectType: getProjectTypes,
   salesStage: getSalesStages,
   leadSource: getLeadSources,
