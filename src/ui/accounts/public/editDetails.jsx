@@ -8,7 +8,7 @@ import controllable from 'react-controllables'
 import capitalize from 'capitalize'
 import collectionDropdown from '../../shared/components/collectionDropdown'
 
-let AccountTypeDropdown = collectionDropdown('accountType');
+// let AccountTypeDropdown = collectionDropdown('accountType');
 
 @controllable(['name', 'customerTypeId', 'street1', 'street2', 'city', 'state', 'zipCode'])
 @propTypes({
@@ -47,7 +47,7 @@ class EditDetail extends Component {
             data={[
               agent.name ? { label: 'Current Account Owner', value: <TextField value={agent.name} disabled={true} />, detailType: 'muiTextField' } : null,
               { label: 'Name', name: 'name', value: <TextField {...this.link('name')} />, detailType: 'muiTextField' },
-              { label: 'Type', name: 'customerTypeId', value: <AccountTypeDropdown {...this.link('customerTypeId', 'dropdown')} />, detailType: 'muiDropDown' },
+              // { label: 'Type', name: 'customerTypeId', value: <AccountTypeDropdown {...this.link('customerTypeId', 'dropdown')} />, detailType: 'muiDropDown' },
             ]}
           />
           <Details
