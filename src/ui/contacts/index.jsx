@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import async, { model } from '../shared/components/async'
 import Cards from '../shared/components/cards'
 
-@async({ contact: model() })
+// @async({ contact: model() })
 class ViewContact extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,10 @@ class ViewContact extends React.Component {
 
   render() {
     return (
-      <Cards />
+      <div>
+        <h1>Contact Single</h1>
+        <Cards />
+      </div>
     );
   }
 }

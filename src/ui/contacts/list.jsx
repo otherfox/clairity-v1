@@ -4,7 +4,7 @@ import { contextTypes } from '../shared/decorators'
 import Link from '../shared/components/link'
 import { FontIcon, ClearFix } from 'material-ui'
 
-@async({ contacts: collection('contact').all() })
+
 @contextTypes({ muiTheme: PropTypes.object })
 class ListContacts extends Component {
   style() {
