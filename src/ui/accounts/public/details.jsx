@@ -29,7 +29,7 @@ export default class AccountDetails extends React.Component {
                   _.pairs(account),
                   n => !_.contains(excludes, n[0])
                 ));
-    console.log('///////////////////// account: ', account );
+
     let details = Object.keys(account).map( r => ({
       'label': r.split('_')
                 .map( r => r.charAt(0).toUpperCase()+r.slice(1, r.length))
