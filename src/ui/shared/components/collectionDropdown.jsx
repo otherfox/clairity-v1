@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import DropDown from './dropDown'
 import {
   networkCollectionRenderer,
@@ -9,7 +9,7 @@ import {
 
 const blankMap = {label: '', value: ''};
 
-class CollectionDropdownView extends React.Component {
+class CollectionDropdownView extends Component {
   getMenuItems() {
     let items = this.props.collection
       .filter(this.props.filterBy)
