@@ -11,21 +11,22 @@ export default class Footer extends React.Component {
     this.state = {
       position: 'relative'
     }
+    this._setPosition = this._setPosition.bind(this);
   }
 
   componentDidMount() {
     this._setPosition();
-    window.addEventListener('resize', e => this._setPosition());
+    window.addEventListener('resize', this._setPosition);
   }
 
   componentWillDismount() {
-    window.removeEventListener('resize', e => this._setPosition());
+    window.removeEventListener('resize', this._setPosition);
   }
 
   render() {
     return (
       <div style={this._style()}>
-        Copywrite 2015 One Ring Networks
+        Copyright 2015 One Ring Networks
       </div>
     );
   }

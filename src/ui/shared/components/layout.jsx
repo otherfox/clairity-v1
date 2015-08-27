@@ -1,7 +1,7 @@
 import React from 'react'
 import Settings from './settings'
 import lodash from 'lodash'
-import uid from 'uid'
+import { v4 } from 'uuid'
 import { ClearFix } from 'material-ui'
 import { List } from 'immutable'
 
@@ -152,9 +152,9 @@ let Layout = React.createClass({
 
   render: function() {
     console.log('layout', 'rendered')
-    let pclass = 'p'+uid();
+    let pclass = 'p' + v4();
 		let children = React.Children.map(this.props.children, (child, i) => {
-      let cclass = 'c'+uid();
+      let cclass = 'c' + v4();
       return <ClearFix className={cclass} style={child.props.style}>
         <style>
           {`
