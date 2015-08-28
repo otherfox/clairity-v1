@@ -13,7 +13,7 @@ import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
 import async, { action } from '../shared/components/async'
 import controllable from 'react-controllables'
-import moment from 'moment'
+import { v4 } from 'uuid'
 
 @controllable([
   'template',
@@ -38,8 +38,7 @@ class CreateTicket extends Component {
   createPerson() {}
   deletePerson() {}
   render() {
-    let ticketId = (+(new moment().format('YYYYMMDD') + Date.now())).toString(16);
-    console.log(ticketId);
+    let ticketId = v4();
     return (
       <Layout widths={{}} cPadding='20px 20px 0 0'>
         <Header>
