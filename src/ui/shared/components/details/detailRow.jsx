@@ -13,7 +13,6 @@ import {
  */
 
 export default class DetailRow extends React.Component {
-
   render() {
     let style =
       this.props.style ||
