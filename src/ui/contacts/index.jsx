@@ -16,7 +16,10 @@ class ViewContact extends React.Component {
 
   render() {
     return (
-      <Cards />
+      <div>
+        <h1>Contact Single</h1>
+        <Cards />
+      </div>
     );
   }
 }

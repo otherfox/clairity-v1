@@ -1,8 +1,10 @@
 import React, { PropTypes, Component } from 'react'
+import async, { collection } from '../shared/components/async'
 import { contextTypes } from '../shared/decorators'
 import Link from '../shared/components/link'
 import { FontIcon, ClearFix } from 'material-ui'
 
+// @async({ contacts: collection('contact').all() })
 @contextTypes({ muiTheme: PropTypes.object })
 class ListContacts extends Component {
   style() {
@@ -21,10 +23,12 @@ class ListContacts extends Component {
       }
   }
   render() {
+    let contacts = this.props.contacts || [];
     return (
       <div style={this.style().root}>
+        <h1>Contacts</h1>
         {
-          this.props.contacts.map(o =>
+          contacts.map(o =>
             <ClearFix>
               <Link to="view-contact" params={{contactId: o.id}}>
                 <FontIcon className={'md md-account-circle'} style={this.style().icon}/> <div style={this.style().link}>{o.name}</div>
