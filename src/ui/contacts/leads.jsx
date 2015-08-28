@@ -39,7 +39,7 @@ class ViewLeads extends Component {
         { label: 'Lead Name', name: 'name', cellType: 'contact'},
         { label: 'Account', name: 'customer_name', cellType: 'account', props: { idField: 'customer_id' } },
         { label: 'Account Owner', name: 'agent_name', cellType: 'agent'},
-        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: {textAlign: 'center'}}
+        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: { textAlign: 'center' }}
       ],
       data: leads.map(s => {
         s.__lead_conversion = (
@@ -74,7 +74,7 @@ class ViewLeads extends Component {
               <TextFilter name={'customer_name'} label={'Account'} />
               <TextFilter name={'agent_name'} label={'Account Owner'} />
             </Filters>
-            <Table {...this.getLeads(this.state.leads)} cardTitle={'name'} />
+            <Cards {...this.getLeads(this.state.leads)} header={'name'} cardType={'lead'} rowHeight={16} linkParam={'id'}/>
           </FilteredCollection>
       </Layout>
     );
