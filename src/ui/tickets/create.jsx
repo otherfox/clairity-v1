@@ -30,7 +30,8 @@ import { v4 } from 'uuid'
 @async({ createTicket: action() })
 class CreateTicket extends Component {
   createTicket() {
-    this.props.actions.createTicket(this.props)
+    console.log(this.props);
+    // this.props.actions.createTicket(this.props)
   }
   newCaller() {}
   searchCallers() {}
@@ -46,7 +47,7 @@ class CreateTicket extends Component {
         </Header>
         <Paper>
           <Details>
-            <DetailRow label='Template'>
+            <DetailRow label='Template' type='muiDropDown'>
               <DropDown style={{}}
                         menuItems={[
                           { label: 'option 1', value: 1 },
@@ -56,7 +57,7 @@ class CreateTicket extends Component {
                         selectedValue={ this.props.template }
                         onChange={ this.onTemplateChange } />
             </DetailRow>
-            <DetailRow label='Status'>
+            <DetailRow label='Status' type='muiDropDown'>
               <DropDown menuItems={[
                           { label: 'option 1', value: 1 },
                           { label: 'option 2', value: 2 },
@@ -65,7 +66,7 @@ class CreateTicket extends Component {
                         selectedValue={ this.props.status }
                         onChange={ this.onStatusChange } />
             </DetailRow>
-            <DetailRow label='Priority'>
+            <DetailRow label='Priority' type='muiDropDown'>
               <DropDown menuItems={[
                           { label: 'option 1', value: 1 },
                           { label: 'option 2', value: 2 },
@@ -74,7 +75,7 @@ class CreateTicket extends Component {
                         selectedValue={ this.props.priority }
                         onChange={ this.onStatusChange } />
             </DetailRow>
-            <DetailRow label='Assign'>
+            <DetailRow label='Assign' type='muiDropDown'>
               <DropDown menuItems={[
                           { label: 'option 1', value: 1 },
                           { label: 'option 2', value: 2 },
@@ -86,7 +87,7 @@ class CreateTicket extends Component {
             <DetailRow label='Ticket ID'>
               { ticketId }
             </DetailRow>
-            <DetailRow label='Call-In Ticket'>
+            <DetailRow label='Call-In Ticket' type='muiDropDown'>
               <RadioButtonGroup value={ this.props.callInTicket }
                                 onChange={ this.onCallInTicketChange }
                                 name='callInTicket'>
@@ -94,7 +95,7 @@ class CreateTicket extends Component {
                 <RadioButton label='No' />
               </RadioButtonGroup>
             </DetailRow>
-            <DetailRow label='Caller'>
+            <DetailRow label='Caller' type='muiTextField'>
               <TextField  value={ this.props.caller }
                           onChange={ e => this.onCallerChange(e.target.value) } />
               <RaisedButton label='Search'
@@ -102,22 +103,22 @@ class CreateTicket extends Component {
               <RaisedButton label='New'
                             onClick={ this.newCaller } />
             </DetailRow>
-            <DetailRow label='Subject'>
+            <DetailRow label='Subject' type='muiTextField'>
               <TextField />
             </DetailRow>
-            <DetailRow label='Body'>
+            <DetailRow label='Body' type='muiTextField'>
               <TextField multiline={true}
                          value={this.props.body}
                          onChange={ e => this.onBodyChange(e.target.value) }/>
             </DetailRow>
-            <DetailRow label='People to Notify'>
+            <DetailRow label='People to Notify' type='muiTextField'>
               <TextField value={this.props.people}
                          onChange={ e => this.onPeopleChange(e.target.value) } />
               <RaisedButton label='Find' onClick={ this.findPerson } />
               <RaisedButton label='New' onClick={ this.createPerson }/>
               <RaisedButton label='Remove' onClick={ this.deletePerson }/>
             </DetailRow>
-            <DetailRow label='Send Email Including Customer'>
+            <DetailRow label='Send Email Including Customer' type='muiDropDown'>
               <RadioButtonGroup value={ this.props.includesCustomer }
                                 onChange={ this.onIncludesCustomerChange }
                                 name='includesCustomer' >

@@ -5,20 +5,20 @@ import {
   Paper,
   ClearFix
 } from 'material-ui'
-
 import Layout from '../layout'
-
 import DetailsRow from './detailRow'
+import { contextTypes } from '../../decorators'
 export {DetailsRow};
-
 let { ColorManipulator } = Utils;
 
+@contextTypes({ muiTheme: PropTypes.object })
 class Details extends React.Component {
-  style(detailType) {
-
-    let textColor = this.context.muiTheme.palette.textColor;
-    let labelColor = ColorManipulator.fade(this.context.muiTheme.palette.textColor, .6 );
-    let headerColor = ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1 );
+  style(detailType, context, props) {
+    props = props || this.props;
+    context = context || this.context.muiTheme;
+    let textColor = context.palette.textColor;
+    let labelColor = ColorManipulator.fade(context.palette.textColor, .6 );
+    let headerColor = ColorManipulator.fade(context.palette.primary1Color, 1 );
     let labelLineHeight = {
       muiDropDown: '4em',
       muiTextField: '3.2em',
@@ -27,14 +27,14 @@ class Details extends React.Component {
 
     return {
       cStyles: {
-        lg: (this.props.labelTop === true) ? [{ textAlign: 'left' }] : [{ textAlign: 'right' }],
+        lg: (props.labelTop) ? [{ textAlign: 'left' }] : [{ textAlign: 'right' }],
         sm: [{ textAlign: 'left'}]
       },
       header: {
         color: headerColor,
         margin: '1em 0',
         lineHeight: '1.8em',
-        height: (this.props.title === null) ? '1.8em' : 'auto'
+        height: (props.title === null) ? '1.8em' : 'auto'
       },
       label: {
         color: labelColor,
@@ -71,7 +71,7 @@ class Details extends React.Component {
   }
 
   getContent() {
-    let style = this.style();
+    let style = this.style;
     let layout = this.layout();
     let count = 0;
     if (this.props.children == null) return null;
@@ -123,10 +123,6 @@ Details.propTypes = {
 Details.defaultProps = {
   widths: {lg: [5,7], md: [4,8], sm: [12]},
   cPadding: '0 20px 5px 0'
-};
-
-Details.contextTypes = {
-  muiTheme: React.PropTypes.object
 };
 
 
