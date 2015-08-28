@@ -6,7 +6,7 @@ import DropDown from '../../shared/components/dropDown'
 import Details from '../../shared/components/details'
 import controllable from 'react-controllables'
 import capitalize from 'capitalize'
-import collectionDropdown from '../../shared/components/collectionDropdown'
+import { collectionDropdown } from '../../shared/components/collectionDropdown'
 
 // let AccountTypeDropdown = collectionDropdown('accountType');
 
