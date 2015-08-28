@@ -15,15 +15,24 @@ import {
 export default class DetailRow extends React.Component {
 
   render() {
+    let style =
+      this.props.style ||
+      {
+        row: {},
+        label: {},
+        value: {},
+        cStyle: {},
+        cStyles: {},
+      };
     return (
-      <div style={this.props.style.row}>
+      <div style={style.row}>
         <Layout widths={this.props.layout}
                 cPadding={this.props.cPadding}
-                cStyles={this.props.style.cStyles}
-                cStyle={this.props.style.cStyle}>
+                cStyles={style.cStyles}
+                cStyle={style.cStyle}>
 
-          <div style={this.props.style.label}>{this.props.label}</div>
-          <div style={this.props.style.value}>{this.props.children}</div>
+          <div style={style.label}>{this.props.label}</div>
+          <div style={style.value}>{this.props.children}</div>
 
         </Layout>
       </div>
