@@ -41,91 +41,93 @@ class CreateTicket extends Component {
     let ticketId = (+(new moment().format('YYYYMMDD') + Date.now())).toString(16);
     console.log(ticketId);
     return (
-      <Layout widths={{}} cPadding={'20px 20px 0 0'}>
+      <Layout widths={{}} cPadding='20px 20px 0 0'>
         <Header>
           <h1>Create Ticket</h1>
         </Header>
         <Paper>
           <Details>
-            <DetailRow label={'Template'}>
+            <DetailRow label='Template'>
               <DropDown style={{}}
                         menuItems={[
-                          { label: 'option 1', value:1 },
-                          { label: 'option 2', value:2 },
-                          { label: 'option 3', value:3 }
+                          { label: 'option 1', value: 1 },
+                          { label: 'option 2', value: 2 },
+                          { label: 'option 3', value: 3 }
                         ]}
                         selectedValue={ this.props.template }
                         onChange={ this.onTemplateChange } />
             </DetailRow>
-            <DetailRow label={'Status'}>
+            <DetailRow label='Status'>
               <DropDown menuItems={[
-                          { label: 'option 1', value:1 },
-                          { label: 'option 2', value:2 },
-                          { label: 'option 3', value:3 },
+                          { label: 'option 1', value: 1 },
+                          { label: 'option 2', value: 2 },
+                          { label: 'option 3', value: 3 },
                         ]}
                         selectedValue={ this.props.status }
                         onChange={ this.onStatusChange } />
             </DetailRow>
-            <DetailRow label={'Priority'}>
+            <DetailRow label='Priority'>
               <DropDown menuItems={[
-                          { label: 'option 1', value:1 },
-                          { label: 'option 2', value:2 },
-                          { label: 'option 3', value:3 },
+                          { label: 'option 1', value: 1 },
+                          { label: 'option 2', value: 2 },
+                          { label: 'option 3', value: 3 },
                         ]}
                         selectedValue={ this.props.priority }
                         onChange={ this.onStatusChange } />
             </DetailRow>
-            <DetailRow label={'Assign'}>
+            <DetailRow label='Assign'>
               <DropDown menuItems={[
-                          { label: 'option 1', value:1 },
-                          { label: 'option 2', value:2 },
-                          { label: 'option 3', value:3 },
+                          { label: 'option 1', value: 1 },
+                          { label: 'option 2', value: 2 },
+                          { label: 'option 3', value: 3 },
                         ]}
                         selectedValue={ this.props.assign }
                         onChange={ this.onAssignChange } />
             </DetailRow>
-            <DetailRow label={'Ticket ID'}>
+            <DetailRow label='Ticket ID'>
               { ticketId }
             </DetailRow>
-            <DetailRow label={'Call-In Ticket'}>
+            <DetailRow label='Call-In Ticket'>
               <RadioButtonGroup value={ this.props.callInTicket }
-                                onChange={ this.onCallInTicketChange }>
-                <RadioButton label={'Yes'} />
-                <RadioButton label={'No'} />
+                                onChange={ this.onCallInTicketChange }
+                                name='callInTicket'>
+                <RadioButton label='Yes' />
+                <RadioButton label='No' />
               </RadioButtonGroup>
             </DetailRow>
-            <DetailRow label={'Caller'}>
+            <DetailRow label='Caller'>
               <TextField  value={ this.props.caller }
                           onChange={ e => this.onCallerChange(e.target.value) } />
-              <RaisedButton label={'Search'}
+              <RaisedButton label='Search'
                             onClick={ this.searchCallers } />
-              <RaisedButton label={'New'}
+              <RaisedButton label='New'
                             onClick={ this.newCaller } />
             </DetailRow>
-            <DetailRow label={'Subject'}>
+            <DetailRow label='Subject'>
               <TextField />
             </DetailRow>
-            <DetailRow label={'Body'}>
+            <DetailRow label='Body'>
               <TextField multiline={true}
                          value={this.props.body}
                          onChange={ e => this.onBodyChange(e.target.value) }/>
             </DetailRow>
-            <DetailRow label={'People to Notify'}>
+            <DetailRow label='People to Notify'>
               <TextField value={this.props.people}
                          onChange={ e => this.onPeopleChange(e.target.value) } />
-              <RaisedButton label={'Find'} onClick={ this.findPerson } />
-              <RaisedButton label={'New'} onClick={ this.createPerson }/>
-              <RaisedButton label={'Remove'} onClick={ this.deletePerson }/>
+              <RaisedButton label='Find' onClick={ this.findPerson } />
+              <RaisedButton label='New' onClick={ this.createPerson }/>
+              <RaisedButton label='Remove' onClick={ this.deletePerson }/>
             </DetailRow>
-            <DetailRow label={'Send Email Including Customer'}>
+            <DetailRow label='Send Email Including Customer'>
               <RadioButtonGroup value={ this.props.includesCustomer }
-                                onChange={ this.onIncludesCustomerChange } >
-                <RadioButton label={'Yes'} />
-                <RadioButton label={'No'} />
+                                onChange={ this.onIncludesCustomerChange }
+                                name='includesCustomer' >
+                <RadioButton label='Yes' />
+                <RadioButton label='No' />
               </RadioButtonGroup>
             </DetailRow>
             <DetailRow label={null}>
-              <RaisedButton label={'Create Ticket'}
+              <RaisedButton label='Create Ticket'
                             onClick={() => this.createTicket()}/>
             </DetailRow>
           </Details>
