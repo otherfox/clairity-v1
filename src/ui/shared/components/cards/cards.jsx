@@ -127,9 +127,9 @@ export class AccountCard extends Component {
                         (data.user_id) ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div>Unassigned</div>
+                            <div style={{ height: '25px'}}>Unassigned</div>
                         :
-                          (data[r.name] === 'true') ? 'Yes' : 'No'
+                          data[r.name]
                     }
                   </div>
                 </div>
