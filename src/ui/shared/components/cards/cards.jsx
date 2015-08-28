@@ -45,7 +45,25 @@ export class DefaultCard extends Component {
           title={data[title]}
           subtitle={data[this.props.subtitle]} />
         <CardText>
-          {this.props.children}
+          { this.props.colNames
+            .filter(r => r.name!==this.props.header)
+            .map( r => (
+                <div style={this.style().row}>
+                  <div style={this.style().label}>{r.label}</div>
+                  <div style={this.style().value}>
+                    { (r.name === 'user_id') ?
+                        (data.user_id) ?
+                            <AccountAgent userId={data.user_id} />
+                          :
+                            <div style={{ height: '25px'}}>Unassigned</div>
+                        :
+                          data[r.name]
+                    }
+                  </div>
+                </div>
+              )
+            )
+          }
         </CardText>
       </Card>
       : null;
@@ -242,10 +260,7 @@ export class LeadCard extends Component {
         <CardActions>
           <div>
             <div style={this.style().action}>
-              <Link to="view-account"
-                    params={params} >
-                <RaisedButton label="View Account"/>
-              </Link>
+
             </div>
           </div>
         </CardActions>
