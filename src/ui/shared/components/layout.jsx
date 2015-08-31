@@ -56,6 +56,14 @@ let Layout = React.createClass({
     return false;
   },
 
+  componentWillReceiveProps(props) {
+    if (!_.eq(withoutFns(props), withoutFns(this.props))) {
+      this.setState({
+        styles: this.calcStyleString(props, this.state.rand)
+      });
+    }
+  },
+
   getDefaultProps() {
     return {
       breakpoints: {
@@ -76,23 +84,23 @@ let Layout = React.createClass({
     }
   },
 
-  getChildWidth(i, breakpoint) {
+  getChildWidth(i, breakpoint, props) {
 
     let breakpoints = Object.keys(Settings.breakpoints);
 
-    if (this.props.widths) {
-      if(this.props.widths[breakpoint]) {
-        if (typeof this.props.widths[breakpoint][i] === 'number') {
-          return ((this.props.widths[breakpoint][i] * 100 )/ this.props.cols)+'%';
+    if (props.widths) {
+      if(props.widths[breakpoint]) {
+        if (typeof props.widths[breakpoint][i] === 'number') {
+          return ((props.widths[breakpoint][i] * 100 )/ props.cols)+'%';
         } else {
-          return this.props.widths[breakpoint][i] || '100%';
+          return props.widths[breakpoint][i] || '100%';
         }
       } else {
         let bidx = breakpoints.indexOf(breakpoint);
         if(bidx > -1) {
           for(let j = bidx - 1; j > -1; j--) {
-            if(this.props.widths[breakpoints[j]]) {
-              return (this.props.widths[breakpoints[j]][i]) ? ((this.props.widths[breakpoints[j]][i] * 100 )/ this.props.cols)+'%' : '100%';
+            if(props.widths[breakpoints[j]]) {
+              return (props.widths[breakpoints[j]][i]) ? ((props.widths[breakpoints[j]][i] * 100 )/ props.cols)+'%' : '100%';
             }
           }
         }
@@ -102,19 +110,19 @@ let Layout = React.createClass({
     return 'initial';
   },
 
-  getChildStyle(i, breakpoint) {
+  getChildStyle(i, breakpoint, props) {
 
     let breakpoints = Object.keys(Settings.breakpoints);
 
-    if (this.props.cStyles) {
-      if(this.props.cStyles[breakpoint]) {
-        return this.props.cStyles[breakpoint][i];
+    if (props.cStyles) {
+      if(props.cStyles[breakpoint]) {
+        return props.cStyles[breakpoint][i];
       } else {
         let bidx = breakpoints.indexOf(breakpoint);
         if(bidx > -1) {
           for(let j = bidx - 1; j > -1; j--) {
-            if(this.props.cStyles[breakpoints[j]]) {
-              return this.props.cStyles[breakpoints[j]][i] || {};
+            if(props.cStyles[breakpoints[j]]) {
+              return props.cStyles[breakpoints[j]][i] || {};
             }
           }
         }
@@ -124,34 +132,38 @@ let Layout = React.createClass({
     return {};
   },
 
-  getChildStyleCSS(i, breakpoint) {
-    return this.getStyleCSS(this.getChildStyle(i, breakpoint));
+  getChildStyleCSS(i, breakpoint, props) {
+    return this.getStyleCSS(this.getChildStyle(i, breakpoint, props));
   },
 
   getStyleCSS(cStyle) {
     let cStyleCSS='';
-    if(typeof cStyle === 'object' && cStyle !== {}){
-      let cStyleKeys= Object.keys(cStyle);
-      cStyleKeys.forEach((key,i) =>{ cStyleCSS += key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()+': '+cStyle[key]+';' });
+    if (typeof cStyle === 'object' && cStyle !== {}) {
+      let cStyleKeys = Object.keys(cStyle);
+      for (let i = 0; i < cStyleKeys.length; ++i) { // for loop for SPEED
+        let k = cStyleKeys[i];
+        cStyleCSS += k.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase() + ':' +
+                     cStyle[k]+';';
+      }
     }
     return cStyleCSS;
   },
 
-  style() {
+  style(props) {
     let style = {
       root: {
-        width : (this.props.type === 'main') ? 'initial' : '100%',
-        padding: (this.props.type === 'main') ? 'initial' : this.props.pPadding,
-        height: (this.props.type === 'center-v') ? '100%' : 'initial'
+        width : (props.type === 'main') ? 'initial' : '100%',
+        padding: (props.type === 'main') ? 'initial' : props.pPadding,
+        height: (props.type === 'center-v') ? '100%' : 'initial'
       },
       child: {
         float: 'left',
-        padding: this.props.cPadding || 'initial',
-        margin: this.props.cMargin || 'initial'
+        padding: props.cPadding || 'initial',
+        margin: props.cMargin || 'initial'
       }
     }
 
-    if (this.props.type === 'center-h') {
+    if (props.type === 'center-h') {
       style.child = _.assign(style.child, {
         position: 'relative',
         margin: '0 auto',
@@ -159,7 +171,7 @@ let Layout = React.createClass({
       });
     }
 
-    if (this.props.type === 'center-v') {
+    if (props.type === 'center-v') {
       style.child = _.assign( style.child, {
         position: 'relative',
         margin: '0 auto',
@@ -171,73 +183,92 @@ let Layout = React.createClass({
     return style;
   },
 
+  getInitialState() {
+    let rand = v4();
+    return {
+      rand,
+      styles: this.calcStyleString(this.props, rand)
+    };
+  },
+
+  calcStyleString(props, r) {
+    let pclass = 'p' + r;
+    let styles = [];
+    React.Children.map(props.children, (child, i) => {
+      let cclass = 'c' + r + i;
+      styles.push(`
+        /* general style */
+        .${pclass} .${cclass} {
+          ${this.getStyleCSS(_.assign(this.style(props).child, props.cStyle))}
+        }
+
+        /* lg */
+        .${pclass} .${cclass} {
+          width: ${this.getChildWidth(i, 'lg', props)};
+          ${this.getChildStyleCSS(i, 'lg', props)}
+        }
+        .${pclass} {
+          ${this.getStyleCSS(_.assign(this.style(props).root, props.pStyles['lg'], props.style))}
+        }
+
+        /* md */
+        @media (max-width: ${props.breakpoints.md}px) {
+          .${pclass} .${cclass} {
+              width: ${this.getChildWidth(i, 'md', props)};
+              ${this.getChildStyleCSS(i, 'md', props)}
+          }
+          .${pclass} {
+            ${this.getStyleCSS(props.pStyles['md'])}
+          }
+        }
+        /* sm */
+        @media (max-width: ${props.breakpoints.sm}px) {
+          .${pclass} .${cclass} {
+              width: ${this.getChildWidth(i, 'sm', props)};
+              ${this.getChildStyleCSS(i, 'sm', props)}
+          }
+          .${pclass} {
+            ${this.getStyleCSS(props.pStyles['sm'])}
+          }
+        }
+        /* xs */
+        @media (max-width: ${props.breakpoints.xs}px) {
+          .${pclass} .${cclass} {
+              width: ${this.getChildWidth(i, 'xs', props)};
+              ${this.getChildStyleCSS(i, 'xs', props)}
+              ${this.getStyleCSS(props.pStyles['xs'])}
+          }
+          .${pclass} {
+            ${this.getStyleCSS(props.pStyles['xs'])}
+          }
+        }
+        /* xxs */
+        @media (max-width: ${props.breakpoints.xxs}px) {
+          .${pclass} .${cclass} {
+              width: ${this.getChildWidth(i, 'xxs', props)};
+              ${this.getChildStyleCSS(i, 'xxs', props)}
+              ${this.getStyleCSS(props.pStyles['xxs'])}
+          }
+          .${pclass} {
+            ${this.getStyleCSS(props.pStyles['xxs'])}
+          }
+        }
+      `);
+    });
+    return styles;
+  },
+
   render: function() {
     console.log('layout', 'rendered')
-    let pclass = 'p' + v4();
+    let pclass = 'p' + this.state.rand;
 		let children = React.Children.map(this.props.children, (child, i) => {
-      let cclass = 'c' + v4();
-      return <ClearFix className={cclass} style={child.props.style}>
-        <style>
-          {`
-            /* general style */
-            .${pclass} .${cclass} {
-              ${this.getStyleCSS(_.assign(this.style().child, this.props.cStyle))}
-            }
-
-            /* lg */
-            .${pclass} .${cclass} {
-              width: ${this.getChildWidth(i, 'lg')};
-              ${this.getChildStyleCSS(i, 'lg')}
-            }
-            .${pclass} {
-              ${this.getStyleCSS(_.assign(this.style().root, this.props.pStyles['lg'], this.props.style))}
-            }
-
-            /* md */
-            @media (max-width: ${this.props.breakpoints.md}px) {
-              .${pclass} .${cclass} {
-                  width: ${this.getChildWidth(i, 'md')};
-                  ${this.getChildStyleCSS(i, 'md')}
-              }
-              .${pclass} {
-                ${this.getStyleCSS(this.props.pStyles['md'])}
-              }
-            }
-            /* sm */
-            @media (max-width: ${this.props.breakpoints.sm}px) {
-              .${pclass} .${cclass} {
-                  width: ${this.getChildWidth(i, 'sm')};
-                  ${this.getChildStyleCSS(i, 'sm')}
-              }
-              .${pclass} {
-                ${this.getStyleCSS(this.props.pStyles['sm'])}
-              }
-            }
-            /* xs */
-            @media (max-width: ${this.props.breakpoints.xs}px) {
-              .${pclass} .${cclass} {
-                  width: ${this.getChildWidth(i, 'xs')};
-                  ${this.getChildStyleCSS(i, 'xs')}
-                  ${this.getStyleCSS(this.props.pStyles['xs'])}
-              }
-              .${pclass} {
-                ${this.getStyleCSS(this.props.pStyles['xs'])}
-              }
-            }
-            /* xxs */
-            @media (max-width: ${this.props.breakpoints.xxs}px) {
-              .${pclass} .${cclass} {
-                  width: ${this.getChildWidth(i, 'xxs')};
-                  ${this.getChildStyleCSS(i, 'xxs')}
-                  ${this.getStyleCSS(this.props.pStyles['xxs'])}
-              }
-              .${pclass} {
-                ${this.getStyleCSS(this.props.pStyles['xxs'])}
-              }
-            }
-          `}
-        </style>
-        {React.cloneElement(child)}</ClearFix>
+      let cclass = 'c' + this.state.rand + i;
+      return (
+        <ClearFix className={cclass} style={child.props.style}>
+          <style>{this.state.styles[i]}</style>
+          {child}
+        </ClearFix>
+      );
     });
 
     return (
