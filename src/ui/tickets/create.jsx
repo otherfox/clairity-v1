@@ -76,17 +76,17 @@ class CreateTicket extends Component {
               <DetailRow label='Template'
                          type='muiDropDown'>
                 <TemplatesDropdown selectedValue={ this.props.template }
-                                   onChange={ this.onTemplateChange } />
+                                   onChange={ () => this.onTemplateChange() } />
               </DetailRow>
               <DetailRow label='Status'
                          type='muiDropDown'>
                 <StatusesDropdown selectedValue={ this.props.status }
-                                  onChange={ this.onStatusChange } />
+                                  onChange={ () => this.onStatusChange() } />
               </DetailRow>
               <DetailRow label='Priority'
                          type='muiDropDown'>
                 <PrioritiesDropdown selectedValue={ this.props.priority }
-                                    onChange={ this.onStatusChange } />
+                                    onChange={ () => this.onStatusChange() } />
               </DetailRow>
               <DetailRow label='Assign'
                          type='muiDropDown'>
