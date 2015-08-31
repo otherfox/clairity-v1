@@ -98,9 +98,9 @@ const collectionMap = {
   campaignSource: getCampaignSources,
   serviceType: getServiceTypes,
   ticket: getTickets,
-  ticketTemplates: getTicketTemplates,
-  ticketStatuses: getTicketStatuses,
-  ticketPriorities: getTicketPriorities
+  ticketTemplate: getTicketTemplates,
+  ticketStatus: getTicketStatuses,
+  ticketPriority: getTicketPriorities
 };
 
 export function getCollection(tableName) {
