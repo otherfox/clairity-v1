@@ -41,7 +41,7 @@ class EditDetail extends Component {
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details
             cStyles={{ lg: [{textAlign: 'left'}]}}
-            rowStyle={{marginLeft: '15%'}}
+            pStyles={{ lg: {marginLeft: '15%'} }}
             widths={{ lg: [4,8]}}
             title={'Account Details'}
             data={[
@@ -93,7 +93,7 @@ let EditDetails = React.createClass({
         <Layout widths={{ lg: [6,6]}} cPadding={'0 20px 20px 20px'}>
           <Details
             cStyles={{ lg: [{textAlign: 'left'}]}}
-            rowStyle={{marginLeft: '15%'}}
+            pStyles={{ lg: {marginLeft: '15%'} }}
             widths={{ lg: [4,8]}}
             title={'Account Details'}
             data={[

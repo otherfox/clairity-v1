@@ -8,6 +8,7 @@ import {
 } from 'material-ui'
 import Details from '../shared/components/details'
 import DetailRow from '../shared/components/details/detailRow'
+import { collectionDropdown } from '../shared/components/collectionDropdown'
 import DropDown from '../shared/components/dropDown'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
@@ -40,18 +41,28 @@ class CreateTicket extends Component {
   deletePerson() {}
   render() {
     let ticketId = v4();
+    let UserDropDown = collectionDropdown('user');
     return (
       <Layout widths={{}} cPadding='20px 20px 0 0'>
         <Header>
           <h1>Create Ticket</h1>
         </Header>
         <Paper>
-          <Layout widths={{lg: [12, 6, 6]}} cPadding='10px 0 30px 0' pPadding='0 0 20px 0'>
-            <Details>
-              <DetailRow rowStyle={{ width: 'auto', float: 'left', paddingLeft: '5%' }}
+          <Layout widths={{lg: [12, 6, 6], md: [12, 12, 12]}}
+                  cPadding='0 0 30px 0'
+                  pPadding='0 0 20px 0'>
+            <Details  pStyles={{ lg: { float: 'left', width: 'auto' },
+                                 md: { float: 'none', width: '100%'}}}
+                      cStyles={{ lg: [
+                                  { float: 'left', paddingLeft: '20px' },
+                                  { float: 'left' }
+                                ],
+                                 md: [{textAlign: 'right'}, {}]}}
+                      widths={{ lg: ['auto', 'auto'], md: [3,8]}}>
+              <DetailRow
                          label='Template'
                          type='muiDropDown'>
-                <DropDown style={{}}
+                <DropDown
                           menuItems={[
                             { label: 'option 1', value: 1 },
                             { label: 'option 2', value: 2 },
@@ -60,7 +71,7 @@ class CreateTicket extends Component {
                           selectedValue={ this.props.template }
                           onChange={ this.onTemplateChange } />
               </DetailRow>
-              <DetailRow rowStyle={{ width: 'auto', float: 'left' }}
+              <DetailRow
                          label='Status'
                          type='muiDropDown'>
                 <DropDown menuItems={[
@@ -71,7 +82,7 @@ class CreateTicket extends Component {
                           selectedValue={ this.props.status }
                           onChange={ this.onStatusChange } />
               </DetailRow>
-              <DetailRow rowStyle={{ width: 'auto', float: 'left' }}
+              <DetailRow
                          label='Priority'
                         type='muiDropDown'>
                 <DropDown menuItems={[
@@ -82,16 +93,10 @@ class CreateTicket extends Component {
                           selectedValue={ this.props.priority }
                           onChange={ this.onStatusChange } />
               </DetailRow>
-              <DetailRow rowStyle={{ width: 'auto', float: 'left' }}
+              <DetailRow
                          label='Assign'
                          type='muiDropDown'>
-                <DropDown menuItems={[
-                            { label: 'option 1', value: 1 },
-                            { label: 'option 2', value: 2 },
-                            { label: 'option 3', value: 3 },
-                          ]}
-                          selectedValue={ this.props.assign }
-                          onChange={ this.onAssignChange } />
+                <UserDropDown />
               </DetailRow>
             </Details>
             <Details widths={{ lg: [3, 8]}}>
@@ -153,7 +158,7 @@ class CreateTicket extends Component {
                   <RadioButton label='No' />
                 </RadioButtonGroup>
               </DetailRow>
-              <DetailRow label={null} rowStyle={{ marginTop: '2em' }}>
+              <DetailRow label={null} pStyles={{ lg: { marginTop: '2em' } }}>
                 <RaisedButton label='Create Ticket'
                               onClick={() => this.createTicket()}
                               primary />

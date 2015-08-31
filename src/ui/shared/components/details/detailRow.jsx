@@ -19,17 +19,16 @@ class DetailRow extends Component {
   render() {
     let style = this.props.getStyle(this.props.type, this.context.muiTheme, this.props);
     return (
-      <div style={_.assign(style.row, this.props.rowStyle)}>
         <Layout widths={this.props.layout}
                 cPadding={this.props.cPadding}
                 cStyles={_.assign(style.cStyles, this.props.cStyles)}
-                cStyle={_.assign(style.cStyle, this.props.cStyle)}>
+                cStyle={_.assign(style.cStyle, this.props.cStyle)}
+                pStyles={this.props.pStyles}>
 
           <div style={_.assign(style.label, this.props.labelStyle)}>{this.props.label}</div>
           <div style={_.assign(style.value, this.props.valueStyle)}>{this.props.children}</div>
 
         </Layout>
-      </div>
     );
   }
 }

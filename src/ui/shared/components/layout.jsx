@@ -35,7 +35,14 @@ let Layout = React.createClass({
       xxs: React.PropTypes.arrayOf(React.PropTypes.object)
     }),
     type: React.PropTypes.string,
-    style: React.PropTypes.object
+    style: React.PropTypes.object,
+    pStyles: React.PropTypes.shape({
+      lg: React.PropTypes.object,
+      md: React.PropTypes.object,
+      sm: React.PropTypes.object,
+      xs: React.PropTypes.object,
+      xxs: React.PropTypes.object
+    }),
   },
 
   shouldComponentUpdate() {
@@ -51,7 +58,14 @@ let Layout = React.createClass({
         xs: Settings.breakpoints.xs,
         xxs: Settings.breakpoints.xxs,
       },
-      cols: Settings.cols
+      cols: Settings.cols,
+      pStyles: {
+        lg: {},
+        md: {},
+        sm: {},
+        xs: {},
+        xxs: {}
+      }
     }
   },
 
@@ -168,6 +182,9 @@ let Layout = React.createClass({
               width: ${this.getChildWidth(i, 'lg')};
               ${this.getChildStyleCSS(i, 'lg')}
             }
+            .${pclass} {
+              ${this.getStyleCSS(_.assign(this.style().root, this.props.pStyles['lg'], this.props.style))}
+            }
 
             /* md */
             @media (max-width: ${this.props.breakpoints.md}px) {
@@ -175,12 +192,16 @@ let Layout = React.createClass({
                   width: ${this.getChildWidth(i, 'md')};
                   ${this.getChildStyleCSS(i, 'md')}
               }
+              .${pclass} {
+                ${this.getStyleCSS(this.props.pStyles['md'])}
+              }
             }
             /* sm */
             @media (max-width: ${this.props.breakpoints.sm}px) {
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'sm')};
                   ${this.getChildStyleCSS(i, 'sm')}
+                  ${this.getStyleCSS(this.props.pStyles['sm'])}
               }
             }
             /* xs */
@@ -188,12 +209,14 @@ let Layout = React.createClass({
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'xs')};
                   ${this.getChildStyleCSS(i, 'xs')}
+                  ${this.getStyleCSS(this.props.pStyles['xs'])}
               }
             }
             /* xxs */
             @media (max-width: ${this.props.breakpoints.xxs}px) {
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'xxs')};
+                  ${this.getStyleCSS(this.props.pStyles['xxs'])}
               }
             }
           `}
@@ -202,7 +225,7 @@ let Layout = React.createClass({
     });
 
     return (
-        <ClearFix className={pclass} style={_.assign(this.style().root, this.props.style)}>
+        <ClearFix className={pclass}>
           {children}
         </ClearFix>
     );
