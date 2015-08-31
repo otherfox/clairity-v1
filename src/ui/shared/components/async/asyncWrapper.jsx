@@ -84,6 +84,9 @@ export default function asyncWrapper() {
 
     requestState(props) {
       console.log(this.name, 'async', 'requestState', props);
+      if (queries.length === 0) {
+        return;
+      }
       let promises = [];
       this.reqs = queries.map(q => {  // q - [propName, queryInfo]
         let { type, name } = q[1];
@@ -118,7 +121,7 @@ export default function asyncWrapper() {
 
     render() {
       console.log(this.name, 'async', 'rendering', this.getInnerProps(), this.state);
-      let innerComponent = this.state.ready ?
+      let innerComponent = this.state.ready || queries.length === 0 ?
           <Component key="inner" ref="inner" {...this.getInnerProps()} />
         :
           <div key="null" />;
