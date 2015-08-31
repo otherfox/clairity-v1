@@ -7,10 +7,13 @@ import { FontIcon, ClearFix } from 'material-ui'
 import {
   Paper
 } from 'material-ui'
-import Table, {} from '../shared/components/table'
+import Details, {} from '../shared/components/details'
 import DetailRow, {} from '../shared/components/details/detailRow'
+import controllable from 'react-controllables'
 
-@async({ contacts: collection('contact').all() })
+let ContactsDropdown = asyncDropdown({ collection: collection('contact').all() });
+
+@controllable([ 'contact' ])
 @contextTypes({ muiTheme: PropTypes.object })
 class ListContacts extends Component {
   style() {
@@ -28,23 +31,19 @@ class ListContacts extends Component {
         }
       }
   }
-  getContacts() {
-    return {
-      colNames: [
-        { label: 'Name', name: 'name'}
-      ],
-      data: this.props.contacts
-    }
-  }
   render() {
     let contacts = this.props.contacts || [];
     return (
       <div style={this.style().root}>
         <h1>Contacts</h1>
-        <Table {...this.getContacts() }/>
+        <Details widths={{lg: ['auto','auto']}}>
+          <DetailRow label='Account' type='muiDropDown'>
+            <ContactsDropdown onChange={ i => this.onContactChange(i) }
+                              selectedValue={ this.props.contact } />
+          </DetailRow>
+
+        </Details>
       </div>
     );
   }
 }
-
-export default ListContacts;

@@ -25,7 +25,7 @@ let getContact = memoize(id => {
 
 let getContacts = memoize(() => {
   return new Promise((s, f) => {
-    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContacts`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=searchContactByName&criteria=`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
