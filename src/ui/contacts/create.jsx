@@ -13,7 +13,6 @@ class CreateContact extends Component {
         comments: '',
         phone: '',
         cell: '',
-        id: '',
         email: '',
         relationships: [{
           pop_id: 0, customer_id: 0, type: 0
