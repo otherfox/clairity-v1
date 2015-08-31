@@ -8,7 +8,10 @@ import {
 } from 'material-ui'
 import Details from '../shared/components/details'
 import DetailRow from '../shared/components/details/detailRow'
-import { asyncDropdown } from '../shared/components/collectionDropdown'
+import {
+  asyncDropdown,
+  asyncTypeahead
+} from '../shared/components/collectionDropdown'
 import DropDown from '../shared/components/dropDown'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
@@ -20,6 +23,7 @@ let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') }
 let TemplatesDropdown = asyncDropdown({ collection: collection('ticketTemplate').all() });
 let PrioritiesDropdown = asyncDropdown({ collection: collection('ticketPriority').all() });
 let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').all() });
+let NotifyTypeahead = StatusesDropdown;//asyncTypeahead({ collection: collection('contact').all() });
 
 @controllable([
   'template',
@@ -35,18 +39,22 @@ let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').al
 ])
 @async({ createTicket: action() })
 class CreateTicket extends Component {
-  createTicket() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ticketId: v4()
+    };
+  }
+  createTicket(props) {
     console.log(this.props);
     // this.props.actions.createTicket(this.props)
   }
   newCaller() {}
   searchCallers() {}
-  findPerson() {}
   createPerson() {}
   deletePerson() {}
   render() {
-    let ticketId = v4();
-
+    let ticketId = this.state.ticketId;
     return (
       <Layout widths={{}} cPadding='20px 20px 0 0'>
         <Header>
@@ -72,38 +80,40 @@ class CreateTicket extends Component {
               <DetailRow label='Template'
                          type='muiDropDown'>
                 <TemplatesDropdown selectedValue={ this.props.template }
-                                   onChange={ this.onTemplateChange } />
+                                   onChange={ () => this.props.onTemplateChange() } />
               </DetailRow>
               <DetailRow label='Status'
                          type='muiDropDown'>
                 <StatusesDropdown selectedValue={ this.props.status }
-                                  onChange={ this.onStatusChange } />
+                                  onChange={ () => this.props.onStatusChange() } />
               </DetailRow>
               <DetailRow label='Priority'
                          type='muiDropDown'>
                 <PrioritiesDropdown selectedValue={ this.props.priority }
-                                    onChange={ this.onStatusChange } />
+                                    onChange={ () => this.props.onStatusChange() } />
               </DetailRow>
               <DetailRow label='Assign'
                          type='muiDropDown'>
                 <AccountOwnersDropdown />
               </DetailRow>
             </Details>
-            <Details widths={{ lg: [3, 8] }} cStyles={{sm:[{textAlign: 'right'}]}}>
+            <Details widths={{ lg: [3, 8] }} cStyles={{
+                sm: [{ textAlign: 'right'}]
+            }}>
               <DetailRow label='Ticket ID'>
                 { ticketId }
               </DetailRow>
               <DetailRow label='Call-In Ticket' type='muiRadio'>
                 <RadioButtonGroup value={ this.props.callInTicket }
-                                  onChange={ this.onCallInTicketChange }
+                                  onChange={ this.props.onCallInTicketChange }
                                   name='callInTicket'>
-                  <RadioButton label='Yes' />
-                  <RadioButton label='No' />
+                  <RadioButton label='Yes' value='yes' />
+                  <RadioButton label='No' value='no' />
                 </RadioButtonGroup>
               </DetailRow>
               <DetailRow label='Caller' type='muiTextField'>
                 <TextField  value={ this.props.caller }
-                            onChange={ e => this.onCallerChange(e.target.value) } />
+                            onChange={ e => this.props.onCallerChange(e.target.value) } />
                 <div>
                   <RaisedButton label='Find'
                                 onClick={ this.searchCallers }
@@ -115,8 +125,8 @@ class CreateTicket extends Component {
                 </div>
               </DetailRow>
               <DetailRow label='People to Notify' type='muiTextField'>
-                <TextField value={this.props.people}
-                           onChange={ e => this.onPeopleChange(e.target.value) } />
+                <NotifyTypeahead value={this.props.people}
+                                 onChange={ e => this.props.onPeopleChange(e.target.value) } />
                 <div>
                   <RaisedButton label='Find'
                                 onClick={ this.findPerson }
@@ -138,14 +148,14 @@ class CreateTicket extends Component {
               <DetailRow label='Body' type='muiTextField'>
                 <TextField multiline={true}
                            value={this.props.body}
-                           onChange={ e => this.onBodyChange(e.target.value) }/>
+                           onChange={ e => this.props.onBodyChange(e.target.value) }/>
               </DetailRow>
               <DetailRow label='Send Email Including Customer' type='muiRadio'>
                 <RadioButtonGroup value={ this.props.includesCustomer }
-                                  onChange={ this.onIncludesCustomerChange }
+                                  onChange={ this.props.onIncludesCustomerChange }
                                   name='includesCustomer' >
-                  <RadioButton label='Yes' />
-                  <RadioButton label='No' />
+                  <RadioButton label='Yes' value='yes' />
+                  <RadioButton label='No' value='no' />
                 </RadioButtonGroup>
               </DetailRow>
               <DetailRow label={null} pStyles={{ lg: { marginTop: '2em' } }}>
