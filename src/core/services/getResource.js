@@ -82,7 +82,7 @@ import { getSalesStages } from './salesStage'
 import { getLeadSources } from './leadSource'
 import { getCampaignSources } from './campaignSource'
 import { getServiceTypes } from './serviceType'
-import { getTickets } from './ticket'
+import { getTickets, getTicketTemplates, getTicketStatuses, getTicketPriorities } from './ticket'
 
 const collectionMap = {
   pop: getPops,
@@ -97,7 +97,10 @@ const collectionMap = {
   leadSource: getLeadSources,
   campaignSource: getCampaignSources,
   serviceType: getServiceTypes,
-  ticket: getTickets
+  ticket: getTickets,
+  ticketTemplates: getTicketTemplates,
+  ticketStatuses: getTicketStatuses,
+  ticketPriorities: getTicketPriorities
 };
 
 export function getCollection(tableName) {
