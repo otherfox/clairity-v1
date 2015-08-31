@@ -93,7 +93,7 @@ export function asyncDropdown(query) {
   return async(CollectionDropdownView, query);
 }
 
-export function asyncDropdown(query) {
+export function asyncTypeahead(query) {
   return async(CollectionTypeaheadView, query);
 }
 
