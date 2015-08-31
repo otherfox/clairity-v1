@@ -1,5 +1,4 @@
 import Fynx from 'fynx'
-import Store from '../store'
 
 export const usersFetched = Fynx.createAsyncAction();
 
@@ -13,3 +12,19 @@ usersFetched.listen(users => {
     }
   });
 });
+
+
+import Store, { MessageTypes } from '../store'
+import { enqueueUpdate } from '../update'
+
+export function accountOwners(request) {
+  let { data, params } = request;
+  enqueueUpdate({
+    type: MessageTypes.Write,
+    payload: {
+      table: 'user',
+      row: data
+    }
+  }, request);
+  return Promise.resolve(Store.data);
+}
