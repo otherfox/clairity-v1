@@ -7,7 +7,7 @@ import {
   collectionViaQuery,
   collectionQuery
 } from './networkRenderer'
-import async from './async'
+import async, { collection } from './async'
 
 const blankMap = {label: '', value: ''};
 
@@ -88,10 +88,8 @@ CollectionTypeaheadView.defaultProps = {
 }
 
 export function collectionDropdown(tableName) {
-  return queryRenderer(CollectionDropdownView, {
-    queries: [
-      collectionQuery(tableName, 'collection')
-    ]
+  return async(CollectionDropdownView, {
+    collection: collection(tableName).all()
   });
 };
 
@@ -104,13 +102,7 @@ export function asyncTypeahead(query) {
 }
 
 export function collectionViaDropdown(table, keyName, viaTable) {
-  return queryRenderer(CollectionDropdownView, {
-    queries: [
-      collectionViaQuery({
-        table, viaTable, keyName,
-        idName: `${viaTable}Id`,
-        propName: 'collection'
-      })
-    ]
+  return async(CollectionDropdownView, {
+    collection: collection(table).by(viaTable)
   });
 }

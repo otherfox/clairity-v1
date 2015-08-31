@@ -1,9 +1,13 @@
 import React from 'react'
 import Settings from './settings'
-import lodash from 'lodash'
+import _ from 'lodash'
 import { v4 } from 'uuid'
 import { ClearFix } from 'material-ui'
 import { List } from 'immutable'
+
+function withoutFns(obj) {
+  return _.omit(obj, _.functions(obj));
+}
 
 let Layout = React.createClass({
   propTypes: {
@@ -45,8 +49,11 @@ let Layout = React.createClass({
     }),
   },
 
-  shouldComponentUpdate() {
-    return true;
+  shouldComponentUpdate(props) {
+    if (!_.eq(withoutFns(props), withoutFns(this.props))) {
+      return true;
+    }
+    return false;
   },
 
   getDefaultProps() {
