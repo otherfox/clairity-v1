@@ -11,13 +11,12 @@ class CreateContact extends Component {
         company: '',
         name: '',
         comments: '',
-        customer_id: 0,
         phone: '',
         cell: '',
         id: '',
         email: '',
         relationships: [{
-          id: '', customer_id: 0, contact_id: 0, type: ''
+          pop_id: 0, customer_id: 0, type: 0
         }],
         extension: '',
         fax: ''
