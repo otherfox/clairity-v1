@@ -8,7 +8,10 @@ import {
 } from 'material-ui'
 import Details from '../shared/components/details'
 import DetailRow from '../shared/components/details/detailRow'
-import { asyncDropdown } from '../shared/components/collectionDropdown'
+import {
+  asyncDropdown,
+  asyncTypeahead
+} from '../shared/components/collectionDropdown'
 import DropDown from '../shared/components/dropDown'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
@@ -20,6 +23,7 @@ let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') }
 let TemplatesDropdown = asyncDropdown({ collection: collection('ticketTemplate').all() });
 let PrioritiesDropdown = asyncDropdown({ collection: collection('ticketPriority').all() });
 let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').all() });
+let NotifyTypeahead = asyncTypeahead({ collection: collection('contact').all() });
 
 @controllable([
   'template',
@@ -89,7 +93,9 @@ class CreateTicket extends Component {
                 <AccountOwnersDropdown />
               </DetailRow>
             </Details>
-            <Details widths={{ lg: [3, 8] }} cStyles={{sm:[{textAlign: 'right'}]}}>
+            <Details widths={{ lg: [3, 8] }} cStyles={{
+                sm: [{ textAlign: 'right'}]
+            }}>
               <DetailRow label='Ticket ID'>
                 { ticketId }
               </DetailRow>
@@ -115,8 +121,8 @@ class CreateTicket extends Component {
                 </div>
               </DetailRow>
               <DetailRow label='People to Notify' type='muiTextField'>
-                <TextField value={this.props.people}
-                           onChange={ e => this.onPeopleChange(e.target.value) } />
+                <NotifyTypeahead value={this.props.people}
+                                 onChange={ e => this.onPeopleChange(e.target.value) } />
                 <div>
                   <RaisedButton label='Find'
                                 onClick={ this.findPerson }
