@@ -51,28 +51,25 @@ class CreateTicket extends Component {
           <Layout widths={{lg: [12, 6, 6], md: [12, 12, 12]}}
                   cPadding='0 0 30px 0'
                   pPadding='0 0 20px 0'>
-            <Details  pStyles={{ lg: { float: 'left', width: 'auto' },
-                                 md: { float: 'none', width: '100%'}}}
-                      cStyles={{ lg: [
+            <Details pStyles={{ lg: { float: 'left', width: 'auto' },
+                                md: { float: 'none', width: '100%'}}}
+                     cStyles={{ lg: [
                                   { float: 'left', paddingLeft: '20px' },
                                   { float: 'left' }
                                 ],
                                  md: [{textAlign: 'right'}, {}]}}
-                      widths={{ lg: ['auto', 'auto'], md: [3,8]}}>
-              <DetailRow
-                         label='Template'
+                     widths={{ lg: ['auto', 'auto'], md: [3,8]}}>
+              <DetailRow label='Template'
                          type='muiDropDown'>
-                <DropDown
-                          menuItems={[
+                <DropDown menuItems={[
                             { label: 'option 1', value: 1 },
                             { label: 'option 2', value: 2 },
                             { label: 'option 3', value: 3 }
                           ]}
                           selectedValue={ this.props.template }
-                          onChange={ this.onTemplateChange } />
+                          onSelect={ this.onTemplateChange } />
               </DetailRow>
-              <DetailRow
-                         label='Status'
+              <DetailRow label='Status'
                          type='muiDropDown'>
                 <DropDown menuItems={[
                             { label: 'option 1', value: 1 },
@@ -82,9 +79,8 @@ class CreateTicket extends Component {
                           selectedValue={ this.props.status }
                           onChange={ this.onStatusChange } />
               </DetailRow>
-              <DetailRow
-                         label='Priority'
-                        type='muiDropDown'>
+              <DetailRow label='Priority'
+                         type='muiDropDown'>
                 <DropDown menuItems={[
                             { label: 'option 1', value: 1 },
                             { label: 'option 2', value: 2 },
@@ -93,13 +89,12 @@ class CreateTicket extends Component {
                           selectedValue={ this.props.priority }
                           onChange={ this.onStatusChange } />
               </DetailRow>
-              <DetailRow
-                         label='Assign'
+              <DetailRow label='Assign'
                          type='muiDropDown'>
                 <UserDropDown />
               </DetailRow>
             </Details>
-            <Details widths={{ lg: [3, 8]}}>
+            <Details widths={{ lg: [3, 8] }}>
               <DetailRow label='Ticket ID'>
                 { ticketId }
               </DetailRow>
