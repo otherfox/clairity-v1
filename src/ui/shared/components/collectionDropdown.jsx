@@ -73,8 +73,14 @@ class CollectionTypeaheadView extends Component {
   }
 }
 
-
 CollectionDropdownView.defaultProps = {
+  labelKey: 'name',
+  valueKey: 'id',
+  includeBlank: true,
+  filterBy: _ => true
+}
+
+CollectionTypeaheadView.defaultProps = {
   labelKey: 'name',
   valueKey: 'id',
   includeBlank: true,
