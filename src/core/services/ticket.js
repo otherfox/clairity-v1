@@ -35,7 +35,7 @@ export function getTickets() {
   });
 }
 
-export function getTicketsTemplates() {
+export function getTicketTemplates() {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TicketTemplateDAO&_m=getAllTicketTemplates`)
       .withCredentials()
@@ -51,14 +51,16 @@ export function getTicketsTemplates() {
   });
 }
 
-export function getTicketsStatuses() {
+export function getTicketStatuses() {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TicketDAO&_m=getAllTicketStatuses`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
           console.log('response:',res);
-          s(JSON.parse(res.text));
+          let parsed = JSON.parse(res.text);
+          let results = parsed.DATA.map(r => ({id: r[0], name: r[1]}));
+          s(results);
         } else {
           console.log('error:',err);
           f(err);
@@ -67,14 +69,16 @@ export function getTicketsStatuses() {
   });
 }
 
-export function getTicketsPriorities() {
+export function getTicketPriorities() {
   return new Promise((s, f) => {
     req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.TicketDAO&_m=getAllTicketPriorities`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
           console.log('response:',res);
-          s(JSON.parse(res.text));
+          let parsed = JSON.parse(res.text);
+          let results = parsed.DATA.map(r => ({id: r[0], name: r[1], level: r[2]}));
+          s(results);
         } else {
           console.log('error:',err);
           f(err);
