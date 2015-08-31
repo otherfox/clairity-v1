@@ -6,6 +6,7 @@ import {
   collectionViaQuery,
   collectionQuery
 } from './networkRenderer'
+import async from './async'
 
 const blankMap = {label: '', value: ''};
 

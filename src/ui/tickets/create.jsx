@@ -8,13 +8,15 @@ import {
 } from 'material-ui'
 import Details from '../shared/components/details'
 import DetailRow from '../shared/components/details/detailRow'
-import { collectionDropdown } from '../shared/components/collectionDropdown'
+import { asyncDropdown } from '../shared/components/collectionDropdown'
 import DropDown from '../shared/components/dropDown'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
-import async, { action } from '../shared/components/async'
+import async, { action, query } from '../shared/components/async'
 import controllable from 'react-controllables'
 import { v4 } from 'uuid'
+
+let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') });
 
 @controllable([
   'template',
@@ -41,7 +43,7 @@ class CreateTicket extends Component {
   deletePerson() {}
   render() {
     let ticketId = v4();
-    let UserDropDown = collectionDropdown('user');
+
     return (
       <Layout widths={{}} cPadding='20px 20px 0 0'>
         <Header>
@@ -91,7 +93,7 @@ class CreateTicket extends Component {
               </DetailRow>
               <DetailRow label='Assign'
                          type='muiDropDown'>
-                <UserDropDown />
+                <AccountOwnersDropdown />
               </DetailRow>
             </Details>
             <Details widths={{ lg: [3, 8] }}>
