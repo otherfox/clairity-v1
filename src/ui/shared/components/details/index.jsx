@@ -20,9 +20,10 @@ class Details extends React.Component {
     let labelColor = ColorManipulator.fade(context.palette.textColor, .6 );
     let headerColor = ColorManipulator.fade(context.palette.primary1Color, 1 );
     let labelLineHeight = {
-      muiDropDown: '4em',
-      muiTextField: '3.2em',
-      muiDatePicker: '3.2em'
+      muiDropDown: '.6em',
+      muiTextField: '.4em',
+      muiDatePicker: '.4em',
+      muiRadio: ''
     }
 
     return {
@@ -38,7 +39,7 @@ class Details extends React.Component {
       },
       label: {
         color: labelColor,
-        lineHeight: (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
+        marginTop : (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
       },
       root: {
         color: textColor,
@@ -61,7 +62,11 @@ class Details extends React.Component {
     return this.props.data.map((dataObj,idx) =>
       dataObj ?
       <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
-        <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)} cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)} style={dataObj.rowStyle}>
+        <Layout widths={this.layout()}
+                cPadding={this.props.cPadding}
+                cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)}
+                cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)}
+                style={dataObj.rowStyle}>
           <div style={_.assign(this.style(dataObj.detailType).label, this.props.labelStyle, dataObj.labelStyle)}>{dataObj.label}</div>
           <div style={_.assign(this.style(dataObj.detailType).value, this.props.valueStyle, dataObj.valueStyle)}>{dataObj.value}</div>
         </Layout>
@@ -71,14 +76,14 @@ class Details extends React.Component {
   }
 
   getContent() {
-    let style = this.style;
+    let getStyle = this.style;
     let layout = this.layout();
     let count = 0;
     if (this.props.children == null) return null;
     return React.Children.map(this.props.children, child => {
       if (child == null) return null;
       return child.type == DetailsRow ?
-        addons.cloneWithProps(child, {...this.props, ...child.props, style, layout, key: count++})
+        addons.cloneWithProps(child, {...this.props, ...child.props, getStyle, layout, key: count++})
       :
         addons.cloneWithProps(child, {key: count++});
     });
@@ -114,6 +119,7 @@ Details.propTypes = {
   rowStyle: React.PropTypes.object,
   labelStyle: React.PropTypes.object,
   valueStyle: React.PropTypes.object,
+  breakpoints: React.PropTypes.object,
   cStyle: React.PropTypes.object,
   cStyles: React.PropTypes.object,
   cPadding: React.PropTypes.string,

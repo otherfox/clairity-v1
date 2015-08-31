@@ -27,7 +27,9 @@ class ListContacts extends Component {
           this.props.contacts.map(o =>
             <ClearFix>
               <Link to="view-contact" params={{contactId: o.id}}>
-                <FontIcon className={'md md-account-circle'} style={this.style().icon}/> <div style={this.style().link}>{o.name}</div>
+                <FontIcon className={'md md-account-circle'}
+                          style={this.style().icon} />
+                <div style={this.style().link}>{o.name}</div>
               </Link>
             </ClearFix>
           )

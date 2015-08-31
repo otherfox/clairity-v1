@@ -1,0 +1,27 @@
+{
+  "company": "Security Equipment Supply, Inc",
+  "name": " Bill Main ",
+  "comments": "twc lead - Angela Boyington\r\n\r\nWilliam Main\r\nIT Manager\r\nSecurity Equipment Supply, Inc.\r\n3435 Rider Trail South\r\nEarth City, MO USA 63045\r\n+1 314.298.8930 x279 Office\r\n+1 636.328.6703 Mobile\r\nHours:  5:30 AM - 2:30 PM CT (GMT-5) M-F\r\n\r\n",
+  "customer_id": 2468,
+  "phone": "3142988930",
+  "cell": "6363286703",
+  "id": 10895,
+  "email": "'bmain@sesonline.com'xxx",
+  "relationships": [
+    {
+      "id": 4109,
+      "customer_id": 2468,
+      "contact_id": 10895,
+      "type": "Customer"
+    },
+    {
+      "location_id": 5152,
+      "id": 4115,
+      "pop_id": 129,
+      "customer_id": 2468,
+      "contact_id": 10895,
+      "type": "Technical"
+    }
+  ],
+  "extension": "279"
+}
