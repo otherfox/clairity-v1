@@ -20,9 +20,10 @@ class Details extends React.Component {
     let labelColor = ColorManipulator.fade(context.palette.textColor, .6 );
     let headerColor = ColorManipulator.fade(context.palette.primary1Color, 1 );
     let labelLineHeight = {
-      muiDropDown: '4em',
-      muiTextField: '3.2em',
-      muiDatePicker: '3.2em'
+      muiDropDown: '.6em',
+      muiTextField: '.4em',
+      muiDatePicker: '.4em',
+      muiRadio: ''
     }
 
     return {
@@ -38,7 +39,7 @@ class Details extends React.Component {
       },
       label: {
         color: labelColor,
-        lineHeight: (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
+        marginTop : (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
       },
       root: {
         color: textColor,
@@ -71,14 +72,14 @@ class Details extends React.Component {
   }
 
   getContent() {
-    let style = this.style;
+    let getStyle = this.style;
     let layout = this.layout();
     let count = 0;
     if (this.props.children == null) return null;
     return React.Children.map(this.props.children, child => {
       if (child == null) return null;
       return child.type == DetailsRow ?
-        addons.cloneWithProps(child, {...this.props, ...child.props, style, layout, key: count++})
+        addons.cloneWithProps(child, {...this.props, ...child.props, getStyle, layout, key: count++})
       :
         addons.cloneWithProps(child, {key: count++});
     });
