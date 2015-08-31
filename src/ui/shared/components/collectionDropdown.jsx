@@ -55,6 +55,10 @@ export function collectionDropdown(tableName) {
   });
 };
 
+export function asyncDropdown(query) {
+  return async(CollectionDropdownView, query);
+}
+
 export function collectionViaDropdown(table, keyName, viaTable) {
   return queryRenderer(CollectionDropdownView, {
     queries: [
