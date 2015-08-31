@@ -12,11 +12,14 @@ import { asyncDropdown } from '../shared/components/collectionDropdown'
 import DropDown from '../shared/components/dropDown'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
-import async, { action, query } from '../shared/components/async'
+import async, { action, query, collection } from '../shared/components/async'
 import controllable from 'react-controllables'
 import { v4 } from 'uuid'
 
 let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') });
+let TemplatesDropdown = asyncDropdown({ collection: collection('ticketTemplate').all() });
+let PrioritiesDropdown = asyncDropdown({ collection: collection('ticketPriority').all() });
+let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').all() });
 
 @controllable([
   'template',
@@ -63,33 +66,18 @@ class CreateTicket extends Component {
                      widths={{ lg: ['auto', 'auto'], md: [3,8]}}>
               <DetailRow label='Template'
                          type='muiDropDown'>
-                <DropDown menuItems={[
-                            { label: 'option 1', value: 1 },
-                            { label: 'option 2', value: 2 },
-                            { label: 'option 3', value: 3 }
-                          ]}
-                          selectedValue={ this.props.template }
-                          onSelect={ this.onTemplateChange } />
+                <TemplatesDropdown selectedValue={ this.props.template }
+                                   onChange={ this.onTemplateChange } />
               </DetailRow>
               <DetailRow label='Status'
                          type='muiDropDown'>
-                <DropDown menuItems={[
-                            { label: 'option 1', value: 1 },
-                            { label: 'option 2', value: 2 },
-                            { label: 'option 3', value: 3 },
-                          ]}
-                          selectedValue={ this.props.status }
-                          onChange={ this.onStatusChange } />
+                <StatusesDropdown selectedValue={ this.props.status }
+                                  onChange={ this.onStatusChange } />
               </DetailRow>
               <DetailRow label='Priority'
                          type='muiDropDown'>
-                <DropDown menuItems={[
-                            { label: 'option 1', value: 1 },
-                            { label: 'option 2', value: 2 },
-                            { label: 'option 3', value: 3 },
-                          ]}
-                          selectedValue={ this.props.priority }
-                          onChange={ this.onStatusChange } />
+                <PrioritiesDropdown selectedValue={ this.props.priority }
+                                    onChange={ this.onStatusChange } />
               </DetailRow>
               <DetailRow label='Assign'
                          type='muiDropDown'>
