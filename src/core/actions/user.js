@@ -23,7 +23,7 @@ export function accountOwners(request) {
     type: MessageTypes.Write,
     payload: {
       table: 'user',
-      row: data
+      rows: data
     }
   }, request);
   return Promise.resolve(Store.data);
