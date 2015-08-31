@@ -119,6 +119,7 @@ Details.propTypes = {
   rowStyle: React.PropTypes.object,
   labelStyle: React.PropTypes.object,
   valueStyle: React.PropTypes.object,
+  breakpoints: React.PropTypes.object,
   cStyle: React.PropTypes.object,
   cStyles: React.PropTypes.object,
   cPadding: React.PropTypes.string,

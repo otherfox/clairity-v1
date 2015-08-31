@@ -57,13 +57,18 @@ class CreateTicket extends Component {
                   cPadding='0 0 30px 0'
                   pPadding='0 0 20px 0'>
             <Details pStyles={{ lg: { float: 'left', width: 'auto' },
-                                md: { float: 'none', width: '100%'}}}
+                                md: { width: '50%'},
+                                sm: { width: '100%'}
+                              }}
                      cStyles={{ lg: [
                                   { float: 'left', paddingLeft: '20px' },
                                   { float: 'left' }
                                 ],
-                                 md: [{textAlign: 'right'}, {}]}}
-                     widths={{ lg: ['auto', 'auto'], md: [3,8]}}>
+                                 md: [{textAlign: 'right'}, {}],
+                                 sm: [{textAlign: 'right'}, {}]
+                              }}
+                     widths={{ lg: ['auto', 'auto'], md: [3, 8]}}
+                     breakpoints={{ md: 1470, sm: 1200 }}>
               <DetailRow label='Template'
                          type='muiDropDown'>
                 <TemplatesDropdown selectedValue={ this.props.template }
@@ -84,7 +89,7 @@ class CreateTicket extends Component {
                 <AccountOwnersDropdown />
               </DetailRow>
             </Details>
-            <Details widths={{ lg: [3, 8] }}>
+            <Details widths={{ lg: [3, 8] }} cStyles={{sm:[{textAlign: 'right'}]}}>
               <DetailRow label='Ticket ID'>
                 { ticketId }
               </DetailRow>
@@ -126,7 +131,7 @@ class CreateTicket extends Component {
                 </div>
               </DetailRow>
             </Details>
-            <Details widths={{ lg: [3, 8]}}>
+            <Details widths={{ lg: [3, 8]}} cStyles={{sm:[{textAlign: 'right'}]}}>
               <DetailRow label='Subject' type='muiTextField'>
                 <TextField />
               </DetailRow>

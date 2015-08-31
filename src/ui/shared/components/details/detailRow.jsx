@@ -23,7 +23,8 @@ class DetailRow extends Component {
                 cPadding={this.props.cPadding}
                 cStyles={_.assign(style.cStyles, this.props.cStyles)}
                 cStyle={_.assign(style.cStyle, this.props.cStyle)}
-                pStyles={this.props.pStyles}>
+                pStyles={this.props.pStyles}
+                breakpoints={this.props.breakpoints}>
 
           <div style={_.assign(style.label, this.props.labelStyle)}>{this.props.label}</div>
           <div style={_.assign(style.value, this.props.valueStyle)}>{this.props.children}</div>

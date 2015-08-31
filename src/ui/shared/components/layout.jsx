@@ -201,7 +201,9 @@ let Layout = React.createClass({
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'sm')};
                   ${this.getChildStyleCSS(i, 'sm')}
-                  ${this.getStyleCSS(this.props.pStyles['sm'])}
+              }
+              .${pclass} {
+                ${this.getStyleCSS(this.props.pStyles['sm'])}
               }
             }
             /* xs */
@@ -211,12 +213,19 @@ let Layout = React.createClass({
                   ${this.getChildStyleCSS(i, 'xs')}
                   ${this.getStyleCSS(this.props.pStyles['xs'])}
               }
+              .${pclass} {
+                ${this.getStyleCSS(this.props.pStyles['xs'])}
+              }
             }
             /* xxs */
             @media (max-width: ${this.props.breakpoints.xxs}px) {
               .${pclass} .${cclass} {
                   width: ${this.getChildWidth(i, 'xxs')};
+                  ${this.getChildStyleCSS(i, 'xxs')}
                   ${this.getStyleCSS(this.props.pStyles['xxs'])}
+              }
+              .${pclass} {
+                ${this.getStyleCSS(this.props.pStyles['xxs'])}
               }
             }
           `}
