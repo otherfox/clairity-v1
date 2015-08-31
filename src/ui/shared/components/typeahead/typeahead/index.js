@@ -77,7 +77,7 @@ var Typeahead = React.createClass({
       visible: this.getOptionsForValue(this.props.defaultValue, []),
 
       // This should be called something else, "entryValue"
-      entryValue: _.result(_.find(this.props.menuItems, 'value', this.props.valueLink.value), 'label'),
+      entryValue: _.result(_.find(this.props.menuItems, 'value', (this.props.valueLink ) ? this.props.valueLink.value : this.props.value ), 'label'),
 
       // A valid typeahead value
       selection: null,
