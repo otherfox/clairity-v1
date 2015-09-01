@@ -6,6 +6,10 @@ import { v4 } from 'uuid'
 
 const { CSSTransitionGroup } = addons;
 
+function withoutFns(obj) {
+  return _.omit(obj, _.functions(obj));
+}
+
 export default function asyncWrapper() {
 
   const args = Array.from(arguments);
@@ -38,7 +42,8 @@ export default function asyncWrapper() {
       this.name = v4().substring(0, 3);
       this.tokens = {};
       this.tables = {};
-      this.state = { ready: false };
+
+      this.state = { ready: queries.length === 0 };
       this.update = this.update.bind(this);
       this.requestState(props);
       instance.on(['update'], this.update);
@@ -60,15 +65,28 @@ export default function asyncWrapper() {
 
     componentWillReceiveProps(props) {
       console.log(this.name, 'async', 'componentWillReceiveProps', props, this.props)
-      if (!_.eq(props, this.props)) {
+      if (!_.eq(withoutFns(props), withoutFns(this.props))) {
         console.log(this.name, 'async', 'componentWillReceiveProps', 'props changed');
         this.setState({ready: false});
         this.requestState(props);
+      };
+    }
+
+    shouldComponentUpdate(props, state) {
+      if (this.state.ready != state.ready) {
+        return true;
       }
+      if (!_.eq(withoutFns(props), withoutFns(this.props))) {
+        return true;
+      }
+      return false;
     }
 
     requestState(props) {
       console.log(this.name, 'async', 'requestState', props);
+      if (queries.length === 0) {
+        return;
+      }
       let promises = [];
       this.reqs = queries.map(q => {  // q - [propName, queryInfo]
         let { type, name } = q[1];
@@ -103,7 +121,7 @@ export default function asyncWrapper() {
 
     render() {
       console.log(this.name, 'async', 'rendering', this.getInnerProps(), this.state);
-      let innerComponent = this.state.ready ?
+      let innerComponent = this.state.ready || queries.length === 0 ?
           <Component key="inner" ref="inner" {...this.getInnerProps()} />
         :
           <div key="null" />;

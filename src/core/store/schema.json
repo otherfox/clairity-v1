@@ -21,5 +21,8 @@
   "locationStatus": {},
   "salesMetric": {},
   "ticket": {},
+  "ticketTemplate": {},
+  "ticketStatus": {},
+  "ticketPriority": {},
   "contact": {}
 }
