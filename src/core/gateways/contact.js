@@ -4,9 +4,9 @@ export function eventConvertLead(contact) {
 }
 
 export function eventInsertContact(contact) {
-  return contact;
+  throw new Error('Not yet implemented');
 }
 
 export function eventInsertContactRelationship(rel) {
-  return rel;
+  throw new Error('Not yet implemented');
 }
