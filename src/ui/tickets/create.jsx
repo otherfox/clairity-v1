@@ -150,7 +150,7 @@ class CreateTicket extends Component {
                 </RadioButtonGroup>
               </DetailRow>
               <DetailRow label='Caller' type='muiTextField'>
-                <CallerTypeahead value={ this.props.caller }
+                <CallerTypeahead value={ this.props.caller || '' }
                                  onOptionSelected={ i => this.props.onCallerChange(i) } />
                 <div>
                   <RaisedButton label={'New Caller'} onTouchTap={ () => this.refs.dialog.show() } />
