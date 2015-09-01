@@ -25,6 +25,7 @@ let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') }
 let TemplatesDropdown = asyncDropdown({ collection: collection('ticketTemplate').all() });
 let PrioritiesDropdown = asyncDropdown({ collection: collection('ticketPriority').all() });
 let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').all() });
+let CallerTypeahead = asyncTypeahead({ collection: collection('contact').all() });
 let NotifyTypeahead = asyncTypeahead({ collection: collection('contact').all() });
 
 @controllable([
@@ -53,7 +54,6 @@ class CreateTicket extends Component {
     };
   }
   createTicket(props) {
-    debugger;
     // other vars
     let received_date_time = moment().format('YYYY-MM-DD h:mm A');
     let received_date_time_key = moment().format('YYYYMMDDHmm');
@@ -150,8 +150,8 @@ class CreateTicket extends Component {
                 </RadioButtonGroup>
               </DetailRow>
               <DetailRow label='Caller' type='muiTextField'>
-                <TextField  value={ this.props.caller }
-                            onChange={ e => this.props.onCallerChange(e.target.value) } />
+                <CallerTypeahead value={ this.props.caller }
+                                 onOptionSelected={ i => this.props.onCallerChange(i) } />
                 <div>
                   <RaisedButton label={'New Caller'} onTouchTap={ () => this.refs.dialog.show() } />
                   <Dialog
