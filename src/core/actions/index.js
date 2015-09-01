@@ -2,8 +2,10 @@
 import { model } from './model'
 import { collection, collectionVia } from './collection'
 import { agingReports } from './agingReport'
+import { accountOwners } from './user'
+import { createContact } from './contact'
 
 export default {
   model, collection, collectionVia,
-  agingReports
+  agingReports, accountOwners, createContact
 };

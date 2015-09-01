@@ -40,7 +40,7 @@ export default class AccountDetails extends React.Component {
       <Paper>
         <Layout widths={{}} cPadding={'0 20px 20px 20px'}>
           <Details
-            rowStyle={{marginLeft: '15%'}}
+            pStyles={{ lg: {marginLeft: '15%'} }}
             widths={{ lg: [4,8]}}
             title={'Account Details'}
             data={ details }

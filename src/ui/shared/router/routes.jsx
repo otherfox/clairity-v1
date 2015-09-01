@@ -33,7 +33,7 @@ import AddLocation from '../../locations/create'
 import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
 import ListContacts from '../../contacts/list'
-import AddContact from '../../contacts/create'
+import CreateContact from '../../contacts/create'
 import AllContacts from '../../contacts/all'
 
 /* Contracts */
@@ -125,7 +125,7 @@ export default (
               <Route name="account-contacts" path="contacts" handler={RouteHandler}>
                 <Route name="all-account-contacts" handler={ListContacts} />
                 <Route name="view-account-contact" path=":contactId" handler={ViewContact} />
-                <Route name="add-account-contact" path="add" handler={AddContact} />
+                <Route name="add-account-contact" path="add" handler={CreateContact} />
               </Route>
 
               <Redirect from="account-opps" to="all-account-opps" />
