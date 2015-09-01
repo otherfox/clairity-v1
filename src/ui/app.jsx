@@ -27,7 +27,7 @@ export class App extends React.Component {
       muiTheme: ThemeManager.getCurrentTheme(),
       lang: function(s) {
         let key = s.toLowerCase().replace(/\s/g, '_').replace(/[^a-zA-Z\d:]/, '')
-        return lang[key] || throw new Error(`Key not found in translation: '${key}' for string '${s}'`)
+        return lang[key] || key // TODO: throw new Error(`Key not found in translation: '${key}' for string '${s}'`)
       }
     };
   }

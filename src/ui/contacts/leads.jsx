@@ -7,18 +7,20 @@ import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
 import { RaisedButton } from 'material-ui'
 import { Filters, FilteredCollection, TextFilter} from '../shared/components/filteredCollection'
-import { networkCollectionRenderer } from '../shared/components/networkRenderer'
+import async, { collection, action } from '../shared/components/async'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
 import Link from '../shared/components/link'
 
+@async({ leads: collection('lead').all(), test: action() })
 class ViewLeads extends Component {
   constructor(props) {
     super(props);
     this.state = {
       leads: this.props.leads
     }
+    console.log('ViewLeads props ----', props);
   }
 
   componentWillReceiveProps(props) {
@@ -79,4 +81,4 @@ class ViewLeads extends Component {
   }
 }
 
-export default networkCollectionRenderer(ViewLeads, { tableName: 'lead' });
+export default ViewLeads;

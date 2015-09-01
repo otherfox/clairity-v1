@@ -27,7 +27,7 @@ class CustomLink extends React.Component {
 }
 
 CustomLink.proptypes = {
-  to: React.PropTypes.string,
+  to: React.PropTypes.string.required,
   params: React.PropTypes.object
 }
 

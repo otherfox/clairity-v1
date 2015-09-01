@@ -35,7 +35,7 @@ export class AccountCell extends React.Component {
   render() {
     return (this.props.children) ?
       <Link to="view-account"
-            params={{accountId: this.props.data[this.props.idField]}}
+            params={{accountId: (this.props.data) ? this.props.data[this.props.idField] : '' }}
             style={_.assign({
               color: this.context.muiTheme.palette.accent1Color
             }, this.props.cellStyle)

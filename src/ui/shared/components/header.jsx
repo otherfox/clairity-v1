@@ -1,29 +1,21 @@
-import React from 'react'
+import React, { PropTypes, Component }  from 'react'
 import Settings from './settings'
 import _ from 'lodash'
+import { contextTypes } from '../decorators'
 
-let Content = React.createClass ({
-
-  style: function() {
-
-    let textColor = this.context.muiTheme.palette.textColor;
-
+@contextTypes({ muiTheme: PropTypes.object })
+export default class Header extends Component {
+  style() {
     return {
-      color: textColor,
+      color: this.context.muiTheme.palette.textColor,
     };
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div style={ _.assign(this.style(), this.props.style)} >
         {this.props.children}
       </div>
     );
   }
-});
-
-Content.contextTypes = {
-  muiTheme: React.PropTypes.object
 }
-
-export default Content;
