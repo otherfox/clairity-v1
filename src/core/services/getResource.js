@@ -1,7 +1,7 @@
 import { getContact } from './contact'
 import { getLocation } from './location'
 import { getWorkOrder } from './workOrder'
-import { getContract } from './contracts'
+import { getContract } from './contract'
 import { getUser } from './users'
 import { getAccount } from './account'
 import { getTicket } from './ticket'
@@ -30,7 +30,7 @@ export function model(args) {
 
 import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contact'
 import { getOpportunitiesByAccount} from './opportunity'
-import { getContractsByAccount, getContractsByLocation } from './contracts'
+import { getContractsByAccount, getContractsByLocation } from './contract'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
 import { getWorkOrderMessagesByWorkOrder } from './messages'
