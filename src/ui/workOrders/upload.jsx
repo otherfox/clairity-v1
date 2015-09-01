@@ -26,7 +26,7 @@ import {
 } from 'material-ui'
 
 import controllable from 'react-controllables'
-import {State} from 'react-router'
+import { State } from 'react-router'
 
 
 let WorkOrders = React.createClass({

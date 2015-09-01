@@ -4,60 +4,62 @@
   "description": "Clairity's front-end",
   "main": "src/index.js",
   "scripts": {
-    "test": "karma start karma.config.js",
+    "test": "set BABEL_JEST_STAGE=1 & jest",
     "start": "node dev-server.js"
   },
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/brainbytescreative/clairity.git"
   },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "jsx",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  },
   "author": "Ben Cochrane",
   "license": "ISC",
   "devDependencies": {
     "babel": "^5.6.14",
     "babel-core": "^5.6.15",
+    "babel-jest": "^5.3.0",
     "babel-loader": "^5.3.1",
     "babel-runtime": "^5.6.15",
-    "chai": "^2.3.0",
-    "chai-as-promised": "^5.0.0",
-    "chai-immutable": "^0.3.0",
-    "chai-spies": "^0.6.0",
     "coffee-script": "^1.9.2",
     "css-loader": "^0.11.0",
     "html-webpack-plugin": "^1.2.0",
+    "jest-cli": "^0.5.0",
     "json-loader": "^0.5.1",
     "jsx-loader": "^0.13.1",
-    "karma": "^0.12.31",
-    "karma-chrome-launcher": "^0.1.12",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-ie-launcher": "^0.1.5",
-    "karma-mocha": "^0.1.10",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "karma-safari-launcher": "^0.1.1",
-    "karma-webpack": "^1.5.1",
     "less": "^2.5.0",
     "less-loader": "^2.2.0",
-    "lodash": "^3.10.0",
-    "mocha": "^2.2.4",
-    "node-libs-browser": "^0.5.2",
     "react-hot-loader": "^1.2.7",
+    "react-tools": "^0.13.3",
     "style-loader": "^0.11.0",
-    "uid": "^0.0.2",
     "url-loader": "^0.5.5",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
     "@brainbytes/immutable-store": "^0.4.0",
+    "capitalize": "^1.0.0",
     "classnames": "^1.2.0",
     "debounce": "^1.0.0",
-    "es6-mapify": "^1.0.0",
-    "event-emitter": "^0.3.3",
     "eventemitter2": "^0.4.14",
     "fixed-data-table": "0.4.1",
     "fuzzy": "^0.1.0",
     "fynx": "^1.6.0",
     "immutable": "^3.7.0",
+    "lodash": "^3.10.1",
     "material-design-iconfont": "^0.1.7",
     "material-ui": "0.10.4",
     "memoize-promise": "^0.2.2",
@@ -68,16 +70,14 @@
     "react": "^0.13.3",
     "react-controllables": "^0.3.3",
     "react-d3-components": "https://github.com/brainbytes/react-d3-components/tarball/master",
-    "react-grid-layout": "^0.8.5",
+    "react-grid-layout": "https://github.com/brainbytes/react-grid-layout/tarball/master",
     "react-intl": "^1.2.0",
     "react-router": "^0.13.2",
     "react-tap-event-plugin": "^0.1.3",
     "react-transmit": "^2.6.1",
     "react-window-mixins": "0.0.6",
-    "rx": "^2.5.2",
     "superagent": "https://github.com/brainbytes/superagent/tarball/master",
     "throttle-debounce": "^0.1.1",
-    "underscore": "^1.8.3",
     "uuid": "^2.0.1"
   }
 }

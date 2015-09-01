@@ -1,6 +1,6 @@
 import React from "react"
 import Link from '../shared/components/link'
-import {FontIcon, ClearFix, Paper} from 'material-ui'
+import { FontIcon, ClearFix, Paper } from 'material-ui'
 import ContractInfo from './public/details'
 
 export default class ListContracts extends React.Component {
@@ -26,7 +26,9 @@ export default class ListContracts extends React.Component {
         {
           this.props.contracts.map(contract =>
             <ClearFix key={contract.id}>
-              <Paper><ContractInfo contract={contract} /></Paper>
+              <Paper>
+                <ContractInfo contract={contract} />
+              </Paper>
             </ClearFix>
           )
         }

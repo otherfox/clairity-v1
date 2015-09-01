@@ -7,6 +7,7 @@ import LeftNav from '../shared/components/leftnav'
 import Content from '../shared/components/content'
 import Settings from '../shared/components/settings'
 import ThemeManager from '../shared/themes/themeManager'
+import { propTypes } from '../shared/decorators'
 import {
   RadioButtonGroup,
   RadioButton,
@@ -25,10 +26,15 @@ import {
 
 import controllable from 'react-controllables'
 
-import {tryLogin, loginSuccess} from '../../core/actions/login'
+import { tryLogin, loginSuccess } from '../../core/actions/login'
 import {} from '../../core/queries/login'
 
 @controllable(['username', 'password'])
+@propTypes({
+  username: PropTypes.string,
+  password: PropTypes.string,
+  onLogin: PropTypes.func
+})
 class LoginForm extends React.Component {
   changeUsername(ev) {
     if (!this.props.onUsernameChange) return;
@@ -75,13 +81,7 @@ class LoginForm extends React.Component {
   }
 }
 
-LoginForm.propTypes = {
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onLogin: PropTypes.func
-}
-
-import {Navigation} from 'react-router'
+import { Navigation } from 'react-router'
 
 const Login = React.createClass({
   contextTypes: { muiTheme: React.PropTypes.object},

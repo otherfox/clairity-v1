@@ -10,10 +10,23 @@ import SendIcon from 'material-ui/lib/svg-icons/content/send'
 export class AgentCell extends React.Component {
   render() {
     return (this.props.children) ?
-      <Link to='/' style={_.assign({ color: this.context.muiTheme.palette.primary1Color }, this.props.cellStyle)}>
+      <Link to='/' style={_.assign({
+          color: this.context.muiTheme.palette.primary1Color
+        }, this.props.cellStyle
+      )}>
         <AgentIcon style={_.assign(
-          { fill: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .5), marginRight: '5px', position: 'absolute' }, this.props.iconStyle)} />
-        <div style={_.assign({ paddingLeft: '30px', lineHeight: '25px' }, this.props.labelStyle )}>{this.props.children}</div>
+          { fill: Utils.ColorManipulator
+              .fade(this.context.muiTheme.palette.primary1Color, .5),
+            marginRight: '5px',
+            position: 'absolute' },
+          this.props.iconStyle)} />
+        <div style={_.assign({
+            paddingLeft: '30px',
+            lineHeight: '25px'
+          }, this.props.labelStyle
+        )}>
+          {this.props.children}
+        </div>
       </Link> : null;
   }
 }
@@ -22,11 +35,25 @@ export class AccountCell extends React.Component {
   render() {
     return (this.props.children) ?
       <Link to="view-account"
-            params={{accountId: this.props.data[this.props.idField]}}
-            style={_.assign({ color: this.context.muiTheme.palette.accent1Color }, this.props.cellStyle)}>
-        <AccountIcon
-              style={_.assign({ fill: Utils.ColorManipulator.fade(this.context.muiTheme.palette.accent1Color, .5), marginRight: '5px', position: 'absolute' }, this.props.iconStyle)} />
-        <div style={_.assign({ paddingLeft: '30px', lineHeight: '25px' }, this.props.labelStyle)}>{this.props.children}</div>
+            params={{accountId: (this.props.data) ? this.props.data[this.props.idField] : '' }}
+            style={_.assign({
+              color: this.context.muiTheme.palette.accent1Color
+            }, this.props.cellStyle)
+      }>
+        <AccountIcon style={_.assign({
+            fill: Utils.ColorManipulator
+              .fade(this.context.muiTheme.palette.accent1Color, .5),
+            marginRight: '5px',
+            position: 'absolute'
+          }, this.props.iconStyle
+        )} />
+        <div style={_.assign({
+            paddingLeft: '30px',
+            lineHeight: '25px'
+          }, this.props.labelStyle
+        )}>
+          {this.props.children}
+        </div>
       </Link> : null;
   }
 }
@@ -34,10 +61,25 @@ export class AccountCell extends React.Component {
 export class ContactCell extends React.Component {
   render() {
     return (this.props.children) ?
-      <Link to="view-contact" params={{contactId: 0}} style={_.assign({ color: this.context.muiTheme.palette.textColor }, this.props.cellStyle)}>
-        <ContactIcon
-              style={_.assign({ fill: Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, .5), marginRight: '5px', position: 'absolute' }, this.props.iconStyle)} />
-        <div style={_.assign({ paddingLeft: '30px', lineHeight: '25px' }, this.props.labelStyle)}>{this.props.children}</div>
+      <Link to="view-contact"
+            params={{contactId: 0}}
+            style={_.assign({
+              color: this.context.muiTheme.palette.textColor
+            }, this.props.cellStyle)
+      }>
+        <ContactIcon style={_.assign({
+            fill: Utils.ColorManipulator
+              .fade(this.context.muiTheme.palette.textColor, .5),
+            marginRight: '5px', position: 'absolute'
+          }, this.props.iconStyle
+        )} />
+        <div style={_.assign({
+            paddingLeft: '30px',
+            lineHeight: '25px'
+          }, this.props.labelStyle
+        )}>
+          {this.props.children}
+        </div>
       </Link> : null;
   }
 }
@@ -47,10 +89,11 @@ export class SendCell extends React.Component {
     return (
       <div style={_.assign({textAlign: 'center'}, this.props.cellStyle)} >
         <Link to={(this.props.to) ? this.props.to :'/'}>
-          <SendIcon style={_.assign(
-            { fill: Utils.ColorManipulator.fade(this.context.muiTheme.palette.textColor, 0.6),
-              verticalAlign: 'middle' },
-            this.props.iconStyle
+          <SendIcon style={_.assign({
+              fill: Utils.ColorManipulator
+                .fade(this.context.muiTheme.palette.textColor, 0.6),
+              verticalAlign: 'middle'
+            }, this.props.iconStyle
           )} />
         </Link>
       </div>
@@ -138,12 +181,8 @@ export class ButtonCell extends React.Component {
 export class BooleanCell extends React.Component {
   style() {
     return {
-        true: {
-          color: Styles.Colors.green500
-        },
-        false: {
-          color: Styles.Colors.red500
-        }
+        true: { color: Styles.Colors.green500 },
+        false: { color: Styles.Colors.red500 }
     }
   }
   render() {
@@ -160,21 +199,11 @@ export class BooleanCell extends React.Component {
 export class RangeCell extends React.Component {
   style() {
     return {
-        0: {
-          color: Styles.Colors.green500
-        },
-        1: {
-          color: Styles.Colors.yellow500
-        },
-        2: {
-          color: Styles.Colors.amber500
-        },
-        3: {
-          color: Styles.Colors.orange500
-        },
-        4: {
-          color: Styles.Colors.red500
-        }
+        0: { color: Styles.Colors.green500 },
+        1: { color: Styles.Colors.yellow500 },
+        2: { color: Styles.Colors.amber500 },
+        3: { color: Styles.Colors.orange500 },
+        4: { color: Styles.Colors.red500 }
     }
   }
   render() {

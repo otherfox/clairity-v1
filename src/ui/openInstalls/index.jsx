@@ -23,7 +23,7 @@ import {
 
 import controllable from 'react-controllables'
 
-import {Navigation} from 'react-router'
+import { Navigation } from 'react-router'
 
 let OpenInstalls = React.createClass({
   mixins: [Navigation],

@@ -5,7 +5,7 @@ import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
 import Header from '../shared/components/header'
 import { RaisedButton, Utils } from 'material-ui'
-import {contextTypes} from '../shared/decorators'
+import { contextTypes } from '../shared/decorators'
 import Selector from './selector'
 
 @contextTypes({ muiTheme: PropTypes.object })

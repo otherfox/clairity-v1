@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {collectionQuery, collectionViaQuery} from './queryBuilders'
+import { collectionQuery, collectionViaQuery } from './queryBuilders'
 import multiQueryRenderer from './queryRenderer'
 
 export function networkCollectionRenderer(Component, options) {

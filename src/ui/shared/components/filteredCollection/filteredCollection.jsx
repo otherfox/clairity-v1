@@ -1,5 +1,5 @@
 import React, {Component, PropTypes, addons} from 'react/addons'
-import {Filters} from '../filteredCollection'
+import { Filters } from '../filteredCollection'
 
 class FilteredCollection extends Component {
 
@@ -22,7 +22,6 @@ class FilteredCollection extends Component {
 
   updateFilters() {
     let filters = this.refs.filters;
-    console.log(this.refs.filters);
     let newData = filters.filterData(this.props.data);
     this.setState({
       data: newData

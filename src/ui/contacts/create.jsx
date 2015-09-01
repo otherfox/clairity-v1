@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { PropTypes, Component } from 'react'
+import async, { action } from '../shared/components/async'
 
-export default class CreateContact extends React.Component {
+@async({ createContact: action() })
+class CreateContact extends Component {
   render() {
     return (
       <div />
     );
   }
 }
+
+export default CreateContact;

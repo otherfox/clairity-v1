@@ -2,8 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import Header from '../shared/components/header'
 import Layout from '../shared/components/layout'
 import Table from '../shared/components/table'
+import Cards from '../shared/components/cards'
 
-import async, { collection } from '../shared/components/async'
+import async, { collection, model } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 
 import {
@@ -13,11 +14,11 @@ import {
 @async({ accounts: collection('account').all() })
 @propTypes({ accounts: PropTypes.array.isRequired })
 class ViewAccounts extends Component {
-
   getAccounts(accounts) {
     return {
       colNames: [
-        { label: 'Accounts', name: 'name', cellType: 'account', props: { idField: 'id'} },
+        { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
+        { label: 'Account Owner', name: 'user_id' }
       ],
       data: accounts,
       colWidths: [1],
@@ -26,7 +27,6 @@ class ViewAccounts extends Component {
   }
 
   render() {
-
     let accounts = this.props.accounts;
 
     return (
@@ -36,12 +36,11 @@ class ViewAccounts extends Component {
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
           </Filters>
-          <Table {...this.getAccounts(accounts)} />
+          <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={16} linkParam={'id'} />
         </FilteredCollection>
       </Layout>
     );
   }
-
 }
 
 export default ViewAccounts;

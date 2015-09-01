@@ -7,18 +7,20 @@ import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
 import { RaisedButton } from 'material-ui'
 import { Filters, FilteredCollection, TextFilter} from '../shared/components/filteredCollection'
-import {networkCollectionRenderer} from '../shared/components/networkRenderer'
+import async, { collection, action } from '../shared/components/async'
 
 import _ from 'lodash'
 import controllable from 'react-controllables'
 import Link from '../shared/components/link'
 
+@async({ leads: collection('lead').all(), test: action() })
 class ViewLeads extends Component {
   constructor(props) {
     super(props);
     this.state = {
       leads: this.props.leads
     }
+    console.log('ViewLeads props ----', props);
   }
 
   componentWillReceiveProps(props) {
@@ -37,7 +39,7 @@ class ViewLeads extends Component {
         { label: 'Lead Name', name: 'name', cellType: 'contact'},
         { label: 'Account', name: 'customer_name', cellType: 'account', props: { idField: 'customer_id' } },
         { label: 'Account Owner', name: 'agent_name', cellType: 'agent'},
-        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: {textAlign: 'center'}}
+        { label: 'Lead Conversion', name: '__lead_conversion', cellType: 'string', style: { textAlign: 'center' }}
       ],
       data: leads.map(s => {
         s.__lead_conversion = (
@@ -72,11 +74,11 @@ class ViewLeads extends Component {
               <TextFilter name={'customer_name'} label={'Account'} />
               <TextFilter name={'agent_name'} label={'Account Owner'} />
             </Filters>
-            <Table {...this.getLeads(this.state.leads)} cardTitle={'name'} />
+            <Cards {...this.getLeads(this.state.leads)} header={'name'} cardType={'lead'} rowHeight={16} linkParam={'id'}/>
           </FilteredCollection>
       </Layout>
     );
   }
 }
 
-export default networkCollectionRenderer(ViewLeads, { tableName: 'lead' });
+export default ViewLeads;

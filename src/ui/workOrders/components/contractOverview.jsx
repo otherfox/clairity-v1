@@ -8,7 +8,7 @@ import ContractSingle from './contractSingle'
 import WorkOrder from '../services/stubs/order1583.json'
 import Contract from '../services/stubs/contract7416.json'
 
-import {List, Map, fromJS} from 'immutable'
+import { List, Map, fromJS } from 'immutable'
 
 const ContractOverview = React.createClass({
   mixins:[addons.LinkedStateMixin],

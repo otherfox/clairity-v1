@@ -7,7 +7,7 @@ import {
   Redirect
 } from 'react-router'
 
-import {App, NavigationLayout} from '../../app'
+import { App, NavigationLayout } from '../../app'
 
 import Testbed from '../../testbed'
 
@@ -34,6 +34,7 @@ import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
 import ListContacts from '../../contacts/list'
 import AddContact from '../../contacts/create'
+import AllContacts from '../../contacts/all'
 
 /* Contracts */
 import CreateContract from '../../contracts/create'
@@ -64,6 +65,7 @@ import WorkOrderUpload from '../../workOrders/upload'
 
 /* Tickets */
 import Tickets from '../../tickets'
+import CreateTicket from '../../tickets/create'
 
 export default (
   <Route>
@@ -164,13 +166,13 @@ export default (
         <Route {/***** Contacts *****/...{}}>
           <Redirect from="contacts" to="all-contacts" />
           <Route name="contacts" handler={RouteHandler}>
+            <Route name="all-contacts" path="all" handler={AllContacts} />
             <Route path=":contactId" handler={RouteHandler}>
               <DefaultRoute name="view-contact" handler={ViewContact} />
               <Route name="contact-opps" path="opps" handler={RouteHandler}>
                 <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
               </Route>
             </Route>
-            <Route name="all-contacts" path="all" handler={ViewLeads} />
           </Route>
         </Route>
 
@@ -189,7 +191,11 @@ export default (
         </Route>
 
         <Route {/***** Tickets *****/...{}}>
-          <Route name="tickets" handler={Tickets} />
+          <Redirect from="tickets" to="all-tickets" />
+          <Route name="tickets" handler={RouteHandler} >
+            <Route name="all-tickets" path="all" handler={Tickets} />
+            <Route name="add-ticket" path="create" handler={CreateTicket} />
+          </Route>
         </Route>
 
         <Route {/***** Work Orders *****/...{}}>
