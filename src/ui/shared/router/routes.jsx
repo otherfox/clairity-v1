@@ -65,6 +65,7 @@ import WorkOrderUpload from '../../workOrders/upload'
 
 /* Tickets */
 import Tickets from '../../tickets'
+import CreateTicket from '../../tickets/create'
 
 export default (
   <Route>
@@ -171,7 +172,7 @@ export default (
               <Route name="contact-opps" path="opps" handler={RouteHandler}>
                 <DefaultRoute name="contact-opps-list" handler={RouteHandler} />
               </Route>
-            </Route>        
+            </Route>
           </Route>
         </Route>
 
@@ -190,7 +191,11 @@ export default (
         </Route>
 
         <Route {/***** Tickets *****/...{}}>
-          <Route name="tickets" handler={Tickets} />
+          <Redirect from="tickets" to="all-tickets" />
+          <Route name="tickets" handler={RouteHandler} >
+            <Route name="all-tickets" path="all" handler={Tickets} />
+            <Route name="add-ticket" path="create" handler={CreateTicket} />
+          </Route>
         </Route>
 
         <Route {/***** Work Orders *****/...{}}>
