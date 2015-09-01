@@ -1,4 +1,4 @@
-import { getContact } from './contacts'
+import { getContact } from './contact'
 import { getLocation } from './location'
 import { getWorkOrder } from './workOrder'
 import { getContract } from './contracts'
@@ -28,7 +28,7 @@ export function model(args) {
   return getResource(id, table);
 }
 
-import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
+import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contact'
 import { getOpportunitiesByAccount} from './opportunity'
 import { getContractsByAccount, getContractsByLocation } from './contracts'
 import { getAccountsByAgent, getAccountsByContact } from './account'
@@ -75,8 +75,8 @@ export function collectionVia(args) {
 import { getPops } from './pop'
 import { getAccounts, getAccountTypes } from './account'
 import { getWorkOrderTypes, getWorkOrderStatuses } from './workOrder'
-import { getLeads } from './contacts'
-import { getContacts } from './contacts'
+import { getLeads } from './contact'
+import { getContacts } from './contact'
 import { getProjectTypes } from './projectType'
 import { getSalesStages } from './salesStage'
 import { getLeadSources } from './leadSource'
