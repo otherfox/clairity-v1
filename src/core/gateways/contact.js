@@ -4,7 +4,13 @@ export function eventConvertLead(contact) {
 }
 
 export function eventInsertContact(contact) {
-  throw new Error('Not yet implemented');
+  let {
+    name, company, phone, ext, cell, email, fax, comments
+  } = contact;
+  let result = {
+    name, company, phone, ext, cell, email, fax, comments
+  };
+  return result;
 }
 
 export function eventInsertContactRelationship(rel) {
