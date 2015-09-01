@@ -68,6 +68,7 @@ let ContactListQuery = async(ContactList, {
 import AccountDetails from './public/details'
 
 @async({ account: model('account') })
+@contextTypes({ lang: PropTypes.object })
 @propTypes({ account: PropTypes.object })
 @contextTypes({ muiTheme: PropTypes.object })
 class AccountView extends Component {
@@ -89,9 +90,7 @@ class AccountView extends Component {
 
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
-        <Header>
-          <h1>{account.name}</h1>
-        </Header>
+        <Header><h1>{this.context.lang('Account')} - {account.name}</h1></Header>
         <SubHeader>
           { address }
           {
