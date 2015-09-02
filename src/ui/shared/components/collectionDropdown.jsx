@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import DropDown from './dropDown'
-import { Typeahead } from './typeahead'
+import { Typeahead, Tokenizer } from './typeahead'
 import {
   networkCollectionRenderer,
   queryRenderer,

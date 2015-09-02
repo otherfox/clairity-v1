@@ -5,13 +5,18 @@
 
 import React, { PropTypes, Component } from 'react'
 import { contextTypes } from '../shared/decorators'
-import { Tokenizer } from '../shared/components/typeahead'
+import {
+  asyncTokenizer
+} from '../shared/components/collectionDropdown'
+import async, { action, query, collection } from '../shared/components/async'
+
+let NotifyTokenizer = asyncTokenizer({ collection: collection('contact').all() });
 
 @contextTypes({muiTheme: PropTypes.object})
 class TestbedPage extends Component {
   render() {
     return (
-      <Tokenizer />
+      <NotifyTokenizer />
     )
   }
 }
