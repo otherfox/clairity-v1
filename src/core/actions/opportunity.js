@@ -1,8 +1,8 @@
 import Fynx from 'fynx'
 import Store from '../../core/store'
 
-import { postConvertLead } from '../../core/services/contacts'
-import { putOpportunity } from '../../core/services/opportunity'
+import { postConvertLead } from '../services/contact'
+import { putOpportunity } from '../services/opportunity'
 
 export const convertLead = Fynx.createAsyncAction();
 export const updateSalesOpp = Fynx.createAsyncAction();
