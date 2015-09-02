@@ -11,7 +11,8 @@ import Details from '../shared/components/details'
 import DetailRow from '../shared/components/details/detailRow'
 import {
   asyncDropdown,
-  asyncTypeahead
+  asyncTypeahead,
+  asyncTokenizer
 } from '../shared/components/collectionDropdown'
 import DropDown from '../shared/components/dropDown'
 import Header from '../shared/components/header'
@@ -26,7 +27,7 @@ let TemplatesDropdown = asyncDropdown({ collection: collection('ticketTemplate')
 let PrioritiesDropdown = asyncDropdown({ collection: collection('ticketPriority').all() });
 let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').all() });
 let CallerTypeahead = asyncTypeahead({ collection: collection('contact').all() });
-let NotifyTypeahead = asyncTypeahead({ collection: collection('contact').all() });
+let NotifyTokenizer = asyncTokenizer({ collection: collection('contact').all() });
 
 @controllable([
   'template',
@@ -193,8 +194,8 @@ class CreateTicket extends Component {
                 </div>
               </DetailRow>
               <DetailRow label='People to Notify' type='muiTextField'>
-                <NotifyTypeahead value={ this.props.people || '' }
-                                 onOptionSelected={ i => this.props.onPeopleChange(i) } />
+                <NotifyTokenizer value={ this.props.people || '' }
+                                 onTokenAdd={ (i,s) => this.props.onPeopleChange(s) } />
                 <div>
                   <RaisedButton label='New'
                                 onClick={ this.createPerson }
