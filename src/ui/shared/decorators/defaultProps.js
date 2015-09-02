@@ -1,4 +1,4 @@
-export function contextTypes(pTypes) {
+export function defaultProps(pTypes) {
   return target => {
     target.defaultProps = pTypes;
   };
