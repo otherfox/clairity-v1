@@ -16,7 +16,19 @@ module.exports = {
       './src/core/index'
     ]
   },
+  devServer: {
+    hot: true,
+    historyApiFallback: {
+      index: 'index.html',
+      rewrites: [
+        { from: /\/\w*\.js$/, to: function(c) { return c.match[0]; } },
+        { from: /.*/, to: '/index.html'}
+      ]
+    },
+    publicPath: '/'
+  },
   output: {
+    publicPath: '/',
     filename: '[name].js',
     path: __dirname + '/bin'
   },
