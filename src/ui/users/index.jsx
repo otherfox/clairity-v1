@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import async, { model } from '../shared/components/async'
-import Cards from '../shared/components/cards'
+import { DetailsObject } from '../shared/components/cards'
 
 @async({ user: model() })
-class ViewUser extends React.Component {
+class ViewUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,10 +18,14 @@ class ViewUser extends React.Component {
     return (
       <div>
         <h1>User Single</h1>
-        <Cards />
+        <DetailsObject target={this.props.user} />
       </div>
     );
   }
 }
 
-export default ViewUser;
+export default class extends Component {
+  render() {
+    return <ViewUser {...this.props.params} />
+  }
+};
