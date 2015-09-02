@@ -15,7 +15,7 @@ class CreateContact extends Component {
         cell: '222-222-2222',
         email: 'test@test.test',
         relationships: [{
-          pop_id: 0, customer_id: 0, type: 0
+          contact_id: 13867, pop_id: 1, customer_id: 0, type: 0
         }],
         extension: 'extensions',
         fax: 'fax'
