@@ -7,8 +7,9 @@ import {
 } from 'material-ui'
 import Layout from '../layout'
 import DetailsRow from './detailRow'
+import DetailsObject from './detailsObject'
 import { contextTypes, propTypes, defaultProps } from '../../decorators'
-export { DetailsRow };
+export { DetailsRow, DetailsObject };
 let { ColorManipulator } = Utils;
 
 @contextTypes({ muiTheme: PropTypes.object })
