@@ -31,7 +31,7 @@ class ListContacts extends Component {
   getContacts() {
     return {
       colNames: [
-        { label: 'Name', name: 'name'}
+        { label: 'Name', name: 'name', cellType: 'contact' }
       ],
       data: this.props.contacts
     }
