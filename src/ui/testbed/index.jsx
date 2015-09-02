@@ -23,7 +23,7 @@ class TestbedPage extends Component {
       <div>
         <h2>Tokenizer</h2>
         <NotifyTokenizer value={ this.props.caller2 || '' }
-                         onOptionSelected={ i => this.props.onCaller2Change(i) }/>
+                         onTokenAdd={ (i,s) => this.props.onCaller2Change(2) }/>
         <h2>Typeahead</h2>
         <NotifyTypeahead value={ this.props.caller || '' }
                          onOptionSelected={ i => this.props.onCallerChange(i) }/>
