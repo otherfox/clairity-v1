@@ -104,7 +104,6 @@ class CollectionTokenizerView extends Component {
   }
 }
 
-
 CollectionDropdownView.defaultProps = {
   labelKey: 'name',
   valueKey: 'id',
