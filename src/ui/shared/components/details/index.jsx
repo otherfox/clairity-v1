@@ -1,4 +1,4 @@
-import React, {PropTypes, addons} from 'react/addons'
+import React, { PropTypes, addons, Component } from 'react/addons'
 import _ from 'lodash'
 import {
   Utils,
@@ -7,12 +7,27 @@ import {
 } from 'material-ui'
 import Layout from '../layout'
 import DetailsRow from './detailRow'
-import { contextTypes } from '../../decorators'
-export {DetailsRow};
+import { contextTypes, propTypes, defaultProps } from '../../decorators'
+export { DetailsRow };
 let { ColorManipulator } = Utils;
 
 @contextTypes({ muiTheme: PropTypes.object })
-class Details extends React.Component {
+@defaultProps({ widths: {lg: [5,7], md: [4,8], sm: [12]}, cPadding: '0 20px 5px 0' })
+@propTypes({
+  data: React.PropTypes.array,
+  title: React.PropTypes.string,
+  labelTop: React.PropTypes.bool,
+  headerStyle: React.PropTypes.object,
+  rowStyle: React.PropTypes.object,
+  labelStyle: React.PropTypes.object,
+  valueStyle: React.PropTypes.object,
+  breakpoints: React.PropTypes.object,
+  cStyle: React.PropTypes.object,
+  cStyles: React.PropTypes.object,
+  cPadding: React.PropTypes.string,
+  widths: React.PropTypes.object
+})
+class Details extends Component {
   style(detailType, context, props) {
     props = props || this.props;
     context = context || this.context.muiTheme;
@@ -110,26 +125,6 @@ class Details extends React.Component {
     );
   }
 }
-
-Details.propTypes = {
-  data: React.PropTypes.array,
-  title: React.PropTypes.string,
-  labelTop: React.PropTypes.bool,
-  headerStyle: React.PropTypes.object,
-  rowStyle: React.PropTypes.object,
-  labelStyle: React.PropTypes.object,
-  valueStyle: React.PropTypes.object,
-  breakpoints: React.PropTypes.object,
-  cStyle: React.PropTypes.object,
-  cStyles: React.PropTypes.object,
-  cPadding: React.PropTypes.string,
-  widths: React.PropTypes.object
-};
-
-Details.defaultProps = {
-  widths: {lg: [5,7], md: [4,8], sm: [12]},
-  cPadding: '0 20px 5px 0'
-};
 
 
 export default Details;
