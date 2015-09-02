@@ -5,13 +5,14 @@
 
 import React, { PropTypes, Component } from 'react'
 import { contextTypes } from '../shared/decorators'
-
-import CreateContact from '../contacts/create'
+import { Tokenizer } from '../shared/components/typeahead'
 
 @contextTypes({muiTheme: PropTypes.object})
 class TestbedPage extends Component {
   render() {
-    return <CreateContact />;
+    return (
+      <Tokenizer />
+    )
   }
 }
 
