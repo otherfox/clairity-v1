@@ -26,6 +26,7 @@ import ListAccounts from '../../accounts/all'
 /* Users */
 import ViewUser from '../../users'
 import ListUsers from '../../users/all'
+import CreateUser from '../../users/create'
 
 /* Locations */
 import ViewLocation from '../../locations'
