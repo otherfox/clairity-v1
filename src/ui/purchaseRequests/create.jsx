@@ -22,44 +22,34 @@ import controllable from 'react-controllables'
 import { v4 } from 'uuid'
 import moment from 'moment'
 
-let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') });
-let TemplatesDropdown = asyncDropdown({ collection: collection('ticketTemplate').all() });
-let PrioritiesDropdown = asyncDropdown({ collection: collection('ticketPriority').all() });
-let StatusesDropdown = asyncDropdown({ collection: collection('ticketStatus').all() });
-let CallerTypeahead = asyncTypeahead({ collection: collection('contact').all() });
-let NotifyTokenizer = asyncTokenizer({ collection: collection('contact').all() });
+// let AccountOwnersDropdown = asyncDropdown({ collection: query('accountOwners') });
 
 @controllable([
-  'template',
-  'status',
-  'priority',
-  'assign',
-  'callInTicket',
-  'callerName',
-  'callerLastName',
-  'callerPhone',
-  'callerCompany',
-  'callerCell',
-  'subject',
-  'body',
-  'people',
-  'ownerId',
-  'includesCustomer'
+  'location_id',
+  'approval_date',
+  'requested_by',
+  'item',
+  'approval_id',
+  'customer_id',
+  'amount',
+  'type',
+  'notes',
+  'file1',
+  'file2',
+  'file3'
 ])
-@async({ createTicket: action() })
+@async({ createPurchaseRequest: action() })
 class CreateTicket extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticketId: v4()
+      requestId: v4()
     };
   }
   createTicket(props) {
     // other vars
-    let received_date_time = moment().format('YYYY-MM-DD h:mm A');
-    let received_date_time_key = moment().format('YYYYMMDDHmm');
-    let last_mod_date_time = received_date_time;
-    let last_mod_date_time_key = received_date_time_key;
+    let requested_data = moment().format('YYYY-MM-DD h:mm A');
+    let id = this.state.requestId;
 
     let submission = {
       thisTicketId: this.state.ticketId,

@@ -8,9 +8,7 @@ import { RaisedButton, Utils } from 'material-ui'
 import { contextTypes } from '../shared/decorators'
 import async, { collection, model } from '../shared/components/async'
 
-@async({
-  purchaseRequests: collection('purchaseRequest').all()
- })
+@async({ purchaseRequests: collection('purchaseRequest').all() })
 @contextTypes({ muiTheme: PropTypes.object })
 class ViewPurchaseRequests extends Component {
 
