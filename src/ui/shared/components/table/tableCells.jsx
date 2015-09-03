@@ -1,6 +1,7 @@
 import React from 'react'
 import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import Link from '../link'
+import async, {model} from '../async'
 import numeral from 'numeral'
 import AgentIcon from 'material-ui/lib/svg-icons/action/account-circle'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
@@ -55,6 +56,13 @@ export class AccountCell extends React.Component {
           {this.props.children}
         </div>
       </Link> : null;
+  }
+}
+
+export class AccountByIdCell extends React.Component {
+  render() {
+    async( AccountName, model('account'))
+    return <AccountCell {...this.props}><AccountName accountId={this.props.accountId}/></AccountCell>
   }
 }
 
@@ -226,6 +234,7 @@ let CellTypes = {
     button: ButtonCell,
     boolean: BooleanCell,
     account: AccountCell,
+    accountById: AccountByIdCell,
     contact: ContactCell,
     agent: AgentCell,
     send: SendCell,

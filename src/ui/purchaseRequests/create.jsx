@@ -39,7 +39,7 @@ import moment from 'moment'
   'file3'
 ])
 @async({ createPurchaseRequest: action() })
-class CreateTicket extends Component {
+class CreatePurchaseRequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -224,4 +224,4 @@ class CreateTicket extends Component {
   }
 }
 
-export default CreateTicket
+export default CreatePurchaseRequest
