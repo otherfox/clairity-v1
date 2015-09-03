@@ -4,8 +4,8 @@ import { Cards, DetailsObject } from '../shared/components'
 import { Paper } from 'material-ui'
 import { contextTypes } from '../shared/decorators'
 
-@contextTypes({ lang: PropTypes.object })
 @async({ contact: model() })
+@contextTypes({ lang: PropTypes.object })
 class ViewContact extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +20,7 @@ class ViewContact extends Component {
   render() {
     return (
       <div>
-        // TODO: Implement {this.context.lang('Contact')} 
-        <h1>Contact: {this.props.contact.name}</h1>
+        <h1>{this.context.lang('Contact')}: {this.props.contact.name}</h1>
         <DetailsObject target={this.props.contact} />
       </div>
     );
