@@ -6,9 +6,11 @@ import Table from '../shared/components/table'
 import Header from '../shared/components/header'
 import { RaisedButton, Utils } from 'material-ui'
 import { contextTypes } from '../shared/decorators'
-import async, { collection } from '../shared/components/async'
+import async, { collection, model } from '../shared/components/async'
 
-@async({ purchaseRequests: collection('purchaseRequest').all() })
+@async({
+  purchaseRequests: collection('purchaseRequest').all()
+ })
 @contextTypes({ muiTheme: PropTypes.object })
 class ViewPurchaseRequests extends Component {
 
@@ -17,19 +19,19 @@ class ViewPurchaseRequests extends Component {
     return {
       colNames: [
         { label: 'ID', name: 'id', props: { cellStyle: { color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .75) } } },
-        { label: 'item', name: 'item' },
-        { label: 'location_id', name: 'location_id' },
-        { label: 'approval_date', name: 'approval_date' },
-        { label: 'requested_by', name: 'requested_by' },
-        { label: 'approval_id', name: 'approval_id' },
-        { label: 'customer_id', name: 'customer_id' },
-        { label: 'requested_date', name: 'requested_date' },
-        { label: 'amount', name: 'amount' },
-        { label: 'type', name: 'type' },
-        { label: 'notes', name: 'notes' }
+        { label: 'Item', name: 'item' },
+        { label: 'Location ID', name: 'location_id' },
+        { label: 'Approved', name: 'approval_date', cellType:'date' },
+        { label: 'Requested By', name: 'requested_by' },
+        { label: 'Approval ID', name: 'approval_id' },
+        { label: 'Customer', name: 'customer_id', cellType: 'accountById', props: { idField: 'customer_id' } },
+        { label: 'Requested', name: 'requested_date', cellType:'date' },
+        { label: 'Amount', name: 'amount', cellType:'currency' },
+        { label: 'Type', name: 'type' },
+        { label: 'Notes', name: 'notes' }
       ],
       data: purchaseRequests,
-      // colWidths: [1,3,1,1,1,1,1],
+      colWidths: [1,3,1,1,1,1,1,1,1,1,3],
       widthAdj: -20
     }
   }
