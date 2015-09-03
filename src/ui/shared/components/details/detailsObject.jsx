@@ -12,7 +12,7 @@ class DetailsObject extends Component {
   render() {
     let o = this.props.target;
     return (
-      <Details>
+      <Details {...this.props}>
         {
           Object.keys(o).map(k =>
             <DetailsRow label={k}>
