@@ -1,10 +1,13 @@
 import {} from 'babel/polyfill'
-import {} from './less/main'
+import {} from './ui/less/main'
 import React, {addons} from 'react/addons'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import SettingsManager from './shared/settings'
+import SettingsManager from './ui/shared/settings'
 
-import Router from './shared/router'
+import AWS from 'aws-sdk'
+
+import Router from './ui/shared/router'
+import WorkerBridge, {instance} from './core/bridge' // force instantiation here
 
 window.Perf = addons.Perf;
 
