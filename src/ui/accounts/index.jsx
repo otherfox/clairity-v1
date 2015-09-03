@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Paper, Utils } from 'material-ui'
 
 import { Header, Layout, Link, SubHeader } from '../shared/components'
