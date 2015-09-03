@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { AgentCell } from '../../shared/components/table/tableCells'
 
-export class UserName extends Component {
+export default class UserName extends Component {
   render() {
     let agent = this.props.user ? this.props.user : {};
     return (

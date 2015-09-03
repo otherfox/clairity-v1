@@ -32,7 +32,7 @@ export class AgentCell extends React.Component {
   }
 }
 
-import UserName from '../../../accounts/public/name'
+import UserName from '../../../users/public/name'
 
 export class AgentByIdCell extends React.Component {
   render() {
@@ -248,7 +248,7 @@ let CellTypes = {
     accountById: AccountByIdCell,
     contact: ContactCell,
     agent: AgentCell,
-    agentByIdCell: AgentByIdCell,
+    agentById: AgentByIdCell,
     send: SendCell,
     range: RangeCell
 };
