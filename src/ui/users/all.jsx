@@ -10,9 +10,9 @@ import {
 import Table, {} from '../shared/components/table'
 import DetailRow, {} from '../shared/components/details/detailRow'
 
-@async({ contacts: collection('contact').all() })
+@async({ contacts: collection('user').all() })
 @contextTypes({ muiTheme: PropTypes.object })
-class ListContacts extends Component {
+class ListUsers extends Component {
   style() {
       return {
         root: {},
@@ -31,7 +31,7 @@ class ListContacts extends Component {
   getContacts() {
     return {
       colNames: [
-        { label: 'Name', name: 'name', cellType: 'contact' }
+        { label: 'Name', name: 'name', cellType: 'user' }
       ],
       data: this.props.contacts
     }
@@ -40,11 +40,11 @@ class ListContacts extends Component {
     let contacts = this.props.contacts || [];
     return (
       <div style={this.style().root}>
-        <h1>Contacts</h1>
+        <h1>Users</h1>
         <Table {...this.getContacts() }/>
       </div>
     );
   }
 }
 
-export default ListContacts;
+export default ListUsers;
