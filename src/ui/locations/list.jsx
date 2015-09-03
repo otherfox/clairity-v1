@@ -1,5 +1,5 @@
 
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import async, { collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 
