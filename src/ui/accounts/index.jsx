@@ -59,7 +59,10 @@ class AccountView extends Component {
 
         <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
           <AccountDetails user={null} account={this.props.account} />
-          <AccountLocations accountId={this.props.accountId} />
+          <div style={{padding: '10px 20px 20px 20px'}}>
+            <h3 style={this.style().header}>Locations</h3>
+            <AccountLocations accountId={this.props.accountId} />
+          </div>
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
               <div>
