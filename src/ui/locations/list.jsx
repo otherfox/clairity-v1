@@ -6,7 +6,7 @@ import { propTypes } from '../shared/decorators'
 import LocationDetails from './public/details'
 
 @propTypes({ locations: PropTypes.arrayOf(PropTypes.object) })
-class ListLocationsView extends Component {
+class ListLocations extends Component {
   render() {
     return (
       <div>
