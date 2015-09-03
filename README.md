@@ -1,22 +1,16 @@
 
 Compilation instructions:
 
-Make sure you have npm/node installed, as well as bower and webpack
+Make sure you have npm/node installed, as well as webpack
 
 ```
-npm install -g bower webpack
+npm install -g webpack
 ```
 
 then run
 
 ```
 npm install
-```
-
-and
-
-```
-bower install
 ```
 
 and finally just
