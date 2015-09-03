@@ -73,8 +73,8 @@ import Tickets from '../../tickets'
 import CreateTicket from '../../tickets/create'
 
 /* Purchase Requests */
-import PurchaseRequests from '../../purchaseRequest'
-import CreatePurchaseRequest from '../../purchaseRequest/create'
+import PurchaseRequests from '../../purchaseRequests'
+import CreatePurchaseRequest from '../../purchaseRequests/create'
 
 export default (
   <Route>
