@@ -5,10 +5,10 @@ export function eventConvertLead(contact) {
 
 export function eventInsertContact(contact) {
   let {
-    name, company, phone, ext, cell, email, fax, comments
+    name, company, phone, extension, cell, email, fax, comments
   } = contact;
   let result = {
-    name, company, phone, ext, cell, email, fax, comments
+    name, company, phone, extension, cell, email, fax, comments
   };
   return result;
 }

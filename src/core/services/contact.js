@@ -107,7 +107,7 @@ import {
 export function postInsertContact(contact) {
   // TODO: Verify this URL
   return new Promise((s, f) => {
-    req.post(`https://lab.rairity.com/controller.cfm?event=insertContact`)
+    req.post(`https://lab.rairity.com/controller.cfm?event=insertContacts`)
       .withCredentials()
       .type('form')
       .send(eventInsertContact(contact))

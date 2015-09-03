@@ -23,6 +23,11 @@ import OpenInstalls from '../../openInstalls'
 import ViewAccount from '../../accounts'
 import ListAccounts from '../../accounts/all'
 
+/* Users */
+import ViewUser from '../../users'
+import ListUsers from '../../users/all'
+import CreateUser from '../../users/create'
+
 /* Locations */
 import ViewLocation from '../../locations'
 import EditLocation  from '../../locations/edit'
@@ -183,6 +188,15 @@ export default (
             <Route path=":contactId/:userId" handler={RouteHandler}>
               <Route name="add-contact-opp" path="convert" handler={CreateOpportunity} />
             </Route>
+          </Route>
+        </Route>
+
+        <Route {/***** Users *****/...{}}>
+          <Redirect from="users" to="all-users" />
+          <Route name="users" handler={RouteHandler} >
+            <Route name="all-users" path="all" handler={ListUsers} />
+            <Route name="add-user" path="create" handler={CreateUser} />
+            <Route path=":userId" handler={ViewUser} />
           </Route>
         </Route>
 
