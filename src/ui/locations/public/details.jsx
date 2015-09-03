@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Paper } from 'material-ui'
 
 import { propTypes } from '../../shared/decorators'
