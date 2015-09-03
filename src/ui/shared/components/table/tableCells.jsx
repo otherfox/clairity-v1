@@ -32,6 +32,15 @@ export class AgentCell extends React.Component {
   }
 }
 
+import UserName from '../../../accounts/public/name'
+
+export class AgentByIdCell extends React.Component {
+  render() {
+    let User = async( UserName, {user: model('user')});
+    return (<User userId={this.props.data[this.props.userId]}/>)
+  }
+}
+
 export class AccountCell extends React.Component {
   render() {
     return (this.props.children) ?
@@ -59,10 +68,12 @@ export class AccountCell extends React.Component {
   }
 }
 
+import AccountName from '../../../accounts/public/name'
+
 export class AccountByIdCell extends React.Component {
   render() {
-    async( AccountName, model('account'))
-    return <AccountCell {...this.props}><AccountName accountId={this.props.accountId}/></AccountCell>
+    let Account = async( AccountName, {account: model('account')});
+    return (<Account accountId={this.props.data[this.props.accountId]}/>)
   }
 }
 
@@ -237,6 +248,7 @@ let CellTypes = {
     accountById: AccountByIdCell,
     contact: ContactCell,
     agent: AgentCell,
+    agentByIdCell: AgentByIdCell,
     send: SendCell,
     range: RangeCell
 };
