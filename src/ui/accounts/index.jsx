@@ -68,9 +68,8 @@ let ContactListQuery = async(ContactList, {
 import AccountDetails from './public/details'
 
 @async({ account: model('account') })
-@contextTypes({ lang: PropTypes.object })
 @propTypes({ account: PropTypes.object })
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 class AccountView extends Component {
   style() {
     return {
@@ -106,8 +105,8 @@ class AccountView extends Component {
           <AccountDetails user={null} account={this.props.account} />
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
-              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Opportunities</h3><OppsListQuery accountId={account.id} /></Paper></div>
-              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>Contacts</h3><ContactListQuery accountId={account.id} /></Paper></div>
+              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>{this.context.lang('Opportunities')}</h3><OppsListQuery accountId={account.id} /></Paper></div>
+              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>{this.context.lang('Contacts')}</h3><ContactListQuery accountId={account.id} /></Paper></div>
             </Layout>
           </div>
           <div><ContractsListQuery accountId={account.id} /></div>
