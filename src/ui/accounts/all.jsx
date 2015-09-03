@@ -12,8 +12,6 @@ import {
   FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter
 } from '../shared/components/filteredCollection'
 
-// import langKeys from '../shared/lang/langkeys.js'
-
 @async({ accounts: collection('account').all() })
 @contextTypes({ lang: PropTypes.object })
 @propTypes({ accounts: PropTypes.array.isRequired })
@@ -38,7 +36,7 @@ class ViewAccounts extends Component {
         <Header><h1>{this.context.lang('View Accounts')}</h1></Header>
         <FilteredCollection data={accounts}>
           <Filters>
-            <TextFilter name={'name'} label={'Account Name'} />
+            <TextFilter name={'name'} label={this.context.lang('Account Name')} />
           </Filters>
           <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={16} linkParam={'id'} />
         </FilteredCollection>
