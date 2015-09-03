@@ -47,17 +47,18 @@ let LeftNav = React.createClass ({
           `}
         </style>
         <Menu zDepth={0} style={this._style().menu} onItemTap={this._link} menuItems={[
-          { text: "Aging Reports", target: "aging-reports"},
-          { text: "IP Blocks", target: "ip-blocks"},
-          { text: "IP Zones", target: "ip-zones"},
-          { text: "Accounts", target: "accounts"},
-          { text: "Opportunites", target: "opps"},
-          { text: "Contacts", target: "contacts"},
-          { text: "Leads", target: "leads"},
-          { text: "Open Installs", target: "open-installs"},
-          { text: "Work Orders", target: "/work-orders/1538"},
-          { text: "Tickets", target: "/tickets"},
-          { text: "Login", target: "login"}
+          { text: 'Aging Reports', target: 'aging-reports'},
+          { text: 'IP Blocks', target: 'ip-blocks'},
+          { text: 'IP Zones', target: 'ip-zones'},
+          { text: 'Accounts', target: 'accounts'},
+          { text: 'Opportunites', target: 'opps'},
+          { text: 'Contacts', target: 'contacts'},
+          { text: 'Leads', target: 'leads'},
+          { text: 'Open Installs', target: 'open-installs'},
+          { text: 'Work Orders', target: '/work-orders/1538'},
+          { text: 'Tickets', target: '/tickets'},
+          { text: 'Purchase Requests', target:'/purchase-requests'},
+          { text: 'Login', target: 'login'}
         ]} />
       </div>
     );

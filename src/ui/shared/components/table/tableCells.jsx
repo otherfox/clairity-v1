@@ -35,7 +35,7 @@ export class AccountCell extends React.Component {
   render() {
     return (this.props.children) ?
       <Link to="view-account"
-            params={{accountId: (this.props.data) ? this.props.data[this.props.idField] : '' }}
+            params={{accountId: (this.props.data) ? this.props.data[this.props.idField || 'id'] : '' }}
             style={_.assign({
               color: this.context.muiTheme.palette.accent1Color
             }, this.props.cellStyle)
@@ -62,7 +62,7 @@ export class ContactCell extends React.Component {
   render() {
     return (this.props.children) ?
       <Link to="view-contact"
-            params={{contactId: 0}}
+            params={{ contactId: this.props.data ? this.props.data[this.props.idField || 'id'] : undefined }}
             style={_.assign({
               color: this.context.muiTheme.palette.textColor
             }, this.props.cellStyle)

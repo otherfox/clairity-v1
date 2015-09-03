@@ -1,0 +1,144 @@
+{
+   "location_id":1988,
+   "approval_date":"April, 08 2011 11:15:11 +0000",
+   "requested_by":115,
+   "item":"Cisco 2801, HWIC-4ESW",
+   "id":3,
+   "approval_id":10,
+   "customer_id":1294,
+   "requested_date":"April, 08 2011 08:31:51 +0000",
+   "amount":1144.01,
+   "type":{  
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"SIP customer installed with no DMARC so they are complaining of poor call quality. ORN dmarc will segment traffic leaving the customer lan.  Device was already ordered but placing in the new PO system for tracking purposes."
+},
+{
+   "location_id":1778,
+   "approval_date":"April, 08 2011 11:15:26 +0000",
+   "requested_by":115,
+   "item":"PC Flash cards",
+   "id":4,
+   "approval_id":10,
+   "customer_id":1179,
+   "requested_date":"April, 08 2011 08:33:38 +0000",
+   "amount":161,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"Memory cards for in stock switches we will be deploying soon. Cards were already ordered. Entering in new PO system for tracking purposes."
+},
+{
+   "location_id":2177,
+   "approval_date":"April, 08 2011 11:15:57 +0000",
+   "requested_by":115,
+   "item":"2801 SIP Dmarc",
+   "id":5,
+   "approval_id":10,
+   "customer_id":1400,
+   "requested_date":"April, 08 2011 08:35:28 +0000",
+   "amount":1264.74,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"Device ordered to establish DMARC at century warehouse but customer was unable to complete test upgrade due to lack of knowledge of their own lan and no lan vendor to make changes. Device already odered. Entering in PO system for tracking purposes. We will use this device on the next relevant deployment."
+},
+{
+   "location_id":2249,
+   "approval_date":"April, 11 2011 09:55:57 +0000",
+   "requested_by":115,
+   "item":"Cisco 2950",
+   "id":6,
+   "approval_id":107,
+   "customer_id":1429,
+   "requested_date":"April, 11 2011 09:18:07 +0000",
+   "amount":100,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"cpe device for RLJ Buckhead Lessee"
+},
+{
+   "location_id":2353,
+   "approval_date":"April, 14 2011 09:02:35 +0000",
+   "requested_by":7,
+   "item":"Ubiquiti PowerbridgeM5",
+   "id":7,
+   "approval_id":10,
+   "customer_id":1481,
+   "requested_date":"April, 14 2011 08:06:30 +0000",
+   "amount":600,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"This pair of radios will be used for the new circuit we will be installing next Monday 4/18"
+},
+{
+   "location_id":1778,
+   "approval_date":"April, 14 2011 14:39:14 +0000",
+   "requested_by":7,
+   "item":"Outdoor CAT 5e ",
+   "id":8,
+   "approval_id":10,
+   "customer_id":1179,
+   "requested_date":"April, 14 2011 09:07:36 +0000",
+   "amount":461,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"Outdoor CAT 5e cable for Atlanta stock/inventory. This is the outdoor cable we use on all of our installations.\r\n3 x $145 = $435\r\n"
+},
+{
+   "location_id":1778,
+   "approval_date":"May, 12 2011 14:27:58 +0000",
+   "requested_by":7,
+   "item":"Brakes, Tires and service for Chevy 1500 4x4 Truck",
+   "id":9,
+   "approval_id":10,
+   "customer_id":1179,
+   "requested_date":"April, 14 2011 09:14:13 +0000",
+   "amount":1500,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"This truck has 81K miles and not had brakes or tires replaced. Brake light stays on the dashboard and vibrates when stopping. Tires are completely worn out. It has never been serviced, transmission flushed, rear differential fluid, etc. We can get the work completed in stages if necessary."
+},
+{
+   "location_id":2239,
+   "declined_id":10,
+   "declined_date":"April, 14 2011 14:39:02 +0000",
+   "requested_by":115,
+   "item":"2801, PRI, PVDM",
+   "id":10,
+   "customer_id":1420,
+   "requested_date":"April, 14 2011 10:53:15 +0000",
+   "amount":1142,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"Broadsource ordered SIP and now they are unable to deploy sip. Port is tomorrow and customer is asking us to temporarily deploy a PRI to save the port. We can redeploy this device on the next 10-30mb customer with PRI.  Price does not include tax."
+},
+{
+   "location_id":672,
+   "approval_date":"April, 14 2011 14:38:52 +0000",
+   "requested_by":7,
+   "item":"Ubiquiti PowerbridgeM5",
+   "id":11,
+   "approval_id":10,
+   "customer_id":462,
+   "requested_date":"April, 14 2011 13:37:04 +0000",
+   "amount":600,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"Amerprise is upgrading circuit to 8 Mbps, and they have added another location. The radio currently serving their location has been in service about 4 years and needs an upgrade. We have a test of the circuit scheduled for next Tuesday, it would be a good time to upgrade circuit."
+}

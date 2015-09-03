@@ -1,10 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import async, { model } from '../shared/components/async'
-import { Cards, DetailsObject } from '../shared/components'
-import { Paper } from 'material-ui'
+import { DetailsObject } from '../shared/components/cards'
 
-@async({ contact: model() })
-class ViewContact extends Component {
+@async({ user: model() })
+class ViewUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,8 +17,8 @@ class ViewContact extends Component {
   render() {
     return (
       <div>
-        <h1>Contact: {this.props.contact.name}</h1>
-        <DetailsObject target={this.props.contact} />
+        <h1>User Single</h1>
+        <DetailsObject target={this.props.user} />
       </div>
     );
   }
@@ -27,6 +26,6 @@ class ViewContact extends Component {
 
 export default class extends Component {
   render() {
-    return <ViewContact {...this.props.params} />
+    return <ViewUser {...this.props.params} />
   }
 };

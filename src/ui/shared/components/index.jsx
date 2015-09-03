@@ -1,5 +1,5 @@
 export Cards from './cards'
-export Details from './details'
+export Details, { DetailsRow, DetailsObject } from './details'
 export Table from './table'
 export CollectionDropdown from './collectionDropdown'
 export Content from './content'

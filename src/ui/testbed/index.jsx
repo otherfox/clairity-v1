@@ -5,13 +5,30 @@
 
 import React, { PropTypes, Component } from 'react'
 import { contextTypes } from '../shared/decorators'
+import {
+  asyncTokenizer,
+  asyncTypeahead
+} from '../shared/components/collectionDropdown'
+import async, { action, query, collection } from '../shared/components/async'
+import controllable from 'react-controllables'
 
-import CreateContact from '../contacts/create'
+let NotifyTokenizer = asyncTokenizer({ collection: collection('contact').all() });
+let NotifyTypeahead = asyncTypeahead({ collection: collection('contact').all() });
 
+@controllable(['caller', 'caller2'])
 @contextTypes({muiTheme: PropTypes.object})
 class TestbedPage extends Component {
   render() {
-    return <CreateContact />;
+    return (
+      <div>
+        <h2>Tokenizer</h2>
+        <NotifyTokenizer value={ this.props.caller2 || '' }
+                         onTokenAdd={ (i,s) => this.props.onCaller2Change(2) }/>
+        <h2>Typeahead</h2>
+        <NotifyTypeahead value={ this.props.caller || '' }
+                         onOptionSelected={ i => this.props.onCallerChange(i) }/>
+      </div>
+    )
   }
 }
 

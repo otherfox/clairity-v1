@@ -3,11 +3,11 @@ import async, { action } from '../shared/components/async'
 
 import { RaisedButton } from 'material-ui'
 
-@async({ createContact: action() })
-class CreateContact extends Component {
+@async({ createUser: action() })
+class CreateUser extends Component {
   render() {
     return (
-      <RaisedButton onClick={() => this.props.actions.createContact({
+      <RaisedButton onClick={() => this.props.actions.createUser({
         company: 'form test 1',
         name: 'test test',
         comments: 'test',
@@ -24,4 +24,4 @@ class CreateContact extends Component {
   }
 }
 
-export default CreateContact;
+export default CreateUser;
