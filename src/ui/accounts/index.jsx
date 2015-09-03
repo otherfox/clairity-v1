@@ -58,20 +58,20 @@ class AccountView extends Component {
         <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
           <AccountDetails user={null} account={this.props.account} />
           <div style={{padding: '10px 20px 20px 20px'}}>
-            <h3 style={this.style().header}>Locations</h3>
+            <h3 style={this.style().header}>{this.context.lang('Locations')}</h3>
             <AccountLocations accountId={this.props.accountId} />
           </div>
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
               <div>
                 <Paper style={{padding: '10px 20px 20px 20px'}}>
-                  <h3 style={this.style().header}>Opportunities</h3>
+                  <h3 style={this.style().header}>{this.context.lang('Opportunities')}</h3>
                   <OppsListQuery accountId={account.id} />
                 </Paper>
               </div>
               <div>
                 <Paper style={{padding: '10px 20px 20px 20px'}}>
-                  <h3 style={this.style().header}>Contacts</h3>
+                  <h3 style={this.style().header}>{this.context.lang('Contacts')}</h3>
                   <ContactListQuery accountId={account.id} />
                 </Paper>
               </div>

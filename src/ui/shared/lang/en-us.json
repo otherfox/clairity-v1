@@ -8,6 +8,7 @@
   "customer": "Customer",
   "id": "ID",
   "item": "Item",
+  "locations": "Locations",
   "location_id": "Location ID",
   "name": "Name",
   "notes": "Notes",
