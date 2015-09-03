@@ -6,12 +6,14 @@ import Cards from '../shared/components/cards'
 
 import async, { collection, model } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
+import { contextTypes } from '../shared/decorators'
 
 import {
   FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter
 } from '../shared/components/filteredCollection'
 
 @async({ accounts: collection('account').all() })
+@contextTypes({ lang: PropTypes.object })
 @propTypes({ accounts: PropTypes.array.isRequired })
 class ViewAccounts extends Component {
   getAccounts(accounts) {
@@ -31,7 +33,7 @@ class ViewAccounts extends Component {
 
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1>View Accounts</h1></Header>
+        <Header><h1>{this.context.lang('View Accounts').toString()}</h1></Header>
         <FilteredCollection data={accounts}>
           <Filters>
             <TextFilter name={'name'} label={'Account Name'} />
