@@ -209,10 +209,10 @@ export default (
         </Route>
 
         <Route {/***** Purchase Requests *****/...{}}>
-          <Redirect from="purchase-requests" to="all-purchaseRequests" />
+          <Redirect from="purchase-requests" to="all-purchase-requests" />
           <Route name="purchase-requests" handler={RouteHandler} >
-            <Route name="all-purchaseRequests" path="all" handler={PurchaseRequests} />
-            <Route name="add-purchaseRequest" path="create" handler={CreatePurchaseRequest} />
+            <Route name="all-purchase-requests" path="all" handler={PurchaseRequests} />
+            <Route name="add-purchase-request" path="create" handler={CreatePurchaseRequest} />
           </Route>
         </Route>
 
