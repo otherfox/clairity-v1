@@ -20,6 +20,7 @@ class ViewContact extends Component {
   render() {
     return (
       <div>
+        // TODO: Implement {this.context.lang('Contact')} 
         <h1>Contact: {this.props.contact.name}</h1>
         <DetailsObject target={this.props.contact} />
       </div>
