@@ -72,6 +72,10 @@ import WorkOrderUpload from '../../workOrders/upload'
 import Tickets from '../../tickets'
 import CreateTicket from '../../tickets/create'
 
+/* Purchase Requests */
+import PurchaseRequests from '../../purchaseRequests'
+import CreatePurchaseRequest from '../../purchaseRequests/create'
+
 export default (
   <Route>
     <Redirect from="/" to="login" />
@@ -202,6 +206,14 @@ export default (
 
         <Route {/***** Open Intstalls *****/...{}}>
           <Route name="open-installs" handler={OpenInstalls} />
+        </Route>
+
+        <Route {/***** Purchase Requests *****/...{}}>
+          <Redirect from="purchase-requests" to="all-purchase-requests" />
+          <Route name="purchase-requests" handler={RouteHandler} >
+            <Route name="all-purchase-requests" path="all" handler={PurchaseRequests} />
+            <Route name="add-purchase-request" path="create" handler={CreatePurchaseRequest} />
+          </Route>
         </Route>
 
         <Route {/***** Tickets *****/...{}}>

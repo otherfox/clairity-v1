@@ -157,7 +157,7 @@ class CreateTicket extends Component {
                   <RaisedButton label={'New Caller'} onTouchTap={ () => this.refs.dialog.show() } />
                   <Dialog
                     ref='dialog'
-                    title='New Caller'
+                    title='New'
                     actions={[
                       { text: 'Cancel' },
                       { text: 'Submit', onTouchTap: e => console.log(e), ref: 'submit' }
@@ -199,9 +199,6 @@ class CreateTicket extends Component {
                 <div>
                   <RaisedButton label='New'
                                 onClick={ this.createPerson }
-                                style={{marginRight: '10px'}} />
-                  <RaisedButton label='Remove'
-                                onClick={ this.deletePerson }
                                 style={{marginRight: '10px'}} />
                 </div>
               </DetailRow>
