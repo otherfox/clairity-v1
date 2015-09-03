@@ -42,7 +42,7 @@ class ViewPurchaseRequests extends Component {
         <Header><h1>Purchase Requests</h1></Header>
         <div>
           <Link to='/purchaseRequests/create'>
-            <RaisedButton label='Create Purcase Request' />
+            <RaisedButton label='Request Purchase' />
           </Link>
         </div>
         <FilteredCollection data={this.props.purchaseRequests}>
