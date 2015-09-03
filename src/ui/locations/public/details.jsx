@@ -6,7 +6,7 @@ import { Layout, DetailsObject, Settings } from '../../shared/components'
 import async, { model } from '../../shared/components/async'
 
 @propTypes({
-  location: PropTypes.shapeOf({
+  location: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     street1: PropTypes.string,
@@ -14,7 +14,7 @@ import async, { model } from '../../shared/components/async'
     city: PropTypes.string,
     state: PropTypes.string,
     zip_core: PropTypes.number,
-    customer: PropTypes.shapeOf({
+    customer: PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string,
       street1: PropTypes.string,
