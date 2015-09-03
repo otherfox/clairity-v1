@@ -32,7 +32,7 @@ import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation }
 import { getOpportunitiesByAccount} from './opportunity'
 import { getContractsByAccount, getContractsByLocation } from './contract'
 import { getAccountsByAgent, getAccountsByContact } from './account'
-import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
+import { getLocationsByPop, getLocationsByContact, getLocationsByStatus, getLocationsByAccount } from './location'
 import { getWorkOrderMessagesByWorkOrder } from './messages'
 
 const resourceVia = {
@@ -58,7 +58,8 @@ const resourceVia = {
   location: {
     pop: getLocationsByPop,
     contact: getLocationsByContact,
-    locationStatus: getLocationsByStatus
+    locationStatus: getLocationsByStatus,
+    account: getLocationsByAccount
   }
 };
 
@@ -82,6 +83,7 @@ import { getSalesStages } from './salesStage'
 import { getLeadSources } from './leadSource'
 import { getCampaignSources } from './campaignSource'
 import { getServiceTypes } from './serviceType'
+import { getLocations } from './location'
 import { getPurchaseRequests } from './purchaseRequest'
 import { getTickets, getTicketTemplates, getTicketStatuses, getTicketPriorities } from './ticket'
 
