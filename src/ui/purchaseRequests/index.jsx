@@ -11,24 +11,24 @@ import async, { collection, model } from '../shared/components/async'
 @async({
   purchaseRequests: collection('purchaseRequest').all()
  })
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 class ViewPurchaseRequests extends Component {
 
   getPurchaseRequests(purchaseRequests) {
     console.log(purchaseRequests);
     return {
       colNames: [
-        { label: 'ID', name: 'id', props: { cellStyle: { color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .75) } } },
-        { label: 'Item', name: 'item' },
-        { label: 'Location ID', name: 'location_id' },
-        { label: 'Approved', name: 'approval_date', cellType:'date' },
-        { label: 'Requested By', name: 'requested_by' },
-        { label: 'Approval ID', name: 'approval_id' },
-        { label: 'Customer', name: 'customer_id', cellType: 'accountById', props: { idField: 'customer_id' } },
-        { label: 'Requested', name: 'requested_date', cellType:'date' },
-        { label: 'Amount', name: 'amount', cellType:'currency' },
-        { label: 'Type', name: 'type' },
-        { label: 'Notes', name: 'notes' }
+        { label: this.context.lang('ID'), name: 'id', props: { cellStyle: { color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .75) } } },
+        { label: this.context.lang('Item'), name: 'item' },
+        { label: this.context.lang('Location ID'), name: 'location_id' },
+        { label: this.context.lang('Approved'), name: 'approval_date', cellType:'date' },
+        { label: this.context.lang('Requested By'), name: 'requested_by' },
+        { label: this.context.lang('Approval ID'), name: 'approval_id' },
+        { label: this.context.lang('Customer'), name: 'customer_id', cellType: 'accountById', props: { idField: 'customer_id' } },
+        { label: this.context.lang('Requested'), name: 'requested_date', cellType:'date' },
+        { label: this.context.lang('Amount'), name: 'amount', cellType:'currency' },
+        { label: this.context.lang('Type'), name: 'type' },
+        { label: this.context.lang('Notes'), name: 'notes' }
       ],
       data: purchaseRequests,
       colWidths: [1,3,1,1,1,1,1,1,1,1,3],
@@ -39,7 +39,7 @@ class ViewPurchaseRequests extends Component {
   render() {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1>Purchase Requests</h1></Header>
+        <Header><h1>{this.context.lang('Purchase Requests')}</h1></Header>
         <div>
           <Link to='/purchaseRequests/create'>
             <RaisedButton label='Create Purcase Request' />

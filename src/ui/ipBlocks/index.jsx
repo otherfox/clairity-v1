@@ -286,7 +286,7 @@ let IpBlocks = React.createClass({
         ]
       },
       colWidths: [2,2,2,2,2,2,2,2],
-      
+
       widthAdj: -30
     };
   },
