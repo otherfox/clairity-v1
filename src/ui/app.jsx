@@ -13,6 +13,7 @@ import ThemeManager from './shared/themes/themeManager'
 import SettingsManager from './shared/settings'
 
 import lang from './shared/lang/en-us'
+import langKeys from './shared/lang/langKeys.js'
 
 export class App extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export class App extends React.Component {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
       lang: function(s) {
-        let key = s.toLowerCase().replace(/\s/g, '_').replace(/[^a-zA-Z_\d:]/, '')
+        let key = langKeys.enToKey(s)
         return lang[key] || s // TODO: throw new Error(`Key not found in translation: '${key}' for string '${s}'`)
       }
     };
