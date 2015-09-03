@@ -1,6 +1,7 @@
 import React from 'react'
 import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import Link from '../link'
+import async, {model} from '../async'
 import numeral from 'numeral'
 import AgentIcon from 'material-ui/lib/svg-icons/action/account-circle'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
@@ -31,6 +32,15 @@ export class AgentCell extends React.Component {
   }
 }
 
+import UserName from '../../../users/public/name'
+
+export class AgentByIdCell extends React.Component {
+  render() {
+    let User = async( UserName, {user: model('user')});
+    return (<User userId={this.props.data[this.props.userId]}/>)
+  }
+}
+
 export class AccountCell extends React.Component {
   render() {
     return (this.props.children) ?
@@ -55,6 +65,15 @@ export class AccountCell extends React.Component {
           {this.props.children}
         </div>
       </Link> : null;
+  }
+}
+
+import AccountName from '../../../accounts/public/name'
+
+export class AccountByIdCell extends React.Component {
+  render() {
+    let Account = async( AccountName, {account: model('account')});
+    return (<Account accountId={this.props.data[this.props.accountId]}/>)
   }
 }
 
@@ -226,8 +245,10 @@ let CellTypes = {
     button: ButtonCell,
     boolean: BooleanCell,
     account: AccountCell,
+    accountById: AccountByIdCell,
     contact: ContactCell,
     agent: AgentCell,
+    agentById: AgentByIdCell,
     send: SendCell,
     range: RangeCell
 };
