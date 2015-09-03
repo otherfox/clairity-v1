@@ -2,7 +2,9 @@ import React, { PropTypes, Component } from 'react'
 import async, { model } from '../shared/components/async'
 import { Cards, DetailsObject } from '../shared/components'
 import { Paper } from 'material-ui'
+import { contextTypes } from '../shared/decorators'
 
+@contextTypes({ lang: PropTypes.object })
 @async({ contact: model() })
 class ViewContact extends Component {
   constructor(props) {
