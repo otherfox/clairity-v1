@@ -200,7 +200,7 @@ export default (
           <Route name="users" handler={RouteHandler} >
             <Route name="all-users" path="all" handler={ListUsers} />
             <Route name="add-user" path="create" handler={CreateUser} />
-            <Route path=":userId" handler={ViewUser} />
+            <Route path=":userId" name="view-user" handler={ViewUser} />
           </Route>
         </Route>
 

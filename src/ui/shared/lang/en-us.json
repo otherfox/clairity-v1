@@ -17,5 +17,8 @@
   "requested": "Requested",
   "requested_by": "Requested By",
   "type": "Type",
+  "user": "User",
+  "users": "Users",
+  "user_name": "User Name",
   "view_accounts": "View Accounts"
 }
