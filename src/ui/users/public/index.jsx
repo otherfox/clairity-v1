@@ -1,4 +1,4 @@
 
-import { UserName } from './name'
+import { UserName } from './link'
 
 export { UserName };
