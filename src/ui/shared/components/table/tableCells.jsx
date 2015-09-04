@@ -256,7 +256,7 @@ let CellTypes = {
     account: AccountCell,
     accountById: AccountByIdCell,
     contact: ContactCell,
-    contactById: ContactById,
+    contactById: ContactByIdCell,
     agent: AgentCell,
     agentById: AgentByIdCell,
     send: SendCell,
