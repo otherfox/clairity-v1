@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import Link from '../link'
 import async, {model} from '../async'
@@ -8,7 +8,7 @@ import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import SendIcon from 'material-ui/lib/svg-icons/content/send'
 
-export class AgentCell extends React.Component {
+export class AgentCell extends Component {
   render() {
     return (this.props.children) ?
       <Link to='/' style={_.assign({
@@ -32,16 +32,16 @@ export class AgentCell extends React.Component {
   }
 }
 
-import UserName from '../../../users/public/name'
+import UserName from '../../../users/public/link'
 
-export class AgentByIdCell extends React.Component {
+export class AgentByIdCell extends Component {
   render() {
     let User = async( UserName, {user: model('user')});
     return (<User userId={this.props.data[this.props.userId]}/>)
   }
 }
 
-export class AccountCell extends React.Component {
+export class AccountCell extends Component {
   render() {
     return (this.props.children) ?
       <Link to="view-account"
@@ -68,16 +68,16 @@ export class AccountCell extends React.Component {
   }
 }
 
-import AccountName from '../../../accounts/public/name'
+import AccountName from '../../../accounts/public/link'
 
-export class AccountByIdCell extends React.Component {
+export class AccountByIdCell extends Component {
   render() {
     let Account = async( AccountName, {account: model('account')});
     return (<Account accountId={this.props.data[this.props.accountId]}/>)
   }
 }
 
-export class ContactCell extends React.Component {
+export class ContactCell extends Component {
   render() {
     return (this.props.children) ?
       <Link to="view-contact"
@@ -103,7 +103,16 @@ export class ContactCell extends React.Component {
   }
 }
 
-export class SendCell extends React.Component {
+import ContactName from '../../../contacts/public/link'
+
+export class ContactByIdCell extends Component {
+  render() {
+    let Contact = async( ContactName, { contact: model('contact') });
+    return (<Contact contactId={this.props.data[this.props.contactId]}/>)
+  }
+}
+
+export class SendCell extends Component {
   render() {
     return (
       <div style={_.assign({textAlign: 'center'}, this.props.cellStyle)} >
@@ -120,7 +129,7 @@ export class SendCell extends React.Component {
   }
 }
 
-export class StringCell extends React.Component {
+export class StringCell extends Component {
   render() {
     return (
       <div style={_.assign({}, this.props.cellStyle)}>
@@ -130,7 +139,7 @@ export class StringCell extends React.Component {
   }
 }
 
-export class NumberCell extends React.Component {
+export class NumberCell extends Component {
   render() {
     return (
       <div style={_.assign({}, this.props.cellStyle)} >
@@ -140,7 +149,7 @@ export class NumberCell extends React.Component {
   }
 }
 
-export class DateCell extends React.Component {
+export class DateCell extends Component {
   formatDate(c) {
     if(c) {
       var d = new Date(c);
@@ -157,7 +166,7 @@ export class DateCell extends React.Component {
   }
 }
 
-export class CurrencyCell extends React.Component {
+export class CurrencyCell extends Component {
   render() {
     return (
       <div style={_.assign({}, this.props.cellStyle)}>
@@ -167,7 +176,7 @@ export class CurrencyCell extends React.Component {
   }
 }
 
-export class LinkCell extends React.Component {
+export class LinkCell extends Component {
   render() {
     return (
       <Link style={_.assign({}, this.props.cellStyle)}
@@ -178,7 +187,7 @@ export class LinkCell extends React.Component {
   }
 }
 
-export class UriCell extends React.Component {
+export class UriCell extends Component {
   render() {
     return (
       <a  style={_.assign({}, this.props.cellStyle)}
@@ -189,7 +198,7 @@ export class UriCell extends React.Component {
   }
 }
 
-export class ButtonCell extends React.Component {
+export class ButtonCell extends Component {
   render() {
     <div style={_.assign({textAlign: 'center'}, this.props.cellStyle)}>
       <RaisedButton label={this.props.children} />
@@ -197,7 +206,7 @@ export class ButtonCell extends React.Component {
   }
 }
 
-export class BooleanCell extends React.Component {
+export class BooleanCell extends Component {
   style() {
     return {
         true: { color: Styles.Colors.green500 },
@@ -215,7 +224,7 @@ export class BooleanCell extends React.Component {
   }
 }
 
-export class RangeCell extends React.Component {
+export class RangeCell extends Component {
   style() {
     return {
         0: { color: Styles.Colors.green500 },
@@ -247,6 +256,7 @@ let CellTypes = {
     account: AccountCell,
     accountById: AccountByIdCell,
     contact: ContactCell,
+    contactById: ContactById,
     agent: AgentCell,
     agentById: AgentByIdCell,
     send: SendCell,
