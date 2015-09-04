@@ -15,7 +15,7 @@ class ViewAccounts extends Component {
   getAccounts(accounts) {
     return {
       colNames: [
-        { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
+        { label: 'Account', name: 'name', cellType: 'account' },
         { label: 'Account Owner', name: 'user_id' }
       ],
       data: accounts,
