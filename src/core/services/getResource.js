@@ -6,6 +6,7 @@ import { getUser } from './users'
 import { getAccount } from './account'
 import { getTicket } from './ticket'
 import { getOpportunity, getSale } from './opportunity'
+import { getSupportNote } from './supportNote'
 
 const resource = {
   contact: getContact,
@@ -16,7 +17,8 @@ const resource = {
   user: getUser,
   account: getAccount,
   opportunity: getOpportunity,
-  ticket: getTicket
+  ticket: getTicket,
+  supportNote: getSupportNote
 };
 
 export function getResource(id, tableName) {
@@ -34,6 +36,7 @@ import { getContractsByAccount, getContractsByLocation } from './contract'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus, getLocationsByAccount } from './location'
 import { getWorkOrderMessagesByWorkOrder } from './messages'
+import { supportNote } from './supportNote'
 
 const resourceVia = {
   workOrderMessage: {
@@ -43,6 +46,9 @@ const resourceVia = {
     account: getContactsByAccount,
     opportunity: getContactsByOpportunity,
     location: getContactsByLocation
+  },
+  supportNote: {
+    account: getSupportNotesByAccount
   },
   contract: {
     account: getContractsByAccount,
@@ -84,6 +90,7 @@ import { getLeadSources } from './leadSource'
 import { getCampaignSources } from './campaignSource'
 import { getServiceTypes } from './serviceType'
 import { getLocations } from './location'
+import { getSupportNotes } from './serviceNote'
 import { getUsers } from './users'
 import { getPurchaseRequests } from './purchaseRequest'
 import { getTickets, getTicketTemplates, getTicketStatuses, getTicketPriorities } from './ticket'
@@ -106,7 +113,8 @@ const collectionMap = {
   ticketStatus: getTicketStatuses,
   ticketPriority: getTicketPriorities,
   purchaseRequest: getPurchaseRequests,
-  user: getUsers
+  user: getUsers,
+  supportNote: getSupportNotes
 };
 
 export function getCollection(tableName) {
