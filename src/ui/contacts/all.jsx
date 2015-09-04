@@ -9,6 +9,7 @@ import {
 } from 'material-ui'
 import Table, {} from '../shared/components/table'
 import DetailRow, {} from '../shared/components/details/detailRow'
+import LangText from '../shared/components/langText'
 
 @async({ contacts: collection('contact').all() })
 @contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
