@@ -235,6 +235,18 @@ export class RangeCell extends Component {
   }
 }
 
+/************* Object *************/
+
+export class ObjectCell extends Component {
+  render() {
+    return  (
+      <div style={ this.props.cellStyle }>
+        {this.props.children[this.props.show]}
+      </div>
+    )
+  }
+}
+
 let CellTypes = {
     string: StringCell,
     number: NumberCell,
@@ -253,7 +265,9 @@ let CellTypes = {
     location: LocationCell,
     locationById: LocationByIdCell,
     send: SendCell,
-    range: RangeCell
+    range: RangeCell,
+    object: ObjectCell
+
 };
 
 export {CellTypes};
