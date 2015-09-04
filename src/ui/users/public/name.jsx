@@ -1,7 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component, PropTypes } from 'react'
 import { AgentCell } from '../../shared/components/table/tableCells'
+import { contextTypes } from '../../shared/decorators'
 
-export default class UserName extends Component {
+@contextTypes
+class UserName extends Component {
   render() {
     let agent = this.props.user ? this.props.user : {};
     return (
@@ -9,3 +11,5 @@ export default class UserName extends Component {
     )
   }
 }
+
+export default UserName;
