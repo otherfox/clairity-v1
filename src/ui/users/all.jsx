@@ -14,7 +14,7 @@ import {
 } from '../shared/components/filteredCollection'
 
 @async({ users: collection('user').all() })
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 class ListUsers extends Component {
   style() {
       return {
