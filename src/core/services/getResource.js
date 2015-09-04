@@ -105,7 +105,8 @@ const collectionMap = {
   ticketTemplate: getTicketTemplates,
   ticketStatus: getTicketStatuses,
   ticketPriority: getTicketPriorities,
-  purchaseRequest: getPurchaseRequests
+  purchaseRequest: getPurchaseRequests,
+  user: getUsers
 };
 
 export function getCollection(tableName) {
