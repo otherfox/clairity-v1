@@ -35,8 +35,9 @@ export class AccountCell extends Component {
 export class AccountByIdCell extends Component {
   render() {
     let Account = async( AccountName, {account: model('account')});
-    return
+    return (
       <Account {..._.assign(this.props, {accountId: this.props.children})} />
+    )
   }
 }
 

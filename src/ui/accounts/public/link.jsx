@@ -8,7 +8,7 @@ import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 @contextTypes({ muiTheme: PropTypes.object })
 export default class AccountName extends Component {
   render() {
-    let account = (this.props.account) ? this.props.account : this.props.children ;
+    let account = (this.props.account) ? this.props.account.name : this.props.children ;
     return (
       <Link to="view-account"
             params={{ accountId: (this.props.data) ? this.props.data[this.props.idField || 'id'] : '' }}
@@ -28,7 +28,7 @@ export default class AccountName extends Component {
             lineHeight: '25px'
           }, this.props.labelStyle
         )}>
-          {this.props.children}
+          { account }
         </div>
       </Link>
     )
