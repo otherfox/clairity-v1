@@ -13,8 +13,6 @@ import {
   Table
 } from '../shared/components'
 
-import { AgentCell } from '../shared/components/table/tableCells'
-
 import async, { model, collection } from '../shared/components/async'
 import { propTypes } from '../shared/decorators'
 import {
@@ -45,7 +43,7 @@ import controllable from 'react-controllables'
 import { State } from 'react-router'
 import { contextTypes } from '../shared/decorators'
 
-import { AccountName } from '../users/public'
+import { AccountName } from '../users/public/link'
 let AccountAgent = async(AccountName, {
   user: model('user')
 });
@@ -75,7 +73,9 @@ class AccountView extends Component {
     return {
       header: {
         marginBottom: '10px',
-        color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)
+        color: Utils.ColorManipulator.fade(
+          this.context.muiTheme.palette.primary1Color, 1
+        )
       }
     }
   }
@@ -89,7 +89,9 @@ class AccountView extends Component {
 
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
-        <Header><h1>{this.context.lang('Account')} - {account.name}</h1></Header>
+        <Header>
+          <h1>{this.context.lang('Account')} - {account.name}</h1>
+        </Header>
         <SubHeader>
           { address }
           {
@@ -105,8 +107,22 @@ class AccountView extends Component {
           <AccountDetails user={null} account={this.props.account} />
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
-              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>{this.context.lang('Opportunities')}</h3><OppsListQuery accountId={account.id} /></Paper></div>
-              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>{this.context.lang('Contacts')}</h3><ContactListQuery accountId={account.id} /></Paper></div>
+              <div>
+                <Paper style={{padding: '10px 20px 20px 20px'}}>
+                  <h3 style={this.style().header}>
+                    {this.context.lang('Opportunities')}
+                  </h3>
+                  <OppsListQuery accountId={account.id} />
+                </Paper>
+              </div>
+              <div>
+                <Paper style={{padding: '10px 20px 20px 20px'}}>
+                  <h3 style={this.style().header}>
+                    {this.context.lang('Contacts')}
+                  </h3>
+                  <ContactListQuery accountId={account.id} />
+                </Paper>
+              </div>
             </Layout>
           </div>
           <div><ContractsListQuery accountId={account.id} /></div>

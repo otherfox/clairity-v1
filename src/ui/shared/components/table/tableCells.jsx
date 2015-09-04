@@ -5,6 +5,7 @@ import async, {model} from '../async'
 import numeral from 'numeral'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import SendIcon from 'material-ui/lib/svg-icons/content/send'
+import _ from 'lodash'
 
 /************* Agent / User *************/
 
@@ -18,7 +19,7 @@ export class AgentCell extends Component {
 export class AgentByIdCell extends Component {
   render() {
     let User = async( UserName, {user: model('user')});
-    return <User userId={this.props.children} {...this.props}/>
+    return <User {..._.assign(this.props, {userId: this.props.children})}/>
   }
 }
 
@@ -34,7 +35,8 @@ export class AccountCell extends Component {
 export class AccountByIdCell extends Component {
   render() {
     let Account = async( AccountName, {account: model('account')});
-    return (<Account accountId={this.props.data[this.props.accountId]} {...this.props}/>)
+    return
+      <Account {..._.assign(this.props, {accountId: this.props.children})} />
   }
 }
 
