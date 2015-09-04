@@ -18,7 +18,7 @@ export class AgentCell extends Component {
 export class AgentByIdCell extends Component {
   render() {
     let User = async( UserName, {user: model('user')});
-    return <User userId={this.props.data[this.props.userId]} {...this.props}/>
+    return <User userId={this.props.children} {...this.props}/>
   }
 }
 
