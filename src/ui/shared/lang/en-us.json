@@ -1,5 +1,6 @@
 {
   "account": "Account",
+  "account_name": "Account Name",
   "amount": "Amount",
   "approval_id": "Approval ID",
   "approved": "Approved",
@@ -8,8 +9,8 @@
   "customer": "Customer",
   "id": "ID",
   "item": "Item",
-  "locations": "Locations",
   "location_id": "Location ID",
+  "locations": "Locations",
   "name": "Name",
   "notes": "Notes",
   "opportunities": "Opportunities",
@@ -18,7 +19,7 @@
   "requested_by": "Requested By",
   "type": "Type",
   "user": "User",
-  "users": "Users",
   "user_name": "User Name",
+  "users": "Users",
   "view_accounts": "View Accounts"
 }
