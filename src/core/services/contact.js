@@ -25,7 +25,7 @@ let getContact = memoize(id => {
 
 let getContacts = memoize(() => {
   return new Promise((s, f) => {
-    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=getAllContacts`)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.ContactDAO&_m=searchContactByName&criteria=`)
       .withCredentials()
       .end((err, res) => {
         if (!err) {
@@ -98,7 +98,47 @@ export {
   getContactsByLocation, getLeads
 };
 
-import { eventConvertLead } from '../gateways/contact'
+import {
+  eventConvertLead,
+  eventInsertContact,
+  eventInsertContactRelationship
+} from '../gateways/contact'
+
+export function postInsertContact(contact) {
+  // TODO: Verify this URL
+  return new Promise((s, f) => {
+    req.post(`https://lab.rairity.com/controller.cfm?event=insertContacts`)
+      .withCredentials()
+      .type('form')
+      .send(eventInsertContact(contact))
+      .end((err, res) => {
+        if (res.ok) {
+          // TODO: Parse this if it's JSON
+          return s(res);
+        } else {
+          f(err);
+        }
+      })
+  });
+}
+
+export function postInsertContactRelationship(rel) {
+  return new Promise((s, f) => {
+    // TODO: Verify this URL
+    req.post(`https://lab.rairity.com/controller.cfm?event=insertContactRelationship`)
+      .withCredentials()
+      .type('form')
+      .send(eventInsertContactRelationship(rel))
+      .end((err, res) => {
+        if (res.ok) {
+          // TODO: Parse this if it's JSON
+          return s(res);
+        } else {
+          f(err);
+        }
+      })
+  });
+}
 
 export function postConvertLead(contact) {
   return new Promise((s, f) => {

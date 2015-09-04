@@ -1,11 +1,17 @@
 import React, { PropTypes, Component } from 'react'
 import async, { collection } from '../shared/components/async'
+import { asyncDropdown } from '../shared/components/collectionDropdown'
 import { contextTypes } from '../shared/decorators'
 import Link from '../shared/components/link'
 import { FontIcon, ClearFix } from 'material-ui'
+import {
+  Paper
+} from 'material-ui'
+import Table, {} from '../shared/components/table'
+import DetailRow, {} from '../shared/components/details/detailRow'
 
-// @async({ contacts: collection('contact').all() })
-@contextTypes({ muiTheme: PropTypes.object })
+@async({ contacts: collection('contact').all() })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 class ListContacts extends Component {
   style() {
       return {
@@ -22,20 +28,20 @@ class ListContacts extends Component {
         }
       }
   }
+  getContacts() {
+    return {
+      colNames: [
+        { label: this.context.lang('Name'), name: 'name', cellType: 'contact' }
+      ],
+      data: this.props.contacts
+    }
+  }
   render() {
     let contacts = this.props.contacts || [];
     return (
       <div style={this.style().root}>
-        <h1>Contacts</h1>
-        {
-          contacts.map(o =>
-            <ClearFix>
-              <Link to="view-contact" params={{contactId: o.id}}>
-                <FontIcon className={'md md-account-circle'} style={this.style().icon}/> <div style={this.style().link}>{o.name}</div>
-              </Link>
-            </ClearFix>
-          )
-        }
+        <h1>{this.context.lang('Contacts')}</h1>
+        <Table {...this.getContacts() }/>
       </div>
     );
   }

@@ -77,7 +77,7 @@ var Typeahead = React.createClass({
       visible: this.getOptionsForValue(this.props.defaultValue, []),
 
       // This should be called something else, "entryValue"
-      entryValue: _.result(_.find(this.props.menuItems, 'value', this.props.valueLink.value), 'label'),
+      entryValue: _.result(_.find(this.props.menuItems, 'value', (this.props.valueLink ) ? this.props.valueLink.value : this.props.value ), 'label'),
 
       // A valid typeahead value
       selection: null,
@@ -186,7 +186,7 @@ var Typeahead = React.createClass({
   },
 
   _onTextEntryUpdated: function(event) {
-    var value = event.target.value;
+    var value = (event) ? event.target.value : '';
     this.setState({visible: this.getOptionsForValue(value, _.map(this.props.menuItems, 'label')),
                    selection: null,
                    entryValue: value});

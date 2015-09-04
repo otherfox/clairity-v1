@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { networkCollectionRenderer } from '../shared/components/networkRenderer'
 import { FilteredCollection, Filters, TextFilter, RadioButtonFilter, DateFilter } from '../shared/components/filteredCollection'
 import Layout from '../shared/components/layout'
+import Link from '../shared/components/link'
 import Table from '../shared/components/table'
 import Header from '../shared/components/header'
 import { RaisedButton, Utils } from 'material-ui'
@@ -33,6 +34,11 @@ class ViewTickets extends Component {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>Tickets</h1></Header>
+        <div>
+          <Link to='/tickets/create'>
+            <RaisedButton label='Create Ticket' />
+          </Link>
+        </div>
         <FilteredCollection data={this.props.tickets}>
           <Filters breakpoints={{md: 1200}}>
             <TextFilter label='Subject' name='subject' />

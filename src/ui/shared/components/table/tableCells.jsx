@@ -1,6 +1,7 @@
 import React from 'react'
 import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
 import Link from '../link'
+import async, {model} from '../async'
 import numeral from 'numeral'
 import AgentIcon from 'material-ui/lib/svg-icons/action/account-circle'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
@@ -10,7 +11,7 @@ import SendIcon from 'material-ui/lib/svg-icons/content/send'
 export class AgentCell extends React.Component {
   render() {
     return (this.props.children) ?
-      <Link to='/' style={_.assign({
+      <Link to='view-user' params={{userId: (this.props.data) ? this.props.data[this.props.idField || 'id'] : '' }} style={_.assign({
           color: this.context.muiTheme.palette.primary1Color
         }, this.props.cellStyle
       )}>
@@ -31,11 +32,20 @@ export class AgentCell extends React.Component {
   }
 }
 
+import UserName from '../../../users/public/name'
+const User = async(UserName, { user: model() })
+
+export class AgentByIdCell extends React.Component {
+  render() {
+    return <User userId={this.props.data[this.props.userId]} />;
+  }
+}
+
 export class AccountCell extends React.Component {
   render() {
     return (this.props.children) ?
       <Link to="view-account"
-            params={{accountId: (this.props.data) ? this.props.data[this.props.idField] : '' }}
+            params={{accountId: (this.props.data) ? this.props.data[this.props.idField || 'id'] : '' }}
             style={_.assign({
               color: this.context.muiTheme.palette.accent1Color
             }, this.props.cellStyle)
@@ -58,11 +68,20 @@ export class AccountCell extends React.Component {
   }
 }
 
+import AccountName from '../../../accounts/public/name'
+
+export class AccountByIdCell extends React.Component {
+  render() {
+    let Account = async( AccountName, {account: model('account')});
+    return (<Account accountId={this.props.data[this.props.accountId]}/>)
+  }
+}
+
 export class ContactCell extends React.Component {
   render() {
     return (this.props.children) ?
       <Link to="view-contact"
-            params={{contactId: 0}}
+            params={{ contactId: this.props.data ? this.props.data[this.props.idField || 'id'] : undefined }}
             style={_.assign({
               color: this.context.muiTheme.palette.textColor
             }, this.props.cellStyle)
@@ -226,8 +245,10 @@ let CellTypes = {
     button: ButtonCell,
     boolean: BooleanCell,
     account: AccountCell,
+    accountById: AccountByIdCell,
     contact: ContactCell,
     agent: AgentCell,
+    agentById: AgentByIdCell,
     send: SendCell,
     range: RangeCell
 };

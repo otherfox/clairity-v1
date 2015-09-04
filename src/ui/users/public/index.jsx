@@ -1,4 +1,4 @@
 
-import { AccountName } from './details'
+import UserName from './name'
 
-export { AccountName };
+export { UserName };

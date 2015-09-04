@@ -1,4 +1,4 @@
-import React, {PropTypes, addons} from 'react/addons'
+import React, { PropTypes, addons, Component } from 'react/addons'
 import _ from 'lodash'
 import {
   Utils,
@@ -7,12 +7,28 @@ import {
 } from 'material-ui'
 import Layout from '../layout'
 import DetailsRow from './detailRow'
-import { contextTypes } from '../../decorators'
-export {DetailsRow};
+import DetailsObject from './detailsObject'
+import { contextTypes, propTypes, defaultProps } from '../../decorators'
+export { DetailsRow, DetailsObject };
 let { ColorManipulator } = Utils;
 
 @contextTypes({ muiTheme: PropTypes.object })
-class Details extends React.Component {
+@defaultProps({ widths: {lg: [5,7], md: [4,8], sm: [12]}, cPadding: '0 20px 5px 0' })
+@propTypes({
+  data: React.PropTypes.array,
+  title: React.PropTypes.string,
+  labelTop: React.PropTypes.bool,
+  headerStyle: React.PropTypes.object,
+  rowStyle: React.PropTypes.object,
+  labelStyle: React.PropTypes.object,
+  valueStyle: React.PropTypes.object,
+  breakpoints: React.PropTypes.object,
+  cStyle: React.PropTypes.object,
+  cStyles: React.PropTypes.object,
+  cPadding: React.PropTypes.string,
+  widths: React.PropTypes.object
+})
+class Details extends Component {
   style(detailType, context, props) {
     props = props || this.props;
     context = context || this.context.muiTheme;
@@ -20,9 +36,10 @@ class Details extends React.Component {
     let labelColor = ColorManipulator.fade(context.palette.textColor, .6 );
     let headerColor = ColorManipulator.fade(context.palette.primary1Color, 1 );
     let labelLineHeight = {
-      muiDropDown: '4em',
-      muiTextField: '3.2em',
-      muiDatePicker: '3.2em'
+      muiDropDown: '.6em',
+      muiTextField: '.4em',
+      muiDatePicker: '.4em',
+      muiRadio: ''
     }
 
     return {
@@ -38,7 +55,7 @@ class Details extends React.Component {
       },
       label: {
         color: labelColor,
-        lineHeight: (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
+        marginTop : (labelLineHeight[detailType]) ? labelLineHeight[detailType] : 'inherit'
       },
       root: {
         color: textColor,
@@ -61,7 +78,11 @@ class Details extends React.Component {
     return this.props.data.map((dataObj,idx) =>
       dataObj ?
       <div style={ _.assign(this.style(dataObj.detailType).row, this.props.rowStyle) } key={idx}>
-        <Layout widths={this.layout()} cPadding={this.props.cPadding} cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)} cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)} style={dataObj.rowStyle}>
+        <Layout widths={this.layout()}
+                cPadding={this.props.cPadding}
+                cStyles={ _.assign(this.style(dataObj.detailType).cStyles, this.props.cStyles)}
+                cStyle={ _.assign(this.style(dataObj.detailType).cStyle, this.props.cStyle)}
+                style={dataObj.rowStyle}>
           <div style={_.assign(this.style(dataObj.detailType).label, this.props.labelStyle, dataObj.labelStyle)}>{dataObj.label}</div>
           <div style={_.assign(this.style(dataObj.detailType).value, this.props.valueStyle, dataObj.valueStyle)}>{dataObj.value}</div>
         </Layout>
@@ -71,14 +92,14 @@ class Details extends React.Component {
   }
 
   getContent() {
-    let style = this.style;
+    let getStyle = this.style;
     let layout = this.layout();
     let count = 0;
     if (this.props.children == null) return null;
     return React.Children.map(this.props.children, child => {
       if (child == null) return null;
       return child.type == DetailsRow ?
-        addons.cloneWithProps(child, {...this.props, ...child.props, style, layout, key: count++})
+        addons.cloneWithProps(child, {...this.props, ...child.props, getStyle, layout, key: count++})
       :
         addons.cloneWithProps(child, {key: count++});
     });
@@ -105,25 +126,6 @@ class Details extends React.Component {
     );
   }
 }
-
-Details.propTypes = {
-  data: React.PropTypes.array,
-  title: React.PropTypes.string,
-  labelTop: React.PropTypes.bool,
-  headerStyle: React.PropTypes.object,
-  rowStyle: React.PropTypes.object,
-  labelStyle: React.PropTypes.object,
-  valueStyle: React.PropTypes.object,
-  cStyle: React.PropTypes.object,
-  cStyles: React.PropTypes.object,
-  cPadding: React.PropTypes.string,
-  widths: React.PropTypes.object
-};
-
-Details.defaultProps = {
-  widths: {lg: [5,7], md: [4,8], sm: [12]},
-  cPadding: '0 20px 5px 0'
-};
 
 
 export default Details;

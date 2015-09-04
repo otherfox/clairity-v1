@@ -11,7 +11,7 @@ class AgingSettings extends React.Component {
   render() {
     return (
       <Details  widths={{lg: ['auto', '320px']}}
-                rowStyle={{ float: 'left' }}
+                pStyles={{ lg: { float: 'left' } }}
                 cStyles={{lg: [{textAlign: 'left'}]}}
                 cStyle={{float: 'left'}}
                 data={[

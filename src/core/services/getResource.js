@@ -1,11 +1,12 @@
-import { getContact } from './contacts'
+import { getContact } from './contact'
 import { getLocation } from './location'
 import { getWorkOrder } from './workOrder'
-import { getContract } from './contracts'
+import { getContract } from './contract'
 import { getUser } from './users'
 import { getAccount } from './account'
 import { getTicket } from './ticket'
 import { getOpportunity, getSale } from './opportunity'
+import { getSupportNote } from './supportNote'
 
 const resource = {
   contact: getContact,
@@ -16,7 +17,8 @@ const resource = {
   user: getUser,
   account: getAccount,
   opportunity: getOpportunity,
-  ticket: getTicket
+  ticket: getTicket,
+  supportNote: getSupportNote
 };
 
 export function getResource(id, tableName) {
@@ -28,12 +30,13 @@ export function model(args) {
   return getResource(id, table);
 }
 
-import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contacts'
+import { getContactsByAccount, getContactsByOpportunity, getContactsByLocation } from './contact'
 import { getOpportunitiesByAccount} from './opportunity'
-import { getContractsByAccount, getContractsByLocation } from './contracts'
+import { getContractsByAccount, getContractsByLocation } from './contract'
 import { getAccountsByAgent, getAccountsByContact } from './account'
-import { getLocationsByPop, getLocationsByContact, getLocationsByStatus } from './location'
+import { getLocationsByPop, getLocationsByContact, getLocationsByStatus, getLocationsByAccount } from './location'
 import { getWorkOrderMessagesByWorkOrder } from './messages'
+import { getSupportNotesByAccount } from './supportNote'
 
 const resourceVia = {
   workOrderMessage: {
@@ -43,6 +46,9 @@ const resourceVia = {
     account: getContactsByAccount,
     opportunity: getContactsByOpportunity,
     location: getContactsByLocation
+  },
+  supportNote: {
+    account: getSupportNotesByAccount
   },
   contract: {
     account: getContractsByAccount,
@@ -58,7 +64,8 @@ const resourceVia = {
   location: {
     pop: getLocationsByPop,
     contact: getLocationsByContact,
-    locationStatus: getLocationsByStatus
+    locationStatus: getLocationsByStatus,
+    account: getLocationsByAccount
   }
 };
 
@@ -75,14 +82,18 @@ export function collectionVia(args) {
 import { getPops } from './pop'
 import { getAccounts, getAccountTypes } from './account'
 import { getWorkOrderTypes, getWorkOrderStatuses } from './workOrder'
-import { getLeads } from './contacts'
-import { getContacts } from './contacts'
+import { getLeads } from './contact'
+import { getContacts } from './contact'
 import { getProjectTypes } from './projectType'
 import { getSalesStages } from './salesStage'
 import { getLeadSources } from './leadSource'
 import { getCampaignSources } from './campaignSource'
 import { getServiceTypes } from './serviceType'
-import { getTickets } from './ticket'
+import { getLocations } from './location'
+import { getSupportNotes } from './supportNote'
+import { getUsers } from './users'
+import { getPurchaseRequests } from './purchaseRequest'
+import { getTickets, getTicketTemplates, getTicketStatuses, getTicketPriorities } from './ticket'
 
 const collectionMap = {
   pop: getPops,
@@ -97,7 +108,13 @@ const collectionMap = {
   leadSource: getLeadSources,
   campaignSource: getCampaignSources,
   serviceType: getServiceTypes,
-  ticket: getTickets
+  ticket: getTickets,
+  ticketTemplate: getTicketTemplates,
+  ticketStatus: getTicketStatuses,
+  ticketPriority: getTicketPriorities,
+  purchaseRequest: getPurchaseRequests,
+  user: getUsers,
+  supportNote: getSupportNotes
 };
 
 export function getCollection(tableName) {

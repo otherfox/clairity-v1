@@ -23,6 +23,11 @@ import OpenInstalls from '../../openInstalls'
 import ViewAccount from '../../accounts'
 import ListAccounts from '../../accounts/all'
 
+/* Users */
+import ViewUser from '../../users'
+import ListUsers from '../../users/all'
+import CreateUser from '../../users/create'
+
 /* Locations */
 import ViewLocation from '../../locations'
 import EditLocation  from '../../locations/edit'
@@ -33,7 +38,7 @@ import AddLocation from '../../locations/create'
 import ViewContact from '../../contacts'
 import ViewLeads from '../../contacts/leads'
 import ListContacts from '../../contacts/list'
-import AddContact from '../../contacts/create'
+import CreateContact from '../../contacts/create'
 import AllContacts from '../../contacts/all'
 
 /* Contracts */
@@ -66,6 +71,14 @@ import WorkOrderUpload from '../../workOrders/upload'
 /* Tickets */
 import Tickets from '../../tickets'
 import CreateTicket from '../../tickets/create'
+
+/* Purchase Requests */
+import PurchaseRequests from '../../purchaseRequests'
+import CreatePurchaseRequest from '../../purchaseRequests/create'
+
+/* Support Notes */
+import ListSupportNotes from '../../supportNotes/all'
+import AccountSupportNotes from '../../supportNotes'
 
 export default (
   <Route>
@@ -111,8 +124,11 @@ export default (
             <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
 
+              <Route name="all-account-support-notes" path="support" handler={AccountSupportNotes} />
+
               <Redirect from="account-locations" to="all-account-locations" />
               <Route name="account-locations" path="locations" handler={RouteHandler}>
+
                 <Route name="all-account-locations" handler={ListLocations} />
                 <Route name="view-account-location" path=":locationId" handler={ViewLocation} />
                 <Route name="add-account-location" path="add" handler={AddLocation} />
@@ -125,7 +141,7 @@ export default (
               <Route name="account-contacts" path="contacts" handler={RouteHandler}>
                 <Route name="all-account-contacts" handler={ListContacts} />
                 <Route name="view-account-contact" path=":contactId" handler={ViewContact} />
-                <Route name="add-account-contact" path="add" handler={AddContact} />
+                <Route name="add-account-contact" path="add" handler={CreateContact} />
               </Route>
 
               <Redirect from="account-opps" to="all-account-opps" />
@@ -186,8 +202,33 @@ export default (
           </Route>
         </Route>
 
+        <Route {/***** Users *****/...{}}>
+          <Redirect from="users" to="all-users" />
+          <Route name="users" handler={RouteHandler} >
+            <Route name="all-users" path="all" handler={ListUsers} />
+            <Route name="add-user" path="create" handler={CreateUser} />
+            <Route path=":userId" name="view-user" handler={ViewUser} />
+          </Route>
+        </Route>
+
         <Route {/***** Open Intstalls *****/...{}}>
           <Route name="open-installs" handler={OpenInstalls} />
+        </Route>
+
+        <Route {/***** Purchase Requests *****/...{}}>
+          <Redirect from="purchase-requests" to="all-purchase-requests" />
+          <Route name="purchase-requests" handler={RouteHandler} >
+            <Route name="all-purchase-requests" path="all" handler={PurchaseRequests} />
+            <Route name="add-purchase-request" path="create" handler={CreatePurchaseRequest} />
+          </Route>
+        </Route>
+
+        <Route {/***** Support Notes *****/...{}}>
+          <Redirect from="support-notes" to="all-support-notes" />
+          <Route name="support-notes" handler={RouteHandler} >
+            <Route name="all-support-notes" path="all" handler={ListSupportNotes} />
+            <Route name="all-support-notes-account" path=":accountId" handler={AccountSupportNotes} />
+          </Route>
         </Route>
 
         <Route {/***** Tickets *****/...{}}>

@@ -3,80 +3,33 @@
  * etc.
  */
 
-import React, {PropTypes} from 'react'
+import React, { PropTypes, Component } from 'react'
 import { contextTypes } from '../shared/decorators'
-import { PieGraph, BarGraph, LineGraphWithBrush, ScatterPlotGraph, AreaGraph, LineGraph } from '../shared/components/graphs'
-import { queryRenderer } from '../shared/components/networkRenderer'
-import { salesMetricsFetched } from '../../core/actions/salesMetric'
-import { querySalesMetrics } from '../../core/queries/salesMetric'
-import { getSalesMetricsByMonth } from '../../core/services/opportunity'
-import { State } from 'react-router'
-import _ from 'lodash'
+import {
+  asyncTokenizer,
+  asyncTypeahead
+} from '../shared/components/collectionDropdown'
+import async, { action, query, collection } from '../shared/components/async'
+import controllable from 'react-controllables'
 
+let NotifyTokenizer = asyncTokenizer({ collection: collection('contact').all() });
+let NotifyTypeahead = asyncTypeahead({ collection: collection('contact').all() });
+
+@controllable(['caller', 'caller2'])
 @contextTypes({muiTheme: PropTypes.object})
-class TestbedView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+class TestbedPage extends Component {
   render() {
-    let data = this.props.salesMetrics0
-      .map(r => {
-        let x = new Date(r.id);
-        return {x: x.getDate(), y: r.running_sales}})
-      .sort((a, b) => b.x - a.x );
-    let data1 = this.props.salesMetrics1
-      .map(r => {
-        let x = new Date(r.id);
-        return {x: x.getDate(), y: r.running_sales}})
-      .sort((a, b) => b.x - a.x );
-    let data2 = this.props.salesMetrics2
-      .map(r => {
-        let x = new Date(r.id);
-        return {x: x.getDate(), y: r.running_sales}})
-      .sort((a, b) => b.x - a.x );
-    let domain = [_.min(data, r => r.x).x, _.max(data, r => r.x).x];
-    let xAxis = {};
     return (
-      <div style={{backgroundColor: this.context.muiTheme.palette.canvasColor}}>
-        <PieGraph />
-        <BarGraph />
-        <LineGraph data={[{label: 'Aug', values:data},{label: 'Jul', values:data1},{label: 'Jun', values:data2}]} domain={domain} xAxis={xAxis} />
-        <LineGraphWithBrush />
-        <ScatterPlotGraph />
-        <AreaGraph />
+      <div>
+        <h2>Tokenizer</h2>
+        <NotifyTokenizer value={ this.props.caller2 || '' }
+                         onTokenAdd={ (i,s) => this.props.onCaller2Change(2) }/>
+        <h2>Typeahead</h2>
+        <NotifyTypeahead value={ this.props.caller || '' }
+                         onOptionSelected={ i => this.props.onCallerChange(i) }/>
       </div>
-    );
+    )
   }
 }
 
-// let TestbedPage = React.createClass({
-//   mixins: [State],
-//   render() {
-//     return <TestbedView month={0} />;
-//   }
-// });
-
-export default queryRenderer(TestbedView, {
-  queries: [{
-    tableName: 'salesMetric',
-    writeMethod: salesMetricsFetched,
-    shouldFetch: e => e.state.data,
-    cacheMethod: props => querySalesMetrics(props.month || '2015-08'),
-    serviceMethod: props => getSalesMetricsByMonth(0),
-    propName: 'salesMetrics0'
-  },{
-    tableName: 'salesMetric',
-    writeMethod: salesMetricsFetched,
-    shouldFetch: e => e.state.data,
-    cacheMethod: props => querySalesMetrics(props.month || '2015-07'),
-    serviceMethod: props => getSalesMetricsByMonth(1),
-    propName: 'salesMetrics1'
-  },{
-    tableName: 'salesMetric',
-    writeMethod: salesMetricsFetched,
-    shouldFetch: e => e.state.data,
-    cacheMethod: props => querySalesMetrics(props.month || '2015-06'),
-    serviceMethod: props => getSalesMetricsByMonth(2),
-    propName: 'salesMetrics2'
-  }]
-});
+export default TestbedPage;
