@@ -72,7 +72,9 @@ let getAccountOwners = memoize(() => {
   return getUsersByType('Employee');
 });
 
+let getUsers = getAccountOwners;
+
 export {
-  getUser, getPermissionByRole, getUsersByRole, getUsersByType,
+  getUser, getUsers, getPermissionByRole, getUsersByRole, getUsersByType,
   getWorkOrderOwners, getAccountOwners
 };
