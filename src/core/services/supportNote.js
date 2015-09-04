@@ -1,4 +1,4 @@
-import { serialize } from './utils'
+import { serialize, post } from './utils'
 
 import { withDelay } from 'memoize-promise'
 const memoize = withDelay(10000); // ten second delay
@@ -21,3 +21,8 @@ const getSupportNotes = memoize(() =>
     .catch(console.error));
 
 export { getSupportNotesByAccount, getSupportNote, getSupportNotes };
+
+export const postSupportNote = note =>
+  fetch(...serialize(CustomerNoteDAO, 'insertCustomerNoteQuick', note, post))
+    .then(res => res.json())
+    .catch(console.error);
