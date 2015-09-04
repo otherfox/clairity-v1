@@ -76,6 +76,10 @@ import CreateTicket from '../../tickets/create'
 import PurchaseRequests from '../../purchaseRequests'
 import CreatePurchaseRequest from '../../purchaseRequests/create'
 
+/* Support Notes */
+import ListSupportNotes from '../../supportNotes/all'
+import AccountSupportNotes from '../../supportNotes'
+
 export default (
   <Route>
     <Redirect from="/" to="login" />
@@ -120,8 +124,11 @@ export default (
             <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
 
+              <Route name="all-account-support-notes" path="support" handler={AccountSupportNotes} />
+
               <Redirect from="account-locations" to="all-account-locations" />
               <Route name="account-locations" path="locations" handler={RouteHandler}>
+
                 <Route name="all-account-locations" handler={ListLocations} />
                 <Route name="view-account-location" path=":locationId" handler={ViewLocation} />
                 <Route name="add-account-location" path="add" handler={AddLocation} />
@@ -213,6 +220,14 @@ export default (
           <Route name="purchase-requests" handler={RouteHandler} >
             <Route name="all-purchase-requests" path="all" handler={PurchaseRequests} />
             <Route name="add-purchase-request" path="create" handler={CreatePurchaseRequest} />
+          </Route>
+        </Route>
+
+        <Route {/***** Support Notes *****/...{}}>
+          <Redirect from="support-notes" to="all-support-notes" />
+          <Route name="support-notes" handler={RouteHandler} >
+            <Route name="all-support-notes" path="all" handler={ListSupportNotes} />
+            <Route name="all-support-notes-account" path=":accountId" handler={AccountSupportNotes} />
           </Route>
         </Route>
 

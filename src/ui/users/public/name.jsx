@@ -1,11 +1,16 @@
-import React, {Component} from 'react'
+import React, { Component, PropTypes } from 'react'
 import { AgentCell } from '../../shared/components/table/tableCells'
+import { contextTypes } from '../../shared/decorators'
 
-export default class UserName extends Component {
+@contextTypes({ lang: PropTypes.object })
+class UserName extends Component {
   render() {
     let agent = this.props.user ? this.props.user : {};
+    console.log('UserName render')
     return (
-      <AgentCell>{ agent.name || 'Not Assigned' }</AgentCell>
+      <AgentCell>{ agent.name || this.context.lang('Unassigned') }</AgentCell>
     )
   }
 }
+
+export default UserName;

@@ -2,10 +2,9 @@
 import React, { Component, PropTypes } from 'react'
 import { contextTypes, propTypes } from '../shared/decorators'
 
-import async, { model, collection } from '../shared/components/async'
+import async, { collection } from '../shared/components/async'
 
-@async({ notes: collection('supportNote').by('account'),
-         account: model() })
+@async({ notes: collection('supportNote').all() })
 @contextTypes({ lang: PropTypes.object })
 @propTypes({ notes: PropTypes.arrayOf(PropTypes.object) })
 class ViewSupportNotes extends Component {
@@ -14,8 +13,4 @@ class ViewSupportNotes extends Component {
   }
 }
 
-export default class extends Component {
-  render() {
-    return <ViewSupportNotes {...this.props.params} />;
-  }
-};
+export default ViewSupportNotes;

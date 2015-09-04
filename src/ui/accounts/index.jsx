@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Paper, Utils } from 'material-ui'
+import { Paper, Utils, FloatingActionButton } from 'material-ui'
+import SupportIcon from 'material-ui/lib/svg-icons/communication/chat-bubble'
 
 import { Header, Layout, Link, SubHeader } from '../shared/components'
 import { propTypes, contextTypes } from '../shared/decorators'
@@ -43,7 +44,14 @@ class AccountView extends Component {
 
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
-        <Header><h1>{this.context.lang('Account')} - {account.name}</h1></Header>
+        <Header>
+          <h1>{this.context.lang('Account')} - {account.name}</h1>
+          <Link to="all-account-support-notes" params={this.props}>
+            <FloatingActionButton>
+              <SupportIcon />
+            </FloatingActionButton>
+          </Link>
+        </Header>
         <SubHeader>
           { address }
           {
