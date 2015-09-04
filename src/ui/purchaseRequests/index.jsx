@@ -41,7 +41,7 @@ class ViewPurchaseRequests extends Component {
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
         <Header><h1>{this.context.lang('Purchase Requests')}</h1></Header>
         <div>
-          <Link to='/purchaseRequests/create'>
+          <Link to='/purchase-requests/create'>
             <RaisedButton label='Request Purchase' />
           </Link>
         </div>
