@@ -40,7 +40,7 @@ class ListContacts extends Component {
     let contacts = this.props.contacts || [];
     return (
       <div style={this.style().root}>
-        <h1>{this.context.lang('Contacts')}</h1>
+        <h1><LangText>Contacts</LangText></h1>
         <Table {...this.getContacts() }/>
       </div>
     );

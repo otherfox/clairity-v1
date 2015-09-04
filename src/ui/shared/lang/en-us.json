@@ -1,11 +1,13 @@
 {
   "account": "Account",
+  "account_name": "Account Name",
   "amount": "Amount",
   "approval_id": "Approval ID",
   "approved": "Approved",
   "contact": "Contact",
   "contacts": "Contacts",
   "customer": "Customer",
+  "customer_id": "Customer ID",
   "id": "ID",
   "item": "Item",
   "location_id": "Location ID",

@@ -4,6 +4,7 @@ import Layout from '../shared/components/layout'
 import Link from '../shared/components/link'
 import Table from '../shared/components/table'
 import Header from '../shared/components/header'
+import LangText from '../shared/components/langText'
 import { RaisedButton, Utils } from 'material-ui'
 import { contextTypes } from '../shared/decorators'
 import async, { collection, model } from '../shared/components/async'
@@ -39,7 +40,7 @@ class ViewPurchaseRequests extends Component {
   render() {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1>{this.context.lang('Purchase Requests')}</h1></Header>
+        <Header><h1><LangText>Purchase Requests</LangText>  {this.context.lang('Purchase Requests')}</h1></Header>
         <div>
           <Link to='/purchaseRequests/create'>
             <RaisedButton label='Create Purcase Request' />

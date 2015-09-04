@@ -22,7 +22,7 @@ import async, { model } from '../async'
 import { AccountName } from '../../../users/public'
 let AccountAgent = async(AccountName, { user: model('user') });
 
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 export class DefaultCard extends Component {
   render() {
     let i = this.props.i;
@@ -55,7 +55,7 @@ export class DefaultCard extends Component {
                         (data.user_id) ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div style={{ height: '25px'}}>Unassigned</div>
+                            <div style={{ height: '25px'}}>{this.context.lang('Unassigned')}</div>
                         :
                           data[r.name]
                     }
