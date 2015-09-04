@@ -15,4 +15,9 @@ const getSupportNote = memoize(id =>
     .then(res => res.json())
     .catch(console.error));
 
-export { getSupportNotesByAccount, getSupportNote };
+const getSupportNotes = memoize(() =>
+  fetch(...serialize(CustomerNoteDAO, 'getAllCustomerNotes'))
+    .then(res => res.json())
+    .catch(console.error));
+
+export { getSupportNotesByAccount, getSupportNote, getSupportNotes };
