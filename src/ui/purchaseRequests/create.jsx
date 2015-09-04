@@ -32,6 +32,8 @@ let CustomerTypeahead = asyncTypeahead({ collection: collection('account').all()
   'item',
   'approvalId',
   'customerId',
+  'sourceId',
+  'vendorId',
   'amount',
   'type',
   'notes',
@@ -48,11 +50,13 @@ class CreatePurchaseRequest extends Component {
       requestId: v4()
     };
   }
-  createTicket(props) {
+  createPurchaseRequest(props) {
     let submission = {
       id: this.state.requestId,
       received_date: moment().format('YYYY-MM-DD h:mm A'),
       location_id: this.props.locationId,
+      source_id: this.props.sourceId,
+      vendor_id: this.props.venderId,
       approval_date: this.props.approvalDate,
       requested_by: this.props.requestedBy,
       item: this.props.item,
@@ -77,11 +81,50 @@ class CreatePurchaseRequest extends Component {
         </Header>
         <Paper>
           <Layout widths={{}}
-                  pPadding='0 0 20px 0'>
+                  pPadding='20px 0 20px 0'>
             <Details>
+              <DetailRow label='Request Type' type='muiTextField'>
+                <CustomerTypeahead value={ this.props.type || '' }
+                                   onOptionSelected={ i => this.props.onTypeChange(i) } />
+              </DetailRow>
               <DetailRow label='Customer' type='muiTextField'>
                 <CustomerTypeahead value={ this.props.customerId || '' }
-                                 onOptionSelected={ i => this.props.onCustomerIdChange(i) } />
+                                   onOptionSelected={ i => this.props.onCustomerIdChange(i) } />
+              </DetailRow>
+              <DetailRow label='Location' type='muiTextField'>
+                <TextField value={ this.props.locationId || '' }
+                           onChange={ e => this.props.onLocationIdChange(e.target.value) } />
+              </DetailRow>
+              <DetailRow label='Item(s) to Purchase' type='muiTextField'>
+                <TextField value={ this.props.item || '' }
+                           onChange={ e => this.props.onItemChange(e.target.value) } />
+              </DetailRow>
+              <DetailRow label='Total Cost $' type='muiTextField'>
+                <TextField value={ this.props.amount || '' }
+                           onChange={ e => this.props.onAmountChange(e.target.value) } />
+              </DetailRow>
+              <DetailRow label='Payment Source' type='muiTextField'>
+                <TextField value={ this.props.sourceId || '' }
+                           onChange={ e => this.props.onSourceIdChange(e.target.value) } />
+              </DetailRow>
+              <DetailRow label='Suggested Vendor' type='muiTextField'>
+                <TextField value={ this.props.vendorId || '' }
+                           onChange={ e => this.props.onVendorIdChange(e.target.value) } />
+              </DetailRow>
+              <DetailRow label='Need for Purchase' type='muiTextField'>
+                <TextField value={ this.props.note || '' }
+                           hint='Describe why it is necessary to purchase the item(s)'
+                           onChange={ e => this.props.onNoteChange(e.target.value) } />
+              </DetailRow>
+              <DetailRow label='Attach Files' type='muiButton'>
+                <RaisedButton label='Choose File' style={{ marginRight: '10px' }} />
+                <RaisedButton label='Choose File' style={{ marginRight: '10px' }} />
+                <RaisedButton label='Choose File' style={{ marginRight: '10px' }} />
+              </DetailRow>
+              <DetailRow valueStyle={{ paddingTop: '10px'}}>
+                <RaisedButton label='Send Request'
+                               primary
+                               onClick={() => this.createPurchaseRequest() } />
               </DetailRow>
             </Details>
           </Layout>
