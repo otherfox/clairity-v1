@@ -19,7 +19,7 @@ import { contextTypes } from '../../decorators'
 import Details from '../details'
 import async, { model } from '../async'
 
-import {UserName} from '../../../users/public'
+import UserName from '../../../users/public/link'
 let AccountAgent = async(UserName, { user: model('user') });
 
 @contextTypes({ muiTheme: PropTypes.object })
