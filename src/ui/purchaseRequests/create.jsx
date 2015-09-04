@@ -24,7 +24,6 @@ import moment from 'moment'
 import { contextTypes } from '../shared/decorators'
 
 let CustomerTypeahead = asyncTypeahead({ collection: collection('account').all() });
-//let LocationTypeahead = asyncTypeahead({ collection: collection('location').all() });
 
 @controllable([
   'locationId',
@@ -72,7 +71,7 @@ class CreatePurchaseRequest extends Component {
   }
   render() {
     return (
-      <Layout widths={{}} pPadding='20px 20px 0 0'>
+      <Layout widths={{}} cPadding='20px 20px 0 0'>
         <Header>
           <h1>Request Purchase</h1>
         </Header>
