@@ -150,7 +150,7 @@ export class DateCell extends Component {
 export class CurrencyCell extends Component {
   render() {
     return (
-      <div style={_.assign({}, this.props.cellStyle)}>
+      <div style={_.assign({ fontWeight: 'bold' }, this.props.cellStyle)}>
         {numeral(this.props.children).format('$0,0.00')}
       </div>
     );
