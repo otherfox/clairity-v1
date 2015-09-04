@@ -11,7 +11,7 @@ import SendIcon from 'material-ui/lib/svg-icons/content/send'
 export class AgentCell extends React.Component {
   render() {
     return (this.props.children) ?
-      <Link to='/' style={_.assign({
+      <Link to='view-user' params={{userId: (this.props.data) ? this.props.data[this.props.idField || 'id'] : '' }} style={_.assign({
           color: this.context.muiTheme.palette.primary1Color
         }, this.props.cellStyle
       )}>

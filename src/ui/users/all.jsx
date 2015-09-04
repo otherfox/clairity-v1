@@ -31,7 +31,7 @@ class ListUsers extends Component {
   getContacts() {
     return {
       colNames: [
-        { label: 'Name', name: 'name', cellType: 'user' }
+        { label: 'Name', name: 'name', cellType: 'agent' }
       ],
       data: this.props.contacts
     }
