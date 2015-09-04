@@ -42,13 +42,13 @@ class ListUsers extends Component {
   render() {
     let users = this.props.users || [];
     return (
-      <div style={this.style().root}>
+      <div>
         <h1>{this.context.lang('Users')}</h1>
         <FilteredCollection data={users}>
           <Filters>
             <TextFilter name={'name'} label={this.context.lang('User Name')} />
           </Filters>
-          <Table {...this.getUsers()} header={'name'} cardType={'user'} rowHeight={16} linkParam={'id'} />
+          <Table {...this.getUsers()} header={'name'} linkParam={'id'} />
         </FilteredCollection>
       </div>
     );
