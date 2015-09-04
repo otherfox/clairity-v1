@@ -8,7 +8,11 @@ const CustomerNoteDAO = 'CustomerNoteDAO';
 const getSupportNotesByAccount = memoize(customer_id =>
   fetch(...serialize(CustomerNoteDAO, 'getAllCustomerNotesByCustomer', { customer_id }))
     .then(res => res.json())
-    .catch(console.error)
-);
+    .catch(console.error));
 
-export { getSupportNotesByAccount };
+const getSupportNote = memoize(id =>
+  fetch(...serialize(CustomerNoteDAO, 'getCustomerNoteById', { id }))
+    .then(res => res.json())
+    .catch(console.error));
+
+export { getSupportNotesByAccount, getSupportNote };
