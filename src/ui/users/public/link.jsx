@@ -9,7 +9,7 @@ import AgentIcon from 'material-ui/lib/svg-icons/action/account-circle'
 export default class UserName extends Component {
 
   render() {
-    let agent = this.props.user ? this.props.user : this.props.children;
+    let agent = this.props.user ? this.props.user.name : this.props.children;
     return (
       <Link to='/' style={_.assign({
           color: this.context.muiTheme.palette.primary1Color
@@ -26,7 +26,7 @@ export default class UserName extends Component {
             lineHeight: '25px'
           }, this.props.labelStyle
         )}>
-          { agent.name || 'Not Assigned' }
+          { agent || 'Not Assigned' }
         </div>
       </Link>
     )

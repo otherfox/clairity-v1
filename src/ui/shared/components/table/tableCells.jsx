@@ -3,59 +3,38 @@ import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} 
 import Link from '../link'
 import async, {model} from '../async'
 import numeral from 'numeral'
-import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import SendIcon from 'material-ui/lib/svg-icons/content/send'
 
+/************* Agent / User *************/
 
 import UserName from '../../../users/public/link'
-
 export class AgentCell extends Component {
   render() {
-    return ( <UserName>{this.props.children}</UserName>);
+    return <UserName {...this.props}>{this.props.children}</UserName>
   }
 }
 
 export class AgentByIdCell extends Component {
   render() {
     let User = async( UserName, {user: model('user')});
-    return (<User userId={this.props.data[this.props.userId]}/>)
+    return <User userId={this.props.data[this.props.userId]} {...this.props}/>
   }
 }
 
-export class AccountCell extends Component {
-  render() {
-    return (this.props.children) ?
-      <Link to="view-account"
-            params={{accountId: (this.props.data) ? this.props.data[this.props.idField || 'id'] : '' }}
-            style={_.assign({
-              color: this.context.muiTheme.palette.accent1Color
-            }, this.props.cellStyle)
-      }>
-        <AccountIcon style={_.assign({
-            fill: Utils.ColorManipulator
-              .fade(this.context.muiTheme.palette.accent1Color, .5),
-            marginRight: '5px',
-            position: 'absolute'
-          }, this.props.iconStyle
-        )} />
-        <div style={_.assign({
-            paddingLeft: '30px',
-            lineHeight: '25px'
-          }, this.props.labelStyle
-        )}>
-          {this.props.children}
-        </div>
-      </Link> : null;
-  }
-}
+/************* Account / Customer *************/
 
 import AccountName from '../../../accounts/public/link'
+export class AccountCell extends Component {
+  render() {
+    return <AccountName {...this.props}>{this.props.children}</AccountName>
+  }
+}
 
 export class AccountByIdCell extends Component {
   render() {
     let Account = async( AccountName, {account: model('account')});
-    return (<Account accountId={this.props.data[this.props.accountId]}/>)
+    return (<Account accountId={this.props.data[this.props.accountId]} {...this.props}/>)
   }
 }
 
