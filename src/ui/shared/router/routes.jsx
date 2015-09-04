@@ -124,6 +124,8 @@ export default (
             <Route path=":accountId" handler={RouteHandler}>
               <DefaultRoute name="view-account" handler={ViewAccount} />
 
+              <Route name="all-account-support-notes" path="support" handler={AccountSupportNotes} />
+
               <Redirect from="account-locations" to="all-account-locations" />
               <Route name="account-locations" path="locations" handler={RouteHandler}>
 
@@ -225,7 +227,7 @@ export default (
           <Redirect from="support-notes" to="all-support-notes" />
           <Route name="support-notes" handler={RouteHandler} >
             <Route name="all-support-notes" path="all" handler={ListSupportNotes} />
-            <Route name="all-account-support-notes" path=":accountId" handler={AccountSupportNotes} />
+            <Route name="all-support-notes-account" path=":accountId" handler={AccountSupportNotes} />
           </Route>
         </Route>
 
