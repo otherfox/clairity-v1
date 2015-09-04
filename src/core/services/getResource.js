@@ -36,7 +36,7 @@ import { getContractsByAccount, getContractsByLocation } from './contract'
 import { getAccountsByAgent, getAccountsByContact } from './account'
 import { getLocationsByPop, getLocationsByContact, getLocationsByStatus, getLocationsByAccount } from './location'
 import { getWorkOrderMessagesByWorkOrder } from './messages'
-import { supportNote } from './supportNote'
+import { getSupportNotesByAccount } from './supportNote'
 
 const resourceVia = {
   workOrderMessage: {
@@ -90,7 +90,7 @@ import { getLeadSources } from './leadSource'
 import { getCampaignSources } from './campaignSource'
 import { getServiceTypes } from './serviceType'
 import { getLocations } from './location'
-import { getSupportNotes } from './serviceNote'
+import { getSupportNotes } from './supportNote'
 import { getUsers } from './users'
 import { getPurchaseRequests } from './purchaseRequest'
 import { getTickets, getTicketTemplates, getTicketStatuses, getTicketPriorities } from './ticket'
