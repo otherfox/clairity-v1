@@ -20,7 +20,7 @@ import Details from '../details'
 import async, { model } from '../async'
 
 import UserName from '../../../users/public'
-let AccountAgent = async(UserName, { user: model('user') });
+let AccountAgent = async(UserName, { user: model() });
 
 @contextTypes({ muiTheme: PropTypes.object })
 export class DefaultCard extends Component {
