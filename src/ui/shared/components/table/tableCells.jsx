@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
-import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} from 'material-ui'
+import {
+  IconButton,
+  Toggle,
+  FloatingActionButton,
+  FontIcon,
+  Utils,
+  Styles
+} from 'material-ui'
 import Link from '../link'
-import async, {model} from '../async'
+import async, { model } from '../async'
 import numeral from 'numeral'
-import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
-import SendIcon from 'material-ui/lib/svg-icons/content/send'
 import _ from 'lodash'
+import { contextTypes } from '../../decorators'
+
+import SendIcon from 'material-ui/lib/svg-icons/content/send'
 
 /************* Agent / User *************/
 
@@ -41,33 +49,14 @@ export class AccountByIdCell extends Component {
   }
 }
 
-export class ContactCell extends Component {
-  render() {
-    return (this.props.children) ?
-      <Link to="view-contact"
-            params={{ contactId: this.props.data ? this.props.data[this.props.idField || 'id'] : undefined }}
-            style={_.assign({
-              color: this.context.muiTheme.palette.textColor
-            }, this.props.cellStyle)
-      }>
-        <ContactIcon style={_.assign({
-            fill: Utils.ColorManipulator
-              .fade(this.context.muiTheme.palette.textColor, .5),
-            marginRight: '5px', position: 'absolute'
-          }, this.props.iconStyle
-        )} />
-        <div style={_.assign({
-            paddingLeft: '30px',
-            lineHeight: '25px'
-          }, this.props.labelStyle
-        )}>
-          {this.props.children}
-        </div>
-      </Link> : null;
-  }
-}
+/************* Contact / Caller *************/
 
 import ContactName from '../../../contacts/public/link'
+export class ContactCell extends Component {
+  render() {
+    return <ContactName>{this.props.children}</ContactName>
+  }
+}
 
 export class ContactByIdCell extends Component {
   render() {
@@ -76,6 +65,8 @@ export class ContactByIdCell extends Component {
   }
 }
 
+/************* Send *************/
+@contextTypes({ muiTheme: React.PropTypes.object })
 export class SendCell extends Component {
   render() {
     return (
@@ -93,6 +84,8 @@ export class SendCell extends Component {
   }
 }
 
+/************* String *************/
+
 export class StringCell extends Component {
   render() {
     return (
@@ -103,6 +96,8 @@ export class StringCell extends Component {
   }
 }
 
+/************* Number *************/
+
 export class NumberCell extends Component {
   render() {
     return (
@@ -112,6 +107,8 @@ export class NumberCell extends Component {
     );
   }
 }
+
+/************* Date *************/
 
 export class DateCell extends Component {
   formatDate(c) {
@@ -130,6 +127,8 @@ export class DateCell extends Component {
   }
 }
 
+/************* Currency *************/
+
 export class CurrencyCell extends Component {
   render() {
     return (
@@ -139,6 +138,8 @@ export class CurrencyCell extends Component {
     );
   }
 }
+
+/************* Link *************/
 
 export class LinkCell extends Component {
   render() {
@@ -151,6 +152,8 @@ export class LinkCell extends Component {
   }
 }
 
+/************* Uri *************/
+
 export class UriCell extends Component {
   render() {
     return (
@@ -162,6 +165,8 @@ export class UriCell extends Component {
   }
 }
 
+/************* Button *************/
+
 export class ButtonCell extends Component {
   render() {
     <div style={_.assign({textAlign: 'center'}, this.props.cellStyle)}>
@@ -169,6 +174,8 @@ export class ButtonCell extends Component {
     </div>;
   }
 }
+
+/************* Boolean *************/
 
 export class BooleanCell extends Component {
   style() {
@@ -187,6 +194,8 @@ export class BooleanCell extends Component {
     return <div style={style}>{this.props.children}</div>;
   }
 }
+
+/************* Range *************/
 
 export class RangeCell extends Component {
   style() {
@@ -228,8 +237,3 @@ let CellTypes = {
 };
 
 export {CellTypes};
-
-AccountCell.contextTypes = { muiTheme: React.PropTypes.object };
-ContactCell.contextTypes = { muiTheme: React.PropTypes.object };
-AgentCell.contextTypes = { muiTheme: React.PropTypes.object };
-SendCell.contextTypes = { muiTheme: React.PropTypes.object };
