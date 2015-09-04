@@ -40,10 +40,10 @@ class ViewPurchaseRequests extends Component {
   render() {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1><LangText>Purchase Requests</LangText>  {this.context.lang('Purchase Requests')}</h1></Header>
+        <Header><h1><LangText>Purchase Requests</LangText>  </h1></Header>
         <div>
           <Link to='/purchaseRequests/create'>
-            <RaisedButton label='Create Purcase Request' />
+            <RaisedButton label={this.context.lang('Create Purchase Request')} />
           </Link>
         </div>
         <FilteredCollection data={this.props.purchaseRequests}>

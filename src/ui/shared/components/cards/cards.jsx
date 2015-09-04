@@ -10,6 +10,7 @@ import mui, {
   RaisedButton,
   Avatar,
   CardTitle,
+  LangText,
   Paper
 } from 'material-ui'
 import Link from '../link'
@@ -55,7 +56,7 @@ export class DefaultCard extends Component {
                         (data.user_id) ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div style={{ height: '25px'}}>{this.context.lang('Unassigned')}</div>
+                            <div style={{ height: '25px'}}><LangText>Unassigned</LangText></div>
                         :
                           data[r.name]
                     }

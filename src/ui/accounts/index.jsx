@@ -10,7 +10,8 @@ import {
   LeftNav,
   Content,
   SubHeader,
-  Table
+  Table,
+  LangText
 } from '../shared/components'
 
 import { AgentCell } from '../shared/components/table/tableCells'
@@ -89,7 +90,7 @@ class AccountView extends Component {
 
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
-        <Header><h1>{this.context.lang('Account')} - {account.name}</h1></Header>
+        <Header><h1><LangText>Account</LangText> - {account.name}</h1></Header>
         <SubHeader>
           { address }
           {
@@ -105,8 +106,8 @@ class AccountView extends Component {
           <AccountDetails user={null} account={this.props.account} />
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
-              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>{this.context.lang('Opportunities')}</h3><OppsListQuery accountId={account.id} /></Paper></div>
-              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}>{this.context.lang('Contacts')}</h3><ContactListQuery accountId={account.id} /></Paper></div>
+              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}><LangText>Opportunities</LangText></h3><OppsListQuery accountId={account.id} /></Paper></div>
+              <div><Paper style={{padding: '10px 20px 20px 20px'}}><h3 style={this.style().header}><LangText>Contacts</LangText></h3><ContactListQuery accountId={account.id} /></Paper></div>
             </Layout>
           </div>
           <div><ContractsListQuery accountId={account.id} /></div>
