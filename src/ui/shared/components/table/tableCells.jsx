@@ -3,36 +3,18 @@ import mui, {IconButton, Toggle, FloatingActionButton, FontIcon, Utils, Styles} 
 import Link from '../link'
 import async, {model} from '../async'
 import numeral from 'numeral'
-import AgentIcon from 'material-ui/lib/svg-icons/action/account-circle'
 import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 import ContactIcon from 'material-ui/lib/svg-icons/action/assignment-ind'
 import SendIcon from 'material-ui/lib/svg-icons/content/send'
 
-export class AgentCell extends Component {
-  render() {
-    return (this.props.children) ?
-      <Link to='/' style={_.assign({
-          color: this.context.muiTheme.palette.primary1Color
-        }, this.props.cellStyle
-      )}>
-        <AgentIcon style={_.assign(
-          { fill: Utils.ColorManipulator
-              .fade(this.context.muiTheme.palette.primary1Color, .5),
-            marginRight: '5px',
-            position: 'absolute' },
-          this.props.iconStyle)} />
-        <div style={_.assign({
-            paddingLeft: '30px',
-            lineHeight: '25px'
-          }, this.props.labelStyle
-        )}>
-          {this.props.children}
-        </div>
-      </Link> : null;
-  }
-}
 
 import UserName from '../../../users/public/link'
+
+export class AgentCell extends Component {
+  render() {
+    return ( <UserName>{this.props.children}</UserName>);
+  }
+}
 
 export class AgentByIdCell extends Component {
   render() {
