@@ -84,6 +84,7 @@ import { getLeadSources } from './leadSource'
 import { getCampaignSources } from './campaignSource'
 import { getServiceTypes } from './serviceType'
 import { getLocations } from './location'
+import { getUsers } from './users'
 import { getPurchaseRequests } from './purchaseRequest'
 import { getTickets, getTicketTemplates, getTicketStatuses, getTicketPriorities } from './ticket'
 
