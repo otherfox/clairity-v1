@@ -7,3 +7,5 @@ export function serialize(daoName, methodName, params, opts) {
       Object.keys(params).map(k => `${k}=${params[k]}`).join('&'),
       Object.assign({ credentials: 'include' }, opts)];
 }
+
+export const post = { method: 'post' };
