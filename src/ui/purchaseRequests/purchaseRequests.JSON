@@ -1,0 +1,16 @@
+{
+   "location_id":1988,
+   "approval_date":"April, 08 2011 11:15:11 +0000",
+   "requested_by":115,
+   "item":"Cisco 2801, HWIC-4ESW",
+   "id":3,
+   "approval_id":10,
+   "customer_id":1294,
+   "requested_date":"April, 08 2011 08:31:51 +0000",
+   "amount":1144.01,
+   "type":{
+      "name":"Equipment",
+      "id":1
+   },
+   "notes":"SIP customer installed with no DMARC so they are complaining of poor call quality. ORN dmarc will segment traffic leaving the customer lan.  Device was already ordered but placing in the new PO system for tracking purposes."
+}

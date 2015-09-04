@@ -1,0 +1,21 @@
+{
+  "account": "Account",
+  "amount": "Amount",
+  "approval_id": "Approval ID",
+  "approved": "Approved",
+  "contact": "Contact",
+  "contacts": "Contacts",
+  "customer": "Customer",
+  "id": "ID",
+  "item": "Item",
+  "locations": "Locations",
+  "location_id": "Location ID",
+  "name": "Name",
+  "notes": "Notes",
+  "opportunities": "Opportunities",
+  "purchase_requests": "Purchase Requests",
+  "requested": "Requested",
+  "requested_by": "Requested By",
+  "type": "Type",
+  "view_accounts": "View Accounts"
+}
