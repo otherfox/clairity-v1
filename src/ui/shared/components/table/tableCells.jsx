@@ -33,11 +33,11 @@ export class AgentCell extends React.Component {
 }
 
 import UserName from '../../../users/public/name'
+const User = async(UserName, { user: model() })
 
 export class AgentByIdCell extends React.Component {
   render() {
-    let User = async( UserName, {user: model('user')});
-    return (<User userId={this.props.data[this.props.userId]}/>)
+    return <User userId={this.props.data[this.props.userId]} />;
   }
 }
 

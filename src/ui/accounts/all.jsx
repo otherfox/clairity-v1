@@ -16,7 +16,7 @@ class ViewAccounts extends Component {
     return {
       colNames: [
         { label: 'Account', name: 'name', cellType: 'account' },
-        { label: 'Account Owner', name: 'user_id' }
+        { label: 'Account Owner', name: 'user_id', cellType: 'agentById' }
       ],
       data: accounts,
       colWidths: [1],

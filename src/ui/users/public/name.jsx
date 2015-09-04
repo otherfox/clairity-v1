@@ -6,8 +6,9 @@ import { contextTypes } from '../../shared/decorators'
 class UserName extends Component {
   render() {
     let agent = this.props.user ? this.props.user : {};
+    console.log('UserName render')
     return (
-      <AgentCell>{ agent.name || this.context.lang('Not Assigned') }</AgentCell>
+      <AgentCell>{ agent.name || this.context.lang('Unassigned') }</AgentCell>
     )
   }
 }
