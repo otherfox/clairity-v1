@@ -20,7 +20,7 @@ class ViewPurchaseRequests extends Component {
       colNames: [
         { label: this.context.lang('ID'), name: 'id', props: { cellStyle: { color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, .75) } } },
         { label: this.context.lang('Item'), name: 'item' },
-        { label: this.context.lang('Location ID'), name: 'location_id' },
+        { label: this.context.lang('Location'), name: 'location_id', cellType: 'locationById' },
         { label: this.context.lang('Approved'), name: 'approval_date', cellType:'date' },
         { label: this.context.lang('Requested By'), name: 'requested_by', cellType: 'agentById' },
         { label: this.context.lang('Approval ID'), name: 'approval_id' },

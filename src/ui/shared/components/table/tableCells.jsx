@@ -26,8 +26,8 @@ export class AgentCell extends Component {
 
 export class AgentByIdCell extends Component {
   render() {
-    let User = async( UserName, {user: model('user')});
-    return <User {..._.assign(this.props, {userId: this.props.children})}/>
+    let User = async( UserName, { user: model('user') });
+    return <User {..._.assign(this.props, { userId: this.props.children })}/>
   }
 }
 
@@ -42,9 +42,27 @@ export class AccountCell extends Component {
 
 export class AccountByIdCell extends Component {
   render() {
-    let Account = async( AccountName, {account: model('account')});
+    let Account = async( AccountName, { account: model('account') });
     return (
-      <Account {..._.assign(this.props, {accountId: this.props.children})} />
+      <Account {..._.assign(this.props, { accountId: this.props.children })} />
+    )
+  }
+}
+
+/************* Location *************/
+
+import LocationName from '../../../locations/public/link'
+export class LocationCell extends Component {
+  render() {
+    return <LocationName {...this.props}>{this.props.children}</LocationName>
+  }
+}
+
+export class LocationByIdCell extends Component {
+  render() {
+    let Location = async( LocationName, { location: model('location') });
+    return (
+      <Location {..._.assign(this.props, { locationId: this.props.children })} />
     )
   }
 }
@@ -61,7 +79,7 @@ export class ContactCell extends Component {
 export class ContactByIdCell extends Component {
   render() {
     let Contact = async( ContactName, { contact: model('contact') });
-    return (<Contact contactId={this.props.data[this.props.contactId]}/>)
+    return (<Contact contactId={ this.props.data[this.props.contactId] }/>)
   }
 }
 
@@ -232,6 +250,8 @@ let CellTypes = {
     contactById: ContactByIdCell,
     agent: AgentCell,
     agentById: AgentByIdCell,
+    location: LocationCell,
+    locationById: LocationByIdCell,
     send: SendCell,
     range: RangeCell
 };
