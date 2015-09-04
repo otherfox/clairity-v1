@@ -56,7 +56,7 @@ class CreatePurchaseRequest extends Component {
       received_date: moment().format('YYYY-MM-DD h:mm A'),
       location_id: this.props.locationId,
       source_id: this.props.sourceId,
-      vendor_id: this.props.venderId,
+      vendor_id: this.props.vendorId,
       approval_date: this.props.approvalDate,
       requested_by: this.props.requestedBy,
       item: this.props.item,
