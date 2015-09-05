@@ -25,6 +25,7 @@ import { fetchLocation, updateLocation, fetchAllCustomerTypes } from '../../core
 import { queryAllCustomerTypes, queryLocation } from '../../core/queries/account'
 
 // React Renders
+// TODO: @contextTypes({ lang: PropTypes.object })
 export default class CreateLocation extends React.Component {
   constructor() {
     super();
