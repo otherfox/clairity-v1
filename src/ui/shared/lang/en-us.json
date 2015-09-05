@@ -1,6 +1,7 @@
 {
   "account": "Account",
   "account_name": "Account Name",
+  "account_details": "Account Details",
   "amount": "Amount",
   "approval_id": "Approval ID",
   "approved": "Approved",
