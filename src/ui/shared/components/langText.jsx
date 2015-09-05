@@ -1,4 +1,4 @@
-import React, { PropTypes, Component }  from 'react'
+import React, { PropTypes, Component, Children }  from 'react'
 import Settings from './settings'
 import _ from 'lodash'
 import { contextTypes } from '../decorators'
@@ -14,7 +14,7 @@ export default class LangText extends Component {
   render() {
     return (
       this.props.children
-        ? <span>{this.translate(Children.only(this.props.children))}</span>
+        ? <span>{this.translate(this.props.children)}</span>
         : <span> </span>
     );
   }

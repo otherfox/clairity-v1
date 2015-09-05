@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Header, Layout, Table, Cards } from '../shared/components'
+import { Header, Layout, Table, Cards, LangText } from '../shared/components'
 
 import async, { collection, model } from '../shared/components/async'
 import { propTypes, contextTypes } from '../shared/decorators'
@@ -29,7 +29,7 @@ class ViewAccounts extends Component {
 
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1>{this.context.lang('View Accounts')}</h1></Header>
+        <Header><h1><LangText>View Accounts</LangText></h1></Header>
         <FilteredCollection data={accounts}>
           <Filters>
             <TextFilter name={'name'} label={this.context.lang('Account Name')} />
