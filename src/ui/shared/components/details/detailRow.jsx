@@ -26,7 +26,7 @@ class DetailRow extends Component {
                 pStyles={this.props.pStyles}
                 breakpoints={this.props.breakpoints}>
 
-          <div style={_.assign(style.label, this.props.labelStyle)}>{this.props.label}</div>
+          <div style={_.assign(style.label, this.props.labelStyle)}><LangText>{this.props.label}</LangText></div>
           <div style={_.assign(style.value, this.props.valueStyle)}>{this.props.children}</div>
 
         </Layout>
