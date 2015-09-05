@@ -13,7 +13,9 @@ export default class LangText extends Component {
 
   render() {
     return (
-      <span>{this.translate(this.props.children.toString())}</span>
+      this.props.children
+        ? <span>{this.translate(this.props.children.toString())}</span>
+        : <span> </span>
     );
   }
 }
