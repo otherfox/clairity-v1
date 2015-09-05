@@ -23,9 +23,9 @@ class ViewPurchaseRequests extends Component {
         { label: this.context.lang('Item'), name: 'item' },
         { label: this.context.lang('Location ID'), name: 'location_id' },
         { label: this.context.lang('Approved'), name: 'approval_date', cellType:'date' },
-        { label: this.context.lang('Requested By'), name: 'requested_by' },
+        { label: this.context.lang('Requested By'), name: 'requested_by', cellType: 'agentById', props: { userId: 'requested_by' } },
         { label: this.context.lang('Approval ID'), name: 'approval_id' },
-        { label: this.context.lang('Customer'), name: 'customer_id', cellType: 'accountById', props: { idField: 'customer_id' } },
+        { label: this.context.lang('Customer'), name: 'customer_id', cellType: 'accountById', props: { accountId: 'customer_id' } },
         { label: this.context.lang('Requested'), name: 'requested_date', cellType:'date' },
         { label: this.context.lang('Amount'), name: 'amount', cellType:'currency' },
         { label: this.context.lang('Type'), name: 'type' },
@@ -40,10 +40,10 @@ class ViewPurchaseRequests extends Component {
   render() {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1><LangText>Purchase Requests</LangText>  </h1></Header>
+        <Header><h1><LangText>Purchase Requests</LangText>  {this.context.lang('Purchase Requests')}</h1></Header>
         <div>
           <Link to='/purchaseRequests/create'>
-            <RaisedButton label={this.context.lang('Create Purchase Request')} />
+            <RaisedButton label='Request Purchase' />
           </Link>
         </div>
         <FilteredCollection data={this.props.purchaseRequests}>

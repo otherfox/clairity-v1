@@ -12,12 +12,18 @@
   "id": "ID",
   "item": "Item",
   "location_id": "Location ID",
+  "locations": "Locations",
   "name": "Name",
+  "not_assigned": "Not Assigned",
   "notes": "Notes",
   "opportunities": "Opportunities",
   "purchase_requests": "Purchase Requests",
   "requested": "Requested",
   "requested_by": "Requested By",
   "type": "Type",
+  "unassigned": "Unassigned",
+  "user": "User",
+  "user_name": "User Name",
+  "users": "Users",
   "view_accounts": "View Accounts"
 }

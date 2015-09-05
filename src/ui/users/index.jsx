@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import async, { model } from '../shared/components/async'
-import { DetailsObject } from '../shared/components/cards'
+import { DetailsObject } from '../shared/components'
 
 @async({ user: model() })
 class ViewUser extends Component {

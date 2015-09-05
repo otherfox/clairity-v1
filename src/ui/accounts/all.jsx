@@ -1,12 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import Header from '../shared/components/header'
-import Layout from '../shared/components/layout'
-import Table from '../shared/components/table'
-import Cards from '../shared/components/cards'
+import { Header, Layout, Table, Cards } from '../shared/components'
 
 import async, { collection, model } from '../shared/components/async'
-import { propTypes } from '../shared/decorators'
-import { contextTypes } from '../shared/decorators'
+import { propTypes, contextTypes } from '../shared/decorators'
 
 import {
   FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter
@@ -19,8 +15,8 @@ class ViewAccounts extends Component {
   getAccounts(accounts) {
     return {
       colNames: [
-        { label: 'Account', name: 'name', cellType: 'account', props: { idField: 'id'} },
-        { label: 'Account Owner', name: 'user_id' }
+        { label: 'Account', name: 'name', cellType: 'account' },
+        { label: 'Account Owner', name: 'user_id', cellType: 'agentById' }
       ],
       data: accounts,
       colWidths: [1],

@@ -20,8 +20,8 @@ import { contextTypes } from '../../decorators'
 import Details from '../details'
 import async, { model } from '../async'
 
-import { AccountName } from '../../../users/public'
-let AccountAgent = async(AccountName, { user: model('user') });
+import { UserName } from '../../../users/public'
+const AccountAgent = async(UserName, { user: model() });
 
 @contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 export class DefaultCard extends Component {
@@ -30,17 +30,6 @@ export class DefaultCard extends Component {
     let data = this.props.data;
     let title = data[this.props.header];
     return (this.props.children) ?
-      // <Link to="view-contact"
-      //       params={{contactId: 0}}
-      //       style={{ color: this.context.muiTheme.palette.textColor }}
-      // >
-      //   <ContactIcon style={{
-      //     fill: Utils.ColorManipulator
-      //       .fade(this.context.muiTheme.palette.textColor, .5)
-      //     }}
-      //   />
-      //   {this.props.children}
-      // </Link>
       <Card transitionEnabled={false} {...this.props}>
         <CardHeader
           title={data[title]}
@@ -71,7 +60,7 @@ export class DefaultCard extends Component {
   }
 }
 
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 export class AccountCard extends Component {
   style() {
     return {
@@ -143,11 +132,12 @@ export class AccountCard extends Component {
                 <div style={this.style().row}>
                   <div style={this.style().label}>{r.label}</div>
                   <div style={this.style().value}>
-                    { (r.name === 'user_id') ?
-                        (data.user_id) ?
+                    {
+                      (r.name === 'user_id') ?
+                        (data.user_id ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div style={{ height: '25px'}}>Unassigned</div>
+                            <div style={{ height: '25px'}}>{this.context.lang('Unassigned')}</div>)
                         :
                           data[r.name]
                     }
@@ -172,7 +162,7 @@ export class AccountCard extends Component {
   }
 }
 
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 export class LeadCard extends Component {
   style() {
     return {
@@ -248,7 +238,7 @@ export class LeadCard extends Component {
                         (data.user_id) ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div style={{ height: '25px'}}>Unassigned</div>
+                            <div style={{ height: '25px'}}>{this.context.lang('Unassigned')}</div>
                         :
                           data[r.name]
                     }
@@ -276,6 +266,6 @@ let CardTypes = {
     lead: LeadCard
 };
 
-export {CardTypes};
+export { CardTypes };
 
 DefaultCard.contextTypes = { muiTheme: React.PropTypes.object };
