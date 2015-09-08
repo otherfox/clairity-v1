@@ -1,11 +1,13 @@
 {
   "account": "Account",
   "account_name": "Account Name",
+  "account_details": "Account Details",
   "amount": "Amount",
   "approval_id": "Approval ID",
   "approved": "Approved",
   "contact": "Contact",
   "contacts": "Contacts",
+  "create_purchase_request": "Create Purchase Request",
   "customer": "Customer",
   "customer_id": "Customer ID",
   "id": "ID",
@@ -24,5 +26,6 @@
   "user": "User",
   "user_name": "User Name",
   "users": "Users",
-  "view_accounts": "View Accounts"
+  "view_accounts": "View Accounts",
+  "view_leads": "View Leads"
 }

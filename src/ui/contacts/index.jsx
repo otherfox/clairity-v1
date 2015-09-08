@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import async, { model } from '../shared/components/async'
-import { Cards, DetailsObject } from '../shared/components'
+import { Cards, DetailsObject, LangText } from '../shared/components'
 import { Paper } from 'material-ui'
 import { contextTypes } from '../shared/decorators'
 
@@ -20,7 +20,7 @@ class ViewContact extends Component {
   render() {
     return (
       <div>
-        <h1>{this.context.lang('Contact')}: {this.props.contact.name}</h1>
+        <h1><LangText>Contact</LangText>: {this.props.contact.name}</h1>
         <DetailsObject target={this.props.contact} />
       </div>
     );
