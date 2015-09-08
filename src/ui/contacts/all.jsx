@@ -9,9 +9,10 @@ import {
 } from 'material-ui'
 import Table, {} from '../shared/components/table'
 import DetailRow, {} from '../shared/components/details/detailRow'
+import LangText from '../shared/components/langText'
 
 @async({ contacts: collection('contact').all() })
-@contextTypes({ muiTheme: PropTypes.object })
+@contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 class ListContacts extends Component {
   style() {
       return {
@@ -31,7 +32,7 @@ class ListContacts extends Component {
   getContacts() {
     return {
       colNames: [
-        { label: 'Name', name: 'name', cellType: 'contact' }
+        { label: this.context.lang('Name'), name: 'name', cellType: 'contact' }
       ],
       data: this.props.contacts
     }
@@ -40,7 +41,7 @@ class ListContacts extends Component {
     let contacts = this.props.contacts || [];
     return (
       <div style={this.style().root}>
-        <h1>Contacts</h1>
+        <h1><LangText>Contacts</LangText></h1>
         <Table {...this.getContacts() }/>
       </div>
     );

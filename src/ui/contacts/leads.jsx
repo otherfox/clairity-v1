@@ -5,6 +5,7 @@ import Layout from  '../shared/components/layout'
 import Table from  '../shared/components/table'
 import Cards from '../shared/components/cards'
 import Details from '../shared/components/details'
+import LangText from '../shared/components/langText'
 import { RaisedButton } from 'material-ui'
 import { Filters, FilteredCollection, TextFilter} from '../shared/components/filteredCollection'
 import async, { collection, action } from '../shared/components/async'
@@ -67,7 +68,7 @@ class ViewLeads extends Component {
   render() {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-          <Header><h1>View Leads</h1></Header>
+          <Header><h1><LangText>View Leads</LangText></h1></Header>
           <FilteredCollection data={this.state.leads}>
             <Filters>
               <TextFilter name={'name'} label={'Name'} />

@@ -3,7 +3,7 @@ import Store from './store'
 import { is } from 'immutable'
 import _ from 'lodash'
 
-export function enqueueUpdate(msg, cause) {
+export function enqueueUpdate(msg, cause, forceUpdate = false) {
   console.log('Worker Update pump', 'update request received', msg, cause);
   let before = Store.data;
   Store.handleMessage(msg);
@@ -17,7 +17,7 @@ export function enqueueUpdate(msg, cause) {
       delete msg.payload.rows;
     }
     postMessage({
-      cause, message,
+      cause, message, forceUpdate,
       type: 'event',
       event: true
     });

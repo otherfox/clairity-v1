@@ -6,6 +6,7 @@ import {
   ClearFix
 } from 'material-ui'
 import Layout from '../layout'
+import LangText from '../LangText'
 import DetailsRow from './detailRow'
 import DetailsObject from './detailsObject'
 import { contextTypes, propTypes, defaultProps } from '../../decorators'
@@ -39,7 +40,8 @@ class Details extends Component {
       muiDropDown: '.6em',
       muiTextField: '.4em',
       muiDatePicker: '.4em',
-      muiRadio: ''
+      muiRadio: '',
+      muiButton: '1em',
     }
 
     return {
@@ -65,7 +67,7 @@ class Details extends Component {
         margin: (detailType === 'muiCheckbox') ? '20px 0' : 'initial'
       },
       value: {
-        marginTop: (detailType === 'muiButton') ? '20px' : 'initial'
+        marginTop: (detailType === 'muiButton') ? '10px' : 'initial'
       }
     };
   }
@@ -109,7 +111,7 @@ class Details extends Component {
     let title = (this.props.title || this.props.title === null) ?
         (<div>
           <h3 style={_.assign(this.style().header, this.props.headerStyle)}>
-            {this.props.title}
+            <LangText>{this.props.title}</LangText>
           </h3>
         </div>)
       :

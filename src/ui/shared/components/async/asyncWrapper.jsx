@@ -51,7 +51,8 @@ export default function asyncWrapper() {
 
     update(ev) {
       console.log(this.name, 'async wrapper', 'update event called');
-      if (this.tokens[ev.cause.token]) {
+      let force = ev.forceUpdate && this.tables[ev.message.payload.table];
+      if (this.tokens[ev.cause.token] || force) {
         console.log(this.name, 'async', 'cause matched')
         this.requestState(this.props);
       } else {
