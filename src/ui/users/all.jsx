@@ -2,13 +2,9 @@ import React, { PropTypes, Component } from 'react'
 import async, { collection } from '../shared/components/async'
 import { asyncDropdown } from '../shared/components/collectionDropdown'
 import { contextTypes } from '../shared/decorators'
-import Link from '../shared/components/link'
 import { FontIcon, ClearFix } from 'material-ui'
-import {
-  Paper
-} from 'material-ui'
-import Table, {} from '../shared/components/table'
-import DetailRow, {} from '../shared/components/details/detailRow'
+import { Paper } from 'material-ui'
+import { Table, LangText, DetailRow, Link } from '../shared/components'
 import {
   FilteredCollection, Filters, CheckBoxFilter, TextFilter, RadioButtonFilter
 } from '../shared/components/filteredCollection'
@@ -43,10 +39,10 @@ class ListUsers extends Component {
     let users = this.props.users || [];
     return (
       <div>
-        <h1>{this.context.lang('Users')}</h1>
+        <h1><LangText>Users</LangText></h1>
         <FilteredCollection data={users}>
           <Filters>
-            <TextFilter name={'name'} label={this.context.lang('User Name')} />
+            <TextFilter name={'name'} label=<LangText>User Name</LangText> />
           </Filters>
           <Table {...this.getUsers()} header={'name'} linkParam={'id'} />
         </FilteredCollection>

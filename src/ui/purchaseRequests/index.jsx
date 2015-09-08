@@ -36,7 +36,7 @@ class ViewPurchaseRequests extends Component {
   render() {
     return (
       <Layout widths={{}} pPadding={'20px 20px 0 0'}>
-        <Header><h1><LangText>Purchase Requests</LangText>  {this.context.lang('Purchase Requests')}</h1></Header>
+        <Header><h1><LangText>Purchase Requests</LangText></h1></Header>
         <div>
           <Link to='/purchase-requests/create'>
             <RaisedButton label='Request Purchase' />
