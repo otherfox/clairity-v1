@@ -2,15 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import { Paper, Utils, FloatingActionButton } from 'material-ui'
 import SupportIcon from 'material-ui/lib/svg-icons/communication/chat-bubble'
 
-import { Header, Layout, Link, SubHeader } from '../shared/components'
+import { Header, Layout, Link, SubHeader, LangText } from '../shared/components'
 import { propTypes, contextTypes } from '../shared/decorators'
 
 import async, { model, collection } from '../shared/components/async'
 import { AgentCell } from '../shared/components/table/tableCells'
 
-
 import AccountDetails from './public/details'
-import { AccountName } from '../users/public'
+import { AccountName } from '../users/public/link'
+
 import ContractList from '../contracts/list'
 import OppsList from '../opportunities/list'
 import ContactList from '../contacts/list'
@@ -31,7 +31,9 @@ class AccountView extends Component {
     return {
       header: {
         marginBottom: '10px',
-        color: Utils.ColorManipulator.fade(this.context.muiTheme.palette.primary1Color, 1)
+        color: Utils.ColorManipulator.fade(
+          this.context.muiTheme.palette.primary1Color, 1
+        )
       }
     }
   }
@@ -73,13 +75,13 @@ class AccountView extends Component {
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
               <div>
                 <Paper style={{padding: '10px 20px 20px 20px'}}>
-                  <h3 style={this.style().header}>{this.context.lang('Opportunities')}</h3>
+                  <h3 style={this.style().header}><LangText>Opportunities</LangText></h3>
                   <OppsListQuery accountId={account.id} />
                 </Paper>
               </div>
               <div>
                 <Paper style={{padding: '10px 20px 20px 20px'}}>
-                  <h3 style={this.style().header}>{this.context.lang('Contacts')}</h3>
+                  <h3 style={this.style().header}><LangText>Contacts</LangText></h3>
                   <ContactListQuery accountId={account.id} />
                 </Paper>
               </div>

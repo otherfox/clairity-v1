@@ -19,8 +19,8 @@ import { contextTypes } from '../../decorators'
 import Details from '../details'
 import async, { model } from '../async'
 
-import { UserName } from '../../../users/public'
-const AccountAgent = async(UserName, { user: model() });
+import UserName from '../../../users/public/link'
+let AccountAgent = async(UserName, { user: model() });
 
 @contextTypes({ muiTheme: PropTypes.object, lang: PropTypes.object })
 export class DefaultCard extends Component {
