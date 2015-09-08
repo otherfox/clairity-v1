@@ -39,7 +39,8 @@ class Details extends Component {
       muiDropDown: '.6em',
       muiTextField: '.4em',
       muiDatePicker: '.4em',
-      muiRadio: ''
+      muiRadio: '',
+      muiButton: '1em',
     }
 
     return {
@@ -65,7 +66,7 @@ class Details extends Component {
         margin: (detailType === 'muiCheckbox') ? '20px 0' : 'initial'
       },
       value: {
-        marginTop: (detailType === 'muiButton') ? '20px' : 'initial'
+        marginTop: (detailType === 'muiButton') ? '10px' : 'initial'
       }
     };
   }
