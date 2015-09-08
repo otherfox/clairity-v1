@@ -1,69 +1,27 @@
-import React, { PropTypes, Component } from 'react'
-import Store from '../../core/store'
+import React, { Component, PropTypes } from 'react'
+import { Paper, Utils, FloatingActionButton } from 'material-ui'
+import SupportIcon from 'material-ui/lib/svg-icons/communication/chat-bubble'
 
-import {
-  Header,
-  Layout,
-  Link,
-  Footer,
-  TopNav,
-  LeftNav,
-  Content,
-  SubHeader,
-  Table
-} from '../shared/components'
+import { Header, Layout, Link, SubHeader, LangText } from '../shared/components'
+import { propTypes, contextTypes } from '../shared/decorators'
 
 import async, { model, collection } from '../shared/components/async'
-import { propTypes } from '../shared/decorators'
-import {
-  networkModelRenderer,
-  queryRenderer,
-  modelQuery,
-  collectionViaQuery
-} from '../shared/components/networkRenderer'
-
-import {
-  RadioButtonGroup,
-  RadioButton,
-  Checkbox,
-  FlatButton,
-  RaisedButton,
-  FloatingActionButton,
-  IconButton,
-  Toggle,
-  Slider,
-  DropDownMenu,
-  DatePicker,
-  TextField,
-  Paper,
-  Utils
-} from 'material-ui'
-
-import controllable from 'react-controllables'
-import { State } from 'react-router'
-import { contextTypes } from '../shared/decorators'
-
-import { AccountName } from '../users/public/link'
-let AccountAgent = async(AccountName, {
-  user: model('user')
-});
-
-import ContractList from '../contracts/list'
-let ContractsListQuery = async(ContractList, {
-  contracts: collection('contract').by('account')
-});
-
-import OppsList from '../opportunities/list'
-let OppsListQuery = async(OppsList, {
-  opportunities: collection('opportunity').by('account')
-})
-
-import ContactList from '../contacts/list'
-let ContactListQuery = async(ContactList, {
-  contacts: collection('contact').by('account')
-});
+import { AgentCell } from '../shared/components/table/tableCells'
 
 import AccountDetails from './public/details'
+import { AccountName } from '../users/public/link'
+
+import ContractList from '../contracts/list'
+import OppsList from '../opportunities/list'
+import ContactList from '../contacts/list'
+import { AccountLocations } from '../locations/list'
+
+let AccountAgent = async(AccountName, { user: model() });
+
+let ContractsListQuery = async(ContractList, { contracts: collection('contract').by('account') });
+let OppsListQuery = async(OppsList, { opportunities: collection('opportunity').by('account') });
+let ContactListQuery = async(ContactList, { contacts: collection('contact').by('account') });
+
 
 @async({ account: model('account') })
 @propTypes({ account: PropTypes.object })
@@ -82,15 +40,19 @@ class AccountView extends Component {
   render() {
     let account = this.props.account;
     let { street1, street2, city, state, zip_code } = account;
-    let address =
-      [ street1, street2, city, state, zip_code ]
-      .filter( k => k )
+    let address = [street1, street2, city, state, zip_code]
+      .filter(k => k)
       .join(', ');
 
     return (
       <Layout widths={{}} cPadding={'0 20px 0 0'}>
         <Header>
-          <h1>{this.context.lang('Account')} - {account.name}</h1>
+          <h1><LangText>Account</LangText> - {account.name}</h1>
+          <Link to="all-account-support-notes" params={this.props}>
+            <FloatingActionButton>
+              <SupportIcon />
+            </FloatingActionButton>
+          </Link>
         </Header>
         <SubHeader>
           { address }
@@ -105,21 +67,21 @@ class AccountView extends Component {
 
         <Layout widths={{ lg: [5, 7, 12]}} cPadding={'20px 20px 0 0'}>
           <AccountDetails user={null} account={this.props.account} />
+          <div style={{padding: '10px 20px 20px 20px'}}>
+            <h3 style={this.style().header}><LangText>Locations</LangText></h3>
+            <AccountLocations accountId={this.props.accountId} />
+          </div>
           <div>
             <Layout widths={{}} cPadding={'0 0 20px 0'}>
               <div>
                 <Paper style={{padding: '10px 20px 20px 20px'}}>
-                  <h3 style={this.style().header}>
-                    {this.context.lang('Opportunities')}
-                  </h3>
+                  <h3 style={this.style().header}><LangText>Opportunities</LangText></h3>
                   <OppsListQuery accountId={account.id} />
                 </Paper>
               </div>
               <div>
                 <Paper style={{padding: '10px 20px 20px 20px'}}>
-                  <h3 style={this.style().header}>
-                    {this.context.lang('Contacts')}
-                  </h3>
+                  <h3 style={this.style().header}><LangText>Contacts</LangText></h3>
                   <ContactListQuery accountId={account.id} />
                 </Paper>
               </div>
@@ -133,11 +95,10 @@ class AccountView extends Component {
   }
 }
 
-let AccountPage = React.createClass({
-  mixins: [State],
+class AccountPage extends Component {
   render() {
-    return <AccountView accountId={+this.getParams().accountId} />;
+    return <AccountView {...this.props.params} />;
   }
-});
+}
 
 export default AccountPage;

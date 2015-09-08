@@ -9,7 +9,59 @@ const memoize = withDelay(10000); // ten second delay
 
 let getLocation = memoize(id => {
   return new Promise((s, f) => {
-    req.get("https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationById&id="+id)
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getLocationById&id=${id}`)
+      .withCredentials()
+      .end((err, res) => {
+        if(!err) {
+          let location = JSON.parse(res.text);
+          //convert text booleans into real booleans
+          for(let key in location.customer) {
+            switch(location.customer[key]) {
+              case 'true':
+                location.customer[key] = true;
+                break;
+              case 'false':
+                location.customer[key] = false;
+                break;
+            }
+          }
+          s(location);
+        } else {
+          f(err);
+        }
+      });
+  });
+});
+
+let getLocationsByAccount = memoize(id => {
+  return new Promise((s, f) => {
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getAllLocationsForCustomerId&customer_id=${id}`)
+      .withCredentials()
+      .end((err, res) => {
+        if(!err) {
+          let location = JSON.parse(res.text);
+          //convert text booleans into real booleans
+          for(let key in location.customer) {
+            switch(location.customer[key]) {
+              case 'true':
+                location.customer[key] = true;
+                break;
+              case 'false':
+                location.customer[key] = false;
+                break;
+            }
+          }
+          s(location);
+        } else {
+          f(err);
+        }
+      });
+  });
+});
+
+let getLocations = memoize(() => {
+  return new Promise((s, f) => {
+    req.get(`https://lab.rairity.com/controller.cfm?event=serialize&authkey=tardis&_c=ample.dao.LocationDAO&_m=getAllLocations`)
       .withCredentials()
       .end((err, res) => {
         if(!err) {
@@ -77,7 +129,7 @@ let getLocationsByStatus = memoize(status => {
 
 export {
   getLocation, getLocationsByPop, getLocationsByContact, getLocationsByStatus,
-  getLocationsByContact
+  getLocationsByContact, getLocations, getLocationsByAccount
 };
 
 import { eventUpdateCustomerLocation } from '../gateways/location'

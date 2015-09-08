@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Children } from 'react'
 import {
   IconButton,
   Toggle,
@@ -24,16 +24,19 @@ export class AgentCell extends Component {
   }
 }
 
+const UserNameAsync = async(UserName, { user: model() });
+
 export class AgentByIdCell extends Component {
   render() {
-    let User = async( UserName, { user: model('user') });
-    return <User {..._.assign(this.props, { userId: this.props.children })}/>
+    const userId = Children.only(this.props.children);
+    return <UserNameAsync {...Object.assign({}, this.props, { userId })} />
   }
 }
 
 /************* Account / Customer *************/
 
 import AccountName from '../../../accounts/public/link'
+const AccountNameAsync = async(AccountName, { account: model() });
 export class AccountCell extends Component {
   render() {
     return <AccountName {...this.props}>{this.props.children}</AccountName>
@@ -42,9 +45,9 @@ export class AccountCell extends Component {
 
 export class AccountByIdCell extends Component {
   render() {
-    let Account = async( AccountName, { account: model('account') });
+    const accountId = Children.only(this.props.children);
     return (
-      <Account {..._.assign(this.props, { accountId: this.props.children })} />
+      <AccountNameAsync {...Object.assign({}, this.props, { accountId })} />
     )
   }
 }
@@ -52,6 +55,7 @@ export class AccountByIdCell extends Component {
 /************* Location *************/
 
 import LocationName from '../../../locations/public/link'
+const LocationNameAsync = async(LocationName, { location: model() })
 export class LocationCell extends Component {
   render() {
     return <LocationName {...this.props}>{this.props.children}</LocationName>
@@ -60,9 +64,9 @@ export class LocationCell extends Component {
 
 export class LocationByIdCell extends Component {
   render() {
-    let Location = async( LocationName, { location: model('location') });
+    const locationId = Children.only(this.props.children);
     return (
-      <Location {..._.assign(this.props, { locationId: this.props.children })} />
+      <LocationNameAsync {...Object.assign({}, this.props, { locationId })} />
     )
   }
 }
@@ -70,6 +74,8 @@ export class LocationByIdCell extends Component {
 /************* Contact / Caller *************/
 
 import ContactName from '../../../contacts/public/link'
+const ContactNameAsync = async(ContactName, { contact: model() });
+
 export class ContactCell extends Component {
   render() {
     return <ContactName>{this.props.children}</ContactName>
@@ -78,8 +84,8 @@ export class ContactCell extends Component {
 
 export class ContactByIdCell extends Component {
   render() {
-    let Contact = async( ContactName, { contact: model('contact') });
-    return (<Contact contactId={ this.props.data[this.props.contactId] }/>)
+    const contactId = Children.only(this.props.children);
+    return <ContactNameAsync {...Object.assign({}, this.props, { contactId })} />;
   }
 }
 
