@@ -6,7 +6,7 @@ import {
   ClearFix
 } from 'material-ui'
 import Layout from '../layout'
-import LangText from '../LangText'
+import LangText from '../langText'
 import DetailsRow from './detailRow'
 import DetailsObject from './detailsObject'
 import { contextTypes, propTypes, defaultProps } from '../../decorators'

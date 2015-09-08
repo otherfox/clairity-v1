@@ -32,7 +32,7 @@ class ViewAccounts extends Component {
         <Header><h1><LangText>View Accounts</LangText></h1></Header>
         <FilteredCollection data={accounts}>
           <Filters>
-            <TextFilter name={'name'} label={this.context.lang('Account Name')} />
+            <TextFilter name={'name'} label=<LangText>Account Name</LangText> />
           </Filters>
           <Cards {...this.getAccounts(accounts)} header={'name'} cardType={'account'} rowHeight={16} linkParam={'id'} />
         </FilteredCollection>

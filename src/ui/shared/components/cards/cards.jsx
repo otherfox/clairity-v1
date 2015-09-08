@@ -10,7 +10,6 @@ import mui, {
   RaisedButton,
   Avatar,
   CardTitle,
-  LangText,
   Paper
 } from 'material-ui'
 import Link from '../link'
@@ -19,6 +18,7 @@ import AccountIcon from 'material-ui/lib/svg-icons/action/verified-user'
 import { contextTypes } from '../../decorators'
 import Details from '../details'
 import async, { model } from '../async'
+import LangText from '../langText'
 
 import UserName from '../../../users/public/link'
 let AccountAgent = async(UserName, { user: model() });
@@ -134,10 +134,10 @@ export class AccountCard extends Component {
                   <div style={this.style().value}>
                     {
                       (r.name === 'user_id') ?
-                        (data.user_id ?
+                        (data.user_id) ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div style={{ height: '25px'}}>{this.context.lang('Unassigned')}</div>)
+                            <div style={{ height: '25px'}}><LangText>Unassigned</LangText></div>
                         :
                           data[r.name]
                     }
@@ -238,7 +238,7 @@ export class LeadCard extends Component {
                         (data.user_id) ?
                             <AccountAgent userId={data.user_id} />
                           :
-                            <div style={{ height: '25px'}}>{this.context.lang('Unassigned')}</div>
+                            <div style={{ height: '25px'}}><LangText>Unassigned</LangText></div>
                         :
                           data[r.name]
                     }
