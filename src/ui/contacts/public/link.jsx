@@ -12,17 +12,17 @@ export default class ContactName extends Component {
     return (
       <Link to="view-contact"
             params={{ contactId: this.props.data ? this.props.data[this.props.idField || 'id'] : undefined }}
-            style={_.assign({
+            style={ _.assign({
               color: this.context.muiTheme.palette.textColor
             }, this.props.cellStyle)
       }>
-        <ContactIcon style={_.assign({
+        <ContactIcon style={ _.assign({
             fill: Utils.ColorManipulator
               .fade(this.context.muiTheme.palette.textColor, .5),
             marginRight: '5px', position: 'absolute'
           }, this.props.iconStyle
         )} />
-        <div style={_.assign({
+        <div style={ _.assign({
             paddingLeft: '30px',
             lineHeight: '25px'
           }, this.props.labelStyle
